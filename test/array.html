@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组arr</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		console.log(arr);
+		console.log(arr.sort(function(a,b){console.log(a,b); return 2}));
+
+		/*
+		*增
+		*/ 
+		document.write("<h4>增</h4>");
+
+
+		// concat();
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		var arrCon = ["a","b","c"];
+		var arrAdd = arr.concat(arrCon);
+		document.write(arr+"<br>"+arrCon+"<br>"+arrAdd+"<hr>");
+
+
+		// push
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		var arrPush = arr.push("a","b","c");
+		document.write(arr+"<br>长度"+arrPush+"<hr>");
+
+		// unshift
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		var arrUnshift = arr.unshift("a","b","c");
+		document.write(arr+"<br>长度"+arrUnshift+"<hr>");
+
+		/*
+		*删
+		*/ 
+		document.write("<h4>删</h4>");
+
+		// pop() 方法用于删除并返回数组的最后一个元素。
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		var arrPop = arr.pop();
+		document.write(arr+"<br>"+arrPop+"<hr>");
+
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		var arrShift = arr.shift();
+		document.write(arr+"<br>"+arrShift);
+
+		/*
+		*改
+		*/ 
+		console.clear();
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		var arrSlice = arr.slice(1,-1);
+		console.log(arr,arrSlice);
+
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		var arrSplice = arr.splice(1,3,"f","f");
+		console.log(arr,arrSplice);
+
+		// join(separator);可选。指定要使用的分隔符。如果省略该参数，则使用逗号作为分隔符。
+		// console.log(arr.join(""));
+	</script>
+</body>
+</html>

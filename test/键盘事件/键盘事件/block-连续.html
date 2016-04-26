@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#block {
+				width:100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="block"></div>
+		<script>
+			var block = document.getElementById("block");
+			var dLeft = dRight = dBottom = dTop = false;
+			setInterval(function() {
+				if(dLeft) {
+					block.style.left = block.offsetLeft - 10 + "px";
+				}
+				if(dRight) {
+					block.style.left = block.offsetLeft + 10 + "px";
+				}
+				if(dTop) {
+					block.style.top = block.offsetTop - 10 + "px";
+				}
+				if(dBottom) {
+					block.style.top = block.offsetTop + 10 + "px";
+				}
+			},30)
+			document.onkeydown = function(e) {
+				console.log(e.keyCode);
+				var e = e || window.event;
+				if(e.keyCode == 37) {
+					dLeft = true;
+				}else if(e.keyCode == 38) {
+					dTop = true;
+				}else if(e.keyCode == 39) {
+					dRight = true; 
+				}else if(e.keyCode == 40) {
+					dBottom = true;
+				}
+			}
+			document.onkeyup = function(e) {
+				var e = e || window.event;
+				dLeft = dRight = dBottom = dTop = false;
+			}
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+

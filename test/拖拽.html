@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>拖拽</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			body{
+				width: 3000px;
+				height: 3000px;
+			}
+			#drag {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 50px;
+				height: 50px;
+				background-color: #000000;
+			}
+			#drag:hover {
+				cursor: move;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="drag">
+
+		</div>
+		<script type="text/javascript">
+			var drag = document.getElementById("drag");
+			drag.onmousedown = function(e) {
+				var event = e || window.event;
+				var mouseX = event.clientX - drag.offsetLeft;
+				var mouseY = event.clientY - drag.offsetTop;
+				document.onmousemove = function(e) {
+					var event = e || window.event;
+					var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+					var scrollLeft=document.documentElement.scrollLeft||document.body.scrollLeft;
+					var moveX = event.clientX - mouseX;
+					var moveY = event.clientY - mouseY;
+					if(moveX<=0+scrollLeft){
+						moveX=0+scrollLeft;
+					}else if(moveX>=document.documentElement.clientWidth-drag.offsetWidth+scrollLeft){
+						moveX=document.documentElement.clientWidth-drag.offsetWidth+scrollLeft;
+					}
+					if(moveY<=0+scrollTop){
+						moveY=0+scrollTop;
+					}else if(moveY>=document.documentElement.clientHeight-drag.offsetHeight+scrollTop){
+						moveY=document.documentElement.clientHeight-drag.offsetHeight+scrollTop;
+					}
+					drag.style.left = moveX + "px";
+					drag.style.top = moveY + "px";
+				}
+			}
+			document.onmouseup=function(){
+				document.onmousemove=null;
+			}
+		</script>
+	</body>
+
+</html>

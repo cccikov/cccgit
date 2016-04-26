@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>console</title>
+		<style type="text/css">
+			body{
+				
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a =[1,2,3,4,5]
+			a.hello = "hi";
+			console.log("%c css88.com", "font-size:20pt");
+			console.log("%c有阴影的log", "text-shadow: 3px 1px 1px grey");
+			console.clear();
+			console.log("%c停止！","font-size:100px;color:red");
+			console.log("%c"+a,"font-size:20pt;color:darkred");
+			console.log(a);
+			console.debug(a);
+			console.info(a);
+			console.warn(a);
+			console.error(a);
+			console.assert(1==1);
+			console.dir(a);
+			for(var key in a){
+				console.log("%c"+key+" "+a[key],"font-size:20px;color:#fff;background: darkred");
+			}
+		</script>
+	</body>
+</html>

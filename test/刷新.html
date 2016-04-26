@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<p>hi</p>
+		<button id="btn">按钮</button>
+		<button id="btn2">还原</button>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			if (self.location.search.indexOf("index=1") != -1) {
+				$("p").html("改变了");
+			}
+			$("#btn").click(function() {
+				if (self.location.href.indexOf("index=1") == -1) {
+					self.location.href = self.location.href + "?index=1";
+				} else {
+					window.location.reload();
+				}
+			});
+			$("#btn2").click(function(){
+				if(self.location.search.indexOf("index=1")!=-1){
+					var end = self.location.href.indexOf("index=1")-1;					
+					self.location.href = self.location.href.slice(0,end)
+				}
+			});
+		</script>
+	</body>
+
+</html>

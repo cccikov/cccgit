@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>js模拟placeholder</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#wrap {
+				position: relative;
+			}
+			
+			#userName {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 200px;
+				height: 14px;
+				line-height: 14px;
+				padding: 5px 5px;
+				border: 1px solid #bbb;
+				/*outline: none;*/
+				font-size: 12px;
+				background: none;
+			}
+			
+			#pH {
+				position: absolute;
+				top: 5px;
+				left: 5px;
+				font-size: 12px;
+				color: #ccc;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<input type="text" name="userName" id="userName" />
+			<span id="pH">请输入名字</span>
+		</div>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#userName").on("focus", function() {
+				$("#pH").hide();
+			});
+			$("#userName").on("blur", function() {
+				var textVal = $("#userName").val();
+				if (textVal == "") {//或者是(!textVal)
+					$("#pH").show();
+				}
+			});
+			
+			//或者写在一齐
+			//$("#userName").on({
+			//	"focus": function() {
+			//		alert("asdasd");
+			//		$("#pH").hide();
+			//	},
+			//	"blur": function() {
+			//		var textVal = $("#userName").val();
+			//		if (textVal == "") {
+			//			$("#pH").show();
+			//		}
+			//	}
+			//});
+		</script>
+	</body>
+
+</html>

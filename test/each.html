@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js">
+		</script>
+		<!--<script>
+			$(document).ready(function() {
+				$("button").click(function() {
+					$("li").each(function() {
+						alert($(this).text())
+					});
+				});
+			});
+		</script>-->
+		<script type="text/javascript">
+		$(function(){
+//			alert("asdasd");
+			$("button").click(function(){
+//				alert("asdasd");
+				for(var i = 0;i< $("li").length;i++){
+					alert($("li").eq(i).html());
+				}
+			});
+		});
+			
+		</script>
+	</head>
+
+	<body>
+
+		<button>Alert the value of each list item</button>
+
+		<ul>
+			<li>Coffee</li>
+			<li>Milk</li>
+			<li>Soda</li>
+		</ul>
+
+	</body>
+
+</html>

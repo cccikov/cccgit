@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>angularJs</title>
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+
+		<!--<div id="wrap1" ng-app=>
+			Your name:
+			<input type="text" ng-model="yourname" placeholder="World">
+			<hr> Hello {{yourname || 'World'}}!
+		</div>-->
+
+		<!--<h2>表达式</h2>-->
+		<!--<div ng-app="">
+			<p>我的第一个表达式: {{ 5 + 5 }}</p>
+		</div>-->
+
+		<!-- {{}} 等价于 ng-bind 字符串-->
+		<!--<div ng-app="" ng-init="quantity=1;cost=5">
+			<p>总价： {{ quantity * cost }}</p>
+		</div>-->
+		<!--<div ng-app="" ng-init="quantity=1;cost=5">
+			<p>总价： <span ng-bind="quantity * cost"></span></p>
+		</div>-->
+
+		<!-- {{}} 等价于 ng-bind 对象-->
+		<!--<div ng-app="" ng-init="person={firstName:'John',lastName:'Doe'}">
+			<p>姓为 {{ person.lastName }}</p>
+		</div>-->
+		<!--<div ng-app="" ng-init="person={firstName:'John',lastName:'Doe'}">
+			<p>姓为 <span ng-bind="person.lastName"></span></p>
+		</div>-->
+
+		<!--<div ng-app="" ng-init="points=[1,15,19,2,40]">
+			<p>第三个值为 {{ points[2] }}</p>
+		</div>-->
+		<!--<p>
+			<strong>AngularJS 表达式 与 JavaScript 表达式</strong>
+			<br /> 类似于 JavaScript 表达式，AngularJS 表达式可以包含字母，操作符，变量。
+			<br /> 与 JavaScript 表达式不同，AngularJS 表达式可以写在 HTML 中。
+			<br /> 与 JavaScript 表达式不同，AngularJS 表达式不支持条件判断，循环及异常。
+			<br /> 与 JavaScript 表达式不同，AngularJS 表达式支持过滤器。
+		</p>
+		<hr />
+		<hr />
+
+		<h2>指令</h2>
+		<p>
+			AngularJS 指令是扩展的 HTML 属性，带有前缀 ng-。
+			<br /> ng-app 指令初始化一个 AngularJS 应用程序。
+			<br /> ng-init 指令初始化应用程序数据。即初始值。
+			<br /> ng-model 指令把元素值（比如输入域的值）绑定到应用程序。
+		</p>
+		<hr />-->
+
+		<!--<div ng-app="" ng-init="firstName='ccc'">
+			<p>在输入框中尝试输入：</p>
+			<p>姓名：
+				<input type="text" ng-model="firstName">
+			</p>
+			<p>你输入的为： {{ firstName }}</p>
+		</div>
+		<hr />-->
+
+		<!--<h3>数据绑定</h3>
+		<div ng-app="" ng-init="quantity=1;price=5">
+			<h2>价格计算器</h2> 数量：
+			<input type="number" ng-model="quantity"> 价格：
+			<input type="number" ng-model="price">
+			<p><b>总价：</b> {{ quantity * price }}</p>
+		</div>
+		<p>ng-model 与 {{}} 绑定</p><hr />-->
+
+		<!--<h3>重复 HTML 元素</h3>-->
+		<!--<div ng-app="" ng-init="names=['Jani','Hege','Kai']">
+			<p>使用 ng-repeat 来循环数组</p>
+			<ul>
+				<li ng-repeat="x in names">
+					{{ x }}
+				</li>
+			</ul>
+		<div>-->
+		<!--<div ng-app="" ng-init="names=[{name:'Jani',country:'Norway'},{name:'Hege',country:'Sweden'},{name:'Kai',country:'Denmark'}]">
+			<p>循环对象(即系json)：</p>
+			<ul>
+				<li ng-repeat="x in names">
+					{{ x.name + ', ' + x.country }}
+				</li>
+			</ul>
+		</div>-->
+
+		<!--<p>
+			<strong>ng-app 指令</strong>
+			<br /> ng-app 指令定义了 AngularJS 应用程序的 根元素。
+			<br /> ng-app 指令在网页加载完毕时会自动引导（自动初始化）应用程序。
+			<br /> 稍后您将学习到 ng-app 如何通过一个值（比如 ng-app="myModule"）连接到代码模块
+		</p>
+		<p>
+			<stong>ng-init 指令</stong>
+			<br /> ng-init 指令为 AngularJS 应用程序定义了 初始值。
+			<br /> 通常情况下，不使用 ng-init。您将使用一个控制器或模块来代替它。
+			<br /> 稍后您将学习更多有关控制器和模块的知识。
+		</p>
+		<p>
+			<strong>ng-model 指令</strong>
+			<br /> ng-model 指令 绑定 HTML 元素 到应用程序数据。
+			<br /> ng-model 指令也可以：
+			<br /> 为应用程序数据提供类型验证（number、email、required）。
+			<br /> 为应用程序数据提供状态（invalid、dirty、touched、error）。
+			<br /> 为 HTML 元素提供 CSS 类。
+			<br /> 绑定 HTML 元素到 HTML 表单。
+		</p>
+		<p>
+			<strong>ng-repeat 指令</strong>
+			<br /> ng-repeat 指令对于集合中（数组中）的每个项会 克隆一次 HTML 元素。
+		</p>
+		-->
+		<!--<h3>创建自定义的指令</h3>-->
+		<div ng-app="myApp">
+			<runoob-directive></runoob-directive>
+		</div>
+		<script>
+			var app = angular.module("myApp", []);
+			app.directive("runoobDirective", function() {
+			    return {
+			    	restrict : "E",
+			        template : "<h1>自定义指令!</h1>"
+			    };
+			});
+		</script>
+	</body>
+
+</html>

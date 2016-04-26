@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>模拟锚点</title>
+		<style type="text/css">
+			#wrap{
+				height: 2000px;
+			}
+			#wrap div{
+				margin:10px 0;
+				border: 1px solid red;
+			}
+			.nothing{
+				height: 400px;
+			}
+			#btn{
+				position: fixed;
+				top:10px;
+				right:10px;
+			}
+		</style>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn").on("click",function(){
+					$(window).scrollTop($("#theDiv").offset().top);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="wrap">
+			<button id="btn">我是按钮</button>
+			<div class="nothing">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis tenetur id aperiam sequi enim molestiae consequatur. Aut dolorum quam aliquid voluptates dignissimos obcaecati saepe possimus laboriosam nihil reprehenderit atque libero.
+			</div>
+			<div id="theDiv">
+				臭茄，么么哒
+			</div>
+		</div>
+	</body>
+</html>

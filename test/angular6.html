@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>angularJs</title>
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<h2>服务(Service)</h2>
+
+		<!--<h3>$location 服务</h3>
+		<div ng-app="myApp">
+			<p ng-controller="customersCtrl" >
+				<input type="text" ng-model="name"/>
+				{{name}}{{url}}
+			</p>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myApp', []);
+			app.controller('customersCtrl', function($scope, $location) {
+				myUrl = $location.absUrl();
+				$scope.url = myUrl;
+				$scope.name="lalala";//这个可有可无
+			});
+		</script>
+		<pre>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, <strong style="color:red;font-size:20px">$location</strong>) {
+    myUrl = $location.absUrl();
+});
+
+***注意 $location 服务是作为一个参数传递到 controller 中。如果要使用它，需要在 controller 中定义。
+		</pre>-->
+
+		<!--<h3>$timeout 服务</h3>
+		<div ng-app="myApp">
+			<span ng-controller="myCtrl">
+				{{myHeader}}
+			</span>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope, $timeout) {
+				$scope.myHeader = "Hello World!";
+				$timeout(function() {
+					$scope.myHeader = "How are you today?";
+				}, 2000);
+			});
+		</script>-->
+
+		<!--<h3>$interval 服务</h3>
+		<div ng-app="myApp">
+			<span ng-controller="myCtrl">
+				{{theTime}}
+			</span>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope, $interval) {
+				$scope.theTime = new Date().toLocaleTimeString();
+				$interval(function() {
+					$scope.theTime = new Date().toLocaleTimeString();
+				}, 1000);
+			});
+		</script>-->
+
+		<h3>自定义 服务</h3>
+		<!--<div ng-app="myApp">
+			<span ng-controller="myCtrl">
+				<ul>
+					<li ng-repeat="x in counts">{{x}}</li>
+				</ul>
+			</span>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope) {
+				$scope.counts=[1,2,3,4,5,6,7]
+			});
+		</script>-->
+
+		<!-- <div ng-app="myApp" ng-controller="myCtrl">
+			<p>255的16进制是:</p>
+			<h1>{{hex}}</h1>
+			<input type="text" ng-model="num"/>
+			{{num}}
+		</div>
+		<p>自定义服务，用于转换16进制数：</p>
+		<script>
+			var app = angular.module('myApp', []);
+			app.service('hexafy', function() {
+				this.myFunc = function(x) {
+					return x.toString(16);
+				}
+			});
+			app.controller('myCtrl', function($scope, hexafy) {
+				$scope.num = 100;
+				$scope.hex = hexafy.myFunc(255);
+			});
+		</script> -->
+
+
+		<div ng-app="myApp" ng-controller="myCtrl">
+			在过滤器中使用服务:
+			<input type="text" ng-model="num"/>
+			{{num}}
+			<h1>{{255 | selfFilter}}</h1>
+		</div>
+		<script>
+			var app = angular.module('myApp', []);
+			app.service('selfService', function() {
+				this.myFunc = function (x) {
+			        return x.toString(16);
+			    }
+			});
+			app.filter('selfFilter',['selfService', function(num) {
+			    return function(x) {
+			        return num.myFunc(x);
+			    };
+			}]);
+			app.controller('myCtrl', function($scope) {
+				$scope.num = 100;
+			});
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>cookie</title>
+	</head>
+
+	<body>
+		<form action="" method="post">
+			<input type="text" name="username" id="username" value="" />
+			<!--<input id="submit" type="submit" value="" />-->
+			<!--<input type="checkbox" name="check" id="check" value="" />-->
+			<button id="btn">123123123</button>
+		</form>
+		<script type="text/javascript">
+			function setCookie(cname, cvalue, exDays) {
+				var d = new Date();
+				var expires = d.getTime() + exDays * (24 * 60 * 60 * 1000);
+				document.cookie = cname + "=" + cvalue + "; expires=" + new Date(expires);
+			}
+			var username = document.getElementById("username");
+			username.value = "asdasdasdasdasd";
+			var btn = document.getElementById("btn");
+			var check = document.getElementById("check");
+			btn.onclick = function() {
+				var userNameValue = document.getElementById("username").value;
+//				console.log(userNameValue);
+//				alert("asdasd");
+				setCookie("username3", userNameValue,200);
+			}
+			alert(navigator.userAgent);
+		</script>
+	</body>
+
+</html>

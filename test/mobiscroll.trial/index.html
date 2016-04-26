@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <title>Mobiscroll</title>
+
+    <!-- jQuery Include -->
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+
+    <!-- Mobiscroll JS and CSS Includes -->
+    <link href="css/mobiscroll.custom-2.17.1.min.css" rel="stylesheet" type="text/css" />
+    <script src="js/mobiscroll.custom-2.17.1.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        /*****************************************************************/
+        /* Demo Page styling, you can ignore this in your implementation */
+        body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+        input, select { width: 100%; padding: .625em; margin: 0 0 .625em 0; border: 1px solid #aaa; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
+        .header { padding: .625em; background: #5185a8;}
+        .header h1 { margin: 0; padding: 0; color: #fff; text-align: center; font-size: 1.25em; font-weight: bold; text-shadow: 1px 1px 1px #000; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+        #main, .demo-wrapper { padding: 1em; }
+        button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 0.8em 2.6em;
+            margin: 20px 10px 0 0;
+            outline: 0;
+            border: 0;
+            overflow: visible;
+            cursor: pointer;
+            color: #fff;
+            background: #5185a8;
+            font-family: Arial, sans-serif, verdana;
+            font-size: 14px;
+            font-weight: 100;
+            -webkit-transition: background 0.3s ease-out;
+            -moz-transition: background 0.3s ease-out;
+            -o-transition: background 0.3s ease-out;
+            transition: background 0.3s ease-out;
+        }
+        
+        button:hover {
+            background: #34566d;
+        }
+
+        input {
+            width: 100%;
+            margin: 0 0 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            background: #fff;
+            font-family: Arial, sans-serif,verdana;
+            text-shadow: none;
+            color: #000;
+            font-size: 15px;
+            -webkit-appearance: none;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .demo-iframe { 
+            padding: 10px 10px 10px 10px; 
+            text-shadow: none; 
+        }
+        /* Demo page styling END */
+        /*************************/
+
+    </style>
+
+    <script>
+        // -------------------------------------------------------------------
+        // Demo page code START, you can ignore this in your implementation
+        $(function(){
+            var noDisplay = { listview: true, forms: true, menustrip: 'partial' },
+                noMode = ['listview', 'menustrip', 'forms', 'numpad', 'widget'];
+                
+            $('#demo,#theme,#display,#lang,#mode').change(reInitialize);
+            reInitialize();
+
+            function reInitialize(){
+                var demo = $('#demo').val(),
+                    component = demo.split(/(?=[A-Z])/)[0];
+                    
+                // reset options
+                resetOptions(component);
+
+                // hide all demos
+                $('.demo-wrapper').hide();
+
+                // show current demo
+                var demoContainer = $('.demo-wrapper-'+demo);
+                demoContainer.show();
+
+                // reinitialize demo
+                var initFunction = demo+'Init';
+                window[initFunction]();
+                demoContainer.trigger('mbsc-enhance');
+            }
+            function resetOptions(component) {
+                // reset display
+                $('#display').parent().show();
+                $('#display option').show();
+                var displayValue = $('#display').val();
+                
+                if (noDisplay[component]==='partial') {
+                    if (displayValue == 'modal' || displayValue == 'bubble') {
+                        $('#display').val('inline');
+                    }
+                    $('#display option[value="modal"]').hide();
+                    $('#display option[value="bubble"]').hide();
+                } else if (noDisplay[component] === true) {
+                    $('#display').parent().hide();
+                }
+                
+                // reset mode
+                if ($.inArray(component, noMode) > -1){
+                    $('#mode').parent().hide();
+                } else {
+                    $('#mode').parent().show();
+                }
+            }
+        });
+        // Demo page code END
+        // -------------------------------------------------------------------
+
+        /* Basic usage date demo script */
+        function datetimeDateInit() {
+            $(function () {
+            
+                // Mobiscroll Date & Time initialization
+                $('#datetimeDate-demo').mobiscroll().date({
+                    theme: $('#theme').val(),      // Specify theme like: theme: 'ios' or omit setting to use default
+                    lang: $('#language').val(),    // Specify language like: lang: 'pl' or omit setting to use default
+                    display: $('#display').val(),  // Specify display mode like: display: 'bottom' or omit setting to use default
+                    mode: $('#mode').val()         // More info about mode: http://docs.mobiscroll.com/2-17-1/datetime#!opt-mode
+                });
+
+                $('#datetimeDate-show').click(function () {
+                    $('#datetimeDate-demo').mobiscroll('show');
+                    return false;
+                });
+            
+                $('#datetimeDate-clear').click(function () {
+                    $('#datetimeDate-demo').mobiscroll('clear');
+                    return false;
+                });
+
+            });
+        }
+
+        /* Datetime with invalids demo script */
+        function datetimeInvalidInit() {
+            $(function () {
+                var now = new Date();
+            
+                // Mobiscroll Date & Time initialization
+                $('#datetimeInvalid-demo').mobiscroll().datetime({
+                    theme: $('#theme').val(),                                             // Specify theme like: theme: 'ios' or omit setting to use default
+                    lang: $('#language').val(),                                           // Specify language like: lang: 'pl' or omit setting to use default
+                    display: $('#display').val(),                                         // Specify display mode like: display: 'bottom' or omit setting to use default
+                    mode: $('#mode').val(),                                               // More info about mode: http://docs.mobiscroll.com/2-17-1/datetime#!opt-mode
+                    minDate: new Date(),  // More info about minDate: http://docs.mobiscroll.com/2-17-1/datetime#!opt-minDate
+                    maxDate: new Date(2099, 11, 31), 
+                     // More info about minDate: http://docs.mobiscroll.com/2-17-1/datetime#!opt-minDate
+                    // invalid: ['w0', 'w6', '5/1', '12/24', '12/25']                        // More info about invalid: http://docs.mobiscroll.com/2-17-1/datetime#!opt-invalid
+                });
+
+                $('#datetimeInvalid-show').click(function () {
+                    $('#datetimeInvalid-demo').mobiscroll('show');
+                    return false;
+                });
+            
+                $('#datetimeInvalid-clear').click(function () {
+                    $('#datetimeInvalid-demo').mobiscroll('clear');
+                    return false;
+                });
+
+            });
+        }
+
+        /* Date with min and max demo script */
+        function datetimeMinmaxInit() {
+            $(function () {
+            
+                // Mobiscroll Date & Time initialization
+                $('#datetimeMinmax-demo').mobiscroll().date({
+                    theme: $('#theme').val(),        // Specify theme like: theme: 'ios' or omit setting to use default
+                    lang: $('#language').val(),      // Specify language like: lang: 'pl' or omit setting to use default
+                    display: $('#display').val(),    // Specify display mode like: display: 'bottom' or omit setting to use default
+                    mode: $('#mode').val(),          // More info about mode: http://docs.mobiscroll.com/2-17-1/datetime#!opt-mode
+                    minDate: new Date(2014, 8, 15),  // More info about minDate: http://docs.mobiscroll.com/2-17-1/datetime#!opt-minDate
+                    maxDate: new Date(2024, 8, 14)   // More info about maxDate: http://docs.mobiscroll.com/2-17-1/datetime#!opt-maxDate
+                });
+
+                $('#datetimeMinmax-show').click(function () {
+                    $('#datetimeMinmax-demo').mobiscroll('show');
+                    return false;
+                });
+            
+                $('#datetimeMinmax-clear').click(function () {
+                    $('#datetimeMinmax-demo').mobiscroll('clear');
+                    return false;
+                });
+
+            });
+        }
+
+        /* Basic usage time demo script */
+        function datetimeTimeInit() {
+            $(function () {
+            
+                // Mobiscroll Date & Time initialization
+                $('#datetimeTime-demo').mobiscroll().time({
+                    theme: $('#theme').val(),      // Specify theme like: theme: 'ios' or omit setting to use default
+                    lang: $('#language').val(),    // Specify language like: lang: 'pl' or omit setting to use default
+                    display: $('#display').val(),  // Specify display mode like: display: 'bottom' or omit setting to use default
+                    mode: $('#mode').val(),        // More info about mode: http://docs.mobiscroll.com/2-17-1/datetime#!opt-mode
+                    headerText: false,             // More info about headerText: http://docs.mobiscroll.com/2-17-1/datetime#!opt-headerText
+                    maxWidth: 60                   // More info about maxWidth: http://docs.mobiscroll.com/2-17-1/datetime#!opt-maxWidth
+                });
+
+                $('#datetimeTime-show').click(function () {
+                    $('#datetimeTime-demo').mobiscroll('show');
+                    return false;
+                });
+            
+                $('#datetimeTime-clear').click(function () {
+                    $('#datetimeTime-demo').mobiscroll('clear');
+                    return false;
+                });
+
+            });
+        }
+
+        </script>
+</head>
+<body>
+    <!-- ------------------------------------------------------------------ -->
+    <!-- Demo configurator markup START, ignore this in your implementation -->
+    <div class="header">
+        <h1>Mobiscroll</h1>
+    </div>
+    <div id="main">
+        <div>
+            <label for="theme">Theme</label>
+            <select name="theme" id="theme" class="settings">
+                <option value="">Default / Auto</option>
+                <option value="mobiscroll">Mobiscroll</option>
+                <option value="mobiscroll-dark">Mobiscroll Dark</option>
+            </select>
+        </div>
+        <div>
+            <label for="mode">Mode</label>
+            <select name="mode" id="mode" class="settings">
+                <option value="scroller">Scroller</option>
+                <option value="clickpick">Clickpick</option>
+                <option value="mixed">Mixed</option>
+            </select>
+        </div>
+        <div>
+            <label for="display">Display</label>
+            <select name="display" id="display" class="settings">
+                <option value="modal">Modal</option>
+                <option value="inline">Inline</option>
+                <option value="bubble">Bubble</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </select>
+        </div>
+        <div>
+            <label for="language">Language</label>
+            <select name="language" id="language" class="settings">
+                <option value="">English</option>
+            </select>
+        </div>
+        <div>
+            <label for="demo">Demo</label>
+            <select name="demo" id="demo" class="settings">
+                
+                <option value="datetimeDate" selected>Basic usage date</option>
+                <option value="datetimeInvalid" >Datetime with invalids</option>
+                <option value="datetimeMinmax" >Date with min and max</option>
+                <option value="datetimeTime" >Basic usage time</option>
+            </select>
+        </div>
+    </div>
+    <!-- Demo configurator markup END -->
+    <!-- ------------------------------------------------------------------ -->
+
+    <!-- ------------------------------------------------------------------------------- -->
+    <!-- Basic usage date START -->
+    <div class="demo-wrapper demo-wrapper-datetimeDate">
+        <input id="datetimeDate-demo" placeholder="Please Select..." />
+
+        <button id="datetimeDate-clear">Clear</button>
+        <button id="datetimeDate-show">Show</button>
+        
+    </div>
+    <!-- Basic usage date END -->
+    <!-- ------------------------------------------------------------------------------- -->
+
+    <!-- ------------------------------------------------------------------------------- -->
+    <!-- Datetime with invalids START -->
+    <div class="demo-wrapper demo-wrapper-datetimeInvalid">
+        <input id="datetimeInvalid-demo" placeholder="Please Select..." />
+
+        <button id="datetimeInvalid-clear">Clear</button>
+        <button id="datetimeInvalid-show">Show</button>
+        
+    </div>
+    <!-- Datetime with invalids END -->
+    <!-- ------------------------------------------------------------------------------- -->
+
+    <!-- ------------------------------------------------------------------------------- -->
+    <!-- Date with min and max START -->
+    <div class="demo-wrapper demo-wrapper-datetimeMinmax">
+        <input id="datetimeMinmax-demo" placeholder="Please Select..." />
+
+        <button id="datetimeMinmax-clear">Clear</button>
+        <button id="datetimeMinmax-show">Show</button>
+        
+    </div>
+    <!-- Date with min and max END -->
+    <!-- ------------------------------------------------------------------------------- -->
+
+    <!-- ------------------------------------------------------------------------------- -->
+    <!-- Basic usage time START -->
+    <div class="demo-wrapper demo-wrapper-datetimeTime">
+        <input id="datetimeTime-demo" placeholder="Please Select..." />
+
+        <button id="datetimeTime-clear">Clear</button>
+        <button id="datetimeTime-show">Show</button>
+        
+    </div>
+    <!-- Basic usage time END -->
+    <!-- ------------------------------------------------------------------------------- -->
+
+</body>
+
+</html>

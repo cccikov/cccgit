@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			
+			#pic {
+				position: absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/1.jpg" alt="" id="pic"/>
+		<script type="text/javascript">
+			var pic = document.getElementById("pic");
+			
+			function mousewheel(obj, callback){
+				obj.onmousewheel = fn;
+				if(obj.addEventListener) {
+					obj.addEventListener("DOMMouseScroll",fn,false);
+				}
+				function fn(e){
+					var e = e || window.event;
+					e.delta = true;
+					if(e.wheelDelta < 0 || e.detail > 0) {
+						e.delta = true;
+					}else {
+						e.delta = false;
+					}
+					callback(e);
+					
+					if(e.preventDefault){
+						e.preventDefault();
+					}
+					return false;
+				}
+			}
+			
+			mousewheel(document,function(e){
+				//旧的图片宽高
+				var oldWidth = pic.offsetWidth;
+				var oldHeight = pic.offsetHeight;
+				
+				//旧的视口坐标
+				var picPos = pic.getBoundingClientRect();
+				var oldLeft = picPos.left;
+				var oldTop = picPos.top;
+				
+				var scaleX = (e.clientX - oldLeft) / oldWidth;
+				var scaleY = (e.clientY - oldTop) / oldHeight;
+				
+				if(e.delta) {
+					pic.style.width = pic.offsetWidth + 10 + "px";
+				}else {
+					pic.style.width = pic.offsetWidth - 10 + "px";
+				}
+				
+				//变化量
+				var changeX = (pic.offsetWidth - oldWidth) * scaleX;
+				var changeY = (pic.offsetHeight - oldHeight) * scaleY;
+				
+				//scaleX = (oldLeft - pic.style.left)/(pic.offsetWidth - oldWidth)
+				//scaleX = (e.clientX - oldLeft) / oldWidth;
+				
+				pic.style.left = oldLeft - changeX + "px";
+				pic.style.top = oldTop - changeY + "px";
+			})
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>原生js添加节点</title>
+		<style type="text/css">
+			.btn{
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="btnWrap"> 
+				
+			</div>
+		</div>
+		<script type="text/javascript">
+			var btnWrap = document.getElementById("btnWrap");
+			for(var i=0;i<10;i++){
+				var btn = document.createElement('button');
+				btn.className = 'btn';
+				btn.innerHTML = i;
+				btnWrap.appendChild(btn);
+			}
+		</script>
+	</body>
+</html>

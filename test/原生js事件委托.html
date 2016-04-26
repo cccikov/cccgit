@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>原生js事件委托</title>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="btnWrap">
+
+			</div>
+		</div>
+		<script type="text/javascript">
+			var btnWrap = document.getElementById("btnWrap");
+			for (var i = 0; i < 10; i++) {
+				var btn = document.createElement('button');
+				btn.className = 'btn btn' + i;
+				btn.innerHTML = i;
+				btnWrap.appendChild(btn);
+			}
+			btnWrap.onclick = function(e) {
+				var e = e || window.event;
+				console.log(e);
+				var that = e.target || e.srcElement;
+				that.style.background = "red";
+			}
+			btnWrap.addEventListener("click", function(e) {
+				var e = e || window.event;
+				console.log(e);
+				var that = e.target || e.srcElement;
+				alert(that.innerHTML);
+			}, false);
+		</script>
+	</body>
+
+</html>

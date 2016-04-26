@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+
+			function Foo() {
+				var i = 0;
+				console.log(i);
+				return function() {
+					console.log("in"+i);
+					i = 100;
+				}
+			}
+			f1 = Foo();
+			f1();
+			f1();
+			f1();
+		</script>
+	</body>
+
+</html>

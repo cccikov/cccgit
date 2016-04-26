@@ -1,0 +1,237 @@
+<html><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-eval';">
+		<title>任务</title>
+		<link rel="stylesheet" href="lib/ionic/css/ionic.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/base.css">
+		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" href="css/login.css">
+		<link rel="stylesheet" href="css/msg.css">
+		<link rel="stylesheet" href="css/warn.css">
+		<link rel="stylesheet" href="css/mission.css">
+		<link rel="stylesheet" href="css/project.css">
+		<link rel="stylesheet" href="css/contacts.css">
+		<script type="text/javascript" src="lib/jquery-1.11.3.min.js"></script>
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- ngcordova script -->
+		<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<script src="js/app.js"></script>
+
+		<script src="js/services/commonServices.js"></script>
+		<script src="js/services/contactsServices.js"></script>
+		<script src="js/services/messageServices.js"></script>
+		<script src="js/services/projectsServices.js"></script>
+		<script src="js/services/goBackServices.js"></script>
+
+		<script src="js/controller/loginControllers.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/controller/navControllers.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/controller/missionControllers.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/controller/projectControllers.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/controller/contactsControllers.js"></script>
+		<script src="js/controller/registerControllers.js"></script>
+		<script src="js/controller/warnControllers.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/controller/meControllers.js"></script>
+		<script src="js/controller/messageControllers.js"></script>
+		<script src="js/controller/projectControllers.js"></script>
+		<script src="js/directive/directives.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body ng-app="starter" class="grade-a platform-browser platform-ios platform-ios9 platform-ios9_1 platform-ready">
+		<!--The nav bar that will be updated as we navigate between views.-->
+		<!--<ion-nav-bar class="bar-stable">
+			<ion-nav-back-button>
+			</ion-nav-back-button>
+		</ion-nav-bar>-->
+		<!--The views will be rendered in the <ion-nav-view> directive below Templates are in the /templates folder (but you could also have templates inline in this html file if you'd like).-->
+		<!--<ion-nav-view></ion-nav-view>-->
+
+		<ion-nav-bar class="selfNav nav-bar-container" align-title="center" nav-bar-transition="ios" nav-bar-direction="back" nav-swipe="">
+			<ion-nav-back-button class="hide" style="color:#fff;background: #a50100;"></ion-nav-back-button>
+		<div class="nav-bar-block" nav-bar="cached"><ion-header-bar class="selfNav bar bar-header" align-title="center"><button class="button back-button buttons button button-icon icon ion-android-arrow-back header-item" style="color: rgb(255, 255, 255); opacity: 0; background: rgb(165, 1, 0);" ng-click="$ionicGoBack()">
+			<span class="back-text" style="transform: translate3d(137.5px, 0px, 0px); opacity: 0;"></span></button><div class="buttons buttons-left" style="opacity: 0;"><span class="left-buttons">
+		<button class="button" nav-direction="back" style="color:#fff;background: none;">
+		</button>
+	</span></div><div class="title title-center header-item" style="transform: translate3d(221.5px, 0px, 0px); left: 60px; right: 60px; opacity: 0;">任务新建</div><div class="buttons buttons-right" style="opacity: 0;"><span class="right-buttons">
+		<button class="button" style="background: none; color:#fff;font-size: 16px;">
+			<span style="font:16px 'myFont'">保存</span>
+		</button>
+	</span></div></ion-header-bar></div><div class="nav-bar-block" nav-bar="active"><ion-header-bar class="selfNav bar bar-header" align-title="center"><button class="button back-button hide buttons button button-icon icon ion-android-arrow-back header-item" style="color: rgb(255, 255, 255); background: rgb(165, 1, 0);" ng-click="$ionicGoBack()">
+			<span class="back-text" style="transform: translate3d(0px, 0px, 0px);"></span></button><div class="buttons buttons-left"><span class="left-buttons">
+		<button class="button" ui-sref="tab.mission-filter" style="background:none;color:#fff;font-size: 16px;" href="#/tab/mission-filter">
+			<span style="font:16px 'myFont'">筛选</span>
+		</button>
+	</span></div><div class="title title-center header-item" style="left: 60px; right: 60px; transform: translate3d(0px, 0px, 0px);">任务</div><div class="buttons buttons-right"><span class="right-buttons">
+		<button class="button button-icon icon ion-more" missionbarclick="" style="background: none;color:#fff">
+		</button>
+	</span></div></ion-header-bar></div></ion-nav-bar>
+		<ion-nav-view class="view-container" nav-view-transition="ios" nav-view-direction="none" nav-swipe=""><ion-tabs class="tabs-icon-top tabs-bottom pane tabs-standard" nav-view="active" style="opacity: 1; transform: translate3d(0%, 0px, 0px);"><div class="tab-nav tabs">
+
+	<!-- 消息 -->
+	<ion-tab badge="0" ng-click="toMessages()" href="#/tab/msg" icon-off="ion-ios-chatbubble-outline" icon-on="ion-ios-chatbubble-outline"></ion-tab>
+
+	<!-- 提醒  href="#/tab/warn"-->
+	<ion-tab ng-click="toWarn()" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes-outline"></ion-tab>
+
+	<!-- 任务  href="#/tab/mission"-->
+	<ion-tab ng-click="toMission()" icon-off="ion-ios-briefcase-outline" icon-on="ion-ios-briefcase-outline"></ion-tab>
+	
+	<!--通讯录  href="#/tab/contacts"-->
+	<ion-tab ng-click="toContacts()" icon-off="ion-ios-people-outline" icon-on="ion-ios-people-outline"></ion-tab>
+
+<a ng-class="{'tab-item-active': isTabActive(), 'has-badge':badge, 'tab-hidden':isHidden()}" ng-disabled="disabled()" class="tab-item" ng-click="toMessages()" icon-on="ion-ios-chatbubble-outline" icon-off="ion-ios-chatbubble-outline" badge="0"><!-- ngIf: badge --><!-- ngIf: getIconOn() && isTabActive() --><!-- ngIf: getIconOff() && !isTabActive() --><i class="icon ion-ios-chatbubble-outline" ng-if="getIconOff() &amp;&amp; !isTabActive()"></i><!-- end ngIf: getIconOff() && !isTabActive() --><span class="tab-title ng-binding" ng-bind-html="title">消息</span></a><a ng-class="{'tab-item-active': isTabActive(), 'has-badge':badge, 'tab-hidden':isHidden()}" ng-disabled="disabled()" class="tab-item" ng-click="toWarn()" icon-on="ion-ios-chatboxes-outline" icon-off="ion-ios-chatboxes-outline"><!-- ngIf: badge --><!-- ngIf: getIconOn() && isTabActive() --><!-- ngIf: getIconOff() && !isTabActive() --><i class="icon ion-ios-chatboxes-outline" ng-if="getIconOff() &amp;&amp; !isTabActive()"></i><!-- end ngIf: getIconOff() && !isTabActive() --><span class="tab-title ng-binding" ng-bind-html="title">提醒</span></a><a ng-class="{'tab-item-active': isTabActive(), 'has-badge':badge, 'tab-hidden':isHidden()}" ng-disabled="disabled()" class="tab-item tab-item-active" ng-click="toMission()" icon-on="ion-ios-briefcase-outline" icon-off="ion-ios-briefcase-outline"><!-- ngIf: badge --><!-- ngIf: getIconOn() && isTabActive() --><i class="icon ion-ios-briefcase-outline" ng-if="getIconOn() &amp;&amp; isTabActive()"></i><!-- end ngIf: getIconOn() && isTabActive() --><!-- ngIf: getIconOff() && !isTabActive() --><span class="tab-title ng-binding" ng-bind-html="title">任务</span></a><a ng-class="{'tab-item-active': isTabActive(), 'has-badge':badge, 'tab-hidden':isHidden()}" ng-disabled="disabled()" class="tab-item" ng-click="toContacts()" icon-on="ion-ios-people-outline" icon-off="ion-ios-people-outline"><!-- ngIf: badge --><!-- ngIf: getIconOn() && isTabActive() --><!-- ngIf: getIconOff() && !isTabActive() --><i class="icon ion-ios-people-outline" ng-if="getIconOff() &amp;&amp; !isTabActive()"></i><!-- end ngIf: getIconOff() && !isTabActive() --><span class="tab-title ng-binding" ng-bind-html="title">通讯录</span></a></div><ion-nav-view name="tab-mission" class="view-container tab-content" nav-view="active" nav-view-transition="ios" nav-view-direction="back" nav-swipe=""><ion-view view-title="任务" class="pane" nav-view="active" style="opacity: 1; transform: translate3d(0%, 0px, 0px);">
+	
+	<!--导航按钮-->
+	<ion-nav-buttons side="left" class="hide"></ion-nav-buttons>
+	<ion-nav-buttons side="right" class="hide"></ion-nav-buttons>
+	
+	<!--内容-->
+	<ion-content scroll="false" style="background: #ebebeb;" class="scroll-content ionic-scroll scroll-content-false  has-header has-tabs">
+		<div class="mission">
+
+			<!-- 任务筛选栏 -->
+			<ul class="tips">
+				<li ng-click="missionTab[1].Fn()" class="active" missiontab="">我指派</li>
+				<li ng-click="missionTab[2].Fn()" missiontab="">我执行</li>
+				<li ng-click="missionTab[3].Fn()" missiontab="">我检查</li>
+				<li ng-click="missionTab[4].Fn()" missiontab="">我奖惩</li>
+			</ul>
+
+			<!--主要-->
+
+			<div class="main-wrap">
+
+				<!--我指派的-->
+				<!-- ngIf: missionScroll1() --><ion-scroll ng-if="missionScroll1()" scrollheight="" delegate-handle="small" style="height: 524px; margin: 5px 0px 0px;" direction="y" class="scroll-view ionic-scroll scroll-y"><div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+					<ul class="main">
+
+						<!--单元任务块-->
+						<!-- ngRepeat: x in arr1 --><li class="mission" ui-sref="tab.mission-detail" ng-repeat="x in arr1" href="#/tab/mission-detail">
+
+							<!--任务头像栏-->
+							<div class="misstop clearfix">
+								<i style="background-image: url(img/adam.jpg);"></i>
+								<div class="state">
+									<ul>
+										<li class="finished">已完成</li>
+										<li class="checked">已检查</li>
+										<li class="rewarded">已激励</li>
+										<li class="canceled">已撤销</li>
+									</ul>
+								</div>
+								<span>李秀玉</span>
+								<span>创建于2016/02/12</span>
+							</div>
+	
+							<!--任务消息栏-->
+							<div class="missmid">
+								<p class="ng-binding">{}。</p>
+							</div>
+
+							<!--任务时间栏-->
+							<div class="missfoot">
+								<span>2016/02/28  10:36</span>
+								<span style="color: #aa0e0e">超期10天</span>
+							</div>
+						</li><!-- end ngRepeat: x in arr1 --><li class="mission" ui-sref="tab.mission-detail" ng-repeat="x in arr1" href="#/tab/mission-detail">
+
+							<!--任务头像栏-->
+							<div class="misstop clearfix">
+								<i style="background-image: url(img/adam.jpg);"></i>
+								<div class="state">
+									<ul>
+										<li class="finished">已完成</li>
+										<li class="checked">已检查</li>
+										<li class="rewarded">已激励</li>
+										<li class="canceled">已撤销</li>
+									</ul>
+								</div>
+								<span>李秀玉</span>
+								<span>创建于2016/02/12</span>
+							</div>
+	
+							<!--任务消息栏-->
+							<div class="missmid">
+								<p class="ng-binding">{}。</p>
+							</div>
+
+							<!--任务时间栏-->
+							<div class="missfoot">
+								<span>2016/02/28  10:36</span>
+								<span style="color: #aa0e0e">超期10天</span>
+							</div>
+						</li><!-- end ngRepeat: x in arr1 --><li class="mission" ui-sref="tab.mission-detail" ng-repeat="x in arr1" href="#/tab/mission-detail">
+
+							<!--任务头像栏-->
+							<div class="misstop clearfix">
+								<i style="background-image: url(img/adam.jpg);"></i>
+								<div class="state">
+									<ul>
+										<li class="finished">已完成</li>
+										<li class="checked">已检查</li>
+										<li class="rewarded">已激励</li>
+										<li class="canceled">已撤销</li>
+									</ul>
+								</div>
+								<span>李秀玉</span>
+								<span>创建于2016/02/12</span>
+							</div>
+	
+							<!--任务消息栏-->
+							<div class="missmid">
+								<p class="ng-binding">{}。</p>
+							</div>
+
+							<!--任务时间栏-->
+							<div class="missfoot">
+								<span>2016/02/28  10:36</span>
+								<span style="color: #aa0e0e">超期10天</span>
+							</div>
+						</li><!-- end ngRepeat: x in arr1 -->
+
+					</ul>
+					<!-- ngIf: infinite1() --><ion-infinite-scroll ng-if="infinite1()" on-infinite="doinfinite1()" immediate-check="false"><ion-spinner icon="" class="spinner spinner-ios"><svg viewBox="0 0 64 64"><g stroke-width="4" stroke-linecap="round"><line y1="17" y2="29" transform="translate(32,32) rotate(180)"><animate attributeName="stroke-opacity" dur="750ms" values="1;.85;.7;.65;.55;.45;.35;.25;.15;.1;0;1" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(210)"><animate attributeName="stroke-opacity" dur="750ms" values="0;1;.85;.7;.65;.55;.45;.35;.25;.15;.1;0" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(240)"><animate attributeName="stroke-opacity" dur="750ms" values=".1;0;1;.85;.7;.65;.55;.45;.35;.25;.15;.1" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(270)"><animate attributeName="stroke-opacity" dur="750ms" values=".15;.1;0;1;.85;.7;.65;.55;.45;.35;.25;.15" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(300)"><animate attributeName="stroke-opacity" dur="750ms" values=".25;.15;.1;0;1;.85;.7;.65;.55;.45;.35;.25" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(330)"><animate attributeName="stroke-opacity" dur="750ms" values=".35;.25;.15;.1;0;1;.85;.7;.65;.55;.45;.35" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(0)"><animate attributeName="stroke-opacity" dur="750ms" values=".45;.35;.25;.15;.1;0;1;.85;.7;.65;.55;.45" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(30)"><animate attributeName="stroke-opacity" dur="750ms" values=".55;.45;.35;.25;.15;.1;0;1;.85;.7;.65;.55" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(60)"><animate attributeName="stroke-opacity" dur="750ms" values=".65;.55;.45;.35;.25;.15;.1;0;1;.85;.7;.65" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(90)"><animate attributeName="stroke-opacity" dur="750ms" values=".7;.65;.55;.45;.35;.25;.15;.1;0;1;.85;.7" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(120)"><animate attributeName="stroke-opacity" dur="750ms" values=".85;.7;.65;.55;.45;.35;.25;.15;.1;0;1;.85" repeatCount="indefinite"></animate></line><line y1="17" y2="29" transform="translate(32,32) rotate(150)"><animate attributeName="stroke-opacity" dur="750ms" values="1;.85;.7;.65;.55;.45;.35;.25;.15;.1;0;1" repeatCount="indefinite"></animate></line></g></svg></ion-spinner></ion-infinite-scroll><!-- end ngIf: infinite1() -->
+				</div><div class="scroll-bar scroll-bar-v"><div class="scroll-bar-indicator scroll-bar-fade-out" style="transform: translate3d(0px, 0px, 0px) scaleY(1); height: 0px;"></div></div></ion-scroll><!-- end ngIf: missionScroll1() -->
+
+				<!--我执行的-->
+				<!-- ngIf: missionScroll2() -->
+
+				<!--我检查-->
+				<!-- ngIf: missionScroll3() -->
+
+				<!--我奖惩-->
+				<!-- ngIf: missionScroll4() -->
+			</div>
+
+		</div>
+		
+		<!--右上方-->
+		<ul class="rightTop-bar" id="mission-home-rightTop-bar" style="display: none;">
+			<li ng-show="addMissionFn()" class="add-mission" ui-sref="tab.mission-edit" href="#/tab/mission-edit">发起任务</li>
+			<li class="project-manage" ui-sref="tab.mission-project" href="#/tab/mission-project">项目管理</li>
+			<li class="scanner" ng-click="scanner()">扫一扫</li>
+		</ul>
+		
+		<div class="mask white-mask" id="mission-home-mask" style="display: none;">
+		</div>
+		
+	</ion-content>
+</ion-view></ion-nav-view></ion-tabs></ion-nav-view>
+		<div class="mask" id="indexMask" style="display: none;">
+		</div>
+	
+
+<div class="backdrop"></div><div class="click-block click-block-hide"></div></body></html>

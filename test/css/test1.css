@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.ul1 {
+  border: 1px solid blue;
+}
+.ul1 .li {
+  border: 1px solid red;
+}
+.ul2 {
+  border: 1px solid pink;
+}
+.ul2 .li {
+  border: 1px solid blue;
+}
+/*# sourceMappingURL=test1.css.map */

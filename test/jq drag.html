@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>jq drag</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#wrap {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+			
+			.header {
+				width: 600px;
+				height: 40px;
+				background: blue;
+			}
+			
+			.header:hover {
+				cursor: move;
+			}
+			
+			.main {
+				width: 600px;
+				height: 500px;
+				background: #ccc;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="header"></div>
+			<div class="main"></div>
+		</div>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">			
+			$(".header").on("mousedown", function(e) {
+				var e = e || window.event;
+				var mouseX = e.clientX - $("#wrap").position().left;
+				var mouseY = e.clientY - $("#wrap").position().top; //要搞清楚是谁有定位，这里不是header有定位，而是wrap有定位
+				$(document).off("mousemove").on("mousemove", function(e) {
+					var e = e || window.event;
+					var moveX = e.clientX - mouseX;
+					var moveY = e.clientY - mouseY; //					
+					$("#wrap").css({
+						"left": moveX,
+						"top": moveY
+					});
+				});
+			});
+			$(document).on("mouseup", function() {
+				$(document).off("mousemove");
+			})
+		</script>
+	</body>
+
+</html>

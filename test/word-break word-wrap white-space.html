@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>word-break word-wrap white-space</title>
+	<style type="text/css">
+		hr{
+			margin: 0 0 30px;
+		}
+		dl{
+			width: 400px;
+			margin: 0 auto;
+		}
+		.demo{
+			width: 320px;
+			margin: 10px auto;
+			outline: 1px solid red;
+		}
+		table{
+			border-collapse:collapse;
+			margin:0 0 20px;
+		}
+		.wordBreakbreak{
+			word-break:break-all;
+		}
+		.wordBreakKeep{
+			word-break: keep-all;
+		}
+		.wordWrapBreak{
+			word-wrap:break-word;
+		}
+		.wordWrapBreak2{
+			word-wrap:break-word;
+			word-break:break-all;
+		}
+	</style>
+</head>
+<body>
+	<!-- word-break -->
+	<p>word-break: normal|break-all|keep-all;属性规定自动换行的处理方法;CSS3</p>
+	<table border="1">
+		<tr>
+			<td>normal(默认)</td>
+			<td>使用浏览器默认的换行规则。</td>
+		</tr>
+		<tr>
+			<td>break-all</td>
+			<td>允许在单词内换行。</td>
+		</tr>
+		<tr>
+			<td>keep-all</td>
+			<td>只能在半角空格或连字符处换行。</td>
+		</tr>
+	</table>
+	<dl>
+		<dt><strong>word-break: normal</strong></dt>
+		<dd class="demo">Lorem ipsum dolooooor sit amet. ipsum dolooooor sit amet.</dd>
+	</dl>
+	<dl>
+		<dt><strong>word-break: break-all</strong></dt>
+		<dd class="demo wordBreakbreak">Lorem ipsum dolooooor sit amet. ipsum dolooooor sit amet.</dd>
+	</dl>
+	<dl>
+		<dt><strong>word-break: keep-all</strong></dt>
+		<dd class="demo wordBreakKeep">Lorem ipsum dolooooor sit amet. ipsum dolooooor sit amet.</dd>
+	</dl>
+	<hr>
+
+
+	<!-- word-wrap -->
+	<p>word-wrap: normal|break-word;word-wrap 属性允许长单词或 URL 地址换行到下一行;CSS3</p>	
+	<table border="1">
+		<tr>
+			<td>normal(默认)</td>
+			<td>只在允许的断字点换行（浏览器保持默认处理）。</td>
+		</tr>
+		<tr>
+			<td>break-word</td>
+			<td>在长单词或 URL 地址内部进行换行。</td>
+		</tr>
+	</table>
+	<dl>
+		<dt><strong>word-wrap: normal</strong></dt>
+		<dd class="demo">Lorem ipsum dolor sit amet.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</dd>
+	</dl>
+	<dl>
+		<dt><strong>word-wrap: break-word</strong></dt>
+		<dd class="demo wordWrapBreak">Lorem ipsum dolor sit amet.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</dd>
+	</dl>
+	<dl>
+		<dt><strong><em>word-wrap:break-word;word-break:break-all;</em></strong></dt>
+		<dd class="demo wordWrapBreak2">Lorem ipsum dolor sit amet.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</dd>
+	</dl>
+	<dl>
+		<dt><strong><em>word-break:break-all;</em></strong></dt>
+		<dd class="demo wordBreakbreak">Lorem ipsum dolor sit amet.ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</dd>
+	</dl>
+	<hr>
+
+	<!-- white-space -->
+	<p>white-space 属性设置如何处理元素内的空白。CSS1</p>
+	<table border="1">
+		<tr>
+			<td>normal(默认)</td>
+			<td>默认。空白会被浏览器忽略。</td>
+		</tr>
+		<tr>
+			<td>pre</td>
+			<td>空白会被浏览器保留。其行为方式类似 HTML 中的 &lt;pre&gt; 标签。</td>
+		</tr>
+		<tr>
+			<td>nowrap</td>
+			<td>文本不会换行，文本会在在同一行上继续，直到遇到 &lt;br&gt;</td>
+		</tr>
+		<tr>
+			<td>pre-wrap</td>
+			<td>保留空白符序列，但是正常地进行换行。</td>
+		</tr>
+		<tr>
+			<td>pre-line</td>
+			<td>合并空白符序列，但是保留换行符。</td>
+		</tr>
+		<tr>
+			<td>inherit</td>
+			<td>从父元素继承</td>
+		</tr>
+	</table>
+	<style type="text/css">
+		.whiteSpacePre{
+			white-space: pre;
+		}
+		.whiteSpaceNowrap{
+			white-space: nowrap;
+		}
+		.whiteSpaceWrap{
+			white-space: pre-wrap;
+		}
+		.whiteSpaceLine{
+			white-space: pre-line;
+		}
+
+	</style>
+	<dl>
+		<dt><strong>white-space:normal;</strong></dt>
+		<dd class="demo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi nostrum, qui in. Hic harum voluptatem eaque molestias accusamus esse odit tempore, quod libero, dolorem similique voluptatum necessitatibus tenetur consequuntur quisquam!</dd>
+	</dl>
+	<dl>
+		<dt><strong>white-space:pre;</strong></dt>
+		<dd class="demo whiteSpacePre">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente minus molestiae sunt, velit non neque veritatis accusantium? Rem ad, inventore pariatur nesciunt consequuntur eos adipisci atque, ipsa voluptatum consectetur possimus.</dd>
+	</dl>
+	<dl>
+		<dt><strong>white-space:nowrap;</strong></dt>
+		<dd class="demo whiteSpaceNowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis voluptas ratione doloremque, dolores dicta suscipit, molestias sint illum harum non quas veritatis hic, quia rerum vero. Possimus architecto error fugiat.</dd>
+	</dl>
+	<dl>
+		<dt><strong>white-space:pre-wrap;</strong></dt>
+		<dd class="demo whiteSpaceWrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis voluptas ratione doloremque, dolores dicta suscipit, molestias sint illum harum non quas veritatis hic, quia rerum vero. Possimus architecto error fugiat.</dd>
+	</dl>
+	<dl>
+		<dt><strong>white-space:pre-line;</strong></dt>
+		<dd class="demo whiteSpaceLinec">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis voluptas ratione doloremque, dolores dicta suscipit, molestias sint illum harum non quas veritatis hic, quia rerum vero. Possimus architecto error fugiat.</dd>
+	</dl>
+
+</body>
+</html>

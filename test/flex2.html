@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>flex</title>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			/*html,body{
+				height: 100%;
+			}*/
+			div{
+				text-align: center;
+			}
+			.num1{
+				background: red;
+			}
+			.num2{
+				background: green;
+			}
+			.num3{
+				background: yellow;
+			}
+			.num4{
+				background: blue;
+			}
+			.num5{
+				background: brown;
+			}
+			.num6{
+				background: yellowgreen;
+			}
+			.num7{
+				background: cyan;
+			}
+			
+			
+			
+			
+			#wrap{
+				display: flex;
+				height: 500px;
+				width: 100%;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+			.line1{
+				flex-grow:2;
+				display: flex;
+				justify-content: space-between;
+				margin:0 0 10px;
+			}
+			.line1>div{
+				width: 50%;
+			}
+			.line1>div:nth-of-type(1),.line2 div:nth-of-type(1),.line3 div:nth-of-type(1){
+				margin: 0 10px 0 0;
+			}
+			.column2{
+				display: flex;
+				flex-direction: column;
+			}
+			.column2>div{
+				flex-grow: 1;
+			}
+			.column2 div:nth-of-type(1){
+				margin:0 0 10px 0;
+			}
+			.line2{
+				flex-grow:1;
+				display: flex;
+				margin:0 0 10px;
+			}
+			.line2>div{
+				width: 50%;
+			}
+			.line3{
+				flex-grow:1;
+				display: flex;
+			}
+			.line3>div{
+				width: 50%;
+			}
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			
+			<div class="line1">
+				<div class="column1 num1">
+					1
+				</div>
+				<div class="column2">
+					<div class="num2">2</div>
+					<div class="num3">3</div>
+				</div>
+			</div>
+			
+			<div class="line2">
+				<div class="num4">4</div>
+				<div class="num5">5</div>
+			</div>
+			
+			<div class="line3">
+				<div class="num6">6</div>
+				<div class="num7">7</div>
+			</div>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ctrl + enter</title>
+	</head>
+	<body>
+		<input id="text" type="text" />
+		<button id="btn">改变body颜色</button>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var flag = false;
+			$("#text").on({
+				focus:function(){
+					flag = true;
+					console.log(flag);
+				},
+				blur:function(){
+					flag = false;
+					console.log(flag);
+				}
+			})
+			$("#text").on("keydown",function(e){//				
+				if(e.keyCode == 13 && e.ctrlKey){
+//					alert("enter");
+					$("#btn").trigger("click");
+				}
+			})
+			
+			var colorFlag = true;
+			$("#btn").on("click",function(){
+				location.href = "http://www.baidu.com";
+				if(colorFlag){
+					$("body").css("background","red");
+					colorFlag = false;
+				}else{
+					$("body").css("background","blue");
+					colorFlag = true;
+				}
+				
+			})
+			
+			$("#btn").trigger("click");
+
+
+	
+
+
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function codePreview(value) {
+				$('<iframe id="preview" height="340" width="100%" frameborder="0"></iframe>').appendTo($("body"));
+				var timer = setTimeout(function() {
+					var doc = document.getElementById("preview").contentDocument || document.frames["preview"].document;
+					doc.body.innerHTML = value;
+				}, 1)
+			}
+			codePreview("ahhahahahahahahh");
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+		<script>
+			var m1 = angular.module('myApp', []);
+			m1.controller('Aaa', ['$scope', function($scope) {
+				$scope.text = 'hello';
+				$scope.style = "{color:'red',background:'yellow'}";
+				$scope.sClass = "{red:true,yellow:true}";
+				$scope.url = "http://www.baidu.com";
+			}]);
+		</script>
+	</head>
+
+	<body ng-app="myApp">
+
+		<runoob-directive></runoob-directive>
+
+		<div runoob-directive></div>
+
+		<script>
+			var app = angular.module("myApp", []);
+			app.directive("runoobDirective", function() {
+				return {
+					restrict: "A",
+					template: "abc"
+				};
+			});
+		</script>
+
+		<p><strong>注意：</strong> 通过设置 <strong>restrict</strong> 属性值为 "A" 来设置指令只能通过 HTML 元素的属性来调用。</p>
+
+	</body>
+
+</html>

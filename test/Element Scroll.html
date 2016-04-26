@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>触发BFC元素滚动条问题</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#wrap {
+				float: left;
+				height: 500px;
+				border: 1px solid #ccc;
+				/*overflow-y: scroll;*/
+				overflow: auto;
+			}
+			
+			#inner1,
+			#inner2 {
+				width: 350px;
+				border: 1px solid blue;
+				/*margin:10px 17px 10px 10px;*/
+				/*如果上面margin-right大于17px就可以了*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="inner1">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error magni ut unde commodi doloribus doloremque aspernatur distinctio et voluptatum ab reiciendis odio perspiciatis iusto repudiandae obcaecati. Ex quia obcaecati a?orem ipsum dolor sit amet,
+				consectetur adipisicing elit. Placeat velit quos corporis quidem dolorum incidunt illo id! Iste aperiam assumenda quo eaque sequi ea ipsum temporibus laborum officia vero beatae lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error
+				magni ut unde commodi doloribus doloremque aspernatur distinctio et voluptatum ab reiciendis odio perspiciatis iusto repudiandae obcaecati. Ex quia obcaecati a?orem ipsum dolor sit amet, consectetur adipisicing elit. Placeat velit quos corporis quidem
+				dolorum incidunt illo id! Iste aperiam assumenda quo eaque sequi ea ipsum temporibus laborum officia vero beatae lorem
+			</div>
+			<div id="inner2">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error magni ut unde commodi doloribus doloremque aspernatur distinctio et voluptatum ab reiciendis odio perspiciatis iusto repudiandae obcaecati. Ex quia obcaecati a?orem ipsum dolor sit amet,
+				consectetur adipisicing elit. Placeat velit quos corporis quidem dolorum incidunt illo id! Iste aperiam assumenda quo eaque sequi ea ipsum temporibus laborum officia vero beatae lorem
+			</div>
+
+		</div>
+	</body>
+
+</html>

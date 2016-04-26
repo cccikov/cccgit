@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>反向滚动条</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#wrap {
+				height: 100px;
+				overflow: auto;
+			}
+			#btn{
+				padding: 30px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates impedit obcaecati esse dolorum dicta maxime quam similique vel voluptatibus ullam nam molestias aliquid voluptatem illum eligendi voluptas quibusdam facere cumque! ipsum dolor sit amet,
+			consectetur adipisicing elit. Accusantium quaerat distinctio dolor in aperiam veritatis natus aliquid delectus adipisci ullam excepturi beatae assumenda. Fugit accusantium quaerat tempora minima nihil quidem. ipsum dolor sit amet, consectetur adipisicing
+			elit. Porro ipsam sit veritatis nobis neque molestias officiis est velit nulla mollitia! Similique rerum deleniti repellat dolores modi quo vero fugiat vitae! ipsum dolor sit amet, consectetur adipisicing elit. Commodi reiciendis est dolorum pariatur
+			accusamus perferendis ratione. Aliquid molestiae quas odit dolore animi eos aperiam harum minima fugiat inventore adipisci fuga. ipsum dolor sit amet, consectetur adipisicing elit. Minus maiores officiis autem iste quam eaque obcaecati enim laboriosam
+			amet hic nesciunt voluptatibus aspernatur sunt corrupti deserunt totam cum at id? ipsum dolor sit amet, consectetur adipisicing elit. Optio hic ab delectus deserunt obcaecati incidunt commodi modi quae iure eum eaque expedita quisquam unde. Veniam
+			maxime distinctio sequi. Odit tempore!
+		</div>
+		<button id="btn">添加内容</button>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var wrap = $("#wrap");
+			var btn = $("#btn");
+			btn.on("click", function() {
+				var start = wrap[0].scrollHeight;
+				wrap.html("s autem iste quam eaque obcaecati enim laboriosam amet hic nesciunt voluptatibus aspernatur sunt co<br>" + wrap.html());
+				var end = wrap[0].scrollHeight;				
+				wrap.scrollTop(end-start + wrap.scrollTop());
+			});
+		</script>
+	</body>
+
+</html>

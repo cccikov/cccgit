@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>测试图片高度</title>
+	</head>
+
+	<body>
+		<div class="right-loading" style="display: none;">
+			<div id="wrap">
+
+				<img src="img/big-icon.png" />
+			</div>
+		</div>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var b = $(".right-loading").height();
+			var a = $("img").height();
+			alert("img:" + a + " ，父类：" + b);
+		</script>
+	</body>
+
+</html>

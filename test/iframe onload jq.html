@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<iframe class="iframe1" src="http://www.baidu.com" width="" height=""></iframe>
+		<button>切换iframe</button>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".iframe1").on("load",function(){
+				alert("完成了");
+			})
+			$("button").on("click",function(){
+				$(".iframe1").attr("src","http://www.qq.com");
+			})
+		</script>
+	</body>
+</html>

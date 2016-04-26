@@ -1,0 +1,67 @@
+/*jq滚动时间*/
+body{
+    font-size: 20px;
+    line-height: 1.5;
+}
+*{
+    padding:0;
+    margin:0;
+}
+ul{
+    li{
+        list-style:none;
+    }
+}
+
+#wrap{
+    /*display: none;*/
+    position:fixed;
+    top:50%;
+    left:50%;
+    z-index: 10;
+    height: 210px;
+    width: 300px;
+    margin:-200px 0 0 -150px;
+    background: #fff;
+    text-align: center;
+    ul{
+        position:relative;
+        top:0;
+        left:0;
+        float: left;
+        width: 18.33333333333333%;
+    }
+    span{
+        position: relative;
+        top:90px;
+        float: left;
+        width: 15%;
+    }
+}
+#year{
+//  transition: 0.1s;
+//  transform: translateY(100px);
+}
+
+#year-span{
+    &:before{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        top:14px;
+        left:-52px;
+        width: 50px;
+        border: 1px solid red;
+    }
+}
+
+#mask{
+    /*display: none;*/
+    position:fixed;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: 0.4;
+}

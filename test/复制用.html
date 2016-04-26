@@ -1,0 +1,1475 @@
+<html>
+
+	<head>
+		<title>普伟云商城全面启动招商</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<!--<script src="//hm.baidu.com/hm.js?f3498b833d24632a6d5b9701b824dfe4"></script>
+		<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/base.css">
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/common.css">
+		<script type="text/javascript" src="/js/uploader.js"></script>
+
+		<link href="/js/photoswipe/photoswipe.css" rel="stylesheet">
+		<link href="/js/photoswipe/default-skin/default-skin.css" rel="stylesheet">
+		<script src="/js/photoswipe/photoswipe.min.js"></script>
+		<script src="/js/photoswipe/photoswipe-ui-default.min.js"></script>-->
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			* {
+				-webkit-text-size-adjust: none;
+			}
+			
+			body {
+				margin: 0px;
+			}
+			
+			.clear {
+				width: 0px;
+				height: 0px;
+				overflow: hidden;
+				clear: both;
+			}
+			
+			hr {
+				border: 0px;
+				height: 1px;
+				background-color: #d8d8d8;
+				-webkit-margin-before: 0;
+				-webkit-margin-after: 0;
+			}
+			
+			.msg {
+				float: left;
+				color: Red;
+				line-height: 45px;
+				height: 45px;
+				width: 94%;
+				margin-left: 3%;
+				margin-top: 0px;
+				font-size: 16px;
+				text-align: left;
+			}
+			
+			.head {
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 45px;
+				background: #FFF;
+				border-bottom: 1px solid #cccccc;
+				float: left;
+			}
+			
+			.clienteHeadImg {
+				width: 65px;
+				height: 65px;
+				float: left;
+				padding-top: 5px;
+				margin: auto 10px;
+			}
+			
+			.mySupplyDemand {
+				margin: 0px auto 0px auto;
+				width: 94%;
+				background: #FFF;
+				-webkit-box-shadow: -1.5px 2px 2px #cccccc, 0 0 0 #fff, 0 0 0 #fff, 1px 2px 2px #cccccc;
+			}
+			
+			.myTitle,
+			.myContent,
+			.myImg,
+			.myfans {
+				width: 96%;
+				margin: auto;
+			}
+			
+			.myTitle {
+				font-weight: bold;
+				padding: 10px 0px 10px 0px;
+				font-size: 18px;
+			}
+			
+			.demand-tip {
+				/*display:none;*/
+				color: #fff;
+				padding: 1px 7px;
+				font-size: 16px;
+				background-color: #38889E;
+			}
+			
+			.supply-tip {
+				/*display:none;*/
+				color: #fff;
+				padding: 1px 7px;
+				font-size: 16px;
+				background-color: #529C17;
+			}
+			
+			.myContent {
+				font-size: 16px;
+				line-height: 18px;
+				word-wrap: break-word;
+			}
+			
+			.myImg>.sdImg {
+				width: 90px;
+				height: 90px;
+				border: 0px;
+				margin: 3px;
+				float: left;
+				text-align: center;
+				overflow: hidden;
+			}
+			
+			.sdImg>img {
+				position: relative;
+				margin: auto;
+				border: 0px;
+				margin-right: 2px;
+			}
+			
+			.myfans {
+				height: 45px;
+				line-height: 45px;
+			}
+			
+			.myCount {
+				width: 33.33%;
+				font-size: 14px;
+				float: left;
+				color: #666666;
+			}
+			
+			.myName,
+			.myBusiness {
+				height: 20px;
+				line-height: 20px;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			
+			#main {
+				position: relative;
+			}
+			
+			.admin {
+				position: absolute;
+				top: 10px;
+				right: 20px;
+			}
+			
+			.pic {
+				display: block;
+				width: 20px;
+				height: 20px;
+				background: url("/img/supplyDemand/admin.png")no-repeat;
+				background-size: contain;
+			}
+			
+			.more {
+				display: none;
+				position: absolute;
+				z-index: 4;
+				top: 33px;
+				right: -17px;
+				width: 100px;
+				border-radius: 4px;
+				background-color: #fff;
+			}
+			
+			.more:before {
+				content: "";
+				position: absolute;
+				z-index: 5;
+				top: -21px;
+				left: 57px;
+				display: block;
+				width: 30px;
+				height: 30px;
+				background: url("/img/supplyDemand/up.png")no-repeat;
+				background-size: contain;
+			}
+			
+			.more ul {
+				margin: 0;
+			}
+			
+			.more ul li {
+				padding: 10px;
+				text-align: center;
+				border-bottom: 1px solid #e8e8e8;
+				font-size: 16px;
+				font-family: "微软雅黑";
+			}
+			
+			.myBusiness {
+				width: 180px;
+				font-size: 18px;
+			}
+			
+			.createTime,
+			.commentTime {
+				font-size: 14px;
+				color: #666666;
+			}
+			
+			.commentInfo {
+				float: left;
+				width: 79.5%;
+				background: #fff;
+				margin-left: 5%;
+				-webkit-box-shadow: -1.5px 2px 2px #cccccc, 0 0 0 0, 1px 2px 2px #cccccc, 0 0 0 0;
+				border-radius: 1px;
+			}
+			
+			.link {
+				width: 92%;
+				margin: auto;
+				font-size: 16px;
+				line-height: 25px;
+				padding: 10px 0px 10px 0px;
+			}
+			
+			.commentContent {
+				width: 92%;
+				margin: auto;
+				font-size: 16px;
+				line-height: 25px;
+				word-spacing: normal;
+				word-break: break-all;
+			}
+			
+			.linker,
+			.atLinker {
+				float: left;
+			}
+			
+			.atLinker {
+				margin-right: 10px;
+				color: #2687e5;
+			}
+			
+			.bottom-opts {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				padding: 0 0 3px 0;
+				text-align: center;
+				border-top: 1px solid #ccc;
+				background-color: #fff;
+			}
+			
+			.bottom-opts .btn {
+				float: left;
+				width: 33.3%;
+				margin-top: 5px;
+			}
+			
+			.bottom-opts div img {
+				height: 24px;
+			}
+			
+			.commentMessage {
+				z-index: 1005;
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				background: #d9d9d9;
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			.edit-input {
+				width: 65%;
+				border: 1px solid #ccc;
+				display: inline-block;
+				background-color: #fff;
+				min-height: 28px;
+				max-height: 84px;
+				line-height: 28px;
+				overflow-y: visible;
+				overflow-x: hidden;
+				text-align: left;
+				left: 13%;
+				float: left;
+				margin: 5px 0 10px 13%;
+				word-spacing: normal;
+				word-break: break-all;
+			}
+			
+			#mark {
+				display: none;
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				left: 0;
+				top: -10px;
+				z-index: 1001;
+				filter: alpha(opacity=50);
+				-moz-opacity: 0.5;
+				-khtml-opacity: 0.5;
+				opacity: 0.5;
+				"
+
+			}
+			
+			#loadMore {
+				height: 20px;
+				text-align: center;
+				line-height: 20px;
+				color: #ccc;
+				font-size: 12px;
+				display: none;
+			}
+			
+			.clearfix:after {
+				clear: both;
+				height: 0px;
+				display: block;
+				content: "";
+			}
+			
+			.btn_text {
+				font-size: 14px;
+				line-height: 16px;
+				color: #555555;
+			}
+			
+			.btn_collected {
+				color: #a50100;
+			}
+			
+			#message {
+				display: block;
+				width: 100%;
+				min-height: 28px;
+				line-height: 28px;
+				padding: 0px;
+				margin: 5px 3px 3px 3px;
+				border: 1px solid #ccc;
+				border-radius: 3px;
+				font-size: 18px;
+				resize: none;
+			}
+			
+			.send-btn {
+				width: 80px;
+				line-height: 37px;
+				border: 0px;
+				border-radius: 3px;
+				text-align: center;
+				font-size: 16px;
+				background-color: #a50100;
+				color: #fff;
+			}
+			
+			#glass {
+				display: none;
+				position: fixed;
+				left: 0;
+				top: 0;
+				z-index: 3;
+				width: 100%;
+				height: 100%;
+				background-color: #f5f5f5;
+				opacity: 0.5;
+			}
+		</style>
+		<script type="text/javascript">
+			supplyId = '1443526181378S0269I7928E661R9456'; //全局多处用到
+			pageNo = 1; //评论页码
+			var parentId = null;
+			var parentName = null;
+			//----------------收藏function开始
+			collected = 'true';
+			//收藏或取消收藏操作
+			function collect() {
+				var img = $('#endCollect').find('img');
+				var url;
+				if (collected == 'true') {
+					url = '/supplyDemand/delete.do?supplyId=' + supplyId + '&key=2';
+				} else {
+					url = '/supplyDemand/collect.do?supplyId=' + supplyId;
+				}
+				$.ajax({
+					url: url,
+					success: function(result) {
+						//操作成功
+						if (result.success == true) {
+							//判断之前的收藏状态
+							if (collected == 'true') {
+								//取消了收藏
+								collected = 'false';
+								$('#endCollect img').attr('src', '/images/supplyDemand/collectNew.png');
+								$('#collectTimes').html(parseInt($('#collectTimes').html()) - 1);
+								$('#warnTodo').find("span").html("取消收藏");
+								$('#warnTodo').find("img").hide();
+								$('#warnTodo').show();
+								setTimeout(function() {
+									$('#warnTodo').hide();
+								}, 1500);
+								$("#endCollect .btn_text").removeClass("btn_collected");
+							} else {
+								//进行了收藏
+								collected = 'true';
+								$('#endCollect img').attr('src', '/images/supplyDemand/collectedNew.png');
+								$('#collectTimes').html(parseInt($('#collectTimes').html()) + 1);
+								$('#warnTodo').find("span").html("收藏成功");
+								$('#warnTodo').show();
+								$('#warnTodo').find("img").show();
+								setTimeout(function() {
+									$('#warnTodo').hide();
+								}, 1500);
+								$("#endCollect .btn_text").addClass("btn_collected");
+							}
+						}
+					}
+				});
+			}
+			//----------------收藏操作function结束
+			$(function() {
+				var maindiv = $('#main');
+				//maindiv.css("min-height",$(window).height() - $('#head-bar')[0].offsetHeight - $('.bottom-opts')[0].offsetHeight);
+				getcommentList();
+				$(window).scroll(function() {
+					var bd = $('body');
+					if (bd[0].scrollTop >= bd[0].scrollHeight - window.screen.height) {
+						if (pageNo > 1) {
+							getcommentList();
+						}
+					}
+				});
+				// 分享向导
+				$("#endShare").click(function() {
+					$("#mark").css("background-color", "black").show();
+					$("#mark").css("height", document.body.scrollHeight);
+					$("#share_guide").show();
+				});
+				//点击评论
+				$("#endComm").click(function() {
+					$(".bottom-opts").hide();
+					$(".commentMessage").show();
+					if ($("#main").height() >= $(window).height()) {
+						$("#mark").css("height", $("#main").height());
+					} else {
+						$("#mark").css("height", $(window).height());
+					}
+					$("#mark").show();
+					parentName = null;
+					$('#message').attr('placeHolder', '评论内容').focus();
+				});
+				//回复评论按钮事件
+				$('#comments').on('click', '.reply', function() {
+					parentId = $(this).attr('data-fid'); //全局变量
+					parentName = $(this).attr('data-name'); //全局变量
+					$('#mark').bind("touchmove", function(event) {
+						event.preventDefault();
+					});
+					$(".bottom-opts").hide();
+					$(".commentMessage").show();
+					if ($("#main").height() >= $(window).height()) {
+						$("#mark").css("height", $("#main").height());
+					} else {
+						$("#mark").css("height", $(window).height());
+					}
+					$("#mark").show();
+					$('#message').attr('placeHolder', '回复评论').focus();
+				});
+				//点击遮蔽层关闭窗口层
+				$('#mark').bind('click touchmove', function() {
+					$('#message').blur();
+					$('#mark').css("background-color", "").hide();
+					$(".bottom-opts").show();
+					$(".commentMessage").hide();
+					$("#share_guide").hide();
+				});
+				$('#message').focus(function() {
+					$('#bottomGap').hide();
+					$('body').scrollTop($('body').height());
+				});
+				$('#message').blur(function() {
+					$('#bottomGap').show();
+					$('.commentMessage').css('position', 'fixed');
+				});
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				//输入评论事件监听
+				$('#message').on("input",function() {
+					var textarea = $(this).css('height', 'auto');
+					
+				console.clear();
+					console.log(textarea);
+					console.log(this.scrollHeight);
+					if (this.scrollHeight > 140 && textarea.height() != 140) {
+						textarea.height(140);
+					} else if (this.scrollHeight > textarea.height()) {
+						textarea.height(this.scrollHeight);
+					}
+					var content = textarea.val();
+					if (content.length > 150) {
+						textarea.val(content.substr(0, 150));
+					}
+					$('body').scrollTop($('body')[0].scrollHeight);
+				});
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				//点击头像条到个人名片
+				$('#comments').on('click', '.headimg', function() {
+					var fid = $(this).attr("data-userId");
+					location.href = '/vcard/view/' + fid + '.do';
+				});
+				//图片预览功能开始
+				var initPhotoSwipeFromDOM = function(gallerySelector) {
+					var parseThumbnailElements = function($el) {
+						var items = [];
+						$el.each(function() {
+							var $img = $(this);
+							if ($img.attr("img-width")) {
+								item = {
+									src: "/filesystem/view/" + $img.attr("fileId") + ".do",
+									w: parseInt($img.attr("img-width"), 10),
+									h: parseInt($img.attr("img-height"), 10),
+									author: ""
+								};
+								item.el = this;
+								item.msrc = $img.attr("src");
+								item.o = {
+									src: item.src,
+									w: item.w,
+									h: item.h
+								};
+								items.push(item);
+							}
+						});
+						return items;
+					};
+					var onThumbnailsClick = function(e) {
+						e = e || window.event;
+						e.preventDefault ? e.preventDefault() : e.returnValue = false;
+						var eTarget = e.target || e.srcElement;
+						var index = $(".myImg").find("img").index(eTarget);
+						if (index < 0) {
+							index = $("#uploadDiv").find(".sdImg img").index(eTarget);
+						}
+						var $clickedGallery = $(".sdImg").children("img");
+						if (index >= 0) {
+							openPhotoSwipe(index, $clickedGallery);
+						}
+						return false;
+					};
+					var openPhotoSwipe = function(index, $galleryElement) {
+						var pswpElement = document.querySelectorAll('.pswp')[0],
+							gallery,
+							options,
+							items;
+						items = parseThumbnailElements($galleryElement);
+						// define options (if needed)
+						options = {
+							galleryUID: $galleryElement.attr('data-pswp-uid'),
+							getThumbBoundsFn: function(index) {
+								// See Options->getThumbBoundsFn section of docs for more info
+								var thumbnail = items[index].el;
+								pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+								rect = thumbnail.getBoundingClientRect();
+								return {
+									x: rect.left,
+									y: rect.top + pageYScroll,
+									w: rect.width
+								};
+							}
+						};
+						options.index = parseInt(index, 10);
+						options.mainClass = 'pswp--minimal--dark';
+						options.barsSize = {
+							top: 0,
+							bottom: 0
+						};
+						options.captionEl = false;
+						options.fullscreenEl = false;
+						options.shareEl = false;
+						options.bgOpacity = 1;
+						options.tapToClose = true;
+						options.tapToToggleControls = false;
+						options.showAnimationDuration = 0;
+						gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+						var realViewportWidth,
+							useLargeImages = false,
+							firstResize = true,
+							imageSrcWillChange;
+						gallery.listen('beforeResize', function() {
+							var dpiRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+							dpiRatio = Math.min(dpiRatio, 2.5);
+							realViewportWidth = gallery.viewportSize.x * dpiRatio;
+							if (realViewportWidth >= 1200 || (!gallery.likelyTouchDevice && realViewportWidth > 800) || screen.width > 1200) {
+								if (!useLargeImages) {
+									useLargeImages = true;
+									imageSrcWillChange = true;
+								}
+							} else {
+								if (useLargeImages) {
+									useLargeImages = false;
+									imageSrcWillChange = true;
+								}
+							}
+							if (imageSrcWillChange && !firstResize) {
+								gallery.invalidateCurrItems();
+							}
+							if (firstResize) {
+								firstResize = false;
+							}
+							imageSrcWillChange = false;
+						});
+						gallery.listen('gettingData', function(index, item) {
+							item.src = item.o.src;
+							item.w = item.o.w;
+							item.h = item.o.h;
+						});
+						gallery.init();
+					};
+					// 选择所有图片，绑定事件
+					var $galleryElements = $(gallerySelector);
+					for (var i = 0, l = $galleryElements.size(); i < l; i++) {
+						var finsh = false;
+						for (var j = 0; j < $galleryElements.size(); j++) {
+							finsh = true;
+						}
+						if (finsh) {
+							$galleryElements.get(i).setAttribute('data-pswp-uid', i + 1);
+							$galleryElements.get(i).onclick = onThumbnailsClick;
+						}
+					}
+				};
+				//------------------------图片预览功能结束
+				initPhotoSwipeFromDOM('.progressImg'); //图片	
+				// #glass 蒙尘效果
+				$("#glass").click(function() {
+					$("#glass").hide();
+					$(".more").hide();
+				});
+			});
+			//---------------------$(function(){})结束
+			//发送评论
+			function sendComment() {
+				var content = $('#message').val();
+				if (content.length === 0) {
+					alert("评论不能为空！");
+					return;
+				}
+				if (content.length > 150) {
+					alert("评论长度超过150！");
+					return;
+				}
+				var commentVo = {
+					supplyId: supplyId,
+					parentId: parentId,
+					content: content
+				};
+				$.ajax({
+					type: "POST",
+					url: "/supplyDemandComment/addComment.do",
+					data: commentVo,
+					dataType: "json",
+					async: false,
+					success: function(result) {
+						if (result.success === false) {
+							alert(result.msg);
+						} else {
+							$(".commentMessage").hide();
+							$(".bottom-opts").show();
+							$('#message').val('').trigger('keyup');
+							var template = $('.comment:hidden'); //获取隐藏的class="comment"的html为模板
+							var commentDiv = $('#comments>.comment').last();
+							commentVo.timeStr = '刚刚';
+							commentVo.fid = result.msg;
+							commentVo.parentName = parentName;
+							commentVo.name = '郭煜悦';
+							commentVo.headImg = '1457359170339S0163I7928E661R2383';
+							commentVo.userId = '1457359151106S0161I7928E661R0342';
+							showOneComment(commentVo, commentDiv, template, 'true');
+							//$('body').scrollTop($('#comments')[0].offsetTop);
+							$('#commentTimes').html(parseInt($('#commentTimes').html()) + 1);
+							$("#mark").hide();
+						}
+					}
+				});
+			}
+			//图片加载后改变尺寸
+			function imgOnload(dom) {
+				var w = $(dom).width() / 90;
+				var h = $(dom).height() / 90;
+				var ww; //缩放后宽
+				var hh; //缩放后的高
+				if (w > h) {
+					ww = parseInt($(dom).width() / h);
+					hh = parseInt($(dom).height() / h);
+				} else {
+					ww = parseInt($(dom).width() / w);
+					hh = parseInt($(dom).height() / w);
+				}
+				$(dom).width(ww);
+				$(dom).height(hh);
+			}
+			//ajax获取评论分页列表
+			function getcommentList() {
+				$.ajax({
+					type: "POST",
+					url: "/supplyDemandComment/commentList.do",
+					data: {
+						pageNo: pageNo,
+						supplyId: supplyId
+					},
+					success: function(data) {
+						//判断所以符合条件的数据是否加载完
+						if (data.length == 0) {
+							pageNo = 0; //没有数据可以加载了,设置页码为0
+							$('#loadMore').html('');
+							return;
+						}
+						pageNo++; //获取成功，当前页码+1
+						var template = $('.comment:hidden'); //获取隐藏的class="comment"的html为模板
+						var commentDiv = $('#comments>.comment').last();
+						for (var i = 0; i < data.length; i++) {
+							var commentVo = data[i];
+							showOneComment(commentVo, commentDiv, template);
+						}
+					}
+				});
+			}
+			//点击至个人名片页
+			function toVCard(dom) {
+				var userId = $(dom).parent().attr("userId");
+				location.href = '/vcard/view/' + userId + '.do';
+			}
+			// 点击个人管理按钮
+			function toManager(dom) {
+				if ($(dom).siblings(".more").css("display") == "none") {
+					$("#glass").show();
+					$(dom).siblings(".more").show();
+				} else {
+					$(dom).siblings(".more").hide();
+				}
+			}
+			// 点击编辑
+			function toEdit(dom) {
+				location.href = '/supplyDemand/toPublish.do?type=2&fid=' + supplyId;
+			}
+			// 点击删除
+			function toDel(dom) {
+				if (confirm("确定删除吗？")) {
+					var key = 0;
+					$.ajax({
+						url: '/supplyDemand/delete.do',
+						data: {
+							supplyId: supplyId,
+							key: key
+						},
+						success: function(result) {
+							if (result.success) {
+								document.location.href = "/supplyDemand/index.do"
+							} else {
+								alert('删除失败');
+							}
+						},
+						error: function() {
+							alert('删除失败');
+						}
+					});
+					$("#glass").click();
+				};
+			}
+			//--显示一个评论
+			// commentVo 评论vo对象
+			// commentDiv 评论列表的div容器
+			// template 评论的html模板
+			// top 是否把这个评论添加到列表的头部，可空
+			function showOneComment(commentVo, commentDiv, template, top) {
+				var tp = template.clone();
+				tp.attr('id', commentVo.fid);
+				if (commentVo.headImg != null && commentVo.headImg != '') {
+					tp.find('.headimg').attr('src', '/filesystem/view/' + commentVo.headImg + '.do'); //头像
+				}
+				tp.find('.headimg').attr('data-userId', commentVo.userId);
+				tp.find('.name').html(commentVo.name); //姓名
+				tp.find('.commentContent').html(commentVo.content); //内容
+				tp.find('.createTime').html(commentVo.timeStr); //时间
+				if (commentVo.parentName != null) {
+					tp.find('.parentName').html('@' + commentVo.parentName); //父评论者名称
+				}
+				tp.find('.reply').attr('data-fid', commentVo.fid); //内容
+				tp.find('.reply').attr('data-name', commentVo.name); //内容
+				//if(commentVo.honor != null){
+				//tp.find('.honor').html(commentVo.honor);//头衔
+				//}
+				//else{
+				tp.find('.honor,.honor-img').hide();
+				//}
+				tp.show();
+				if (top != null) {
+					//commentDiv.prepend(tp);
+					tp.insertAfter(commentDiv);
+				} else {
+					//commentDiv.append(tp);
+					tp.insertAfter(commentDiv);
+				}
+			}
+			/**
+			 * 分享功能
+			 */
+			function share(shareType) {
+				$.ajax({
+					type: "POST",
+					url: "/shareLog/shareSupplyDemandContentLog.do",
+					data: {
+						shareType: shareType,
+						supplyDemandId: '1443526181378S0269I7928E661R9456'
+					},
+					dataType: "json",
+					async: false,
+					success: function(result) {
+						if (result.success) {
+							$("#share_guide").hide();
+							$("#mark").hide();
+							window.location = result.msg;
+						} else {
+							$("#errorMsg").html(result.msg);
+						}
+					}
+				});
+			}
+			//点击跳到登陆页
+			function toLogin(dom) {
+				if (confirm("您尚未登录，马上去登录吗？")) {
+					document.location.href = '/login/index.do?url=/supplyDemand/toContent.do?fid=1443526181378S0269I7928E661R9456';
+				}
+			}
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				url: 'http://we.prowealth.com.cn/supplyDemand/toContent.do?way=index&fid=1443526181378S0269I7928E661R9456',
+				appId: 'wx63d65ba0e261df86', // 必填，公众号的唯一标识
+				timestamp: 1460615591, // 必填，生成签名的时间戳
+				nonceStr: 'ZF41QSM6QLGP7ZG2', // 必填，生成签名的随机串
+				signature: '6b573c5fe39e620f151f57c67d49aeee76a48378', // 必填，签名，见附录1
+				jsApiList: ['onMenuShareTimeline',
+						'onMenuShareAppMessage',
+						'onMenuShareQQ',
+						'onMenuShareWeibo',
+						'showOptionMenu'
+					] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+			wx.ready(function() {
+				wx.showOptionMenu(); //显示右上角菜单功能
+				//分享到朋友圈
+				wx.onMenuShareTimeline({
+					title: '\u666E\u4F1F\u4E91\u5546\u57CE\u5168\u9762\u542F\u52A8\u62DB\u5546', // 分享标题
+					link: 'http://we.prowealth.com.cn/supplyDemand/toContent.do?fid=1443526181378S0269I7928E661R9456', // 分享链接
+					imgUrl: 'http://we.prowealth.com.cn/filesystem/view/46/46/1443526176434S0267I7928E661R3118.do', // 分享图标
+					success: function() {
+						share('分享至朋友圈');
+						$("#share_guide").hide();
+						$("#mark").hide();
+					},
+					cancel: function() {
+						// 用户取消分享后执行的回调函数
+						$("#share_guide").hide();
+						$("#mark").hide();
+					}
+				});
+				//分享给朋友
+				wx.onMenuShareAppMessage({
+					title: '\u666E\u4F1F\u4E91\u5546\u57CE\u5168\u9762\u542F\u52A8\u62DB\u5546', // 分享标题
+					desc: '\u666E\u4F1F\u4E91\u5546\u57CE\uFF0C\u662F\u5168\u8425\u9500\u6E20\u9053\u878D\u5408\u8FD0\u8425\u7684\u7535\u5546\u5E73\u53F0\u3002\u901A\u8FC7\u666E\u4F1F\u96C6\u56E2\u5E9E\u5927\u7684\u8D44\u6E90\u4F53\u7CFB\uFF1A\r\n\r\n\u2605 \u666E\u4F1F\u96C6\u56E2\u62E5\u670915\u5E74\u7684\u4F01\u4E1A\u670D\u52A1\u7ECF\u9A8C\uFF0C\u670D\u52A1\u4F01\u4E1A\u8986\u76D6\u5404\u884C\u5404\u4E1A\uFF1B\r\n\u2605 \u6BCF\u5E74\u5728\u5927\u4F5B\u5C71\u8303\u56F4\u5185\u4E3E\u529E\u7684\u516C\u5F00\u8BFE\u7A0B\u8D85\u8FC7500\u5929\uFF0C\u53C2\u52A0\u8BFE\u7A0B\u4EBA\u5458\u8D85\u8FC750000\u4EBA\u6B21\uFF0C\u5F71\u54CD\u8986\u76D6\u4EBA\u7FA4\u8D85\u8FC7500000\u4EBA\uFF1B\r\n\u2605 \u666E\u4F1F\u96C6\u56E2\u4F1A\u5458\u5BA2\u6237\u4F01\u4E1A\u9AD8\u8FBE10000\u5BB6\uFF0C\u4EE5\u6BCF\u5BB6\u5458\u5DE5\u6570\u91CF200\u540D\u8BA1\u7B97\uFF0C\u5F71\u54CD\u8986\u76D6\u4EBA\u7FA4\u8D85\u8FC72000000\u4EBA\uFF1B\r\n\u2605 \u666E\u4F1F\u96C6\u56E2\u62E5\u6709\u201C\u666E\u4F1F\u4F01\u4E1A\u5BB6\u201D\u53CA\u201C\u5927\u6210\u5546\u9053\u201D\u4E24\u5927\u96C6\u56E2\u516C\u4F17\u53F7\uFF0C\u7D2F\u8BA1\u7C89\u4E1D\u8D85\u8FC7\u5341\u4E07\u4EBA\uFF1B\r\n\u2605 \u7ED3\u5408\u7F51\u7EDC\u5206\u9500\u673A\u5236\uFF0C\u666E\u4F1F\u96C6\u56E2\u5C06\u4E3A\u4F01\u4E1A\u76F4\u63A5\u5E26\u6765\u8D85\u8FC72000\u4E07\u7684\u5206\u9500\u5F15\u6D41\uFF1B\r\n\r\n\u901A\u8FC7\u8FD9\u4E9B\u5F3A\u5927\u7684\u8D44\u6E90\uFF0C\u6211\u4EEC\u53EF\u4EE5\u4E3A\u4F01\u4E1A\u63D0\u4F9B\u4E00\u4E2A\u8D44\u6E90\u5171\u4EAB\u7684\u5E73\u53F0\uFF0C\u5E2E\u52A9\u4F01\u4E1A\u83B7\u5F97\u66F4\u591A\u7684\u9500\u552E\u673A\u4F1A\uFF0C\u63A8\u52A8\u4F01\u4E1A\u66F4\u597D\u66F4\u5FEB\u7684\u53D1\u5C55\uFF01\r\n\r\n\u666E\u4F1F\u96C6\u56E2\u4F1A\u5458\u4F01\u4E1A\u5C06\u83B7\u5F97\u514D\u8D39\u8FDB\u9A7B\u666E\u4F1F\u4E91\u5546\u57CE\u5E73\u53F0\u8D44\u683C\uFF01\u4E0D\u4EC5\u53EF\u4EE5\u514D\u8D39\u8FDB\u9A7B\uFF0C\u666E\u4F1F\u96C6\u56E2\u8FD8\u4F1A\u901A\u8FC7\u5927\u91CF\u7EBF\u4E0A\u7EBF\u4E0B\u8D44\u6E90\u4E3A\u8FDB\u9A7B\u5546\u57CE\u7684\u4F01\u4E1A\u8FDB\u884C\u5F15\u6D41\uFF0C\u5E2E\u52A9\u4F01\u4E1A\u66F4\u597D\u8FDB\u884C\u5546\u54C1\u7684\u9500\u552E\uFF01\r\n\r\n\u60F3\u4E86\u89E3\u66F4\u591A\uFF0C\u6B22\u8FCE\u524D\u6765\u53C2\u52A0\u53D1\u5E03\u4F1A\uFF01\r\n\u666E\u4F1F\u4E91\u5546\u57CE\u5E73\u53F0\uFF0C\u987A\u5E94\u65F6\u4EE3\u6F6E\u6D41\uFF0C\u6253\u9020\u4E00\u6D41\u8D44\u6E90\u5171\u4EAB\u5E73\u53F0\uFF01\r\n\u666E\u4F1F\u4E91\u5546\u57CE\u5E73\u53F0\u9884\u4E0A\u7EBF\u53D1\u5E03\u4F1A\uFF0C\u6211\u4EEC\u8BDA\u9080\u60A8\u7684\u53C2\u4E0E\uFF01\r\n\u65F6\u95F4\uFF1A\r\n2015\u5E7410\u670813\u65E5\uFF08\u661F\u671F\u4E8C\uFF09\u4E0B\u534814\uFF1A00--17\uFF1A30\r\n\u5730\u70B9\uFF1A\r\n\u4F5B\u5C71\u5E02\u7985\u57CE\u533A\u4E5D\u9F0E\u56FD\u9645\u91D1\u878D\u4E2D\u5FC32\u680B8\u697C\u666E\u4F1F\u96C6\u56E2\u603B\u90E8\r\n\u8054\u7CFB\u7535\u8BDD\uFF1A\r\n13928211552\uFF08\u5927\u6210\u79D8\u4E66\u5904\uFF09\uFF1B\r\n13928670298\uFF08\u603B\u88C1\u73ED\u79D8\u4E66\u5904\uFF09', // 分享描述
+					link: 'http://we.prowealth.com.cn/supplyDemand/toContent.do?fid=1443526181378S0269I7928E661R9456', // 分享链接
+					imgUrl: 'http://we.prowealth.com.cn/filesystem/view/46/46/1443526176434S0267I7928E661R3118.do', // 分享图标
+					success: function() {
+						share('分享给朋友');
+						$("#share_guide").hide();
+						$("#mark").hide();
+					},
+					cancel: function() {
+						// 用户取消分享后执行的回调函数
+						$("#share_guide").hide();
+						$("#mark").hide();
+					}
+				});
+			});
+			//返回按钮处理事件
+			function goBack() {
+				window.location.href = '/supplyDemand/index.do';
+			}
+		</script>
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "//hm.baidu.com/hm.js?f3498b833d24632a6d5b9701b824dfe4";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!--导航条-->
+			<script type="text/javascript">
+				$(function() {
+					// 默认获取一次
+					//getMessageCount();
+					//定时获取新消息数 
+					//setInterval(getMessageCount,timer_message);	暂时屏蔽	
+				});
+				// 获取短信数量
+				function getMessageCount() {
+					$.ajax({
+						url: '/message/newMessageNumber.do?time=' + new Date(),
+						success: function(data) {
+							if (data > 0) {
+								var style = "left_num";
+								if (data > 9) {
+									style = "left_num long";
+								}
+								if (data > 99) {
+									data = '99+';
+								}
+								$('#mymsg').html(data);
+								$('#mymsg').addClass(style);
+								$('#mymsg').show();
+							} else {
+								$('#mymsg').html("");
+							}
+						}
+					});
+				}
+				//跳转到登录页面
+				function toLogin() {
+					if (confirm("您尚未登录，马上去登录吗？")) {
+						document.location.href = "/login/index.do";
+					}
+				}
+				//退出登陆	
+				function toLogout() {
+					if (confirm("确定退出登录吗?")) {
+						document.location.href = "/login/logout.do";
+					}
+				}
+				//普伟微网
+				function toWeb() {
+					document.location.href = "http://wx1ffbdd575df37a7b.m.weimob.com/weisite/home?pid=437585&bid=857220&wechatid=oMhOVt3xAxoCigQMudSVTVMqB1tU&from=1&wxref=mp.weixin.qq.com";
+				}
+				//关系共享
+				function toOther(path) {
+					document.location.href = "/path";
+				}
+				//关系共享
+				function toRelation() {
+					alert('功能正在建设中。');
+					return;
+					document.location.href = "/relation/index.do";
+				}
+				//个人名片
+				function toCard() {
+					//用户
+					document.location.href = "/vcard/view/1457359151106S0161I7928E661R0342.do";
+				}
+				//产品推广
+				function toProduct() {
+					alert('功能正在建设中。');
+					return;
+					//员工
+					window.location.href = '/product/toPublishList.do'
+				}
+				//产品推广
+				function toProductSearch() {
+					//员工
+					window.location.href = '/product/toPublishList.do'
+				}
+				//绑定企业
+				function toEditBusiness() {}
+				//消息列表
+				function toClienteleList() {
+					//用户
+					document.location.href = "/message/toClienteleList.do";
+				}
+				//跳转到管理
+				function toManage() {
+					//员工
+					alert("抱歉，普伟内部暂未开放此功能！");
+				}
+				// 跳入完善资料的界面
+				function organizingData() {
+					window.location = '/clientele/toAddBusiness.do'
+				}
+
+				function toMySelf() {
+					//员工
+					document.location.href = "/staff/index.do";
+				}
+
+				function toDetermineIndex() {
+					alert("尚未绑定企业，请先绑定企业");
+				}
+
+				function toConcern() {
+					//用户
+					document.location.href = "/concern/toMyConcern.do";
+				}
+
+				function toFavorer() {
+					//用户
+					document.location.href = "/concern/toMyfans.do";
+				}
+
+				function toEditPersonInfo() {
+					//用户
+					document.location.href = "/clientele/toEditPersonInfo.do";
+				}
+
+				function toSetPassword() {
+					//用户
+					document.location.href = "/clientele/toSetPassword.do";
+				}
+				//聚商圈（商机在握）
+				function toSupplyDemand() {
+					$.ajax({
+						url: '/supplyDemand/supplyDemandOpened.do',
+						success: function(data) {
+							if (data.success) { //开放
+								document.location.href = "/supplyDemand/index.do"
+							} else {
+								alert("抱歉，未到开放时间。");
+							}
+						}
+					});
+				}
+				//积分商城
+				function toIntegral() {
+					alert('功能正在建设中。');
+				}
+
+				function showDownload() {
+					$("#appDownload").show();
+					$("#sideBlock,#content").css("padding", "46px 0 70px");
+				}
+			</script>
+
+			<script type="text/javascript">
+				wx.config({
+					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					url: 'http://we.prowealth.com.cn/supplyDemand/toContent.do?way=index&fid=1443526181378S0269I7928E661R9456',
+					appId: 'wx63d65ba0e261df86', // 必填，公众号的唯一标识
+					timestamp: 1460615591, // 必填，生成签名的时间戳
+					nonceStr: 'ZF41QSM6QLGP7ZG2', // 必填，生成签名的随机串
+					signature: '6b573c5fe39e620f151f57c67d49aeee76a48378', // 必填，签名，见附录1
+					jsApiList: ['hideOptionMenu',
+							'scanQRCode',
+							'onMenuShareTimeline',
+							'onMenuShareAppMessage',
+							'chooseWXPay'
+						] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
+				wx.ready(function() {
+					$("#wxScan").show();
+					//扫一扫功能
+					$("#wxScan").click(function() {
+						//员工
+						alert("抱歉，普伟内部暂未开放此功能！");
+					});
+				});
+			</script>
+
+			<!--导航条-->
+			<nav class="clearfix" id="nav">
+				<h2>普伟集团</h2>
+				<ul>
+					<li>
+						<a class="sideBar" id="sideBtn" href="javascript:void(0)"></a>
+					</li>
+					<!-- 暂时隐藏“搜索” -->
+					<li>
+						<a class="search" href="###" style="display:none;"></a>
+					</li>
+					<!--已登录-->
+					<li>
+						<a class="msg" onclick="toClienteleList()"></a>
+					</li>
+					<li>
+						<a id="wxScan" class="scan" style="display:none;"></a>
+					</li>
+					<!--未登录-->
+				</ul>
+			</nav>
+
+			<!--app下载悬浮块-->
+			<div class="clearfix" id="appDownload" style="display: none;">
+				<img src="/img/common/logo.png" alt="" width="40px">
+				<div class="appDownload-middle">
+					<p>普伟商圈</p>
+					<p>企业全价值体系的领导者</p>
+				</div>
+				<a href="http://app.prowealth.com.cn">下载app</a>
+				<i id="closeDownload"></i>
+			</div>
+
+			<!--  -->
+			<div class="loading-mark"></div>
+
+			<!--侧栏-->
+			<div id="sideBlock">
+				<!--侧栏顶部-->
+				<div class="sideBlock-top clearfix">
+					<img src="/filesystem/view/1457359170339S0163I7928E661R2383.do">
+					<div class="sideBlock-top-center">
+						<a onclick="toEditBusiness();">
+							<p>郭煜悦 <i>18316961025</i></p>
+							<p></p>
+						</a>
+					</div>
+				</div>
+				<!--侧栏中部-->
+				<div class="sideBlock-middle">
+					<!--实用链接-->
+					<h6>链接</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part1">
+						<a class="clearfix" href="/clientele/homePage.do">首页<i></i></a>
+						<a class="clearfix" href="/training/index.do">精品课程<i></i></a>
+						<a class="clearfix" href="/mien/toMien.do?typeId=3">精彩回顾<i></i></a>
+						<a class="clearfix" href="/mien/toMien.do?typeId=1">学员风采<i></i></a>
+						<a class="clearfix" href="/mien/toMien.do?typeId=2">普伟动态<i></i></a>
+						<a class="clearfix" onclick="toSupplyDemand()">商机在握<i></i></a>
+						<a class="clearfix" onclick="toProduct()">优品速递<i></i></a>
+						<a class="clearfix" onclick="toRelation()">营商智囊<i></i></a>
+						<a class="clearfix" onclick="toIntegral()">积分商城<i></i></a>
+					</div>
+					<!--账户管理-->
+					<h6>个人</h6>
+					<div class="sideBlock-middle-part sideBlock-middle-part2">
+						<!--<a class="clearfix" onclick="toMySelf()">个人中心<i></i></a>-->
+						<a class="clearfix" onclick="toEditPersonInfo();">个人资料<i></i></a>
+						<a class="clearfix" onclick="toSetPassword();">修改密码<i></i></a>
+					</div>
+					<!--企业-->
+					<!--退出按钮-->
+					<a class="out" onclick="toLogout()">退出登录</a>
+				</div>
+			</div>
+			<div id="content">
+				<div id="gallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="pswp__bg"></div>
+					<div class="pswp__scroll-wrap">
+						<div class="pswp__container">
+							<div class="pswp__item"></div>
+							<div class="pswp__item"></div>
+							<div class="pswp__item"></div>
+						</div>
+						<div class="pswp__ui pswp__ui--hidden">
+							<div class="pswp__top-bar">
+								<div class="pswp__counter"></div>
+								<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+								<button class="pswp__button pswp__button--share" title="Share"></button>
+								<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+								<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+								<div class="pswp__preloader">
+									<div class="pswp__preloader__icn">
+										<div class="pswp__preloader__cut">
+											<div class="pswp__preloader__donut"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+								<div class="pswp__share-tooltip"></div>
+							</div>
+							<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+							<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+							<div class="pswp__caption">
+								<div class="pswp__caption__center"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--	
+			<div id="head-bar" style="width:100%; height : 45px; background:#FFF; border-bottom: 1px solid #cccccc;">
+				<div align="center" style="float:left; width:50%; line-height:45px;"
+				     onclick="goBack()">
+					<div style="width:55px;height:45px;"><img src="/images/message/return.png"
+					                                          style="float:left;height:16px; margin-top:14px;"/>
+						<div style="float:left; margin-left:6px;">返回</div>
+					</div>
+				</div>
+				<div style="float:left; width:1px; background:#e7e7e7; height : 23px; margin-top: 10px;"></div>
+			</div>
+		-->
+				<div class="clear"></div>
+				<div id="warnTodo" style="display:none;text-align:center;position:fixed;top:0;left:0;z-index:2;width:100%;background:#2687e5;font-size:18px;line-height:45px;height:45px;color:#fff;">
+					<img style="width:17px;vertical-align: middle;" src="/images/supplyDemand/todo.png">
+					<span style="vertical-align: middle;">收藏成功</span>
+				</div>
+				<div style="height:10px;"></div>
+				<div id="enableWarn" style="display:none;text-align:center;">对不起，该项目已被发布者删除！</div>
+				<!-- #main用于遮罩层起作用 -->
+				<div id="main">
+					<!-- 管理按钮 -->
+					<div id="supply">
+						<div class="mySupplyDemand" userid="1439431811348S0220I7928E661R5375">
+							<img onclick="toVCard(this)" class="clienteHeadImg" src="/filesystem/view/1459994930113S5731I7928E661R2035.do">
+							<div style="overflow:hidden;zoom:1;padding-top:10px;">
+								<div class="myBusiness">普伟集团</div>
+								<div class="myName">冼卓辉</div>
+								<div class="createTime">2015-09-29</div>
+							</div>
+							<div class="clear"></div>
+							<div style="height:5px;"></div>
+							<hr>
+							<div id="1443526181378S0269I7928E661R9456">
+								<div class="myTitle">
+									<span class="supply-tip">供应</span> 普伟云商城全面启动招商
+								</div>
+								<div class="myContent"><pre style="margin:0;font-size:16px;background:none;border:0;">普伟云商城，是全营销渠道融合运营的电商平台。通过普伟集团庞大的资源体系：
+
+★ 普伟集团拥有15年的企业服务经验，服务企业覆盖各行各业；
+★ 每年在大佛山范围内举办的公开课程超过500天，参加课程人员超过50000人次，影响覆盖人群超过500000人；
+★ 普伟集团会员客户企业高达10000家，以每家员工数量200名计算，影响覆盖人群超过2000000人；
+★ 普伟集团拥有“普伟企业家”及“大成商道”两大集团公众号，累计粉丝超过十万人；
+★ 结合网络分销机制，普伟集团将为企业直接带来超过2000万的分销引流；
+
+通过这些强大的资源，我们可以为企业提供一个资源共享的平台，帮助企业获得更多的销售机会，推动企业更好更快的发展！
+
+普伟集团会员企业将获得免费进驻普伟云商城平台资格！不仅可以免费进驻，普伟集团还会通过大量线上线下资源为进驻商城的企业进行引流，帮助企业更好进行商品的销售！
+
+想了解更多，欢迎前来参加发布会！
+普伟云商城平台，顺应时代潮流，打造一流资源共享平台！
+普伟云商城平台预上线发布会，我们诚邀您的参与！
+时间：
+2015年10月13日（星期二）下午14：00--17：30
+地点：
+佛山市禅城区九鼎国际金融中心2栋8楼普伟集团总部
+联系电话：
+13928211552（大成秘书处）；
+13928670298（总裁班秘书处）</pre></div>
+								<div style="height:10px;"></div>
+								<div class="myImg">
+									<div class="sdImg">
+										<img class="progressImg" onload="imgOnload(this)" fileid="1443526176434S0267I7928E661R3118" img-width="400" img-height="400" src="/filesystem/view/180/180/1443526176434S0267I7928E661R3118.do" data-pswp-uid="1" style="width: 90px; height: 90px;">
+									</div>
+									<div class="sdImg">
+										<img class="progressImg" onload="imgOnload(this)" fileid="1443526178523S0268I7928E661R4021" img-width="400" img-height="400" src="/filesystem/view/180/180/1443526178523S0268I7928E661R4021.do" data-pswp-uid="2" style="width: 90px; height: 90px;">
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div style="height:10px;"></div>
+							<hr>
+							<div class="myfans">
+								<div class="myCount" style="text-align:left;">评论(<span id="commentTimes">5</span>)</div>
+								<div class="myCount" style="text-align:center;">收藏(<span id="collectTimes">4</span>)</div>
+								<div class="myCount" style="text-align:right;">分享(4)</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div style="height:10px;"></div>
+					<div id="comments">
+						<!-- ajax 加载 显示评论（每页显示15条） -->
+						<!-- 一行评论开始 -->
+						<div class="comment" style="width:94%;margin:0 auto 10px auto ;display:none;">
+							<img class="headimg" data-userid="" style="width:46px;height:46px;float:left;" src="/images/clientele/head.png">
+							<div class="commentInfo">
+								<img style="margin-left:-12px;float:left;" src="/images/supplyDemand/commentPre.png">
+								<div class="link">
+									<div class="linker name" style="margin-right:10px;">名称</div>
+									<div class="atLinker parentName"></div>
+									<div class="linker honor" style="margin-right:2px;">头衔</div>
+									<div class="clear"></div>
+								</div>
+								<div class="commentContent">内容内容内容内容内容</div>
+								<div style="height:40px;line-height:40px;">
+									<div class="createTime" style="float:left;margin-left:10px;">2小时前</div>
+									<div class="reply" style="float:right;margin-right:20px;" data-fid="" data-name=""><img src="/images/supplyDemand/comment.png" style="width: 15px;height: 15px;"></div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="comment" style="width: 94%; margin: 0px auto 10px; display: block;" id="1443602562499S1392I7928E661R0019">
+							<img class="headimg" data-userid="1443602379711S1387I7928E661R6222" style="width:46px;height:46px;float:left;" src="/filesystem/view/1443602389272S1390I7928E661R5379.do">
+							<div class="commentInfo">
+								<img style="margin-left:-12px;float:left;" src="/images/supplyDemand/commentPre.png">
+								<div class="link">
+									<div class="linker name" style="margin-right:10px;">周雄伟</div>
+									<div class="atLinker parentName"></div>
+									<div class="linker honor" style="margin-right: 2px; display: none;">头衔</div>
+									<div class="clear"></div>
+								</div>
+								<div class="commentContent">融汇资源，合力共赢</div>
+								<div style="height:40px;line-height:40px;">
+									<div class="createTime" style="float:left;margin-left:10px;">2015-09-30</div>
+									<div class="reply" style="float:right;margin-right:20px;" data-fid="1443602562499S1392I7928E661R0019" data-name="周雄伟"><img src="/images/supplyDemand/comment.png" style="width: 15px;height: 15px;"></div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="comment" style="width: 94%; margin: 0px auto 10px; display: block;" id="1444366110923S0031I7928E661R0410">
+							<img class="headimg" data-userid="1444365832703S0018I7928E661R0992" style="width:46px;height:46px;float:left;" src="/filesystem/view/1447044536011S2817I7928E661R1039.do">
+							<div class="commentInfo">
+								<img style="margin-left:-12px;float:left;" src="/images/supplyDemand/commentPre.png">
+								<div class="link">
+									<div class="linker name" style="margin-right:10px;">谢静芬</div>
+									<div class="atLinker parentName"></div>
+									<div class="linker honor" style="margin-right: 2px; display: none;">头衔</div>
+									<div class="clear"></div>
+								</div>
+								<div class="commentContent">合力共赢！yes！</div>
+								<div style="height:40px;line-height:40px;">
+									<div class="createTime" style="float:left;margin-left:10px;">2015-10-09</div>
+									<div class="reply" style="float:right;margin-right:20px;" data-fid="1444366110923S0031I7928E661R0410" data-name="谢静芬"><img src="/images/supplyDemand/comment.png" style="width: 15px;height: 15px;"></div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="comment" style="width: 94%; margin: 0px auto 10px; display: block;" id="1444617368635S2774I7928E661R8655">
+							<img class="headimg" data-userid="1438574299124S4325I7928E661R9559" style="width:46px;height:46px;float:left;" src="/filesystem/view/1446194723715S2734I7928E661R7380.do">
+							<div class="commentInfo">
+								<img style="margin-left:-12px;float:left;" src="/images/supplyDemand/commentPre.png">
+								<div class="link">
+									<div class="linker name" style="margin-right:10px;">伍锦镔</div>
+									<div class="atLinker parentName"></div>
+									<div class="linker honor" style="margin-right: 2px; display: none;">头衔</div>
+									<div class="clear"></div>
+								</div>
+								<div class="commentContent">合力共生！</div>
+								<div style="height:40px;line-height:40px;">
+									<div class="createTime" style="float:left;margin-left:10px;">2015-10-12</div>
+									<div class="reply" style="float:right;margin-right:20px;" data-fid="1444617368635S2774I7928E661R8655" data-name="伍锦镔"><img src="/images/supplyDemand/comment.png" style="width: 15px;height: 15px;"></div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="comment" style="width: 94%; margin: 0px auto 10px; display: block;" id="1460337711709S6176I7928E661R2762">
+							<img class="headimg" data-userid="1457359151106S0161I7928E661R0342" style="width:46px;height:46px;float:left;" src="/filesystem/view/1457359170339S0163I7928E661R2383.do">
+							<div class="commentInfo">
+								<img style="margin-left:-12px;float:left;" src="/images/supplyDemand/commentPre.png">
+								<div class="link">
+									<div class="linker name" style="margin-right:10px;">郭煜悦</div>
+									<div class="atLinker parentName"></div>
+									<div class="linker honor" style="margin-right: 2px; display: none;">头衔</div>
+									<div class="clear"></div>
+								</div>
+								<div class="commentContent">合力共生！</div>
+								<div style="height:40px;line-height:40px;">
+									<div class="createTime" style="float:left;margin-left:10px;">3天前</div>
+									<div class="reply" style="float:right;margin-right:20px;" data-fid="1460337711709S6176I7928E661R2762" data-name="郭煜悦"><img src="/images/supplyDemand/comment.png" style="width: 15px;height: 15px;"></div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="comment" style="width: 94%; margin: 0px auto 10px; display: block;" id="1460614682222S0018IC0A84702R8507">
+							<img class="headimg" data-userid="1439428287175S0102I7928E661R7826" style="width:46px;height:46px;float:left;" src="/filesystem/view/1457055179617S1046I7928E661R9939.do">
+							<div class="commentInfo">
+								<img style="margin-left:-12px;float:left;" src="/images/supplyDemand/commentPre.png">
+								<div class="link">
+									<div class="linker name" style="margin-right:10px;">谢静芬</div>
+									<div class="atLinker parentName"></div>
+									<div class="linker honor" style="margin-right: 2px; display: none;">头衔</div>
+									<div class="clear"></div>
+								</div>
+								<div class="commentContent">灰灰</div>
+								<div style="height:40px;line-height:40px;">
+									<div class="createTime" style="float:left;margin-left:10px;">15分钟前</div>
+									<div class="reply" style="float:right;margin-right:20px;" data-fid="1460614682222S0018IC0A84702R8507" data-name="谢静芬"><img src="/images/supplyDemand/comment.png" style="width: 15px;height: 15px;"></div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+
+						<!-- 单行评论结束 -->
+					</div>
+					<div class="clear"></div>
+					<!-- 加载新数据  -->
+					<div id="loadMore"></div>
+					<div id="bottomGap" style="height: 62px; width: 100%; float: left; display: block;"></div>
+					<div class="clear"></div>
+					<!-- 遮罩层 -->
+					<div id="mark" style="height: 1456px; display: block;"></div>
+				</div>
+				<!-- 分享向导 -->
+				<div id="share_guide" style="position:fixed; display:none; z-index:1002; top:0; left:0; width:100%;">
+					<img src="/images/clientele/share_guide.png" style="position:absolute; width:60%; right:0;">
+				</div>
+				<!-- 导航 -->
+				<div style="height: 52px;"></div>
+				<div class="bottom-opts" style="display: none;">
+					<div id="endComm" class="btn" align="center">
+						<img src="/images/supplyDemand/commentNew.png">
+						<div class="btn_text">评论</div>
+					</div>
+					<div id="endCollect" class="btn" align="center" onclick="collect();">
+						<img style="height:25px;" src="/images/supplyDemand/collectedNew.png">
+						<div class="btn_text btn_collected" style="margin-top:-2px;">收藏</div>
+					</div>
+					<div id="endShare" class="btn" align="center">
+						<img src="/images/clientele/shareNew.png">
+						<div class="btn_text">分享</div>
+					</div>
+				</div>
+				<div class="commentMessage clearfix" style="position: fixed;">
+					<table width="100%" style="border-spacing: 0px;">
+						<tbody>
+							<tr>
+								<td style=" display: block;padding: 0 8px;">
+									<textarea id="message" placeholder="评论内容" rows="1"></textarea>
+								</td>
+								<td width="70px" style="vertical-align:bottom;">
+									<div class="send-btn" onclick="sendComment();">
+										发送
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="glass"></div>
+		</div>
+
+	</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>onkeydown,onkeyup,onkeypress</h2>
+		<h3>
+			onkeydown,onkeyup能检测所有的键盘按键，包括（辅助键【ctrl...shift..f1..】）字符键（字母（都是大写），数字）
+			<br />
+			onkeypress字符键【区分大小写字母，数字，enter,space】
+		</h3>
+		<script>
+			document.onkeypress = function(e) {
+				var e = e || window.event;
+				console.log("keypress");
+//				console.log(e);
+			}
+			document.onkeydown = function(e) {
+				var e = e || window.event;
+				console.log("onkeydown");
+//				console.log(e);
+			}
+			document.onkeyup = function(e) {
+				var e = e || window.event;
+				console.log("onkeyup");
+//				console.log(e);
+			}
+		</script>
+	</body>
+</html>
+
+
+
+
+
+

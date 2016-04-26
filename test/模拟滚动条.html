@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#wrap {
+				position: relative;
+				width: 250px;
+				height: 400px;
+				background-color: greenyellow;
+				overflow: hidden;
+			}
+			
+			#content {
+				padding-right: 25px;
+				position: relative;
+			}
+			
+			#scrollBar {
+				display: none;
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 25px;
+				height: 100%;
+				background-color: #ccc;
+			}
+			
+			#scrollBar div {
+				position: absolute;
+				width: 100%;
+				top: 0;
+				left: 0;
+				background-color: yellow;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="content">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus exercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus exercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
+				exercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernatur possimus sapiente ducimus est quo harum adipisci libero perferendis pariatur illum in minima voluptatibus molestiae atque. Aliquid! Lorem ipsum
+				dolor sit amet, consectetur adipisicing elit. Placeat quia ixercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernatur possimus sapiente ducimus est quo harum adipisci libero perferendis pariatur illum in minima voluptatibus molestiae atque. Aliquid! Lorem ipsum
+				dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernaxercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernatur possimus sapiente ducimus est quo harum adipisci libero perferendis pariatur illum in minima voluptatibus molestiae atque. Aliquid! Lorem ipsum
+				dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernaxercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernatur possimus sapiente ducimus est quo harum adipisci libero perferendis pariatur illum in minima voluptatibus molestiae atque. Aliquid! Lorem ipsum
+				dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernaxercitationem! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernatur possimus sapiente ducimus est quo harum adipisci libero perferendis pariatur illum in minima voluptatibus molestiae atque. Aliquid! Lorem ipsum
+				dolor sit amet, consectetur adipisicing elit. Placeat quia id totam aspernad totam aspernatur possimus sapiente ducimus est quo harum adipisci libero perferendis pariatur illum in minima voluptatibus molestiae atque. Aliquid! Lorem ipsum dolor sit amet, consectetur
+				adipisicing elit. Placeat quia id totam aspernatur possimus sapiente ducimus est quo harum adipisci libero perferendis pariatur illum in minima voluptatibus molestiae atque. Aliquid!
+			</div>
+			<div id="scrollBar"></div>
+		</div>
+		<script src="mousewheel.js"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var wrap = document.getElementById("wrap");
+				var content = document.getElementById("content");
+				var scrollbar = document.getElementById("scrollBar");
+				//判断是否需要出现滚动条
+				if (content.offsetHeight < wrap.offsetHeight) return;
+				scrollbar.style.display = "block";
+				//高度的比例
+				var scale = wrap.offsetHeight / content.offsetHeight;
+				var sliderHeight = Math.round(scrollbar.offsetHeight * scale);
+				var slider = document.createElement("div");
+				slider.style.height = sliderHeight + "px";
+				scrollbar.appendChild(slider);
+				//添加滑轮事件
+				mousewheel(wrap, function(e) {
+					var goTop = slider.offsetTop;
+					//offsetTop 的比例
+					//slider.offsetTop / scrollbar.offsetHeight = cotent.offsetTop / content.offsetHeight;
+					var offsetScale = goTop / scrollbar.offsetHeight;
+					if (e.delta) {
+						//                          alert("down");
+						goTop += 10;
+					} else {
+						//                          alert("up");
+						goTop -= 10;
+					}
+					if (goTop < 0) {
+						goTop = 0;
+					} else if (goTop > scrollbar.offsetHeight - slider.offsetHeight) {
+						goTop = scrollbar.offsetHeight - slider.offsetHeight;
+					}
+					var contentOffsetTop = offsetScale * content.offsetHeight;
+					slider.style.top = goTop + "px";
+					content.style.top = -contentOffsetTop + "px";
+				});
+				//点击事件
+				scrollbar.onclick = function(e) {
+						var e = e || window.event;
+						var goTop = e.clientY - slider.offsetHeight / 2;
+						//offsetTop 的比例
+						var offsetScale = goTop / scrollbar.offsetHeight;
+						if (goTop < 0) {
+							goTop = 0;
+						} else if (goTop > scrollbar.offsetHeight - slider.offsetHeight) {
+							goTop = scrollbar.offsetHeight - slider.offsetHeight;
+						}
+						var contentOffsetTop = -offsetScale * content.offsetHeight;
+						//判断contentOffsetTop 的边界
+						if (contentOffsetTop > 0) {
+							contentOffsetTop = 0;
+						} else if (contentOffsetTop < -(content.offsetHeight - wrap.offsetHeight)) {
+							contentOffsetTop = -(content.offsetHeight - wrap.offsetHeight);
+						}
+						slider.style.top = goTop + "px";
+						content.style.top = contentOffsetTop + "px";
+					}
+					//              
+					//拖放
+				scrollbar.onmousedown = function(e) {
+					var e = e || window.event;
+					var oHeight = e.clientY - slider.offsetTop;
+					document.onmousemove = function(e) {
+						var e = e || window.event;
+						var oTop = e.clientY - oHeight;
+						if (oTop < 0) {
+							oTop = 0;
+						} else if (oTop > scrollbar.offsetHeight - slider.offsetHeight) {
+							oTop = scrollbar.offsetHeight - slider.offsetHeight;
+						}
+						//offsetTop 的比例
+						var offsetScale = oTop / scrollbar.offsetHeight;
+						var contentOffsetTop = -offsetScale * content.offsetHeight;
+						//判断contentOffsetTop 的边界
+						if (contentOffsetTop > 0) {
+							contentOffsetTop = 0;
+						} else if (contentOffsetTop < -(content.offsetHeight - wrap.offsetHeight)) {
+							contentOffsetTop = -(content.offsetHeight - wrap.offsetHeight);
+						}
+						slider.style.top = oTop + "px";
+						content.style.top = contentOffsetTop + "px";
+					}
+					document.onmouseup = function() {
+						document.onmousemove = null;
+					}
+					return false;
+				}
+				//键盘事件
+				document.onkeydown = function(e) {
+					var e = e || window.event;
+					var goTop = slider.offsetTop;
+					//offsetTop 的比例
+					//slider.offsetTop / scrollbar.offsetHeight = cotent.offsetTop / content.offsetHeight;
+					var offsetScale = goTop / scrollbar.offsetHeight;
+					if (e.keyCode == 40) {
+						//                          alert("down");
+						goTop += 10;
+					} else if (e.keyCode == 38) {
+						//                          alert("up");
+						goTop -= 10;
+					}
+					if (goTop < 0) {
+						goTop = 0;
+					} else if (goTop > scrollbar.offsetHeight - slider.offsetHeight) {
+						goTop = scrollbar.offsetHeight - slider.offsetHeight;
+					}
+					var contentOffsetTop = offsetScale * content.offsetHeight;
+					slider.style.top = goTop + "px";
+					content.style.top = -contentOffsetTop + "px";
+				}
+			}
+		</script>
+	</body>
+
+</html>

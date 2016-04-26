@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>angularJs</title>
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<h6>模型model</h6>
+
+		<!--<div ng-app="" ng-init="firstName='ccc'">
+			<p>在输入框中尝试输入：</p>
+			<p>姓名：
+				<input type="text" ng-model="firstName">
+			</p>
+			<p>你输入的为： {{ firstName }}</p>
+		</div>-->
+
+		<!--<div ng-app="cccApp" >
+			<div ng-controller="cccCtrl">
+				<input type="text" ng-model="name"/>
+				<p>{{name}}</p>
+			</div>
+			<p>{{name}}</p>
+		</div>
+		<script type="text/javascript">
+			//定义一个模块
+			var app = angular.module("cccApp",[]);
+			app.controller("cccCtrl",function($scope){
+				$scope.name="ccc";//是否相当于ng-init  指令初始化应用程序数据
+			});
+		</script>-->
+
+		<!--<p>双向绑定，model（M）与{{}}（V）通过controller（C）绑定</p>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			名字:
+			<input ng-model="name">
+			<h1>你输入了: {{name}}</h1>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module("myApp",[]);
+			app.controller("myCtrl",function($scope){
+				
+			});
+		</script>-->
+
+		<!--<form ng-app="" name="myForm">
+			Email:
+			<input type="email" name="myAddress" ng-model="text">
+			<span ng-show="myForm.myAddress.$error.email">不是一个合法的邮箱地址</span>
+			<span ng-hide="myForm.myAddress.$error.email">这是合法的邮箱地址</span>
+		</form>-->
+
+		<!--<form ng-app="" name="myForm" ng-init="myText = 'test@runoob.com'">
+			Email:
+			<input type="email" name="myAddress" ng-model="myText" required>
+			</p>
+			<h1>状态</h1>有无效{{myForm.myAddress.$valid}} 被污染(修改){{myForm.myAddress.$dirty}} 接触过{{myForm.myAddress.$touched}} {{myForm.myAddress.$error}}
+		</form>-->
+
+		<style>
+			/*无效*/
+			
+			input.ng-invalid {
+				background-color: lightblue;
+			}
+			
+			input.ng-empty {
+				background-color: red;
+			}
+			
+			input.ng-not-empty {
+				background-color: red;
+			}
+			
+			input.ng-valid {
+				background-color: blue;
+			}
+			
+			input.ng-dirty {
+				border: 1px solid red;
+			}
+			/*挂起*/
+			
+			input.ng-pending {
+				outline: 3px solid red;
+			}
+		</style>
+
+		<form ng-app="" name="myForm">
+			输入你的名字:
+			<input name="myAddress" ng-model="text" required>
+		</form>
+	</body>
+
+</html>

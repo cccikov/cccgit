@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>angularJs</title>
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<pre>过滤器可以通过一个管道字符（|）和一个过滤器添加到表达式中。</pre>
+		<!--<div ng-app="myApp" ng-controller="personCtrl">
+			<p>姓名为 {{ lastName | uppercase }}</p>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module("myApp",[]);
+			app.controller("personCtrl",function($scope){
+				$scope.lastName="ccc";
+			});
+		</script>-->
+
+		<!--<div ng-app="myApp" ng-controller="costCtrl">
+			<input type="number" ng-model="quantity">
+			<input type="number" ng-model="price">
+			<p>总价 = {{ (quantity * price) | currency }}</p>
+		</div>
+		<script type="text/javascript">
+			angular.module("myApp", []).controller("costCtrl", function($scope) {});
+		</script>-->
+
+		<div ng-app="myApp" ng-controller="namesCtrl">
+			<ul>
+				<li ng-repeat="x in names | orderBy:'country'">
+					{{ (x.name | uppercase) + ', ' + x.country }}
+				</li>
+			</ul>
+		<div>
+		<script type="text/javascript">
+			angular.module("myApp", []).controller("namesCtrl", function($scope) {
+				$scope.names=[{name:"aaa",country:"b"},{name:"bbbb",country:"a"},{name:"ccc",country:"d"},{name:"ddd",country:"c"}];
+			});
+		</script>
+	</body>
+
+</html>

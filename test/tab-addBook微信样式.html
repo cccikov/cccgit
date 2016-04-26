@@ -1,0 +1,209 @@
+<style type="text/css">
+	.rj-list .list {
+		width: 90%;
+		margin-left: 10px;
+		margin-right: auto;
+		margin-top: -1px;
+	}
+	
+	.rj-list .list .rj-item {
+		border-left: none;
+		border-right: none;
+		border-bottom: none;
+		padding-left: 0;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+	
+	.rj-contacts-item {
+		padding: 0px !important;
+	}
+	
+	.rj-item .rj-contacts-pic {
+		color: white;
+		height: 36px;
+		width: 36px;
+		line-height: 36px;
+		float: left;
+		font-size: 28px;
+		text-align: center;
+	}
+	
+	.rj-orange-bgc {
+		background-color: orange;
+	}
+	
+	.rj-green-bgc {
+		background-color: #63db2a;
+	}
+	
+	.rj-blue-bgc {
+		background-color: #2d31ca;
+	}
+	
+	.rj-item h2 {
+		padding-left: 10px;
+		position: absolute;
+		margin: auto !important;
+		top: 0;
+		bottom: 0;
+		left: 36px;
+		height: 32px;
+		line-height: 32px;
+	}
+	
+	.rj-contacts-pic img {
+		width: 36px;
+		height: 36px;
+	}
+	
+	.rj-contacts-index-bar {
+		background-color: #E8E8E8;
+		padding-left: 10px;
+		height: 20px;
+		line-height: 20px;
+		font-size: 80%;
+		color: #545454;
+	}
+	
+	.rj-contacts-right-bar {
+		position: fixed;
+		right: 0;
+		width: 20px;
+		height: 464px;
+		z-index: 2;
+		text-align: center;
+		font-size: 80%;
+		color: #545454;
+	}
+	
+	.rj-contacts-right-bar div {
+		height: 16px;
+	}
+	
+	.rj-contacts-middle-bar {
+		position: fixed;
+		margin: auto;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		height: 60px;
+		width: 60px;
+		line-height: 60px;
+		text-align: center;
+		color: #FFF;
+		font-size: 300%;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+</style>
+<ion-view view-title="通讯录">
+	<ion-content>
+
+		<ion-list>
+			<ion-item class="rj-contacts-item">
+				<div class="rj-contacts-index-bar">A</div>
+				<ion-list class="rj-list">
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+				</ion-list>
+			</ion-item>
+			<ion-item class="rj-contacts-item">
+				<div class="rj-contacts-index-bar">B</div>
+				<ion-list class="rj-list">
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+				</ion-list>
+			</ion-item>
+			<ion-item class="rj-contacts-item">
+				<div class="rj-contacts-index-bar">C</div>
+				<ion-list class="rj-list">
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+					<ion-item class="rj-item">
+						<div class="rj-contacts-pic">
+							<img src="img/adam.jpg">
+						</div>
+						<h2>李明</h2>
+					</ion-item>
+				</ion-list>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+	<div class="rj-contacts-right-bar" rj-position-middle on-drag="contacts_right_bar_swipe($event)">
+		<div>&uarr;</div>
+		<div>☆</div>
+		<div>A</div>
+		<div>B</div>
+		<div>C</div>
+		<div>D</div>
+		<div>E</div>
+		<div>F</div>
+		<div>G</div>
+		<div>H</div>
+		<div>I</div>
+		<div>J</div>
+		<div>K</div>
+		<div>L</div>
+		<div>M</div>
+		<div>N</div>
+		<div>O</div>
+		<div>P</div>
+		<div>Q</div>
+		<div>R</div>
+		<div>S</div>
+		<div>T</div>
+		<div>U</div>
+		<div>V</div>
+		<div>W</div>
+		<div>X</div>
+		<div>Y</div>
+		<div>Z</div>
+		<div>#</div>
+	</div>
+	<div class="rj-contacts-middle-bar">
+		A
+	</div>
+</ion-view>

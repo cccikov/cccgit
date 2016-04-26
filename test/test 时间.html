@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var time = 1450751041549;
+		function getLocalTime(nS) {     
+		      return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");      
+		   } 
+		    
+		alert(getLocalTime(time));  
+	</script>
+</body>
+</html>

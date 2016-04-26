@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>子类撑开块父类</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding:0;
+		}
+		.clearfix{
+			clear: both;
+		}
+		table{
+			/*width: 100%;*/
+		}
+		th{
+			min-width: 110px;
+			width: 0.1%;
+		}
+		#middle{
+			/*overflow: hidden;*/
+			box-sizing: border-box;
+			display: inline-block;
+			min-width: 100%;
+			padding:10px;
+			border:1px solid #ff0000;
+		}
+		#middle div{
+			float: right;
+			margin:3px 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="middle">
+			<!--<div>
+				<button>AAA</button>
+				<div class="clearfix"></div>
+			</div>-->
+			<table border="1">
+				<tr class="first">
+					<th>表格家居搜附近奥斯的风景表格家居搜附近奥斯的风景表格家居搜附近奥斯的风景表格家居搜附近奥斯的风景表格家居搜附近奥斯的风景</th>
+					<th>表格家居景</th>
+					<th>表格家居奥斯的风景</th>
+					<th>表格家居的风景</th>
+					<th>表格家居奥斯的风景</th>
+					<th>表格家居斯的风景</th>
+				
+					
+					
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<!--<script type="text/javascript">
+		if($(".first th").length<8){
+			$("#middle").css("display","block");
+			$("table").css("width","100%");
+		}
+	</script>-->
+	<!--如果父类是块元素，父类的宽度会默认撑满整个屏幕,而不会被子元素撑开，若子元素宽度大于屏幕宽度，则会导致父元素还是那么大，某些演示或者position了的东西会在一边-->
+	<!-- 总结：总需要把父类设成inline-block min-width：100% -->
+</body>
+</html>

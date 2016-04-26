@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>angularJs</title>
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<h6>控制器controller</h6>
+		<!--<div ng-app="myApp" ng-controller="myCtrl">
+			名:
+			<input type="text" ng-model="firstName">
+			<br> 名:
+			<input type="text" ng-model="lastName">
+			<br>
+			<br> 姓名: {{firstName + " " + lastName}}
+		</div>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope) {
+				$scope.firstName = "John";
+				$scope.lastName = "Doe";
+			});
+		</script>
+		<pre>应用解析：
+AngularJS 应用程序由 ng-app 定义。应用程序在 &lt;div>&gt;内运行。
+ng-controller="myCtrl" 属性是一个 AngularJS 指令。用于定义一个控制器。
+myCtrl 函数是一个 JavaScript 函数。
+AngularJS 使用$scope 对象来调用控制器。
+在 AngularJS 中， $scope 是一个应用象(属于应用变量和函数)。
+控制器的 $scope （相当于作用域、控制范围）用来保存AngularJS Model(模型)的对象。
+控制器在作用域中创建了两个属性 (firstName 和 lastName)。
+ng-model 指令绑定输入域到控制器的属性（firstName 和 lastName）</pre>-->
+
+		<div ng-app="myApp" ng-controller="personCtrl">
+			名:
+			<input type="text" ng-model="firstName">
+			<br> 姓:
+			<input type="text" ng-model="lastName">
+			<br>
+			<br> 姓名: {{fullName()}}
+		</div>
+		<!--<script>
+			var app = angular.module('myApp', []);
+			app.controller('personCtrl', function($scope) {
+				$scope.firstName = "John";
+				$scope.lastName = "Doe";
+				$scope.fullName = function() {
+					return $scope.firstName + " " + $scope.lastName;
+				}
+			});
+		</script>-->
+		<pre>在外部js文件控制器一般不用再
+var app = angular.module('myApp', []);
+app.controller('personCtrl', function($scope) {
+	......
+}
+直接
+angular.module('myApp', []).controller('personCtrl', function($scope) {
+	......
+}
+原因不明。
+</pre>
+		<script src="js/namecontroller.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<iframe id="preview" height="340" width="100%" frameborder="0"></iframe>
+		<script type="text/javascript">
+			function codePreview(value) {
+				var doc = document.getElementById("preview").contentDocument || document.frames["preview"].document;
+				doc.body.innerHTML = value;
+			}
+			codePreview("lajsdfljalsdjf; lajsdl; fjal; sdjf; lasjdfl; ajsdlfja; ldsjfl; asjdfl; jasdl; fj; lasdjf");
+		</script>
+	</body>
+
+</html>

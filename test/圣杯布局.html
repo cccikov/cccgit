@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>圣杯布局</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<style type="text/css">
+			div{
+				height:200px;
+				text-align: center;
+			}
+			#wrap{
+				height: auto;
+				min-width: 400px;
+				background: yellow;
+			}
+			.left{
+				float: left;
+				width: 100px;
+				background: red;
+			}
+			.right{
+				float: right;
+				width: 200px;
+				background: blue;
+			}
+			.middle{
+				height:300px;
+				overflow: hidden;
+				background: green;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap" class="clearfix">
+			<div class="left">left</div>
+			<div class="right">right</div>
+			<div class="middle">middle</div>
+		</div>
+	</body>
+
+</html>

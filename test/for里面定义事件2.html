@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<p id="tips"></p>
+		<script type="text/javascript">
+			var tips = document.getElementById("tips");
+
+			var Fn1 = function(){
+				tips.innerHTML = "1";
+			}
+			var Fn2 = function(){
+				tips.innerHTML = "2";
+			}
+			var Fn3 = function(){
+				tips.innerHTML = "3";
+			}
+			var Fn4 = function(){
+				tips.innerHTML = "4";
+			}
+			var Fn5 = function(){
+				tips.innerHTML = "5";
+				console.log(this);
+			}
+
+			var FnArr = [];
+			var index = 0
+			for(var i=1;i<=5;i++){
+				FnArr[i] = function(){
+					index++;
+					console.log(this);
+					tips.innerHTML = index;
+				}
+			}
+
+			var a = {
+				name:"ccc"
+			}
+
+			Fn5();
+			FnArr[1].apply(a);
+			FnArr[5]();
+			console.log(FnArr);
+
+		</script>
+	</body>
+
+</html>

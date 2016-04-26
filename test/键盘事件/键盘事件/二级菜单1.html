@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin:0;
+				padding: 0;
+			}
+			#menu {
+				width:100px;
+				border:1px solid black;
+			}
+			#menu li:hover {
+				background-color: #ccc;
+			}
+			#menu li:hover ul {
+				display: block;
+			}
+			li {
+				list-style: none;
+				position:relative;
+			}
+			li ul {
+				display: none;
+				position:absolute;
+				width:100px;
+				left:100px;
+				top:0;
+				border:1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="menu">
+			<li>
+				list1
+				<ul>
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+			</li>
+		</ul>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+

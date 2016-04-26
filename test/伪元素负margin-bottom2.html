@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>伪元素负margin-bottom</title>
+		<style type="text/css">
+			p:before {
+				content: "";
+				display: inline-block;
+				height: 20px;
+				width: 20px;
+				margin: 0 0 -10px 0;
+				background: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias necessitatibus dolores odit neque similique. Laborum voluptatibus voluptatem repudiandae nobis facere at expedita fugiat natus illum voluptas atque blanditiis dolor obcaecati.</p>
+	</body>
+
+</html>

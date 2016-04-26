@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>alert阻塞</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var timer = setInterval(alertOut, 1500, "alallalalalalall");
+
+			function alertOut(value) {
+				if (flag()) {
+					alert(value);
+				}
+			}
+
+			function flag() {
+				return true;
+			}
+		</script>
+	</body>
+
+</html>

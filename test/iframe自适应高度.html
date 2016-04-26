@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur omnis quidem nulla hic natus delectus alias eum quia tempora voluptatibus quae in quo animi aspernatur provident illum non dolor voluptas.</p>
+    <iframe id="ifm" name="ifm" src="word.html" frameborder="0" scrolling="auto" width="100%" height="200"></iframe>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		
+		$(function(){
+			$("#ifm").on("load",function(){
+				var obj = $(window.frames["ifm"].document);
+				console.log(obj.height());
+				$("#ifm").height(obj.height());
+			});
+		});
+	</script> 
+</body>
+</html>

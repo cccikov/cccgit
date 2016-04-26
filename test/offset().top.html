@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>jq offset().top</title>
+		<style>
+			* {
+				padding: 0;
+				/*margin: 0;*/
+			}
+			.p1{
+				/*height: 600px;*/
+			}
+			.div {
+				height: 100px;
+				overflow: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p class="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam animi sint ea repellendus amet nisi impedit accusantium autem doloribus cupiditate odio laboriosam vero provident! Ex neque facilis illo optio natus!</p>
+		<div class="div">
+			<p class="in-p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi impedit doloremque rem velit alias iste nulla voluptatibus dolorum nesciunt ea inventore cupiditate aliquid amet corporis unde architecto harum ullam blanditiis!</p>
+			<p class="in-p2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione ea eaque minus tempora in amet tempore facilis a dolores quam necessitatibus libero voluptas perferendis magni quaerat sit id quas voluptates!</p>
+		</div>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(document).on("click", function() {
+					console.log("p1 offset:" + $(".p1").offset().top + " position:" + $(".p1").position().top + " 原生offset:" + $(".p1")[0].offsetTop + " 原生scrollTop:" + $(".p1")[0].scrollTop);
+					console.log("div offset:" + $(".div").offset().top + " position:" + $(".div").position().top + " 原生offset:" + $(".div")[0].offsetTop + " 原生scrollTop:" + $(".div")[0].scrollTop);
+					console.log("in-p1 offset:" + $(".in-p1").offset().top + " position:" + $(".in-p1").position().top + " 原生offset:" + $(".in-p1")[0].offsetTop + " 原生scrollTop:" + $(".in-p1")[0].scrollTop);
+				});
+			});
+		</script>
+	</body>
+
+</html>

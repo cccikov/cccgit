@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>span高度</title>
+		<style>
+			#wrap{
+				display: none;
+			}
+			p{
+				height: 120px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p>个人怀疑 不能通过jq获取隐藏元素的子span高度,如果该元素也没有设置高度也无法获取</p>
+		<div id="wrap">
+			asdasdasdasdasdasdaasdfasdfasdf
+		</div>
+		<span id="span">
+			
+		</span>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				console.log($("#wrap").height());
+				console.log($("#span").height());
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>angularJs</title>
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<!-- <h2>选择框(Select)</h2>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			ng-options
+			<select ng-model="selectedName" ng-options="x for x in names">
+			</select>
+			ng-repeat
+			<select>
+				<option ng-repeat="x in names">{{x}}</option>
+			</select>
+		</div>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope) {
+			    $scope.names = ["Google", "Runoob", "Taobao"];
+			});
+		</script> -->
+
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<select ng-model="selectedSite">
+				<option ng-repeat="x in sites" value="{{x.site}}">{{x.site}}</option>
+			</select>
+			<h1>你选择的是: {{selectedSite}}</h1>
+		</div>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function($scope) {
+			   $scope.sites = [
+				    {site : "Google", url : "http://www.google.com"},
+				    {site : "Runoob", url : "http://www.runoob.com"},
+				    {site : "Taobao", url : "http://www.taobao.com"}
+				];
+			});
+		</script>
+
+	</body>
+
+</html>

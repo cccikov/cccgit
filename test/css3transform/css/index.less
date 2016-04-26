@@ -1,0 +1,103 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+#wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom:0;
+    right:0;
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    perspective: 500px;
+    ul {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        transform-style: preserve-3d;
+        transform: rotate3d(1,1,1,45deg);
+        animation: toRotate 10s 0s linear infinite both;
+        li {
+            position: absolute;
+            width: 200px;
+            line-height: 200px;
+            text-align: center;
+            font: 700 30px/200px "微软雅黑";
+            list-style: none;
+            text-decoration: underline;
+            transition: transform 0.3s;
+        }
+        &:hover {
+            li:nth-child(1) {
+                transform: rotate3d(0,0,0,0deg) translate3d(0,0,200px);
+            }
+            li:nth-child(2) {
+                transform: rotate3d(0,1,0,90deg) translate3d(0,0,200px);
+            }
+            li:nth-child(3) {
+                transform: rotate3d(0,1,0,180deg) translate3d(0,0,200px);
+            }
+            li:nth-child(4) {
+                transform: rotate3d(0,1,0,-90deg) translate3d(0,0,200px);
+            }
+            li:nth-child(5) {
+                transform: rotate3d(1,0,0,90deg) translate3d(0,0,200px);
+            }
+            li:nth-child(6) {
+                transform: rotate3d(1,0,0,-90deg) translate3d(0,0,200px);
+            }
+        }
+        li:nth-child(1) {
+            background: hsla(0, 100%, 50%, 1 );
+            transform: rotate3d(0,0,0,0deg) translate3d(0,0,100px);
+        }
+        li:nth-child(2) {
+            background: hsla(40, 100%, 50%, 1 );
+            transform: rotate3d(0,1,0,90deg) translate3d(0,0,100px);
+        }
+        li:nth-child(3) {
+            background: hsla(80, 100%, 50%, 1 );
+            transform: rotate3d(0,1,0,180deg) translate3d(0,0,100px);
+        }
+        li:nth-child(4) {
+            background: hsla(120, 100%, 50%, 1 );
+            transform: rotate3d(0,1,0,-90deg) translate3d(0,0,100px);
+        }
+        li:nth-child(5) {
+            background: hsla(160, 100%, 50%, 1 );
+            transform: rotate3d(1,0,0,90deg) translate3d(0,0,100px);
+        }
+        li:nth-child(6) {
+            background: hsla(200, 100%, 50%, 1 );
+            transform: rotate3d(1,0,0,-90deg) translate3d(0,0,100px);
+        }
+    }
+    span {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        width: 5px;
+        height: 5px;
+        border-radius: 2.5px;
+        margin: auto;
+        background: red;
+    }
+}
+@keyframes toRotate {
+    from {
+        transform: rotateX(10deg) rotateY(10deg) rotateZ(10deg);
+    }
+    to {
+        transform: rotateX(370deg) rotateY(370deg) rotateZ(370deg);
+    }
+}

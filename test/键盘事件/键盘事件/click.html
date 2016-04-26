@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>
+			dblclick,click,mousedown,mouseup执行顺序
+			mousedown>mouseup>click > mousedown>mouseup>click >dblclick
+		</h1>
+		<script type="text/javascript">
+			document.ondblclick = function() {
+				console.log("dblclick");
+			}
+			document.onclick = function() {
+//				alert("document");
+				console.log("document");
+			}
+			document.onmousedown = function() {
+//				alert("mousedown")
+				console.log("mousedown");
+			}
+			document.onmouseup = function() {
+//				alert("mouseup");
+				console.log("mouseup");
+			}
+		</script>
+	</body>
+</html>
+
+
+
+
+
+

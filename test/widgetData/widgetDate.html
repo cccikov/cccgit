@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="widgetDate.js"></script>
+</head>
+<body>
+    <div class="pop-box">
+        <div class="date-pop">
+            <h5 style="text-align:center">选择时间</h5>
+            <div class="date-box clearfix">
+                <div class="currSelect">
+                </div>
+                <!--active-->
+                <div class="box horizontal">
+                    <ul class="years-ul  flex1" style="position: relative">
+                        <li rv-data-val="v" rv-each-v="app.years" rv-text="v"></li>
+                    </ul>
+                    <ul class="month-ul  flex1" style="position: relative">
+                        <li rv-data-val="v" rv-each-v="app.months" rv-text="v"></li>
+                    </ul>
+                    <ul class="date-ul  flex1" style="position: relative">
+                        <li rv-data-val="v" rv-each-v="app.dates" rv-text="v"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="button-box clearfix box ">
+                <a class="link flex1 link-clear" rv-show="app.showClear">至今</a>
+                <a class="no flex1" rv-on-click="app.cancleClick">取消</a>
+                <a class="yes flex1" rv-on-click="app.yesClick">确定</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

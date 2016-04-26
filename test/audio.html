@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>html5 audio</title>
+		<style type="text/css">
+			*{
+				padding:0;
+				margin:0;
+			}
+			#wrap{
+				padding:10px;
+			}
+			span{
+				padding:0 10px;
+			}
+			button{
+				margin:10px 0;
+				font-size: 50px;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+		 	
+			$(function(){
+				//test
+				var all = 0;
+				var now = 0;
+				var index = 0;
+				var timer = null;
+				$(".button").click(function(){
+					var that = $(this);
+					if(that.attr("class").indexOf("active")==-1){//没有在播放状态
+						that.addClass("active");
+						that.html("暂停");
+						$("audio")[0].play();
+						all = $("audio")[0].duration;
+						now = $("audio")[0].currentTime;
+						$(".allLong").html(all+"s");
+						$(".hasLong").html(now+"s");
+						
+						timer =setInterval(function(){
+							index++;
+							all = $("audio")[0].duration;
+							now = $("audio")[0].currentTime;
+							
+							if(now>=all){//播放完暂停
+								$(".button").click();
+							}
+							
+							$(".allLong").html(all+"s");
+							$(".hasLong").html(now+"s");
+						},1000);
+
+					}else{
+						that.removeClass("active");
+						that.html("播放");
+						$("audio")[0].pause();
+						all = $("audio")[0].duration;
+						now = $("audio")[0].currentTime;
+						$(".allLong").html(all+"s");
+						$(".hasLong").html(now+"s");
+						
+						clearInterval(timer);
+					}
+				});
+				
+				$(".button2").click(function(){
+					$(".button").removeClass("active");
+					$(".button").html("播放");
+					$("audio")[0].pause();
+					$("audio")[0].currentTime=0;
+					all = $("audio")[0].duration;
+					now = $("audio")[0].currentTime;
+					$(".allLong").html(all+"s");
+					$(".hasLong").html(now+"s");
+					
+					clearInterval(timer);
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<audio src="audio/songnotime.mp3" preload="auto" controls=""></audio>
+			<div>
+				<span class="allLong">100s</span><span class="hasLong">10s</span>
+			</div>
+			<button class="button">播放</button>
+			<button class="button2">停止</button>
+		</div>
+	</body>
+
+</html>

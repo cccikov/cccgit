@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<input type="text" id="input" />
+		<ul id="wrap" class="container">
+		</ul>
+		<h4>组合键 
+			event.ctrlKey 【ctrl】
+			event.altKey 【alt】
+			event.shiftKey 【shift】
+			
+			获取焦点 标签属性 autofocus=""
+			脚本 js input.focus();
+		</h4>
+		<script>
+			var input = document.getElementById("input");
+			var wrap = document.getElementById("wrap");
+			input.focus();
+			document.onkeydown = function(e) {
+				var e = e || window.event;
+				console.log(e);
+				if(e.ctrlKey && e.keyCode == 13 && input.value) {
+					var li = document.createElement("li");
+					li.innerHTML = input.value;
+					wrap.appendChild(li);
+					input.value = "";
+				}
+			}
+			
+			
+		
+		</script>
+	</body>
+</html>
+
+
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			#wrap{
+				width: 600px;
+				height: 100px;
+				overflow: auto;
+				margin:0 auto;
+			}
+			#tips{
+				margin:10px 0;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<p id="content">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cumque maiores cum incidunt deserunt veritatis reiciendis assumenda eum dolores in omnis obcaecati sed illum iusto voluptatibus tempora quibusdam mollitia nostrum?Lorem ipsum dolor sit
+				amet, consectetur adipisicing elit. Non molestias labore illum nam repellendus impedit illo tempora quia veniam doloribus explicabo distinctio molestiae et ducimus temporibus. Vel quia labore alias. Lorem ipsum dolor sit amet, consectetur adipisicing
+				elit. Accusantium facilis eligendi beatae aliquid velit blanditiis eum quasi voluptate porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
+				facilis eligendi beatae aliquid velit blanditiis eum quasi voluptate porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis
+				eligendi beatae aliquid velit blanditiis eum quasi voluptate porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi
+				beatae aliquid velit blanditiis eum quasi voluptate porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid
+				velit blanditiis eum quasi voluptate porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid velit blanditiis
+				eum quasi voluptate porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid velit blanditiis eum quasi
+				voluptate porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid velit blanditiis eum quasi voluptate
+				porro nulla dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid velit blanditiis eum quasi voluptate porro nulla
+				dolore adipisci exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid velit blanditiis eum quasi voluptate porro nulla dolore adipisci
+				exercitationem similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid velit blanditiis eum quasi voluptate porro nulla dolore adipisci exercitationem
+				similique dolor impedit culpa voluptas inventore maxime! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium facilis eligendi beatae aliquid velit blanditiis eum quasi voluptate porro nulla dolore adipisci exercitationem similique
+				dolor impedit culpa voluptas inventore maxime!
+			</p>
+		</div>
+		<p id="tips"></p>
+		<script type="text/javascript">
+			var wrap = document.getElementById("wrap");
+			var content = document.getElementById("content");
+			var tips = document.getElementById("tips");
+			
+			var wrapSh = wrap.scrollHeight;
+			var wrapOh = wrap.offsetHeight;
+			var contentOh =content.offsetHeight; 
+			
+			tips.innerHTML="外层scrollHeight:"+wrapSh+"<br>外层offsetHeight:"+wrapOh+"<br>内层offsetHeight:"+contentOh;
+		</script>
+	</body>
+
+</html>

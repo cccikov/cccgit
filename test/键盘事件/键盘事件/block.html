@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#block {
+				width:100px;
+				height: 100px;
+				background-color: red;
+				position: absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="block"></div>
+		<script>
+			var block = document.getElementById("block");
+			document.onkeydown = function(e) {
+				console.log(e.keyCode);
+				if(e.keyCode == 37) {
+					block.style.left = block.offsetLeft - 10 + "px";
+				}else if(e.keyCode == 38) {
+					block.style.top = block.offsetTop - 10 + "px";
+				}else if(e.keyCode == 39) {
+					block.style.left = block.offsetLeft + 10 + "px";
+				}else if(e.keyCode == 40) {
+					block.style.top = block.offsetTop + 10 + "px";
+				}
+			}
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+

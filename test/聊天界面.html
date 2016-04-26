@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+
+	<body>
+		<div id="demo" style="height:50px;overflow:hidden;">
+			<div id="indemo" style="height:200%;">
+				<div id="demo1">
+					第一行字<br /> 第二行字
+				</div>
+				<div id="demo2"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		speed = 100; //数字越大滚得越慢
+		var tab = document.getElementById("demo");
+		var tab1 = document.getElementById("demo1");
+		var tab2 = document.getElementById("demo2");
+		tab2.innerHTML = tab1.innerHTML;
+		tab.scrollTop = tab1.offsetHeight;
+
+		function Marquee() {
+			if (tab.scrollTop >= tab1.offsetHeight) {
+				tab.scrollTop -= tab2.offsetHeight;
+			} else {
+				tab.scrollTop += 1;
+			}
+		}
+		var MyMar = setInterval(Marquee, speed);
+	</script>
+	</body>
+
+</html>
