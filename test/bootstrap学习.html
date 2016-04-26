@@ -3,125 +3,222 @@
 
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 		<title>bootstrap学习</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<style type="text/css">
-			body {
-				padding:10px;
-				max-width: 1400px;
+			#wrap {
+				/*display: inline-block;*/
+				/*max-width: 1024px;*/
+				margin: 15px;
 				overflow-x: hidden;
 			}
 		</style>
 	</head>
 
 	<body>
-		<h1>
-			栅格布局
-		</h1>
-		<p>.container>.row>.col</p>
-		<div class="container">
-			<div class="row text-center">
-				<div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
-					<p class="bg-primary">1</p>
-				</div>
-				<div class="col-lg-4 col-md-2 col-sm-10 col-xs-6">
-					<p class="bg-info">2</p>
-				</div>
-				<div class="col-lg-4 col-md-8 hidden-sm hidden-xs">
-					<p class="bg-danger">3</p>
-				</div>
-			</div>
-		</div>
-		<hr />
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-xs-4 col-xs-offset-4">
-					<p class="bg-primary">Lorem ipsum dolor.</p>
+		<div id="wrap">
+			<h1>栅格布局	</h1>
+			<p>.container>.row>.col 但是实际甘距.container非必须</p>
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+						<p class="bg-primary">1</p>
+					</div>
+					<div class="col-lg-4 col-md-2 col-sm-10 col-xs-6">
+						<p class="bg-info">2</p>
+					</div>
+					<div class="col-lg-4 col-md-8 hidden-sm hidden-xs">
+						<p class="bg-danger">3</p>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-4 col-xs-push-6">
-					<p class="bg-primary">左</p>
+			<hr />
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-4 col-xs-offset-4">
+						<p class="bg-primary">Lorem ipsum dolor.</p>
+					</div>
 				</div>
-				<div class="col-xs-5 col-xs-pull-4">
-					<p class="bg-danger">右</p>
+				<div class="row">
+					<div class="col-xs-4 col-xs-push-6">
+						<p class="bg-primary">左</p>
+					</div>
+					<div class="col-xs-5 col-xs-pull-4">
+						<p class="bg-danger">右</p>
+					</div>
 				</div>
 			</div>
-		</div>
-		<hr />
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-6 col-sm-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque totam similique mollitia nam fuga est porro ullam aliquam. Optio sapiente libero ipsam consequuntur incidunt iure assumenda atque omnis quibusdam molestias.</div>
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+			<hr />
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-6 col-sm-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque totam similique mollitia nam fuga est porro ullam aliquam. Optio sapiente libero ipsam consequuntur incidunt iure assumenda atque omnis quibusdam molestias.</div>
+					<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
 
-				<!-- Add the extra clearfix for only the required viewport -->
-				<div class="clearfix visible-xs-block"></div>
+					<!-- Add the extra clearfix for only the required viewport -->
+					<div class="clearfix visible-xs-block"></div>
 
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+					<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+					<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+				</div>
 			</div>
-		</div>
-		<hr />
+			<hr />
 
-		<h1>排版</h1>
-		<h1>heading <small>little</small></h1>
-		<h2>heading <small>little</small></h2>
-		<h3>heading <small>little</small></h3>
-		<h4>heading <small>little</small></h4>
-		<h5>heading <small>little</small></h5>
-		<h6>heading <small>little</small></h6>
-		<hr />
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore temporibus.</p>
-		<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint.</p>
-		<hr />
-		<div>
-			<mark>mark</mark>
-			<del>del</del>
-			<s>s</s>
-			<ins>ins</ins>
-			<u>u</u>
-			<small>small</small>
-			<strong>strong</strong>
-			<em>em</em>
-			<i>i</i>
-			<b>b</b>
+			<h1>排版</h1>
+			<h1>heading <small>little</small></h1>
+			<h2>heading <small>little</small></h2>
+			<h3>heading <small>little</small></h3>
+			<h4>heading <small>little</small></h4>
+			<h5>heading <small>little</small></h5>
+			<h6>heading <small>little</small></h6>
+			<hr />
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore temporibus.</p>
+			<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint.</p>
+			<hr />
+			<div>
+				<mark>mark</mark>
+				<del>del</del>
+				<s>s</s>
+				<ins>ins</ins>
+				<u>u</u>
+				<small>small</small>
+				<strong>strong</strong>
+				<em>em</em>
+				<i>i</i>
+				<b>b</b>
+			</div>
+			<hr />
+			<p class="text-left">.text-left</p>
+			<p class="text-center">.text-center</p>
+			<p class="text-right">.text-right</p>
+			<p class="text-justify">.text-justify</p>
+			<p class="text-nowrap">.text-nowrap Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus sint repellat eum facilis magni ex amet soluta consequatur obcaecati quam accusantium repudiandae maxime sapiente delectus aut eligendi tempora! Atque porro dignissimos
+				praesentium magnam autem dolor ipsam reiciendis provident animi!</p>
+			<hr />
+			<p class="text-lowercase">.text-lowercase</p>
+			<p class="text-uppercase">.text-uppercase</p>
+			<p class="text-capitalize">.text-capitalize</p>
+			<hr />
+			<abbr title="attribute">attr</abbr>
+			<address>addresss</address>
+			<blockquote>blockquote</blockquote>
+			<blockquote>
+				<p>Lorem ipsum dolor sit amet.</p>
+				<footer>footer <cite title="ccc">cite</cite></footer>
+			</blockquote>
+			<hr />
+			<ul>
+				<li>Lorem ipsum.</li>
+				<li>Lorem ipsum.</li>
+			</ul>
+			<ol>
+				<li>Lorem ipsum dolor sit amet, mollitia?</li>
+				<li>consectetur adipisicing elit. Blanditiis</li>
+			</ol>
+			<ul class="list-unstyled">
+				<li>.list-unstyled</li>
+				<li>.list-unstyled</li>
+			</ul>
+			<ul class="list-inline">
+				<li>.list-inline</li>
+				<li>.list-inline</li>
+			</ul>
+			<hr />
+			<dl>
+				<dt>Lorem.</dt>
+				<dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis praesentium.</dd>
+			</dl>
+			<dl class="dl-horizontal">
+				<dt>Lorem.</dt>
+				<dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum doloribus earum amet hic iure enim facere dolores repellat explicabo facilis voluptatibus a debitis dignissimos. Omnis consectetur eum molestiae rem praesentium culpa non accusantium
+					repellendus veritatis nobis corporis voluptatum tenetur expedita!</dd>
+			</dl>
+			<hr />
+			<p>将label及其他表单元素放在.form-group<br />.form-control里面的input textarea select 均为width:100%</p>
+			<form action="">
+				<div class="form-group">
+					<label for="">用户名</label>
+					<input class="form-control" type="text" />
+				</div>
+			</form>
+			<form class="form-inline" action="">
+				<p>.form-inline设备宽度至少为768px以上</p>
+				<div class="form-group">
+					<label for="">用户名</label>
+					<input class="form-control" type="text" placeholder=".form-inline" />
+				</div>
+				<div class="form-group">
+					<label for="">form-inline密码</label>
+					<input class="form-control" type="password" />
+				</div>
+			</form>
+			<form action="" class="form-horizontal">
+				<p>.form-horizontal 使 .form-group变现为.row，可用栅格系统；label要设置.control-label</p>
+				<div class="form-group">
+					<label class="col-xs-6 control-label" for="">用户名</label>
+					<div class="col-xs-6">
+						<input class="form-control" type="text" />
+					</div>
+				</div>
+			</form>
+			<!--checkbox radio-->
+			<form action="">
+				<div class="checkbox">
+					<label for="">
+						<input type="checkbox" />男
+					</label>
+				</div>
+				<div class="checkbox disabled">
+					<label for="">
+						<input type="checkbox" disabled="" />女
+					</label>
+				</div>
+				<div class="radio">
+					<label for="" class="radio-inline">
+						<input type="radio" />男
+					</label>
+					<label for="" class="radio-inline disabled">
+						<input type="radio" disabled=""/>女
+					</label>
+				</div>
+				<p>请将 .disabled 类赋予 .radio、.radio-inline、.checkbox、.checkbox-inline (连label都会设置cursor: not-allowed)<br />.radio、.checkbox里面一定要有label,checkbox radio才会出现<br />.radio-inline、checkbox-inline是设置在label上面</p>
+			</form>
+			<form action="">
+				<select class="form-control">
+				  	<option>1</option>
+				 	<option>2</option>
+				 	<option>3</option>
+				 	<option>4</option>
+				 	<option>5</option>
+				</select>
+			</form>
+
+			<form action="" class="form-horizontal">
+				<div class="form-group">
+					<label class="col-xs-4 control-label" for="">邮箱</label>
+					<p class="col-xs-4 form-control-static">.form-control-static@qq.com</p>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-4 control-label" for="">密码</label>
+					<div class="col-xs-4">
+						<input class="form-control" type="text" />
+					</div>
+				</div>
+				<fieldset class="disabled">
+					
+					<legend>健康信息fieldset legend</legend>
+					<label for="">
+						身高：
+					</label>
+					<input class="form-control" disabled="" type="text" />
+					<label for="">
+						体重：
+					</label>
+					 <input class="form-control" disabled="" type="text" />
+				</fieldset>
+			</form>
 		</div>
-		<hr />
-		<p class="text-left">.text-left</p>
-		<p class="text-center">.text-center</p>
-		<p class="text-right">.text-right</p>
-		<p class="text-justify">.text-justify</p>
-		<p class="text-nowrap">.text-nowrap Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus sint repellat eum facilis magni ex amet soluta consequatur obcaecati quam accusantium repudiandae maxime sapiente delectus aut eligendi tempora! Atque porro dignissimos
-			praesentium magnam autem dolor ipsam reiciendis provident animi!</p>
-		<hr />
-		<p class="text-lowercase">.text-lowercase</p>
-		<p class="text-uppercase">.text-uppercase</p>
-		<p class="text-capitalize">.text-capitalize</p>
-		<hr />
-		<abbr title="attribute">attr</abbr>
-		<address>addresss</address>
-		<blockquote>blockquote</blockquote>
-		<blockquote>
-			<p>Lorem ipsum dolor sit amet.</p>
-			<footer>footer <cite title="ccc">cite</cite></footer>
-		</blockquote>
-		<hr />
-		<ul>
-			<li>Lorem ipsum.</li>
-			<li>Lorem ipsum.</li>
-		</ul>
-		<ol>
-			<li>Lorem ipsum dolor sit amet,  mollitia?</li>
-			<li>consectetur adipisicing elit. Blanditiis</li>
-		</ol>
-		<ul  class="list-unstyled">
-			<li>.list-unstyled</li>
-			<li>.list-unstyled</li>
-		</ul>
-		<ul class="list-inline">
-			<li>.list-inline</li>
-			<li>.list-inline</li>
-		</ul>
+
 	</body>
 
 </html>
