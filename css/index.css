@@ -1,8 +1,24 @@
 /*index css*/
-*{
-	padding:0;
-	margin:0;
+* {
+  padding: 0;
+  margin: 0;
 }
-#content{
-	cursor: pointer;
+html,
+body {
+  *background: red;
+  _background: #000;
 }
+#content {
+  cursor: pointer;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.clear {
+  overflow: hidden;
+  background: blue;
+}
+/*# sourceMappingURL=index.css.map */
