@@ -27,6 +27,7 @@
 			4、返回新对象。
 		</p>
 		<script type="text/javascript">
+		
 			//普通模式(一个个建)
 			var person0 = {
 				name: "ccc",
@@ -36,6 +37,7 @@
 					alert(this.name);
 				}
 			}
+			
 			// 工厂模式
 			function createPerson(name, age, job) {
 				var o = new Object(); //var o = {};
@@ -49,6 +51,7 @@
 			}
 			var person1 = createPerson("nicholas", 29, "software engineer");
 			var person2 = createPerson("greg", 23, "doctor");
+			
 			//构造函数模式
 			function Person(name,age,job){
 				this.name = name;
@@ -62,6 +65,8 @@
 			var person4 = new Person("greg2",33,"old doctor");
 
 
+
+
 			/*
 			*不使用new
 			*/ 
@@ -72,7 +77,7 @@
 			*构造函数作为普通函数一样执行
 			*/ 
 			Person("ccc3",33,"hahah");//相当于var name = "ccc3"; var age = 33;……………………
-			// console.log(name,this);//ccc3,window
+			// console.log(name,this);//ccc3,window        在全局作用域中调用一个函数，this对象总是指向global对象(在浏览器中就是window对象)。
 
 
 			/*
@@ -81,8 +86,7 @@
 			var theObj = {};
 			Person.call(theObj,"ccc4",55,"cleaner");//theObj就变成Person的新实例
 			console.log(theObj);
-
-
+			
 
 			// console.log(person3.constructor == Person,typeof(person3),person3 instanceof Person);
 			
