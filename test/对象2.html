@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>对象2</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			/*
+			 * 解决不同实例上的同名函数不相等问题，方法一
+			 */
+			function Person(name,age,job){
+				this.name = name,
+				this.age = age,
+				this.job = job,
+				this.sayName = sayName
+			}
+			function sayName(){
+				alert(this.name);
+			}
+			
+			var person1 = new Person("ccc1",18,"software engineer");
+			var person2 = new Person("ccc2",28,"father");
+			console.log("方法一可以解决问题吗",person1.sayName==person2.sayName);
+			//方法一缺点：其实这个解决办法只是全局函数被我们的对象调用而已，而且如果对象需要定义多个方法，就要定义好多个全局函数
+			
+			
+		</script>
+	</body>
+
+</html>

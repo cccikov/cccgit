@@ -26,6 +26,10 @@
 			3、执行构造函数中代码(为新对象添加属性)；<br>
 			4、返回新对象。
 		</p>
+		<p>
+			构造函数缺点：<br />
+			以构造函数方式创造函数，会导致不同的作用域链和标识符解析，就是每个Person实例都包含一个不同的Function实例的本质。不通事理上的同名函数是不相等的。
+		</p>
 		<script type="text/javascript">
 		
 			//普通模式(一个个建)
@@ -59,7 +63,7 @@
 				this.job = job;
 				this.sayName = function(){
 					alert(this.name);
-				}
+				}//等价于 this.sayName = new Function("alert(this.name)");
 			}
 			var person3 = new Person("nicholas2",39,"old software engineer");
 			var person4 = new Person("greg2",33,"old doctor");
@@ -86,6 +90,11 @@
 			var theObj = {};
 			Person.call(theObj,"ccc4",55,"cleaner");//theObj就变成Person的新实例
 			console.log(theObj);
+			
+			
+			//证明不同实例上的同名函数是不相等的
+			console.log("不同实例上的同名函数相等吗",person3.sayName==person4.sayName);
+			
 			
 
 			// console.log(person3.constructor == Person,typeof(person3),person3 instanceof Person);
