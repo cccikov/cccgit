@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax请求text</title>
+	</head>
+
+	<body>
+		<div ng-app="myApp" ng-controller="customersCtrl">
+
+			<ul>
+				<li ng-repeat="(x,y) in names">
+					"{{x}}","{{y}}"
+				</li>
+			</ul>
+
+		</div>
+		
+		
+		
+		<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$.ajax({
+				type: "get",
+				url: "ajax/contentListUn.txt",
+				async: true,
+				dataType: "json",
+				success: function(data) {
+					console.dir(data);
+				}
+			});
+			var app = angular.module('myApp', []);
+			app.controller('customersCtrl', function($scope, $http) {
+				$http.get("ajax/contentListUn.txt")
+					.success(function(response) {
+//						console.log(response[0]);
+//						$scope.names = response[0];
+
+						var allData = response;
+						var tenData = [];
+						for(var i=0,len=allData.length;i<10;i++){
+							tenData.push(allData[i]);
+						}
+						console.log(tenData);
+						
+					});
+			});
+		</script>
+	</body>
+
+</html>
