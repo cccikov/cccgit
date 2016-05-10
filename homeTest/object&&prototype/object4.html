@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var person = (function(){
+			var name = "班长";
+			var age = 20;
+			var o = {};
+			return function() {
+				// o.name = name;
+				o.setName = function(n) {
+					name = n;
+				}
+				o.getName = function() {
+					return name;
+				}
+				o.maimeng = function() {
+					alert("打你喔~");
+				}
+				return o;
+			}
+	})();
+	</script>
+</body>
+</html>

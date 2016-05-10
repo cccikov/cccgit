@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>点透问题</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			a {
+				display: block;
+				line-height: 50px;
+				margin: 10px 0;
+				text-align: center;
+				background: #ccc;
+			}
+			
+			#mask {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 50%;
+				background: rgba(100, 100, 100, 0.5);
+				font-size: 50px;
+				text-align: center;
+			}
+			
+			#mask2 {
+				position: fixed;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				height: 50%;
+				background: rgba(200, 0, 200, 0.5);
+				font-size: 50px;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="main">
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					出现点透的原因是因为click有300ms（是为了确定是双击还是单击）左右的延迟，而touchstart是没有延迟的，所以当touchstart是蒙层消失后，300ms后就会触发后面的click事件
+					<br />你点下去的时候，浏览器会按照以下顺序去寻找有事件的节点（或者是元素，对象）:touchstart touchmove touchend mousedown mousemove mouseenter click，当你点一下的时候，浏览器在你点的位置上寻找有touchstart的对象（#mask），找到了，触发touchstart事件，#mask、 消失，然后按照顺序继续寻找touchmove touchend mousedown mousemove mouseenter click事件，当寻找click时，发现蒙层后面的a有click事件，因为蒙层已经消失了，所以就会触发啊、
+					的click事件。就会造成点透（zepto 里面的 tap的事件同样的原理）。
+
+					<br />解决方法1：
+					<br /> 移动端的click都是touch之后，才会模拟触发。
+					<br /> 触发的顺序是 touchstart touchmove touchend mousedown mousemove mouseenter click
+					<br /> 在重叠的区域里，被遮盖的元素绑定click，遮盖的元素绑定touch事件，且touch后遮盖的元素会隐藏的话，就会造成穿透，因为click是在touch之后延迟触发的，浏览器会误认为是在遮盖的元素上触发了click。 最好的解决方案是 自己通过touchstart，touchmove，touchend，来模拟一个click（tap）事件，这样除了防止穿透外，事件响应速度也会提高。
+
+				</p>
+				<p>
+					解决方法2
+					<br /> 穿透（点穿）是在mobile各种浏览器上发生的常见的bug。可能是由click事件的延迟或者事件冒泡导致。
+					<br /> 移动web开发常用的Zepto库中的touch和tap事件就会有点穿的bug（Zepto的事件都绑在Document上）。
+
+					<br /> 常用的解决方案如下：
+
+					<br /> 1 使用fastclick，这个可以非常完美的解决点穿问题。
+					<br /> 2 在touchend事件回调中加入preventDefault, 并在下一层中加上pointer-events:none。
+					<br /><a href="http://segmentfault.com/q/1010000000691822">解决方法网址</a>
+				</p>
+			</div>
+			<div id="mask">
+				我是蒙层，我用的是click，我没有点透
+			</div>
+			<div id="mask2">
+				我是蒙层2，我用的是touchstart，我有点透
+			</div>
+		</div>
+		<script src="jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#mask").on("click", function() {
+				$(this).hide();
+			});
+			$("#mask2").on("touchstart", function() {
+				$(this).hide();
+			});
+		</script>
+	</body>
+
+</html>

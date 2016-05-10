@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#wrap.class {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab excepturi itaque reiciendis.
+	</div>
+	<script type="text/javascript">	
+	function Person() {
+	}
+	Person.prototype.age = 18;
+	Person.prototype.name = "班长";
+	Person.prototype.maimeng = function() {
+		alert("打你喔~~");
+	}
+	function People() {
+
+	}
+	function create(Obj) {
+		function F(){};
+		F.prototype = new Obj();
+		// F.prototype = Obj.prototype;
+		return new F();
+	}
+	var man = create(Person);
+	// var p1 = new Person();
+
+	</script>
+</body>
+</html>

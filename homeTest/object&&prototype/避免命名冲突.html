@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>避免命名冲突</title>
+</head>
+<body>
+	<script>
+	 (function(){
+	 	//个人写的代码
+	 	var b = 123;
+	 })();
+
+	 (function(){
+	 	//个人写的代码
+	 	var b = 1234;
+	 })();
+	</script>
+</body>
+</html>

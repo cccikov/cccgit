@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#wrap.class {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab excepturi itaque reiciendis.
+	</div>
+	<script type="text/javascript">	
+	alert(HTMLDivElement);
+	HTMLDivElement.prototype.addClass = function(cn) {
+		this.className = cn;
+	}
+	</script>
+</body>
+</html>

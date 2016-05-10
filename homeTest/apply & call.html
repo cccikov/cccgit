@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>js apply % call</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var name = "window";
+			var obj = {
+				name: "aaa",
+				fun: function() {
+					console.log(this);
+				}
+			}
+			obj.fun2 = function() {
+				console.log(this);
+			}
+			function test(num,num2){
+				var sum = num+num2;
+				console.log(this.name + " test " +sum);
+			}
+			
+			obj.fun();//Object {name: "aaa"}……!
+			obj.fun2();//Object {name: "aaa"}……!
+			test.call(obj,1,2);//aaa test 3
+			test.apply(obj,[2,2]);//aaa test 4
+			test(3,2);//window test 5
+		</script>
+	</body>
+
+</html>

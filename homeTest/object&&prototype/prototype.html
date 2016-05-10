@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function Person(name, age) {
+		this.name = name;
+		this.age = age;
+		// this.maimeng = maimeng();
+	}
+	// function maimeng() {
+		
+	// }
+	Person.prototype.maimeng = function() {
+		alert("打你喔~~~");
+	}
+	var person1 = new Person("班长1",18);
+	var person2 = new Person("班长2",25);
+	</script>
+</body>
+</html>

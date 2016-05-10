@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>负margin</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		.div1{
+			background: red;
+			margin-left:-100px;
+		}
+		.div2{
+			margin-top: -10px;
+			background: #123456;
+		}
+		.span1{
+			display: inline-block;
+			vertical-align: middle;
+			margin-left:-10px;
+			margin-top:-10px;
+			background: yellow;
+		}
+		.span2{
+			display: inline-block;
+			vertical-align: top;
+			margin-top:-10px;
+			background: green;
+		}
+		.wrap{
+			overflow: hidden;
+		}
+		.left{
+			float: left;
+			margin-left:-10px;
+			background: red;
+		}
+		.right{
+			float: right;
+			margin-right:-10px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="div1">Lorem ipsum dolor</div>
+	<div class="div2">div2</div>
+	<span class="span1">span1</span>
+	<span class="span2">span2</span>
+	<div class="wrap">
+		<p class="left">left</p>
+		<p class="right">right</p>
+	</div>
+	<p>
+		总结：margin是边距，可以让自己远离别的元素（改变自己的位置，就是通过设置margin让自己离开别的元素，如一般文档流的margin-top,margin-left）；也可以让别的元素远离自己（改变其他元素的位置，如一般文档流的margin-right,margin-bottom）。
+		<br />
+		然而设置为负值的时候，就相反了，margin-top，margin-left会让自己移动到其他元素里面，而margin-right，margin-bottom就会让其他元素进入自己元素里面(这是一般文档流的时候，当float:right的时候，margin-left是让其他元素进入自己元素里面，而margin-right就是让自己远离别的元素，具体作用看margin的值为正数的时候就知道了)。
+		<br />
+		行内标签，只能左右，不能上下，
+		而行内替换元素（inline-block）设置vertical-align的时候，vertical-align:top,vertical-align:middle时可以设置margin-top改变自己的位置，因为当vertical-align:top,vertical-align:middle只有margin-top是改变自己的位置，margin-bottom是改变其他元素的位置；同理当设置为vertical-align:bottom时，只有margin-bottom是改变自己的位置。
+		<br />
+		如果想知道负margin的具体作用是改变自己，还是改变其他元素，只要想想是margin正数的时候就知道了。
+	</p>
+</body>
+</html>

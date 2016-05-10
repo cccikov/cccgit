@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>iframe状态2</title>
+	</head>
+
+	<body>
+		<div id="load" align="center">
+			<img src="http://sc.cnwebshow.com/upimg/allimg/070707/01294420.gif" /> loading
+		</div>
+		<!-- 首先放一个div，用做loading效果 -->
+
+		<iframe id="demo" src="http://www.baidu.com" width="100%" height="800" frameborder="0" scrolling="no" marginheight="0"></iframe>
+		<!-- src 里面放你想要的网页-->
+
+		<script type="text/javascript">
+			var a = document.getElementById("demo");
+			var b = document.getElementById("load");
+			a.style.display = "none"; //隐藏 
+			b.style.display = "block"; //显示
+			a.onreadystatechange = function() {
+				if (this.readyState == "complete") { //最近才知道的。不然也写不出来。
+					// 解释：一个iframe加载完毕的状态是complete,
+					// 就象xmlhttp里的那个==4一样,这些都是规定的
+					b.innerHTML = "load complete!";
+					b.style.display = "none";
+					a.style.display = "block";
+				}
+			}
+		</script>
+	</body>
+
+</html>

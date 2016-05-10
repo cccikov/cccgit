@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>jq offset().top2</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#wrap {
+				position:relative;
+				top:100px;
+				left:0;
+				padding: 10px;
+				margin:12px;
+			}
+			.div{
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin:17px;
+				height: 50px;
+				overflow: auto;
+			}
+			.p1{
+				margin:4px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="div">
+				<div class="p1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis magnam perspiciatis quaerat magni temporibus officiis adipisci omnis cum laboriosam rem mollitia quasi sequi aliquid odit sit ut laudantium earum corrupti!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut quo porro eligendi ipsa tempora blanditiis corporis dolore nemo qui aliquam labore animi laboriosam accusamus quasi sequi exercitationem quas voluptas aut!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam illum incidunt commodi expedita id consequatur dicta! Delectus explicabo eaque ex eveniet. Error et accusantium non cumque minima tempora aperiam in!</div>
+			</div>
+			
+		</div>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(document).on("click", function() {
+					console.log("#wrap offset:" + $("#wrap").offset().top + " position:" + $("#wrap").position().top + " 原生offset:" + $("#wrap")[0].offsetTop + " 原生scrollTop:" + $("#wrap")[0].scrollTop);
+					console.log("div offset:" + $(".div").offset().top + " position:" + $(".div").position().top + " 原生offset:" + $(".div")[0].offsetTop + " 原生scrollTop:" + $(".div")[0].scrollTop);
+					console.log("p1 offset:" + $(".p1").offset().top + " position:" + $(".p1").position().top + " 原生offset:" + $(".p1")[0].offsetTop + " 原生scrollTop:" + $(".p1")[0].scrollTop);
+					console.log("----");
+				});
+			});
+		</script>
+	</body>
+
+</html>

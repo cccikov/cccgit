@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>冒泡获取第几个</title>
+		<style type="text/css">
+			.first {
+				margin: 10px;
+				padding: 10px;
+				background: red;
+			}
+			
+			.second {
+				margin: 10px;
+				padding: 10px;
+				background: blue;
+			}
+			
+			.third {
+				display: inline-block;
+				line-height: 30px;
+				margin: 20px;
+				background: green;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="first">
+			<div class="second">
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+			</div>
+			<div class="second">
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+			</div>
+		</div>
+		<div class="first">
+			<div class="second">
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+			</div>
+			<div class="second">
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+				<span class="third">
+					lalalalal
+				</span>
+			</div>
+		</div>
+		<div class="first">
+			<span class="third">
+				asdasdasd
+			</span>
+			<span class="third">
+				asdasdasd
+			</span>
+			<span class="third">
+				asdasdasd
+			</span>
+			<span class="third">
+				asdasdasd
+			</span>
+			<span class="third">
+				asdasdasd
+			</span>
+			
+		</div>
+		<script src="jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			flag = false;
+
+			function Fget() {
+				var Oi = Oj = Ok = -1;
+				$(".first").click(function() {
+					Oi = $(this).index();
+					if(flag){
+						alert(Oi + " " + Oj + " " + Ok);
+					}					
+				})
+				$(".second").click(function() {
+					Oj = $(this).index();
+				})
+				$(".third").click(function() {
+					Ok = $(this).index();
+				})
+			}
+			Fget();
+			$(".third").on("mouseenter", function() {
+				Oi = Oj = Ok = -1;
+				flag = true;
+			}).on("mouseleave",function(){
+				flag = false;
+			});
+		</script>
+	</body>
+
+</html>

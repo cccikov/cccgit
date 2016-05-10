@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>自适应高度textarea</title>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<textarea name="test" id="test" rows="" cols=""></textarea>
+		</div>
+		<script src="jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#test").on("input",function(){
+					$(this).attr("style","");
+					var hei = $(this)[0].scrollHeight-4;
+					$(this).height(hei);
+				});
+			});
+		</script>
+	</body>
+
+</html>

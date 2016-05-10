@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>微信红包</title>
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			}
+			#wrap{
+				padding:10px;
+			}
+			p,div,ul{
+				margin:15px 0;
+			}
+			input{
+				padding:5px;
+				text-align: right;
+				border:none;
+				border-bottom:1px solid #ccc;
+				outline:none;
+			}
+			button{
+				padding:5px 10px;
+				margin:15px;
+			}
+			ul,li{
+				list-style: none;
+			}
+			ul{
+				overflow:hidden;
+			}
+			li{
+				float: left;
+				width: 60px;
+				height:60px;
+				margin:10px;
+				line-height:60px;
+				text-align:center;
+				border:1px solid #ccc;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+//				alert("hello");
+
+				var money = num = sum = 0;
+				$("#btn").click(function(){
+					money = $("#money").val();
+					num = $("#number").val();
+					
+					
+				});
+
+
+			});
+		</script>
+	</head>
+	<body>
+		<div id="wrap">
+			<p>随机红包</p>
+			<div>
+				<label for="money">
+					金额：<input type="tel" id="money"/>元
+				</label>
+			</div>
+			<div>
+				<label for="number">
+					个数：<input type="tel" id="number"/>个
+				</label>
+			</div>
+			<button id="btn">生成红包</button>
+			<ul>
+				<li>10</li>
+				<li>10</li>
+				<li>10</li>
+			</ul>
+		</div>
+	</body>
+</html>

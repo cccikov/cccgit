@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>模拟锚点</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			html {
+				background: #ccc;
+			}
+			
+			#wrap{
+				height: 200px;
+				overflow: auto;
+			}
+			
+			.list {
+				background: #fff;
+			}
+			
+			h4 {
+				text-indent: 5px;
+				background: #eee;
+			}
+			
+			p {
+				padding: 5px;
+				height: 100px;
+			}
+			
+			ul {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				/*left: 0;*/
+				right: 0;
+				width: 20px;
+				height: 160px;
+				margin: auto;
+				text-align: center;
+				list-style: none;
+			}
+			
+			li {
+				line-height: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="list">
+				<h4>A</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+			<div class="list">
+				<h4>B</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+			<div class="list">
+				<h4>C</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+			<div class="list">
+				<h4>D</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+			<div class="list">
+				<h4>E</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+			<div class="list">
+				<h4>F</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+			<div class="list">
+				<h4>G</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+			<div class="list">
+				<h4>H</h4>
+				<p>Lorem ipsum dolor sit amet.</p>
+			</div>
+		</div>
+
+		<p>
+			方法一：点击时，获取"锚点"的原生JavaScript offsetTop（一定要是原生，因为原生的不随着滚动滚动而变化）,然后就设置滚动条位置为那个offsetTop
+		</p>
+		<p>
+			方法二：进入页面时，记录各个"锚点"的jq offset().top（文档位置）,点击时，设置滚动条位置为那个offset().top
+		</p>
+		<p>
+			方法三：页面滚动时
+		</p>
+		<ul id="rightBar">
+			<li>A</li>
+			<li>B</li>
+			<li>C</li>
+			<li>D</li>
+			<li>E</li>
+			<li>F</li>
+			<li>G</li>
+			<li>H</li>
+		</ul>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*
+			 * 方法一：点击时，获取"锚点"的原生JavaScript offsetTop（一定要是原生，因为原生的不随着滚动滚动而变化）,然后就设置滚动条位置为那个offsetTop
+			 */
+			$("#rightBar li").on("touchstart mouseenter",function(){
+				var value = $(this).html();
+				$("h4").each(function(){
+					var that = $(this);
+					if(that.html()==value){
+						$("#wrap").stop().animate({scrollTop:that[0].offsetTop},300);//获取"锚点"的原生JavaScript offsetTop ,并设置scrollTop滚动条位置
+					}
+				});
+			});
+			/*
+			 * 方法二：进入页面时，记录各个"锚点"的jq offset().top（文档位置）,点击时，设置滚动条位置为那个offset().top
+			 */
+//			$("h4").each(function() {
+//				$(this).attr("data-offset-top", $(this).offset().top);//记录各个"锚点"的jq offset().top（文档位置）
+//			});
+//			$("#rightBar li").on("touchstart mouseenter", function() {
+//				var value = $(this).html();
+//				$("h4").each(function() {
+//					if($(this).html()==value){
+//						$("#wrap").stop().animate({
+//							scrollTop: $(this).attr("data-offset-top")//点击时，设置滚动条位置为那个offset().top
+//						}, 300);
+//					}
+//				});
+//			});
+			/*
+			 * 方法三：点击时，获取当时父元素的scrollTop,当时锚点的jq位置（offset().top ,position().top ,因为这两个会随着滚动条变化而变化），设置scrollTop(当时scrollTop()-(-当时锚点的jq位置))---这种方法只适用于除body，html之外标签出现滚动条的情况。
+			 */
+//			$("#rightBar li").on("touchstart", function() {
+//				var parentTop = $("#wrap").scrollTop();
+//				console.log(parentTop);
+//				var value = $(this).html();
+//				$("h4").each(function(index, key) {
+//					if ($(key).html() == value) {
+//						var selfTop = $(key).offset().top;
+//						console.log(selfTop);
+//						$("#wrap").scrollTop(parentTop+selfTop);
+//					}
+//				});
+//			});
+		</script>
+	</body>
+
+</html>

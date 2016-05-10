@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title> progress元素的使用</title>
+	</head>
+
+	<p id="pTip">开始下载</p>
+	<progress value="0" max="100" id="proDownFile"></progress>
+	<input type="button" value="下载" onclick="Btn_Click();">
+
+	<script type="text/javascript">
+		var intValue = 0;
+		var intTimer;
+		var objPro = document.getElementById('proDownFile');
+		var objTip = document.getElementById('pTip');
+		//定时事件
+		function Interval_handler() {
+			intValue++;
+			objPro.value = intValue;
+			if (intValue >= objPro.max) {
+				clearInterval(intTimer);
+				objTip.innerHTML = "下载完成";
+			} else {
+				objTip.innerHTML = "正在下载" + intValue + "%";
+			}
+		}
+
+		function Btn_Click() {
+			intTimer = setInterval(Interval_handler, 100);
+		}
+	</script>
+	</body>
+
+</html>

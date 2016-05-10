@@ -1,0 +1,121 @@
+1.块元素与行元素的区别、替换元素（img,button,input,textarea）与非替换元素的区别
+块元素可以设置宽高，行元素中的非替换元素设置宽高，竖直方向上的padding,margin不生效，
+块元素中的竖直方向上的margin、padding叠加，水平方向上相加
+2.a标签中的锚点使用，表单元素的使用(post,get，head,delete,put,options以及input中的各个类型)
+3.SEO以及语义化 标题title meta:Description Keywords h1~h6 img[alt], 列表ul,ol,dl 段落p 外链a
+4.BFC,IFC
+	BFC触发条件：
+	a.根元素
+	b.float属性不为none
+	c.position为absolute或fixed
+	e.display为inline-block, table-cell, table-caption, flex, inline-flex
+	f.overflow不为visible
+5.如何实现元素居中
+6.css中的transition,transform,@keyframes,@media媒体查询
+7.css中的兼容写法，以及低版本ie中bug的解决
+
+
+/****************************************************/
+/****************************************************/
+
+tips：按照设计稿，精细到px
+移动端切图：iphone 5 size 设计稿（640*1136）微信（640*1008）
+css初始化 ----->base.css  
+字体使用相对单位（em,rem）
+pc中chrome最小字体大小12px 默认18px
+mobile网页最小字体为8~10px;
+大块元素设宽不设高，宽度使用百分比
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+字体为设计稿一半，图片设置100%，外层嵌套div,设置该容器的宽度即可
+小icon图标尺寸减半，可使用px
+box-sizing的使用
+-webkit-appearance: none;去除默认样式
+-webkit-tap-highlight-color 改变点击高亮颜色
+
+弹窗居中，如果弹窗中包含输入框，使用position:absolute定位，以防输入数据时的虚拟键盘阻挡input区域，top值使用px,通过js脚本控制，top = (window.innerHeight - pop.offsetHeight)/2
+
+箭头，线（可以考虑(svg)）
+click事件在移动设备里会有300ms延迟，可能会使用touchstart替换，
+点透（faskclick.js）
+怎么取消事件冒泡 e.stopPropagation();
+取消默认事件 e.preventDefault();
+zepto.js(添加其他模块【animate、touch、selector...】)
+百度touch.js
+动画的强大利器GSAP
+
+/****************************************************/
+/****************************************************/
+
+/****************************************************/
+/****************************************************/
+前端开发工具软件：
+编辑软件：sublimeText HBuilder webstorm dw vim 
+版本控制：svn,git
+调试：chrome控制台(断点调试)，firebug，360兼容模式，极速模式，ieTester
+前端自动化构建工具（gulp,brower）
+
+
+http://www.iplaysoft.com/browsers-engine.html
+主流浏览器：IE,FireFox,Chrome,safari,opera,edge
+内核(渲染引擎)
+IE--->Trident 
+firefox---->Gecko
+Chrome,opera---->Blink
+safari---->webkit
+edge----->Chakra??
+国内主流浏览器：360（双核【IE,Chrome】），UC，百度，QQ，Max(遨游)，猎豹，搜狗。。。
+
+手机浏览器：微信，qq,uc
+Android -- > webView
+
+JS引擎
+Chrome----->V8
+IE ----->Chakra  查克拉，IE9启用的新的JavaScript引擎。
+Safari  ---> Nitro  应用于Safari 4及后续的版本。
+Firefox ---> SpiderMonkey / TraceMonkey / JaegerMonkey
+SpiderMonkey应用在Mozilla Firefox 1.0-3.0，TraceMonkey应用在Mozilla Firefox 3.5-3.6版本，JaegerMonkey应用在Mozilla Firefox 4.0及后续的版本。
+/****************************************************/
+/****************************************************/
+
+
+/****************************************************/
+/****************************************************/
+5基本类型：number,string,boolean,null,undefined;
+对象：Object,Array,Function,Date,RegExp,Math,JSON,XMLHttpRequest
+setInterval,setTimeout
+clearInterval(),clearTimeout()
+requestAnimationFrame()
+DOM操作 
+document.getElementById(),
+document.getElementsByTagName(),
+document.getElementsByClassName(),
+document.getElementsByName(), 获取的都是实时
+document.querySelector()
+document.querySelectorAll();获取的非实时
+
+事件
+绑定：1.<div onclick="abc()"></div>
+	  2.document.onclick = function() {}
+	  3.document.addEventListener("click",fn,false);
+	  可以绑定多个
+事件冒泡，捕获，怎么取消冒泡、捕获，取消默认事件
+e.stopPropagation(),e.preventDefault();
+事件委托
+$("ul").on("click","li",function(){})
+事件对象event ----> event = event || window.event;
+
+
+js效果  
+tab切换，大图滚动，放大镜，返回顶部，滚轮事件，
+图片预加载，懒加载。。。。。
+
+cookies(4K，150条左右) 跟本地存储(localStorage,sessionStorage)(5M)，
+location.hash 
+以上可以进行页面间的数据交换
+
+window.navigator.userAgent;
+history.back() history.go(-1)
+
+/****************************************************/
+/****************************************************/
+

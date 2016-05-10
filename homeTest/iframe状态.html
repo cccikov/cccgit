@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>iframe状态</title>
+		<style>
+			iframe{
+				width: 800px;
+				height: 500px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<iframe id="demo" src="http://www.baidu.com/" frameborder="0"></iframe>
+		</div>
+		<button id="btn">切换iframe</button>
+		<script type="text/javascript">
+			var demo = document.getElementById("demo");
+			var btn = document.getElementById("btn");
+			btn.onclick = function(){
+				demo.src = "http://www.qq.com/"
+			}
+			demo.onreadystatechange = function(){
+				console.log(this);
+				if(this.readyState=="complete"){
+					alert("ashdasd");
+				}
+			}
+			demo.onload = function(){
+				alert("完成了");
+			}
+		</script>
+	</body>
+</html>

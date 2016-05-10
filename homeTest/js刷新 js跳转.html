@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>js刷新 js跳转</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#time {
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<span id="time"></span>
+		<div id="wrap1">
+			<p>页面刷新</p>
+			<button class="s1">history.go(0);</button>
+			<button class="s2">location.reload();</button>
+			<button class="s3">location=location;</button>
+			<button class="s4">location.assign();</button>
+			<button class="s5">location.replace();</button>
+			<p>
+				网上介绍的好有一个document.URL的方法不行,上网看好像只能返回当前文档的 URL，是不可以修改的
+				<br />。 还有一个document.execCommand('Refresh')、window.navigate(location)是IE特有的方法
+			</p>
+		</div>
+		<div id="wrap2">
+			<button class="t1">location=(location.href=)</button>
+			<button class="t2">location.assign()</button>
+			<button class="t3">location.replace()</button>
+			<button class="t4">window.open()在一个新窗口打开</button>
+		</div>
+		<script src="jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var t = 0;
+			var timer = setInterval(function() {
+				t++;
+				$("#time").html(t);
+			}, 100);
+			console.log(window.location);
+			console.log(window.navigator);
+			//页面刷新
+			jQuery(".s1").click(function() {
+				//History 对象
+				history.go(0);
+			});
+			jQuery(".s2").click(function() {
+				//Location 对象
+				//location.reload();//true绕过缓存，false加载缓存页面(默认)
+				window.location.reload(); //true绕过缓存，false加载缓存页面
+			});
+			jQuery(".s3").click(function() {
+				//Location 对象
+				//location = location;
+				//window.location = window.location;
+				window.location.href = window.location.href;
+			});
+			$(".s4").click(function() {
+				//Location 对象
+				//window.location.assign(location);
+				window.location.assign(location.href);
+			});
+			$(".s5").click(function() {
+				//Location 对象
+				//replace() 方法不会在 History 对象中生成一个新的记录。当使用该方法时，新的 URL 将覆盖 History 对象中的当前记录。
+				location.replace(location);
+			});
+			
+			
+			$(".t1").click(function(){
+				//location="http://www.baidu.com";
+				location.href="http://www.baidu.com";
+			});
+			$(".t2").click(function(){
+				location.assign("http://www.baidu.com");
+			});
+			$(".t3").click(function(){
+				location.replace("http://www.baidu.com");
+			});
+			var t4 = document.getElementsByClassName("t4")[0];
+			t4.addEventListener("click",function(){
+				window.open("http://www.baidu.com");
+			},false);
+			
+			//页面跳转
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>bootstrap学习</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<style type="text/css">
+			body {
+				max-width: 1400px;
+				overflow-x: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>
+			栅格布局
+		</h1>
+		<p>.container>.row>.col</p>
+		<div class="container">
+			<div class="row text-center">
+				<div class="col-lg-4 col-md-2 col-sm-2 col-xs-6">
+					<p class="bg-primary">1</p>
+				</div>
+				<div class="col-lg-4 col-md-2 col-sm-10 col-xs-6">
+					<p class="bg-info">2</p>
+				</div>
+				<div class="col-lg-4 col-md-8 hidden-sm hidden-xs">
+					<p class="bg-danger">3</p>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-4 col-xs-offset-4">
+					<p class="bg-primary">Lorem ipsum dolor.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-xs-push-4">
+					<p class="bg-primary">左</p>
+				</div>
+				<div class="col-xs-5 col-xs-pull-4">
+					<p class="bg-danger">右</p>
+				</div>
+			</div>
+		</div>
+		<hr />
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6 col-sm-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque totam similique mollitia nam fuga est porro ullam aliquam. Optio sapiente libero ipsam consequuntur incidunt iure assumenda atque omnis quibusdam molestias.</div>
+				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+
+				<!-- Add the extra clearfix for only the required viewport -->
+				<div class="clearfix visible-xs-block"></div>
+
+				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+				<div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+			</div>
+		</div>
+		<hr />
+
+		<h1>排版</h1>
+		<h1>heading <small>little</small></h1>
+		<h2>heading <small>little</small></h2>
+		<h3>heading <small>little</small></h3>
+		<h4>heading <small>little</small></h4>
+		<h5>heading <small>little</small></h5>
+		<h6>heading <small>little</small></h6>
+		<hr />
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore temporibus.</p>
+		<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint.</p>
+		<hr />
+		<div>
+			<mark>mark</mark>
+			<del>del</del>
+			<s>s</s>
+			<ins>ins</ins>
+			<u>u</u>
+			<small>small</small>
+			<strong>strong</strong>
+			<em>em</em>
+			<i>i</i>
+			<b>b</b>
+		</div>
+		<hr />
+		<p class="text-left">.text-left</p>
+		<p class="text-center">.text-center</p>
+		<p class="text-right">.text-right</p>
+		<p class="text-justify">.text-justify</p>
+		<p class="text-nowrap">.text-nowrap Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda natus sint repellat eum facilis magni ex amet soluta consequatur obcaecati quam accusantium repudiandae maxime sapiente delectus aut eligendi tempora! Atque porro dignissimos
+			praesentium magnam autem dolor ipsam reiciendis provident animi!</p>
+		<hr />
+		<p class="text-lowercase">.text-lowercase</p>
+		<p class="text-uppercase">.text-uppercase</p>
+		<p class="text-capitalize">.text-capitalize</p>
+		<hr />
+		<abbr title="attribute">attr</abbr>
+		<address>addresss</address>
+		<blockquote>blockquote</blockquote>
+		<blockquote>
+			<p>Lorem ipsum dolor sit amet.</p>
+			<footer>footer <cite title="ccc">cite</cite></footer>
+		</blockquote>
+		<hr />
+	</body>
+
+</html>

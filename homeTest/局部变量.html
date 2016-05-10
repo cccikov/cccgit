@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>局部变量</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+////**********1、只有在函数中定义（var 定义）的变量才是局部变量***********
+//(function(){
+//	var a1 = 10;//局部变量		
+//	console.log(a1);//10
+//})();
+//(function(){
+//	b1 = 20;//全局变量
+//	console.log(b1);//20
+//})();
+////在全局中执行
+//console.log(a1);//报错,未定义。a1 is not defined
+//console.log(b1);//20,这是忽略错误阻塞
+
+////************2、在函数中定义的变量（局部变量），只有该函数或者该函数里面的函数才可以读取、修改。函数外面是不能进行读取/修改*********
+//(function(){
+//	var a2 = 10;//局部变量		
+//	a2=a2+20;
+//	console.log(a2);//30
+//})();
+//a2=a2+20;//报错，未定义a2
+
+////*****4、全局变量，任何函数里面都能读取并修改*****
+//var a4 = 15;
+//(function(){
+//	console.log(a4);//15
+//	a4 = a4 + 15;
+//})();
+//(function(){
+//	console.log(a4);//30
+//	a4 = a4 - 9;
+//})();
+//(function(){
+//	console.log(a4);//21
+//	a4 = 120;
+//})();
+//console.log(a4);//120
+
+
+//********5、函数中定义的变量（局部变量），如果该函数里面的定义了其他子函数，这子函数可以读取修改父函数定义的局部变量，而父函数不能读取子函数定义的变量****
+(function(){
+	var a5 = 10;
+	(function(){
+		var b5 = a5 + 5;//15
+		console.log(b5);
+	})();
+	console.log(b5);//报错，未定义
+})();
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>自适应高度textarea2</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.wrap {
+				position: relative;
+				width: 80%;
+				margin: 10px auto;
+				border: 1px solid #ccc;
+			}
+			
+			.longtext {
+				width: 100%;
+				height: 24px;
+				line-height: 1.5;
+				font-size: 16px;
+				resize: none;
+				border: none;
+				outline: none;
+				/*overflow: hidden;*/
+				/*一定要加不然会算滚动条的宽度，导致还没有到行末就换行*/
+			}
+			
+			.longtext.back {
+				position: absolute;
+				top: 100px;
+				left: 0;
+				height: 0;
+				z-index: -1;
+				background: red;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<textarea id="longtext" class="longtext" name="" rows="1" cols=""></textarea>
+			<textarea class="longtext back" name="" rows="1" cols=""></textarea>
+		</div>
+
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#longtext").on("input", function() {
+				var that = $(this);
+				var the = that.siblings();
+				the.val(that.val());
+				var h = the[0].scrollHeight;
+				h <= 120 ? h = h : h = 120;
+				that.height(h);
+			});
+		</script>
+	</body>
+
+</html>

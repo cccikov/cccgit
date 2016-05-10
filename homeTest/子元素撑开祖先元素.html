@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>子元素撑开祖先元素</title>
+		<style type="text/css">
+			*{
+				padding:0;
+				margin:0;
+			}
+			div{
+				padding:30px;
+			}
+			#wrap{
+				/*要不就设这个*/
+				display: inline-block;
+				min-width: 100%;
+				/*要不就设置一个可以放得下子孙元素的宽度*/
+				/*width: 2400px;*/
+				
+				background: #CCCCCC;
+			}
+			.out{
+				background: #008888;
+			}
+			.mid{
+				background: #00FF00;
+			}
+			.inn{
+				width: 2000px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="out">
+				<div class="mid">
+					<div class="inn"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

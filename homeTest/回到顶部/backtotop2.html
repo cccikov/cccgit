@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>返回顶部</title>
+		<style type="text/css">
+			body {
+				height: 2500px;
+			}
+			#back {
+				display: none;
+				width: 40px;
+				height: 50px;
+				position: fixed;
+				right: 10px;
+				/*bottom: 10px;*/				
+				background: red;
+			}
+			#back {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="back">
+			回到顶部
+		</div>
+		<script type="text/javascript">
+			var back = document.getElementById("back");
+			var scrTop= document.body.scrollTop || document.documentElement.scrollTop;			
+			var userAgent = window.navigator.userAgent.toLowerCase();			
+			if (userAgent.indexOf("msie 6.0") > 0) {
+				back.style.position = "absolute";
+				back.style.top = scrTop + document.documentElement.clientHeight - back.offsetHeight + "px";
+				window.onscroll =window.onresize= function() {
+					scrTop = document.body.scrollTop || document.documentElement.scrollTop;
+					back.style.top = scrTop + document.documentElement.clientHeight - back.offsetHeight + "px";
+					if(scrTop>document.documentElement.clientHeight){
+						back.style.display="block";
+					}else{
+						back.style.display="none";
+					}
+				}
+			} else {
+				back.style.bottom = 10 + "px";				
+				window.onscroll = function() {
+					scrTop = document.body.scrollTop || document.documentElement.scrollTop;
+					if(scrTop>document.documentElement.clientHeight){
+						back.style.display="block";
+					}else{
+						back.style.display="none";
+					}
+				}
+			}
+			var timer;
+			back.onclick = function() {
+				var start = scrTop;
+				var end = 0;
+				var change = end - start;
+				var t = 0;
+				var maxT = 30;
+				clearInterval(timer);
+				timer = setInterval(function() {
+					t++;
+					if (t >= maxT) {
+						clearInterval(timer);
+					}
+					document.body.scrollTop = change * t / maxT + start;
+					document.documentElement.scrollTop = change * t / maxT + start;
+				}, 30)
+			}
+		</script>
+	</body>
+
+</html>

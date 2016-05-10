@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>三列布局第二种方法</title>
+		<style>
+			body {
+				padding: 0;
+			}
+			#wrap {
+				position: relative;
+				min-width: 600px;
+			}
+			#left {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 200px;
+				height: 200px;
+				background: red;
+			}
+			#middle {
+				height: 300px;
+				margin: 0 300px 0 200px;
+				background: yellow;
+			}
+			#right {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 300px;
+				height: 200px;
+				background: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="left"></div>
+			<div id="middle"></div>
+			<div id="right"></div>
+		</div>
+	</body>
+
+</html>

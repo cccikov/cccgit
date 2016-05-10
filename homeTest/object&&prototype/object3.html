@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var obj = {
+		age:18,
+		name:"班长",
+		maimeng:function() {
+			alert("打你喔~~");
+		}
+	};
+	//工厂模式
+	function createPerson(name,age) {
+		var o = {};
+		o.name = name;
+		o.age = age;
+		o.maimeng = function() {
+			alert("打你喔~~");
+		};
+		return o;
+	}
+	//构造函数模式
+	function People(name,age) {
+		//new Object();
+		this._name = name;
+		this._age = age;
+		this.setName = function(name) {
+			this._name = name;
+		}
+		this.getName = function() {
+			return this._name;
+		}
+		this.maimeng = function() {
+			alert("打你喔~~");
+		}
+	}
+
+	var people1 = new People("班长",30);
+	var people2 = new People("班长1",20);
+
+	// var person1 = Person("班长",20);
+	// var person2 = Person("班长1",20);
+	</script>
+</body>
+</html>

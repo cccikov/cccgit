@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>原生offsetTop与jq的offset</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html {
+				background: red;
+			}
+			
+			#p {
+				height: 20px;
+				margin: 10px;
+				padding: 10px;
+				background: yellow;
+			}
+			
+			#wrap {
+				position: relative;
+				top: 10px;
+				height: 50px;
+				margin: 10px;
+				padding: 10px;
+				overflow: auto;
+				background: #0f0;
+			}
+			
+			#inner1 {
+				height: 600px;
+				padding: 5px;
+				margin: 5px;
+				background: #00f;
+			}
+			
+			#inner2 {
+				height: 20px;
+				padding: 5px;
+				margin: 5px;
+				background: #00a;
+			}
+			
+			#content {
+				margin: 50px 0 0;
+			}
+			
+			.content {
+				padding: 0;
+				margin: 0;
+				background: #fff;
+				overflow: hidden;
+			}
+			
+			.content span {
+				float: left;
+				width: 20%;
+				line-height: 1.5;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p id="p">这是有position且有滚动条的情况,我是第一行P height:20px margin:10px padding:10px</p>
+		<div id="wrap">
+			<div id="inner1">
+				我是inner1内容
+			</div>
+			<div id="inner2">
+				我是inner2内容
+			</div>
+		</div>
+		<p class="content" id="content"><span>元素</span><span>scrollTop</span><span>原生offset</span><span>jq offset</span> <span>jq position</span></p>
+		<div class="contentWrap">
+			
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script>
+			var a = null;
+			function objOffset(obj) {
+				$('<p class="content"><span>' + obj.attr('id') + '</span><span>'+obj[0].scrollTop+'</span><span>' + obj[0].offsetTop + '</span><span>' + obj.offset().top + '</span><span>' + obj.position().top + '</span></p>').appendTo($(".contentWrap"));
+			}
+			var timer = setInterval(function() {
+				$(".contentWrap").html("");
+				objOffset($("#p"));
+				objOffset($("#wrap"));
+				objOffset($("#inner1"));
+				objOffset($("#inner2"));
+			}, 10)
+		</script>
+	</body>
+
+</html>

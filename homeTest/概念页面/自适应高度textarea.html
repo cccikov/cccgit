@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>自适应高度textarea</title>
+		<style type="text/css">
+			
+		</style>
+	</head>
+
+	<body>
+		<textarea name="test" id="test" rows="5" cols=""></textarea>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var oldLen = nowLen = 0;
+				$("#test").on("input",function(){
+					var nowLen = $(this).val().length;
+					if(oldLen>nowLen){
+						$("#test").height(50);
+					}
+					$("#test").height($(this)[0].scrollHeight-4);
+					oldLen = nowLen;
+				});
+			});
+		</script>
+	</body>
+
+</html>

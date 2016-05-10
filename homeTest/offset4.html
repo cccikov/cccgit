@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>原生offsetTop与jq的offset</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html {
+				background: red;
+			}
+			
+			
+			#wrap {
+				position: relative;
+				top: 10px;
+				height: 300px;
+				overflow: auto;
+				background: #0f0;
+			}
+			
+			#inner1 {
+				height: 500px;
+				background: #00f;
+			}
+			
+			#inner2 {
+				height: 100px;
+				margin:50px;
+				background: #00a;
+			}
+			
+			#content {
+				margin: 50px 0 0;
+			}
+			
+			.content {
+				padding: 0;
+				margin: 0;
+				background: #fff;
+				overflow: hidden;
+			}
+			
+			.content span {
+				float: left;
+				width: 20%;
+				line-height: 1.5;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="inner1">
+				我是inner1内容
+			</div>
+			<div id="inner2">
+				我是inner2内容
+			</div>
+		</div>
+		<p class="content" id="content"><span>元素</span><span>scrollTop</span><span>原生offset</span><span>jq offset</span> <span>jq position</span></p>
+		<div class="contentWrap">
+			
+		</div>
+		<p>jq 的 offset() 还有 position() 都会随着父元素滚动条变化而变化</p>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script>
+			var a = null;
+			function objOffset(obj) {
+				$('<p class="content"><span>' + obj.attr('id') + '</span><span>'+obj[0].scrollTop+'</span><span>' + obj[0].offsetTop + '</span><span>' + obj.offset().top + '</span><span>' + obj.position().top + '</span></p>').appendTo($(".contentWrap"));
+			}
+			var timer = setInterval(function() {
+				$(".contentWrap").html("");
+				objOffset($("#wrap"));
+				objOffset($("#inner1"));
+				objOffset($("#inner2"));
+				$('<p class="content"> jq position公式：原生offsetTop - marginTop - 父元素scrollTop = '+($("#inner2")[0].offsetTop - Number($("#inner2").css("marginTop").slice(0,-2)) - $("#inner2").parent()[0].scrollTop)+'</p>').appendTo(".contentWrap");
+			}, 10)
+			console.log();
+		</script>
+	</body>
+
+</html>
