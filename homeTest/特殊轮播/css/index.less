@@ -46,3 +46,42 @@
         background: red;
     }
 }
+#wrap.animate3 {
+    width: 510px;
+    margin:0 auto;
+    ul {
+        position: relative;
+        height: 286px;
+        overflow: hidden;
+        li {
+            position: absolute;
+            width: 100%;//会有奇怪的现象
+            top:0;
+            left:100%;
+            list-style: none;
+            &:nth-of-type(1){
+                left:0;
+            }
+            img{
+                width: 100%;
+            }
+        }
+    }
+    .btn-group{
+        position: relative;
+        top: -25px;
+        left:0;
+        text-align: center;
+        span{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background: #ddd;
+            cursor: pointer;
+        }
+        span.active{
+            background: red;
+        }
+    }
+}

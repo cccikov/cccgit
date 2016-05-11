@@ -46,4 +46,43 @@
 #wrap.animate1 span.active {
   background: red;
 }
+#wrap.animate3 {
+  width: 510px;
+  margin: 0 auto;
+}
+#wrap.animate3 ul {
+  position: relative;
+  height: 286px;
+  overflow: hidden;
+}
+#wrap.animate3 ul li {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 100%;
+  list-style: none;
+}
+#wrap.animate3 ul li:nth-of-type(1) {
+  left: 0;
+}
+#wrap.animate3 ul li img {
+  width: 100%;
+}
+#wrap.animate3 .btn-group {
+  position: relative;
+  top: -25px;
+  left: 0;
+  text-align: center;
+}
+#wrap.animate3 .btn-group span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: #ddd;
+  cursor: pointer;
+}
+#wrap.animate3 .btn-group span.active {
+  background: red;
+}
 /*# sourceMappingURL=index.css.map */

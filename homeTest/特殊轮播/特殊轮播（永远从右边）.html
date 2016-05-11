@@ -5,9 +5,14 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 		<title>轮播</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
 	</head>
 
 	<body>
+		<p>进入页面后先点击对应特效按钮</p>
+		<button id="animate1">特效一</button>
+		<button id="animate2">特效二</button>
+		<button id="animate3">特效三</button>
 		<div id="wrap">
 			<!--图片组-->
 			<ul>
@@ -32,14 +37,13 @@
 				<span></span>
 			</div>
 		</div>
-		<button id="animate1">特效一</button>
-		<button id="animate2">特效二</button>
-		<button id="animate3">特效三</button>
+
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			$("ul").height($("li:eq(0)").height());
 			//特效一
 			$("#animate1").click(function() {
+				$("#wrap").attr("class", "animate1");
+				$(".animate1 ul").height($("li:eq(0)").height());
 				$(".btn-group span").off("mouseenter").on("mouseenter", function() {
 					var that = $(this);
 					var _index = that.index();
@@ -55,6 +59,8 @@
 			});
 			//特效二
 			$("#animate2").click(function() {
+				$("#wrap").attr("class", "animate1");
+				$(".animate1 ul").height($("li:eq(0)").height());
 				$(".btn-group span").off("mouseenter").on("mouseenter", function() {
 					var that = $(this);
 					var _index = that.index();
@@ -70,6 +76,30 @@
 							$(this).removeClass("middle").addClass("start");
 						});
 					})
+				});
+			});
+			//特效三
+			$("#animate3").click(function() {
+				$("#wrap").attr("class", "animate3");
+				$("*").removeAttr("style");
+				var movingFlag = false;
+				$(".btn-group span").off("mouseenter").on("mouseenter", function() {
+					if(!movingFlag){
+						var cur = $("span.active");
+						var next = $(this);
+						var _cur = cur.index();
+						var _next = next.index();
+						//如果hover的不是现在的
+						if(_cur!=_next){
+							cur.removeClass("active");
+							next.addClass("active");
+							movingFlag = true;
+							$("li").eq(_cur).animate({"left":"-100%"},300).end().eq(_next).css({"left":"100%"}).animate({"left":"0"},300,function(){
+								movingFlag = false;
+							});
+						}
+					}
+					
 				});
 			});
 		</script>
