@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>对象2</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			function Person(){
+			}
+			
+			Person.prototype = {
+				constructor:Person,
+				name:"Nocholas",
+				age:25,
+				job:"Software Engineer",
+				sayName:function(){
+					alert(this.name);
+				}
+			}
+			
+			var person1 = new Person();
+			var person2 = new Person();
+			
+			/*
+			 * 实例内部有一个叫做[[prototype]]的指针，指向构造函数的原型对象。
+			 * 但是我们却无法访问[[prototype]]。
+			 * 
+			 * isPrototypeof()方法
+			 */ 
+			console.log(Person.prototype.isPrototypeOf(person1));//true,表示person1实例的[[prototype]]指向Person.prototype
+			
+			/*
+			 * getPrototypeOf()方法
+			 */
+			person1.name = "ccc";
+			console.dir(Person.prototype);
+			console.log(person1.constructor,Person.prototype.constructor);
+			var arr = [1,2,3,4];
+			console.dir(arr.constructor);
+			
+			console.log(Object.getPrototypeOf(person1)==Person.prototype);//true ,Object.getPrototypeOf(person1)返回实际是就是这个对象的原型Person.prototype
+			console.log(Object.getPrototypeOf(person1).name);//Nocholas 这里是对象原型的name
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>对象2</title>
+	</head>
+
+	<body>
+		<div id="wrap"></div>
+		<script type="text/javascript">
+			
+			/*
+			 * 原型模式
+			 */
+			function Person() {}
+			//Person.prototype.name = "Nicholas";
+			//Person.prototype.age = 29;
+			//Person.prototype.job = "Software Engineer";
+			//Person.prototype.sayName = function() {
+			//	alert(this.name);
+			//}
+			Person.prototype = {
+				constructor:Person,//这里一定要重定向，上面的写法不用重定向是因为prototype本身就constructor属性，如果这里不加，相当于把constructor删除，这样实例的constructor都是Object
+				name: "Nicholas",
+				age: 29,
+				job: "Software Engineer",
+				sayName: function() {
+					alert(this.name);
+				}
+			}
+			
+			var person1 = new Person();
+			var person2 = new Person();
+			//person1.sayName();
+			console.dir(person1.constructor);
+			
+			/*
+			 * 数组原型
+			 */
+			var a = [1,2,3,4,5];
+			Array.prototype.fuck = function(){
+				alert("fuck");
+			}
+			//a.fuck();
+
+			/*
+			 * 标签的原型
+			 */
+			var wrap = document.getElementById("wrap");
+			console.dir(a);
+			HTMLElement.prototype.haha = function(){
+				alert("hihi");
+			}
+//			wrap.haha();
+			Object.prototype.diao = function(){
+				alert("diao");
+			}
+//			wrap.diao();
+		</script>
+	</body>
+
+</html>

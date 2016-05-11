@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>对象2</title>
+		<style type="text/css">
+			strong{
+				color:darkred;
+			}
+			p{
+				line-height: 2.425;
+				font-family: "微软雅黑";
+			}
+		</style>
+		<script type="text/javascript">
+			function Person() {}
+			Person.prototype.name = "Nocholas";
+			Person.prototype.age = 25;
+			Person.prototype.job = "Software Engineer";
+			Person.prototype.sayName = function() {
+				alert(this.name);
+			}
+
+			function People() {}
+			People.prototype = {
+				//constructor:Person,//用这种json写法一定要重定向
+				name: "Nocholas",
+				age: 25,
+				job: "Software Engineer",
+				sayName: function() {
+					alert(this.name);
+				}
+			}
+			var person1 = new Person();
+			var people1 = new People();
+			console.dir(person1);
+			console.dir(people1);
+			console.log("%c-----------","color:red");
+			console.log("person1.prototype：", person1.prototype);//
+			console.log("Object.getPrototypeOf(person1)：",Object.getPrototypeOf(person1))
+			console.log("person1.constructor：", person1.constructor);
+			console.log("Person.prototype：", Person.prototype);
+			console.log("Person.prototype.constructor：", Person.prototype.constructor);
+			console.log("%c-----------","color:red");
+			console.log("Person.constructor：",Person.constructor)
+			console.log("Object.constructor：",Object.constructor)
+		</script>
+	</head>
+
+	<body>
+		<p>这里先理解prototype和constructor概念先</p>
+		<img src="img/prototype-constructor2.png"/>
+		<img src="img/prototype-constructor.png"/>
+		<p>
+			从图中可以看出，<br />
+			实例<strong>(peron1)</strong>没有prototype属性，但有[[prototype]]内部属性指向构造函数<strong>(Person)</strong>的原型对象(Person.prototype)<br />
+			解析器读取实例属性的时候，先读取实例的属性，如果实例自身没有；则在实例的原型那里寻找。<br />
+			所以实例<strong>(person1)</strong>的constructor属性 就是 构造函数<strong>(Person)</strong>的原型对象(Person.prototype)的constructor属性 指向构造函数<strong>(Person)</strong>本身 
+		</p>
+	</body>
+
+</html>
