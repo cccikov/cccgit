@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>轮播</title>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<!--图片组-->
+			<ul>
+				<li class="start" data-mark="1"><img src="img/1.jpg" alt="" /></li>
+				<li class="start" data-mark="2"><img src="img/2.jpg" alt="" /></li>
+				<li class="start" data-mark="3"><img src="img/3.jpg" alt="" /></li>
+				<li class="start" data-mark="4"><img src="img/4.jpg" alt="" /></li>
+				<li class="start" data-mark="5"><img src="img/5.jpg" alt="" /></li>
+				<li class="start" data-mark="6"><img src="img/6.jpg" alt="" /></li>
+				<li class="start" data-mark="7"><img src="img/7.jpg" alt="" /></li>
+				<li class="start" data-mark="8"><img src="img/8.jpg" alt="" /></li>
+			</ul>
+			<!--按钮组-->
+			<div class="btn-group">
+				<span class="active"></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<button id="animate1">特效一</button>
+		<button id="animate2">特效二</button>
+		<button id="animate3">特效三</button>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("ul").height($("li:eq(0)").height());
+			//特效一
+			$("#animate1").click(function() {
+				$(".btn-group span").off("mouseenter").on("mouseenter", function() {
+					var that = $(this);
+					var _index = that.index();
+					that.addClass("active").siblings().removeClass("active");
+					$(".start[data-mark='" + (_index + 1) + "']").css({
+						"left": "100%"
+					}).appendTo("ul").removeClass("start").addClass("middle").stop().animate({
+						"left": "0"
+					}, 300, function() {
+						$(this).removeClass("middle").addClass("start");
+					});
+				});
+			});
+			//特效二
+			$("#animate2").click(function() {
+				$(".btn-group span").off("mouseenter").on("mouseenter", function() {
+					var that = $(this);
+					var _index = that.index();
+					that.addClass("active").siblings().removeClass("active");
+					$(".start[data-mark='" + (_index + 1) + "']").animate({
+						"left": "-100%"
+					}, 300, function() {
+						$(this).css({
+							"left": "100%"
+						}).appendTo("ul").removeClass("start").addClass("middle").stop().animate({
+							"left": "0"
+						}, 300, function() {
+							$(this).removeClass("middle").addClass("start");
+						});
+					})
+				});
+			});
+		</script>
+	</body>
+
+</html>
