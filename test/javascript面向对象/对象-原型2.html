@@ -22,27 +22,40 @@
 			}
 			
 			var person1 = new Person();
-			var person2 = new Person();
 			
 			/*
 			 * 实例内部有一个叫做[[prototype]]的指针，指向构造函数的原型对象。
 			 * 但是我们却无法访问[[prototype]]。
 			 * 
-			 * isPrototypeof()方法
+			 * isPrototypeof()方法，用于检测特定实例是否原型的实例，true表示是。
 			 */ 
 			console.log(Person.prototype.isPrototypeOf(person1));//true,表示person1实例的[[prototype]]指向Person.prototype
 			
 			/*
-			 * getPrototypeOf()方法
+			 * getPrototypeOf()方法，用于返回实例的[[prototype]]值
 			 */
-			person1.name = "ccc";
-			console.dir(Person.prototype);
-			console.log(person1.constructor,Person.prototype.constructor);
-			var arr = [1,2,3,4];
-			console.dir(arr.constructor);
-			
 			console.log(Object.getPrototypeOf(person1)==Person.prototype);//true ,Object.getPrototypeOf(person1)返回实际是就是这个对象的原型Person.prototype
 			console.log(Object.getPrototypeOf(person1).name);//Nocholas 这里是对象原型的name
+			
+			console.log("%c-----------我是分隔符-----------","color:red");
+			
+			console.log(person1.name);//Nocholas，来自原型
+			person1.name = "ccc";
+			console.log(person1.name);//ccc，来自实例
+			console.log(Object.getPrototypeOf(person1).name);//Nocholas，来自原型
+			
+			//可以通过实例访问原型中的值，但却不能通过实例来重写原型中的值。
+			
+			delete person1.name;//删除实例属性
+			console.log(person1.name);//Nocholas，来自原型
+			
+			
+			/*
+			 * hasOwnProperty()方法，用于检测属性是存在于实例，还是原型，true表示来自实例
+			 */
+			person1.age=50;
+			console.log(person1.hasOwnProperty("name"));//false,表示属性来自于原型
+			console.log(person1.hasOwnProperty("age"));//true,表示属性来自于实例
 			
 		</script>
 	</body>

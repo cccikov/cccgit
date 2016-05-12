@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>对象2</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			function Person(){
+			}
+			Person.prototype = {
+				constructor:Person,
+				name:"Nocholas",
+				age:25,
+				job:"Software Engineer",
+				sayName:function(){
+					alert(this.name);
+				}
+			}
+			var person1 = new Person();
+			person1.name = "ccc";
+			var person2 = new Person();
+			
+		</script>
+	</body>
+
+</html>
