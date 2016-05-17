@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+	<head>
+		<meta charset=gbk>
+		<title>椭圆曲线</title>
+	</head>
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		div {
+			border: 1px solid #111;
+		}
+		
+		.points {
+			width: 1px;
+			height: 1px;
+			border: 0px solid #111;
+			position: absolute;
+			line-height: 1px;
+			font-size: 1px;
+			background: #111;
+		}
+		
+		.go-oval {
+			width: 10px;
+			height: 10px;
+			border: 0px solid #111;
+			position: absolute;
+			line-height: 1px;
+			font-size: 1px;
+			background: #111;
+			border-radius: 5px;
+		}
+	</style>
+
+	<body>
+		<div style="position:absolute;left:80px;top:30px;height:500px;width:500px;">
+			<div id="tuoyuan1" style="height:500px;width:500px;"></div>
+			<div id="go-oval1" class="go-oval"></div>
+		</div>
+
+		<div style="position:absolute;left:800px;top:130px;height:500px;width:900px;">
+			<div id="tuoyuan2" style="height:500px;width:900px;"></div>
+			<div id="go-oval2" class="go-oval"></div>
+		</div>
+
+	</body>
+
+</html>
+<script>
+	(function() {
+		function $(idd) {
+			var obj = {};
+			if (typeof(idd) === 'string') {
+				var idName = idd.substr(1, idd.length);
+				//alert(idName)
+				if (idd.substr(0, 1) === '#') {
+					obj = document.getElementById(idName);
+				} else if (idd.substr(0, 1) === '.') {
+					obj = document.getElementsByName(idName);
+					//obj = obj.length ? document.getElementsByClassName(idName) : null;
+					//alert(obj.length);
+					//alert( obj[0].className )
+				} else if (idd == 'document') {
+					obj = document;
+				} else {
+					obj = document.getElementsByTagName(idd);
+					//alert(idd)
+				}
+			} else {
+				obj = idd;
+			}
+			return obj;
+		}
+		//alert(document.body.clientWidth  )
+		//生成椭圆曲线的点（数组）
+		function make_points(a, b, interval, addX, addY) {
+			var x, y;
+			var xy = [],
+				xy1 = [],
+				xy2 = [];
+			addX = addX ? addX : a;
+			addY = addY ? addY : b;
+			x = -Math.sqrt((b * b) * a * a / (b * b));
+			for (var n = 0; 1; n++) {
+				y = Math.sqrt(b * b - (b * b * x * x) / (a * a));
+				if (n == 0) {
+					y0 = y;
+				}
+				xy1[n] = [x + addX, y + addY];
+				//n++;
+				xy2[n] = [x + addX, -y + addY];
+				x = x + interval;
+				if (x > Math.sqrt((b * b) * a * a / (b * b))) {
+					break;
+				}
+			}
+			//xy2倒序
+			/*
+			xy2 = xy2.sort(function(x,y){
+			  return x == y ? 0 : (x > y ? -1 : 1);
+			});
+			*/
+			for (var n = 0, n2 = len = xy2.length - 1; n <= len; n++, n2--) {
+				xy[n] = xy2[n2];
+			}
+			xy = xy1.concat(xy);
+			return xy;
+		}
+		//画椭圆曲线
+		function draw_oval(points) {
+			var len = points.length;
+			var divs = '';
+			for (var n = 0; n < len; n++) {
+				divs += '<div class="points" style="left:' + points[n][0] + 'px;top:' + points[n][1] + 'px;"></div>';
+			}
+			return divs;
+		}
+		//沿着曲线跑动
+		function go_oval(idd, points, n, t, addX, addY) {
+			var len = points.length;
+			n = n ? n : 0;
+			t = t ? t : 10;
+			addX = addX ? addX : 0;
+			addY = addY ? addY : 0;
+			var $obj = $(idd).style;
+			$obj.left = points[n][0] + addX + 'px';
+			$obj.top = points[n][1] + addY + 'px';
+			n++;
+			n = n == len ? 0 : n;
+			setTimeout(function() {
+				go_oval(idd, points, n, t, addX, addY);
+			}, t);
+		}
+		window.onload = function() {
+			var points1 = make_points(50, 100, 1, 200, 200);
+			var points2 = make_points(200, 100, 1);
+			//画椭圆曲线
+			$('#tuoyuan1').innerHTML = draw_oval(points1);
+			$('#tuoyuan2').innerHTML = draw_oval(points2);
+			//alert( make_points(200,100,3) )
+			//小点在曲线上跑动
+			go_oval('#go-oval1', points1, 0, 10, -5, -5);
+			go_oval('#go-oval2', points2, 0, 10, -5, -5);
+		};
+	})();
+</script>
