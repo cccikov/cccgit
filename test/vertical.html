@@ -16,20 +16,23 @@
 				line-height: 50px;
 				float: left;
 				margin:  0 10px 0 0;
-				vertical-align: bottom;
+				vertical-align: baseline;
 			}
 			p{
-				height: 100px;
+				/*height: 100px;*/
 				border: 1px solid #ddd;
-				vertical-align: bottom;
+				vertical-align: top;
+			}
+			i{
+				vertical-align: top;
 			}
 			span{
-				vertical-align: bottom;
-				font-size: 50px;
+				vertical-align: middle;
+				font-size: 20px;
 			}
 			em{
-				vertical-align: bottom;
-				font-size: 19px;
+				vertical-align: middle;/*最大的文字设置vertical-align是无效的*/
+				font-size: 50px;
 			}
 		</style>
 	</head>
@@ -39,6 +42,6 @@
 			<li>asdasd</li>
 			<li>asdasd</li>
 		</ul>
-		<p>Lorem <span>ajsdla jsdl j</span>ipsumidem culpa quia! Tem <em>ajsdlasjdl</em> pore magni.</p>
+		<p><i>i i i i</i><span>span span span</span><em>em em em</em></p>
 	</body>
 </html>
