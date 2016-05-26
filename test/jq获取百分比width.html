@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jq获取百分比width</title>
+		<style type="text/css">
+			#wrap{
+				width: 40%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam saepe fugiat ratione odio enim voluptatibus laborum officiis fugit dolor eveniet consequatur ut magnam quidem beatae excepturi eum adipisci voluptas sequi!
+		</div>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var wrap = $("#wrap").get(0);
+			console.log(getComputedStyle(wrap).width , wrap.offsetWidth , wrap.clientWidth , wrap.scrollWidth);
+			console.dir(wrap.offsetParent);
+		</script>
+	</body>
+</html>
