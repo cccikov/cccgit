@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>名字第二个字变星号</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var str = "abcdefg";
+				var arr = str.split("");
+				arr.splice(1, , "*");
+				str = arr.join("");
+				console.log(str);
+			});
+		</script>
+	</head>
+
+	<body>
+		<ul>
+			<li>阿萨德</li>
+			<li>存储储</li>
+			<li>陈楚从</li>
+			<li>高高个</li>
+		</ul>
+	</body>
+
+</html>
