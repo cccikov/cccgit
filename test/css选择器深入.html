@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>选择器深入</title>
+		<style type="text/css">
+			/*多个选择器连接使用，表示选择同时满足多个选择器的元素*/
+			
+			/*元素选择器+类选择器这种是最常见的*/
+			div.title{
+				color:red;
+			}
+			
+			/*类选择器+类选择器 也常见，通常用于同时满足多种状态的（同时是info，content）；也常用于按钮，或者表示状态（.btn.active）表示点击了，与普通状态区别*/
+			.btn{
+				background: none;
+				border:1px solid #ccc;
+			}
+			.btn.active{
+				background: darkred;
+				color:#fff;
+			}
+			.content{
+				font-size: 20px;
+			}
+			.content.info{
+				font-weight: 700;
+			}
+			.para.content.info{
+				color:red;
+			}
+			
+			/*类选择器+伪类选择器*/
+			:nth-child(1){/*伪元素选择器通常是div:nth-child(1) 其实元素选择（div）是可以不用 :nth-child(1)表示全部的第一个子元素等价于   *:nth-child(1) ，所以有时候加上元素选择可以防止选上了一些不是想选的元素   */
+				outline:1px solid blue;
+			}
+			#wrap{/*因为最外层div也是body下第一子元素*/
+				outline: none;
+			}
+			.para:nth-child(1){/*表示即是.para又是第1个子元素的，所以没有元素符合*/
+				outline:1px solid red;
+			}
+			.para:nth-of-type(1){/*表示即是.para又是同级元素中的第1个*/
+				outline:1px solid green;
+			}
+			
+			.out#wrap{/*其实这样写是没有必要的，因为id是唯一的所以直接#wrap就可以*/
+				padding:20px;
+			}
+			
+			/*其实任何处元素选择器外的选择器，都相当于和通用选择器（*）同时使用，.content===*.content */
+			
+			/*通用选择器使用*/
+			*{
+				padding:0;
+				margin:0;
+			}
+			#wrap *{/*选择某个元素下的全部元素*/
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="out" id="wrap">
+			<div class="title warning">title warning</div>
+			<h4 class="para">para</h4>
+			<p class="para info">para info</p>
+			<div class="content">content</div>
+			<div class="content info">content info</div>
+			<p class="para content info">para content info</p>
+			<p class="para warning">para warning</p>
+			<button class="btn active">活动中按钮</button>
+			<button class="btn">非活动按钮</button>
+		</div>
+	</body>
+</html>
