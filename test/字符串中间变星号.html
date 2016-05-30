@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>名字第二个字变星号</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("li").each(function(index,key){
+					var str = $(key).text();
+					var str1 = str.substring(0,1)+"*"+str.substring(2);
+					console.log(str1);
+				});
+				$("li").each(function(index,key){
+					var str = $(key).text();
+					var str2 = str.slice(0,1)+"*"+str.slice(2);
+					console.log(str2);
+				});
+				$("li").each(function(index,key){
+					var str = $(key).text();
+					var str3 = str.substr(0,1)+"*"+str.substr(2,1);
+					console.log(str3);
+				});
+				
+				//原型方法
+				String.prototype.star = function(start,end){
+					var num = end-start;
+					var str = this;
+					var starStr = "";
+					for(var i = 0;i<num;i++){
+						starStr = starStr + "*";
+					}
+					str = str.slice(0,start)+starStr+str.slice(end);
+					return str;
+				}
+				
+				//原型方法
+				String.prototype.midCha = function(start,end,sign){
+					var num = end-start;
+					var str = this;
+					var starStr = "";
+					if(!sign){
+						for(var i = 0;i<num;i++){
+							starStr = starStr + "*";
+						}
+					}else{
+						for(var i = 0;i<num;i++){
+							starStr = starStr + sign;
+						}
+					}
+					
+					str = str.slice(0,start)+starStr+str.slice(end);
+					return str;
+				}
+				
+				
+				//Demo
+				var phone = "15920135479";
+				console.log(phone.star(4,8));//1592****479
+				console.log(phone.midCha(-6,-5,"1").midCha(-4,-3,"1").midCha(-2,-1,"1"));//15920*3*4*9
+				
+				$("li").each(function(i,key){
+					var str = $(key).text().star(1,2);
+					$(key).text(str);
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<ul>
+			<li>阿萨德</li>
+			<li>存储储</li>
+			<li>陈楚从</li>
+			<li>高个</li>
+			<li>高</li>
+		</ul>
+	</body>
+
+</html>

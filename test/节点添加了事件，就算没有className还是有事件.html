@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>节点添加了事件，就算没有className还是有事件</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".hello").on("click",function(){
+					var num = Number($(this).text());
+					num++;
+					$(this).text(num);
+				});
+				$(".btn").on("click",function(){
+					$(".hello").removeClass("hello");
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li class="hello">1</li>
+			<li class="hello">2</li>
+			<li class="hello">3</li>
+			<li class="hello">4</li>
+			<li class="hello">5</li>
+			<li class="hello">6</li>
+		</ul>
+		<button class="btn">removeClassName</button>
+		<p>总结：所以我们只要在节点上添加事件，就算没有我们用于找节点时的className，节点上的事件也不会消失。所以对于一些className会变化的节点添加事件，可以通过事件委托；或者在事件函数中判断有无这个className来区分不同的执行函数（常见就是判断有无active is(".active")）</p>
+	</body>
+</html>
