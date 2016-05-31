@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>IE6，7</title>
+			
+		<style type="text/css">
+			img{
+				/*max-width: 100px;*/
+				/*max-height: 100px;*/
+				/**width:expression(this.offsetWidth>this.offsetHeight ?( this.offsetWidth >= 100 ? '100px' : 'auto'):'auto');*/
+				/**height:expression(this.offsetHeight>this.offsetWidth ?( this.offsetHeight >= 100 ? '100px' : 'auto'):'auto');*/
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var imgs = $("img");
+				var index = 0;
+				for (var i = 0; i < imgs.length; i++) {
+					var theimg = new Image();
+					theimg.onload = function() {
+						index++;
+						if (index == imgs.length) {
+							for (var i = 0; i < imgs.length; i++) {
+								var that = imgs.eq(i);
+								that.attr("src", that.attr("data-src"))
+								if (that.width() > that.height() && that.width() > 100) {
+									that.width(100);
+								} else if (that.width() < that.height() && that.height() > 100) {
+									that.height(100);
+								}
+							}
+						}
+					}
+					theimg.src = imgs.eq(i).attr("data-src");
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<img data-src="img/height.jpg" />
+			<img data-src="../homeTest/img/1.jpg" alt="" />
+		</div>
+		
+	</body>
+
+</html>
