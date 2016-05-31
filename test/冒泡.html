@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>阻止冒泡</title>
+		<style>
+			#outer{
+				width: 200px;
+				height:200px;
+				background: #FF0000;
+				cursor: pointer;
+			}
+			#inner{
+				position: relative;
+				top:50px;
+				width: 100px;
+				height: 100px;
+				margin: 0 auto;
+				background: #00ff00;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="outer">
+			<div id="inner" onclick = "innerFn()">
+				
+			</div>
+		</div>
+		<script type="text/javascript">
+			var outer = document.getElementById("outer");
+			var inner = document.getElementById("inner");
+			
+			
+			//DOM 0级
+			outer.onclick = function(e){
+				alert("outer");
+			}
+			/*inner.onclick = function(e){
+				e.cancelBubble = true;
+				alert("inner");
+			}*/
+			/*inner.onclick = innerFn;
+			function innerFn(e){
+				e.cancelBubble = true;
+				alert("inner");
+			}*/
+			/*inner.onclick = function(e){
+				innerFn(e)
+			}
+			function innerFn(e){
+				e.cancelBubble = true;
+				alert("inner");
+			}*/
+			
+			//html事件处理 
+			function innerFn(){
+				var e = window.event;//由于html事件无法获取事件对象，所以我们我们只能人为定义
+				e.cancelBubble = true;
+				alert("inner");
+			}
+		</script>
+	</body>
+</html>
