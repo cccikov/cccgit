@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>点透问题</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			a {
+				display: block;
+				line-height: 50px;
+				margin: 10px0;
+				text-align: center;
+				background: #ccc;
+			}
+			
+			#mask {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 50%;
+				background: rgba(100, 100, 100, 0.5);
+				font-size: 50px;
+				text-align: center;
+			}
+			
+			#mask2 {
+				position: fixed;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				height: 50%;
+				background: rgba(200, 0, 200, 0.5);
+				font-size: 50px;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="main">
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+				<p>
+					<a href="http://www.baidu.com">点透</a>
+				</p>
+			</div>
+			<div id="mask">
+				我是蒙层，我用的是click，我没有点透
+			</div>
+			<div id="mask2">
+				我是蒙层2，我用的是touchstart，我有点透
+			</div>
+		</div>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*//解决办法一：用click事件代替touchstart事件
+			$("#mask").on("click", function() {
+				$(this).hide();
+			});*/
+			
+			/*//解决办法二：定时器，点透是因为click在那点上有300ms左右的延迟，而touchstart是即时的
+			$("a").on("click",function(e){//禁用蒙层下元素的点击事件，off("click")或者是a的话就禁用默认事件。
+				e.preventDefault();
+			});
+			$("#mask").on("touchstart", function() {
+				$(this).hide();
+				var timer = setTimeout(function(){
+					$("a").off("click").on("click",function(e){
+						location.href = "http://www.baidu.com";
+					});
+				},350);
+			});*/
+			
+			/*//方法三：还是定时器，让蒙层迟点消失
+			$("#mask").on("touchstart",function(){
+				var that = $(this);
+				var timer = setTimeout(function(){
+					that.hide();
+				},350);
+			});*/
+			
+			//方法四：其实click就挺好的，只是用click事件的话，手指在上面拖来拖去（touchmove）蒙层后面内容会滚动，有点奇怪。如果蒙层上面内容较多，出现了滚动条，或者不介意蒙层后面内容会滚动，那就直接用click事件就好啦
+			$("#mask").on("click",function(){
+				$(this).hide();
+			}).on("touchmove",function(e){
+				e.preventDefault();
+			});
+			
+			
+			$("#mask2").on("touchstart", function() {
+				$(this).hide();
+			});
+		</script>
+	</body>
+
+</html>
