@@ -9,7 +9,7 @@
 	</head>
 
 	<body>
-		<h5>红线非baseline，只是用用于对比,为了方便显示，span一般设置了inline-block，但实际不影响</h5>
+		<h3>红线非baseline，只是用用于对比,为了方便显示，i,span一般设置了inline-block（为了表现line-height占的高度，撑开父元素的原因，i是模拟父元素的文本），但实际不影响</h3>
 		<div class="same">
 			<p>Lorem ipsum dolor sit amet.</p>
 			<p><span>Lorem ipsum dolor sit amet.</span></p>
@@ -20,11 +20,18 @@
 			<p class="text-bottom">text-bottom把元素的底端与父元素字体的底端对齐。 <i style="display: inline;">i i i</i><span style="display: inline;">span span span</span><i>i i i</i><span>span span span</span></p>
 			<p class="middle">middle把此元素放置在父元素的中部。(类似是把元素中线与父元素基线对齐) <i>i i i</i><span>span span span</span></p>
 			<p class="top">top把元素的顶端与行中最高元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span></p>
-			<p class="bottom">bottom把元素的顶端与行中最低的元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span></p>
+			<p class="bottom">bottom把元素的底端与行中最低的元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span></p>
+			<div class="clearfix">
+				<p class="length left">50px <i>i i i</i><span>span span span</span></p>
+				<p class="length2 left">-50px <i>i i i</i><span>span span span</span></p>
+			</div>
+			<div class="clearfix">
+				<p class="percent left">100% <i>i i i</i><span>span span span</span></p>
+				<p class="percent2 left">-100% <i>i i i</i><span>span span span</span></p>
+			</div>
 		</div>
 		
-		
-		<h5>以下字体大小会不一样,</h5>
+		<h3>以下字体大小会不一样,</h3>
 		<div class="font">
 			<p class="baseline">baseline默认。元素放置在父元素的基线上 <i>i i i</i><span>span span span</span></p>
 			<p class="sub">sub（下标） 垂直对齐文本的下标。 <i>i i i</i><span>span span span</span></p>
@@ -33,11 +40,44 @@
 			<p class="text-bottom">text-bottom把元素的底端与父元素字体的底端对齐。 <i style="display: inline;">i i i</i><span style="display: inline;">span span span</span><i>i i i</i><span>span span span</span></p>
 			<p class="middle">middle把此元素放置在父元素的中部。(类似是把元素中线与父元素基线对齐) <i>i i i</i><span>span span span</span></p>
 			<p class="top">top把元素的顶端与行中最高元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span></p>
-			<p class="bottom">bottom把元素的顶端与行中最低的元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span></p>
+			<p class="bottom">bottom把元素的底端与行中最低的元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span></p>
+			<div class="clearfix">
+				<p class="length left">50px <i>i i i</i><span>span span span</span></p>
+				<p class="length2 left">-50px <i>i i i</i><span>span span span</span></p>
+			</div>
+			<div class="clearfix">
+				<p class="percent left">100% <i>i i i</i><span>span span span</span></p>
+				<p class="percent2 left">-100% <i>i i i</i><span>span span span</span></p>
+			</div>
 		</div>
 		
-		<h5>以下多个元素设置vertical-align</h5>
+		<h3>以下span，em字体大小会不一样,line-height为1.42</h3>
+		<div class="font2">
+			<p class="baseline">baseline默认。元素放置在父元素的基线上 <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<p class="sub">sub（下标） 垂直对齐文本的下标。 <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<p class="super">super（上标）垂直对齐文本的上标 <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<p class="text-top">text-top把元素的顶端与父元素字体的顶端对齐  <i style="display: inline;">i i i</i><span style="display: inline;">span span span</span><i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<p class="text-bottom">text-bottom把元素的底端与父元素字体的底端对齐。 <i style="display: inline;">i i i</i><span style="display: inline;">span span span</span><i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<p class="middle">middle把此元素放置在父元素的中部。(类似是把元素中线与父元素基线对齐) <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<p class="top">top把元素的顶端与行中最高元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<p class="bottom">bottom把元素的底端与行中最低的元素的顶端对齐。（由于个个元素一样高） <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			<div class="clearfix">
+				<p class="length left">50px <i>i i i</i><span>span span span</span><em>em em em</em></p>
+				<p class="length2 left">-50px <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			</div>
+			<div class="clearfix">
+				<p class="percent left">100% <i>i i i</i><span>span span span</span><em>em em em</em></p>
+				<p class="percent2 left">-100% <i>i i i</i><span>span span span</span><em>em em em</em></p>
+			</div>
+		</div>
 		
+		<h3>以下line-height为1.42，个个元素vertical各不相同</h3>
+		<div class="complex">
+			<p class="c1">Lorem ipsum.<i>top</i><span>bottom</span><em>middle</em></p>
+			<p class="c2">Lorem ipsum.<i>top</i><span>bottom</span><em>middle</em></p>
+			<p class="c3">Lorem ipsum.<i>top</i><span>bottom</span><em>middle</em></p>
+			<p class="c4">Lorem ipsum.<i>top</i><span>bottom</span><em>middle</em></p>
+		</div>
 		<table border="1">
 			<tr>
 				<td>top</td>

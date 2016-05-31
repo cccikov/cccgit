@@ -1,95 +1,209 @@
-body{
+body {
     font-size: 16px;
 }
-p{
+.clearfix {
+    display: block;
+    zoom: 1;
+    &:after {
+        content: " ";
+        display: block;
+        font-size: 0;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+h3 {
+    margin: 30px 0 10px;
+}
+p {
     position: relative;
     //  height: 100px;
     line-height: 50px;
-    padding:0 12px;
+    padding: 0 12px;
     border: 1px solid #ddd;
-    margin:5px 0;
-    &:after{
+    margin: 5px 0;
+    &:after {
         content: "";
         position: absolute;
         top: 25px;
-        left:0;
+        left: 0;
         width: 100%;
-        border-bottom:1px solid rgba(255,0,0,.2);
+        border-bottom: 1px solid rgba(255,0,0,.2);
     }
 }
-span{
+span {
     display: inline-block;
     background: darkred;
-    color:#fff
+    color: #fff;
 }
-i{
-    display: inline-block;
-//  display: none !important;
+i {
+    display: inline-block; //  display: none !important;
     background: darkblue;
-    color:#fff
+    color: #fff;
 }
-p.sub{
-    span{
+em{
+    display: inline-block;
+    background: green;
+    color:#fff;
+}
+p.sub {
+    span {
         vertical-align: sub;
     }
 }
-p.super{
-    span{
+p.super {
+    span {
         vertical-align: super;
     }
 }
-p.text-top{
-    span{
+p.text-top {
+    span {
         vertical-align: text-top;
     }
 }
-p.text-bottom{
-    span{
+p.text-bottom {
+    span {
         vertical-align: text-bottom;
     }
 }
-p.middle{
-    span{
+p.middle {
+    span {
         vertical-align: middle;
     }
 }
-p.top{
-    span{
+p.top {
+    span {
         vertical-align: top;
     }
 }
-p.bottom{
-    span{
+p.bottom {
+    span {
         vertical-align: bottom;
     }
 }
-
-.font{
-    span{
+p.length {
+    span {
+        vertical-align: 50px;
+    }
+}
+p.length2 {
+    span {
+        vertical-align: -50px;
+    }
+}
+p.percent {
+    span {
+        vertical-align: 100%;
+    }
+}
+p.percent2 {
+    span {
+        vertical-align: -100%;
+    }
+}
+.font {
+    span {
         font-size: 40px;
     }
 }
-
-
-            
-table{
-    border-collapse: collapse;
-    td{
-        height: 50px;
+.font2 {
+    p{
+        line-height: 1.42;
     }
-    td:nth-of-type(1){
+    span {
+        font-size: 40px;
+    }
+    em{
+        font-size: 20px;
+    }
+}
+.complex{
+    p{
+        line-height: 1.42;
+    }
+}
+.c1{
+    i{
+        font-size: 20px;
         vertical-align: top;
     }
-    td:nth-of-type(2){
-        vertical-align: middle;
-    }
-    td:nth-of-type(3){
-        vertical-align: baseline;
-    }
-    td:nth-of-type(4){
+    span{
+        font-size: 40px;
         vertical-align: bottom;
     }
-    td:nth-of-type(5){
+    em{
+        font-size: 30px;
+        vertical-align: middle;
+    }
+}
+.c2{
+    i{
+        font-size: 40px;
+        vertical-align: top;
+    }
+    span{
+        font-size: 20px;
+        vertical-align: bottom;
+    }
+    em{
+        font-size: 30px;
+        vertical-align: middle;
+    }
+}
+.c3{
+    i{
+        font-size: 30px;
+        vertical-align: top;
+    }
+    span{
+        font-size: 20px;
+        vertical-align: bottom;
+    }
+    em{
+        font-size: 40px;
+        vertical-align: middle;
+    }
+}
+.c4{
+    font-size: 40px;
+    i{
+        font-size: 16px;
+        vertical-align: top;
+    }
+    span{
+        font-size: 16px;
+        vertical-align: bottom;
+    }
+    em{
+        font-size: 16px;
+        vertical-align: middle;
+    }
+}
+table {
+    border-collapse: collapse;
+    td {
+        height: 50px;
+    }
+    td:nth-of-type(1) {
+        vertical-align: top;
+    }
+    td:nth-of-type(2) {
+        vertical-align: middle;
+    }
+    td:nth-of-type(3) {
+        vertical-align: baseline;
+    }
+    td:nth-of-type(4) {
+        vertical-align: bottom;
+    }
+    td:nth-of-type(5) {
         vertical-align: text-top;
     }
 }

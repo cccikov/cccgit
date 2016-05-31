@@ -1,6 +1,27 @@
 body {
   font-size: 16px;
 }
+.clearfix {
+  display: block;
+  zoom: 1;
+}
+.clearfix:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+h3 {
+  margin: 30px 0 10px;
+}
 p {
   position: relative;
   line-height: 50px;
@@ -26,6 +47,11 @@ i {
   background: darkblue;
   color: #fff;
 }
+em {
+  display: inline-block;
+  background: green;
+  color: #fff;
+}
 p.sub span {
   vertical-align: sub;
 }
@@ -47,8 +73,83 @@ p.top span {
 p.bottom span {
   vertical-align: bottom;
 }
+p.length span {
+  vertical-align: 50px;
+}
+p.length2 span {
+  vertical-align: -50px;
+}
+p.percent span {
+  vertical-align: 100%;
+}
+p.percent2 span {
+  vertical-align: -100%;
+}
 .font span {
   font-size: 40px;
+}
+.font2 p {
+  line-height: 1.42;
+}
+.font2 span {
+  font-size: 40px;
+}
+.font2 em {
+  font-size: 20px;
+}
+.complex p {
+  line-height: 1.42;
+}
+.c1 i {
+  font-size: 20px;
+  vertical-align: top;
+}
+.c1 span {
+  font-size: 40px;
+  vertical-align: bottom;
+}
+.c1 em {
+  font-size: 30px;
+  vertical-align: middle;
+}
+.c2 i {
+  font-size: 40px;
+  vertical-align: top;
+}
+.c2 span {
+  font-size: 20px;
+  vertical-align: bottom;
+}
+.c2 em {
+  font-size: 30px;
+  vertical-align: middle;
+}
+.c3 i {
+  font-size: 30px;
+  vertical-align: top;
+}
+.c3 span {
+  font-size: 20px;
+  vertical-align: bottom;
+}
+.c3 em {
+  font-size: 40px;
+  vertical-align: middle;
+}
+.c4 {
+  font-size: 40px;
+}
+.c4 i {
+  font-size: 16px;
+  vertical-align: top;
+}
+.c4 span {
+  font-size: 16px;
+  vertical-align: bottom;
+}
+.c4 em {
+  font-size: 16px;
+  vertical-align: middle;
 }
 table {
   border-collapse: collapse;
