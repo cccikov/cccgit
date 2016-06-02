@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>textarea值的问题</title>
+	</head>
+	<body>
+		<textarea name="textarea1" id="textarea1" cols="30" rows="10" value="我是textarea1"></textarea>
+		<textarea name="textarea2" id="textarea2" cols="30" rows="10">我是textarea2</textarea>
+		<textarea name="textarea3" id="textarea3" cols="30" rows="10"></textarea>
+		<textarea name="textarea4" id="textarea4" cols="30" rows="10"></textarea>
+		<p>总结：textarea设置默认值的时候是写在便签之间不是写在value那里；如果是用js写入默认值的话，用value和innerHTML(或innerText)都可以。但是读取textarea值的时候只能通过value</p>
+		
+		
+		<select id="select1" name="select1" value="02">
+			<option value="01">01</option>
+			<option value="02">02</option>
+			<option value="03">03</option>
+			<option value="04">04</option>
+			<option value="05">05</option>	
+		</select>
+		<select id="select2" name="select2">
+			<option value="01">01</option>
+			<option value="02" selected="">02</option>
+			<option value="03">03</option>
+			<option value="04">04</option>
+			<option value="05">05</option>	
+		</select>
+		<select id="select3" name="select3">
+			<option value="01">01</option>
+			<option value="02" selected="">02</option>
+			<option value="03">03</option>
+			<option value="04">04</option>
+			<option value="05">05</option>	
+		</select>
+		<button id="selBtn">选择过之后恢复默认</button>
+		<p>总结：select设置默认值，在option上设置selected属性，或者用js设置select的js属性value值；想改变select的值，只能通过改变js属性value值，改变便签上value属性也不行，(用js设置selected属性看似行，但只要有操作过select标签就不行了，因为selected只是默认值，一旦操作过，默认值就不起作用)</p>
+		
+		<label><input type="checkbox" name="checkbox1" id="checkbox1" value="1" checked/>checkbox1</label>
+		<label><input type="checkbox" name="checkbox2" id="checkbox2" value="2" />checkbox2</label>
+		<label><input type="checkbox" name="checkbox3" id="checkbox3" value="3" />checkbox3</label>
+		<button id="cheBtn">选择过之后恢复默认</button>
+		<p>总结：input type="checkbox" 设置默认值可以通过checked属性，也可以通过js设置原生js属性；想改变选择情况，只能通过js设置原生js属性，设置标签属性checked只能是默认值，选择过之后就不行了</p>
+		
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var textarea1 = document.getElementById("textarea1");
+			var textarea2 = document.getElementById("textarea2");
+			var textarea3 = document.getElementById("textarea3");
+			var textarea4 = document.getElementById("textarea4");
+			textarea3.value = "我是textarea3";
+			textarea4.innerText = "我是textarea4";
+			
+			$("textarea").on("input",function(){
+				console.clear();
+				console.log(textarea1.value,textarea2.value,textarea3.value,textarea4.value,textarea2.innerText);
+			})
+			
+			/*
+			 * select
+			 */
+			$("#select3").val("04");
+			$("#selBtn").on("click",function(){
+				$("#select1").attr("value","01");
+				$("#select2").find("option").eq(1).attr("selected",false).end().eq(2).attr("selected",true);
+				$("#select3").val("04");
+			});
+			
+			/*
+			 * checkbox
+			 */
+			$("#checkbox2").val("2");
+			$("#checkbox3").get(0).checked = true;
+			$("#cheBtn").on("click",function(){
+				$("#checkbox1").attr("checked",false).val("1");
+				$("#checkbox2").attr("checked",true);
+				$("#checkbox3").get(0).checked = true;
+			});
+		</script>
+	</body>
+</html>

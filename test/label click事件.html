@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>label click事件</title>
+	</head>
+	<body>
+		<label>
+			<input type="radio" />hi
+		</label>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("input").on("click",function(e){
+				console.log("asd");
+			});
+			//点label会自动点与之对应的input 
+		</script>
+	</body>
+</html>
