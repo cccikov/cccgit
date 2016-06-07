@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title>flex2</title>
+		<style type="text/css">
+			html,body{
+				height: 100%;
+				margin:0;
+				padding:0;
+				text-align: center;
+			}
+			.wrap{
+				display: flex;
+				flex-flow: column;
+				height: 100%;
+			}
+			header{
+				line-height: 50px;
+				background: red;
+			}
+			main{
+				flex:1;
+				background: blue;
+				
+				/*里面居中*/
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			footer{
+				line-height: 50px;
+				background: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<header>header</header>
+			<main>
+				<span>main</span>
+			</main>
+			<footer>footer</footer>
+		</div>
+	</body>
+</html>
