@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>zepto 与 jq冲突时</title>
+		<style type="text/css">
+			div:last-of-type{
+				background: blue;
+			}
+		</style>
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/zepto-1.1.6.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			jQuery.noConflict();
+			(function($){
+				$(function(){
+					console.log($("div"));
+				});
+			})(Zepto);
+		</script>
+	</head>
+	<body>
+		<div>1</div>
+		<div>2</div>
+	</body>
+</html>

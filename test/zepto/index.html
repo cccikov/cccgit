@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>zepto</title>
+		<style type="text/css">
+			#wrap{
+				height:100px;
+				background: red;
+			}
+		</style>
+		<script src="../js/zepto-1.1.6.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/touch.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#wrap").on("tap",function(){
+					$(this).css("background","yellow");//qq浏览器不兼容
+				});
+				$("#wrap").on("longTap",function(){
+					$(this).css("background","blue");//qq浏览器不兼容
+				});
+				$("#wrap").on("swipe",function(){
+					$(this).css("background","red");
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="wrap"></div>
+		<p>使用zepto的时候一定要清楚使用的zepto.js包含了那些模块，有时候因为版本的不同，包含的模块不同，点开zepto.js（或zepto.min.js）查看版本即包含模块</p>
+	</body>
+</html>

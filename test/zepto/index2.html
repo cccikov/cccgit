@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<meta charset="UTF-8">
+		<title>zepto</title>
+		<style type="text/css">
+			body{
+				margin:0;
+			}
+			#wrap{
+				background: red;
+				height: 100px;
+			}
+		</style>
+		<script src="../js/zepto-1.1.6.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#wrap").on("touchstart",function(){
+					console.log("touchstart");
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="wrap"></div>
+	</body>
+</html>
