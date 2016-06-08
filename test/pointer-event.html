@@ -3,8 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>pointer-event</title>
+    <style  type="text/css">
+        a,button{
+            font-size: 30px;
+            pointer-events: none;/*首先取消了hover click的动作*/
+        }
+        #theBtn{
+            pointer-events: auto;
+        }
+        #mask{
+            position: fixed;
+            top:0;
+            left:0;
+            height: 100%;
+            width:100%;
+            background: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
     <a href="http://www.baidu.com">百度</a>
+    <a href="./a.html">a.html</a>
+    <button>我是按钮</button>
+    <button id="theBtn">我是可以点的按钮</button>
+    <div id="mask"></div>
+
+    <p>pointer-events:none;可以禁用元素的鼠标事件，也可以忽略当前层而去监听当前层下面的鼠标事件</p>
 </body>
 </html>
