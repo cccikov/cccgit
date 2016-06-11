@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>box-sizing子元素百分比</title>
+    <style>
+        #wrap{
+            height: 200px;
+            width: 200px;
+            box-sizing: border-box;
+            padding:10px;
+            background: blue;
+        }
+        #inner{
+            width: 100%;
+            height: 100%;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="inner"></div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script>
+        var wrap = $("#wrap")[0];
+        var inner = $("#inner")[0];
+        console.log(wrap.offsetWidth,wrap.clientWidth);
+        console.dir(wrap);
+        console.log($("#wrap").width(),$("#inner").width());
+    </script>
+</body>
+</html>

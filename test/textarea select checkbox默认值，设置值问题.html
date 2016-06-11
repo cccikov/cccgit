@@ -1,81 +1,166 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>textarea值的问题</title>
+		<style type="text/css">
+			.wrap {
+				padding: 0 20px;
+			}
+		</style>
 	</head>
+
 	<body>
-		<textarea name="textarea1" id="textarea1" cols="30" rows="10" value="我是textarea1"></textarea>
-		<textarea name="textarea2" id="textarea2" cols="30" rows="10">我是textarea2</textarea>
-		<textarea name="textarea3" id="textarea3" cols="30" rows="10"></textarea>
-		<textarea name="textarea4" id="textarea4" cols="30" rows="10"></textarea>
-		<p>总结：textarea设置默认值的时候是写在便签之间不是写在value那里；如果是用js写入默认值的话，用value和innerHTML(或innerText)都可以。但是读取textarea值的时候只能通过value</p>
-		
-		
-		<select id="select1" name="select1" value="02">
-			<option value="01">01</option>
-			<option value="02">02</option>
-			<option value="03">03</option>
-			<option value="04">04</option>
-			<option value="05">05</option>	
-		</select>
-		<select id="select2" name="select2">
-			<option value="01">01</option>
-			<option value="02" selected="">02</option>
-			<option value="03">03</option>
-			<option value="04">04</option>
-			<option value="05">05</option>	
-		</select>
-		<select id="select3" name="select3">
-			<option value="01">01</option>
-			<option value="02" selected="">02</option>
-			<option value="03">03</option>
-			<option value="04">04</option>
-			<option value="05">05</option>	
-		</select>
-		<button id="selBtn">选择过之后恢复默认</button>
-		<p>总结：select设置默认值，在option上设置selected属性，或者用js设置select的js属性value值；想改变select的值，只能通过改变js属性value值，改变便签上value属性也不行，(用js设置selected属性看似行，但只要有操作过select标签就不行了，因为selected只是默认值，一旦操作过，默认值就不起作用)</p>
-		
-		<label><input type="checkbox" name="checkbox1" id="checkbox1" value="1" checked/>checkbox1</label>
-		<label><input type="checkbox" name="checkbox2" id="checkbox2" value="2" />checkbox2</label>
-		<label><input type="checkbox" name="checkbox3" id="checkbox3" value="3" />checkbox3</label>
-		<button id="cheBtn">选择过之后恢复默认</button>
-		<p>总结：input type="checkbox" 设置默认值可以通过checked属性，也可以通过js设置原生js属性；想改变选择情况，只能通过js设置原生js属性，设置标签属性checked只能是默认值，选择过之后就不行了</p>
-		
+		<!-- textarea -->
+		<div class="wrap">
+			<h4>textarea</h4>
+			<textarea name="textarea1" id="textarea1" cols="30" rows="10" value="我是textarea1"></textarea>
+			<textarea name="textarea2" id="textarea2" cols="30" rows="10">我是textarea2</textarea>
+			<button id="textareaAttr">标签属性value</button>
+			<button id="textareaJs">js属性value</button>
+			<button id="textareaINN">js属性innerHTML</button>
+			<button id="textareaValue">js属性value</button>
+			<p>
+				总结：textarea
+				<br /> 设置默认值:写在便签之间,写在标签上的value无用。
+				<br /> 修改值:通过设置js属性value；设置标签属性value不行（设置innerHTML(或innerText)在没有输入过或者没有设置过value(js属性)可以，一但输入过或者设置过value（js属性）就不再行了，所以不推荐通过innerHTML修改值）。
+				<br /> 读取值:只能通过读取js属性value,不能通过innerHTML。
+			</p>
+		</div>
+		<hr />
+		<!-- select -->
+		<div class="wrap">
+			<h4>select</h4>
+			<select id="select1" name="select1" value="02">
+		        <option value="01">01</option>
+		        <option value="02">02</option>
+		        <option value="03">03</option>
+		        <option value="04">04</option>
+		        <option value="05">05</option>
+		    </select>
+			<select id="select2" name="select2">
+		        <option value="01">01</option>
+		        <option value="02" selected="">02</option>
+		        <option value="03">03</option>
+		        <option value="04">04</option>
+		        <option value="05">05</option>
+		    </select>
+			<select id="select3" name="select3">
+		        <option value="01">01</option>
+		        <option value="02" selected="">02</option>
+		        <option value="03">03</option>
+		        <option value="04">04</option>
+		        <option value="05">05</option>
+		    </select>
+			<button id="selBtn">第一个是通过设置标签value属性（01），第二个是通过修改option的selected属性（03），第三个是通过设置js属性value(05)</button>
+			<button id="selectValue">读取</button>
+			<p>
+				总结：select
+				<br />设置默认值：在要默认选上的option上设置selected属性。
+				<br />修改值：通过设置js属性value值；改变便签value属性也不行，(用js设置selected属性看似行，但只要有操作过select标签就不行了，因为selected只是默认值，一旦操作过，默认值就不起作用)
+				<br />读取：只能通过读取js属性value。
+			</p>
+		</div>
+		<hr/>
+		<!-- 选择表单 -->
+		<div class="wrap">
+			<label>
+	        	<input type="checkbox" name="checkbox1" id="checkbox1" value="1" checked/>
+	        	checkbox1
+			</label>
+			<label>
+	        	<input type="checkbox" name="checkbox2" id="checkbox2" value="2" />
+	        	checkbox2
+			</label>
+			<label>
+	        	<input type="checkbox" name="checkbox3" id="checkbox3" value="3" />
+	        	checkbox3
+			</label>
+			<button id="cheBtn">value（js属性），便签属性checked，js属性checked</button>
+			<button id="checkValue">读取value，以及勾选情况</button>
+			<p>
+				总结：input type="checkbox"
+				<br />设置默认值：可以通过checked属性。
+				<br />修改值：也可以通过设置原生js属性checked，不能通过设置js属性value，（设置标签属性checked也不行，设置标签属性checked只能是默认值，选择过之后就不行了）。
+				<br />读取：通过读取js属性value。通过读取js属性checked判断勾选情况，jq可以通过is(":checked");
+			</p>
+		</div>
+		<hr />
+
+		<div class="wrap">
+			<input type="text" id="text" name="" value="我是默认值">
+			<input type="password" name="">
+			<input type="tel" name="">
+			<button id="setAttr">设置attr</button>
+			<button id="setValue">设置value</button>
+			<button id="getAttr">读取attr</button>
+			<button id="getValue">读取value</button>
+			<p>而其他文本类输入表单，一般都默认是写在标签上value；通过设置js属性value，或者标签属性value修改值；通过读取js属性value，或者标签属性value</p>
+		</div>
+
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			var textarea1 = document.getElementById("textarea1");
-			var textarea2 = document.getElementById("textarea2");
-			var textarea3 = document.getElementById("textarea3");
-			var textarea4 = document.getElementById("textarea4");
-			textarea3.value = "我是textarea3";
-			textarea4.innerText = "我是textarea4";
-			
-			$("textarea").on("input",function(){
-				console.clear();
-				console.log(textarea1.value,textarea2.value,textarea3.value,textarea4.value,textarea2.innerText);
-			})
-			
+			/*
+			 * textarea
+			 */
+			// 标签属性value
+			$("#textareaAttr").on("click", function() {
+				$("textarea").attr("value", "这是通过标签属性value修改的");
+			});
+			// js属性value
+			$("#textareaJs").on("click", function() {
+				$("textarea").val("这是通过js属性value修改的");
+			});
+			// js属性innerHTML
+			$("#textareaINN").on("click", function() {
+				$("textarea").html("这是通过js属性innerHTML修改的")
+			});
+			// 读取
+			$("#textareaValue").on("click", function() {
+				console.log($("textarea").val());
+			});
+
 			/*
 			 * select
 			 */
-			$("#select3").val("04");
-			$("#selBtn").on("click",function(){
-				$("#select1").attr("value","01");
-				$("#select2").find("option").eq(1).attr("selected",false).end().eq(2).attr("selected",true);
-				$("#select3").val("04");
+
+			$("#selBtn").on("click", function() {
+				$("#select1").attr("value", "01");
+				$("#select2").find("option").attr("selected", false).eq(2).attr("selected", true);
+				$("#select3").val("05");
 			});
-			
+			$("#selectValue").on("click", function() {
+				console.log($("#select1").val(), $("#select2").val(), $("#select3").val());
+			});
+
 			/*
 			 * checkbox
 			 */
-			$("#checkbox2").val("2");
-			$("#checkbox3").get(0).checked = true;
-			$("#cheBtn").on("click",function(){
-				$("#checkbox1").attr("checked",false).val("1");
-				$("#checkbox2").attr("checked",true);
+			$("#cheBtn").on("click", function() {
+				$("#checkbox1").attr("checked", false).val("1");
+				$("#checkbox2").attr("checked", true);
 				$("#checkbox3").get(0).checked = true;
+			});
+			$("#checkValue").on("click", function() {
+				console.log($("#checkbox1").val(), $("#checkbox1").is(":checked"), $("#checkbox1")[0].checked);
+				console.log($("#checkbox2").val(), $("#checkbox2").is(":checked"), $("#checkbox2")[0].checked);
+				console.log($("#checkbox3").val(), $("#checkbox3").is(":checked"), $("#checkbox3")[0].checked);
+			});
+			//
+			$("#setAttr").on("click",function(){
+				$("#text").attr("value","通过标签value");
+			});
+			$("#setValue").on("click",function(){
+				$("#text").val("通过属性value");
+			});
+			$("#getAttr").on("click",function(){
+				console.log($("#text").attr("value"));
+			});
+			$("#getValue").on("click",function(){
+				console.log($("#text").val());
 			});
 		</script>
 	</body>
+
 </html>

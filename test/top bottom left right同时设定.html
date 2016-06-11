@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>top bottom right left全部设定</title>
+		<style type="text/css">
+			.wrap{
+				position:relative;
+				height: 100px;
+				margin:10px 0;
+				background: red;
+			}
+			[class*="demo"]{
+				display: inline-block;
+				min-width: 30px;
+				min-height:30px;
+				background: blue;
+			}
+			.demo1{
+				position:relative;
+				top:5px;
+				bottom:5px;
+				right:5px;
+				left:5px;
+				/*relative的话 如果同时有top bottom right left 值，只会读取top left*/
+			}
+			.demo2{
+				position: absolute;
+				top:5px;
+				bottom:5px;
+				right:5px;
+				left:5px;
+				/*absolute的话，width height没有设定的情况下，如果同时有top bottom right left 值，元素会被拉宽、拉高，以满足top bottom right left 的条件*/
+			}
+			.demo3{
+				position: absolute;
+				top:5px;
+				bottom:5px;
+				/*height没有设定的情况下，只设定top bottom，元素会被拉伸高，以满足top bottom 的条件（同时设定right left 同理会被拉宽）*/
+			}
+			
+			.mask{
+				position: fixed;
+				top:5px;
+				bottom:5px;
+				right:5px;
+				left:5px;
+				background: rgba(0, 0 ,0,.5);
+				/*fixed 的情况与absolute是一样的，都是会被拉伸*/
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="wrap">
+			<div class="demo1"></div>
+		</div>
+		
+		<div class="wrap">
+			<div class="demo2"></div>
+		</div>
+		
+		<div class="wrap">
+			<div class="demo3"></div>
+		</div>
+		
+		<p>
+			没有脱离文档流的relative，如果同时设定 top bttom right left，只会读取top left
+			而脱离文档流的absolute和fixed ，如果同时设定相反方向的属性，元素（没有被固定高或宽的情况下）会自动拉伸以满足属性
+		</p>
+		
+		<div class="mask">
+			
+		</div>
+	</body>
+</html>

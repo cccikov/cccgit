@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>classList</title>
+</head>
+<body>
+    <div class="a b c" id="test">
+
+    </div>
+    <script type="text/javascript">
+		var obj = document.getElementById("test");
+		console.log(obj.classList);//["a", "b", "c"]
+		console.dir(obj.classList);
+		
+		console.log(obj.classList.length);//3
+		
+		console.log(obj.classList.item(1));//b
+		console.log(obj.classList.item(3));//null
+		
+		console.log(obj.classList.contains("a"));//true
+		console.log(obj.classList.contains("d"));//false
+		
+		console.log(obj.classList.add("d"));//underfined
+		console.log(obj.classList);//["a", "b", "c", "d"]
+		
+		console.log(obj.classList.remove("c"));//underfined
+		console.log(obj.classList);//["a", "b", "d"]
+		
+		console.log(obj.classList.toggle("a"));//false
+		console.log(obj.classList);//["b", "d"]
+		
+		console.log(obj.classList.toggle("a"));//true
+		console.log(obj.classList);//["b", "d", "a"]
+
+		obj.classList = ["a"];
+		console.log(obj.classList);
+    </script>
+</body>
+</html>
