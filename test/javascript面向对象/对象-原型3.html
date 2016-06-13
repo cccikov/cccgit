@@ -16,13 +16,53 @@
 				age:25,
 				job:"Software Engineer",
 				sayName:function(){
-					alert(this.name);
+					console.log(this.name);
 				}
 			}
 			var person1 = new Person();
 			person1.name = "ccc";
-			var person2 = new Person();
+			person1.sayName();
 			
+			//构造函数 与 以下的变量定义 不要混淆（虽然用var 相当于 window.）
+			var name = "haha";
+			window.name2 = "hehe";
+			console.log(name,name2);
+			
+			var Fn1 = function(){
+				alert(this.name);
+			}
+			Fn1();
+			
+			//param参数英文
+			var jsonObj = {
+				name:"jsonObj",
+				fn:function(result){
+					alert(result);
+				}
+			}
+//			jsonObj.fn("fuck");
+			
+			
+			function cajax(obj){
+				var get = "成功了"
+				obj.success(get)
+			}
+			
+			cajax({
+				success:function(result){
+					alert(result);
+				}
+			});
+			
+			function getName(a){
+				cajax({
+					success:function(result){
+						alert(result+" "+a);
+
+					}
+				});
+			}
+			getName("ccc");
 		</script>
 	</body>
 
