@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax</title>
+		<style>
+			span {
+				display: block;
+			}
+			.second li:nth-child(1){
+				display: none;
+			}
+		</style>
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="json2.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			$(function() {
+				$.ajax({
+					type: "get",
+					url: "json.js",
+					async: true,
+					success: function(result) {
+						var data = result
+						console.log(data);
+						
+						
+						for (var i = 0; i < data.length; i++) {
+							console.log(data[i]);
+							$("<li><span>"+data[i].person.name+"</span><span>"+data[i].person.position+"</span><span>"+data[i].person.age+"</span></li>").appendTo(".first");
+						}
+						
+						for(var j=0;j<data.length;j++){
+							var tp = $(".second li").eq(0).clone();
+							tp.find(".name").html(data[j].person.name);
+							tp.find(".position").html(data[j].person.position);
+							tp.find(".age").html(data[j].person.age);
+							tp.appendTo(".second");
+						}
+						
+					},
+					dataType: "json"
+				});
+				
+			});
+		</script>
+	</head>
+
+	<body>
+		<ul class="first">
+			<!--<li>
+				<span>ccc</span>
+				<span>前端</span>
+				<span>25</span>
+			</li>-->
+		</ul>
+		<ul class="second">
+			<li>
+				<span class="name">ccc</span>
+				<span class="position">前端</span>
+				<span class="age">25</span>
+			</li>
+		</ul>
+	</body>
+
+</html>

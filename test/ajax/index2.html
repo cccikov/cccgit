@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax2</title>
+		<style type="text/css">
+			.second li:nth-child(1){
+				display: none;
+			}
+		</style>
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$.ajax({
+					type:"get",
+					url:"json.js",
+					async:true,
+					success:function(result){
+						var data = result;
+						for(var i=0;i<data.length;i++){
+							console.log($(".second li"));
+							var tp = $(".second li").eq(0).clone();
+//							console.log(tp);
+							tp.find(".name").html(data[i].person.name);
+							tp.find(".position").html(data[i].person.position);
+							tp.find(".age").html(data[i].person.age);
+							tp.appendTo(".second");
+						}
+					},
+					dataType:"json"
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<ul class="first">
+			<!--<li>
+				<p>陈楚聪</p>
+				<p>前端</p>
+				<p>25</p>
+			</li>-->
+		</ul>
+		<ul class="second">
+			<li>
+				<p class="name">陈楚聪</p>
+				<p class="position">前端</p>
+				<p class="age">25</p>
+			</li>
+		</ul>
+		<div class="wrap">
+			
+		</div>
+		
+	</body>
+</html>
