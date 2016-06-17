@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>zepto</title>
+	<script type="text/javascript" src="js/zepto.all.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		var data = {};
+		(function($){
+			$(function(){
+				data.a="haha";
+				$(".flagInput[data-mark=1]").val("01");
+				$(".flagInput[data-mark=2]").val("02");
+
+				data.Fn = function(param){
+					alert(param);
+				}
+			});		
+		})(jQuery);
+		(function($){
+			$(function(){
+				console.log(data.a);
+				$(".flagInput[data-mark='3']").val("03");
+				$(".flagInput[data-mark=4]").val("04");
+			});		
+		})(Zepto);
+		
+	</script>
+</head>
+<body>
+	<input class="flagInput" data-mark="1" type="text" name="">
+	<input class="flagInput" data-mark="2" type="text" name="">
+	<input class="flagInput" data-mark="3" type="text" name="">
+	<input class="flagInput" data-mark="4" type="text" name="">
+	<button onclick="data.Fn('hi')">sayhi</button>
+</body>
+</html>
