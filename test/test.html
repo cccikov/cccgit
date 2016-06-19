@@ -1,34 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>js获取url参数</title>
-    <script type="text/javascript">
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");//以 name 开头或者以 "&"+name 开头，中间是 "=" + 若干个非&的字符 ,后面是结尾 或者 以 "&"结尾
-        var r = window.location.search.substr(1).match(reg);
-        console.log(r);
-        if (r != null) {
-        	return unescape(r[2]);
-        }
-        return null;
-    }
-    console.log(window.location.search)
-    console.log(getQueryString("id"))
-    </script>
-</head>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<script src="js/base.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			console.log(navigator.appVersion);
+			console.dir(ccc.getStorage("se"));
+			ccc.setStorage("se", {
+				"employees": [{
+					"firstName": "John",
+					"lastName": "Doe"
+				}, {
+					"firstName": "Anna",
+					"lastName": "Smith"
+				}, {
+					"firstName": "Peter",
+					"lastName": "Jones"
+				}]
+			});
+			
+			ccc.toast("hi")
+		</script>
+	</head>
 
-<body>
-    <style type="text/css">
-        .wrap{
-            display: inline;
-            background: red;
-        }
-    </style>
-    <div class="wrap">
-        <img src="img/height.jpg">
-    </div>
-</body>
+	<body>
+
+	</body>
 
 </html>
