@@ -1,32 +1,177 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh-CN">
 
-	<head>
-		<meta charset="UTF-8" />
-		<title>Document</title>
-		<script src="js/base.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			console.log(navigator.appVersion);
-			console.dir(ccc.getStorage("se"));
-			ccc.setStorage("se", {
-				"employees": [{
-					"firstName": "John",
-					"lastName": "Doe"
-				}, {
-					"firstName": "Anna",
-					"lastName": "Smith"
-				}, {
-					"firstName": "Peter",
-					"lastName": "Jones"
-				}]
-			});
-			
-			ccc.toast("hi")
-		</script>
-	</head>
+<head>
+    <meta charset="utf-8">
+    <title>fullPage.js — 回调函数演示_dowebok</title>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <style>
+    /*.section {
+        text-align: center;
+        font: 50px "Microsoft Yahei";
+        color: #fff;
+    }
+    */
+    /*.section2 p {
+        position: relative;
+        left: -120%;
+    }
+    
+    .section3 p {
+        position: relative;
+        bottom: -120%;
+    }
+    
+    .section4 p {
+        display: none;
+    }*/
+    .section{
+    	position: relative;
 
-	<body>
+    }
+    .section .a-wrap{
+    	position: absolute;
+    	bottom:0;
+    	left:0;
+    	width:100%;
+		text-align: center;
+    }
+    .section .a-wrap{
+    	-webkit-animation-duration: 1s;
+    	animation-duration: 1s;
+    	-webkit-animation-fill-mode: both;
+    	animation-fill-mode: both;
+    	-webkit-animation-iteration-count: infinite;
+    	animation-iteration-count: infinite;
+    	-webkit-animation-name: bounce;
+    	animation-name: bounce;
+    	-webkit-transform-origin: center bottom;
+    	transform-origin: center bottom;
+    }
+    @-webkit-keyframes bounce {
+      from, 20%, 53%, 80%, to {
+        -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+      }
 
-	</body>
+      40%, 43% {
+        -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        -webkit-transform: translate3d(0, -10px, 0);
+        transform: translate3d(0, -10px, 0);
+      }
+
+      70% {
+        -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        -webkit-transform: translate3d(0, -5px, 0);
+        transform: translate3d(0, -5px, 0);
+      }
+
+      
+    }
+
+    @keyframes bounce {
+      from, 20%, 53%, 80%, to {
+        -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+      }
+
+      40%, 43% {
+        -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        -webkit-transform: translate3d(0, -10px, 0);
+        transform: translate3d(0, -10px, 0);
+      }
+
+      70% {
+        -webkit-animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        -webkit-transform: translate3d(0, -5px, 0);
+        transform: translate3d(0, -5px, 0);
+      }
+
+      
+    }
+    
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.fullPage.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script>
+    $(function() {
+        $('#dowebok').fullpage({
+            sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90']
+
+            // ,afterLoad: function(anchorLink, index) {
+            //     if (index == 2) {
+            //     	alert("enter 2")
+            //         $('.section2').find('p').delay(500).animate({
+            //             left: '0'
+            //         }, 1500, 'easeOutExpo');
+            //     }
+            //     if (index == 3) {
+            //     	alert("enter 3")
+            //         $('.section3').find('p').delay(500).animate({
+            //             bottom: '0'
+            //         }, 1500, 'easeOutExpo');
+            //     }
+            //     if (index == 4) {
+            //     	alert("enter 4")
+            //         $('.section4').find('p').fadeIn(2000);
+            //     }
+            // },
+            // onLeave: function(index, direction) {
+            //     if (index == '2') {
+            //     	alert("leave 2");
+            //         $('.section2').find('p').delay(500).animate({
+            //             left: '-120%'
+            //         }, 1500, 'easeOutExpo');
+            //     }
+            //     if (index == '3') {
+            //     	alert("leave 3");
+            //         $('.section3').find('p').delay(500).animate({
+            //             bottom: '-120%'
+            //         }, 1500, 'easeOutExpo');
+            //     }
+            //     if (index == '4') {
+            //     	alert("leave 4");
+            //         $('.section4').find('p').fadeOut(2000);
+            //     }
+            // }
+        });
+
+        $(".a-wrap a").on("click",function(){
+        	$.fn.fullpage.moveSectionDown();
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div id="dowebok">
+        <div class="section section1">
+        	<div class="a-wrap">
+        		<a href="javascript:void(0)">往下滚</a>
+        	</div>
+        </div>
+        <div class="section section2">
+            
+        </div>
+        <div class="section section3">
+            
+        </div>
+        <div class="section section4">
+            
+        </div>
+    </div>
+    <a href="http://www.dowebok.com/" style="display: none;">dowebok</a>
+    <a href="http://www.dowebok.com/77.html" style="display: none;">jQuery全屏滚动插件fullPage.js</a>
+    <script src="http://hm.baidu.com/h.js?988268596e7a833ffbfb2e9f82d93e18"></script>
+</body>
 
 </html>
