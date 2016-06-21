@@ -7,19 +7,33 @@
 <body>
 	<script type="text/javascript">
 	var obj = {
+		name:"班长0",
 		age:18,
-		name:"班长",
 		maimeng:function() {
 			alert("打你喔~~");
+			console.log(this);//指向这个obj 因为这个maimeng的函数是obj的方法，所以肯定指向这个obj
 		}
 	};
+	
 	var obj1 = {
 		age:20,
 		name:"班长1",
 		maimeng:function() {
 			alert("打你喔1~~");
+			console.log(this);
 		}
 	}
+	
+	obj.maimeng();
+	
+	
+	
+	function mai(){
+		console.log(this);
+	}
+	mai();
+	//上面mai this指向window是因为，这样相当于 var mai = function(){……} 即 相当于 window.mai = function(){……}
+	console.log(window.mai);
 	</script>
 </body>
 </html>
