@@ -1,41 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" charset="utf-8">
+	<meta charset="UTF-8">
+	<title>js控制动画</title>
+	<style type="text/css">
+		
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
 		$(function(){
-			/*for(var i = 0;i<9;i++){
-				setTimeout(function(){
-					console.log(i);
-					$("p").eq(i).html(i);
-				},i*1000);
-			}*/
-			//上述方法不行是因为，定时器是延时执行的，当执行定时器里面的函数时，其实for循环早就走完了，所以i就等于9，相当于执行了9个i等于就的函数.
-			
-			for(var i=0;i<10;i++){
-				showI(i);
+
+			function jsOne(){
+				var way11 = document.getElementById("way11");
+				var index = 0;
+				var timer = setInterval(function(){
+					index++;
+					way11.style.marginLeft= index+"px";
+					if(index>=300){
+						clearInterval(timer);
+					}
+				},20);
+
 			}
-			function showI(i){
-				setTimeout(function(){
-					console.log(i);
-					$("p").eq(i).html(i);
-				},i*1000);
-			}
+			jsOne();
+
 		});
+
 	</script>
+	
 </head>
 <body>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
+	<div id="way1">
+		<p id="way11">这是方法1，直接用js写，原生js</p>
+		<p>jq的animate</p>
+	</div>
 </body>
 </html>

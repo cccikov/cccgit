@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		p,.test1{
+			transform: translate3d(10px,10px,0);
+		}
+		p,.test2{
+			animation:test 2s ease-out both infinite;
+		}
+		@keyframes test {
+			from{
+				transform: translate3d(0px,0px,0);
+			}
+			to{
+				transform: translate3d(100px,100px,0);
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<span class="test1">之前做一个页面，发现transform对inline元素无效，但是若是transform是放在动画里就有效了</span>
+	<span class="test2">测试一下 transform对inline元素有无效果</span>
+	<p>总结：transform对inline元素是无效果的，但是放在动画animation里面就有效</p>
+</body>
+</html>
