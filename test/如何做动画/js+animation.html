@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js+animation</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin:0;
+			}
+			#ani{
+				/*animation: test 5s infinite;*/
+				animation-iteration-count: infinite;
+				animation-timing-function: linear;/*控制运动曲线*/
+				
+			}
+			#ani.name{
+				animation-name: test;
+			}
+			#ani.time{
+				animation-duration: 5s;
+			}
+			#ani.pause{
+				animation-play-state: paused;
+			}
+			@keyframes test{/*这里也可以通过百分比不同 控制运动曲线*/
+				from{
+					transform: translate3d(0,0,0);
+				}
+				50%{
+					transform: translate3d(200px,0,0);
+				}
+				to{
+					transform: translate3d(300px,0,0);
+				}
+			}
+		</style>
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn").on("click",function(){
+					$("#ani").removeClass("pause").addClass("name");
+				});
+				$("#pause").on("click",function(){
+					$("#ani").addClass("pause");
+				});
+				$("#stop").on("click",function(){
+					$("#ani").removeClass("pause name");
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<div class="time" id="ani">
+			js+animation
+		</div>
+		<button id="btn">开始动画</button>
+		<button id="pause">暂定动画</button>
+		<button id="stop">停止动画</button>
+		<p>
+			用animation+js写动画，控制方法有两个:<br />
+			1、用js控制添加、删除含有 animation-name 属性的className,虽然说要元素有看得到的动画必须至少有两个属性animation-name，animation-duration，但是元素其实只要有了animation-name就已经是有了动画，因为已经与@keyframes互相绑定了，只是没有animation-duration(持续事件)，没有动起来而已。（其实说白了就是js控制animation-name）
+			2、控制animation-play-state，但是这种方法没有停止，要停止始终要改变animation-name。
+		</p>
+	</body>
+</html>

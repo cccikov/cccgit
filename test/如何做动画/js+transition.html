@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js+transition</title>
+		<style type="text/css">
+			#tran{
+				opacity: 1;
+				transition: transform 5s linear,opacity 5s linear;;/*linear 控制运动曲线*/
+			}
+			#tran.down{
+				opacity: 0;
+				transform: translate3d(0,300px,0);
+			}
+		</style>
+		<script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#start").on("click",function(){
+					$("#tran").addClass("down");
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="tran">
+			js+transition
+		</div>
+		<button id="start">开始动画</button>
+		<p>用js+transition,写不同状态的className，通过js增、减、改来改变状态，由于有transition的存在，过渡效果就成了动画了，这种方式比较简单，容易写,只要定义好两个状态就可以;缺点是无法暂停，由于只是两点状态的过渡无法做复杂的动画，如抖动。但是总体来说还是挺常用的，实际情况好多就是两点状态</p>
+	</body>
+</html>

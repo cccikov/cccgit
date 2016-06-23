@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<title>js控制动画</title>
 	<style type="text/css">
 		
 	</style>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(function(){
+		window.onload = function(){
+			
 
 			//方法1	
 			function jsOne(){
@@ -50,8 +52,8 @@
 			}
 			 window.requestAnimationFrame(add3);
 		
-			$("#way2").animate({"margin-left":300},5000,"linear");
-		});
+			$("#way2").animate({"margin-left":300},5010,"linear");
+		}
 
 	</script>
 	
@@ -63,7 +65,7 @@
 		<p id="way13">js的 requestAnimFrame</p>
 	</div>
 	<div>
-		<p id="way2">这是用jq的animate()方法</p>
+		<p id="way2">这是用jq的animate()方法，也会跳哦</p>
 	</div>
 </body>
 </html>
