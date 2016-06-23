@@ -1,0 +1,1 @@
+将left 换成为 transform:translate3d() 触发gpu 应该性能会好一点
