@@ -10,6 +10,7 @@
 	<script type="text/javascript">
 		$(function(){
 
+			//方法1	
 			function jsOne(){
 				var way11 = document.getElementById("way11");
 				var index = 0;
@@ -19,10 +20,36 @@
 					if(index>=300){
 						clearInterval(timer);
 					}
-				},20);
-
+				},16.7);
 			}
 			jsOne();
+
+			//方法2
+			var index2 = 0;
+			var way12 = document.getElementById("way12");
+			function add2(){
+				index2++;
+				way12.style.marginLeft= index2+"px";
+				var timer = setTimeout(add2,16.7);
+				if(index2>=300){
+					clearTimeout(timer);
+				}
+			}
+			setTimeout(add2,16.7);
+
+			//方法3
+			var index3 = 0;
+			var way13 = document.getElementById("way13");
+			function add3(){
+				index3+=1;//requestAnimationFrame 调速度只能通过这个调
+				way13.style.marginLeft= index3+"px";
+				var timer =  window.requestAnimationFrame(add3);
+				if(index3>=300){
+					window.cancelAnimationFrame(timer);
+				}
+			}
+			 window.requestAnimationFrame(add3);
+		
 
 		});
 
@@ -31,8 +58,9 @@
 </head>
 <body>
 	<div id="way1">
-		<p id="way11">这是方法1，直接用js写，原生js</p>
-		<p>jq的animate</p>
+		<p id="way11">这是方法1，直接用js写，原生js，setInterval；哎呀，怎么感觉setInterval会跳啊</p>
+		<p id="way12">这是方法1，直接用js写，原生js，setTimeout</p>
+		<p id="way13">js的 requestAnimFrame</p>
 	</div>
 </body>
 </html>
