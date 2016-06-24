@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <title>js+tween</title>
     <style type="text/css">
     * {
@@ -40,13 +41,13 @@
 
         var ball = $("#ball");
         var t = 0;
-        var maxT = 100;
+        var maxT = 500;
         var change = $(window).width() - 260;
         var timer = null;
 
 
         function move(param) {
-            t++;
+            t+=1;//速度由 t的增加量与maxT 之间的比值决定
             ball.css("transform", "translate3d(" + Tween[param.first][param.second](t, 100, change, maxT) + "px,0,0)");
             timer = window.requestAnimationFrame(function() {
                 move(atf);
