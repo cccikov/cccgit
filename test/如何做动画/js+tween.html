@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>js+tween</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    #ball {
+        position: fixed;
+        top: 500px;
+        left: 10px;
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        background: red;
+    }
+    </style>
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/tween.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var ccc = {
+            second:["easeIn","easeOut","easeInOut"]
+        };
+        ccc.first = ["Quad","Cubic","Quart","Quint","Sine","Expo","Circ","Elastic","Back","Bounce"]
+    </script>
+    <script type="text/javascript">
+    $(function() {
+        // 生成下拉列表
+        for(var i = 0;i<ccc.first.length;i++){
+            $("<option value="+ccc.first[i]+">"+ccc.first[i]+"</option>").appendTo("#first");
+        }
+        for(var j = 0;j<ccc.second.length;j++){
+            $("<option value="+ccc.second[j]+">"+ccc.second[j]+"</option>").appendTo("#second");
+        }
+
+        var ball = $("#ball");
+        var t = 0;
+        var maxT = 100;
+        var change = $(window).width() - 260;
+        var timer = null;
+
+
+        function move(param) {
+            t++;
+            ball.css("transform", "translate3d(" + Tween[param.first][param.second](t, 100, change, maxT) + "px,0,0)");
+            timer = window.requestAnimationFrame(function() {
+                move(atf);
+            });
+            if (t >= maxT) {
+                t = 0;
+                // window.cancelAnimationFrame(timer);
+            }
+        }
+
+        var atf = { //animation-timing-function
+            "first": "Quad",
+            "second": "easeIn"
+        }
+        timer = window.requestAnimationFrame(function() {
+            move(atf);
+        });
+
+
+        $("select").on("change",function(){
+            window.cancelAnimationFrame(timer);
+            atf.first = $("#first").val();
+            atf.second = $("#second").val();
+            t=0;
+            timer = window.requestAnimationFrame(function() {
+                move(atf);
+            });
+        })
+
+        
+        
+
+        
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="ball"></div>
+        <select id="first">
+            <!-- <option value=""></option> -->
+        </select>
+        <select id="second">
+            <!-- <option value=""></option> -->
+        </select>
+        <button id="go"> go </button>
+        <div>
+        	<img src="tween.png"/>
+        </div>
+    </div>
+
+</body>
+
+</html>

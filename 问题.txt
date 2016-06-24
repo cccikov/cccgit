@@ -3,3 +3,15 @@
 3、用js写动画，速度曲线 tween.js
 4、碰壁反弹
 5、拖拽碰壁反弹 pc+移动端
+6、var ccc = {
+	first:function(){
+
+	}
+}
+
+var ccc = {}
+ccc.first = function(){
+	
+}
+
+7、三级联动json怎么写的
