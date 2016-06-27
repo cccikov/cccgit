@@ -1,69 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>js控制动画</title>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css"/>
 	<style type="text/css">
-		
+		li{
+			line-height: 20px;
+			padding:10px;
+			border: 1px solid #ccc;
+			border-bottom: none;
+		}
+		li:last-of-type{
+			border-bottom: 1px solid #ccc;
+		}
+		li.active{
+			background: lightblue;
+		}
+		.answer-wrap{
+			position: relative;
+			top:-2px;
+			left:1px;
+			height: 165px;
+			width: 153px;
+			overflow: auto;
+		}
 	</style>
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(function(){
-
-			//方法1	
-			function jsOne(){
-				var way11 = document.getElementById("way11");
-				var index = 0;
-				var timer = setInterval(function(){
+			
+			
+			var index = 0;
+			var max = $("li").size()-1;
+			
+			window.onkeydown=function(e){
+				e.preventDefault();
+				if(e.keyCode==40){
+					console.log("下");
 					index++;
-					way11.style.marginLeft= index+"px";
-					if(index>=300){
-						clearInterval(timer);
+					if(index>max){
+						index=0;
 					}
-				},16.7);
-			}
-			jsOne();
-
-			//方法2
-			var index2 = 0;
-			var way12 = document.getElementById("way12");
-			function add2(){
-				index2++;
-				way12.style.marginLeft= index2+"px";
-				var timer = setTimeout(add2,16.7);
-				if(index2>=300){
-					clearTimeout(timer);
+				}else if(e.keyCode==38){
+					console.log("上");
+					index--;
+					if(index<0){
+						index=max;
+					}
+				}else{
+					return
 				}
+				
+				$("li").eq(index).addClass("active").siblings().removeClass("active");
+				
+				console.log($("li").eq(index)[0].offsetTop);
+				
 			}
-			setTimeout(add2,16.7);
-
-			//方法3
-			var index3 = 0;
-			var way13 = document.getElementById("way13");
-			function add3(){
-				index3+=1;//requestAnimationFrame 调速度只能通过这个调
-				way13.style.marginLeft= index3+"px";
-				var timer =  window.requestAnimationFrame(add3);
-				if(index3>=300){
-					window.cancelAnimationFrame(timer);
-				}
-			}
-			 window.requestAnimationFrame(add3);
-		
-			$("#way2").animate({"margin-left":300},5000,"linear");
 		});
-
 	</script>
-	
 </head>
 <body>
-	<div id="way1">
-		<p id="way11">这是方法1，直接用js写，原生js，setInterval；哎呀，怎么感觉setInterval会跳啊</p>
-		<p id="way12">这是方法1，直接用js写，原生js，setTimeout</p>
-		<p id="way13">js的 requestAnimFrame</p>
-	</div>
 	<div>
-		<p id="way2">这是用jq的animate()方法</p>
+		<input type="text" /><button>搜索</button>
+	</div>
+	<div class="answer-wrap">
+		<ul>
+			<li class="active">我是1</li>
+			<li>我是2</li>
+			<li>我是3</li>
+			<li>我是4</li>
+			<li>我是5</li>
+			<li>我是6</li>
+			<li>我是7</li>
+			<li>我是8</li>
+		</ul>
 	</div>
 </body>
 </html>
