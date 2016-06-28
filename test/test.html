@@ -1,80 +1,117 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="css/base.css"/>
-	<style type="text/css">
-		li{
-			line-height: 20px;
-			padding:10px;
-			border: 1px solid #ccc;
-			border-bottom: none;
-		}
-		li:last-of-type{
-			border-bottom: 1px solid #ccc;
-		}
-		li.active{
-			background: lightblue;
-		}
-		.answer-wrap{
-			position: relative;
-			top:-2px;
-			left:1px;
-			height: 165px;
-			width: 153px;
-			overflow: auto;
-		}
-	</style>
-	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-		$(function(){
-			
-			
-			var index = 0;
-			var max = $("li").size()-1;
-			
-			window.onkeydown=function(e){
-				e.preventDefault();
-				if(e.keyCode==40){
-					console.log("下");
-					index++;
-					if(index>max){
-						index=0;
-					}
-				}else if(e.keyCode==38){
-					console.log("上");
-					index--;
-					if(index<0){
-						index=max;
-					}
-				}else{
-					return
-				}
-				
-				$("li").eq(index).addClass("active").siblings().removeClass("active");
-				
-				console.log($("li").eq(index)[0].offsetTop);
-				
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <style type="text/css">
+    li {
+        line-height: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-bottom: none;
+    }
+    
+    li:last-of-type {
+        border-bottom: 1px solid #ccc;
+    }
+    
+    li.active {
+        background: lightblue;
+    }
+    
+    .answer-wrap {
+        opacity: 0.1;
+        position: relative;
+        height: 165px;
+        /*4个li 加一个 border-top*/
+        width: 153px;
+        margin: 0 5px;
+        overflow: auto;
+    }
+    </style>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    $(function() {
+
+		$("#search").on("input",function(){
+			var that = $(this);
+			if(that.val().trim()!=""){
+				$(".answer-wrap").css("opacity",1);
+				$("li").each(function(index,key){
+				});
+			}else{
+				$(".answer-wrap").css("opacity",.1);
 			}
 		});
-	</script>
+
+        function downShow(index) {
+            var index = index;
+            var max = $("li").size() - 1;
+            $(window).off("keydown").on("keydown", function(e) {
+                if (e.keyCode == 40) { //下
+                    e.preventDefault(); //禁用默认事件，否则上下箭头会自己移动滚动条的，只是上下键的时候禁用
+                    // index的变化
+                    index++;
+                    if (index > max) {
+                        index = 0;
+                    }
+                } else if (e.keyCode == 38) { //上
+                    e.preventDefault(); //禁用默认事件，否则上下箭头会自己移动滚动条的，只是上下键的时候禁用
+                    // index的变化
+                    index--;
+                    if (index < 0) {
+                        index = max;
+                    }
+                } else {
+                    return
+                }
+                $("li").eq(index).addClass("active").siblings().removeClass("active");
+
+                var theE = $("li").eq(index); //目标元素
+                var wrapE = $(".answer-wrap"); //包裹元素
+
+                //元素在底下的情况 theE[0].offsetTop+theE.outerHeight()+其他 = wrapE[0].scrollTop+wrapE.height() 其中"其他"为1px的border（是下一个元素的border-top）
+                // wrapE[0].scrollTop = theE[0].offsetTop+theE.outerHeight()+1 - wrapE.height();//选中元素永远在底部
+
+                //元素在顶部的情况 theE[0].offsetTop = wrapE[0].scrollTop;
+                // wrapE[0].scrollTop = theE[0].offsetTop;//选中元素永远在顶部
+
+                //所以最大 在范围里面可允许的最大offsetTop  为 wrapE[0].scrollTop+wrapE.height()-theE.outerHeight()-1;
+                //最小可以允许的offsetTop 为 wrapE[0].scrollTop
+
+                if (theE[0].offsetTop < wrapE[0].scrollTop) {
+                    console.log("上面出去了");
+                    wrapE[0].scrollTop = theE[0].offsetTop; //选中元素永远在顶部
+                } else if (theE[0].offsetTop > wrapE[0].scrollTop + wrapE.height() - theE.outerHeight() - 1) {
+                    console.log("下面出去了");
+                    wrapE[0].scrollTop = theE[0].offsetTop + theE.outerHeight() + 1 - wrapE.height(); //选中元素永远在底部
+                }
+            });
+        }
+
+    });
+    </script>
 </head>
+
 <body>
-	<div>
-		<input type="text" /><button>搜索</button>
-	</div>
-	<div class="answer-wrap">
-		<ul>
-			<li class="active">我是1</li>
-			<li>我是2</li>
-			<li>我是3</li>
-			<li>我是4</li>
-			<li>我是5</li>
-			<li>我是6</li>
-			<li>我是7</li>
-			<li>我是8</li>
-		</ul>
-	</div>
+    <div>
+        <input type="text" id="search" />
+        <button>搜索</button>
+    </div>
+    <div class="answer-wrap">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+    </div>
 </body>
+
 </html>

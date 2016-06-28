@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title></title>
+		<style type="text/css">
+			#wrap {
+				width: 100%;
+				height: 5000px;
+			}
+			
+			.btn {
+				position: fixed;
+				bottom: 20px;
+				right: 10px;
+				width: 40px;
+				height: 40px;
+				border-radius: 20px;
+				opacity: 0;
+				transition: opacity .3s; 
+				pointer-events: none;
+				z-index: 10;
+			}
+			.btn.active{
+				opacity: 1;
+				transition: opacity .3s; 
+				z-index: 11;
+			}
+			
+			.red {
+				background: red;
+			}
+			
+			.blue {
+				background: blue;
+			}
+		</style>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var bodyE = $("body");
+				var delta = 0 ,newScroll = oldScroll = bodyE[0].scrollTop;
+				
+				/*$(window).on("scroll", function(e) {
+					newScroll = bodyE[0].scrollTop;
+					delta = newScroll - oldScroll;
+//					console.log(delta);
+					if(delta>0){
+						$(".blue").stop().fadeIn();
+						$(".red").stop().fadeOut();
+					}else if(delta<0){
+						$(".blue").stop().fadeOut();
+						$(".red").stop().fadeIn();
+					}
+					oldScroll = newScroll;
+				});*/
+				var index = 0;
+				$(window).on("scroll",function(){
+					$(".btn").html(++index);
+				});
+				
+				/*function debounce(func, wait, immediate) {
+				    var timeout;
+				    return function() {
+				        var context = this, args = arguments;
+				        var later = function() {
+				            timeout = null;
+				            if (!immediate) func.apply(context, args);
+				        };
+				        var callNow = immediate && !timeout;
+				        clearTimeout(timeout);
+				        timeout = setTimeout(later, wait);
+				        if (callNow) func.apply(context, args);
+				    };
+				};
+				 
+				var myEfficientFn = debounce(function() {
+				    newScroll = bodyE[0].scrollTop;
+					delta = newScroll - oldScroll;
+					if(delta>200 && newScroll>3000){
+						$(".red").addClass("active");
+						$(".blue").removeClass("active");
+					}else if(delta<-200){
+
+						$(".red").removeClass("active");
+						$(".blue").addClass("active");
+					}
+					oldScroll = newScroll;
+				}, 250);
+				 
+				// 绑定监听
+				window.addEventListener('scroll', myEfficientFn);*/
+			});
+		</script>
+		<script type="text/javascript">
+		</script>
+	</head>
+
+	<body>
+		<div id="wrap"></div>
+		<div class="btn red"></div>
+		<div class="btn blue active"></div>
+	</body>
+
+</html>
