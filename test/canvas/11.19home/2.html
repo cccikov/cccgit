@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>将视频转换成灰度，以及反色</title>
+	</head>
+
+	<body>
+		<p>记得要用服务器打开</p>
+		<video autoplay="autoplay" id="video" loop="loop" controls="controls" style="display: none;">
+			<source src="html5-canvas-video/BigBuckBunny_640x360.mp4" type="video/mp4"></source>
+			<source src="html5-canvas-video/BigBuckBunny_640x360.ogv" type="video/ogg"></source>
+		</video>
+		<canvas id="canvas" width="640" height="360"></canvas>
+		<canvas id="canvas1" width="640" height="360"></canvas>
+		<script type="text/javascript">
+			window.onload = function() {
+				var canvas = document.getElementById("canvas");
+				var ctx = canvas.getContext("2d");
+				var video = document.getElementById("video");
+
+				function play() {
+					//灰度
+					ctx.drawImage(video, 0, 0);
+					var Vdata = ctx.getImageData(0, 0, 320, 360);
+					for (var i = 0; i < Vdata.data.length; i += 4) {
+						var r = Vdata.data[i];
+						var g = Vdata.data[i + 1];
+						var b = Vdata.data[i + 2];
+						var a = Vdata.data[i + 3];
+						var avg = (r + g + b) / 3;
+						Vdata.data[i] = Vdata.data[i + 1] = Vdata.data[i + 2] = avg;
+					}
+					ctx.putImageData(Vdata, 0, 0);
+					//黑白
+					var Vdata2 = ctx.getImageData(320, 0, 320, 360);
+					for (var i = 0; i < Vdata2.data.length; i += 4) {
+						var r = Vdata2.data[i];
+						var g = Vdata2.data[i + 1];
+						var b = Vdata2.data[i + 2];
+						var a = Vdata2.data[i + 3];
+						var avg = (r + g + b) / 3;
+						if (avg > 100) {
+							avg = 255;
+						} else {
+							avg = 0;
+						}
+						Vdata2.data[i] = Vdata2.data[i + 1] = Vdata2.data[i + 2] = avg;
+					}
+					ctx.putImageData(Vdata2, 320, 0);
+					//执行
+					window.requestAnimationFrame(play);
+				}
+				window.requestAnimationFrame(play);
+				var canvas1 = document.getElementById("canvas1");
+				var ctx1 = canvas1.getContext("2d");
+
+				function play1() {
+					//反色
+					ctx1.drawImage(video, 0, 0);
+					var Vdata = ctx1.getImageData(0, 0, 320, 360);
+					for (var i = 0; i < Vdata.data.length; i += 4) {
+						Vdata.data[i] = 255 - Vdata.data[i];
+						Vdata.data[i + 1] = 255 - Vdata.data[i + 1];
+						Vdata.data[i + 2] = 255 - Vdata.data[i + 2];
+					}
+					ctx1.putImageData(Vdata, 0, 0);
+					//连环画
+					var Vdata2 = ctx1.getImageData(320, 0, 320, 360);
+					for (var i = 0; i < Vdata2.data.length; i += 4) {
+						var r = Vdata2.data[i];
+						var g = Vdata2.data[i + 1];
+						var b = Vdata2.data[i + 2];
+						var a = Vdata2.data[i + 3];
+						var R = Math.abs(g - b + g + r) * r / 256;
+						var G = Math.abs(b - g + b + r )* r / 256;
+						var B = Math.abs(b - g + b + r ) * g / 256;
+						Vdata2.data[i] = R;
+						Vdata2.data[i + 1] = G;
+						Vdata2.data[i + 2] = B;
+					}
+					ctx1.putImageData(Vdata2, 320, 0);
+					window.requestAnimationFrame(play1);
+				}
+				window.requestAnimationFrame(play1);
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>5.使用canvas制作动画</title>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var index = 0;
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var img = new Image();
+			img.onload = function() {
+				function animate() {
+					ctx.clearRect(0, 0, 500, 500);
+					ctx.drawImage(img, index, 0, 108, 108, 0, 0, 108, 108);
+					index += 108;
+					if (index > 1080) {
+						index = 0;
+					}
+				}
+				var timer = setInterval(animate, 80);
+			};
+			img.src = "img/h.png";
+			
+		</script>
+	</body>
+
+</html>

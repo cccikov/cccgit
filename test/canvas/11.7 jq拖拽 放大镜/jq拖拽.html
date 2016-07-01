@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>jq拖拽</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			#block {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100px;
+				width: 100px;
+				background-color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="block">
+
+		</div>
+		<script src="../../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#block").on("mousedown", function(e) {
+				var e = e || window.event;
+				console.log(e);
+				var mouseX = e.clientX - $("#block").offset().left;
+				var mouseY = e.clientY - $("#block").offset().top;
+				console.log(mouseX + "  " + mouseY);
+				$(document).on("mousemove", function(e) {
+					var e = e || window.event;
+					var moveX = e.clientX - mouseX;
+					var moveY = e.clientY - mouseY;
+					if (moveX < 0) {
+						moveX = 0;
+					} else if (moveX > ($(window).width() - $("#block").innerWidth())) {
+						moveX = $(window).width() - $("#block").innerWidth();
+					}
+					if (moveY < 0) {
+						moveY = 0;
+					} else if (moveY > ($(window).height() - $("#block").innerHeight())) {
+						moveY = $(window).height() - $("#block").innerHeight();
+					}
+					$("#block").css({
+						"left": moveX,
+						"top": moveY
+					});
+				})
+			})
+			 $("#block").on("mouseup", function() {
+				$(document).off();
+			})
+		</script>
+	</body>
+
+</html>

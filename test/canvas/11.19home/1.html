@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>1.使用globalCompositeOperation</title>
+	</head>
+	<body>
+		<div id="text">
+			
+		</div>
+		<canvas id="canvas" width="1024" height="768"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var Otext = document.getElementById("text"); 
+			var gcoArr = ["source-over","destination-over","source-in","destination-in","source-out","destination-out","source-atop","destination-atop","lighter","darken","xor","copy"]
+			var i=0;
+			function change(){
+				canvas.height = canvas.height;//重置画布
+//				ctx.clearRect(0,0,1024,768);//擦除画布上内容，原来内容还是会影响后面覆盖在上面的内容
+				
+				ctx.fillStyle = "blue";
+				ctx.fillRect(0,0,200,200);
+				
+				ctx.beginPath();
+				ctx.arc(200,200,120,0,2*Math.PI,true);
+				ctx.closePath();
+				ctx.fillStyle = "red";//先写fillstyle在fill()
+//				console.log(gcoArr[i]+" "+i);
+				Otext.innerHTML = "这是 "+gcoArr[i]+" 的效果";
+				ctx.globalCompositeOperation=gcoArr[i];
+				i++;
+				if(i>gcoArr.length-1){
+					i=0;
+				}
+				ctx.fill();//			
+			}
+			change();
+			var timer = setInterval(change,500);
+		</script>
+	</body>
+</html>

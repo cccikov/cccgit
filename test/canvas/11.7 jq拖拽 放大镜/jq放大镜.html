@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>jq放大镜</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			#wrap {
+				display: inline-block;
+				position: relative;
+				/*border: 1px solid red;*/
+				margin: 100px;
+			}
+			#small {
+				position: relative;
+				width: 350px;
+				height: 350px;
+				/*border: 1px solid black;*/
+			}
+			#small:hover {
+				cursor: move;
+			}
+			#slide {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 153.125px;
+				/*       slide / small = big / bigPicture ; slide = big*small / bigPicture       */
+				
+				width: 153.125px;
+				background: yellow;
+				opacity: 0.3;
+				filter: alpha(opacity=30);
+			}
+			#big {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 360px;
+				width: 350px;
+				height: 350px;
+				/*border: 1px solid black;*/
+				background-image: url(img/img2.jpg);
+				background-repeat: no-repeat;
+				background-position: 0px 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div id="small">
+				<img src="img/img1.jpg" />
+				<div id="slide"></div>
+			</div>
+			<div id="big"></div>
+		</div>
+		<script src="../../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var small = $("#small");
+			var big = $("#big");
+			var slide = $("#slide");
+			var rate = big.width() / slide.width();
+			small.on("mouseenter", function() {
+				big.show();
+				slide.show();
+				small.on("mousemove", function(e) {
+					var e = e || window.event;
+					var l = e.clientX - small.get(0).getBoundingClientRect().left - slide.width() / 2;
+					var t = e.clientY - small.get(0).getBoundingClientRect().top - slide.height() / 2;
+					if (l < 0) {
+						l = 0;
+					} else if (l > (small.width() - slide.width())) {
+						l = small.width() - slide.width();
+					}
+					if (t < 0) {
+						t = 0;
+					} else if (t > (small.height() - slide.height())) {
+						t = small.height() - slide.height();
+					}
+					slide.css({
+						"left": l,
+						"top": t
+					})
+					big.css({
+						"background-position": ""+l*-rate+"px "+t*-rate+"px"
+					})
+				})
+			})
+			 small.on("mouseleave", function() {
+				big.hide();
+				slide.hide();
+				small.off("mousemove");
+			})
+		</script>
+	</body>
+
+</html>

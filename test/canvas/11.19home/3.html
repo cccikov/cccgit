@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>3.颜色拾取器（见color.gif）</title>
+		<style type="text/css">
+			#col{
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				background:black;
+				vertical-align: top;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<span id="col">
+			
+		</span>
+		<script type="text/javascript">
+			var col = document.getElementById("col");
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			
+			var x=0,y=0;
+			for(var i=0;i<25;i++){
+				for(var j=0;j<25;j++){
+					y = 20*i;
+					x = 20*j;
+					ctx.fillStyle = "rgb("+(255-11*i)+","+(255-11*j)+",0)";
+					ctx.fillRect(x,y,20,20)
+				}
+			}
+			canvas.onmousemove = function(e){
+				var mouseX = e.offsetX;
+				var mouseY = e.offsetY;
+				var imgData = ctx.getImageData(mouseX,mouseY,1,1);	
+//				console.log(imgData);
+				var r = imgData.data[0];
+				var g = imgData.data[1];
+				var b = imgData.data[2];
+				var a = imgData.data[3];
+				col.style.background = "rgba("+r+","+g+","+b+",1)";
+			}
+			
+		</script>
+	</body>
+</html>

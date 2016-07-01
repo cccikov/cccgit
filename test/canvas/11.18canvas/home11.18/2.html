@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>2.a.读取图片到canvas画布上,b.将canvas画布内容输出到image里</title>
+		<style type="text/css">
+			#canvas{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="300"></canvas>
+		<script>
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var url;
+			var img = new Image();
+			img.onload = function(){
+				ctx.drawImage(img,0,0);
+				url = canvas.toDataURL("image/png"); //要在服务器里才可以使用
+				console.log(url);
+				callback();
+			}
+			img.src = "img/3.jpg";
+			
+			function callback(){
+				var newImage = document.createElement("img");
+				newImage.src = url;
+				document.body.appendChild(newImage);
+			}
+		</script>
+	</body>
+</html>

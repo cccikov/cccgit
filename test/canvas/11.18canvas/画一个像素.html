@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>画一个像素</title>
+		<style type="text/css">
+			#canvas{
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			
+			ctx.beginPath();
+			//线宽为奇数的时候，坐标加点5
+			ctx.moveTo(100.5,20);
+			ctx.lineTo(100.5,300);
+			ctx.stroke();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>4.线性渐变（绿到蓝），径向渐变（黄到绿），使用（img/h8.png）填充背景（重复平铺）</title>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			
+			//设置线性渐变方向			
+			var linear = ctx.createLinearGradient(0, 0, 0, 200);
+			linear.addColorStop(0, "green");
+			linear.addColorStop(1, "blue");
+			
+			//设置径向渐变方向
+			var radial = ctx.createRadialGradient(300, 100, 100, 300, 100, 0);
+			radial.addColorStop(0, "yellow");
+			radial.addColorStop(1, "green");
+			
+			ctx.fillStyle = linear;
+			ctx.fillRect(0, 0, 200, 200);
+			
+			ctx.fillStyle = radial;
+			ctx.arc(300, 100, 100, 0, 2 * Math.PI, true);
+			ctx.fill();
+			
+			var img = document.createElement("img");
+			img.onload = function() {
+				var pat = ctx.createPattern(img, "repeat");
+				ctx.fillStyle = pat;
+				ctx.fillRect(0, 200, 500, 300);
+			}
+			img.src = "img/h8.png";
+						
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>canvas圆</title>
+		<style type="text/css">
+			#canvas{
+				/*transform: rotate(-45deg);*/
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			ctx.arc(200,200,100,Math.PI,(Math.PI*3/2),true);//true为逆时针
+			ctx.stroke();
+			
+			
+			
+//			ctx.beginPath();
+//			ctx.moveTo(200,100);
+			
+			ctx.lineTo(200,200);
+			ctx.lineTo(100,200);
+			ctx.fillStyle = "red";
+			ctx.fill();
+			ctx.strokeStyle = "black";
+			ctx.lineWidth = 1;			
+			ctx.stroke();
+			
+			
+		</script>
+	</body>
+</html>

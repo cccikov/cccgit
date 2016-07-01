@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>canvas慢慢画圆</title>
+		<style type="text/css">
+			#canvas{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var index = 0;
+			var timer = setInterval(function(){
+				index++;				
+				ctx.moveTo(300,200);
+				ctx.arc(200,200,100,0,Math.PI*(index/180),false);
+				ctx.stroke();
+			},20)			
+		</script>
+	</body>
+</html>

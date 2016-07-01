@@ -1,171 +1,31 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <title>键盘上下箭头选择 - 带滚动条变换</title>
-    <link rel="stylesheet" type="text/css" href="css/base.css" />
-    <style type="text/css">
-    li {
-        line-height: 20px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-bottom: none;
-    }
-    
-    li:last-of-type {
-        border-bottom: 1px solid #ccc;
-    }
-    
-    li.active {
-        background: lightblue;
-    }
-    
-    .answer {
-        /*opacity: 0.3;*/
-        display: none;
-        position: relative;
-        height: 165px;
-        /*4个li 加一个 border-top*/
-        width: 153px;
-        margin: 0 5px;
-        overflow: auto;
-    }
-    
-    .answer.active {
-        /*opacity: 1;*/
-        display: block;
-    }
-    </style>
-    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-    //  事件顺序 focus →  input → 上下箭头
-    $(function() {
-        var index = 0;
-        var max = $("li").length;
-        var min = 0;
-
-        var seIn = $("#search");
-        var wrap = $(".answer");
-
-        // 重置
-        function reset(flag){
-            if(!flag){
-                index=0;
-            }
-            $("li").removeClass("active");
-            wrap.scrollTop(0);
-        }
-        function change(obj, _index) {
-            obj.eq(_index).addClass("active").siblings().removeClass("active");
-            var theE = obj.eq(_index); //目标元素
-            var wrapE = $(".answer"); //包裹元素
-
-            //元素在底下的情况 theE[0].offsetTop+theE.outerHeight()+其他 = wrapE[0].scrollTop+wrapE.height() 其中"其他"为1px的border（是下一个元素的border-top）
-            // wrapE[0].scrollTop = theE[0].offsetTop+theE.outerHeight()+1 - wrapE.height();//选中元素永远在底部
-
-            //元素在顶部的情况 theE[0].offsetTop = wrapE[0].scrollTop;
-            // wrapE[0].scrollTop = theE[0].offsetTop;//选中元素永远在顶部
-
-            //所以最大 在范围里面可允许的最大offsetTop  为 wrapE[0].scrollTop+wrapE.height()-theE.outerHeight()-1;
-            //最小可以允许的offsetTop 为 wrapE[0].scrollTop
-
-            if (theE[0].offsetTop < wrapE[0].scrollTop) {
-                console.log("上面出去了");
-                wrapE[0].scrollTop = theE[0].offsetTop; //选中元素永远在顶部
-            } else if (theE[0].offsetTop > wrapE[0].scrollTop + wrapE.height() - theE.outerHeight() - 1) {
-                console.log("下面出去了");
-                wrapE[0].scrollTop = theE[0].offsetTop + theE.outerHeight() + 1 - wrapE.height(); //选中元素永远在底部
-            }
-        }
-
-        seIn.on("focus",function(){
-            // 重置
-            reset();
-            if(seIn.val().trim()!=""){
-                wrap.addClass("active");
-            }
-
-        });
-        seIn.on("blur",function(){
-            wrap.removeClass("active");
-        });
-
-        seIn.on("input", function() {
-            var that = $(this);
-            var theVal = that.val().trim();
-            //li赋值
-            $("li").each(function(index, key) {
-                $(key).html(theVal + (index + 1));
-            });
-            // 重置
-            reset();
-
-            if (theVal != "") { //值不为空
-                wrap.addClass("active");
-
-                $("#search").off("keydown").on("keydown", function(e) {
-
-                    if (e.keyCode == 40) { //下
-                        e.preventDefault(); //禁用默认事件，否则上下箭头会自己移动滚动条的，只是上下键的时候禁用
-                        index++;
-                        if (index > max) {
-                            index = min;
-                        }
-                    } else if (e.keyCode == 38) { //上
-                        e.preventDefault(); //禁用默认事件，否则上下箭头会自己移动滚动条的，只是上下键的时候禁用
-                        index--;
-                        if (index < min) {
-                            index = max;
-                        }
-                    } else {
-                        return
-                    }
-
-                    if(index == 0){
-                        reset(true);
-                        seIn.val(theVal);
-                    }else{
-                        change($("li"), index - 1);
-                        seIn.val($("li").eq(index-1).text());
-                    }
-
-                });
-            } else {
-                wrap.removeClass("active");
-            }
-        });
-
-        $("li").on("mouseenter",function(){
-            var that = $(this);
-            that.addClass("active").siblings().removeClass("active");
-            seIn.val(that.text());
-            index = that.index()+1;
-        });
-        
-
-    });
-    </script>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script type="text/javascript">
+		function SuperType(){
+			this.property = true;
+		}
+		SuperType.prototype.getSuperValue = function(){
+			return this.property;
+		}
+		
+		function SubType(){
+			this.subproperty = false;
+		}
+		SubType.prototype = new SuperType();
+		
+		SubType.prototype.getSubValue = function(){
+			return this.subproperty;
+		}
+		
+		var instance = new SubType();
+		alert(instance.getSuperValue());
+		alert(instance.getSubValue());
+	</script>
 </head>
-
 <body>
-    <div>
-        <input type="text" id="search" />
-        <button>搜索</button>
-    </div>
-    <div class="answer">
-        <ul>
-            <!--  -->
-            <li>我是1</li>
-            <li>我是2</li>
-            <li>我是3</li>
-            <li>我是4</li>
-            <li>我是5</li>
-            <li>我是6</li>
-            <li>我是7</li>
-            <li>我是8</li>
-        </ul>
-    </div>
+	
 </body>
-
 </html>

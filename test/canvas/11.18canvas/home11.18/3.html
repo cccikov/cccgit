@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>3.canvas画布输出“I'm studying canvas”,字号36，字体arial，水平居中</title>
+		<style type="text/css">
+			#canvas{
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			
+			ctx.font = "36px arial"
+			var str = "I'm studying canvas"
+			var textWidth = ctx.measureText(str);			
+			ctx.fillText(str,250-textWidth.width/2,250);
+			
+		</script>
+	</body>
+</html>

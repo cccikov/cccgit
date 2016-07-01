@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style type="text/css">
+		#canvas{
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<p>默认宽高300*150，要设置宽高，在行内样式里面设置</p>
+	<canvas id="canvas" width="400" height="300">
+		你的浏览器不支持canvas
+	</canvas>
+	<!-- <noscript>
+		你的浏览器不支持JavaScript或者禁用了JavaScript
+	</noscript> -->
+	<script type="text/javascript">
+		
+		// fill填充，stroke描边
+		//fillRect
+		var canvas = document.getElementById("canvas");
+		// webgl才是3d
+		var ctx = canvas.getContext("2d");
+		// console.log(ctx);
+
+		//画矩形 
+		ctx.fillStyle = "red";
+		ctx.fillRect(2,2,100,50)//填充一个矩形
+		
+		ctx.strokeStyle="blue";
+		ctx.lineWidth = 5;
+		ctx.strokeRect(0,0,150,100);
+
+		ctx.clearRect(0,0,50,50);//清空一定区域
+		
+	</script>
+</body>
+</html>

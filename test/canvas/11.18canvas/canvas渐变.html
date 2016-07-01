@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>canvas渐变</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");			
+			
+		
+			var linearGradient = ctx.createLinearGradient(0,0,0,500);	//只是定义渐变方向		
+			linearGradient.addColorStop(0,"red");
+			linearGradient.addColorStop(1,"yellow");
+			
+			ctx.fillStyle = linearGradient;
+			ctx.fillRect(0,0,500,500);
+
+			
+			
+			var RadialGradient = ctx.createRadialGradient(250,250,250,100,250,0);
+			RadialGradient.addColorStop(0,"black");	
+			RadialGradient.addColorStop(0.5,"Purple");
+			RadialGradient.addColorStop(1,"white");
+			
+			ctx.arc(250,250,250,0,2*Math.PI,true);
+			ctx.fillStyle = RadialGradient;
+			ctx.fill();
+			
+		</script>
+	</body>
+
+</html>

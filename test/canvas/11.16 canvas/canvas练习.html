@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas练习</title>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		ctx.fillStyle = "#000";
+		ctx.fillRect(0,0,200,200);
+		ctx.clearRect(25,25,150,150);
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 2;
+		ctx.strokeRect(40,40,120,120);
+	</script>
+</body>
+</html>

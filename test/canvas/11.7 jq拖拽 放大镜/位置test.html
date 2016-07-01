@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>test</title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#wrap{
+				position: relative;
+				top: 100px;
+				left: 100px;
+				height: 500px;
+				background: #efefef;
+			}
+			#inner{
+				position: absolute;
+				top: 100px;
+				left: 100px;
+				width: 200px;
+				height: 200px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="inner">
+				
+			</div>
+		</div>
+		<script src="../../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var pt= $("#inner").position().top;
+			var ot= $("#inner").offset().top;
+			var oty = $("#inner").get(0).offsetTop;
+			console.log(pt+" "+ot+" "+oty);  //100 200 100
+		</script>
+	</body>
+</html>
