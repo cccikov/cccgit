@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制形状</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    ctx.beginPath();
+    ctx.moveTo(100,300);
+    ctx.quadraticCurveTo(200,114,300,300);
+    ctx.stroke();
+
+
+    // 二次贝尔赛曲线
+    ctx.beginPath();
+    ctx.moveTo(275,25);
+    ctx.quadraticCurveTo(225,25,225,62.5);
+    ctx.quadraticCurveTo(225,100,250,100);
+    ctx.quadraticCurveTo(250,120,230,125);
+    ctx.quadraticCurveTo(260,120,265,100);
+    ctx.quadraticCurveTo(325,100,325,62.5);
+    ctx.quadraticCurveTo(325,25,275,25);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(100,400);
+    ctx.bezierCurveTo(0,250,400,250,300,400);
+    ctx.stroke();
+
+     //三次曲线
+    ctx.beginPath();
+    ctx.moveTo(75,40);
+    ctx.bezierCurveTo(75,37,70,25,50,25);
+    ctx.bezierCurveTo(20,25,20,62.5,20,62.5);
+    ctx.bezierCurveTo(20,80,40,102,75,120);
+    ctx.bezierCurveTo(110,102,130,80,130,62.5);
+    ctx.bezierCurveTo(130,62.5,130,25,100,25);
+    ctx.bezierCurveTo(85,25,75,37,75,40);
+    ctx.fill();
+    
+
+
+    </script>
+</body>
+
+</html>

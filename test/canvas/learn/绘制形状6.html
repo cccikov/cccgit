@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制形状</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script type="text/javascript">
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var rectangle = new Path2D();
+        rectangle.moveTo(100,100);
+        rectangle.lineTo(200,100);
+        rectangle.lineTo(200,200);
+        rectangle.lineTo(100,200);
+        rectangle.lineTo(100,100);
+
+        // ctx.fill(rectangle);
+
+        var rectangle2 = new Path2D(rectangle);
+        rectangle2.moveTo(200,200);
+        rectangle2.lineTo(200,300);
+        rectangle2.lineTo(100,300);
+
+        ctx.fill(rectangle2);
+
+    </script>
+</body>
+
+</html>

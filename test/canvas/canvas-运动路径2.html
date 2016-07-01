@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>canvas运动路径</title>
+		<style media="screen">
+			body{
+				padding:10px;
+				margin:0;
+				text-align: center;
+			}
+			#canvas{
+				border: 1px solid #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<div id="wrap"></div>
+
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var cpi = Math.PI;
+
+
+			/*now = t/maxT*change+start;
+			var t = 0;
+			var maxT = 50;
+			var change = 790;
+			var start = 5;
+			var now = null;
+			function move(){
+				now = t/maxT*change+start;
+				ctx.fillStyle = "darkred";
+				ctx.arc(now,10,5,0,2*cpi);
+				ctx.fill();
+
+				t++;
+				window.requestAnimationFrame(move);
+			}
+			window.requestAnimationFrame(move);*/
+
+
+			var t = 0;
+			var maxT = 30;
+			var timer = null;
+			var v0 = -40;//决定抛物线弧度，因为两点的坐标决定了，时间决定，v0决定了初速度，同时也会影响加速度
+			var x = y = null;
+
+			/*function move(){
+				// canvas.height = canvas.height;
+
+				t+=1;
+				//由（0，0） 到 （800，0）
+				x = 800*t/maxT + 0;
+				//由（0，600） 到 （0，400）
+				y = t*t*(-200/maxT/maxT-v0/maxT)+v0*t+600;
+
+				ctx.beginPath();
+				ctx.fillStyle = "darkred";
+				ctx.arc(x,y,5,0,2*cpi);
+				ctx.fill();
+				ctx.closePath();
+
+				timer = window.requestAnimationFrame(move);
+				if(t>=maxT){
+					window.cancelAnimationFrame(timer);
+				}
+			}
+			timer = window.requestAnimationFrame(move);*/
+
+			var changeX = changeY = 0;
+			canvas.onmousedown = function(e){
+				// canvas.height = canvas.height;
+				changeX = e.offsetX - 400;
+				changeY = e.offsetY - 600;
+
+				t=0;
+				window.cancelAnimationFrame(timer);
+
+				timer = window.requestAnimationFrame(move);
+			}
+			function move(){
+				t+=1;
+				//由（0，0） 到 （e.offsetX，0）
+				x = changeX*t/maxT + 400;
+				//由（0，600） 到 （0，e.offsetY）
+				y = t*t*(changeY/maxT/maxT-v0/maxT)+v0*t+600;
+
+				ctx.beginPath();
+				ctx.fillStyle = "darkred";
+				ctx.arc(x,y,2,0,2*cpi);
+				ctx.fill();
+				ctx.closePath();
+
+				timer = window.requestAnimationFrame(move);
+				if(t>=maxT){
+					window.cancelAnimationFrame(timer);
+				}
+			}
+
+
+		</script>
+	</body>
+</html>
