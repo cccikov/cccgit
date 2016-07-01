@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>优化滚动4-raf</title>
+    <script src="../js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function() {
+
+        var ticking = false; // rAF 触发锁
+
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(realFunc);
+                ticking = true;
+            }
+        }
+
+        function realFunc() {
+
+
+            // do something...
+            console.log("Success");
+
+
+
+            ticking = false;
+        }
+        // 滚动事件监听
+        $(window).on("scroll",onScroll);
+
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit cumque eum veritatis nam unde porro nostrum et officiis libero, perferendis voluptates optio sunt ut, doloremque mollitia amet dolores facere hic eius quod odio sequi saepe voluptate? Quis nisi harum dicta ut, enim in, corrupti aperiam sit voluptatibus nulla, quasi. Illo necessitatibus ad, mollitia assumenda nesciunt harum illum quis quasi porro consequuntur exercitationem neque asperiores, similique iusto, accusantium amet, beatae tenetur! Quo reiciendis delectus magnam dicta eligendi temporibus assumenda tempore, explicabo fuga optio! Excepturi porro suscipit, repudiandae hic eaque minus et quod odit odio omnis nam dolorum modi, ullam blanditiis? Sed.
+    </div>
+</body>
+
+</html>
