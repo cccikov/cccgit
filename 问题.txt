@@ -11,7 +11,7 @@
 
 var ccc = {}
 ccc.first = function(){
-	
+
 }
 
 7、三级联动json怎么写的
@@ -20,6 +20,8 @@ ccc.first = function(){
 
 9、jq animate() 方法不支持transform
 
-10、插件 直接 Fn(); var haha = new Fn();区别，看面向对象 
+10、插件 直接 Fn(); var haha = new Fn();区别，看面向对象
 
 11、曲线运动路径 速度变化怎么做
+
+10、atom-beautify
