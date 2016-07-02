@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>样式与颜色</title>
+    <style media="screen">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script type="text/javascript">
+        var ctx = document.getElementById('canvas').getContext('2d');
+        var offset = 0;
+
+        var grad1 = ctx.createRadialGradient(50, 50, 1, 100, 100, 150);
+        grad1.addColorStop(0, 'blue');
+        grad1.addColorStop(0.1, 'black');
+        grad1.addColorStop(0.1, 'pink');
+
+        grad1.addColorStop(0.9, 'red');
+        grad1.addColorStop(1, 'rgba(1,159,98,0)');
+
+        ctx.fillStyle = grad1;
+        ctx.fillRect(0,0,800,800);
+    </script>
+</body>
+
+</html>
