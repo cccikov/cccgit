@@ -22,13 +22,13 @@
         var grad1 = ctx.createRadialGradient(50, 50, 1, 100, 100, 150);
         grad1.addColorStop(0, 'blue');
         grad1.addColorStop(0.1, 'black');
-        grad1.addColorStop(0.1, 'pink');
+        // grad1.addColorStop(0.1, 'pink');
 
         grad1.addColorStop(0.9, 'red');
-        grad1.addColorStop(1, 'rgba(1,159,98,0)');
+        grad1.addColorStop(1, 'rgba(1,159,98,0)');//通常1的时候就搞个透明的，或者和背景色一样的颜色
 
         ctx.fillStyle = grad1;
-        ctx.fillRect(0,0,800,800);
+        ctx.fillRect(55,51,800,800);
     </script>
 </body>
 
