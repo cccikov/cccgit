@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>样式与颜色</title>
+    <style media="screen">
+        body{
+            margin:0;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script type="text/javascript">
+        var ctx = document.getElementById('canvas').getContext('2d');
+        var offset = 0;
+
+        var grad1 = ctx.createLinearGradient(0, 0, 0, 400);
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        grad1.addColorStop(0, '#00ABEB');
+        grad1.addColorStop(0.2, '#f0f');
+        grad1.addColorStop(0.4, 'red');
+        grad1.addColorStop(0.4, '#000');//在同一个位置设置两个颜色，实现突变
+        grad1.addColorStop(0.6, '#fff');
+        grad1.addColorStop(0.8, '#f12');
+        ctx.fillStyle = grad1;
+        ctx.fillRect(0, 0, 100, 100);
+        ctx.fillRect(100, 50, 100, 100);
+        ctx.fillRect(200, 100, 100, 100);
+        ctx.fillRect(300, 150, 100, 100);
+        ctx.fillRect(0, 250, 500, 100);
+
+
+        var grad2 = ctx.createLinearGradient(0, 400, 100, 500);
+        grad2.addColorStop(0,"white");
+        grad2.addColorStop(.5,"red");
+        grad2.addColorStop(1,"blue");
+        ctx.fillStyle = grad2;
+        ctx.fillRect(0,400,100,100);
+
+        ctx.beginPath();
+        ctx.moveTo(800,0);
+        ctx.lineTo(0,800);
+
+        ctx.moveTo(0,0);
+        ctx.lineTo(800,800);
+
+        ctx.moveTo(0,400);
+        ctx.lineTo(800,400);
+
+        ctx.moveTo(400,0);
+        ctx.lineTo(400,800);
+
+        ctx.strokeStyle = grad1;
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(780,0);
+        ctx.lineTo(0,780);
+
+        ctx.moveTo(20,0);
+        ctx.lineTo(800,780);
+
+        ctx.moveTo(0,390);
+        ctx.lineTo(790,390);
+
+        ctx.moveTo(390,0);
+        ctx.lineTo(390,790);
+
+        ctx.strokeStyle = grad2;
+        ctx.lineWidth = 5;
+        ctx.stroke();
+    </script>
+</body>
+
+</html>

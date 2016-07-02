@@ -20,7 +20,6 @@
             ctx.lineDashOffset = -offset;
             ctx.strokeRect(10, 10, 100, 100);
         }
-
         function march() {
             offset+=1;
             if (offset > 16) {
@@ -29,8 +28,8 @@
             draw();
             setTimeout(march, 20);
         }
-
         march();
+
     </script>
 </body>
 
