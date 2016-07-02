@@ -76,7 +76,8 @@
         ctx.moveTo(700,300);
         ctx.lineTo(700,700);
         ctx.lineTo(0,700);
-        ctx.setLineDash([10,15,100,15]);
+        ctx.lineJoin = "round";
+        ctx.setLineDash([10,11,50,15]);
         ctx.stroke();
     </script>
 </body>
