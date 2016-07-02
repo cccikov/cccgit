@@ -28,6 +28,56 @@
         ctx.globalAlpha = 0.2;
         ctx.fillStyle = "red";
         ctx.fill();
+
+        ctx.globalAlpha = 1;
+        ctx.beginPath();
+        ctx.fillStyle = "#ff00ff";
+        ctx.fillRect(200,100,200,200);
+        ctx.fillStyle= "#00ff00";
+        ctx.fillRect(400,100,200,200);
+        ctx.fillStyle = "#ffff00";
+        ctx.fillRect(200,300,200,200);
+        ctx.fillStyle = "#00ffff";
+        ctx.fillRect(400,300,200,200);
+
+
+        ctx.fillStyle= "rgba(0,0,0,.2)"
+        ctx.fillRect(300,200,200,200);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.globalAlpha = 0.5;
+        for(var k=0;k<5;k++){
+            ctx.arc(400,300,(k+1)*20,0,Math.PI*2,true);
+            ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(650.5,100);
+        ctx.lineTo(650.5,200);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(660,100);
+        ctx.lineTo(660,200);
+        ctx.stroke();
+
+        var capArr = ["butt","round","square"];
+        ctx.lineWidth = 10;
+        ctx.globalAlpha = 1;
+        for(var n=0;n<3;n++){
+            ctx.beginPath();
+            ctx.moveTo(700+n*30,100);
+            ctx.lineTo(700+n*30,200);
+            ctx.lineCap = capArr[n];
+            ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(700,300);
+        ctx.lineTo(700,700);
+        ctx.lineTo(0,700);
+        ctx.setLineDash([10,15,100,15]);
+        ctx.stroke();
     </script>
 </body>
 
