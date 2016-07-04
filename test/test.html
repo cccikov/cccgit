@@ -1,31 +1,443 @@
-<!doctype html>
-<html lang="en">
+<html data-dpr="1" style="font-size: 18px;">
+
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<script type="text/javascript">
-		function SuperType(){
-			this.property = true;
-		}
-		SuperType.prototype.getSuperValue = function(){
-			return this.property;
-		}
-		
-		function SubType(){
-			this.subproperty = false;
-		}
-		SubType.prototype = new SuperType();
-		
-		SubType.prototype.getSubValue = function(){
-			return this.subproperty;
-		}
-		
-		var instance = new SubType();
-		alert(instance.getSuperValue());
-		alert(instance.getSubValue());
-	</script>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <script src="../../js/zepto.min.js?v=20160423"></script>
+    <script src="../../js/zepto.touch.js?v=20160423"></script>
+    <script src="../../js/commonality.js"></script>
+    <script src="../../js/page2.js?v=20160423"></script>
+    <link href="../../css/layout.css?v=20160423" rel="stylesheet">
+    <title></title>
+    <style type="text/css">
+    /*.news li,
+                        h1 li {
+                            float: left;
+                            font-size: 0.85rem;
+                            text-align: center;
+                        }
+                        .news li {
+                            font-size: 0.8rem;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            -o-text-overflow: ellipsis;
+                            text-overflow: ellipsis;
+                            line-height: 2.2rem;
+                        }
+                        .news ul {
+                            width: 100%;
+                            margin: 0 auto;
+                            overflow: hidden;
+                            border-bottom: 1px solid gainsboro;
+                        }
+                        .see {
+                            color: #B3B3B3;
+                        }*/
+    
+    .news {
+        font-size: 0.85rem;
+    }
+    
+    .news ul {
+        background: #f5f6f7;
+    }
+    
+    .news li {
+        border-top: 1px solid #ced5d9;
+        border-bottom: 1px solid #ced5d9;
+        margin: 5px 0;
+    }
+    
+    .news a {
+        display: block;
+        padding: 0 15px;
+    }
+    
+    .news p {
+        overflow: hidden;
+    }
+    
+    .news .type,
+    .news .content {
+        color: #757575;
+    }
+    
+    .news .type {
+        float: left;
+    }
+    
+    .news .createtime {
+        float: right;
+        color: #cecece;
+    }
+    </style>
+    <style type="text/css">
+    a:link {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+    
+    a:visited {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+    
+    a:hover {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+    
+    a:active {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+    </style>
+    <!-- 	  <script>
+			$(function(){
+				$(".news ul").bind("touchstart",function(e){
+
+					e.preventDefault();
+					e.
+					$(this).css("background-color","#F5F5F5")
+				})
+				$(".news ul").bind("touchend",function(e){
+					e.preventDefault();
+					$(this).css("background-color","white")
+				})
+		})
+		</script>    -->
+    <script>
+    function read(vthis) {
+        var ul = $(vthis);
+        var msgid = ul.attr("msgid");
+        var url = ul.attr("url");
+        var isread = ul.attr("isread");
+        if (isread == "0") {
+            //var ul =  $(vthis);
+            $.ajax({
+                type: "POST",
+                url: "/m/member/push/pushaction.jsp",
+                data: {
+                    'optype': "isread",
+                    'msgid': msgid
+                },
+                success: function(data) {
+                    ul.css("color", "#B3B3B3");
+                    ul.attr("isread", 1);
+
+                }
+            })
+
+        }
+        window.open(url);
+    }
+
+    $(function() {
+
+        $("#setAllRead").click(function() {
+
+            $.ajax({
+                type: "POST",
+                url: "/m/member/push/pushaction.jsp",
+                data: {
+                    'optype': "allIsread"
+                },
+                success: function(data) {
+                    /*  var flag = data.flag;
+				 if(flag > 0 ){ */
+                    // $("ul[id=detail][isread=0]").addClass("see");
+                    $("ul[id=detail]").css("color", "#B3B3B3");
+                    $("ul[id=detail]").attr("isread", 1);
+                    // $("a[id=detail][isread=0]").parent().prev().html("已读"); }
+                }
+            })
+        })
+
+    })
+    </script>
 </head>
+
 <body>
-	
+    <!-- 分页用 -->
+    <input type="hidden" id="timestamp_key" name="timestamp_key" value=" _Lev1">
+    <input type="hidden" id="timestamp" name="timestamp" value="1467626623703">
+    <input type="hidden" id="totalSize" name="totalSize" value="342">
+    <input type="hidden" id="totalPage" name="totalPage" value="23">
+    <input type="hidden" id="pageSize" name="pageSize" value="15">
+    <input type="hidden" id="nowpageno" name="nowpageno" value="1">
+    <input type="hidden" id="formname" name="formname" value="frmAction">
+    <input type="hidden" id="appendHtml" name="appendHtml" value="#content">
+    <input type="hidden" id="ajaxurl" name="ajaxurl" value="push.jsp">
+    <input type="hidden" id="loadingHtml" name="loadingHtml" value="#content">
+    <header style="    line-height: 2.8rem;background: #0273C7;color: white; font-size: 0.9rem;text-align: center;">消息提醒<span style="    font-size: 0.80rem; position: absolute;right: 3%;">
+                            <a class="allread" href="javascript:void(0)" id="setAllRead">全部设为已读</a>
+                        </span>
+    </header>
+    <div id="content">
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/member/order/?order_status=-1&amp;otype=XH" msgid="3A4EFD537C2E45078A9C7FE29A1EDFB3" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单取消</span>
+                            <span class="createtime">2016-07-01</span>
+                        </p>
+                        <p class="content">
+                            您的订单1606291591已被取消，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/checkout/spot/complete/index.jsp?orderno=1606169832" msgid="6BB0EBA1B86842EDA626508BE6AAA1CD" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">补款</span>
+                            <span class="createtime">2016-06-27</span>
+                        </p>
+                        <p class="content">
+                            您的订单付款金额不足，请及时补款
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li style="
+    /* background: #bd9797; */
+">
+                    <a class="see" isread="1" url="/m/checkout/spot/complete/index.jsp?orderno=1606179082" msgid="200C16334ACC421090576BE2BAB96C68" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单货物到达</span>
+                            <span class="createtime">2016-06-25</span>
+                        </p>
+                        <p class="content">
+                            您的订单1606179082有在途货物已到达，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/checkout/spot/complete/index.jsp?orderno=1606179082" msgid="F927873E8AE14D6ABE273CDDD16F9B8F" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单货物延长</span>
+                            <span class="createtime">2016-06-25</span>
+                        </p>
+                        <p class="content">
+                            您的订单1606179082有在途货物被延长，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/member/order/?order_status=-1&amp;otype=XH" msgid="565048C9AFAD400A97552AE0312C16FA" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单取消</span>
+                            <span class="createtime">2016-05-20</span>
+                        </p>
+                        <p class="content">
+                            您的订单F1605178943已被取消，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/checkout/spot/complete/index.jsp?orderno=F1605073445" msgid="934B332FF7BE4434A277135239B9287E" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">锁货金支付成功</span>
+                            <span class="createtime">2016-05-07</span>
+                        </p>
+                        <p class="content">
+                            您的订单F1605073445所支付的保证金已被接收，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/member/order/?order_status=-1&amp;otype=XH" msgid="C64FC7A0394D4F52AEB000DA8FD7DBD7" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单取消</span>
+                            <span class="createtime">2016-04-26</span>
+                        </p>
+                        <p class="content">
+                            您的订单F1604264897已被取消，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/member/order/?order_status=-1&amp;otype=XH" msgid="162C8CDC68184CBEAAA90721D4348AFA" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单取消</span>
+                            <span class="createtime">2016-04-26</span>
+                        </p>
+                        <p class="content">
+                            您的订单F1604268120已被取消，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/member/order/?order_status=30&amp;otype=XH" msgid="3D2362336DD44030B4BF11D4F43EF1FA" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">货款支付成功</span>
+                            <span class="createtime">2016-04-20</span>
+                        </p>
+                        <p class="content">
+                            您的订单1604078336所支付的货款已被接收，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/member/order/?order_status=30&amp;otype=XH" msgid="CFBFD820F8414D6AAA62F98F9C26F239" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">货款支付成功</span>
+                            <span class="createtime">2016-04-20</span>
+                        </p>
+                        <p class="content">
+                            您的订单1604077831所支付的货款已被接收，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/member/order/?order_status=30&amp;otype=XH" msgid="FD65EF0B95934EC6BC3A30F278B002C8" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">货款支付成功</span>
+                            <span class="createtime">2016-04-20</span>
+                        </p>
+                        <p class="content">
+                            您的订单1604207125所支付的货款已被接收，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/" msgid="BF4D46A4A8C34097A334DA35BEB387F3" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单货物到达</span>
+                            <span class="createtime">2016-04-19</span>
+                        </p>
+                        <p class="content">
+                            您的订单1604075494有在途货物已到达，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/" msgid="60301E90454844B29951E34A8C10647C" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单货物到达</span>
+                            <span class="createtime">2016-04-19</span>
+                        </p>
+                        <p class="content">
+                            您的订单1604089705有在途货物已到达，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/" msgid="F65A9740BA894620ABC43D0B739523CA" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单货物到达</span>
+                            <span class="createtime">2016-04-19</span>
+                        </p>
+                        <p class="content">
+                            您的订单1604142726有在途货物已到达，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="news">
+            <ul id="detail">
+                <li>
+                    <a class="see" isread="1" url="/m/" msgid="452B0B037C064D249AE4534B63EA08B0" onclick="read(this)" href="javascript:void(0)">
+                        <p>
+                            <span class="type">订单货物到达</span>
+                            <span class="createtime">2016-04-19</span>
+                        </p>
+                        <p class="content">
+                            您的订单1604072783有在途货物已到达，请知悉
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="loading" style="height: 40px;background: #F6F6F6;text-align: center;font-size: 0.8rem;line-height: 40px;    position: relative;">上拉加载更多...</div>
+    <!--底部-->
+    <div style="height: 2.5rem"></div>
+    <div class="foot">
+        <ul>
+            <li _picnameuncheck="home1.png" _picnamecheck="home2.png" name="bottom"><img _type="SE" src="/m/images/home1.png"></li>
+            <li _picnameuncheck="now1.png" _picnamecheck="now2.png" name="bottom"><img _type="QH" src="/m/images/now1.png"></li>
+            <li _picnameuncheck="sales1.png" _picnamecheck="sales2.png" name="bottom"><img _type="CX" src="/m/images/sales1.png"></li>
+            <li _picnameuncheck="attention1.png" _picnamecheck="attention2.png" style="position: relative;" name="bottom"><img _type="GZ" src="/m/images/attention1.png"><span class="num">2</span></li>
+            <li _picnameuncheck="mine1.png" _picnamecheck="mine2.png" name="bottom"><img _type="ME" src="/m/images/mine2.png"></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    $(function() {
+        $(".foot  li").bind("touchend", function(e) {
+            e.preventDefault();
+
+            var type = $(this).find("img").attr("_type");
+            if (type == 'SE')
+                location.href = "/m/resource/";
+            else if (type == 'QH')
+                location.href = "/m/future/";
+            else if (type == 'CX')
+                location.href = "/m/promotion/";
+            else if (type == 'GZ')
+                location.href = "/m/checkout/cart/";
+            else if (type == 'ME')
+                location.href = "/m/member/";
+        });
+    })
+    </script>
+    <!--底部-->
+    <div class="load_img jz" style="display: none;"><img src="/m/images/jiazai.gif"></div>
 </body>
+
 </html>

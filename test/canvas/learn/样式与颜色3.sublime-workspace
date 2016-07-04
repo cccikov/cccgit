@@ -1,0 +1,902 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fi",
+				"fillRect"
+			],
+			[
+				"fill",
+				"fillStyle"
+			],
+			[
+				"can",
+				"canvasTpl"
+			],
+			[
+				"ctx",
+				"ctxTpl"
+			],
+			[
+				"c",
+				"ctx"
+			],
+			[
+				"re",
+				"rectangle2"
+			],
+			[
+				"d",
+				"draw"
+			],
+			[
+				"se",
+				"seIn"
+			],
+			[
+				"remove",
+				"removeClass〔function〕"
+			],
+			[
+				"key",
+				"keydown"
+			],
+			[
+				"op",
+				"opacity"
+			],
+			[
+				"bor",
+				"border-box"
+			],
+			[
+				"box",
+				"box-sizing"
+			],
+			[
+				"remov",
+				"removeClass〔function〕"
+			],
+			[
+				"sc",
+				"scrollTop〔function〕"
+			],
+			[
+				"max",
+				"max-width: 〔property〕"
+			],
+			[
+				"win",
+				"winW"
+			],
+			[
+				"ma",
+				"maxT"
+			],
+			[
+				"move",
+				"moveX"
+			],
+			[
+				"ba",
+				"backPX"
+			],
+			[
+				"back",
+				"backPX	(cccPerfectSwiper.js)"
+			],
+			[
+				"clea",
+				"clearInterval	(cccSwiper.js)"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"cc",
+				"cccPerfectSwiper.js	(index.html)"
+			],
+			[
+				"btn",
+				"btnItem"
+			],
+			[
+				"le",
+				"length	(index.js)"
+			],
+			[
+				"img",
+				"img-item	(index.html)"
+			],
+			[
+				"im",
+				"img-list	(index.html)"
+			],
+			[
+				"per",
+				"perWidth"
+			],
+			[
+				"p",
+				"param"
+			],
+			[
+				"wi",
+				"width	(index.js)"
+			],
+			[
+				"po",
+				"position"
+			],
+			[
+				"cuo",
+				"cursor"
+			],
+			[
+				"inln",
+				"inline-block"
+			],
+			[
+				"in",
+				"index.js"
+			],
+			[
+				"w",
+				"winW"
+			],
+			[
+				"s",
+				"second"
+			],
+			[
+				"r",
+				"requestAnimationFrame.js"
+			],
+			[
+				"ea",
+				"easeIn	(tween.js)"
+			],
+			[
+				"Q",
+				"Quad	(tween.js)"
+			],
+			[
+				"t",
+				"tween.js"
+			],
+			[
+				"or",
+				"originL"
+			],
+			[
+				"off",
+				"offset〔function〕"
+			],
+			[
+				"touch",
+				"touchstart	(index2优化性能2.html)"
+			],
+			[
+				"mo",
+				"moveX"
+			],
+			[
+				"st",
+				"startLeft"
+			],
+			[
+				"bot",
+				"both	(home.css)"
+			],
+			[
+				"tra",
+				"translate3d()"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"no",
+				"none"
+			],
+			[
+				"do",
+				"down03.png	w:63 h:43"
+			],
+			[
+				"bg",
+				"background: 〔property〕"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"con",
+				"contain"
+			],
+			[
+				"section",
+				"section4"
+			],
+			[
+				"sec",
+				"section4"
+			],
+			[
+				"ver",
+				"vertical-align"
+			],
+			[
+				"ta",
+				"table"
+			],
+			[
+				"z",
+				"zoomIn"
+			],
+			[
+				"zoom",
+				"zoomE	(home.html)"
+			],
+			[
+				"zoo",
+				"zoomE"
+			],
+			[
+				"set",
+				"setTimeout"
+			],
+			[
+				"we",
+				"willUpE"
+			],
+			[
+				"add",
+				"addClass〔function〕"
+			],
+			[
+				"bou",
+				"bounceIn	(animate.css.html)"
+			],
+			[
+				"li",
+				"linear"
+			],
+			[
+				"lin",
+				"linear	(password.css)"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"font-w",
+				"font-weight"
+			],
+			[
+				"item",
+				"item1	(home.html)"
+			],
+			[
+				"a",
+				"absolute"
+			],
+			[
+				"section2",
+				"section2-middle	(home.html)"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"login",
+				"login-btn-wrap	(home.html)"
+			],
+			[
+				"pa",
+				"placeholder	Attr"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"text-a",
+				"text-align"
+			],
+			[
+				"te",
+				"text"
+			],
+			[
+				"url",
+				"url()"
+			],
+			[
+				"inl",
+				"inline-block"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"packci",
+				"Package Control: Install Package"
+			],
+			[
+				"git:com",
+				"Git: Commit"
+			],
+			[
+				"git:add",
+				"Git: Add All"
+			],
+			[
+				"ssh",
+				"Set Syntax: HTML"
+			],
+			[
+				"add",
+				"Git: Add All"
+			],
+			[
+				"pci",
+				"Package Control: Install Package"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"git:s",
+				"Git: Status"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"git:push",
+				"Git: Push"
+			],
+			[
+				"git:",
+				"Git: Commit"
+			],
+			[
+				"git:commit",
+				"Git: Commit"
+			],
+			[
+				"git:pu",
+				"Git: Push"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"git:c",
+				"Git: Commit"
+			],
+			[
+				"packcon",
+				"Package Control: Install Package"
+			],
+			[
+				"git:co",
+				"Git: Commit"
+			],
+			[
+				"Package Control: i",
+				"Package Control: Install Package"
+			],
+			[
+				"packc",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 528.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/cccgit/test/canvas/learn/样式与颜色6-fill()参数.html",
+		"/D/cccgit/test/canvas/learn/样式与颜色5-Pattern.html",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/D/cccgit/test/canvas/learn/样式与颜色3.html",
+		"/D/cccgit/test/canvas/learn/样式与颜色5.html",
+		"/D/cccgit/test/canvas/learn/样式与颜色4.html",
+		"/D/cccgit/index.html",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
+		"/D/cccgit/test/canvas/learn/绘制形状6.html",
+		"/D/cccgit/test/canvas/learn/绘制形状5.html",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Administrator/Desktop/simple_canvas_game-master/js/game.js",
+		"/D/cccgit/test/test.html",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/Git.sublime-settings",
+		"/D/cccgit/test/优化滚动/优化滚动4-raf.html",
+		"/D/cccgit/test/优化滚动/优化滚动2-防抖.html",
+		"/D/cccgit/test/优化滚动/优化滚动1-防抖.html",
+		"/D/cccgit/test/键盘上下箭头选择 - 带滚动条变换3.html",
+		"/D/cccgit/test/键盘上下箭头选择 - 带滚动条变换2.html",
+		"/D/cccgit/test/键盘上下箭头选择 - 带滚动条变换.html",
+		"/D/onetime/修改版.html",
+		"/D/eclipse/d/workspace/baoyu/web/m/top.jsp",
+		"/C/Users/Administrator/Desktop/8E2438A332524131B95EC0E06A6F5396.html",
+		"/D/eclipse/d/workspace/baoyu/web/m/js/commonality.js",
+		"/D/eclipse/d/workspace/baoyu/web/m/css/layout.css",
+		"/D/eclipse/d/workspace/baoyu/web/m/future/index.jsp",
+		"/D/eclipse/d/workspace/baoyu/web/css/layout.css",
+		"/D/eclipse/d/workspace/baoyu/web/transation/index.jsp",
+		"/D/eclipse/d/workspace/baoyu/web/m/css/ticket.css",
+		"/D/eclipse/d/workspace/baoyu/web/m/css/Promotion.css",
+		"/D/eclipse/d/workspace/baoyu/web/m/css/balance.css",
+		"/D/eclipse/d/workspace/baoyu/web/member/order/orderdetail.jsp",
+		"/D/eclipse/d/workspace/baoyu/web/css/gangchang/promotion.css",
+		"/D/eclipse/d/workspace/baoyu/web/help/question.jsp",
+		"/D/cccDemo/曲线运动路径/多运动.html",
+		"/D/cccgit/问题.txt",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/order_history.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/after-sales.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/ordersearch.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/memberlevel_huafen.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/member_advantage.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/memberlevel.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/order_status.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Growing.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/aging.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/offeree.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/quantity.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/clutching.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/amount.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/credit_line.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/paytime.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/balancefreeze.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Group.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/change.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Groupbuying.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/payment.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/advantage.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/lock.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/spotgoods.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Goodsgowrong.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/salesreturn.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Choosewarehouse.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/billtaitou.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/lockgood_contract.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/zichanjieshao.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/balance.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/refund.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/withdraw.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/bonuspoint.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/uploading.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/nopay.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/noarrive.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/search.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/opentime.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/personal.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/authentication.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Bindphone.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/add_guanzhu.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/paytype.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/findpassword.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/register.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Paymenttime.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/security.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/qiflow.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/ticket.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/paymentfor.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/ChangePassword.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/Depositrefund.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/margin.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/offlineOrderSplit.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/billsearch.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/lastDelivery.html",
+		"/D/eclipse/d/workspace/baoyu/web/help/question/invoicemanagement.html",
+		"/D/cccDemo/曲线运动路径/曲线运动.html",
+		"/D/cccDemo/曲线运动路径/index.js",
+		"/D/cccDemo/曲线运动路径/圆.html",
+		"/D/cccDemo/轮播/移动端/index.html",
+		"/D/cccDemo/轮播/移动端/index.less",
+		"/D/cccDemo/轮播/移动端/index.js",
+		"/D/cccDemo/轮播/移动端/cccPerfectSwiper.js",
+		"/D/cccgit/test/如何做动画/tween.png",
+		"/D/cccDemo/轮播/移动端/cccSwiper.js",
+		"/D/cccDemo/移动端拖拽/index2优化性能2.html",
+		"/D/cccDemo/移动端拖拽/index方法2-02.性能优化html.html",
+		"/D/cccDemo/移动端拖拽/index2优化性能.html",
+		"/D/cccDemo/index.html",
+		"/G/gulp/wechat/js/common.js",
+		"/G/gulp/wechat/首页.html",
+		"/D/cccgit/test/如何做动画/js+tween.html",
+		"/D/cccgit/test/js/tween.js",
+		"/D/cccgit/test/js/requestAnimationFrame.js",
+		"/D/cccgit/test/如何做动画/纯js动画.html",
+		"/D/effects/js-location-navigator&&大图滚动/tween.js",
+		"/D/effects/js-location-navigator&&大图滚动/大图滚动3.html",
+		"/D/博看/ball-pool/index.html",
+		"/D/博看/ball-pool/assets/protoclass.js",
+		"/D/博看/ball-pool/assets/Main.js",
+		"/D/博看/ball-pool/assets/box2d.js",
+		"/D/博看/canvas-fox-game-runfield/runfield/run.html",
+		"/D/博看/canvas-fox-game-runfield/runfield/main.js",
+		"/D/博看/canvas-fox-game-runfield/runfield/audio.js",
+		"/D/博看/canvas-fox-game-runfield/runfield/mt.js",
+		"/D/cccDemo/碰壁反弹/碰壁反弹 多变.html",
+		"/D/cccgit/README.md",
+		"/D/cccDemo/移动端拖拽/index方法2-02.html",
+		"/D/cccDemo/移动端拖拽/index 缓冲版.html",
+		"/G/博看/9.15 - 大图滚动自己完成版/碰壁反弹2.html"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 108.0,
+		"where_history":
+		[
+			"D:\\eclipse\\d\\workspace\\baoyu\\web\\m\\",
+			"D:\\eclipse\\d\\workspace\\baoyu\\web\\js",
+			"D:\\eclipse\\d\\workspace\\baoyu\\web\\",
+			"D:\\eclipse\\d\\workspace\\baoyu\\web\\help\\question",
+			"D:\\eclipse\\d\\workspace\\baoyu\\web\\help",
+			"D:\\plugin\\fullPage\\examples",
+			"D:\\plugin\\fullPage"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"f2",
+			"rename",
+			"2",
+			"clientWidth",
+			"');\n",
+			"62",
+			"line",
+			"style",
+			"ctrl+shift+g",
+			"ctrl+d",
+			"ctrl+shift+g",
+			"+100",
+			"100",
+			"immediate",
+			"wrap.scrollTop(0);",
+			"$(\"li\").removeClass(\"active\");",
+			"$(\"li\").removeClass(\"active\");\n                        wrap.scrollTop(0);",
+			"$(\".answer\")",
+			"answer-wrap",
+			"height:2.8rem;",
+			"FAB red",
+			"FAB",
+			"s-btn",
+			"tabs",
+			"tacs",
+			"我是",
+			"历史交易记录",
+			"订单状态解析",
+			"支付金额出错",
+			"订单支付金额出错",
+			"订单查询",
+			"如何关注和联系我们",
+			"会员等级与积分",
+			"期货交易",
+			"期货交易>接盘",
+			"期货交易>成盘量与供应量",
+			"现货交易>支付时效",
+			"订单与发票>订单查询",
+			"账户余额冻结",
+			"无论是现货交易的保证金支付",
+			"无论是现货交易的保证金支付，还是期货交易的保证金支付，都需要在提交订单后30分钟内完成，并上传支付凭证，超时未能完成支付的，全民钢铁平台有权取消订单。",
+			"1.保证金支付",
+			"支付时效",
+			"什么是理论授信额度",
+			"成长值",
+			"高级会员具有什么优势",
+			"会员等级如何划分",
+			"成长值",
+			"如何联系全民钢铁",
+			"具体等级划分和积分升级说明请查看《全民钢铁会员积分体系说明》",
+			"交易平台的会员等级可划分为注册会员、铁牌会员、铜",
+			"成长值",
+			"高级会员具有什么优势？",
+			"会员等级划分",
+			"会员等级如何划分？",
+			"什么是会员等级制？",
+			"购买了“团购”类期货商品钢厂没有接盘？",
+			"为什么钢厂发货量与我订购的数量不同",
+			"怎样查看“团购”类期货的成盘进度？",
+			"为什么我的期货订单会转成现货订单",
+			"什么是接盘",
+			"什么是成盘量与供应量?",
+			"什么是团购",
+			"货款支付须知",
+			"在线锁货有什么优势",
+			"什么是在线锁货？",
+			"在线锁货",
+			"什么是现货",
+			"商品出现问题",
+			"如何选择配货仓库",
+			"怎么样退货？",
+			"怎么样收货",
+			"我可以在哪里查询我的订单锁货合同",
+			"在哪里查看历史交易记录",
+			"资产介绍",
+			"我的账户余额为什么会被冻结",
+			"账号余额",
+			"如何查看我的账户余额",
+			"如何提现",
+			"什么是",
+			"什么是消费积分",
+			"怎样",
+			"怎样上传支付凭证",
+			"超时未能支付怎么办",
+			"订单支付金额出错",
+			"退款操作",
+			"操作退款",
+			"退款须知",
+			"支付有效时长",
+			"支付有效时长是多久",
+			"配送指南",
+			"高级搜索",
+			"修改绑定手机",
+			"付方式有哪些",
+			"支付方式",
+			"添加关注",
+			"我的关注",
+			"开放时间",
+			"使用",
+			"如何使用高级搜索？",
+			"修改绑定手机",
+			"账号注册与安全",
+			"修改绑定手机\n修改绑定手机\n修改绑定",
+			"修改绑定手机\n修改绑定手机\n修改绑定手机",
+			"找回或修改密码",
+			"首次使用全民钢铁交易平台的用户，可以点击登录按钮右边的“免费注册”，进入注册页面。",
+			"账号注册",
+			"账户认证与管理",
+			"个人信息",
+			"个人信息补全",
+			"补全",
+			"个人信息补全",
+			"如何注册账号？",
+			"支付时效",
+			"现货下单流程",
+			"全额支付",
+			"购物指南",
+			"点击用户名",
+			"进入“会员中心”",
+			"个人信息补全",
+			"进入会员中心",
+			"点击",
+			"个人信息补全",
+			"账户注册与安全",
+			"注册与安全",
+			"账户",
+			"账号注册与安全",
+			"之前支付的保证金"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"账号注册与安全",
+			"已支付的保证金"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "样式与颜色3.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"test",
+				"cccgit\\test\\test.html"
+			],
+			[
+				"layout",
+				"m\\css\\layout.css"
+			],
+			[
+				"layou",
+				"css\\layout.css"
+			],
+			[
+				"commonality.js",
+				"m\\js\\commonality.js"
+			],
+			[
+				"balance",
+				"m\\css\\balance.css"
+			],
+			[
+				"promo",
+				"m\\css\\Promotion.css"
+			],
+			[
+				"ti",
+				"m\\css\\ticket.css"
+			],
+			[
+				"transtion",
+				"transation\\index.jsp"
+			],
+			[
+				"pro",
+				"m\\css\\Promotion.css"
+			],
+			[
+				"ticket",
+				"m\\css\\ticket.css"
+			],
+			[
+				"promotion",
+				"m\\css\\Promotion.css"
+			],
+			[
+				"qu",
+				"help\\question.jsp"
+			],
+			[
+				"uplo",
+				"help\\question\\uploading.html"
+			],
+			[
+				".html",
+				"baoyu\\web\\include\\top.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 386.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
