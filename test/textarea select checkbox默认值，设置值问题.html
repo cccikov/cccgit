@@ -65,6 +65,7 @@
 		<hr/>
 		<!-- 选择表单 -->
 		<div class="wrap">
+			<h4>checkbox</h4>
 			<label>
 	        	<input type="checkbox" name="checkbox1" id="checkbox1" value="1" checked/>
 	        	checkbox1
@@ -89,9 +90,10 @@
 		<hr />
 
 		<div class="wrap">
+			<h4>input</h4>
 			<input type="text" id="text" name="" value="我是默认值">
-			<input type="password" name="">
-			<input type="tel" name="">
+			<input type="password" id="password" name="password" placeholder="请输入密码">
+			<input type="tel" id='phone' name="phone" placeholder="请输入手机号码">
 			<button id="setAttr">设置attr</button>
 			<button id="setValue">设置value</button>
 			<button id="getAttr">读取attr</button>
@@ -149,10 +151,10 @@
 			});
 			//
 			$("#setAttr").on("click",function(){
-				$("#text").attr("value","通过标签value");
+				$("#text,#password,#phone").attr("value","通过标签value");
 			});
 			$("#setValue").on("click",function(){
-				$("#text").val("通过属性value");
+				$("#text,#password,#phone").val("通过属性value");
 			});
 			$("#getAttr").on("click",function(){
 				console.log($("#text").attr("value"));
