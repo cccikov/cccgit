@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<style type="text/css">
+			div{
+				margin:10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<input id="text" type="text" />
+		</div>
+		<div>
+			<textarea id="textarea" name="" rows="" cols=""></textarea>
+		</div>
+		<div>
+			<input id="radio" type="radio" />
+		</div>
+		<div>
+			<input id="checkbox" type="checkbox" />
+		</div>
+		<div>
+			<select id="select" name="">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		<p>oninput对 文本输入文本输入类（type="text",type="password"）的input，textarea，select有效，并且一但改变就立即触发。</p>
+		<p>onchange对全部有效，radio，checkbox，select一改变立即触发；而已对于文本输入类（type="text",type="password"）的input，textarea要失去焦点的时候才会触发。</p>
+
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("#text,#textarea,#radio,#checkbox,#select").on("input", function(e) {
+					console.log(e.type);
+				});
+				$("#text,#textarea,#radio,#checkbox,#select").on("change", function(e) {
+					console.log(e.type);
+				});
+			});
+		</script>
+	</body>
+
+</html>
