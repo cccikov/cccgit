@@ -31,13 +31,17 @@
 				var index = 0;
 				var timer = null;
 				$(".button").click(function(){
+					clearInterval(timer);
+					
 					var that = $(this);
 					if(that.attr("class").indexOf("active")==-1){//没有在播放状态
 						that.addClass("active");
 						that.html("暂停");
-						$("audio")[0].play();
+						
+						$("audio")[0].play();//播放
 						all = $("audio")[0].duration;
 						now = $("audio")[0].currentTime;
+						
 						$(".allLong").html(all+"s");
 						$(".hasLong").html(now+"s");
 						
@@ -57,7 +61,8 @@
 					}else{
 						that.removeClass("active");
 						that.html("播放");
-						$("audio")[0].pause();
+						
+						$("audio")[0].pause();//暂停
 						all = $("audio")[0].duration;
 						now = $("audio")[0].currentTime;
 						$(".allLong").html(all+"s");
@@ -70,10 +75,13 @@
 				$(".button2").click(function(){
 					$(".button").removeClass("active");
 					$(".button").html("播放");
-					$("audio")[0].pause();
-					$("audio")[0].currentTime=0;
+					
+					$("audio")[0].pause();//暂停
+					$("audio")[0].currentTime=0;//将时间设为0，相当于停止
+					
 					all = $("audio")[0].duration;
 					now = $("audio")[0].currentTime;
+					
 					$(".allLong").html(all+"s");
 					$(".hasLong").html(now+"s");
 					

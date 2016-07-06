@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>html5 video</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var video = $("#myVideo")[0];
+				console.dir(video);
+				video.autoplay = true;
+			});
+		</script>
+	</head>
+	<body>
+		<video id="myVideo" controls="" width="320">
+			<source src="video/BigBuckBunny_640x360.mp4" type="video/mp4"></source>
+			<source src="video/BigBuckBunny_640x360.ogv" type="video/ogg"></source>
+			当前浏览器不支持 video直接播放，点击这里下载视频： <a href="myvideo.webm">下载视频</a>
+		</video>
+	</body>
+</html>

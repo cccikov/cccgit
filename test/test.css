@@ -1,0 +1,20 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+#demo1 table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  text-indent: 2em;
+}
+#demo1 table td,
+#demo1 table th {
+  width: 0.1%;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-bottom: none;
+  word-break: break-all;
+}
+/*# sourceMappingURL=test.css.map */

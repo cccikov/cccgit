@@ -28,6 +28,7 @@
 	</head>
 
 	<body>
+		<video src="../../video/BigBuckBunny_640x360.mp4"></video>
 		<canvas id="canvas" width="800" height="800"></canvas>
 
 		<script type="text/javascript">
@@ -36,26 +37,7 @@
 			//canvas.height = document.documentElement.clientHeight;
 			var ctx = canvas.getContext('2d');
 			
-			var index=[];
-			index[0]=0;
-			var textBaselineArr= ["top","hanging","middle","alphabetic","ideographic","bottom"];
-			setInterval(function(){
-				canvas.height = canvas.height;
-				
-				ctx.beginPath();
-				ctx.moveTo(100,400);
-				ctx.lineTo(800,400);
-				ctx.stroke();
-				
-				ctx.textBaseline = textBaselineArr[index[0]];
-				ctx.font = "48px serif";
-				ctx.strokeText("Hello world", 100, 400);
-				ctx.fillText(textBaselineArr[index[0]], 400, 400);
-				index[0]++;
-				if(index[0]>textBaselineArr.length){
-					index[0]=0;
-				}
-			},2000);
+			
 		</script>
 	</body>
 

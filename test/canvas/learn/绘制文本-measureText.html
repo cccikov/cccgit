@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>绘制文本-textBaseline</title>
+		<title>绘制文本-measureText()</title>
 		<style media="screen">
 			html {
 				height: 100%;
@@ -26,7 +26,7 @@
 			}
 		</style>
 	</head>
-
+ 
 	<body>
 		<canvas id="canvas" width="800" height="800"></canvas>
 
@@ -36,26 +36,10 @@
 			//canvas.height = document.documentElement.clientHeight;
 			var ctx = canvas.getContext('2d');
 			
-			var index=[];
-			index[0]=0;
-			var textBaselineArr= ["top","hanging","middle","alphabetic","ideographic","bottom"];
-			setInterval(function(){
-				canvas.height = canvas.height;
-				
-				ctx.beginPath();
-				ctx.moveTo(100,400);
-				ctx.lineTo(800,400);
-				ctx.stroke();
-				
-				ctx.textBaseline = textBaselineArr[index[0]];
-				ctx.font = "48px serif";
-				ctx.strokeText("Hello world", 100, 400);
-				ctx.fillText(textBaselineArr[index[0]], 400, 400);
-				index[0]++;
-				if(index[0]>textBaselineArr.length){
-					index[0]=0;
-				}
-			},2000);
+			var str = "hello";
+			ctx.fillText(str,100,100)
+			var detail = ctx.measureText(str);
+			console.log(detail);
 		</script>
 	</body>
 
