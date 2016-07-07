@@ -1,44 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>绘制文本-textBaseline</title>
-		<style media="screen">
-			html {
-				height: 100%;
-			}
-			body {
-				height: 100%;
-				margin: 0;
-				/*direction: rtl;*/
-			}
-			
-			img {
-				max-width: 100%;
-			}
-			
-			#canvas {
-				display: block;
-				border: 1px solid #ccc;
-			}
-		</style>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制文本-textBaseline</title>
+    <style media="screen">
+    html {
+        height: 100%;
+    }
+    
+    body {
+        height: 100%;
+        margin: 0;
+        /*direction: rtl;*/
+    }
+    
+    img {
+        max-width: 100%;
+    }
+    
+    canvas {
+        border: 1px solid #ccc;
+    }
+    </style>
+</head>
 
-	<body>
-		<video src="../../video/BigBuckBunny_640x360.mp4"></video>
-		<canvas id="canvas" width="800" height="800"></canvas>
+<body>
+    <video id="theVideo" width="320" src="../../video/BigBuckBunny_640x360.mp4" loop='' autoplay=""></video>
+    <img id="theImg" width="320" src="../../img/01bg.png">
+    <img width="320" src="../../img/04bg.png">
+    <canvas id="theCanvas" width="320" height="180"></canvas>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script type="text/javascript">
+    var theCanvas = document.getElementById('theCanvas');
+    var theImg = document.getElementById("theImg");
+    var theVideo = document.getElementById("theVideo");
 
-		<script type="text/javascript">
-			var canvas = document.getElementById('canvas');
-			//canvas.width = document.documentElement.clientWidth;
-			//canvas.height = document.documentElement.clientHeight;
-			var ctx = canvas.getContext('2d');
-			
-			
-		</script>
-	</body>
+    var tplCtx = theCanvas.getContext("2d");
+    tplCtx.beginPath();
+    var grad1 = tplCtx.createLinearGradient(0, 0, 320, 180);
+    grad1.addColorStop(0, "rgba(255,125,0,1)");
+    grad1.addColorStop(.9, 'rgba(0,125,0,1)');
+    grad1.addColorStop(1, 'rgba(0,125,0,0)');
+    tplCtx.fillStyle = grad1;
+    tplCtx.fillRect(0, 0, 320, 180);
+
+
+
+    var canvas = document.getElementById('canvas');
+    canvas.width = document.documentElement.clientWidth - 2;
+    canvas.height = document.documentElement.clientHeight - 2;
+    var ctx = canvas.getContext('2d');
+
+    /*对象为canvas的时候*/
+    ctx.drawImage(theCanvas, 0, 0);
+
+    /*对象为image的时候,且图片缩放了*/
+    var img = new Image();
+    img.onload = function() {
+        ctx.drawImage(img, 350, 0, 100, 100);
+    }
+    img.src = '../../img/04bg.png';
+
+    /*剪裁*/
+    var img2 = new Image();
+    img2.onload = function() {
+        ctx.drawImage(img2, 100, 100, 800, 800, 480, 0, 100, 100);
+    }
+    img2.src = '../../img/04bg.png'
+
+
+
+    var timer = setInterval(function() {
+        ctx.drawImage(theVideo, 140, 0, 360, 360, 50, 200, 360, 360);
+    }, 32);
+    </script>
+</body>
 
 </html>

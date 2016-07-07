@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制文本-textBaseline</title>
+    <style media="screen">
+    html {
+        height: 100%;
+    }
+    
+    body {
+        height: 100%;
+        margin: 0;
+        /*direction: rtl;*/
+    }
+    
+    video {
+        vertical-align: top;
+    }
+    
+    canvas {
+        border: 1px solid #ccc;
+    }
+    </style>
+</head>
+
+<body>
+    <video id="theVideo" width="320" src="../../video/BigBuckBunny_640x360.mp4" loop='' autoplay=""></video>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script type="text/javascript">
+    var theVideo = document.getElementById("theVideo");
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    var per = {
+        obj : theVideo,
+        orix : 0,
+        oriy : 0,
+        oriw : 100,
+        orih : 100,
+        canx : 0,
+        cany : 0,
+        canw : 100,
+        canh : 100
+    }
+    per.canx = 300;
+    function play() {
+        ctx.drawImage(theVideo, per.orix, per.oriy, per.oriw, per.orih, per.canx,per.cany,per.canw,per.canh);
+        window.requestAnimationFrame(play);
+    }
+    window.requestAnimationFrame(play);
+    </script>
+</body>
+
+</html>

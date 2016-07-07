@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制文本-textBaseline</title>
+    <style media="screen">
+    html {
+        height: 100%;
+    }
+    
+    body {
+        height: 100%;
+        margin: 0;
+        /*direction: rtl;*/
+    }
+    
+    video {
+        vertical-align: top;
+    }
+    
+    canvas {
+        border: 1px solid #ccc;
+    }
+    </style>
+</head>
+
+<body>
+    <video id="theVideo" width="320" src="../../video/BigBuckBunny_640x360.mp4" loop='' autoplay=""></video>
+    <canvas id="canvas" width="1280" height="720"></canvas>
+    <script type="text/javascript">
+    var theVideo = document.getElementById("theVideo");
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    function Per(param) {
+        this.obj = arguments[0],
+        this.orix = arguments[1], 
+        this.oriy = arguments[2], 
+        this.oriw = arguments[3], 
+        this.orih = arguments[4],
+        this.x = arguments[5], 
+        this.y = arguments[6], 
+        this.canw = arguments[7],
+        this.canh = arguments[8]
+    }
+
+
+    var per = new Per(theVideo,0,0,80,60,0,0,80,60);
+    var index = 0;
+    var perArr = [];
+	for(var b=0;b<12;b++){
+	    for(var a=0;a<16;a++){
+	    		perArr[index] = new Per(theVideo,40*a,30*b,40,30,40*a,30*b,40,30);
+	    		index++;
+	    }
+	}
+
+   //  perArr[19].canw = 0;
+   //  perArr[19+1].x+=1;
+   //  perArr[19-1].x-=1;
+   //  perArr[19+16].y+=1;
+   //  perArr[19-16].y-=1;
+
+   //  perArr[19-16-1].y-=1;
+   //  perArr[19-16-1].x-=1;
+   // perArr[19-16+1].y-=1;
+   //  perArr[19-16+1].x+=1;
+
+   //  perArr[19+16-1].y+=1;
+   //  perArr[19+16-1].x-=1;
+   // perArr[19+16+1].y+=1;
+   //  perArr[19+16+1].x+=1;
+
+
+    function play() {
+    	for(var i = 0;i<perArr.length;i++){
+	        ctx.drawImage(theVideo, perArr[i].orix, perArr[i].oriy, perArr[i].oriw, perArr[i].orih, perArr[i].x, perArr[i].y, perArr[i].canw, perArr[i].canh);
+    	}
+        window.requestAnimationFrame(play);
+    }
+    window.requestAnimationFrame(play);
+    </script>
+</body>
+
+</html>
