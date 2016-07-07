@@ -9,10 +9,14 @@
 				var fileSize = 0;
 				var filetypes = [".jpg", ".png", ".rar", ".txt", ".zip", ".doc", ".ppt", ".xls", ".pdf", ".docx", ".xlsx"];
 				var filepath = target.value;
-				var filemaxsize = 1024 * 2; //2M 
+				var filemaxsize = 1024 * 2; //2M
+
+
 				if (filepath) {
 					var isnext = false;
 					var fileend = filepath.substring(filepath.indexOf("."));
+
+					//判断类型
 					if (filetypes && filetypes.length > 0) {
 						for (var i = 0; i < filetypes.length; i++) {
 							if (filetypes[i] == fileend) {
@@ -21,6 +25,7 @@
 							}
 						}
 					}
+
 					if (!isnext) {
 						alert("不接受此文件类型！");
 						target.value = "";
@@ -29,6 +34,8 @@
 				} else {
 					return false;
 				}
+
+				//ie浏览器
 				if (isIE && !target.files) {
 					var filePath = target.value;
 					var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
@@ -41,7 +48,9 @@
 				} else {
 					fileSize = target.files[0].size;
 				}
+
 				var size = fileSize / 1024;
+				//判断大小
 				if (size > filemaxsize) {
 					alert("附件大小不能大于" + filemaxsize / 1024 + "M！");
 					target.value = "";
