@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>组合2-clip</title>
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+				margin: 0;
+			}
+			
+			#canvas {
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<script type="text/javascript">
+			var wh = window.innerHeight;
+			var ww = window.innerWidth;
+			var canvas = document.getElementById("canvas");
+			canvas.height = wh;
+			canvas.width = ww;
+			var ctx = canvas.getContext("2d");
+
+			/*ctx.fillStyle = "red";
+			ctx.fillRect(0,0,800,800);
+
+			ctx.beginPath();
+			ctx.moveTo(100,100);
+			ctx.lineTo(200,150);
+			ctx.lineTo(300,250);
+			ctx.lineTo(500,100);
+			ctx.lineTo(700,150);
+			ctx.lineTo(600,300);
+			ctx.lineTo(700,680);
+			ctx.lineTo(350,650);
+			ctx.lineTo(150,710);
+			ctx.lineTo(50,410);
+			ctx.lineTo(100,100);
+
+			ctx.fill();
+			ctx.stroke();
+			ctx.clip();
+
+			ctx.fillStyle = "blue";
+			ctx.fillRect(0, 0, 800, 800);*/
+
+			var cw = canvas.width;
+			var ch = canvas.height;
+			var cs = cw > ch ? ch : cw; //canvasshort
+			function go() {
+				ctx.clearRect(0,0,cw,ch);
+
+				ctx.fillRect(0, 0, cw, ch);
+				ctx.save();
+				ctx.translate(cw / 2, ch / 2);
+
+
+				// Create a circular clipping path
+				ctx.beginPath();
+				ctx.arc(0, 0, cs / 2, 0, Math.PI * 2, true);
+				ctx.clip();
+
+				// draw background
+				var lingrad = ctx.createLinearGradient(0, -cs / 2, 0, cs / 2);
+				lingrad.addColorStop(0, '#232256');
+				lingrad.addColorStop(1, '#143778');
+
+				ctx.fillStyle = lingrad;
+				ctx.fillRect(-cw / 2, -ch / 2, cw, ch);
+
+				// draw stars
+				for(var j = 1; j < 100; j++) {
+					ctx.save();
+					ctx.fillStyle = '#fff';
+					ctx.translate(cw / 2 - Math.floor(Math.random() * cw),
+						ch / 2 - Math.floor(Math.random() * ch));
+					drawStar(ctx, Math.floor(Math.random() * 4) + 2);
+					ctx.restore();
+				}
+				
+				
+				ctx.restore();
+				
+			}
+			
+			setInterval(go,1000);
+
+			// draw stars
+			function drawStar(ctx, r) {
+				ctx.save();
+				ctx.beginPath()
+				ctx.moveTo(r, 0);
+				for(var i = 0; i < 9; i++) {
+					ctx.rotate(Math.PI / 5);
+					if(i % 2 == 0) {
+						ctx.lineTo((r / 0.525731) * 0.200811, 0);
+					} else {
+						ctx.lineTo(r, 0);
+					}
+				}
+				ctx.closePath();
+				ctx.fill();
+				ctx.restore();
+			}
+		</script>
+	</body>
+
+</html>

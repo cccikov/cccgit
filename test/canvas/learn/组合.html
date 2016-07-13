@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>canvas 组合</title>
+	</head>
+
+	<body>
+
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<p>
+			当使用globalCompositeOperation设置时，如果没有使用save(),restore()；请重置画布，不要用清除画布。
+			<br />重置画布 canvas.height = canvas.height;
+			<br />清除画布 ctx.clearRect();
+		</p>
+
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+
+			var color1 = "#0098FF";
+			var color2 = "#FF3200";
+
+			var gco = [{
+				"name": "source-over",
+				"dec": "是默认设置，新图形会覆盖在原有内容之上。"
+			}, {
+				"name": "destination-over",
+				"dec": "会在原有内容之下绘制新图形。"
+			}, {
+				"name": "source-in",
+				"dec": "新图形会仅仅出现与原有内容重叠的部分。其它区域都变成透明的。"
+			}, {
+				"name": "destination-in",
+				"dec": "原有内容中与新图形重叠的部分会被保留，其它区域都变成透明的。"
+			}, {
+				"name": "source-out",
+				"dec": "结果是只有新图形中与原有内容不重叠的部分会被绘制出来。"
+			}, {
+				"name": "destination-out",
+				"dec": "原有内容中与新图形不重叠的部分会被保留。"
+			}, {
+				"name": "source-atop",
+				"dec": "新图形中与原有内容重叠的部分会被绘制，并覆盖于原有内容之上。"
+			}, {
+				"name": "destination-atop",
+				"dec": "原有内容中与新内容重叠的部分会被保留，并会在原有内容之下绘制新图形。"
+			}, {
+				"name": "lighter",
+				"dec": "两图形中重叠部分作加色处理。"
+			}, {
+				"name": "darker",
+				"dec": "两图形中重叠的部分作减色处理。"
+			}, {
+				"name": "xor",
+				"dec": "重叠的部分会变成透明。"
+			}, {
+				"name": "copy",
+				"dec": "只有新图形会被保留，其它都被清除掉。"
+			}];
+
+			var index = 0;
+
+			/*function go() {
+				canvas.height = canvas.height; //重置画布，不能用clearRect清除，因为会有保留
+
+				ctx.fillStyle = color1;
+				ctx.fillRect(100, 100, 300, 300);
+
+				ctx.globalCompositeOperation = gco[index].name; //写在原有内容和新内容之间（新内容描边，填充之前）；
+				ctx.beginPath();
+				ctx.fillStyle = color2;
+				ctx.arc(400, 400, 200, 0, Math.PI * 2, true);
+				//ctx.globalCompositeOperation = gco[index].name;//写在原有内容和新内容之间（新内容描边，填充之前）；
+				ctx.fill(); //填充
+
+				ctx.fillStyle = "#000";
+				ctx.font = "16px serif";
+				ctx.textAlign = "center";
+				ctx.globalCompositeOperation = gco[0].name; //写在原有内容和新内容之间（新内容描边，填充之前）；
+				ctx.fillText(gco[index].name+";"+gco[index].dec, 400, 400);
+
+				index++;
+				if(index >= gco.length) {
+					index = 0;
+				}
+
+				timer = setTimeout(go, 1000);
+			}
+			var timer = setTimeout(go, 1);*/
+
+			/*function go() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height); //clearRect清除,因为下面有save(),restore()
+
+				ctx.save(); //0
+				ctx.fillStyle = color1;
+				ctx.fillRect(100, 100, 300, 300);
+
+				ctx.globalCompositeOperation = gco[index].name; //写在原有内容和新内容之间（新内容描边，填充之前）；
+				ctx.beginPath();
+				ctx.fillStyle = color2;
+				ctx.arc(400, 400, 200, 0, Math.PI * 2, true);
+				//ctx.globalCompositeOperation = gco[index].name;//写在原有内容和新内容之间（新内容描边，填充之前）；
+				ctx.fill(); //填充
+				ctx.restore() //恢复0
+
+				ctx.font = "16px serif";
+				ctx.textAlign = "center";
+				ctx.fillText(gco[index].name + ";" + gco[index].dec, 400, 400);
+
+				index++;
+				if(index >= gco.length) {
+					index = 0;
+				}
+
+				timer = setTimeout(go, 500);
+			}
+			var timer = setTimeout(go, 1);*/
+
+			function change() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height); //clearRect清除,因为下面有save(),restore()
+
+				ctx.save(); //0
+				ctx.fillStyle = color1;
+				ctx.fillRect(100, 100, 300, 300);
+
+				ctx.globalCompositeOperation = gco[index].name; //写在原有内容和新内容之间（新内容描边，填充之前）；
+				ctx.beginPath();
+				ctx.fillStyle = color2;
+				ctx.arc(400, 400, 200, 0, Math.PI * 2, true);
+				//ctx.globalCompositeOperation = gco[index].name;//写在原有内容和新内容之间（新内容描边，填充之前）；
+				ctx.fill(); //填充
+				ctx.restore() //恢复0
+
+				ctx.font = "16px serif";
+				ctx.textAlign = "center";
+				ctx.fillText(gco[index].name + ";" + gco[index].dec, 400, 400);
+			}
+			change();
+
+			function next() {
+				index++;
+				if(index >= gco.length) {
+					index = 0;
+				}
+				change();
+			}
+			
+
+			function pre() {
+				index--;
+				if(index < 0) {
+					index = gco.length - 1;
+				}
+				change();
+			}
+
+			function go() {
+				next();
+				timer = setTimeout(go, 2000);
+			}
+			var timer = setTimeout(go, 2000);
+			
+			
+			window.onkeydown = function(e) {
+				if(e.keyCode == "37") {
+					e.preventDefault();
+					clearTimeout(timer);
+					pre();
+					timer = setTimeout(go, 2000);
+				} else if(e.keyCode == "39") {
+					e.preventDefault();
+					clearTimeout(timer);
+					next();
+					timer = setTimeout(go, 2000);
+				}
+			}
+
+			//以前的
+			/*function change() {
+				canvas.height = canvas.height; //重置画布
+				// ctx.clearRect(0,0,canvas.width,canvas.height);//擦除画布上内容，原来内容还是会影响后面覆盖在上面的内容
+
+				ctx.fillStyle = "blue";
+				ctx.fillRect(0, 0, 200, 200);
+
+				ctx.beginPath();
+				ctx.arc(200, 200, 120, 0, 2 * Math.PI, true);
+				ctx.closePath();
+				ctx.fillStyle = "red"; //先写fillstyle在fill()
+				ctx.globalCompositeOperation = gco[index].name;
+				index++;
+				if(index >= gco.length) {
+					index = 0;
+				}
+				ctx.fill();//填充
+			}
+			change();
+			var timer = setInterval(change, 500);*/
+		</script>
+
+	</body>
+
+</html>
