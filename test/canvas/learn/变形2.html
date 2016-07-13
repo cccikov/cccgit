@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>变形2</title>
+		<style type="text/css">
+			#canvas {
+				border: 1px solid #ccc;
+			}
+		</style>
+		<script src="../../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+
+		</div>
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<script type="text/javascript">
+			var p = Math.PI;
+			var per = p * 2 / 60;
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext('2d');
+
+			var timer = window.requestAnimationFrame(go);
+
+			function go() {
+				var time = new Date();
+				var year = time.getFullYear();
+				var month = time.getMonth()+1;
+				var day = time.getDate();
+				var week = time.getDay();
+				var weekArr = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+				var hour = time.getHours();
+				var minute = time.getMinutes();
+				var second = time.getSeconds();
+				var millisecond = time.getMilliseconds()
+
+				canvas.height = canvas.height;
+
+				ctx.save();//0级
+				
+				ctx.translate(400, 400); //先变形，再画
+
+				ctx.arc(0, 0, 200, 0, p * 2);
+				ctx.stroke();
+
+				//小时刻度
+				ctx.beginPath();
+				for(var i = 0; i < 12; i++) {
+					ctx.moveTo(0, -200);
+					ctx.lineTo(0, -175);
+					ctx.stroke();
+					ctx.rotate(p / 6);
+				}
+
+				//分钟刻度
+				ctx.beginPath();
+				for(var i = 0; i < 60; i++) {
+					ctx.moveTo(0, -200);
+					ctx.lineTo(0, -190);
+					ctx.stroke();
+					ctx.rotate(p / 30);
+				}
+
+				//时针
+				ctx.save();//1级
+				ctx.rotate(per * 5 * hour + per * 5 / 60 * minute); //per*5/60 将一个小时分成60份
+				ctx.beginPath();
+				ctx.moveTo(0, 0);
+				ctx.lineWidth = 2;
+				ctx.lineTo(0, -100);
+				ctx.stroke();
+				ctx.restore();//恢复1级
+
+				//分针
+				ctx.save();//1级
+				ctx.rotate(per * minute + per / 60 * second); 
+				ctx.beginPath();
+				ctx.moveTo(0, 0);
+				ctx.lineWidth = 2;
+				ctx.lineTo(0, -130);
+				ctx.stroke();
+				ctx.restore();//恢复1级
+				
+				//秒针
+				ctx.save();//1级
+				//ctx.rotate(per * second); 
+				ctx.rotate(per * second+per/1000*millisecond); 
+				ctx.beginPath();
+				ctx.moveTo(0, 0);
+				ctx.lineWidth = 2;
+				ctx.lineTo(0, -160);
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.arc(0,-165,5,0,2*p);
+				ctx.stroke();
+				ctx.restore();//恢复1级
+				
+				ctx.font = "18px serif";
+				ctx.textAlign = "center";
+				ctx.fillText(year+"/"+month+"/"+day,0,100);
+				ctx.fillText(weekArr[week],0,124)
+				
+				ctx.restore();//恢复0级
+				
+				
+				
+				timer = window.requestAnimationFrame(go);
+			}
+		</script>
+	</body>
+
+</html>

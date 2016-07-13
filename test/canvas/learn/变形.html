@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>变形</title>
+		<script src="../../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="wrap">
+			
+		</div>
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext('2d');
+			var grad1 = ctx.createLinearGradient(-150,-150,800,800);
+			grad1.addColorStop(0.1,"red");
+			grad1.addColorStop(0.5,"rgba(0,255,0,1)");
+			
+			ctx.save();
+			ctx.fillStyle = grad1;
+			
+			ctx.translate(300,300);
+			ctx.rotate(Math.PI*2/8);
+			ctx.scale(1.5,1.5);
+			
+			ctx.fillRect(-150,-150,300,300);
+			ctx.restore();
+			ctx.fillRect(150,150,300,300);
+			
+			
+			
+		</script>
+	</body>
+</html>
