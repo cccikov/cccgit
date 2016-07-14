@@ -5,7 +5,8 @@
 		<meta charset="UTF-8">
 		<title>js对象</title>
 		<style type="text/css">
-			html,body{
+			html,
+			body {
 				*background: #000;
 			}
 		</style>
@@ -13,35 +14,52 @@
 
 	<body>
 		<p>
-			构造函数与工厂模式区别：<br />
-			1、构造函数里面没有创建对象；<br />
-			2、构造函数直接将属性和方法赋给this对象；<br />
-			3、构造函数里面没有return语句。<br />
-			4、构造函数首字母大写(约定俗成，构造函数始终都以大写字母开头，非构造函数以小字母开头)，创建新实例，必须用到new操作符。<br />
+			构造函数与工厂模式区别：
+			<br /> 1、构造函数里面没有创建对象；
+			<br /> 2、构造函数直接将属性和方法赋给this对象；
+			<br /> 3、构造函数里面没有return语句。
+			<br /> 4、构造函数首字母大写(约定俗成，构造函数始终都以大写字母开头，非构造函数以小字母开头)，创建新实例，必须用到new操作符。
+			<br />
 		</p>
 		<p>
-			用new创建一个新实例，实际经历以下四个过程：<br />
-			1、创建一个新对象；<br>
-			2、将构造函数作用域赋给新对象(所以this就指向这个新对象)；<br />
-			3、执行构造函数中代码(为新对象添加属性)；<br>
-			4、返回新对象。
+			用new创建一个新实例，实际经历以下四个过程：
+			<br /> 1、创建一个新对象；
+			<br /> 2、将构造函数作用域赋给新对象(所以this就指向这个新对象)；
+			<br /> 3、执行构造函数中代码(为新对象添加属性)；
+			<br /> 4、返回新对象。
 		</p>
 		<p>
-			构造函数缺点：<br />
-			以构造函数方式创造函数，会导致不同的作用域链和标识符解析，就是每个Person实例都包含一个不同的Function实例的本质。不通事理上的同名函数是不相等的。
+			构造函数缺点：<br /> 以构造函数方式创造函数，会导致不同的作用域链和标识符解析，就是每个Person实例都包含一个不同的Function实例的本质。不通实例上的同名函数是不相等的。
 		</p>
 		<script type="text/javascript">
-		
 			//普通模式(一个个建)
-			var person0 = {
-				name: "ccc",
-				age: 40,
-				job: "teacher",
-				sayName: function() {
-					alert(this.name);
-				}
+			//new Object()创建
+			var personZero = new Object();
+			personZero.name = "Nicholas";
+			personZero.age = 29;
+			personZero.job = "Softwar Enginerr";
+			personZero.sayName = function() {
+				alert(this.name);
 			}
-			
+
+			//字面量创建
+			//var person0 = {
+			//	name: "ccc",
+			//	age: 40,
+			//	job: "teacher",
+			//	sayName: function() {
+			//		alert(this.name);
+			//	}
+			//}
+			//字面量创建2
+			var person0 = {};
+			person0.name = "ccc",
+			person0.age = 40,
+			person0.job = "teacher",
+			person0.sayName = function() {
+				alert(this.name);
+			}
+
 			// 工厂模式
 			function createPerson(name, age, job) {
 				var o = new Object(); //var o = {};
@@ -55,50 +73,42 @@
 			}
 			var person1 = createPerson("nicholas", 29, "software engineer");
 			var person2 = createPerson("greg", 23, "doctor");
-			
+
 			//构造函数模式
-			function Person(name,age,job){
+			function Person(name, age, job) {
 				this.name = name;
 				this.age = age;
 				this.job = job;
-				this.sayName = function(){
-					alert(this.name);
-				}//等价于 this.sayName = new Function("alert(this.name)");
+				this.sayName = function() {
+						alert(this.name);
+					} //等价于 this.sayName = new Function("alert(this.name)");
 			}
-			var person3 = new Person("nicholas2",39,"old software engineer");
-			var person4 = new Person("greg2",33,"old doctor");
-
-
-
+			var person3 = new Person("nicholas2", 39, "old software engineer");
+			var person4 = new Person("greg2", 33, "old doctor");
 
 			/*
-			*不使用new
-			*/ 
-			var person5 = Person("ccc3",33,"hahah");//person5 为 underfinded ，因为Person并没有return任何东西。
+			 *不使用new
+			 */
+			var person5 = Person("ccc3", 33, "hahah"); //person5 为 underfinded ，因为Person并没有return任何东西。
 			// console.log(person5);
-			
+
 			/*
-			*构造函数作为普通函数一样执行
-			*/ 
-			Person("ccc3",33,"hahah");//相当于var name = "ccc3"; var age = 33;……………………
+			 *构造函数作为普通函数一样执行
+			 */
+			Person("ccc3", 33, "hahah"); //相当于var name = "ccc3"; var age = 33;……………………
 			// console.log(name,this);//ccc3,window        在全局作用域中调用一个函数，this对象总是指向global对象(在浏览器中就是window对象)。
 
-
 			/*
-			*在另一个对象的作用域中调用
-			*/ 
+			 *在另一个对象的作用域中调用
+			 */
 			var theObj = {};
-			Person.call(theObj,"ccc4",55,"cleaner");//theObj就变成Person的新实例
+			Person.call(theObj, "ccc4", 55, "cleaner"); //theObj就变成Person的新实例
 			console.log(theObj);
-			
-			
-			//证明不同实例上的同名函数是不相等的
-			console.log("不同实例上的同名函数相等吗",person3.sayName==person4.sayName);
-			
-			
 
-			// console.log(person3.constructor == Person,typeof(person3),person3 instanceof Person);
-			
+			//证明不同实例上的同名函数是不相等的
+			console.log("不同实例上的同名函数相等吗", person3.sayName == person4.sayName);
+			console.log(person3.constructor == Person,typeof(person3),person3 instanceof Person);
+
 			// console.log(person0, person1, person2,person3,person4);
 			// person0.name = person1.name = person2.name = person3.name = person4.name = "bbb";
 			// console.log(person0, person1, person2,person3,person4);

@@ -89,15 +89,16 @@ ccc.isPlainObject = function(obj) {
 // }
 
 ccc.isAndroid = function() {
-    return (/android/gi).test(navigator.appVersion.toLowerCase())
+    return (/android/gi).test(navigator.appVersion.toLowerCase());
 }
 
 ccc.isIphone = function() {
-    return (/iphone/gi).test(navigator.appVersion.toLowerCase())
+    return (/iphone/gi).test(navigator.appVersion.toLowerCase());
 }
 
 ccc.isObject = function(obj) {
-    return Object.prototype.isPrototypeOf(obj);
+    // return Object.prototype.isPrototypeOf(obj);
+    return obj instanceof Object;
 };
 
 // json转化为字符串
