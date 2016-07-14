@@ -51,7 +51,7 @@ ccc.isFunction = function(obj) {
 }
 
 // 判断是否为空
-ccc.isNullOrEmpty = function (str) {
+ccc.isNullOrEmpty = function(str) {
     var that = this;
     return (str == null || str == undefined || that.trim(str) == "") ? true : false;
 }
@@ -70,9 +70,10 @@ ccc.isEmptyObject = function(obj) {
 };
 
 //判断是否为纯粹对象 错的
-ccc.isPlainObject = function (obj) {
-	return (typeof(obj)==="object" && obj != null && obj != undefined);
+ccc.isPlainObject = function(obj) {
+    return (typeof(obj) === "object" && obj != null && obj != undefined);
 }
+
 // isPlainObject: function(a) {
 // 	var b;
 // 	if(!a || "object" !== m.type(a) || a.nodeType || m.isWindow(a)) return !1;
@@ -87,7 +88,151 @@ ccc.isPlainObject = function (obj) {
 // 	return void 0 === b || j.call(a, b)
 // }
 
+ccc.isAndroid = function() {
+    return (/android/gi).test(navigator.appVersion.toLowerCase())
+}
 
-ccc.isObject = function(obj){
-	return Object.prototype.isPrototypeOf(obj);
+ccc.isIphone = function() {
+    return (/iphone/gi).test(navigator.appVersion.toLowerCase())
+}
+
+ccc.isObject = function(obj) {
+    return Object.prototype.isPrototypeOf(obj);
+};
+
+// json转化为字符串
+ccc.jsonToStr = function(json) {
+    if (typeof json === 'object') {
+        return JSON && JSON.stringify(json);
+    }
+};
+
+// 字符串转化为json
+ccc.strToJson = function(str) {
+    if (typeof str === 'string') {
+        return JSON && JSON.parse(str);
+    }
+};
+
+
+// 设置localStorage
+ccc.setStorage = function(key, value) {
+    if (arguments.length === 2) {
+        var v = value;
+        if (typeof v == 'object') {
+            v = JSON.stringify(v);
+            v = 'obj-' + v;
+        } else {
+            v = 'str-' + v;
+        }
+        var ls = window.localStorage;
+        if (ls) {
+            ls.setItem(key, v);
+            return v;
+        }
+    }
+};
+// 访问localStorage
+ccc.getStorage = function(key) {
+    var ls = window.localStorage;
+    if (ls) {
+        var v = ls.getItem(key);
+        if (!v) {
+            return;
+        }
+        if (v.indexOf('obj-') === 0) {
+            v = v.slice(4);
+            return JSON.parse(v);
+        } else if (v.indexOf('str-') === 0) {
+            return v.slice(4);
+        }
+    }
+};
+// 删除localStorage
+ccc.rmStorage = function(key) {
+    var ls = window.localStorage;
+    if (ls && key) {
+        ls.removeItem(key);
+    }
+};
+// 清空localStorage
+ccc.clearStorage = function() {
+    var ls = window.localStorage;
+    if (ls) {
+        ls.clear();
+    }
+};
+
+// 设置sessionStorage
+ccc.setSessionStorage = function(key, value) {
+    if (arguments.length === 2) {
+        var v = value;
+        if (typeof v == 'object') {
+            v = JSON.stringify(v);
+            v = 'obj-' + v;
+        } else {
+            v = 'str-' + v;
+        }
+        var ls = window.sessionStorage;
+        if (ls) {
+            ls.setItem(key, v);
+            return v;
+        }
+    }
+};
+// 获取sessionStorage
+ccc.getSessionStorage = function(key) {
+    var ls = window.sessionStorage;
+    if (ls) {
+        var v = ls.getItem(key);
+        if (!v) {
+            return;
+        }
+        if (v.indexOf('obj-') === 0) {
+            v = v.slice(4);
+            return JSON.parse(v);
+        } else if (v.indexOf('str-') === 0) {
+            return v.slice(4);
+        }
+    }
+};
+// 删除sessionStorage
+ccc.rmSessionStorage = function(key) {
+    var ls = window.sessionStorage;
+    if (ls && key) {
+        ls.removeItem(key);
+    }
+};
+// 清空sessionStorage
+ccc.clearSessionStorage = function() {
+    var ls = window.sessionStorage;
+    if (ls) {
+        ls.clear();
+    }
+};
+
+
+//设置cookie
+ccc.setCookie = function(cname, cvalue, exDays) {
+    var d = new Date();
+    var expires = d.getTime() + exDays * (24 * 60 * 60 * 1000);
+    document.cookie = cname + "=" + cvalue + "; expires=" + new Date(expires);
+}
+
+//getCookie事件
+ccc.getCookie = function(cookieName, value) {
+    var strCookie = document.cookie;
+    var arrCookie = strCookie.split("; "); //"user=1443507891162S0005I7F000001R1418; mark=9171E5659CD7799C6651332AD619185D; organizationCode=CCC; username=admin" => ["user=1443507891162S0005I7F000001R1418", "mark=9171E5659CD7799C6651332AD619185D", "organizationCode=CCC", "username=admin"]
+    for (var i = 0; i < arrCookie.length; i++) {
+        var arr = arrCookie[i].split("=");
+        if (cookieName == arr[0]) {
+            return arr[1];
+        }
+    }
+    return "";
+}
+
+//清除cookie
+ccc.clearCookie = function(cname) {
+    setCookie(cname, "", -1);
 }

@@ -7,54 +7,11 @@
     <script type="text/javascript" src="js/ccc.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-    var a = function(){
-    	alert("asd");
-    };
-    var b = new Object();
-    var c = [1,2];
-    var img = new Image();
-    var date = new Date();
+    var str = '[{"name":"ccc","age":"12"},{"name":"csh","age":"11"}]';
+    var json = [{"name":"ccc","age":"12"},{"name":"csh","age":"11"}];
 
-    console.log(ccc.isObject(a));
-    console.log(ccc.isObject(b));
-    console.log(ccc.isObject(c));
- 	console.log(ccc.isObject(img));
-    console.log(ccc.isObject(date));
-    //五种基本类型
-    console.log(ccc.isObject("aaa"));
-    console.log(ccc.isObject(true));
-    console.log(ccc.isObject(123));
-    console.log(ccc.isObject(null));
-    console.log(ccc.isObject(undefined));
-
-
-    console.log("----------------------------------------")
-
-    console.log(ccc.isPlainObject(a));
-    console.log(ccc.isPlainObject(b));
-    console.log(ccc.isPlainObject(c));
-    console.log(ccc.isPlainObject(img));
-    console.log(ccc.isPlainObject(date));
-    //五种基本类型
-    console.log(ccc.isPlainObject("aaa"));
-    console.log(ccc.isPlainObject(true));
-    console.log(ccc.isPlainObject(123));
-    console.log(ccc.isPlainObject(null));
-    console.log(ccc.isPlainObject(undefined));
-
-    console.log("----------------------------------------")
-
-    console.log($.isPlainObject(a));
-    console.log($.isPlainObject(b));
-    console.log($.isPlainObject(c));
-    console.log($.isPlainObject(img));
-    console.log($.isPlainObject(date));
-    //五种基本类型
-    console.log($.isPlainObject("aaa"));
-    console.log($.isPlainObject(true));
-    console.log($.isPlainObject(123));
-    console.log($.isPlainObject(null));
-    console.log($.isPlainObject(undefined));
+    console.log(ccc.strToJson(str));
+    console.log(ccc.jsonToStr(json));
     </script>
 </head>
 
