@@ -53,9 +53,9 @@
 			//}
 			//字面量创建2
 			var person0 = {};
-			person0.name = "ccc",
-			person0.age = 40,
-			person0.job = "teacher",
+			person0.name = "ccc";
+			person0.age = 40;
+			person0.job = "teacher";
 			person0.sayName = function() {
 				alert(this.name);
 			}
@@ -86,28 +86,31 @@
 			var person3 = new Person("nicholas2", 39, "old software engineer");
 			var person4 = new Person("greg2", 33, "old doctor");
 
-			/*
-			 *不使用new
-			 */
+			//(实例上)constructor的属性,是指向构造函数本身 
+			console.log(person3.constructor); //function Person(name, age, job){……}
+			console.log(person3.constructor == Person); //true
+
+			//instanceof用于判断是否该构造函数的实例
+			console.log(person3 instanceof Person); //true person3是Person的实例
+			console.log(person3 instanceof Object); //ture 同时person3也是Object的实例
+
+			console.log(person3.constructor, person3.constructor == Person, typeof(person3), person3 instanceof Person); //function Person(name, age, job){……} , true , object , true;
+
+			//不使用new
 			var person5 = Person("ccc3", 33, "hahah"); //person5 为 underfinded ，因为Person并没有return任何东西。
 			// console.log(person5);
 
-			/*
-			 *构造函数作为普通函数一样执行
-			 */
-			Person("ccc3", 33, "hahah"); //相当于var name = "ccc3"; var age = 33;……………………
+			//构造函数作为普通函数一样执行
+			Person("ccc3", 33, "hahah"); //添加到window ，在全局作用域中调用一个函数，this对象总是指向global对象(在浏览器中就是window对象)。 相当于var name = "ccc3"; var age = 33;……………………
 			// console.log(name,this);//ccc3,window        在全局作用域中调用一个函数，this对象总是指向global对象(在浏览器中就是window对象)。
 
-			/*
-			 *在另一个对象的作用域中调用
-			 */
-			var theObj = {};
-			Person.call(theObj, "ccc4", 55, "cleaner"); //theObj就变成Person的新实例
-			console.log(theObj);
+			//在另一个对象的作用域中调用
+			var person6 = {}; //相当于 new创建的第1步。
+			Person.call(person6, "ccc6", 55, "cleaner"); //person6就变成Person的新实例，相当于new创建的第2，3，4步
+			console.log(person6);
 
 			//证明不同实例上的同名函数是不相等的
-			console.log("不同实例上的同名函数相等吗", person3.sayName == person4.sayName);
-			console.log(person3.constructor == Person,typeof(person3),person3 instanceof Person);
+			console.log(person3.sayName == person4.sayName); //false
 
 			// console.log(person0, person1, person2,person3,person4);
 			// person0.name = person1.name = person2.name = person3.name = person4.name = "bbb";

@@ -57,10 +57,12 @@
 		<img src="img/prototype-constructor.png"/>
 		<p>
 			从图中可以看出，<br />
-			实例<strong>(peron1)</strong>没有prototype属性，但有[[prototype]]内部属性指向构造函数<strong>(Person)</strong>的原型对象(Person.prototype)<br />
+			实例<strong>(peron1)</strong>没有prototype属性，但有[[prototype]]内部属性指向构造函数<strong>(Person)</strong>的原型对象(Person Prototype)（Person.prototype也是指向Person Prototype）<br />
 			解析器读取实例属性的时候，先读取实例的属性，如果实例自身没有；则在实例的原型那里寻找。<br />
-			所以实例<strong>(person1)</strong>的constructor属性 就是 构造函数<strong>(Person)</strong>的原型对象(Person.prototype)的constructor属性 指向构造函数<strong>(Person)</strong>本身 
+			所以实例<strong>(person1)</strong>的constructor属性 就是 构造函数<strong>(Person)</strong>的原型对象(Person Prototype)的constructor属性 指向构造函数<strong>(Person)</strong>本身 
 		</p>
+		<p>实例(peron1)的[[prototype]]内部属性，和Person.prototype都是指向      构造函数(Person) 的 原型对象（Person Prototype）</p>
+		<p>实例(peron1)，和Person的constructor属性       其实就是原型对象（Person Prototype）的constructor属性    指向     构造函数（Person）</p>
 	</body>
 
 </html>
