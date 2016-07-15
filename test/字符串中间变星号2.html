@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>名字第二个字变星号</title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				
+				var ccc = {};
+				ccc.star = function(param){
+					var start = param.start;
+					var end = param.end;
+					var str = param.str;
+					var sign = param.sign || "*";//可选
+					
+					var num = end-start;
+					var starStr = "";
+					for(var i = 0;i<num;i++){
+						starStr = starStr + sign;
+					}
+					str = str.slice(0,start)+starStr+str.slice(end);
+					return str;
+				}
+				
+				//原型方法
+				String.prototype.star = function(start,end){
+					var num = end-start;
+					var str = this;
+					var starStr = "";
+					for(var i = 0;i<num;i++){
+						starStr = starStr + "*";
+					}
+					str = str.slice(0,start)+starStr+str.slice(end);
+					return str;
+				}
+				
+				$("li").each(function(){
+					var str = this.innerHTML;
+					this.innerHTML = ccc.star({
+						str:str,
+						start:1,
+						end:2,
+						sign:"&"
+					});
+				});
+				
+			});
+		</script>
+	</head>
+
+	<body>
+		<ul>
+			<li>阿萨德</li>
+			<li>存储储</li>
+			<li>陈楚从</li>
+			<li>高个</li>
+			<li>高</li>
+		</ul>
+	</body>
+
+</html>
