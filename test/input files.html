@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<title>input file</title>
+	<style type="text/css">
+		input{
+			-webkit-appearance: none;
+			appearance: none;
+		}
+	</style>
 	<script type="text/javascript" src='js/jquery.min.js'></script>
 	<script type="text/javascript">
 		$(function(){
 			$("#up").on("change",function(){
 				var target = this;
 				var msg = target.files[0];
+				console.dir(msg);
 				var fileName = msg.name;
 			 	var fileType = fileName.substring(fileName.lastIndexOf('.')+1);
 			 	console.log(fileType);

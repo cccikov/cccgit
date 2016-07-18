@@ -237,3 +237,8 @@ ccc.getCookie = function(cookieName, value) {
 ccc.clearCookie = function(cname) {
     setCookie(cname, "", -1);
 }
+
+//判断属性是否存在于原型中
+ccc.hasPrototypeProperty = function(object,name){
+    return !object.hasOwnProperty(name) && (name in object);
+}

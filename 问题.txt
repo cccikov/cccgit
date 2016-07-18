@@ -28,5 +28,7 @@ ccc.first = function(){
 
 12、impress.js
 
+13、background: url("../images/arrows(1).png") center/contain no-repeat;
+	当url有其他符号，要用引号括住
 
 frontierarea
