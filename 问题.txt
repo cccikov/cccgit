@@ -32,3 +32,6 @@ ccc.first = function(){
 	当url有其他符号，要用引号括住
 
 frontierarea
+
+
+14、<!--Static Page Generated OK-->

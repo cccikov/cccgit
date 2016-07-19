@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>file API</title>
+    <script src="../js/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#uploadfile").on("change",function(){
+                var that = this;//原生js
+                var file = that.files[0];
+                console.dir(file);
+                var name = file.name;
+                var size = file.size;
+                var type = file.type;
+                console.log(name,size,type);
+            });
+            $("#uploadfile2").on("change",function(){
+                var that = this;//原生js
+                var files = that.files;
+                for(var i =0;i<files.length;i++){
+                    console.log(files[i].name);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <label for="uploadfile">选择一个文件</label>
+    <input id="uploadfile" type="file">
+
+    <label for="uploadfile">选择多个文件</label>
+    <input id="uploadfile2" type="file" multiple>
+</body>
+</html>
