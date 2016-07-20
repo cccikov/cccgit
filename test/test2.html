@@ -1,105 +1,124 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<title>Document</title>
-		<style type="text/css">
-			#imgPreview {
-				float: left;
-				border: none;
-			}
-			
-			#imgPreview img {
-				margin-right: 10px;
-				width: 50px;
-				height: 50px;
-			}
-			
-			.upload-img {
-				display: block;
-				float: left;
-				width: 50px;
-				height: 50px;
-				overflow: hidden;
-				position: relative;
-				background: url(img/big-icon.png) no-repeat 0;
-				background-size: contain;
-			}
-			/*这儿是为了改变上传按钮样式把input设为了透明色*/
-			
-			.upload-img input {
-				height: 50px;
-				opacity: 0;
-				filter: alpha(opacity=0);
-				position: absolute;
-				top: 0;
-				right: 0;
-			}
-		</style>
-		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(function() {
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		var base = $(window).width()/20;
+    		$("html,body").css("font-size",base);
+    		console.log($(".maskInC ul").outerHeight()+2.5*base);
+    		$(".maskIn").height($(".maskInC ul").outerHeight()+2.5*base);//设置的都是content-height
+    	});
+    </script>
+</head>
 
-				$("#fileupload").change(function() {
-
-					if(typeof(FileReader) != "undefined") {
-
-						var dvPreview = $("#dvPreview");
-
-						dvPreview.html("");
-
-						var regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
-
-						$($(this)[0].files).each(function() {
-
-							var file = $(this);
-
-							if(regex.test(file[0].name.toLowerCase())) {
-
-								var reader = new FileReader();
-
-								reader.onload = function(e) {
-
-									var img = $("");
-
-									img.attr("src", e.target.result);
-
-									dvPreview.append(img);
-
-								}
-
-								reader.readAsDataURL(file[0]);
-
-							} else {
-
-								alert(file[0].name + "is not a valid image file.");
-
-								dvPreview.html("");
-
-								return false;
-
-							}
-
-						});
-
-					} else {
-
-						alert("This browser does not support HTML5 FileReader.");
-
-					}
-
-				});
-
-			});
-		</script>
-	</head>
-
-	<body>
-		<p>上传图片：</p>
-		<div id="imgPreview"></div>
-		<span class="upload-img"><input id="fileUpload" accept="image/*" type="file" multiple="multiple"></span>
-		</div>
-	</body>
+<body>
+    <style type="text/css">
+    #mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
+    
+    #mask * {
+        box-sizing: border-box;
+    }
+    
+   	.maskIn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        width: 80%;
+        height: 60%;
+        max-height: 60%;
+        padding: 20px 12px;
+        background: #fff;
+    }
+    
+    .maskInTop {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        width: 100%;
+        padding: 0 12px;
+    }
+    
+    .maskInTop a {
+        float: right;
+        height: 2rem;
+        line-height: 2rem;
+        width: 2rem;
+        border: 1px solid #61B9F2;
+        text-decoration: none;
+        text-align: center;
+        color: #61B9F2;
+        font-size: 1.5rem;
+    }
+    
+    .maskFilter {
+        overflow: hidden;
+        line-height: 1;
+    }
+    
+    .maskFilter input {
+        width: 95%;
+        height: 2rem;
+        padding: 0 12px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+    }
+    
+    .maskInC {
+        height: 100%;
+        padding: 2.5rem 0 0 0;
+    }
+    
+    #mask .maskInC ul {
+        max-height: 100%;
+        border: 1px solid #eee;
+        overflow-y: auto;
+    }
+    
+    .maskInC li {
+        padding: 8px 12px;
+        line-height: 1;
+    }
+    
+    .maskInC li:nth-of-type(2n+1) {
+        background: #fafafa;
+    }
+    </style>
+    <script type="text/javascript">
+    $(function() {});
+    </script>
+    <div id="mask">
+        <div class="maskIn">
+            <div class="maskInTop">
+                <a href="addInvoiceTitle.html">＋</a>
+                <div class="maskFilter">
+                    <input type="" name="">
+                </div>
+            </div>
+            <div class="maskInC">
+                <ul>
+                    <li>bbb</li>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
 
 </html>

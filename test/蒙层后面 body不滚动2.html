@@ -75,15 +75,6 @@
             // e.preventDefault();//如果悬浮窗不需要滚动的话，可以
 
         });
-        
-        $(window).on("touchstart",function(e){
-        	console.log("touchstart");
-        	e.preventDefault();
-        });
-        $(window).on("touchend",function(e){
-        	console.log("touchend");
-        	$(window).off("touchstart touchend");
-        });
     });
     </script>
 </head>

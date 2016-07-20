@@ -96,10 +96,10 @@
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			/*//解决办法一：用click事件代替touchstart事件
-			$("#mask").on("click", function() {
-				$(this).hide();
-			});*/
-			
+						$("#mask").on("click", function() {
+							$(this).hide();
+						});*/
+
 			/*//解决办法二：定时器，点透是因为click在那点上有300ms左右的延迟，而touchstart是即时的
 			$("a").on("click",function(e){//禁用蒙层下元素的点击事件，off("click")或者是a的话就禁用默认事件。
 				e.preventDefault();
@@ -112,25 +112,36 @@
 					});
 				},350);
 			});*/
-			
-			/*//方法三：还是定时器，让蒙层迟点消失
-			$("#mask").on("touchstart",function(){
+
+			//方法三：还是定时器，让蒙层迟点消失
+			/*$("#mask").on("touchstart",function(){
 				var that = $(this);
 				var timer = setTimeout(function(){
 					that.hide();
 				},350);
 			});*/
-			
+
 			//方法四：其实click就挺好的，只是用click事件的话，手指在上面拖来拖去（touchmove）蒙层后面内容会滚动，有点奇怪。如果蒙层上面内容较多，出现了滚动条，或者不介意蒙层后面内容会滚动，那就直接用click事件就好啦
-			$("#mask").on("click",function(){
+			/*$("#mask").on("click", function() {
 				$(this).hide();
-			}).on("touchmove",function(e){
+			}).on("touchmove", function(e) {
 				e.preventDefault();
 			});
-			
-			
+
 			$("#mask2").on("touchstart", function() {
 				$(this).hide();
+			});*/
+
+			//方法五，阻止点透
+			$("#mask").on("click", function() {
+				$(this).hide();
+			}).on("touchmove", function(e) {
+				e.preventDefault();
+			});
+
+			$("#mask2").on("touchstart", function(e) {
+				$(this).hide();
+				e.preventDefault();
 			});
 		</script>
 	</body>
