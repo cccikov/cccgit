@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>Document</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<style type="text/css">
+			html,
+			body {
+				color: #444;
+			}
+			
+			#mask {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.3);
+				z-index: 10;
+			}
+			
+			#mask * {
+				box-sizing: border-box;
+			}
+			
+			.maskIn {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				margin: auto;
+				width: 80%;
+				height: 60%;
+				max-height: 60%;
+				padding: 20px 12px;
+				background: #fff;
+				
+				transform: scale(0.7);
+				opacity: 0;
+				transition:transform cubic-bezier(0, 1.1, 1, 1) 0.3s,opacity cubic-bezier(0, 1.1, 1, 1) 0.2s;
+			}
+			.maskIn.in{
+				transform: scale(1);
+				opacity: 1;
+			}
+			
+			.maskInTop {
+				position: absolute;
+				top: 20px;
+				left: 0;
+				width: 100%;
+				padding: 0 12px;
+			}
+			
+			.maskInTop a {
+				float: right;
+				height: 2rem;
+				line-height: 2rem;
+				width: 2rem;
+				border: 1px solid #61B9F2;
+				text-decoration: none;
+				text-align: center;
+				color: #61B9F2;
+				font-size: 1.5rem;
+			}
+			
+			.maskFilter {
+				overflow: hidden;
+				line-height: 1;
+			}
+			
+			.maskFilter input {
+				width: 95%;
+				height: 2rem;
+				padding: 0 12px;
+				font-size: 1rem;
+				border: 1px solid #ccc;
+			}
+			
+			.maskInC {
+				height: 100%;
+				padding: 2.5rem 0 0 0;
+			}
+			
+			#mask .maskInC ul {
+				max-height: 100%;
+				border: 1px solid #eee;
+				overflow-y: auto;
+			}
+			
+			.maskInC li {
+				padding: 8px 12px;
+				line-height: 1;
+				transition: background .3s;
+				background: #fff;
+			}
+			.maskInC li:nth-of-type(2n+1) {
+				background: #fafafa;
+			}
+			.maskInC li.active {
+				background: #ddd;
+			}
+			/*.maskInC li:active{
+				background: #ccc;
+			}*/
+		</style>
+		<style type="text/css">
+			#select {
+				width: 80%;
+				line-height: 1rem;
+				box-sizing: border-box;
+				font-size: 1rem;
+			}
+		</style>
+		<!--<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="js/zepto-1.1.6.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/touch.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var base = $(window).width() / 20;
+				$("html,body").css("font-size", base);
+				// console.log($(".maskInC ul").outerHeight()+2.5*base);
+				// $(".maskIn").height($(".maskInC ul").outerHeight()+2.5*base);//设置的都是content-height
+			});
+			$(function() {
+				var s = {};
+				s.select = $("#select");
+				s.mask = $("#mask");
+				s.maskIn = $(".maskIn");
+				s.ul = $(".maskIn ul");
+				s.li = $(".maskIn li");
+				s.filter = $(".maskFilter input");
+				s.timer = null;
+				
+				s.in = function(){
+					s.mask.show();
+					setTimeout(function(){
+						s.maskIn.addClass("in");
+					},1);
+				}
+				s.out = function(){
+					s.maskIn.removeClass("in");
+					setTimeout(function(){
+						s.mask.hide();
+						s.li.removeClass("active");
+					},200);
+				}
+				
+				s.select.on("touchstart", function(e) {
+					e.preventDefault(); //解决点透
+					s.in();
+				});
+				
+				s.mask.on("click", function() {
+					s.out();
+				}).find(".maskIn").on("click", function(e) {
+					e.stopPropagation(); //阻止冒泡
+				}).find("li").on("click", function() {
+					var value = $(this).text();
+					s.select.val(value);
+					s.out();
+				}).on("touchstart",function(){
+					$(this).addClass("active");
+				}).on("touchend",function(){
+					$(this).removeClass("active");
+				}).on("touchmove",function(){
+					$(this).removeClass("active");
+				});
+				
+				
+				s.filter.on("input",function(){
+					var value = $(this).val().trim();
+					clearTimeout(s.timer);
+					if(value!=""){
+						s.ul.hide();
+						s.li.hide();
+						s.timer = setTimeout(function(){
+							s.li.each(function(){
+								if($(this).text().indexOf(value)!=-1){
+									s.ul.show();
+									$(this).show();
+								}
+							});
+						},500);
+						
+					}else{
+						s.ul.show();
+						s.li.show();
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur. ipsum dolor sit amet, consectetur adipisicing elit. Cumque veniam officia quaerat nulla molestiae explicabo voluptatem id aperiam saepe odio similique voluptatibus omnis pariatur laudantium delectus maiores eaque perferendis illum.</p>
+			<input id="select" type="text" readonly />
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			<a href="http://www.baidu.com">点透a</a>
+			
+			
+		</div>
+		<div id="mask">
+			<div class="maskIn">
+				<div class="maskInTop">
+					<a href="javascript:void(0)">＋</a>
+					<div class="maskFilter">
+						<input type="" name="">
+					</div>
+				</div>
+				<div class="maskInC">
+					<ul>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>aaa</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>bbb</li>
+						<li>ccc</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
