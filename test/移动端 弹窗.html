@@ -139,7 +139,7 @@
 				
 				s.in = function(){
 					s.mask.show();
-					setTimeout(function(){
+					setTimeout(function(){//若用jq，可以写show()的回调里面
 						s.maskIn.addClass("in");
 					},1);
 				}
