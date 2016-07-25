@@ -242,3 +242,15 @@ ccc.clearCookie = function(cname) {
 ccc.hasPrototypeProperty = function(object,name){
     return !object.hasOwnProperty(name) && (name in object);
 }
+
+// URL API
+// 创建一个url指向上传的file
+ccc.getFileUrl = function(fileObj){
+    var URL = window.URL || window.webkitURL; //URL兼容写法
+    return URL.createObjectURL(fileObj);
+}
+// 取消将这个url指向file
+ccc.cancelFileUrl = function(objectURL){
+    var URL = window.URL || window.webkitURL; //URL兼容写法
+    URL.revokeObjectURL(objectURL);
+}
