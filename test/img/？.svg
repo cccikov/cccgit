@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<svg width="153" height="153" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>No image</title>
+  <rect id="externRect" height="150" width="150" y="1.5" x="1.500024" stroke-width="3" stroke="#666666" fill="#e1e1e1"/>
+  <text transform="matrix(6.66667, 0, 0, 6.66667, -960.5, -1099.33)" xml:space="preserve" text-anchor="middle" font-family="Fantasy" font-size="14" id="questionMark" y="181.249569" x="155.549819" stroke-width="0" stroke="#666666" fill="#000000">?</text>
+ </g>
+</svg>
