@@ -254,3 +254,21 @@ ccc.cancelFileUrl = function(objectURL){
     var URL = window.URL || window.webkitURL; //URL兼容写法
     URL.revokeObjectURL(objectURL);
 }
+
+// FileReader API
+ccc.fileReader = function(fileObj,callback){
+    var fileReader = new FileReader();//创建fileReader对象
+    fileReader.readAsDataURL(fileObj);
+    fileReader.onload = function(e){
+        src = e.target.result//一个base64的url，若是图片，可以直接写在url上
+        callback(src);//callback函数的第一个参数是src
+    }
+}
+/*e.g.  
+input.on("change",function(){
+    var fileObj = $(this)[0].files[0];
+    ccc.fileReader(fileObj,function(e){
+        console.log(e);
+    });
+});*/
+
