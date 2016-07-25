@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URL API</title>
+    <script src="../js/jquery.min.js" charset="utf-8"></script>
+    <style media="screen">
+        img{
+            max-width: 150px;
+            max-height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file">
+    <div class="pic">
+    </div>
+    <p>上传一张图片后，可以发现，有报错，两个img标签的src明明就是一样的。原因是调用了window.URL.revokeObjectURL()方法，src（fileUrl）已经不指向上传的那个file对象了。</p>
+    <script type="text/javascript">
+        var input = $("input").eq(0);
+        var pic = $(".pic");
+        var URL = window.URL || window.webkitURL; //URL兼容写法
+
+        input.on("change", upload)
+
+        function upload() { //上传文件
+            var file = input[0].files[0];//获取file对象
+            console.dir(file);
+
+            // 创建两个image对象
+            var image1 = new Image();
+            var image2 = new Image();
+
+            var fileUrl = URL.createObjectURL(file);
+            // URL.createObjectURL() 静态方法会创建一个 DOMString，它的 URL 表示参数中的对象。这个 URL 的生命周期和创建它的窗口中的 document 绑定。这个新的URL 对象表示着指定的 File 对象或者 Blob 对象。
+            // objectURL = URL.createObjectURL(blob); blob--是用来创建 URL 的 File 对象或者 Blob 对象​
+            image1.src = fileUrl;
+            $(image1).appendTo(pic); //将image1添加到html中
+
+            image1.onload = function() {
+                URL.revokeObjectURL(fileUrl);//调用犯法后，fileUrl已经不指向那个file对象了。
+                // URL.revokeObjectURL() 静态方法用来释放一个之前通过调用 URL.createObjectURL() 创建的已经存在的 URL 对象。当你结束使用某个 URL 对象时，应该通过调用这个方法来让浏览器知道不再需要保持这个文件的引用了。
+                //window.URL.revokeObjectURL(objectURL);
+                image2.src = fileUrl;
+                $(image2).appendTo(pic); //将image2添加到html中
+            }
+
+        }
+    </script>
+</body>
+
+</html>

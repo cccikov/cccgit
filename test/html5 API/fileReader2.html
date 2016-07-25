@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        #wrap {
+            border: 1px solid;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        #wrap img {
+            max-width: 200px;
+            max-height: 200px;
+            border: 1px solid #d9d9d9;
+            box-shadow: 2px 2px 4px #ccc;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input id="file" type="file" accept="image/*">
+    </form>
+    <div id="wrap">
+        <!-- <img src=""> -->
+    </div>
+    <script src="../js/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        var input = $("#file");
+        var fileReader = new FileReader();//创建fileReader对象
+        var src = null;
+        input.on("change",function(){
+            var fileObj = $(this)[0].files[0];
+            fileReader.readAsDataURL(fileObj);
+            fileReader.onload = function(e){
+                console.log(1);
+                src = e.target.result//一个base64的url，若是图片，可以直接写在url上
+                //readAsDataURL()开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.
+                $("#wrap").html('<img src="'+src+'" alt=""/>')
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
