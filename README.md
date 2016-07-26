@@ -9,16 +9,18 @@
 #####五级标题
 ######六级标题
 
-* 无序列表
+####无序列表
 * 1
 * 2
 * 3
-or
+
+#####或者
 - 1
 - 2
 - 3
 
-1. 有序列表
+####有序列表
+1. 1
 2. 2
 3. 3
 
@@ -26,8 +28,8 @@ or
 
 [我的github](https://github.com/cccikov/)
 
-**strong** or -- strong --
-*italic* or - italic -
+**strong**
+*italic*
 
 ####表格
 
@@ -38,5 +40,5 @@ or
 | zebra stripes | are neat      |    $1 |
 
 
-
-'var hehe = null;'
+####代码
+`var hehe = null;`
