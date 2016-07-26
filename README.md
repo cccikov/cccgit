@@ -9,25 +9,25 @@
 #####五级标题
 ######六级标题
 
-*无序列表
-*1
-*2
-*3
+* 无序列表
+* 1
+* 2
+* 3
 or
--1
--2
--3
+- 1
+- 2
+- 3
 
-1.有序列表
-2.2
-3.3
+1. 有序列表
+2. 2
+3. 3
 
 >引用
 
 [我的github](https://github.com/cccikov/)
 
-**strong** or --strong--
-*italic* or -italic-
+**strong** or -- strong --
+*italic* or - italic -
 
 ####表格
 
