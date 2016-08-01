@@ -29,23 +29,22 @@
 			//		alert(this.name);
 			//	}
 			//}
-			
-			
+
 			var person1 = new Person();
 			var person2 = new Person();
 			person1.sayName(); //"Nicholas"
 			person2.sayName(); //"Nicholas"
 
-			console.dir(person1.constructor);
+			console.dir(person1.constructor); //function Person()
 
 			/*
 			 * 数组原型
 			 */
 			var a = [1, 2, 3, 4, 5];
 			Array.prototype.fuck = function() {
-					alert("fuck");
-				}
-				//a.fuck();
+				alert("fuck");
+			}
+			//a.fuck();
 
 			/*
 			 * 标签的原型

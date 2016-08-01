@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Super(){
+			this.pro = true;//property
+		}
+		Super.prototype.superGetValue = function(){
+			return this.pro;
+		}
+
+		function Sub(){
+			this.subpro = false;
+		}
+
+		//继承于Super
+		Sub.prototype = new Super();//重写了原型，继承于Super,Super所有的方法和属性都存在于Sub的原型中
+		Sub.prototype.subGetValue = function(){
+			return this.subpro;
+		}
+
+		var instance = new Sub();
+
+		console.log(instance.superGetValue());
+		console.log(instance.subGetValue());
+		console.dir(instance.constructor);//function Super();
+
+	</script>
+</body>
+</html>

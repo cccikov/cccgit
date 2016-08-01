@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>对象2</title>
+		<title>对象2.1</title>
 		<style type="text/css">
 			strong{
 				color:darkred;
@@ -53,6 +53,15 @@
 
 	<body>
 		<p>这里先理解prototype和constructor概念先</p>
+		<p>
+			概念：<br />
+			function Person() -- 构造函数<br />
+			Person.prototype -- 构造函数指针，指向原型对象<br />
+			person1 -- 实例<br />
+			person1的[[Prototype]] -- 构造函数的指针，指向原型对象(不可以直接访问)<br />
+			Person Prototype -- (Person及Person实例)的原型对象<br />
+			原型对象上的constructor属性 -- 指向回构造函数(Person)
+		</p>
 		<img src="img/prototype-constructor2.png"/>
 		<img src="img/prototype-constructor.png"/>
 		<p>
@@ -63,6 +72,7 @@
 		</p>
 		<p>实例(peron1)的[[prototype]]内部属性，和Person.prototype都是指向      构造函数(Person) 的 原型对象（Person Prototype）</p>
 		<p>实例(peron1)，和Person的constructor属性       其实就是原型对象（Person Prototype）的constructor属性    指向     构造函数（Person）</p>
+		
 	</body>
 
 </html>
