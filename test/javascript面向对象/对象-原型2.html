@@ -9,8 +9,13 @@
 	<body>
 		<script type="text/javascript">
 			function Person() {}
-
-			Person.prototype = {
+			Person.prototype.name = "Nocholas";
+			Person.prototype.age = 25;
+			Person.prototype.job = "Software Engineer";
+			Person.prototype.sayName = function() {
+				alert(this.name);
+			}
+			/*Person.prototype = {
 				constructor: Person,
 				name: "Nocholas",
 				age: 25,
@@ -18,8 +23,8 @@
 				sayName: function() {
 					alert(this.name);
 				}
-			}
-
+			}*/
+	
 			var person1 = new Person();
 
 			/*
@@ -65,6 +70,17 @@
 
 			console.log(hasPrototypeProperty(person1, "name")); //true 属性在原型中
 			console.log(hasPrototypeProperty(person1, "age")); //false 属性在对象中
+			
+			console.log("%c-----------我是分隔符-----------", "color:red");
+			
+			//枚举属性
+			for(var pro in person1){
+				console.log("person1."+pro,"=",person1[pro]);
+			}
+			//除了 constructor和prototype属性外，其他属性都被枚举出来
+			// Object.keys()方法  ECMAScript5，返回一个包含所有可枚举的字符串
+			console.log(Object.keys(person1.constructor.prototype));//等价于Object.keys(Person.prototype)
+			
 		</script>
 	</body>
 
