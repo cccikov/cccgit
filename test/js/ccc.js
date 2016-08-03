@@ -10,6 +10,26 @@ ccc.trim = function(str) {
 ccc.trimAll = function(str) {
     return str.replace(/\s*/g, '');
 };
+// 获取样式
+ccc.getStyle = function(element,StyleName){
+    if(window.getComputedStyle){
+        return window.getComputedStyle(element)[StyleName]
+    }else if(element.currentStyle){
+        return element.currentStyle[StyleName]
+    }
+    return
+}
+ccc.getStyleList = function(element){
+    if(window.getComputedStyle){
+        return window.getComputedStyle(element)
+    }else if(element.currentStyle){
+        return element.currentStyle
+    }
+    return
+}
+ccc.setStyle = function(element,StyleName,val){
+    element.style[StyleName] = val
+}
 
 //判断是否数字（或者转型后为数字）
 ccc.isNumber = function(str) {
