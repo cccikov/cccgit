@@ -76,11 +76,36 @@
 			//枚举属性
 			for(var pro in person1){
 				console.log("person1."+pro,"=",person1[pro]);
-			}
-			//除了 constructor和prototype属性外，其他属性都被枚举出来
-			// Object.keys()方法  ECMAScript5，返回一个包含所有可枚举的字符串
-			console.log(Object.keys(person1.constructor.prototype));//等价于Object.keys(Person.prototype)
+			}//person1.age = 50,person1.name = Nocholas,person1.job = Software Engineer,person1.sayName = () {alert(this.name);}. 除了 constructor，其他属性都被枚举出来
 			
+
+			// Object.keys()方法  ECMAScript5，返回一个包含所有可枚举实例属性的字符串
+			console.log(Object.keys(person1.constructor.prototype));//等价于Object.keys(Person.prototype)，["name", "age", "job", "sayName"]
+			console.log(Object.keys(person1));//["age"]
+			
+			// Object.getOwnPropertyNames() 得到全部实例属性，无论是否可枚举
+			console.log(Object.getOwnPropertyNames(person1));//["age"]
+			console.log(Object.getOwnPropertyNames(Person.prototype));//["constructor", "name", "age", "job", "sayName"]
+
+
+
+			//原型的动态性
+			Person.prototype.sayHi = function(){
+				alert("hi");
+			}
+			person1.sayHi();//hi
+
+			// 这种是错误写法，因为后面重写了原型，而且enemy仍是指向之前的原型
+			var friend = new Person();
+			Person.prototype = {
+				constructor:Person,
+				sayFu:function(){
+					alert("fuck")
+				}
+			}
+			//var friend = new Person(); 只有在重写后新建的实例才是，指向新原型
+			friend.sayFu();//报错
+
 		</script>
 	</body>
 

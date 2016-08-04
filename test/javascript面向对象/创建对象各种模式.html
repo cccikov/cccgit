@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建对象模式</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+		 *   组合使用构造函数模式和原型模式 ， 最常用
+		 */ 
+		/*function Person(name,age,job){
+			this.name = name;
+			this.age = age;
+			this.job = job;
+			this.friend = ["Shelbey","Court"];
+		}
+		Person.prototype = {
+			constructor:Person,
+			sayName:function(){
+				alert(this.name);
+			}
+		}
+		var person1 = new Person("Nicholas",29,"Software Engineer");
+		var person2 = new Person("Greg",27,"Doctor");
+		person1.friend.push("van");
+
+		console.log(person1.friend);//["Shelbey", "Court", "van"]
+		console.log(person2.friend);//["Shelbey", "Court"]*/
+
+		/*
+		 *  动态原型模型
+		 */
+	 	/*function Person(name,age,job){
+		 	this.name = name;
+		 	this.age = age;
+		 	this.job = job;
+		 	if(!this.sayName){
+		 		Person.prototype.sayName = function(){//这里不能使用字面量重写，不然第一个实例会没有sayName这个方法
+		 			alert(this.name);
+		 		}
+		 	}
+		}
+		var person1 = new Person("Nicholas",29,"Software Engineer");
+		var person2 = new Person("Greg",27,"Doctor");
+		person1.sayName();*/
+
+		/*
+		 *  寄生构造函数模式
+		 */ 
+		/*function Person(name,age,job){
+			var o = new Object();
+			o.name = name;
+			o.age = age;
+			o.job = job;
+			o.sayName = function(){
+				alert(this.name);
+			}
+			return o;
+		}
+		var friend = new Person("Nicholas",29,"Software Engineer");
+		friend.sayName();*/
+
+		function SpecialArray(){
+			//创建数组
+			var values = new Array();
+			
+			//添加值
+			values.push.apply(values,arguments);
+			//相当于
+			//var arr = [];
+			//arr.push.apply(values,arguments);//只是想调用数组的push方法
+			
+			//添加方法
+			values.toPipedString = function(){
+				return this.join("|");
+			};
+			
+			//返回数组
+			return values;
+		}
+		var colors = new SpecialArray("red","blue","green");//有没有new一个狗样，直接用工厂模式就可以了
+		// console.log(colors);
+		// console.log(colors.toPipedString());
+		
+		
+		/*
+		 *  稳妥构造函数模式  适合在一些要求安全环境使用
+		 */
+		function Person(name,age,job){
+			// 创建要返回的对象
+			var o = new Object();
+			
+			//可以在这里定义私有变量和函数
+			
+			//添加方法
+			o.sayName = function(){
+				alert(name);
+			}
+			
+			//返回对象
+			return o;
+		}
+		var person1 = Person("ccc",25,"doctor");
+		person1.name = "hehe";
+		person1.sayName();//ccc ， 除了调用sayName()方法外，没有其他方法访问数据，也没有办法修改
+		
+
+	</script>
+</body>
+</html>
