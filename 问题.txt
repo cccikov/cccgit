@@ -36,6 +36,8 @@ frontierarea
 
 14、<!--Static Page Generated OK-->
 
-15、点透、禁用默认事件 
+15、点透、禁用默认事件
 
-16、html5 API fileReader
+//16、html5 API fileReader
+
+17、查看display:none;元素的高度
