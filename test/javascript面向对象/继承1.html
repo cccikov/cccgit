@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>继承</title>
-</head>
-<body>
-	<script type="text/javascript">
-		function Super(){
-			this.pro = true;//property
-		}
-		Super.prototype.superGetValue = function(){
-			return this.pro;
-		}
 
-		function Sub(){
-			this.subpro = false;
-		}
+	<head>
+		<meta charset="UTF-8">
+		<title>继承</title>
+	</head>
 
-		//继承于Super
-		Sub.prototype = new Super();//重写了原型，继承于Super,Super所有的方法和属性都存在于Sub的原型中
-		Sub.prototype.subGetValue = function(){
-			return this.subpro;
-		}
+	<body>
+		<script type="text/javascript">
+			/*
+			 * 原型链继承 
+			 */
+			//Up引用类型
+			function Up() {
+				this.name = "up";
+				this.sayHi = function() {
+					console.log("hi,I`m Up");
+				}
+			};
+			Up.prototype.getName = function() {
+				console.log(this.name);
+			};
 
-		var instance = new Sub();
+			//Down引用类型
+			function Down() {
+				this.role = "son";
+				this.sayGg = function(){
+					console.log("glhf");
+				}
+			};
+			Down.prototype = new Up();// Down继承了Up
+			Down.prototype.getRole = function() { //Down的原型是Up的实例，所有在Up的属性和方法都被Down
+				console.log(this.role);
+			}
 
-		console.log(instance.superGetValue());
-		console.log(instance.subGetValue());
-		console.dir(instance.constructor);//function Super();
+			//实例
+			var instance = new Down();
+			
+			instance.sayHi();//hi,I`m Up
+			instance.getName(); //up
+			instance.getRole(); //son
+			instance.sayGg();//glhf
 
-	</script>
-</body>
+			// 全部引用类型都继承于Object，也是通过原型链来继承的			
+			console.log(instance instanceof Down,instance instanceof Up,instance instanceof Object);//true true true
+			console.log(Down.prototype.isPrototypeOf(instance),Up.prototype.isPrototypeOf(instance),Object.prototype.isPrototypeOf(instance));//true true true
+			// 可以看出instance 同时是 Down Up Object的实例，Down继承于Up，而Up继承于Object。
+
+		</script>
+	</body>
+
 </html>

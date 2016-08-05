@@ -11,24 +11,34 @@
 			/*
 			 *   组合使用构造函数模式和原型模式 ， 最常用
 			 */
-			/*function Person(name, age, job) {
+			function Person(name, age, job) {
 				this.name = name;
 				this.age = age;
 				this.job = job;
 				this.friend = ["Shelbey", "Court"];
+				this.sayHi = function() {
+					alert(hi);
+				}
 			}
 			Person.prototype = {
 				constructor: Person,
+				teacher: ["Mr Wang"],
 				sayName: function() {
 					alert(this.name);
 				}
 			}
 			var person1 = new Person("Nicholas", 29, "Software Engineer");
 			var person2 = new Person("Greg", 27, "Doctor");
-			person1.friend.push("van");
+			console.log(person1.friend === person2.friend); //false
+			console.log(person1.teacher === person2.teacher); //true
 
-			console.log(person1.friend); //["Shelbey", "Court", "van"]
-			console.log(person2.friend); //["Shelbey", "Court"]*/
+			person1.friend.push("van");
+			person1.teacher.push("Mr Li");
+
+			console.log(person1.friend, person2.friend); //["Shelbey", "Court", "van"] ["Shelbey", "Court"]
+			console.log(person1.teacher, person2.teacher); //["Mr Wang", "Mr Li"] ["Mr Wang", "Mr Li"]
+
+			//可以看出，在构造函数中设置的属性，即使同名值相同也不是同一属性；在原型中定义的属性才是大家共用的属性。
 
 			/*
 			 *  动态原型模型
@@ -63,7 +73,7 @@
 			var friend = new Person("Nicholas",29,"Software Engineer");
 			friend.sayName();*/
 
-			function SpecialArray() {
+			/*function SpecialArray() {
 				//创建数组
 				var values = new Array();
 
@@ -83,12 +93,12 @@
 			}
 			var colors = new SpecialArray("red", "blue", "green"); //有没有new一个狗样，直接用工厂模式就可以了
 			console.log(colors); //"red,blue,green"
-			console.log(colors.toPipedString()); //"red|blue|green"
+			console.log(colors.toPipedString()); //"red|blue|green"*/
 
 			/*
 			 *  稳妥构造函数模式  适合在一些要求安全环境使用
 			 */
-			function Person(name, age, job) {
+			/*function Person(name, age, job) {
 				// 创建要返回的对象
 				var o = new Object();
 
@@ -105,7 +115,7 @@
 			var person1 = Person("ccc", 25, "doctor");
 			person1.name = "hehe";
 			person1.sayName(); //ccc ， 除了调用sayName()方法外，没有其他方法访问数据，也没有办法修改
-			console.log(person1.name); //hehe
+			console.log(person1.name); //hehe*/
 		</script>
 	</body>
 
