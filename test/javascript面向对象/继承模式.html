@@ -29,7 +29,7 @@
 		};
 		function Down(name){
 			var that = this;
-			Up.call(that,name);//继承于Up，Down里面的this就变成是Up的实例,并且可以传递参数
+			Up.call(that,name);//继承于Up，Down里面的this就变成是Up的实例,并且可以传递参数，Up里面的实例属性也变成Down的实例属性
 			this.str = ["a","b"];//实例属性
 		};
 		var a = new Down("aaa");
@@ -51,13 +51,13 @@
 		SuperType.prototype.sayName = function(){
 			console.log(this.name);
 		};
-		SuperType.prototype.up1 = "ptt1";
+		SuperType.prototype.up1 = 1;
 
 		function SubType(name,age){
 			//继承属性
 			SuperType.call(this,name);
 			this.age = age;
-			this.down1 = 
+			this.down1 = "down1";
 		};
 
 
