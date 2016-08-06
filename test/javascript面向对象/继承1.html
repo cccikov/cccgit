@@ -29,8 +29,8 @@
 					console.log("glhf");
 				}
 			};
-			Down.prototype = new Up();// Down继承了Up
-			Down.prototype.getRole = function() { //Down的原型是Up的实例，所有在Up的属性和方法都被Down
+			Down.prototype = new Up();// Down继承了Up,Down的原型是Up的实例，所有在Up的属性和方法都被Down继承
+			Down.prototype.getRole = function() { 
 				console.log(this.role);
 			}
 
@@ -46,6 +46,21 @@
 			console.log(instance instanceof Down,instance instanceof Up,instance instanceof Object);//true true true
 			console.log(Down.prototype.isPrototypeOf(instance),Up.prototype.isPrototypeOf(instance),Object.prototype.isPrototypeOf(instance));//true true true
 			// 可以看出instance 同时是 Down Up Object的实例，Down继承于Up，而Up继承于Object。
+
+			// 覆盖超类型（父类）中的方法
+			Down.prototype.getName = function(){
+				console.log("down");
+			}
+			instance.getName();//down
+			var instance2 = new Up();
+			instance2.getName();//up
+			// 读取属性的时候，现在实例找，再在原型一直往上找，直至Object为止
+
+
+			var instancePro = Object.getPrototypeOf(instance);
+			console.log(instancePro);
+			var instanceProPro = Object.getPrototypeOf(instancePro);
+			console.log(instanceProPro);
 
 		</script>
 	</body>

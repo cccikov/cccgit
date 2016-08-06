@@ -35,7 +35,7 @@
 			//普通模式(一个个建)
 			//new Object()创建
 			var personZero = new Object();
-			personZero.name = "Nicholas";
+			personZero.name = "Nicholas";//添加新属性
 			personZero.age = 29;
 			personZero.job = "Softwar Enginerr";
 			personZero.sayName = function() {
@@ -106,7 +106,7 @@
 
 			//在另一个对象的作用域中调用
 			var person6 = {}; //相当于 new创建的第1步。
-			Person.call(person6, "ccc6", 55, "cleaner"); //person6就变成Person的新实例，相当于new创建的第2，3，4步
+			Person.call(person6, "ccc6", 55, "cleaner"); //person6就变成Person的新实例，相当于new创建的第2，3，4步，这也一种创建实例的方法
 			console.log(person6);
 
 			//证明不同实例上的同名函数是不相等的
