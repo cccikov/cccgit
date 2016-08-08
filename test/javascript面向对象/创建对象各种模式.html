@@ -11,7 +11,7 @@
 			/*
 			 *   组合使用构造函数模式和原型模式 ， 最常用
 			 */
-			function Person(name, age, job) {
+			/*function Person(name, age, job) {
 				this.name = name;
 				this.age = age;
 				this.job = job;
@@ -38,7 +38,7 @@
 			console.log(person1.friend, person2.friend); //["Shelbey", "Court", "van"] ["Shelbey", "Court"]
 			console.log(person1.teacher, person2.teacher); //["Mr Wang", "Mr Li"] ["Mr Wang", "Mr Li"]
 
-			//可以看出，在构造函数中设置的属性，即使同名值相同也不是同一属性；在原型中定义的属性才是大家共用的属性。
+			//可以看出，在构造函数中设置的属性，即使同名值相同也不是同一属性；在原型中定义的属性才是大家共用的属性。*/
 
 			/*
 			 *  动态原型模型
@@ -60,7 +60,7 @@
 			/*
 			 *  寄生构造函数模式，感觉就是工厂模式强行变成构造函数模式
 			 */
-			/*function Person(name,age,job){
+			function Person(name,age,job){
 				var o = new Object();
 				o.name = name;
 				o.age = age;
@@ -68,32 +68,34 @@
 				o.sayName = function(){
 					alert(this.name);
 				}
+				// ………………有其他一些代码去增强这个对象，或者改变这个对象
 				return o;
 			}
 			var friend = new Person("Nicholas",29,"Software Engineer");
-			friend.sayName();*/
+			friend.sayName();
 
-			/*function SpecialArray() {
+			function SpecialArray() {
 				//创建数组
-				var values = new Array();
+				var values = new Array();//var o = new Object();
 
 				//添加值
-				values.push.apply(values, arguments);
+				values.push.apply(values, arguments);//一些处理
 				//相当于
 				//var arr = [];
 				//arr.push.apply(values,arguments);//只是想调用数组的push方法
 
 				//添加方法
-				values.toPipedString = function() {
+				values.toPipedString = function() { //o.xxx = funciton(){}
 					return this.join("|");
 				};
 
 				//返回数组
 				return values;
 			}
-			var colors = new SpecialArray("red", "blue", "green"); //有没有new一个狗样，直接用工厂模式就可以了
+			var colors = new SpecialArray("red", "blue", "green"); //有没有new都一样
 			console.log(colors); //"red,blue,green"
-			console.log(colors.toPipedString()); //"red|blue|green"*/
+			console.log(colors.toPipedString()); //"red|blue|green"
+			// 学到现在，我们看得出来，javascript创建对象构造函数方式才是一种正解（可能比较高大上吧），但是构造函数可能比较难对将要被创建的对象做一些处理（或者我们要创建的对象不是单纯的Object，而是其他引用类型），这些处理可能用工厂模式会比较容易，但是又为了要高大上一点就有了寄生模式（可能是寄生其他其他引用类型，或者寄生于工厂模式的意思吧）吧。
 
 			/*
 			 *  稳妥构造函数模式  适合在一些要求安全环境使用

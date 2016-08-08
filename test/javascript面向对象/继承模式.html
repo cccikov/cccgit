@@ -44,21 +44,117 @@
 		/*
 		 *   组合继承 最常用
 		 */ 
+		console.clear();
 		function SuperType(name){
 			this.name = name;
 			this.color = ["red","blue","green"];
+			this.sayHi = function(){
+				alert("hi");
+			}
 		};
 		SuperType.prototype.sayName = function(){
-			console.log(this.name);
+			alert(this.name);
 		};
-		SuperType.prototype.up1 = 1;
+		SuperType.prototype.up = "up";
 
 		function SubType(name,age){
-			//继承属性
-			SuperType.call(this,name);
+			//继承实例属性，方法
+			SuperType.call(this,name);//这个可以覆盖原型里面超类型的实例属性（子类的这部分属性由共享属性变成实例属性）。
 			this.age = age;
-			this.down1 = "down1";
+			this.down = "down";
 		};
+		// 继承共享属性，方法
+		SubType.prototype = new SuperType("Sub.prototype");
+		SubType.prototype.constructor = SubType;
+		SubType.prototype.sayAge = function(){
+			alert(this.age);
+		};
+
+		var instance1 = new SubType("N",25);
+		var instance2 = new SubType("G",80);
+
+		console.log(instance1);
+		/*
+		 * name:"N",
+		 * color:["red","blue","green"],
+		 * sayHi:function(){}
+		 * 
+		 * age:25,
+		 * down1:"down",
+		 */
+		console.log(Object.getPrototypeOf(instance1));
+		/*
+		 * name:"Sub.prototype",
+		 * color:["red","blue","green"],
+		 * sayHi:function(){……}
+		 * 
+		 * sayAge:function(){……}
+		 * constructor:function SubType(name,age),
+		 */
+		console.log(Object.getPrototypeOf(Object.getPrototypeOf(instance1)));
+		/*
+		 * up:"up",
+		 * sayName:function(){……}
+		 */
+		console.log(instance2);
+		/*
+		 * name:"G",
+		 * color:["red","blue","green"],
+		 * sayHi:function(){}
+		 * 
+		 * age:88,
+		 * down1:"down",
+		 */
+		console.log(Object.getPrototypeOf(instance2));
+		/*
+		 * name:"Sub.prototype",
+		 * color:["red","blue","green"],
+		 * sayHi:function(){……}
+		 * 
+		 * sayAge:function(){……}
+		 * constructor:function SubType(name,age),
+		 */
+
+		console.log(instance1.color,instance2.color,instance1.color===instance2.color);//["red", "blue", "green"] ["red", "blue", "green"] false
+		console.log(instance1.sayAge===instance2.sayAge);//true
+		console.log(instance1.sayName===instance2.sayName);//true
+		// 用这种方式，子类SubType的构造函数中，以及原型中都会有name，color，sayHi属性方法，但是
+
+
+		/*
+		 *  原型式继承
+		 */ 
+		console.clear();
+		function object(o){
+			function F(){};
+			F.prototype = o;//继承于o
+			return new F();
+		};
+		var person = {
+			"name":"person",
+			"num":[1,2,3]
+		}
+		var ccc = object(person);
+		ccc.name = "ccc";
+
+		console.log(ccc);//F {name: "ccc"}
+		console.log(Object.getPrototypeOf(ccc));//Object {name: "person", num: Array[3]}
+
+		var aaa = object(person);
+		aaa.num.push(4);
+		console.log(aaa.num,ccc.num,person.num);//[1, 2, 3, 4] [1, 2, 3, 4] [1, 2, 3, 4]
+		// 属性，方法是共享的，其实就和原型模式创建对象一样，不过不用创建构造函数这么复杂
+
+		// 在ECMAScript5中将这个方法封装为 Object.create();
+		var bbb = Object.create(person);
+		console.log(bbb.name);//person
+		//Object.create();第二个参数，用于覆盖原型对象上的同名属性 于Object.defineProperties()写法一样
+		var ddd = Object.create(person,{
+			name:{
+				value:"ddd"
+			}
+		});
+		console.log(ddd.name);//ddd
 
 
 	</script>
