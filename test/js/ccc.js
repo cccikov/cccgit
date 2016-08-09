@@ -292,3 +292,13 @@ input.on("change",function(){
     });
 });*/
 
+// 获取url参数
+ccc.getUrlParam = function(name){
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");//以 name 开头或者以 "&"+name 开头，中间是 "=" + 若干个非&的字符 ,后面是结尾 或者 以 "&"结尾
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+}
+
