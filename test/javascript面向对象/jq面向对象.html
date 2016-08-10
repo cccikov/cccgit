@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery面向对象</title>
+	<script type="text/javascript" src="../js/ccc.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			/*
+			 *   $.extend （jQuery.extend）
+			 */ 
+			// 一个参数时，为jQuery添加属性方法 $.extend(object)
+			$.extend({
+				cName:"ccc",
+				cSayName:function(){
+					console.log("name:"+this.cName);
+				}
+			})
+			console.log($.cName);
+			$.cSayName();
+
+			// 两个参数或以上 $.extend(targetObj,Obj1,[ObjN])，把Obj1到ObjN合并到targetObj
+			var obj1 = {
+				"apple":0,
+				"banana":{
+					"weight":52,
+					"price":100
+				},
+				"cherry":97
+			}
+			var obj2 = {
+				"banana":{
+					"price":200
+				},
+				"durian":100
+			}
+			var obj3 = $.extend(obj1,obj2);
+			console.log(ccc.jsonToStr(obj1));//{"apple":0,"banana":{"price":200},"cherry":97,"durian":100} 合并在一起，并且返回，可以看到obj1的banana被obj2的覆盖了只剩下price
+
+			//两个obj或以上，第一个参数为true，$.extend(true,targetObj,Obj1,[ObjN])，把Obj1到ObjN递归合并到targetObj
+			var obj1 = {
+				"apple":0,
+				"banana":{
+					"weight":52,
+					"price":100
+				},
+				"cherry":97
+			}
+			var obj2 = {
+				"banana":{
+					"price":200
+				},
+				"durian":100
+			}
+			$.extend(true,obj1,obj2);
+			console.log(ccc.jsonToStr(obj1));//{"apple":0,"banana":{"weight":52,"price":200},"cherry":97,"durian":100},banana没有被完全覆盖，只是修改了obj2拥有的price，obj1的weight保留
+
+
+			//$.fn.extend(object) (jQuery.fn.extend(object)) 为jQuery对象来提供新的方法
+			$.fn.extend({
+				clearHtml:function(){
+					this.html("");//这里的this已经是jq对象了
+				}
+			});
+			$("#wrap").clearHtml();
+		});
+	</script>
+</head>
+<body>
+	<div id="wrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+</body>
+</html>
