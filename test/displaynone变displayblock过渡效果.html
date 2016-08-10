@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<style>
+			.out {
+				opacity: 0;
+				display: none;
+				transition: opacity 1.5s;
+			}
+			
+			.out.active {
+				opacity: 1;
+			}
+		</style>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("button").on("click", function() {
+					$(".out").show();
+					setTimeout(function(){
+						$(".out").addClass("active");
+					});//1ms谁看得出来不是同步
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="out">
+			<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt repellendus esse accusantium itaque suscipit vel eligendi voluptatum inventore maiores in quo adipisci. Aliquid officiis neque eum mollitia possimus itaque reprehenderit!</span>
+			<p class="in">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga!</p>
+		</div>
+		<button>出现</button>
+		<p>display:none 变 display:block 动画，可以从height,width,opacity其他样式入手，变display:block先不显示出来，稍微延迟一下在改变其他样式</p>
+	</body>
+
+</html>
