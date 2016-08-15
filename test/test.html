@@ -1,102 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        /*var a = function(){
+            console.log("click1");
+        }
+        document.addEventListener("click",a);
 
-	<head>
-		<meta charset="UTF-8" />
-		<title>自定义右键菜单</title>
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
-		<style type="text/css">
-			ul {
-				display: none;
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 200px;
-				opacity: 0;
-				transition: opacity 0.3s;
-			}
-			
-			ul.active {
-				opacity: 1;
-			}
-			
-			li {
-				line-height: 40px;
-				padding: 0 20px;
-				border: 1px solid #ccc;
-			}
-			
-			li:nth-of-type(n+2) {
-				border-top: none;
-			}
-		</style>
-		<script src="js/ccc.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			var MR = {} //mouseRight
+        a = function(){
+            console.log("click2");
+        }
+        document.addEventListener("click",a);
+        document.removeEventListener("click",a);//只除去了click2*/
 
-			window.onresize = function() {
-				MR.sH = document.documentElement.clientHeight;
-				MR.sW = document.documentElement.clientWidth;
-			}
 
-			window.onload = function() {
-				MR.sH = document.documentElement.clientHeight;
-				MR.sW = document.documentElement.clientWidth;
-				var contM = document.getElementById("contM");
-				MR.in = function() {
-					contM.style.top = MR.top + "px";
-					contM.style.left = MR.left + "px";
-					//为了连续右键的时候
-					contM.style.display = "none";
-					contM.classList.remove("active");
-					
-					setTimeout(function() {
-						contM.style.display = "block";
-						setTimeout(function(){
-							contM.classList.add("active");
-						},16.7);
-					}, 16.7);
-				}
-				MR.out = function(){
-					contM.classList.remove("active");
-					setTimeout(function(){
-						contM.style.display = "none";
-					},300);
-				}
-				document.oncontextmenu = function(e) {
-					MR.top = e.clientY + 80 > MR.sH ? (e.clientY - 80) : e.clientY;
-					MR.left = e.clientX + 200 > MR.sW ? (e.clientX - 200) : e.clientX;
-					MR.in();
-					return false;
-				}
+        /*function sayName(name){
+            console.log(name);
+        }
+        document.addEventListener("click",a);
+        function a(){
+            sayName("ccc");
+        }
+        document.removeEventListener("click",a);*/
 
-				document.onmousedown = function(e) {
-					if(e.button == 0 && contM.style.display == "block") {
-						MR.out();
-					}
-				}
-				contM.onmousedown = function(e) {
-					e.stopPropagation();
-				}
 
-				document.onmouseleave = function(e) {
-					if(contM.style.display == "block") {//其实感觉不判断会好一点，防止一点右键就移出文档
-						MR.out();
-					}
-				}
-			}
-		</script>
-	</head>
+        
+        var clickEvtArr = [];
+        document.addEventListener("click",clickWhole);
+        function clickWhole(){
+            if(clickEvtArr.length>0){//如果是对象的话，判断对象是否为空
+                for(var i in clickEvtArr){
+                    clickEvtArr[i]();
+                }
+            }
+        }
+        clickEvtArr[0] = function(){
+            console.log("0");
+        }
+        clickEvtArr[1] = function(){
+            console.log("1");
+        }
+        console.log(clickEvtArr);
+        clickEvtArr[0] = function(){};//变无效
 
-	<body>
-		<ul id="contM">
-			<li>
-				<a href="http://www.baidu.com">百度一下</a>
-			</li>
-			<li>
-				<a href="http://www.qq.com">qq</a>
-			</li>
-		</ul>
-	</body>
-
+    </script>
+</head>
+<body>
+    
+</body>
 </html>

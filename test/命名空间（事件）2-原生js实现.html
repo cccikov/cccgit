@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件命名空间</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    (function(doc) {
+        window.onload = function() {
+            var add = document.getElementById("add");
+            var del = document.getElementById("del");
+            var clickEvt = {};
+
+            clickEvt.noName1 = function() {
+                console.log("wholeclick");
+            }
+            doc.addEventListener("click", clickEvt.noName1);
+
+            clickEvt.a = function() {
+                console.log("click.a");
+            }
+            doc.addEventListener("click", clickEvt.a);
+
+            add.addEventListener("click", function(e) {
+            	e.stopPropagation();
+                doc.addEventListener("click", clickEvt.a);
+            });
+            del.addEventListener("click", function(e) {
+            	e.stopPropagation();
+                doc.removeEventListener("click", clickEvt.a);
+            });
+        }
+    })(document);
+    </script>
+</head>
+
+<body>
+    <button id="add">添加事件a</button>
+    <button id="del">删除事件a</button>
+</body>
+
+</html>

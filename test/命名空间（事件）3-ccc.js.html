@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件命名空间</title>
+    <script type="text/javascript">
+    	var ccc = {};
+    	// 事件命名空间
+    	ccc.evt={};
+    	ccc.addEvt = function(el,name,fn,useCapture){
+    	    var useCapture = useCapture || false;
+    	    if(name.indexOf(".")!=-1){
+    	        var strNum = name.indexOf(".");
+    	        var evtName = name.slice(0,strNum);
+    	        var fnName = name.slice(strNum+1);
+    	        if(!ccc.evt[evtName]){
+    	            ccc.evt[evtName] = {};
+    	        }
+    	        ccc.evt[evtName][fnName] = fn;
+    	        el.addEventListener(evtName,ccc.evt[evtName][fnName],useCapture);
+    	    }else{
+    	        el.addEventListener(name,fn,useCapture);
+    	    }
+    	}
+    	ccc.rmEvt = function(el,name,fn,useCapture){
+    	    var useCapture = useCapture || false;
+    	    if(name.indexOf(".")!=-1){
+    	        var strNum = name.indexOf(".");
+    	        var evtName = name.slice(0,strNum);
+    	        var fnName = name.slice(strNum+1);
+    	        if(!ccc.evt[evtName]){
+    	            ccc.evt[evtName] = {};
+    	        }
+    	        el.removeEventListener(evtName,ccc.evt[evtName][fnName],useCapture);
+    	    }else{
+    	        el.removeEventListener(name,fn,useCapture);
+    	    }
+    	}
+    </script>
+    <script type="text/javascript">
+    (function(doc) {
+        window.onload = function() {
+        	var add = doc.querySelectorAll("#add")[0];
+        	var del = doc.querySelectorAll("#del")[0];
+
+            ccc.addEvt(doc, "click.a", function() {
+                console.log("click.a");
+            });
+
+            // var moveEvt = function() {
+            //     console.log("move");
+            // }
+            // ccc.addEvt(doc, "mousemove", moveEvt);
+
+
+            ccc.addEvt(del, "click", function(e) {
+                e.stopPropagation();
+                ccc.rmEvt(doc, "click.a");
+                // ccc.rmEvt(doc, "mousemove", moveEvt);
+            });
+            ccc.addEvt(add, "click", function(e) {
+                e.stopPropagation();
+                ccc.addEvt(doc, "click.a", function() {
+                    console.log("click.a");
+                });
+                // ccc.addEvt(doc, "mousemove", moveEvt);
+            });
+        }
+    })(document);
+    </script>
+</head>
+
+<body>
+    <button id="add">添加事件a</button>
+    <button id="del">删除事件a</button>
+</body>
+
+</html>

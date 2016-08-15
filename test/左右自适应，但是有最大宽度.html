@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>左右自适应，但是有最大宽度</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .clearfix {
+        *zoom: 1;
+    }
+    .clearfix:after {
+        content: ".";
+        clear: both;
+        overflow: hidden;
+        
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+    .left{
+    	display: block;
+    	float: left;
+    	max-width: 40%;
+
+    	overflow:hidden;
+    	text-overflow:ellipsis;
+    	white-space:nowrap;
+
+    	outline:1px solid #f99;
+    }
+    .right{
+    	display: block;
+    	/*display:block才会自己适应宽度*/
+    	overflow:hidden;
+
+    	text-overflow:ellipsis;
+    	white-space:nowrap;
+
+    	outline:1px solid #9ff;
+    }
+
+    #wrap{
+    	padding:10px;
+    }
+    p{
+    	width:160px;
+    }
+    </style>
+</head>
+
+<body>
+	<div id="wrap">
+		<p class="clearfix">
+			<span class="left">项目：</span>
+			<span class="right">Lorem ipsum.</span>
+		</p>
+		<p class="clearfix">
+			<span class="left">长项目：</span>
+			<span class="right">Lorem ipsum.</span>
+		</p>
+		<p class="clearfix">
+			<span class="left">超长项目：</span>
+			<span class="right">Lorem ipsum. ipsum.</span>
+		</p>
+	</div>
+</body>
+
+</html>

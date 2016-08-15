@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        /*var a = function(){
+            console.log("click1");
+        }
+        document.addEventListener("click",a);
+
+        a = function(){
+            console.log("click2");
+        }
+        document.addEventListener("click",a);
+        document.removeEventListener("click",a);//只除去了click2*/
+
+
+        /*function sayName(name){
+            console.log(name);
+        }
+        document.addEventListener("click",a);
+        function a(){
+            sayName("ccc");
+        }
+        document.removeEventListener("click",a);*/
+
+
+        
+        var clickEvtArr = [];
+        document.addEventListener("click",clickWhole);
+        function clickWhole(){
+            if(clickEvtArr.length>0){//如果是对象的话，判断对象是否为空
+                for(var i in clickEvtArr){
+                    clickEvtArr[i]();
+                }
+            }
+        }
+        clickEvtArr[0] = function(){
+            console.log("0");
+        }
+        clickEvtArr[1] = function(){
+            console.log("1");
+        }
+        console.log(clickEvtArr);
+        clickEvtArr[0] = function(){};//变无效
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

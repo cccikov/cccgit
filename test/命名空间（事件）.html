@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件命名空间</title>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		(function($,doc){
+
+			$(function(){
+				$(doc).on("click",function(){
+					console.log("click");
+				});
+				$(doc).on("click.a",function(){
+					console.log("click.a");
+				});
+				$(doc).on("click.b",function(){
+					console.log("click.b");
+				});
+
+				$("#del").on("click",function(e){
+					e.stopPropagation();
+					$(doc).off("click.a");
+				});
+				$("#add").on("click",function(e){
+					e.stopPropagation();
+					$(doc).on("click.a",function(){
+						console.log("click.a");//还是可以给添加多次事件
+					});
+				});
+			});
+
+		})(jQuery,document);
+
+	</script>
+</head>
+<body>
+	<button id="add">添加事件a</button>
+	<button id="del">删除事件a</button>
+</body>
+</html>
