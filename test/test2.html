@@ -1,86 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>js获取隐藏元素的尺寸</title>
-		<style type="text/css">
-
-		</style>
-		<script type="text/javascript" src="http://www.css88.com/tool/css3Preview/jquery-1.4.2.min.js"></script>
-	</head>
-
-	<body>
-		<div id="test_display_block" style="display:none; border:10px solid #CDCDCD; margin-left: 100px">这是test容器，可见容器<br />这是test容器，可见容器<br />这是test容器，可见容器<br />这是test容器，可见容器<br />这是test容器，<br />这是test容器，<br />这是test容器，<br />这是test容器，<br />这是test容器，<br /></div>
-		<div id="test_display_none" style="display:none; border:10px solid #CDCDCD">这是test容器，这是test容器，<br />这是test容器，<br />这是test容器，<br />这是test容器，<br />这是test容器，<br />这是test容器，<br /></div>
-		<div id="test_display_click">点我</div>
-		<script type="text/javascript">
-			//判断对象类型
-			function getType(o) {
-				var _t;
-				return((_t = typeof(o)) == "object" ? o == null && "null" || Object.prototype.toString.call(o).slice(8, -1) : _t).toLowerCase();
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>事件处理</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			
+			var doc = {};
+			doc.dom = document;
+			doc.click = new Object();
+			
+			
+			doc.click.a = new Object();
+			doc.click.a.fn = function(){
+				console.log("click.a")
 			}
-			//获取元素样式
-			function getStyle(el, styleName) {
-				return el.style[styleName] ? el.style[styleName] : el.currentStyle ? el.currentStyle[styleName] : window.getComputedStyle(el, null)[styleName];
+			doc.click.b = new Object();
+			//b命名空间方法
+			doc.click.b.fn = function(opt){
+				console.log(opt);
 			}
-
-			function getStyleNum(el, styleName) {
-				return parseInt(getStyle(el, styleName).replace(/px|pt|em/ig, ''));
-			}
-
-			function setStyle(el, obj) {
-				if(getType(obj) == "object") {
-					for(s in obj) {
-						var cssArrt = s.split("-");
-						for(var i = 1; i < cssArrt.length; i++) {
-							cssArrt[i] = cssArrt[i].replace(cssArrt[i].charAt(0), cssArrt[i].charAt(0).toUpperCase());
-						}
-						var cssArrtnew = cssArrt.join("");
-						el.style[cssArrtnew] = obj[s];
-					}
-				} else
-				if(getType(obj) == "string") {
-					el.style.cssText = obj;
-				}
-			}
-
-			function getSize(el) {
-				if(getStyle(el, "display") != "none") {
-					return {
-						width: el.offsetWidth || getStyleNum(el, "width"),
-						height: el.offsetHeight || getStyleNum(el, "height")
-					};
-				}
-				var _addCss = {
-					display: "",
-					position: "absolute",
-					visibility: 'hidden'
-				};
-				var _oldCss = {};
-				for(i in _addCss) {
-					_oldCss[i] = getStyle(el, i);
-				}
-				setStyle(el, _addCss);
-				var _width = el.clientWidth || getStyleNum(el, "width");
-				var _height = el.clientHeight || getStyleNum(el, "height");
-				for(i in _oldCss) {
-					setStyle(el, _oldCss);
-				}
-				return {
-					width: _width,
-					height: _height
-				};
+			//b命名空间传入数据
+			doc.click.b.data = {"name":"ccc"};
+			
+			
+			doc.click.whole = function(){
+				doc.click.a.fn();
+				doc.click.b.fn(doc.click.b.data);
 			}
 			
-			var dd = document.getElementById("test_display_block");
-			alert(getSize(dd).height);
-			document.getElementById("test_display_click").onclick = function() {
-				dd.style.display = "block";
-				document.getElementById("test_display_none").style.display = "block";
+			doc.dom.addEventListener("click",doc.click.whole,false);
+			
+			//做个原型方法用于添加事件
+			function Dom(){
 			}
-			alert($("#test_display_none").height());
-		</script>
-	</body>
-
+			Dom.prototype.addEvt = function(evtName,fn,captrue){
+				if(1)//先判断有无这个事件对象，若有，则增强属性，若无则添加 事件实例属性
+			}
+			Dom.prototype.create = function(){//用于添加 事件实例属性 click -->click.a
+				//创建实例属性的
+			}
+		};
+	</script>
+</head>
+<body>
+	
+</body>
 </html>
