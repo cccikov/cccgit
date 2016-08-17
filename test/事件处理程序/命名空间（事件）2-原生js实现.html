@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <title>事件处理</title>
+    <script src="js/ccc.js" type="text/javascript"></script>
+    <script src="js/json2.js" type="text/javascript"></script>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
     window.onload = function() {
+        var add = document.getElementById("add");
+        var del = document.getElementById("del");
 
         function demo1() {
             var doc = document;
-            var add = document.getElementById("add");
-            var del = document.getElementById("del");
             var clickEvt = {};
 
             clickEvt.noName1 = function() {
@@ -34,7 +37,7 @@
                 doc.removeEventListener("click", clickEvt.a);
             });
         }
-        // demo1(); //demo1 虽然可以顺利实现模仿jQuery命名空间，但是事件函数不可以传参数
+        //demo1(); //demo1 虽然可以顺利实现模仿jQuery命名空间，但是事件函数不可以传参数
 
 
         function demo2() {
@@ -51,32 +54,59 @@
             document.removeEventListener("click", a); //只除去了click2
             document.removeEventListener("click", a); //只除去了click2
         }
-        // demo2();//demo2 展示了一个问题，就是在删除事件函数（有声明）前，改写了事件函数（有声明），之前的事件函数（有声明）就会变成匿名函数，将无法删除。
+        //demo2();//demo2 展示了一个问题，就是在删除事件函数（有声明）前，改写了事件函数（有声明），之前的事件函数（有声明）就会变成匿名函数，将无法删除。
 
 
-        function demo3(){
+        function demo3() {
             // 另外一种模拟事件命名空间方式，一个dom节点的一类事件（如click,mouseenter……）只绑定一个大方法。然后具体的方法在函数里面执行
             var clickEvtArr = [];
-            document.addEventListener("click",clickWhole);
+            document.addEventListener("click", clickWhole);
 
-            function clickWhole(){
-                if(clickEvtArr.length>0){//如果是对象的话，判断对象是否为空
-                    for(var i in clickEvtArr){
-                        clickEvtArr[i]();//各个click函数在里面执行
+            function clickWhole() {
+                if (clickEvtArr.length > 0) { //如果是对象的话，判断对象是否为空
+                    for (var i in clickEvtArr) {
+                        clickEvtArr[i](); //各个click函数在里面执行
                     }
                 }
             }
-            clickEvtArr[0] = function(){
+            clickEvtArr[0] = function() {
                 console.log("0");
             }
-            clickEvtArr[1] = function(){
+            clickEvtArr[1] = function() {
                 console.log("1");
             }
             console.log(clickEvtArr);
             //想删除某个方法，感觉用对象会好一点，用对象的话可以通过delete某个属性来删除方法
-            clickEvtArr[0] = function(){};//变无效
+            clickEvtArr[0] = function() {}; //变无效
         }
-        demo3();
+        //demo3();
+
+        function demo4() {
+            // 另外一种模拟事件命名空间方式，一个dom节点的一类事件（如click,mouseenter……）只绑定一个大方法。然后具体的方法在函数里面执行
+            var clickEvtObj = {};
+			
+            document.addEventListener("click", clickWhole);
+            function clickWhole() {
+                if (!ccc.isEmptyObject(clickEvtObj)) { //非空对象
+                    for (var i in clickEvtObj) {
+                        clickEvtObj[i](); //各个click函数在里面执行
+                    }
+                }
+            }
+            clickEvtObj.a = function() {
+                console.log("0");
+            }
+            clickEvtObj.b = function() {
+                console.log("1");
+            }
+            //想删除某个方法，感觉用对象会好一点，用对象的话可以通过delete某个属性来删除方法
+            del.onclick = function(e) {
+                e.stopPropagation();
+                delete clickEvtObj.a;
+                delete clickEvtObj.b;
+            }
+        }
+        demo4();
 
         function lastDemo() {
             var doc = {};

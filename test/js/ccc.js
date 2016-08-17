@@ -83,11 +83,28 @@ ccc.isElement = function(obj) {
 
 // 判断是否空对象
 ccc.isEmptyObject = function(obj) {
-    if (JSON.stringify(obj) === '{}') {
-        return true;
-    }
-    return false;
+    var t;  
+    for (t in obj)  
+        return !1;  
+    return !0
 };
+//var isEmptyValue = function(value) {
+//  var type;
+//  if(value == null) { // 等同于 value === undefined || value === null
+//      return true;
+//  }
+//  type = Object.prototype.toString.call(value).slice(8, -1);
+//  switch(type) {
+//  case 'String':
+//      return !$.trim(value);
+//  case 'Array':
+//      return !value.length;
+//  case 'Object':
+//      return $.isEmptyObject(value); // 普通对象使用 for...in 判断，有 key 即为 false
+//  default:
+//      return false; // 其他对象均视作非空
+//  }
+//};
 
 //判断是否为纯粹对象 错的,这个只是判断是否obj
 ccc.isPlainObject = function(obj) {
