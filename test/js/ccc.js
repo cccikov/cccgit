@@ -115,6 +115,10 @@ ccc.isAndroid = function() {
 ccc.isIphone = function() {
     return (/iphone/gi).test(navigator.appVersion.toLowerCase());
 }
+ccc.isXBrowser = function(name){
+    var reg = new RegExp(name,"gi");
+    return reg.test(navigator.appVersion.toLowerCase());
+}
 
 ccc.isObject = function(obj) {
     // return Object.prototype.isPrototypeOf(obj);

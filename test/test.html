@@ -1,30 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>给爱茄的demo</title>
-    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-    <script>
-        $(function(){
-            $("#cheBtn").on("click", function() {
-				$("#checkbox2").attr("checked", true);
-				$("#checkbox3").get(0).checked = true;
+	<meta charset="UTF-8" />
+	<title>jQuery height()问题</title>
+	<style type="text/css">
+		div,p{
+			box-sizing: border-box;
+			padding: 20px 0;
+		}
+		.div1,.div2 p{
+			background: #eee;
+		}
+	</style>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#set").on("click",function(){
+				$(".div1").height(60);
+				$(".div2 p").css("height",60);
 			});
-        });
-    </script>
+			$(".div2 p").each(function(i,k){
+				console.log($(k).height());
+			});
+			$(window).scroll(function(){
+				console.log("hi");
+			});
+		});
+	</script>
 </head>
 <body>
-	<!-- 选择表单 -->
-	<div class="wrap">
-		<label>
-        	<input type="checkbox" name="checkbox2" id="checkbox2" value="2" />
-        	
-		</label>
-		<label>
-        	<input type="checkbox" name="checkbox3" id="checkbox3" value="3" />
-        	checkbox3
-		</label>
-		<button id="cheBtn">勾上</button>
+	<div class="div1">
+		div
 	</div>
+	<div class="div2">
+		<p>p</p>
+		<p>p</p>
+		<p>p</p>
+		<p>p</p>
+	</div>	
+	<button id="set">设置高度为100px</button>
+	<script type="text/javascript">
+		document.write("<p>"+".div1的高度为："+$(".div1").height()+" , "+".div2里面p的高度为"+$(".div2 p").height()+"</p>")
+	</script>
 </body>
 </html>
