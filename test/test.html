@@ -2,21 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>给爱茄的demo</title>
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script>
         $(function(){
-
-            function sayName(e){
-                alert(e.data.name);
-            }
-
-            $(document).on("click",{name:"ccc"},sayName);
-
+            $("#cheBtn").on("click", function() {
+				$("#checkbox2").attr("checked", true);
+				$("#checkbox3").get(0).checked = true;
+			});
         });
     </script>
 </head>
 <body>
-    
+	<!-- 选择表单 -->
+	<div class="wrap">
+		<label>
+        	<input type="checkbox" name="checkbox2" id="checkbox2" value="2" />
+        	checkbox2
+		</label>
+		<label>
+        	<input type="checkbox" name="checkbox3" id="checkbox3" value="3" />
+        	checkbox3
+		</label>
+		<button id="cheBtn">勾上</button>
+	</div>
 </body>
 </html>
