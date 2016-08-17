@@ -1,53 +1,132 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-	<title>事件处理</title>
-	<script type="text/javascript">
-		window.onload = function(){
-			
-			var doc = {};
-			doc.dom = document;
-			doc.click = new Object();
-			
-			
-			doc.click.a = new Object();
-			doc.click.a.fn = function(){
-				console.log("click.a")
-			}
-			doc.click.b = new Object();
-			//b命名空间方法
-			doc.click.b.fn = function(opt){
-				console.log(opt);
-			}
-			//b命名空间传入数据
-			doc.click.b.data = {"name":"ccc"};
-			
-			
-			doc.click.whole = function(){
-				doc.click.a.fn();
-				doc.click.b.fn(doc.click.b.data);
-			}
-			
-			doc.dom.addEventListener("click",doc.click.whole,false);
-			
-			//做个原型方法用于添加事件
-			function Dom(){
-			}
-			Dom.prototype.addEvt = function(evtName,fn,captrue){
-				if(1)//先判断有无这个事件对象，若有，则增强属性，若无则添加 事件实例属性
-			}
-			Dom.prototype.create = function(){//用于添加 事件实例属性 click -->click.a
-				//创建实例属性的
-			}
-			
-			doc.click = new XX();
-			
-			doc.click.x.a = new YY();//这些都用new创建
-		};
-	</script>
+    <meta charset="UTF-8" />
+    <title>事件处理</title>
+    <script type="text/javascript">
+    window.onload = function() {
+
+        function demo1() {
+            var doc = document;
+            var add = document.getElementById("add");
+            var del = document.getElementById("del");
+            var clickEvt = {};
+
+            clickEvt.noName1 = function() {
+                console.log("wholeclick");
+            }
+            doc.addEventListener("click", clickEvt.noName1);
+
+            // 模仿命名空间a
+            clickEvt.a = function() {
+                console.log("click.a");
+            }
+            doc.addEventListener("click", clickEvt.a);
+
+            // button添加删除事件
+            add.addEventListener("click", function(e) {
+                e.stopPropagation();
+                doc.addEventListener("click", clickEvt.a);
+            });
+            del.addEventListener("click", function(e) {
+                e.stopPropagation();
+                doc.removeEventListener("click", clickEvt.a);
+            });
+        }
+        // demo1(); //demo1 虽然可以顺利实现模仿jQuery命名空间，但是事件函数不可以传参数
+
+
+        function demo2() {
+            var a = function() {
+                console.log("click1");
+            }
+            document.addEventListener("click", a);
+
+            a = function() {
+                console.log("click2");
+            }
+            document.addEventListener("click", a);
+
+            document.removeEventListener("click", a); //只除去了click2
+            document.removeEventListener("click", a); //只除去了click2
+        }
+        // demo2();//demo2 展示了一个问题，就是在删除事件函数（有声明）前，改写了事件函数（有声明），之前的事件函数（有声明）就会变成匿名函数，将无法删除。
+
+
+        function demo3(){
+        	// 另外一种模拟事件命名空间方式，一个dom节点的一类事件（如click,mouseenter……）只绑定一个大方法。然后具体的方法在函数里面执行
+        	var clickEvtArr = [];
+        	document.addEventListener("click",clickWhole);
+
+        	function clickWhole(){
+        	    if(clickEvtArr.length>0){//如果是对象的话，判断对象是否为空
+        	        for(var i in clickEvtArr){
+        	            clickEvtArr[i]();//各个click函数在里面执行
+        	        }
+        	    }
+        	}
+        	clickEvtArr[0] = function(){
+        	    console.log("0");
+        	}
+        	clickEvtArr[1] = function(){
+        	    console.log("1");
+        	}
+        	console.log(clickEvtArr);
+        	//想删除某个方法，感觉用对象会好一点，用对象的话可以通过delete某个属性来删除方法
+        	clickEvtArr[0] = function(){};//变无效
+        }
+        demo3();
+
+        function lastDemo() {
+            var doc = {};
+            doc.dom = document;
+            doc.click = new Object();
+
+
+            doc.click.a = new Object();
+            doc.click.a.fn = function() {
+                console.log("click.a")
+            }
+            doc.click.b = new Object();
+            //b命名空间方法
+            doc.click.b.fn = function(opt) {
+                    console.log(opt);
+                }
+                //b命名空间传入数据
+            doc.click.b.data = {
+                "name": "ccc"
+            };
+
+
+            doc.click.whole = function() {
+                doc.click.a.fn();
+                doc.click.b.fn(doc.click.b.data);
+            }
+
+            doc.dom.addEventListener("click", doc.click.whole, false);
+
+            //做个原型方法用于添加事件
+            function Dom() {}
+            Dom.prototype.addEvt = function(evtName, fn, captrue) {
+                if (1) { //先判断有无这个事件对象，若有，则增强属性，若无则添加 事件实例属性
+                }
+            }
+            Dom.prototype.create = function() { //用于添加 事件实例属性 click -->click.a
+                //创建实例属性的
+            }
+        }
+        // lastDemo();
+
+
+    }
+    </script>
+
 </head>
+
 <body>
-	
+    <button id="add">添加事件a</button>
+    <button id="del">删除事件a</button>
 </body>
+
 </html>
