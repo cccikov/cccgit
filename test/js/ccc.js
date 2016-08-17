@@ -89,7 +89,7 @@ ccc.isEmptyObject = function(obj) {
     return false;
 };
 
-//判断是否为纯粹对象 错的
+//判断是否为纯粹对象 错的,这个只是判断是否obj
 ccc.isPlainObject = function(obj) {
     return (typeof(obj) === "object" && obj != null && obj != undefined);
 }
@@ -115,9 +115,9 @@ ccc.isAndroid = function() {
 ccc.isIphone = function() {
     return (/iphone/gi).test(navigator.appVersion.toLowerCase());
 }
-ccc.isXBrowser = function(name){
+ccc.isXBrowser = function(name){//msie(或者trident) chrome firefox
     var reg = new RegExp(name,"gi");
-    return reg.test(navigator.appVersion.toLowerCase());
+    return reg.test(navigator.userAgent.toLowerCase());
 }
 
 ccc.isObject = function(obj) {
