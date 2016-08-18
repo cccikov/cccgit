@@ -92,42 +92,42 @@ ccc.isEmptyObject = function(obj) {
     // }
     // return false;//这种方式如果实例全是函数也会判断为空
 };
-//var isEmptyValue = function(value) {
-//  var type;
-//  if(value == null) { // 等同于 value === undefined || value === null
-//      return true;
-//  }
-//  type = Object.prototype.toString.call(value).slice(8, -1);
-//  switch(type) {
-//  case 'String':
-//      return !$.trim(value);
-//  case 'Array':
-//      return !value.length;
-//  case 'Object':
-//      return $.isEmptyObject(value); // 普通对象使用 for...in 判断，有 key 即为 false
-//  default:
-//      return false; // 其他对象均视作非空
-//  }
-//};
+/*var isEmptyValue = function(value) {
+ var type;
+ if(value == null) { // 等同于 value === undefined || value === null
+     return true;
+ }
+ type = Object.prototype.toString.call(value).slice(8, -1);
+ switch(type) {
+ case 'String':
+     return !$.trim(value);
+ case 'Array':
+     return !value.length;
+ case 'Object':
+     return $.isEmptyObject(value); // 普通对象使用 for...in 判断，有 key 即为 false
+ default:
+     return false; // 其他对象均视作非空
+ }
+};*/
 
 //判断是否为纯粹对象 错的,这个只是判断是否obj
 ccc.isPlainObject = function(obj) {
     return (typeof(obj) === "object" && obj != null && obj != undefined);
 }
 
-// isPlainObject: function(a) {
-// 	var b;
-// 	if(!a || "object" !== m.type(a) || a.nodeType || m.isWindow(a)) return !1;
-// 	try {
-// 		if(a.constructor && !j.call(a, "constructor") && !j.call(a.constructor.prototype, "isPrototypeOf")) return !1
-// 	} catch(c) {
-// 		return !1
-// 	}
-// 	if(k.ownLast)
-// 		for(b in a) return j.call(a, b);
-// 	for(b in a);
-// 	return void 0 === b || j.call(a, b)
-// }
+/*isPlainObject: function(a) {
+	var b;
+	if(!a || "object" !== m.type(a) || a.nodeType || m.isWindow(a)) return !1;
+	try {
+		if(a.constructor && !j.call(a, "constructor") && !j.call(a.constructor.prototype, "isPrototypeOf")) return !1
+	} catch(c) {
+		return !1
+	}
+	if(k.ownLast)
+		for(b in a) return j.call(a, b);
+	for(b in a);
+	return void 0 === b || j.call(a, b)
+}*/
 
 ccc.isAndroid = function() {
     return (/android/gi).test(navigator.appVersion.toLowerCase());
