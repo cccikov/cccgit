@@ -87,6 +87,10 @@ ccc.isEmptyObject = function(obj) {
     for (t in obj)  
         return !1;  
     return !0
+    // if (JSON.stringify(obj) === '{}') {
+    //     return true;
+    // }
+    // return false;//这种方式如果实例全是函数也会判断为空
 };
 //var isEmptyValue = function(value) {
 //  var type;

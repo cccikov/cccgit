@@ -54,7 +54,7 @@
             document.removeEventListener("click", a); //只除去了click2
             document.removeEventListener("click", a); //只除去了click2
         }
-        //demo2();//demo2 展示了一个问题，就是在删除事件函数（有声明）前，改写了事件函数（有声明），之前的事件函数（有声明）就会变成匿名函数，将无法删除。
+        //demo2();//demo2 展示了一个问题，就是在删除事件函数!function前，之前函数的的指针指向了新的函数，之前的指针a就会指向新的函数，旧的函数将无法删除。
 
 
         function demo3() {

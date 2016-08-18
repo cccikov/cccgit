@@ -111,6 +111,9 @@
 				float();
 			}
 
+			/*
+			 * 思路：表格table里面的tr td元素是无法position,float，所以只有新建一个一样内容，尺寸一样的table，让其父元素position改变位置
+			 */ 
 			function float() {
 				var doc = $(document);
 				//先清空，防止有两个tabT
