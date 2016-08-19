@@ -193,8 +193,6 @@
         }
         // demo6();
 
-        demo8(window);
-
         function demo8(win) {
             win.addEvt = function(el, name, fn, data) {
                 // 先判断有没有一个全局的大eventDom对象
@@ -202,8 +200,8 @@
                     win.eventDom = {};
                 }
 
-                // 处理明明空间写法 将click.a 拆分为click a
-                if (name.indexOf(".") != -1) { //明明空间
+                // 处理命名空间写法 将click.a 拆分为click a
+                if (name.indexOf(".") != -1) { //命名空间
                     var evtName = name.slice(0, name.indexOf("."));
                     var nameSpace = name.slice(name.indexOf(".") + 1);
                 } else {
@@ -216,13 +214,13 @@
                     eventDom[el].target = el;
                 }
 
-                // 判断这个dom对象有无这种方法
+                // 判断这个dom对象有无这种事件
                 if (!eventDom[el][evtName]) {
                     eventDom[el][evtName] = {} //新建对象
                     eventDom[el][evtName].name = evtName;
                     eventDom[el][evtName].each = {};//有命名空间的，删除一个事件用delete属性
-                    eventDom[el][evtName].arr = []//无命名空间的，数组方法删除值
-                    eventDom[el][evtName].whole = function(event) {
+                    eventDom[el][evtName].arr = [];//无命名空间的，数组方法删除值
+                    eventDom[el][evtName].whole = function(event) {//这个不能写在prototype吧，因为每种事件调用方法都不是同一个
                         var thisEvent = eventDom[el][evtName];
                         console.log(thisEvent);
                         console.log("对象有内容"+!ccc.isEmptyObject(thisEvent.each));
@@ -238,7 +236,7 @@
                         }
 
                     }
-                    eventDom[el].target.addEventListener(eventDom[el][evtName].name, eventDom[el][evtName].whole, false);
+                    eventDom[el].target.addEventListener(eventDom[el][evtName].name, eventDom[el][evtName].whole, false);//这里也要在prototype另外写一个一个方法，在构造函数中调用
                 }
 
 
@@ -287,47 +285,109 @@
             }
             addEvt(document,"click",haha,"ccc");
         }
+        // demo8(window);
 
 
-        function lastDemo() {
-            var doc = {};
-            doc.dom = document;
-            doc.click = new Object();
-
-
-            doc.click.a = new Object();
-            doc.click.a.fn = function() {
-                console.log("click.a")
+       function demo9(win) {
+            if(!ccc){
+                ccc = new Object();
             }
-            doc.click.b = new Object();
-            //b命名空间方法
-            doc.click.b.fn = function(opt) {
-                    console.log(opt);
+            ccc.cst = new Object();//constructor
+
+            ccc.cst.domEle = function(el){
+                this.target = el;
+            }
+            ccc.cst.eventObj = function(evtName){
+                this.name = evtName;
+                this.each = new Object();//有命名空间的，删除一个事件用delete属性
+                this.arr = new Array();//无命名空间的，数组方法删除值
+            }
+
+            ccc.addEvt = function(el, name, fn, data) {
+                // 先判断有没有一个全局的大eventDom对象
+                if (!win.eventDom) {
+                    win.eventDom = {};
                 }
-                //b命名空间传入数据
-            doc.click.b.data = {
-                "name": "ccc"
-            };
 
-
-            doc.click.whole = function() {
-                doc.click.a.fn();
-                doc.click.b.fn(doc.click.b.data);
-            }
-
-            doc.dom.addEventListener("click", doc.click.whole, false);
-
-            //做个原型方法用于添加事件
-            function Dom() {}
-            Dom.prototype.addEvt = function(evtName, fn, captrue) {
-                if (1) { //先判断有无这个事件对象，若有，则增强属性，若无则添加 事件实例属性
+                // 处理命名空间写法 将click.a 拆分为click a
+                if (name.indexOf(".") != -1) { //命名空间
+                    var evtName = name.slice(0, name.indexOf("."));
+                    var nameSpace = name.slice(name.indexOf(".") + 1);
+                } else {
+                    evtName = name;
                 }
+
+                // 判断有无这个dom对象
+                if (!eventDom[el]) {
+                    eventDom[el] = new ccc.cst.domEle(el);
+                }
+
+                // 判断这个dom对象有无这种事件
+                if (!eventDom[el][evtName]) {
+                    eventDom[el][evtName] = new ccc.cst.eventObj(evtName);
+                    eventDom[el][evtName].whole = function(event) {//这个不能写在prototype吧，因为每种事件调用方法都不是同一个
+                        var thisEvent = eventDom[el][evtName];//这里的this是那个dom节点
+                        if ( !ccc.isEmptyObject(thisEvent.each) || (thisEvent.length>0) ) {
+                            var event = event || window.event;
+                            for (var t in thisEvent.each) {
+                                thisEvent.each[t].method(event, thisEvent.each[t].data);
+                            }
+                            for (var tt in thisEvent.arr) {
+                                thisEvent.arr[tt].method(event, thisEvent.arr[tt].data);
+                            }
+                        }
+
+                    }
+                    eventDom[el].target.addEventListener(eventDom[el][evtName].name, eventDom[el][evtName].whole, false);//这里也要在prototype另外写一个一个方法，在构造函数中调用
+                }
+
+
+                // 判断有无命名空间对待
+                if (nameSpace) {
+                    eventDom[el][evtName].each[nameSpace] = {}; //新建对象
+                    eventDom[el][evtName].each[nameSpace].method = fn;
+                    eventDom[el][evtName].each[nameSpace].data = data;
+                }else{
+                    var len = eventDom[el][evtName].arr.length;
+                    var has = false;//里面
+                    for(var i = 0;i<len;i++){
+                        if(eventDom[el][evtName].arr[i].method === fn){
+                            eventDom[el][evtName].arr[i].method = fn;
+                            eventDom[el][evtName].arr[i].data = data;
+                            has = true;//里面已经有这个函数
+                        }
+                    }
+                    if(!has){
+                        eventDom[el][evtName].arr[len] = {};//新建对象
+                        eventDom[el][evtName].arr[len].method = fn;
+                        eventDom[el][evtName].arr[len].data = data;
+                    }
+                }
+
+                console.log(eventDom[el]);
             }
-            Dom.prototype.create = function() { //用于添加 事件实例属性 click -->click.a
-                //创建实例属性的
+
+
+            ccc.addEvt(document, "click.a", function(e,a) {
+                console.log(e,a);
+            }, "我是参数");
+            ccc.addEvt(document, "click.b", function(e,a) {
+                console.log(e,a);
+            }, "我是参数b");
+            ccc.addEvt(document, "click", function(e,a) {
+                console.log(e,a);
+            }, "我是参数c");
+
+            var haha = function(e,a){
+                console.log("我是有指针的匿名函数",e,a);
             }
+            ccc.addEvt(document,"click",haha,"ccc");
+            haha = function(e,a){//改变了指针，原生和jq都不能吧
+                console.log("我是有指针的匿名函数2",e,a);
+            }
+            ccc.addEvt(document,"click",haha,"ccc");
         }
-        // lastDemo();
+        demo9(window);
 
 
     }
