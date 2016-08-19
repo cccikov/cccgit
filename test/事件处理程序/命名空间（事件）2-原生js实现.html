@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>事件处理</title>
-    <script src="js/ccc.js" type="text/javascript"></script>
-    <script src="js/json2.js" type="text/javascript"></script>
-    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/ccc.js" type="text/javascript"></script>
+    <script src="../js/json2.js" type="text/javascript"></script>
+    <script src="../js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
     window.onload = function() {
         var add = document.getElementById("add");
@@ -84,8 +84,9 @@
         function demo4() {
             // 另外一种模拟事件命名空间方式，一个dom节点的一类事件（如click,mouseenter……）只绑定一个大方法。然后具体的方法在函数里面执行
             var clickEvtObj = {};
-			
+
             document.addEventListener("click", clickWhole);
+
             function clickWhole() {
                 if (!ccc.isEmptyObject(clickEvtObj)) { //非空对象
                     for (var i in clickEvtObj) {
@@ -97,16 +98,196 @@
                 console.log("0");
             }
             clickEvtObj.b = function() {
-                console.log("1");
-            }
-            //想删除某个方法，感觉用对象会好一点，用对象的话可以通过delete某个属性来删除方法
+                    console.log("1");
+                }
+                //想删除某个方法，感觉用对象会好一点，用对象的话可以通过delete某个属性来删除方法
             del.onclick = function(e) {
                 e.stopPropagation();
                 delete clickEvtObj.a;
                 delete clickEvtObj.b;
             }
         }
-        demo4();
+        // demo4();//这个是obj版的demo3
+
+
+        function demo5() {
+
+            var clickObj = {}; //这是一个类，事件类，click，mouseenter……
+            clickObj.whole = function() {
+                var that = clickObj;
+                if (!ccc.isEmptyObject(that.each)) {
+                    var t;
+                    for (t in that.each) {
+                        var data = that.each[t].data;
+                        var method = that.each[t].method;
+                        method(data);
+                    }
+                }
+            }
+            clickObj.each = {};
+
+            var a = {};
+            a.data = {
+                "name": "a",
+                "age": 16
+            };
+            a.method = function(data) {
+                console.log(data);
+            }
+
+            var b = {};
+            b.data = {
+                "name": "b"
+            };
+            b.method = function(data) {
+                console.log(data);
+            }
+
+            clickObj.each.a = a;
+            clickObj.each.b = b;
+
+
+            var EleDom = {} //这是一个dom节点类
+            EleDom.ele = document;
+            EleDom.click = clickObj;
+            EleDom.name = "click";
+
+            clickObj.whole();
+
+            EleDom.ele.addEventListener(EleDom.name, EleDom.click.whole);
+
+        }
+        // demo5();
+
+
+
+        function demo6() {
+
+            var addEvt = function(el, name, fn, useCapture, data) {
+                if (name.indexOf(".") != -1) {
+                    var strNum = name.indexOf(".");
+                    var evtName = name.slice(0, strNum);
+                    var nameSpace = name.slice(strNum + 1);
+                }
+                var useCapture = useCapture || false;
+                if (el.addEventListener) {
+                    el.addEventListener(evtName, fn, useCapture);
+                }
+            }
+
+            function whole(e) {
+                a(e, "ccc");
+            }
+
+            function a(e, data) {
+                console.clear();
+                console.log(e);
+                if (data) {
+                    console.log(data + " " + Math.random());
+                }
+            }
+
+            addEvt(document, "click.a", whole, false, {
+                "name": "ccc"
+            })
+        }
+        // demo6();
+
+        demo8(window);
+
+        function demo8(win) {
+            win.addEvt = function(el, name, fn, data) {
+                // 先判断有没有一个全局的大eventDom对象
+                if (!win.eventDom) {
+                    win.eventDom = {};
+                }
+
+                // 处理明明空间写法 将click.a 拆分为click a
+                if (name.indexOf(".") != -1) { //明明空间
+                    var evtName = name.slice(0, name.indexOf("."));
+                    var nameSpace = name.slice(name.indexOf(".") + 1);
+                } else {
+                    evtName = name;
+                }
+
+                // 判断有无这个dom对象
+                if (!eventDom[el]) {
+                    eventDom[el] = {}; //新建对象
+                    eventDom[el].target = el;
+                }
+
+                // 判断这个dom对象有无这种方法
+                if (!eventDom[el][evtName]) {
+                    eventDom[el][evtName] = {} //新建对象
+                    eventDom[el][evtName].name = evtName;
+                    eventDom[el][evtName].each = {};//有命名空间的，删除一个事件用delete属性
+                    eventDom[el][evtName].arr = []//无命名空间的，数组方法删除值
+                    eventDom[el][evtName].whole = function(event) {
+                        var thisEvent = eventDom[el][evtName];
+                        console.log(thisEvent);
+                        console.log("对象有内容"+!ccc.isEmptyObject(thisEvent.each));
+                        console.log("数组非空"+(thisEvent.arr.length>0));
+                        if ( !ccc.isEmptyObject(thisEvent.each) || (thisEvent.length>0) ) {
+                            var event = event || window.event;
+                            for (var t in thisEvent.each) {
+                                thisEvent.each[t].method(event, thisEvent.each[t].data);
+                            }
+                            for (var tt in thisEvent.arr) {
+                                thisEvent.arr[tt].method(event, thisEvent.arr[tt].data);
+                            }
+                        }
+
+                    }
+                    eventDom[el].target.addEventListener(eventDom[el][evtName].name, eventDom[el][evtName].whole, false);
+                }
+
+
+                // 判断有无命名空间对待
+                if (nameSpace) {
+                    eventDom[el][evtName].each[nameSpace] = {}; //新建对象
+                    eventDom[el][evtName].each[nameSpace].method = fn;
+                    eventDom[el][evtName].each[nameSpace].data = data;
+                }else{
+                    var len = eventDom[el][evtName].arr.length;
+                    var has = false;//里面
+                    for(var i = 0;i<len;i++){
+                        if(eventDom[el][evtName].arr[i].method === fn){
+                            eventDom[el][evtName].arr[i].method = fn;
+                            eventDom[el][evtName].arr[i].data = data;
+                            has = true;//里面已经有这个函数
+                        }
+                    }
+                    if(!has){
+                        eventDom[el][evtName].arr[len] = {};//新建对象
+                        eventDom[el][evtName].arr[len].method = fn;
+                        eventDom[el][evtName].arr[len].data = data;
+                    }
+                }
+
+                console.log(eventDom[el]);
+            }
+
+
+            addEvt(document, "click.a", function(e,a) {
+                console.log(e,a);
+            }, "我是参数");
+            addEvt(document, "click.b", function(e,a) {
+                console.log(e,a);
+            }, "我是参数b");
+            addEvt(document, "click", function(e,a) {
+                console.log(e,a);
+            }, "我是参数c");
+
+            var haha = function(e,a){
+                console.log("我是有指针的匿名函数",e,a);
+            }
+            addEvt(document,"click",haha,"ccc");
+            haha = function(e,a){//改变了指针，原生和jq都不能吧
+                console.log("我是有指针的匿名函数2",e,a);
+            }
+            addEvt(document,"click",haha,"ccc");
+        }
+
 
         function lastDemo() {
             var doc = {};

@@ -41,3 +41,29 @@ frontierarea
 //16、html5 API fileReader
 
 17、查看display:none;元素的高度
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * 大知识块，要多看，常看
+ */
+面向对象
+AMD,require.js规范
+node
