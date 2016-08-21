@@ -364,16 +364,31 @@
                         eventDom[el][evtName].arr[len] = new ccc.cst.fnObj(fn, data);
                     }
                 }
-                return eventDom[el];
+                return {
+                    "parent": eventDom,
+                    "children": eventDom[el]
+                };
+            }
+
+
+
+            ccc.off = function(el, name) {
+                // 处理命名空间写法 将click.a 拆分为click a
+                if (name.indexOf(".") != -1) { //命名空间
+                    var evtName = name.slice(0, name.indexOf("."));
+                    var nameSpace = name.slice(name.indexOf(".") + 1);
+                } else {
+                    evtName = name;
+                }
             }
 
 
             console.log(ccc.on(document, "click.a", function(e, a) {
                 console.log(e, a);
-            }, "我是参数"));
-            ccc.on(document, "click.b", function(e, a) {
+            }, "我是参数").parent);
+            console.log(ccc.on(document, "click.b", function(e, a) {
                 console.log(e, a);
-            }, "我是参数b");
+            }, "我是参数b").children);
             ccc.on(document, "click", function(e, a) {
                 console.log(e, a);
             }, "我是参数c");
@@ -388,6 +403,7 @@
             ccc.on(document, "click", haha, "ccc");
         }
         demo9(window);
+
 
 
     }
