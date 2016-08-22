@@ -96,18 +96,18 @@ ccc.isEmptyObject = function(obj) {
 /*var isEmptyValue = function(value) {
  var type;
  if(value == null) { // 等同于 value === undefined || value === null
-     return true;
+	 return true;
  }
  type = Object.prototype.toString.call(value).slice(8, -1);
  switch(type) {
  case 'String':
-     return !$.trim(value);
+	 return !$.trim(value);
  case 'Array':
-     return !value.length;
+	 return !value.length;
  case 'Object':
-     return $.isEmptyObject(value); // 普通对象使用 for...in 判断，有 key 即为 false
+	 return $.isEmptyObject(value); // 普通对象使用 for...in 判断，有 key 即为 false
  default:
-     return false; // 其他对象均视作非空
+	 return false; // 其他对象均视作非空
  }
 };*/
 
@@ -117,17 +117,17 @@ ccc.isPlainObject = function(obj) {
 }
 
 /*isPlainObject: function(a) {
-    var b;
-    if(!a || "object" !== m.type(a) || a.nodeType || m.isWindow(a)) return !1;
-    try {
-        if(a.constructor && !j.call(a, "constructor") && !j.call(a.constructor.prototype, "isPrototypeOf")) return !1
-    } catch(c) {
-        return !1
-    }
-    if(k.ownLast)
-        for(b in a) return j.call(a, b);
-    for(b in a);
-    return void 0 === b || j.call(a, b)
+	var b;
+	if(!a || "object" !== m.type(a) || a.nodeType || m.isWindow(a)) return !1;
+	try {
+		if(a.constructor && !j.call(a, "constructor") && !j.call(a.constructor.prototype, "isPrototypeOf")) return !1
+	} catch(c) {
+		return !1
+	}
+	if(k.ownLast)
+		for(b in a) return j.call(a, b);
+	for(b in a);
+	return void 0 === b || j.call(a, b)
 }*/
 
 ccc.isAndroid = function() {
@@ -312,10 +312,10 @@ ccc.fileReader = function(fileObj, callback) {
     }
     /*e.g.
     input.on("change",function(){
-        var fileObj = $(this)[0].files[0];
-        ccc.fileReader(fileObj,function(e){
-            console.log(e);
-        });
+    	var fileObj = $(this)[0].files[0];
+    	ccc.fileReader(fileObj,function(e){
+    		console.log(e);
+    	});
     });*/
 
 // 获取url参数
@@ -334,128 +334,142 @@ ccc.getUrlParam = function(name) {
  */
 // 构造函数
 ccc.cst.domEle = function(el) {
-            this.target = el;
+    this.target = el;
+}
+ccc.cst.eventObj = function(evtName, el) {
+    this.name = evtName;
+    this.each = new Object(); //有命名空间的，删除一个事件用delete属性
+    this.arr = new Array(); //无命名空间的，数组方法删除值
+    var that = this;
+    this.whole = function(event) { //这个不能写在prototype吧，因为每种事件调用方法都不是同一个
+        if (!ccc.isEmptyObject(that.each) || (that.arr.length > 0)) {
+            var event = event || window.event;
+            for (var t in that.each) {
+                that.each[t].method(event, that.each[t].data);
+            }
+            for (var tt in that.arr) {
+                that.arr[tt].method(event, that.arr[tt].data);
+            }
         }
-        ccc.cst.eventObj = function(evtName, el) {
-            this.name = evtName;
-            this.each = new Object(); //有命名空间的，删除一个事件用delete属性
-            this.arr = new Array(); //无命名空间的，数组方法删除值
-            var that = this;
-            this.whole = function(event) { //这个不能写在prototype吧，因为每种事件调用方法都不是同一个
-                if (!ccc.isEmptyObject(that.each) || (that.arr.length > 0)) {
-                    var event = event || window.event;
-                    for (var t in that.each) {
-                        that.each[t].method(event, that.each[t].data);
-                    }
-                    for (var tt in that.arr) {
-                        that.arr[tt].method(event, that.arr[tt].data);
-                    }
-                }
-            }
-            this.work(el, this.name, this.whole);
-        }
-        ccc.cst.eventObj.prototype.work = function(el, name, fn) {
-            el.addEventListener(name, fn, false);
-        }
-        ccc.cst.fnObj = function(fn, data) {
-            this.method = fn;
-            this.data = data;
-        }
+    }
+    this.work(el, this.name, this.whole);
+}
+ccc.cst.eventObj.prototype.work = function(el, name, fn) {
+    el.addEventListener(name, fn, false);
+}
+ccc.cst.fnObj = function(fn, data) {
+    this.method = fn;
+    this.data = data;
+}
 
-        ccc.on = function(el, name, fn, data) {
-            // 先判断有没有一个全局的大eventDom对象
-            if (!window.eventDom) {
-                window.eventDom = {};
-            }
-
-            // 处理命名空间写法 将click.a 拆分为click a
-            if (name.indexOf(".") != -1) { //命名空间
-                var evtName = name.slice(0, name.indexOf("."));
-                var nameSpace = name.slice(name.indexOf(".") + 1);
-            } else {
-                evtName = name;
-            }
-
-            // 判断有无这个dom对象
-            if (!eventDom[el]) {
-                eventDom[el] = new ccc.cst.domEle(el);
-            }
-
-            // 判断这个dom对象有无这种事件
-            if (!eventDom[el][evtName]) {
-                eventDom[el][evtName] = new ccc.cst.eventObj(evtName, eventDom[el].target);
-            }
-
-            // 判断有无命名空间对待
-            if (nameSpace) {
-                eventDom[el][evtName].each[nameSpace] = new ccc.cst.fnObj(fn, data);
-            } else {
-                var len = eventDom[el][evtName].arr.length;
-                var has = false; //里面
-                for (var i = 0; i < len; i++) {
-                    if (eventDom[el][evtName].arr[i].method === fn) {
-                        eventDom[el][evtName].arr[i].method = fn;
-                        eventDom[el][evtName].arr[i].data = data;
-                        has = true; //里面已经有这个函数
-                    }
-                }
-                if (!has) {
-                    eventDom[el][evtName].arr[len] = new ccc.cst.fnObj(fn, data);
-                }
-            }
-            return {
-                "parent": eventDom,
-                "children": eventDom[el]
-            };
+/*
+ * ccc.on
+ * el-原生dom节点 -eg. document
+ * name - 事件类型.(命名空间) - eg. click 或者命名空间click.a
+ * fn - 该事件被触发时执行的函数
+ * data(可选) - 传递给函数的参数
+ */
+ccc.on = function(el, name, fn, data) {
+        // 先判断有没有一个全局的大eventDom对象
+        if (!window.eventDom) {
+            window.eventDom = {};
         }
 
+        // 处理命名空间写法 将click.a 拆分为click a
+        if (name.indexOf(".") != -1) { //命名空间
+            var evtName = name.slice(0, name.indexOf("."));
+            var nameSpace = name.slice(name.indexOf(".") + 1);
+        } else {
+            evtName = name;
+        }
 
+        // 判断有无这个dom对象
+        if (!eventDom[el]) {
+            eventDom[el] = new ccc.cst.domEle(el);
+        } else {
+            // console.log(eventDom[el].target==el);
+        }
 
-        ccc.off = function(el,name,fn) {
-            // 只有一个参数时，删除这个dom全部事件
-            if(arguments.length == 1){
-                for(var i in eventDom[el]){
-                    if(i != "target"){
-                        var the = eventDom[el][i];//遍历有什么类型事件
-                        el.removeEventListener(the.name,the.whole,false);//如果不removeEventListener，虽然对象没了，但是事件还是绑定在上面(本身就会保存起来事件的内容，除非改动事件内容，而不是之间将整个对象删除掉，这里的事件内容，是whole函数的内容)，所以一定要解绑whole。
-                    }
-                }
-                delete eventDom[el];
-                return eventDom;
-            }else if(arguments.length == 2){//两个参数时
-                // 处理命名空间写法 将click.a 拆分为click a
-                if (name.indexOf(".") != -1) { //命名空间
-                    var evtName = name.slice(0, name.indexOf("."));
-                    var nameSpace = name.slice(name.indexOf(".") + 1);
-                } else {
-                    evtName = name;
-                }
+        // 判断这个dom对象有无这种事件
+        if (!eventDom[el][evtName]) {
+            eventDom[el][evtName] = new ccc.cst.eventObj(evtName, eventDom[el].target);
+        }
 
-                if(nameSpace){//有命名空间
-                    delete eventDom[el][evtName].each[nameSpace];
-                }else{
-                    el.removeEventListener(evtName,eventDom[el][evtName].whole);
-                }
-
-            }else{//三个参数
-                // 处理命名空间写法 将click.a 拆分为click a
-                if (name.indexOf(".") != -1) { //命名空间
-                    var evtName = name.slice(0, name.indexOf("."));
-                    var nameSpace = name.slice(name.indexOf(".") + 1);
-                } else {
-                    evtName = name;
-                }
-
-                if(nameSpace){//有命名空间，就按命名空间处置
-                    delete eventDom[el][evtName].each[nameSpace];
-                }else{
-                    var len = eventDom[el][evtName].arr.length;
-                    for (var i = 0; i < len; i++) {
-                        if (eventDom[el][evtName].arr[i].method === fn) {
-                            delete eventDom[el][evtName].arr[i];
-                        }
-                    }
+        // 判断有无命名空间对待
+        if (nameSpace) {
+            eventDom[el][evtName].each[nameSpace] = new ccc.cst.fnObj(fn, data);
+        } else {
+            var len = eventDom[el][evtName].arr.length;
+            var has = false; //里面
+            for (var i = 0; i < len; i++) {
+                if (eventDom[el][evtName].arr[i].method === fn) {
+                    eventDom[el][evtName].arr[i].method = fn;
+                    eventDom[el][evtName].arr[i].data = data;
+                    has = true; //里面已经有这个函数
                 }
             }
-            return eventDom[el];
+            if (!has) {
+                eventDom[el][evtName].arr[len] = new ccc.cst.fnObj(fn, data);
+            }
         }
+        return {
+            "parent": eventDom,
+            "children": eventDom[el]
+        };
+    }
+    // 暂时存在的问题是，事件里面函数的触发顺序不是定义顺序
+
+/*
+ * ccc.off
+ * el-原生dom节点 -eg. document
+ * name（可选） - 指定要移除的事件类型.(命名空间) - eg. click 或者命名空间click.a
+ * fn（可选） - 指定要移除的函数。
+ */
+ccc.off = function(el, name, fn) {
+    // 只有一个参数时，删除这个dom全部事件
+    if (arguments.length == 1) {
+        for (var i in eventDom[el]) {
+            if (i != "target") {
+                var the = eventDom[el][i]; //遍历有什么类型事件
+                el.removeEventListener(the.name, the.whole, false); //如果不removeEventListener，虽然对象没了，但是事件还是绑定在上面(本身就会保存起来事件的内容，除非改动事件内容，而不是之间将整个对象删除掉，这里的事件内容，是whole函数的内容)，所以一定要解绑whole。
+            }
+        }
+        delete eventDom[el];
+        return eventDom;
+    } else if (arguments.length == 2) { //两个参数时
+        // 处理命名空间写法 将click.a 拆分为click a
+        if (name.indexOf(".") != -1) { //命名空间
+            var evtName = name.slice(0, name.indexOf("."));
+            var nameSpace = name.slice(name.indexOf(".") + 1);
+        } else {
+            evtName = name;
+        }
+
+        if (nameSpace) { //有命名空间
+            delete eventDom[el][evtName].each[nameSpace];
+        } else {
+            el.removeEventListener(evtName, eventDom[el][evtName].whole);
+        }
+
+    } else { //三个参数
+        // 处理命名空间写法 将click.a 拆分为click a
+        if (name.indexOf(".") != -1) { //命名空间
+            var evtName = name.slice(0, name.indexOf("."));
+            var nameSpace = name.slice(name.indexOf(".") + 1);
+        } else {
+            evtName = name;
+        }
+
+        if (nameSpace) { //有命名空间，就按命名空间处置
+            delete eventDom[el][evtName].each[nameSpace];
+        } else {
+            var len = eventDom[el][evtName].arr.length;
+            for (var i = 0; i < len; i++) {
+                if (eventDom[el][evtName].arr[i].method === fn) {
+                    delete eventDom[el][evtName].arr[i];
+                }
+            }
+        }
+    }
+    return eventDom[el];
+}

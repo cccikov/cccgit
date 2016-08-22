@@ -3,26 +3,70 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>事件命名空间</title>
+    <title>事件命名空间-ccc.js</title>
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
     <script src="../js/ccc.js" type="text/javascript"></script>
+    <style type="text/css">
+    	.btn{
+    		/*position: absolute;*/
+    		top:0;
+    	}
+    </style>
     <script type="text/javascript">
-        ccc.on(document, "click", function(e, a) {
-            console.log(e, a);
-        }, "我是参数c");
+        window.onload = function(){
+        	var btnArr = document.getElementsByClassName("btn");
+        	var btn = document.getElementById("btn");
+        	console.dir(btn);
+
+
+
+        	/*
+			 * ccc.on示例
+        	 */
+        	ccc.on(document, "click", function(e,a) {
+        	    console.log("单纯的click");
+        	});
+
+        	ccc.on(document,"click",function(e,a){
+        		console.log(a);
+        	},"我是参数");
+
+        	ccc.on(document,"click.a",function(e,param){
+        		console.log("命名空间a+参数"+param)
+        	},"我是参数");
+        	// 现在存在的问题是事件函数的触发顺序不是按照定义顺序，一般都是命名空间先
+
+        	// 若想要有顺序，只能自己定义的时候人为
+        	function num1(num){
+        		console.log("我是顺序"+num);
+        	}
+        	function num2(num){
+        		console.log("我是顺序"+num);
+        	}
+
+
+        	// bug
+        	ccc.on(btnArr[0],"click.a",function(e){
+        		e.stopPropagation();
+        		num1(1);
+        		num2(2);
+        	});
+        	ccc.on(btnArr[1],"click.a",function(e){
+        		e.stopPropagation();
+        		num1(2);
+        		num2(3);
+        	});
+        	//大bug：若是通过非唯一选择器(id)选出带有合集的元素，区别不出合集里面的每个元素
+
+        	console.log(eventDom);
+        }
     </script>
 </head>
 
 <body>
     <button class="btn">按钮1</button>
-    <button class="btn">按钮2</button>
-    <button class="btn">按钮3</button>
-    <button class="btn">按钮4</button>
-    <button class="btn">按钮5</button>
-    <button class="btn">按钮6</button>
-    <button class="btn">按钮7</button>
-    <button class="btn">按钮8</button>
-    <button class="btn">按钮9</button>
-    <button class="btn">按钮10</button>
+    <button class="btn">按钮1</button>
+    <a id="btn" href="http://www.baidu.com">id按钮</a>
 </body>
 
 </html>
