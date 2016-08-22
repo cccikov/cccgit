@@ -345,10 +345,10 @@ ccc.cst.eventObj = function(evtName, el) {
         if (!ccc.isEmptyObject(that.each) || (that.arr.length > 0)) {
             var event = event || window.event;
             for (var t in that.each) {
-                that.each[t].method(event, that.each[t].data);
+                that.each[t].method.call(el,event, that.each[t].data);
             }
             for (var tt in that.arr) {
-                that.arr[tt].method(event, that.arr[tt].data);
+                that.arr[tt].method.call(el,event, that.arr[tt].data);
             }
         }
     }
@@ -370,54 +370,58 @@ ccc.cst.fnObj = function(fn, data) {
  * data(可选) - 传递给函数的参数
  */
 ccc.on = function(el, name, fn, data) {
-        // 先判断有没有一个全局的大eventDom对象
-        if (!window.eventDom) {
-            window.eventDom = {};
-        }
-
-        // 处理命名空间写法 将click.a 拆分为click a
-        if (name.indexOf(".") != -1) { //命名空间
-            var evtName = name.slice(0, name.indexOf("."));
-            var nameSpace = name.slice(name.indexOf(".") + 1);
-        } else {
-            evtName = name;
-        }
-
-        // 判断有无这个dom对象
-        if (!eventDom[el]) {
-            eventDom[el] = new ccc.cst.domEle(el);
-        } else {
-            // console.log(eventDom[el].target==el);
-        }
-
-        // 判断这个dom对象有无这种事件
-        if (!eventDom[el][evtName]) {
-            eventDom[el][evtName] = new ccc.cst.eventObj(evtName, eventDom[el].target);
-        }
-
-        // 判断有无命名空间对待
-        if (nameSpace) {
-            eventDom[el][evtName].each[nameSpace] = new ccc.cst.fnObj(fn, data);
-        } else {
-            var len = eventDom[el][evtName].arr.length;
-            var has = false; //里面
-            for (var i = 0; i < len; i++) {
-                if (eventDom[el][evtName].arr[i].method === fn) {
-                    eventDom[el][evtName].arr[i].method = fn;
-                    eventDom[el][evtName].arr[i].data = data;
-                    has = true; //里面已经有这个函数
-                }
-            }
-            if (!has) {
-                eventDom[el][evtName].arr[len] = new ccc.cst.fnObj(fn, data);
-            }
-        }
-        return {
-            "parent": eventDom,
-            "children": eventDom[el]
-        };
+    // 先判断有没有一个全局的大eventDom对象
+    if (!window.eventDom) {
+        window.eventDom = {};
     }
-    // 暂时存在的问题是，事件里面函数的触发顺序不是定义顺序
+
+    // 处理命名空间写法 将click.a 拆分为click a
+    if (name.indexOf(".") != -1) { //命名空间
+        var evtName = name.slice(0, name.indexOf("."));
+        var nameSpace = name.slice(name.indexOf(".") + 1);
+    } else {
+        evtName = name;
+    }
+
+    // 判断有无这个dom对象
+    if (!eventDom[el]) {
+        eventDom[el] = new ccc.cst.domEle(el);
+    } else {
+        // console.log(eventDom[el].target==el);
+    }
+
+    // 判断这个dom对象有无这种事件
+    if (!eventDom[el][evtName]) {
+        eventDom[el][evtName] = new ccc.cst.eventObj(evtName, eventDom[el].target);
+    }
+
+    // 判断有无命名空间对待
+    if (nameSpace) {
+        eventDom[el][evtName].each[nameSpace] = new ccc.cst.fnObj(fn, data);
+    } else {
+        var len = eventDom[el][evtName].arr.length;
+        var has = false; //里面
+        for (var i = 0; i < len; i++) {
+            if (eventDom[el][evtName].arr[i].method === fn) {
+                eventDom[el][evtName].arr[i].method = fn;
+                eventDom[el][evtName].arr[i].data = data;
+                has = true; //里面已经有这个函数
+            }
+        }
+        if (!has) {
+            eventDom[el][evtName].arr[len] = new ccc.cst.fnObj(fn, data);
+        }
+    }
+    return {
+        "parent": eventDom,
+        "children": eventDom[el]
+    };
+}
+// 暂时存在的问题是，事件里面函数的触发顺序不是定义顺序
+// 大bug：若是通过非唯一选择器(id)选出带有合集的元素，区别不出合集里面的每个元素
+// bug 因为我直接将el作为索引，索引当dom的toString()返回值相同的时候，误以为是同一个dom
+// 现在的问题是怎么区分dom了，上面的大bug也是因为这个
+// 里面事件的this指向错误(已解决)
 
 /*
  * ccc.off
