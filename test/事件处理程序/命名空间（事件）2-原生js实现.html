@@ -225,7 +225,7 @@
                         console.log(thisEvent);
                         console.log("对象有内容" + !ccc.isEmptyObject(thisEvent.each));
                         console.log("数组非空" + (thisEvent.arr.length > 0));
-                        if (!ccc.isEmptyObject(thisEvent.each) || (thisEvent.length > 0)) {
+                        if (!ccc.isEmptyObject(thisEvent.each) || (thisEvent.arr.length > 0)) {
                             var event = event || window.event;
                             for (var t in thisEvent.each) {
                                 thisEvent.each[t].method(event, thisEvent.each[t].data);
@@ -303,7 +303,7 @@
                 this.arr = new Array(); //无命名空间的，数组方法删除值
                 var that = this;
                 this.whole = function(event) { //这个不能写在prototype吧，因为每种事件调用方法都不是同一个
-                    if (!ccc.isEmptyObject(that.each) || (that.length > 0)) {
+                    if (!ccc.isEmptyObject(that.each) || (that.arr.length > 0)) {
                         var event = event || window.event;
                         for (var t in that.each) {
                             that.each[t].method(event, that.each[t].data);
@@ -446,7 +446,7 @@
             }
             ccc.on(document, "click", haha, "ccc");
 
-            console.log(ccc.off(document,"click",haha));
+            // console.log(ccc.off(document,"click",haha));
         }
         demo9(window);
 
