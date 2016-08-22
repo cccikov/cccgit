@@ -372,15 +372,59 @@
 
 
 
-            ccc.off = function(el, name) {
-                // 处理命名空间写法 将click.a 拆分为click a
-                if (name.indexOf(".") != -1) { //命名空间
-                    var evtName = name.slice(0, name.indexOf("."));
-                    var nameSpace = name.slice(name.indexOf(".") + 1);
-                } else {
-                    evtName = name;
+            ccc.off = function(el,name,fn) {
+                // 只有一个参数时，删除这个dom全部事件
+                if(arguments.length == 1){
+                    for(var i in eventDom[el]){
+                        if(i != "target"){
+                            var the = eventDom[el][i];//遍历有什么类型事件
+                            el.removeEventListener(the.name,the.whole,false);//如果不removeEventListener，虽然对象没了，但是事件还是绑定在上面(本身就会保存起来事件的内容，除非改动事件内容，而不是之间将整个对象删除掉，这里的事件内容，是whole函数的内容)，所以一定要解绑whole。
+                        }
+                    }
+                    delete eventDom[el];
+                    return eventDom;
+                }else if(arguments.length == 2){//两个参数时
+                    // 处理命名空间写法 将click.a 拆分为click a
+                    if (name.indexOf(".") != -1) { //命名空间
+                        var evtName = name.slice(0, name.indexOf("."));
+                        var nameSpace = name.slice(name.indexOf(".") + 1);
+                    } else {
+                        evtName = name;
+                    }
+
+                    if(nameSpace){//有命名空间
+                        delete eventDom[el][evtName].each[nameSpace];
+                    }else{
+                        el.removeEventListener(evtName,eventDom[el][evtName].whole);
+                    }
+
+                }else{//三个参数
+                    // 处理命名空间写法 将click.a 拆分为click a
+                    if (name.indexOf(".") != -1) { //命名空间
+                        var evtName = name.slice(0, name.indexOf("."));
+                        var nameSpace = name.slice(name.indexOf(".") + 1);
+                    } else {
+                        evtName = name;
+                    }
+
+                    if(nameSpace){//有命名空间，就按命名空间处置
+                        delete eventDom[el][evtName].each[nameSpace];
+                    }else{
+                        var len = eventDom[el][evtName].arr.length;
+                        for (var i = 0; i < len; i++) {
+                            if (eventDom[el][evtName].arr[i].method === fn) {
+                                delete eventDom[el][evtName].arr[i];
+                            }
+                        }
+                    }
                 }
+                return eventDom[el];
             }
+
+
+
+
+
 
 
             console.log(ccc.on(document, "click.a", function(e, a) {
@@ -394,13 +438,15 @@
             }, "我是参数c");
 
             var haha = function(e, a) {
-                console.log("我是有指针的匿名函数", e, a);
+                console.log("我是没有指针的匿名函数", e, a);
             }
             ccc.on(document, "click", haha, "ccc");
             haha = function(e, a) { //改变了指针，原生和jq都不能吧
                 console.log("我是有指针的匿名函数2", e, a);
             }
             ccc.on(document, "click", haha, "ccc");
+
+            console.log(ccc.off(document,"click",haha));
         }
         demo9(window);
 
