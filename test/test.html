@@ -26,12 +26,25 @@
 				domArr.push(win, doc, thebody, thehtml, wrap, wrap2, btn, btn2, abtn, abtn2);
 				console.log(domArr);
 
-				for(var i in domArr){
-					if(!domArr[i].nodeType){
+				var dom = {};
+
+				for(var i in domArr) {
+					/*if(!domArr[i].nodeType){
 						console.log(domArr[i])
 					}else{
 						console.log(domArr[i].nodeType)
+					}*/
+
+					if(domArr[i] === window || domArr[i] === document || domArr[i] === document.body || domArr[i] === document.documentElement){
+						dom[domArr[i]] = domArr[i];
+					}else{
+						
 					}
+				}
+				console.log(dom);
+				
+				for(var j in dom){
+					console.log(dom[j])
 				}
 			}
 		</script>
