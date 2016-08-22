@@ -263,6 +263,24 @@
                 }
 
                 console.log(eventDom[el]);
+                
+                /*
+                 * 结构
+                 * eventDom包含着许多dom节点(eventDom[el]),如document，a#btn等;
+                 *   每个dom节点(eventDom[el]) - 里面包含着一个target，以及若干个事件类型（click，scroll……）
+                 * 		target - 就是这个dom
+                 * 		事件类型（如click）- 包含着name,whole,arr,each
+                 * 			name - 这个事件类型的名称("click","scroll")
+                 * 			whole - 是这个dom的这类事件包含着的一个函数（用来实现某个事件类型绑定多个函数，见demo4），arr、each里面的函数都在whole里面被调用
+                 * 			arr - 是非命名空间的函数的集合
+                 * 				索引为数字，从0开始arr[0] - 包含fn和data
+                 * 					fn为被调用的函数
+                 * 					data为调用时传入的数据
+                 * 			each - 是命名空间的函数的集合
+                 * 				索引为字符串,each[a] - 包含fn和data
+                 *					fn为被调用的函数
+                 * 					data为调用时传入的数据
+                 */
             }
 
 

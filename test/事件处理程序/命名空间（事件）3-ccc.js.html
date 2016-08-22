@@ -16,15 +16,14 @@
         window.onload = function(){
         	var btnArr = document.getElementsByClassName("btn");
         	var btn = document.getElementById("btn");
-        	console.dir(btn);
-
-
+        	var btn2 = document.getElementById("btn2");
 
         	/*
 			 * ccc.on示例
         	 */
         	ccc.on(document, "click", function(e,a) {
         	    console.log("单纯的click");
+        	    console.log(this);
         	});
 
         	ccc.on(document,"click",function(e,a){
@@ -32,7 +31,7 @@
         	},"我是参数");
 
         	ccc.on(document,"click.a",function(e,param){
-        		console.log("命名空间a+参数"+param)
+        		console.log("命名空间a + 参数:"+param)
         	},"我是参数");
         	// 现在存在的问题是事件函数的触发顺序不是按照定义顺序，一般都是命名空间先
 
@@ -43,7 +42,6 @@
         	function num2(num){
         		console.log("我是顺序"+num);
         	}
-
 
         	// bug
         	ccc.on(btnArr[0],"click.a",function(e){
@@ -58,7 +56,23 @@
         	});
         	//大bug：若是通过非唯一选择器(id)选出带有合集的元素，区别不出合集里面的每个元素
 
-        	console.log(eventDom);
+			ccc.on(btn,"click",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				console.log("我是id的dom");
+			});
+			ccc.on(btn2,"click",function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				console.log("我是id的dom2");
+			});
+			console.log(btn.toString());//http://www.baidu.com/
+			console.log(btn2.toString());//http://www.baidu.com/
+			//bug 因为我直接将el作为索引，索引当dom的toString()返回值相同的时候，误以为是同一个dom
+			
+			//现在的问题是怎么区分dom了，上面的大bug也是因为这个
+			
+			//里面事件的this指向错误
         }
     </script>
 </head>
@@ -67,6 +81,7 @@
     <button class="btn">按钮1</button>
     <button class="btn">按钮1</button>
     <a id="btn" href="http://www.baidu.com">id按钮</a>
+    <a id="btn2" href="http://www.baidu.com">id按钮</a>
 </body>
 
 </html>

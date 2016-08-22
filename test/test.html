@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<script type="text/javascript">
-		var c = function(){
-			console.log("hio");
-		}
 
-		function eq(fn1,fn2){
-			if(fn1===fn2){
-				return true
+	<head>
+		<meta charset="UTF-8">
+		<title>dom</title>
+		<style>
+			button,
+			a {
+				display: block;
 			}
-			return false
-		}
-		var a = c;
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var win = window;
+				var doc = document;
+				var thebody = document.body;
+				var thehtml = document.documentElement;
+				var wrap = document.getElementById("wrap");
+				var wrap2 = document.getElementById("wrap2");
+				var btn = document.getElementById("btn");
+				var btn2 = document.getElementById("btn2");
+				var abtn = document.getElementById("abtn");
+				var abtn2 = document.getElementById("abtn2");
+				var domArr = [];
+				domArr.push(win, doc, thebody, thehtml, wrap, wrap2, btn, btn2, abtn, abtn2);
+				console.log(domArr);
 
-		console.log(eq(c,function(){
-			console.log("hio");
-		}));
-		console.log(eq(a,c));
-		var b = function(){
-			console.log("hio");
-		}
-		console.log(eq(b,c));
-	</script>
-</head>
-<body>
+				for(var i in domArr){
+					if(!domArr[i].nodeType){
+						console.log(domArr[i])
+					}else{
+						console.log(domArr[i].nodeType)
+					}
+				}
+			}
+		</script>
+	</head>
 
-</body>
+	<body>
+		<div id="wrap">lorem</div>
+		<div id="wrap2">lorem</div>
+		<button id="btn">button</button>
+		<button id="btn2">button</button>
+		<a href="http:www.baidu.com" id="abtn">百度一下，你就知道</a>
+		<a href="http:www.baidu.com" id="abtn2">百度一下，你就知道</a>
+	</body>
+
 </html>
