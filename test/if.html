@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>if</title>
+		<script type="text/javascript">
+			/*
+			 * if(){
+			 * 	  ……
+			 * }else if(
+			 * 	  ……
+			 * )
+			 * 
+			 * 或者
+			 * if(){
+			 * 	   ……
+			 * }else{
+			 * 	   ……
+			 * }
+			 * 
+			 * 这种通常是里面各项是相互独立的，没有交集；就是上面那一项筛选剩下的，从中找到自己想要的;就算if里面设置的范围有交集，得到东西都是完全独立的。
+			 */
+			
+			function money(num){
+				if(num>10000){
+					console.log("富有");
+				}else{//相当于else if(num<=10000)
+					console.log("贫穷");
+				}
+			}
+			money(12000);//富有
+			money(8000);//贫穷
+			
+			
+			function money2(num){
+				if(num>25000){
+					console.log("富有");
+				}else if(num<5000){
+					console.log("贫穷");
+				}else if(num<=20000 && num>=15000){//从上面筛选下来的，找到符合自己的。
+					console.log("中庸");
+				}
+			}
+			money2(12000);//
+			money2(8000);//
+			money2(30000);//富有
+			
+			
+			function money3(num){//有交集，又有独立的地方
+				if(num<20000){
+					console.log("买不起好车");
+				}else if(num>5000){//一定是上面筛选剩下来的，
+					console.log("可以活下来");
+				}
+			}
+			money3(15000);//买不起好车
+			
+			
+			/*
+			 * if(){
+			 * 	  if(){
+			 * 		  ………
+			 * 	  }
+			 * }
+			 * 
+			 * 这里是外面那一项一定完全包含里面那一项，完全交集
+			 */
+			
+			function money4(num){
+				if(num>5000){
+					console.log("可以活下去");
+					if(num>50000){//这个一定在上面那个范围里面，不可能存在有上面那个以外的
+						console.log("可以好high");
+					}
+				}
+			}
+			money4(6000);//可以活下去
+			money4(60000);//可以活下去 //可以好high
+			
+			
+			/*
+			 * if(){
+			 * 	  ……
+			 * }
+			 * if(){
+			 * 	  ……
+			 * }
+			 * 
+			 * 这个可以达到上面以上各种效果，以及可以得到有部分交集
+			 */
+			
+			//模拟第一种
+			function money5(num){
+				if(num>10000){
+					console.log("富有");
+				}
+				if(!num>10000){
+					console.log("贫穷");
+				}
+			}
+			money5(12000);//富有
+			money5(8000);//贫穷
+			
+			
+			function money6(){
+				if(num>25000){
+					console.log("富有");
+				}
+				if(num<5000){
+					console.log("贫穷");
+				}
+				if(num<=20000 && num>=15000){
+					console.log("中庸");
+				}
+				money6(12000);//
+				money6(8000);//
+				money6(30000);//富有
+			}
+			
+			function money7(num){//有交集，又有独立的地方；如果在交集的地方就会执行两次
+				if(num<20000){
+					console.log("买不起好车");
+				}
+				if(num>5000){
+					console.log("可以活下来");
+				}
+			}
+			money7(15000);//买不起好车 //可以活下来	 
+			
+			//所以模仿第一种正确的写法
+			function money72(num){//有交集，又有独立的地方；如果在交集的地方就会执行两次
+				if(num<20000){
+					console.log("买不起好车");
+				}
+				if(!(num<20000) && num>5000){
+					console.log("可以活下来");
+				}
+			}
+			money72(15000);//买不起好车
+			
+			//模仿第二种
+			function money8(num){
+				if(num>5000){
+					console.log("可以活下去");
+				}
+				if(num>5000 && num>50000){//这个一定在上面那个范围里面，不可能存在有上面那个以外的
+					console.log("可以好high");
+				}
+			}
+			money8(6000);//可以活下去
+			money8(60000);//可以活下去 //可以好high
+			
+			//自己特有的
+			function money9(num){
+				if(num<8000){
+					console.log("略穷")
+				}
+				if(num>5000 && num<10000){
+					console.log("小康")
+				}
+				if(num>7000){
+					console.log("买得起iphone");
+				}
+			}
+			money9(7500);//略穷 //小康 //买得起iphone
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
