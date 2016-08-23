@@ -52,19 +52,38 @@
     /**
      * for
      */
+
     ! function() {
         var a = "";
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 5; i++) {//var i 可以在for之前定义
             a += i + " ";
         }
         console.log(a, i); //"0 1 2 3 4 " , 5
     }();
+
+    var numArr = [1,2,3,4,5,6,7,8,9,10];
+    ! function(){
+    	var sum = 0;
+    	for(var i = 0 ; i<numArr.length;i++){
+    		sum += numArr[i];
+    	}
+    	console.log(sum);//55
+    }()
+    ! function(){//有时候遍历数组的时候，为了避免每次都要循环都要获取数组长度，在之前就定义一个变量存储起来
+    	var sum = 0;
+    	for(var i = 0,len = numArr.length;i<len;i++){
+    		sum += numArr[i];
+    	}
+    	console.log(sum);//55
+    }();
+
     ! function() {
         var i = 2;
         for (i; i < 5; i++) {
             console.log(i);
         }
     }(); //2 //3 //4
+
     ! function() {
         var i;
         for (i = 0; i < 5; i++) {
@@ -97,12 +116,14 @@
     		}
     	]
     };
+
     !function(){
     	var i;
     	for( i in obj){
     		console.log(i,obj[i]);
     	}
     }();//apply 5 //banana Object {weight: "2", price: "10"} //cherry [Object, Object, Object]
+
     !function(){
     	for(var i in obj.cherry){//cherr是一个数组
     		console.log(i,obj.cherry[i].weight,obj.cherry[i].price);
@@ -121,6 +142,16 @@
     }();//"0 1" //"1 6" //"2 8" //"user ccc" //"date 2016.8.23"
     //可以看出，就算不是数组里面的内容（指 [] 包含的内容）也会被遍历出来
 
+    // for-in里面可以做处理，来遍历出自己所需要的东西，或者达到其他自己所需的效果
+    (function(){
+        for(var i in arr){
+            if(!isNaN(i)){//属性是数字
+                console.log(i +":"+ arr[i]);
+            }
+        }
+    })();//"0:1" //"1:6" //"2:8"
+
+
 
     /**
      * forEach chrome firefox 现代浏览器封装好的 for-in遍历(不过是数组Array特有的 Object没有),而且只会遍历数组里面的内容，而不会遍历数组其他属性
@@ -131,8 +162,11 @@
 
 
     // for-in 是遍历对象的，而forEach是遍历数组的
-    if (!Array.prototype.forEach) {
-        Array.prototype.forEach = function(callback, thisArg) {
+
+
+    // forEach 兼容
+    if (!Array.prototype.cforEach) {
+        Array.prototype.cforEach = function(callback, thisArg) {
             var T, k;
             if (this == null) {
                 throw new TypeError(" this is null or not defined");
@@ -156,6 +190,9 @@
             }
         };
     }
+    arr.cforEach(function(con,key){
+    	console.log(key+ " " + con);
+    });//0 1 //1 6 //2 8
     </script>
 </head>
 
