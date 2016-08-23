@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>循环</title>
+    <script type="text/javascript">
+    /**
+     * while do……while
+     */
+    ! function() {
+        var a = "";
+        var i = 0;
+        while (i < 5) {
+            a += i + " ";
+            i++;
+        }
+        console.log(a); //"0 1 2 3 4 "
+    }();
+
+    ! function() {
+        var b = "";
+        var j = 0;
+        do {
+            b += j + " ";
+            j++;
+        } while (j < 5);
+        console.log(b); //"0 1 2 3 4 "
+    }();
+
+    ! function() {
+        var a = "";
+        var i = 5;
+        while (i < 5) {
+            a += i + " ";
+            i++;
+        }
+        console.log(a); //""
+    }();
+
+    ! function() {
+        var b = "";
+        var j = 5;
+        do {
+            b += j + " ";
+            j++;
+        } while (j < 5);
+        console.log(b); //"5 "
+    }();
+    // do……while 无论如何都会执行一次
+
+    /**
+     * for
+     */
+    ! function() {
+        var a = "";
+        for (var i = 0; i < 5; i++) {
+            a += i + " ";
+        }
+        console.log(a, i); //"0 1 2 3 4 " , 5
+    }();
+    ! function() {
+        var i = 2;
+        for (i; i < 5; i++) {
+            console.log(i);
+        }
+    }(); //2 //3 //4
+    ! function() {
+        var i;
+        for (i = 0; i < 5; i++) {
+            console.log(i);
+        }
+    }(); //0 //1 //2 //3 //4
+
+    // for-in遍历 for(变量 in 对象)
+    var obj = {
+    	"apply":5,
+    	"banana":{
+    		"weight":"2",
+    		"price":"10"
+    	},
+    	"cherry":[
+    		{
+    			"level":"A",
+    			"weight":10,
+    			"price":100
+    		},
+    		{
+    			"level":"B",
+    			"weight":8,
+    			"price":50
+    		},
+    		{
+    			"level":"C",
+    			"weight":3,
+    			"price":20
+    		}
+    	]
+    };
+    !function(){
+    	var i;
+    	for( i in obj){
+    		console.log(i,obj[i]);
+    	}
+    }();//apply 5 //banana Object {weight: "2", price: "10"} //cherry [Object, Object, Object]
+    !function(){
+    	for(var i in obj.cherry){//cherr是一个数组
+    		console.log(i,obj.cherry[i].weight,obj.cherry[i].price);
+    	}
+    }();//0 10 100 //1 8 50 //2 3 50
+    // 遍历对象的时候，"变量"是属性，"对象[变量]"是对应的值。遍历数组的时候，"变量"是索引，"数组[变量]"是对应的值。其实数组的索引就是数组的属性而已，只不过索引是按照顺序而已，而且如果数组有其他可遍历属性，照样会被遍历出来，因为数组的实际也是一个对象。
+
+    var arr = [1,6,8];
+    arr.user = "ccc";
+    arr.date = "2016.8.23";
+    !function(){
+    	var t;
+    	for(t in arr){
+    		console.log(t+" "+arr[t]);
+    	}
+    }();//"0 1" //"1 6" //"2 8" //"user ccc" //"date 2016.8.23"
+    //可以看出，就算不是数组里面的内容（指 [] 包含的内容）也会被遍历出来
+
+
+    /**
+     * forEach chrome firefox 现代浏览器封装好的 for-in遍历(不过是数组Array特有的 Object没有),而且只会遍历数组里面的内容，而不会遍历数组其他属性
+     */
+    arr.forEach(function(con,key){
+    	console.log(key+ " " + con);
+    });//0 1 //1 6 //2 8
+
+
+    // for-in 是遍历对象的，而forEach是遍历数组的
+    if (!Array.prototype.forEach) {
+        Array.prototype.forEach = function(callback, thisArg) {
+            var T, k;
+            if (this == null) {
+                throw new TypeError(" this is null or not defined");
+            }
+            var O = Object(this);
+            var len = O.length >>> 0; // Hack to convert O.length to a UInt32
+            if ({}.toString.call(callback) != "[object Function]") {
+                throw new TypeError(callback + " is not a function");
+            }
+            if (thisArg) {
+                T = thisArg;
+            }
+            k = 0;
+            while (k < len) {
+                var kValue;
+                if (k in O) {
+                    kValue = O[k];
+                    callback.call(T, kValue, k, O);
+                }
+                k++;
+            }
+        };
+    }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

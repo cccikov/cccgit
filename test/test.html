@@ -3,13 +3,14 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>dom</title>
+		<title>domArr</title>
 		<style>
 			button,
 			a {
 				display: block;
 			}
 		</style>
+		<script src="js/jquery.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			window.onload = function() {
 				var win = window;
@@ -22,31 +23,50 @@
 				var btn2 = document.getElementById("btn2");
 				var abtn = document.getElementById("abtn");
 				var abtn2 = document.getElementById("abtn2");
-				var domArr = [];
-				domArr.push(win, doc, thebody, thehtml, wrap, wrap2, btn, btn2, abtn, abtn2);
-				console.log(domArr);
+				var btnArr = document.querySelectorAll("button");
 
-				var dom = {};
+				var p1 = $("p").eq(0);
+				var p2 = $(".para").eq(0);
+				console.log(p1==p2);//false 表示不同jq对象
+				console.log(p1[0]==p2[0]);//true 表示同一个节点
+				/*可以看出来，就算是同一个节点，但是用不同方法jq方法获取，也是不同对象。
+				启发：我也未必要做到一个节点就对应死一个对象，我也可以是一个节点对应多个对象*/
 
-				for(var i in domArr) {
-					/*if(!domArr[i].nodeType){
-						console.log(domArr[i])
+				var arr = [];
+				arr.push(win, doc, thebody, thehtml, wrap, wrap2, btn, btn2, abtn, abtn2);
+
+				var domArr = {};
+				for(var i in arr) {
+					if(!arr[i].nodeType){
+						console.log(arr[i])
 					}else{
-						console.log(domArr[i].nodeType)
-					}*/
+						console.log(arr[i].nodeType)
+					}
 
-					if(domArr[i] === window || domArr[i] === document || domArr[i] === document.body || domArr[i] === document.documentElement){
-						dom[domArr[i]] = domArr[i];
+					if(arr[i] === window || arr[i] === document || arr[i] === document.body || arr[i] === document.documentElement){
+						domArr[arr[i]] = arr[i];
 					}else{
-						
+
 					}
 				}
-				console.log(dom);
-				
-				for(var j in dom){
-					console.log(dom[j])
+				// console.log(domArr);
+
+				for(var j in domArr){
+					console.log(domArr[j]);
 				}
 			}
+		</script>
+		<script>
+		var arryAll = [];
+		arryAll.push(1);
+		arryAll.push(2);
+		arryAll.push(3);
+		arryAll.push(4);
+
+		arryAll.forEach(function(e,a){
+			console.log(e,a);
+		})
+
 		</script>
 	</head>
 
@@ -57,6 +77,8 @@
 		<button id="btn2">button</button>
 		<a href="http:www.baidu.com" id="abtn">百度一下，你就知道</a>
 		<a href="http:www.baidu.com" id="abtn2">百度一下，你就知道</a>
+		<p class="para">Lorem ipsum.</p>
+		<p class="para">Lorem ipsum.</p>
 	</body>
 
 </html>

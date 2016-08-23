@@ -3,35 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>节点实时变化，循环创建节点</title>
     <script src="js/jquery.min.js" type="text/javascript"></script>
-
-</head>
-
-<body>
-    <div id="wrap">
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-    </div>
     <script type="text/javascript">
+    $(function() {
         var jQdom = $(".pro");
         var tagDom = document.getElementsByTagName("p");
         var classDom = document.getElementsByClassName("pro");
@@ -42,6 +17,7 @@
         var p2 = $(".pro").eq(0);
         console.log(p1 == p2);//false
         console.log(p1[0]==p2[0]);//true
+        // 可以看出来，就算是同一个节点，但是用不同方法jq方法获取，也是不同对象。
 
 
         for(var a = 0;a<classDom.length;a++){
@@ -98,7 +74,34 @@
         console.log(len); //40 40 40 40 40
 
 
+
+    });
     </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+        <p class="pro">Lorem ipsum dolor sit amet.</p>
+    </div>
 </body>
 
 </html>
