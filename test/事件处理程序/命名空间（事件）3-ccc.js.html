@@ -14,7 +14,6 @@
     </style>
     <script type="text/javascript">
         window.onload = function(){
-        	var btnArr = document.getElementsByClassName("btn");
         	var btn = document.getElementById("btn");
         	var btn2 = document.getElementById("btn2");
 
@@ -43,22 +42,11 @@
         		console.log("我是顺序"+num);
         	}
 
-        	// bug
-        	ccc.on(btnArr[0],"click.a",function(e){
-        		e.stopPropagation();
-        		num1(1);
-        		num2(2);
-        	});
-        	ccc.on(btnArr[1],"click.a",function(e){
-        		e.stopPropagation();
-        		num1(2);
-        		num2(3);
-        	});
-        	//大bug：若是通过非唯一选择器(id)选出带有合集的元素，区别不出合集里面的每个元素
-
 			ccc.on(btn,"click",function(e){
 				e.stopPropagation();
 				e.preventDefault();
+                num1(1);
+                num2(3);
 				console.log("我是id的dom");
 			});
 			ccc.on(btn2,"click",function(e){
@@ -66,20 +54,17 @@
 				e.stopPropagation();
 				console.log("我是id的dom2");
 			});
-			console.log(btn.toString());//http://www.baidu.com/
-			console.log(btn2.toString());//http://www.baidu.com/
-			//bug 因为我直接将el作为索引，索引当dom的toString()返回值相同的时候，误以为是同一个dom
-			
-			//现在的问题是怎么区分dom了，上面的大bug也是因为这个
-			
-			//里面事件的this指向错误
+
+            /*
+             * off
+             */
+            ccc.off(document,"click.a");
+            ccc.off(document,"click");
         }
     </script>
 </head>
 
 <body>
-    <button class="btn">按钮1</button>
-    <button class="btn">按钮1</button>
     <a id="btn" href="http://www.baidu.com">id按钮</a>
     <a id="btn2" href="http://www.baidu.com">id按钮</a>
 </body>

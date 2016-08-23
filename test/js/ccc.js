@@ -328,7 +328,12 @@ ccc.getUrlParam = function(name) {
     return null;
 }
 
-
+ccc.specialObj = {
+    "win":window,
+    "doc":document,
+    "html":document.documentElement,
+    "body":document.body
+};
 /*
  *  on，off
  */
@@ -383,48 +388,60 @@ ccc.on = function(el, name, fn, data) {
         evtName = name;
     }
 
+    var attrName = "";
+    var isSpecial = false;
+    // 处理属性名
+    for(var i in ccc.specialObj){
+        if(el == ccc.specialObj[i]){
+            attrName = i;
+            isSpecial = true;
+        }
+    }
+    if(!isSpecial){//非特殊对象
+        attrName = el.tagName.toLowerCase();
+        if(el.id){
+            attrName += "#"+el.id;
+        }
+    }
     // 判断有无这个dom对象
-    if (!eventDom[el]) {
-        eventDom[el] = new ccc.cst.domEle(el);
-    } else {
-        // console.log(eventDom[el].target==el);
+    if (!eventDom[attrName]) {
+        eventDom[attrName] = new ccc.cst.domEle(el);
     }
 
+
     // 判断这个dom对象有无这种事件
-    if (!eventDom[el][evtName]) {
-        eventDom[el][evtName] = new ccc.cst.eventObj(evtName, eventDom[el].target);
+    if (!eventDom[attrName][evtName]) {
+        eventDom[attrName][evtName] = new ccc.cst.eventObj(evtName, eventDom[attrName].target);
     }
 
     // 判断有无命名空间对待
     if (nameSpace) {
-        eventDom[el][evtName].each[nameSpace] = new ccc.cst.fnObj(fn, data);
+        eventDom[attrName][evtName].each[nameSpace] = new ccc.cst.fnObj(fn, data);
     } else {
-        var len = eventDom[el][evtName].arr.length;
+        var len = eventDom[attrName][evtName].arr.length;
         var has = false; //里面
         for (var i = 0; i < len; i++) {
-            if (eventDom[el][evtName].arr[i].method === fn) {
-                eventDom[el][evtName].arr[i].method = fn;
-                eventDom[el][evtName].arr[i].data = data;
+            if (eventDom[attrName][evtName].arr[i].method === fn) {
+                eventDom[attrName][evtName].arr[i].method = fn;
+                eventDom[attrName][evtName].arr[i].data = data;
                 has = true; //里面已经有这个函数
             }
         }
         if (!has) {
-            eventDom[el][evtName].arr[len] = new ccc.cst.fnObj(fn, data);
+            eventDom[attrName][evtName].arr[len] = new ccc.cst.fnObj(fn, data);
         }
     }
     return {
         "parent": eventDom,
-        "children": eventDom[el]
+        "children": eventDom[attrName]
     };
 }
 // 暂时存在的问题是，事件里面函数的触发顺序不是定义顺序
 
 // 大bug：若是通过非唯一选择器(id)选出带有合集的元素，区别不出合集里面的每个元素
-// bug 因为我直接将el作为索引，索引当dom的toString()返回值相同的时候，误以为是同一个dom(用id也会，只要两个元素除了id外其他都相同就有可能无法区分)，暂时只适用唯一的dom对象，window,document,documentElement,document.body,也行吧，反正只有这些才比较需要用到命名空间
 // 现在的问题是怎么区分dom了，上面的大bug也是因为这个（要不就要遍历有没有dom重复，要不就要创建自己框架的dom对象，以及dom获取方法，我们现在相当于是将原生dom转化为自己dom，但是转化过程有点错误）
 
-// 里面事件的this指向错误(已解决)
-
+//现在只能用于选择器(id)获取得到的dom对象以及4个特殊对象window,document,document.body,document.documentElement。
 /*
  * ccc.off
  * el-原生dom节点 -eg. document
@@ -432,15 +449,31 @@ ccc.on = function(el, name, fn, data) {
  * fn（可选） - 指定要移除的函数。
  */
 ccc.off = function(el, name, fn) {
+    var attrName = "";
+    var isSpecial = false;
+    // 处理属性名
+    for(var i in ccc.specialObj){
+        if(el == ccc.specialObj[i]){
+            attrName = i;
+            isSpecial = true;
+        }
+    }
+    if(!isSpecial){//非特殊对象
+        attrName = el.tagName.toLowerCase();
+        if(el.id){
+            attrName += "#"+el.id;
+        }
+    }
+
     // 只有一个参数时，删除这个dom全部事件
     if (arguments.length == 1) {
-        for (var i in eventDom[el]) {
+        for (var i in eventDom[attrName]) {
             if (i != "target") {
-                var the = eventDom[el][i]; //遍历有什么类型事件
+                var the = eventDom[attrName][i]; //遍历有什么类型事件
                 el.removeEventListener(the.name, the.whole, false); //如果不removeEventListener，虽然对象没了，但是事件还是绑定在上面(本身就会保存起来事件的内容，除非改动事件内容，而不是之间将整个对象删除掉，这里的事件内容，是whole函数的内容)，所以一定要解绑whole。
             }
         }
-        delete eventDom[el];
+        delete eventDom[attrName];
         return eventDom;
     } else if (arguments.length == 2) { //两个参数时
         // 处理命名空间写法 将click.a 拆分为click a
@@ -452,9 +485,10 @@ ccc.off = function(el, name, fn) {
         }
 
         if (nameSpace) { //有命名空间
-            delete eventDom[el][evtName].each[nameSpace];
+            delete eventDom[attrName][evtName].each[nameSpace];
         } else {
-            el.removeEventListener(evtName, eventDom[el][evtName].whole);
+            el.removeEventListener(evtName, eventDom[attrName][evtName].whole);
+            delete eventDom[attrName][evtName];
         }
 
     } else { //三个参数
@@ -467,15 +501,15 @@ ccc.off = function(el, name, fn) {
         }
 
         if (nameSpace) { //有命名空间，就按命名空间处置
-            delete eventDom[el][evtName].each[nameSpace];
+            delete eventDom[attrName][evtName].each[nameSpace];
         } else {
-            var len = eventDom[el][evtName].arr.length;
+            var len = eventDom[attrName][evtName].arr.length;
             for (var i = 0; i < len; i++) {
-                if (eventDom[el][evtName].arr[i].method === fn) {
-                    delete eventDom[el][evtName].arr[i];
+                if (eventDom[attrName][evtName].arr[i].method === fn) {
+                    delete eventDom[attrName][evtName].arr[i];
                 }
             }
         }
     }
-    return eventDom[el];
+    return eventDom[attrName];
 }
