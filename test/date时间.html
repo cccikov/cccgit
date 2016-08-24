@@ -10,15 +10,33 @@
 		<script type="text/javascript">
 			var d = new Date();
 			console.log(d); //Sat Dec 26 2015 15:16:47 GMT+0800 (中国标准时间)
+
 			var d2 = new Date();
-			d2.getTime();
+			d2.getTime();//data2还是Date对象
 			console.log(d2 + " " + typeof d2); //Sat Dec 26 2015 15:28:21 GMT+0800 (中国标准时间) object
+
 			var d3 = new Date();
 			var Onum = d3.getTime();
 			console.log(Onum + " " + typeof Onum); //1451114960401 number
 			//结论：任何时间对象输出的时候都是日期
+
 			var d4 = new Date(86400000);
 			console.log(d4); //Fri Jan 02 1970 08:00:00 GMT+0800 (中国标准时间)
+
+
+			var d5 = new Date(d.getTime()+25600000);
+			var furtherDay = d5.getDate();
+			var nowDay = d.getDate();
+			if(furtherDay!=nowDay && d5>d){
+				console.log("不是同一天");
+			}else{
+				console.log("是同一天")
+			}
+			console.log(d5,nowDay);
+
+			console.log(new Date("2016-3-1 9:30"));//Tue Mar 01 2016 09:30:00 GMT+0800 (中国标准时间)
+			console.log(new Date("2016/3/1 19:30"));//Tue Mar 01 2016 19:30:00 GMT+0800 (中国标准时间)
+			console.log(new Date("Wed Aug 24 2016 16:49:43"));//Wed Aug 24 2016 16:49:43 GMT+0800 (中国标准时间)
 		</script>
 	</body>
 

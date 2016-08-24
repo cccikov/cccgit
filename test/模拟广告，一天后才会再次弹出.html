@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>广告</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		#ad{
+			display: none;
+			position:fixed;
+			right:0;
+			top:50%;
+			height: 200px;
+			line-height: 200px;
+			width: 100px;
+			background: #000;
+			margin:-100px 0 0 0;
+			text-align: center;
+			text-decoration: none;
+			color:#ccc;
+		}
+	</style>
+	<script src = "js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/ccc.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			var nowDate = new Date();
+			// var nextDate = new Date(nowDate.getTime()  + 86400000);
+			//console.log(nextDate);
+			var adTime = ccc.getStorage("adTime") || 0;
+			console.log(adTime);
+			if(nowDate-adTime>86400000){//要24小时后才会出现
+				$("#ad").show();
+			}
+			$("#ad").on("click",function(e){
+				e.stopPropagation();
+				e.preventDefault();
+				var that = $(this);
+				var href = that.attr("href");
+				ccc.setStorage("adTime",new Date());
+				window.location.href = href;
+			});
+		});
+	</script>
+</head>
+<body>
+	<a id="ad" href="http://www.baidu.com">
+		我是广告
+	</a>
+</body>
+</html>

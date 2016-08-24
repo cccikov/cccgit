@@ -5,21 +5,29 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 		<title>datatime</title>
+		<script src="js/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("input").on("input change",function(){
+					console.log($(this).val());
+				});
+			});
+		</script>
 	</head>
 
 	<body>
 		date
-		<input type="date" /><br />
+		<input type="date" value="2016-08-02" /><br />
 		month
-		<input type="month" /><br />
+		<input type="month" value="2016-08" /><br />
 		week
-		<input type="week" /><br />
+		<input type="week" value="2016-W31"/><br />
 		time
-		<input type="time" /><br />
+		<input type="time" value="22:59"/><br />
 		datetime
-		<input type="datetime" /><br />
+		<input type="datetime" value="123"/><br />
 		datetime-local
-		<input type="datetime-local" />
+		<input type="datetime-local" value = "2016-08-03T23:58"/>
 	</body>
 
 </html>
