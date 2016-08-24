@@ -24,7 +24,7 @@
 			console.log(d4); //Fri Jan 02 1970 08:00:00 GMT+0800 (中国标准时间)
 
 
-			var d5 = new Date(d.getTime()+25600000);
+			var d5 = new Date(d.getTime()+25600000);//设置时间
 			var furtherDay = d5.getDate();
 			var nowDay = d.getDate();
 			if(furtherDay!=nowDay && d5>d){
@@ -34,9 +34,41 @@
 			}
 			console.log(d5,nowDay);
 
+
+			/*
+			 * 设置时间
+			 */
 			console.log(new Date("2016-3-1 9:30"));//Tue Mar 01 2016 09:30:00 GMT+0800 (中国标准时间)
 			console.log(new Date("2016/3/1 19:30"));//Tue Mar 01 2016 19:30:00 GMT+0800 (中国标准时间)
 			console.log(new Date("Wed Aug 24 2016 16:49:43"));//Wed Aug 24 2016 16:49:43 GMT+0800 (中国标准时间)
+			console.log(new Date(2000000000000));//Wed May 18 2033 11:33:20 GMT+0800 (中国标准时间)
+
+			!function(){
+				// 获取时间
+				var week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+				var date = new Date();//将date定为时间对象，并且等于现在的时间
+				var year = date.getFullYear();
+				var mon = date.getMonth()+1;
+				var weekDay = date.getDay();
+				var day = date.getDate();
+				var hour = date.getHours();
+				var min = date.getMinutes();
+				var second = date.getSeconds();
+				console.log(year+"-"+mon+"-"+day+" "+week[weekDay]+" "+hour+":"+min+":"+second);//2016-8-24 Wednesday 17:25:50
+			}();
+			!function(){
+				// 获取时间
+				var date = new Date();//将date定为时间对象，并且等于现在的时间
+				date.setFullYear(2017);
+				date.setMonth(10-1);
+				date.setDate(2);
+				date.setHours(2);
+				date.setMinutes(3);
+				date.setSeconds(5);
+				console.log(date);//Mon Oct 02 2017 02:03:05 GMT+0800
+			}();
+
+
 		</script>
 	</body>
 
