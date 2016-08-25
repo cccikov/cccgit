@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模拟微信红包</title>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function() {
+        console.log(redBag(100,8,parseInt(ran(100,2))));
+    });
+    function ran(max,min){
+        return parseInt(Math.random()*(max-min+1)+min);
+    }
+    function toDecimal(num,len){
+        return Number(num.toFixed(len));
+    }
+    function redBag(money,num,flu){//总金额，红包个数，波动
+        var money = money;
+        var bagNum = num;
+        var flu = flu || 10;
+        var sum = 0;
+        var numArr = [];
+        var redArr = [];
+        var monMid = 0;
+        var monSum = 0;
+        for (var i = 0; i < bagNum; i++) {
+            var num = ran(flu,1);//这里控制波动范围；
+            numArr.push(num);
+            sum += num;
+        }
+        for(var j = 0,len=numArr.length ; j< len; j++){
+            var red;
+            if(j<len-1){
+                red = toDecimal(numArr[j]/sum*money,2);
+                monMid += red;
+            }else{
+                red = toDecimal(money - monMid,2);//由于是浮点型，所以也要用一下，不过不会影响总金额的，因为通常都是2.12就变成2.119999999999999四舍五入两位小数也是2.12，以为浮点本身就是一些小浮动
+            }
+            redArr.push(red);
+        }
+
+        /*for(var k = 0;k<redArr.length;k++){
+            monSum += redArr[k];
+        }
+        console.log(numArr,sum,redArr);
+        console.log(monSum,toDecimal(monSum,2));*/
+        console.log(numArr);
+        return redArr;
+    }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

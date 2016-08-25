@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回车符，换行符</title>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function(){
+            var str = "abc\nabcaba\nasdasd\nasdasd"
+            if(hasNewLine(str)){
+                console.log("有空格");
+            }
+
+            str = changeNewLine(str,"\n\n");
+            if(hasNewLine(str)){
+                console.log("有空格");
+            }else{
+                console.log("没有空格")
+            }
+            console.log(str);
+
+        });
+        function hasNewLine(str){
+            var reg = /\r|\n|\r\n/g;
+            return reg.test(str);
+        }
+        function changeNewLine(str1,str2){
+            var change = str2 || "";
+            var newStr = str1.replace(/\r|\n|\r\n/g, change);
+            return newStr;
+        }
+
+    </script>
+</head>
+<body>
+    <textarea></textarea>
+    <pre>
+        \n是换行，英文是New line，表示使光标到行首
+        \r是回车，英文是Carriage return，表示使光标下移一格
+        \r\n表示回车换行
+        我们在平时使用电脑时，已经习惯了回车和换行一次搞定，敲一个回车键，即是回车，又是换行。
+
+        1、\n 软回车：
+
+        在Windows 中表示换行且回到下一行的最开始位置。相当于Mac OS 里的 \r 的效果。
+        在Linux、unix 中只表示换行，但不会回到下一行的开始位置。
+
+        2、\r 软空格：
+
+        在Linux、unix 中表示返回到当行的最开始位置。
+        在Mac OS 中表示换行且返回到下一行的最开始位置，相当于Windows 里的 \n 的效果。
+
+
+        3、\t 跳格（移至下一列）。
+
+        它们在双引号或定界符表示的字符串中有效，在单引号表示的字符串中无效。
+        \r\n 一般一起用，用来表示键盘上的回车键，也可只用 \n。
+        \t表示键盘上的“TAB”键。
+
+        就像你使用 enter和shift+enter的区别
+
+        4、文件中的换行符号：
+
+
+        linux,unix: \r\n
+        windows : \n
+        Mac OS ： \r
+
+
+        5、常用转义符号的意义：
+
+        \n  LF或ASCII中的0x0A(10)
+        \r  CR或ASCII中的0x0D(13)
+        \t  水平制表符-HT或ASCII中的0x09（9）
+        \\  反斜杠
+        \$  美圆符
+        \"  双引号
+        \'  单引号
+
+        6、"\r\n"与"&lt;br/&gt;的区别
+
+        \r\n是输出的HTML代码换行，客户看到的效果没有换行。
+        如果是输出给浏览器，就用"&lt;br/&gt;"
+        \r\n，好比你在DreamWeaver里做一个网页，在源代码里按一下回车，是给源代码回车换行。
+        是输出一个（HTML标记性语言），在HTML中解释为输入的字换行。 \r\n的作用是给源代码回车换行，输入后，查看html源代码，就看会到有换行，而HTML解释器（浏览器）认为它是没用的东西，用不用都一样显示。
+    </pre>
+</body>
+</html>
