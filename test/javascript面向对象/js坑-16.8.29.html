@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>概念</title>
+</head>
+<body>
+	<p>
+		此题是别人综合以前的开发经验以及遇到的js各种坑汇集而成的。此题涉及的知识点众多，宝货变量定义，声明提前，this指向，运算符优先级、原型、继承、全局变量污染、对象属性及原型属性优先级
+	</p>
+	<script type="text/javascript">
+		console.log(getName);//function getName(){console.log(5);} 由于声明提升
+
+		function Foo() {
+		    getName = function() {
+		        console.log(1);
+		    };
+		    console.log(this);
+		    return this;
+		}
+		Foo.getName = function() {
+		    console.log(2);
+		};
+		Foo.prototype.getName = function() {
+		    console.log(3);
+		};
+		var getName = function() {
+		    console.log(4);
+		};
+
+		function getName() {
+		    console.log(5);
+		};
+
+		Foo.getName(); //2
+		getName(); //4 由于声明提升 所以getName（5）会被4覆盖
+		Foo().getName();//1 因为不是this.getName 所以里面的getName就是变量getName，重新赋值。
+		getName(); //1
+		new Foo.getName(); //2
+		new Foo().getName(); //3 因为Foo构造函数里面不是使用this.getName 所以是调用prototype里面的方法
+		new new Foo().getName(); //3
+	</script>
+</body>
+</html>

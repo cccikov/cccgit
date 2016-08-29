@@ -1,84 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>domArr</title>
-		<style>
-			button,
-			a {
-				display: block;
-			}
-		</style>
-		<script src="js/jquery.min.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			window.onload = function() {
-				var win = window;
-				var doc = document;
-				var thebody = document.body;
-				var thehtml = document.documentElement;
-				var wrap = document.getElementById("wrap");
-				var wrap2 = document.getElementById("wrap2");
-				var btn = document.getElementById("btn");
-				var btn2 = document.getElementById("btn2");
-				var abtn = document.getElementById("abtn");
-				var abtn2 = document.getElementById("abtn2");
-				var btnArr = document.querySelectorAll("button");
+<head>
+    <meta charset="UTF-8">
+    <title>设备检测</title>
+</head>
 
-				var p1 = $("p").eq(0);
-				var p2 = $(".para").eq(0);
-				console.log(p1==p2);//false 表示不同jq对象
-				console.log(p1[0]==p2[0]);//true 表示同一个节点
-				/*可以看出来，就算是同一个节点，但是用不同方法jq方法获取，也是不同对象。
-				启发：我也未必要做到一个节点就对应死一个对象，我也可以是一个节点对应多个对象*/
+<body>
+    <script type="text/javascript">
+    // 不太准
+    function parseUA() {
+        var u = navigator.userAgent;
+        var u2 = navigator.userAgent.toLowerCase();
+        return { //移动端浏览器版本信息
+            "trident": u.indexOf('Trident') > -1, //ie内核
+            "presto": u.indexOf('Presto') > -1, //opera内核
+            "webKit": u.indexOf("AppleWebKit") > -1, //苹果、谷歌内核
+            "gecko": u.indexOf("Gecko") > -1 && u.indexOf("KHTML") > -1, //火狐内核
+            "mobile": !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动端
+            "ios": !!u.match(/\(i[^;]+;( U;)?CPU.+Mac OS X/), //ios
+            "android": u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, //android终端或uc浏览器
+            "iphone": u.indexOf('iPhone') > -1, //iphone
+            "iPad": u.indexOf('iPad') > -1, //ipad
+            "webApp": u.indexOf("Safari") == -1, //是否web应用程序，没有头部和尾部
+            "iosv": u.substr(u.indexOf("iPhone OS") + 9, 3),
+            "weixin": u2.match(/MicroMessenger/i) == 'micromessenger',
+            "ali": u.indexOf('AliApp') > -1,
+        };
+    }
+    var ua = parseUA();
 
-				var arr = [];
-				arr.push(win, doc, thebody, thehtml, wrap, wrap2, btn, btn2, abtn, abtn2);
+    var theReg = {
+        "chinese": /^[\u4e00-\u9fa5]{0,}$/, //校验中文字符串仅能是中文
+        "common": /^\w+$/, //由数字、26个英文字母或下划线组成的字符串
+    }
 
-				var domArr = {};
-				for(var i in arr) {
-					if(!arr[i].nodeType){
-						console.log(arr[i])
-					}else{
-						console.log(arr[i].nodeType)
-					}
+    console.log(getName);//function getName(){console.log(5);} 由于声明提升
 
-					if(arr[i] === window || arr[i] === document || arr[i] === document.body || arr[i] === document.documentElement){
-						domArr[arr[i]] = arr[i];
-					}else{
+    function Foo() {
+        getName = function() {
+            console.log(1);
+        };
+        console.log(this);
+        return this;
+    }
+    Foo.getName = function() {
+        console.log(2);
+    };
+    Foo.prototype.getName = function() {
+        console.log(3);
+    };
+    var getName = function() {
+        console.log(4);
+    };
 
-					}
-				}
-				// console.log(domArr);
+    function getName() {
+        console.log(5);
+    };
 
-				for(var j in domArr){
-					console.log(domArr[j]);
-				}
-			}
-		</script>
-		<script>
-		var arryAll = [];
-		arryAll.push(1);
-		arryAll.push(2);
-		arryAll.push(3);
-		arryAll.push(4);
-
-		arryAll.forEach(function(e,a){
-			console.log(e,a);
-		})
-
-		</script>
-	</head>
-
-	<body>
-		<div id="wrap">lorem</div>
-		<div id="wrap2">lorem</div>
-		<button id="btn">button</button>
-		<button id="btn2">button</button>
-		<a href="http:www.baidu.com" id="abtn">百度一下，你就知道</a>
-		<a href="http:www.baidu.com" id="abtn2">百度一下，你就知道</a>
-		<p class="para">Lorem ipsum.</p>
-		<p class="para">Lorem ipsum.</p>
-	</body>
+    Foo.getName(); //2
+    getName(); //4 由于声明提升 所以getName（5）会被4覆盖
+    Foo().getName();//1 因为不是this.getName 所以里面的getName就是变量getName，重新赋值。
+    getName(); //1
+    new Foo.getName(); //2
+    new Foo().getName(); //3 因为Foo构造函数里面不是使用this.getName 所以是调用prototype里面的方法
+    new new Foo().getName(); //3
+    </script>
+</body>
 
 </html>
