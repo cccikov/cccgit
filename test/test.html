@@ -1,72 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>设备检测</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        html,body{
+            padding:0;
+            margin:0;
+        }
+        #wrap{
+            padding:10% 0;
+        }
+        .loading-wrap{
+            width: 300px;
+            border-radius: 100px;
+            margin: 0 auto;
+            background: #f1f1f1;
+        }
+        .loading{
+            overflow: hidden;
+            width: 75%;
+        }
+        .percent{
+            width: 300px;
+            height: 25px;
+            border-radius: 100px;
+            background: linear-gradient(90deg,rgba(0,0,0,0) 0%,#00ffa1 50%,#06ce84 100%),url(img/ha.png) repeat-x,#fff;
+        }
+
+    </style>
 </head>
-
 <body>
-    <script type="text/javascript">
-    // 不太准
-    function parseUA() {
-        var u = navigator.userAgent;
-        var u2 = navigator.userAgent.toLowerCase();
-        return { //移动端浏览器版本信息
-            "trident": u.indexOf('Trident') > -1, //ie内核
-            "presto": u.indexOf('Presto') > -1, //opera内核
-            "webKit": u.indexOf("AppleWebKit") > -1, //苹果、谷歌内核
-            "gecko": u.indexOf("Gecko") > -1 && u.indexOf("KHTML") > -1, //火狐内核
-            "mobile": !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动端
-            "ios": !!u.match(/\(i[^;]+;( U;)?CPU.+Mac OS X/), //ios
-            "android": u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, //android终端或uc浏览器
-            "iphone": u.indexOf('iPhone') > -1, //iphone
-            "iPad": u.indexOf('iPad') > -1, //ipad
-            "webApp": u.indexOf("Safari") == -1, //是否web应用程序，没有头部和尾部
-            "iosv": u.substr(u.indexOf("iPhone OS") + 9, 3),
-            "weixin": u2.match(/MicroMessenger/i) == 'micromessenger',
-            "ali": u.indexOf('AliApp') > -1,
-        };
-    }
-    var ua = parseUA();
+    <div id="wrap">
 
-    var theReg = {
-        "chinese": /^[\u4e00-\u9fa5]{0,}$/, //校验中文字符串仅能是中文
-        "common": /^\w+$/, //由数字、26个英文字母或下划线组成的字符串
-    }
+        <div class="loading-wrap">
+            <div class="loading">
+                <div class="percent"></div>
+            </div>
+        </div>
 
 
-    console.log(getName);//function getName(){console.log(5);} 由于声明提升
-
-    function Foo() {
-        getName = function() {
-            console.log(1);
-        };
-        console.log(this);
-        return this;
-    }
-    Foo.getName = function() {
-        console.log(2);
-    };
-    Foo.prototype.getName = function() {
-        console.log(3);
-    };
-    var getName = function() {
-        console.log(4);
-    };
-
-    function getName() {
-        console.log(5);
-    };
-
-    Foo.getName(); //2
-    getName(); //4 由于声明提升 所以getName（5）会被4覆盖
-    Foo().getName();//1 因为不是this.getName 所以里面的getName就是变量getName，重新赋值。
-    getName(); //1
-    new Foo.getName(); //2
-    new Foo().getName(); //3 因为Foo构造函数里面不是使用this.getName 所以是调用prototype里面的方法
-    new new Foo().getName(); //3
-    </script>
+    </div>
 </body>
-
 </html>

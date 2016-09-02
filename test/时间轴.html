@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    #wrap{
+        margin:10px 0;
+        background: #f1f1f1;
+    }
+    #wrap .part {
+        position: relative;
+        padding: 10px 0 10px 20px;
+        border-left: 1px solid #ccc;
+        margin: 0 30px;
+    }
+
+    #wrap .part:before {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: 0;
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent transparent #ccc;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="part">
+            Lorem ipsum.
+            <br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="part">
+            Lorem ipsum.
+        </div>
+        <div class="part">
+            Lorem ipsum.
+        </div>
+        <div class="part">
+            Lorem ipsum.
+        </div>
+        <div class="part">
+            Lorem ipsum.
+        </div>
+    </div>
+
+
+</body>
+
+</html>

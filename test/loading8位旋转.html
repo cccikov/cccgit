@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>一直转</title>
+    <style type="text/css">
+        .theEl{
+            position: absolute;
+            top:50%;
+            left:50%;
+            margin:-100px 0 0 -100px;
+            animation: turn 0.5s cubic-bezier(0, 0.4, 0, 1.06) infinite;
+        }
+        @keyframes turn{
+            from{
+                transform: rotate3d(0,0,1,0deg);
+            }
+            0.000001%{
+                transform: rotate3d(0,0,1,45deg);
+            }
+            12.5%{
+                transform: rotate3d(0,0,1,45deg);
+            }
+            12.500001%{
+                transform: rotate3d(0,0,1,90deg);
+            }
+            25%{
+                transform: rotate3d(0,0,1,90deg);
+            }
+            25.000001%{
+                transform: rotate3d(0,0,1,135deg);
+            }
+            37.5%{
+                transform: rotate3d(0,0,1,135deg);
+            }
+            37.500001%{
+                transform: rotate3d(0,0,1,180deg);
+            }
+            50%{
+                transform: rotate3d(0,0,1,180deg);
+            }
+            50.000001%{
+                transform: rotate3d(0,0,1,225deg);
+            }
+            62.5%{
+                transform: rotate3d(0,0,1,225deg);
+            }
+            62.500001%{
+                transform: rotate3d(0,0,1,270deg);
+            }
+            75%{
+                transform: rotate3d(0,0,1,270deg);
+            }
+            75.000001%{
+                transform: rotate3d(0,0,1,315deg);
+            }
+            87.5%{
+                transform: rotate3d(0,0,1,315deg);
+            }
+            87.500001%{
+                transform: rotate3d(0,0,1,360deg);
+            }
+            to{
+                transform: rotate3d(0,0,1,360deg);
+            }
+        }
+        </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="theEl">
+            <img src="img/load.png">
+        </div>
+    </div>
+</body>
+
+</html>
