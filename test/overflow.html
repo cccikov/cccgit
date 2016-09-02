@@ -6,8 +6,9 @@
 	<style type="text/css">
 		div{
 			height: 200px;
-			overflow-y:visible;
-			overflow-x: hidden;
+			width: 100px;
+			overflow-y:hidden;
+			overflow-x: visible;
 		}
 	</style>
 </head>
@@ -20,5 +21,10 @@
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 	</div>
+	<p>
+		overflow-x和overflow-y的计算值跟给定的值相同，除了某些跟'visible'值的不合理组合：如果一个其中一个属性的值被赋为'visible'，而另一个被赋值为'scroll'或'auto'，那么'visible'会被重置为'auto'。overflow的计算值与overflow-x相等（如果overflow-y相同的话）；否则就是一对overflow-x和overflow-y的计算值
+
+		其实另一个值设置为hidden的时候，visible也会被重置为auto
+	</p>
 </body>
 </html>
