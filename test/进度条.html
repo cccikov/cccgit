@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .pipe{
+            position: relative;
+            width: 0%;
+            height: 30px;
+            margin:150px 20px;
+            background: linear-gradient(to right,#f00 0%,#00f 100%);
+            background: -webkit-linear-gradient(to right,#f00 0%,#00f 100%);
+            background: -webkit-linear-gradient(left,#f00 0%,#00f 100%);
+        }
+        .pipe span{
+            position: absolute;
+            top:-30px;
+            right:-20px;
+            color:blue;
+        }
+        .pipe2{
+            transition: width 1.5s cubic-bezier(0.39, 0.85, 0.62, 0.96);
+        }
+    </style>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(".pipe1").animate({"width":"85%"},1000);
+            $(".pipe2").width("85%");
+        });
+    </script>
+</head>
+<body>
+    <div class="pipe pipe1">
+        <span>hi</span>
+    </div>
+    <div class="pipe pipe2">
+        <span>hi</span>
+    </div>
+</body>
+</html>

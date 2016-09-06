@@ -37,9 +37,9 @@
             var fileObj = $(this)[0].files[0];
             fileReader.readAsDataURL(fileObj);
             fileReader.onload = function(e){
-                console.log(1);
-                src = e.target.result//一个base64的url，若是图片，可以直接写在url上
-                //readAsDataURL()开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.
+                console.log(e.target);//traget就是fileReader
+                src = e.target.result//一个base64的url，若是图片，可以直接写在url上，其实是将内容转为url
+                //readAsDataURL()开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个 data: URL格式（base64的url "data:image/jpeg;base64,/9j/4TT1RXhpZgAASUkqAAgAAAAKADIB……"） 的字符串以表示所读取文件的内容.
                 $("#wrap").html('<img src="'+src+'" alt=""/>')
             }
         });
