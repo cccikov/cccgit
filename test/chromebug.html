@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <style type="text/css">
+    .demo {
+        position: relative;
+        width: 100px;
+        height: 30px;
+        border-radius: 20px;
+        background: #f00;
+        overflow: hidden;
+    }
+
+    .in {
+        position: relative;
+        width: 50px;
+        height:25px;
+        border-radius: 20px;
+        transform: translate(-10px);
+        -webkit-transform: translate(-10px);
+        background: #ccc;
+    }
+
+
+    @-webkit-keyframes flash {
+        from,
+        50%,
+        to {
+            transform: translate(10px);
+            -webkit-transform: translate(10px);
+        }
+        25%,
+        75% {
+            transform: translate(100px);
+            -webkit-transform: translate(100px);
+        }
+    }
+
+    @keyframes flash {
+        from,
+        50%,
+        to {
+            transform: translate(10px);
+            -webkit-transform: translate(10px);
+        }
+        25%,
+        75% {
+            transform: translate(100px);
+            -webkit-transform: translate(100px);
+        }
+    }
+
+    .flash {
+        -webkit-animation-name: flash;
+        animation-name: flash;
+    }
+    .animated {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    .animated.infinite {
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+    }
+    </style>
+    <p class="animated infinite flash">lorem</p>
+    <div class="demo">
+        <div class="in">
+        </div>
+    </div>
+    <p>
+        只要没了动画
+        或者in没有transform，就正常（难道chrome）也将transform的元素脱离文档流？
+    </p>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    	html,body{
+			padding:0;
+			margin:0;
+    	}
+    	h5{
+    		padding:0;
+    		margin:20px 0 0px;
+    	}
+    	[class*=demo]{
+    		margin:20px;
+    	}
+		.out{
+			position: relative;
+			height: 30px;
+			background: rgba(255,0,0,0.1);
+		}
+		.in{
+			position: absolute;
+			/*height: 20px;*/
+			top:5px;
+			background: rgba(0,255,0,0.6);
+		}
+
+		.demo1 .in{
+			left:50px;
+		}
+
+		.demo2 .in{
+			right:50px;
+		}
+
+		.demo3 .in{
+			left:50px;
+			right:0;
+		}
+
+		.demo4 .in{
+			left:50px;
+			right:50px;
+		}
+	</style>
+</head>
+
+<body>
+
+    <div class="demo1">
+    	<h5>只设置left:50px</h5>
+        <div class="out">
+            <div class="in">
+            	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa iusto nam nisi quia voluptatibus voluptate fugit, dolor accusantium aspernatur maxime?
+            </div>
+        </div>
+    </div>
+
+    <div class="demo2">
+    	<h5>只设置right:50px</h5>
+        <div class="out">
+            <div class="in">
+            	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa iusto nam nisi quia voluptatibus voluptate fugit, dolor accusantium aspernatur maxime?
+            </div>
+        </div>
+    </div>
+
+    <p>都可以看得出设置的反方向会有个边界一样。以为默认为auto（计算值为0）</p>
+
+    <div class="demo3">
+    	<h5>left:50px;right:0;和第一个是一样的</h5>
+        <div class="out">
+            <div class="in">
+            	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa iusto nam nisi quia voluptatibus voluptate fugit, dolor accusantium aspernatur maxime?
+            </div>
+        </div>
+    </div>
+
+    <div class="demo4">
+    	<h5>left:50px;right:50px;元素会自己拉伸或者缩短以满足left，right（width未设定的情况下）</h5>
+        <div class="out">
+            <div class="in">
+            	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa iusto nam nisi quia voluptatibus voluptate fugit, dolor accusantium aspernatur maxime?
+            </div>
+        </div>
+    </div>
+
+    <p style="margin:100px 0 0">
+    	总结：脱离文档流（absolute，fixed）若width未设定，元素会自动拉伸或者缩短宽度来满足left，right；同理若height未设定，元素会自动拉伸或者缩短高度来满足top,bottom。只要是为非relative是，top,right,bottom,left 任意一个方向未指定值时，该方向都auto（计算值为0）
+    </p>
+</body>
+
+</html>
