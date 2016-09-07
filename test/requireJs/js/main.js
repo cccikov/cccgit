@@ -12,7 +12,9 @@ require.config({
 	paths:{
 		"a":"./js1",
 		"b":"./js2",
-		"c":"./js3"
+		"c":"./js3",
+		"d":"js4",
+		"e":"js5"
 	}
 });
 require(['a', 'b', 'c'], function (js1, js2, js3){
@@ -26,10 +28,14 @@ require(['a', 'b', 'c'], function (js1, js2, js3){
 
 require(["b"],function(b){
 	console.log(b.test(1,2));//3,先比上面的require()执行
-	second();//2
+	second();
 });
 function second(){
-	require(["c"],function(c){
-		console.log(c);//2 三个require中最后执行
+	require(["c","d","e"],function(c,d,e){//三个require中最后执行
+		console.log(c);//2
+		console.log(d.color);//"black"
+		console.log(e.fruit);//[Object, Object]
+		console.log(e.fruit2);//Object {apple: Object, banana: Object}
+		e.buy();// "go to the supermarket"
 	});
 }
