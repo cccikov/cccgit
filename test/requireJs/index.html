@@ -2,12 +2,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
-		<!-- <script src="js/js2.js" type="text/javascript" charset="utf-8"></script> -->
-		<!-- <script src="js/js3.js" type="text/javascript" charset="utf-8"></script> -->
-		<!-- <script src="js/js1.js" type="text/javascript" charset="utf-8"></script> -->
+		<title>require.js</title>
+
 		<script type="text/javascript" src="../js/require.min.js" defer async="true"></script>
+		<!-- <script src="../js/require.min.js" data-main="js/main.js"></script> -->
+
+		<!-- .js后缀可以不写 -->
 		<script src="../js/require.min.js" data-main="js/main"></script>
+
 		<style type="text/css">
 			p{
 				font-size: 20px;
@@ -16,9 +18,9 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 				/*white-space: nowrap;*/
-				display: -webkit-box; 
-				 -webkit-line-clamp: 3;  
-   				 -webkit-box-orient: vertical;  
+				display: -webkit-box;
+				 -webkit-line-clamp: 3;
+   				 -webkit-box-orient: vertical;
 			}
 		</style>
 	</head>
