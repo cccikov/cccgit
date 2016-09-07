@@ -1,10 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>上传图片</title>
-</head>
-<body>
-    <div id="wrap"></div>
-</body>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>上传图片</title>
+		<style type="text/css">
+			.upload-btn {
+				position: relative;
+				display: inline-block;
+				overflow: hidden;
+				padding:5px 12px;
+				border: 1px solid #0aa;
+				border-radius:  25px 0px 25px 0px ;
+				color:#088;
+                transition: border-radius 1s,border-color 1.5s,color 0.8s;
+			}
+            .upload-btn.active{
+                border-radius: 0px 25px 0px 25px ;
+                border-color: #aa0;
+                color:#aa0;
+            }
+
+			.upload-btn input {
+				position: absolute;
+				top: 0;
+				right: 0;
+				opacity: 0;
+				width: 200%;
+                min-width: 40px;
+				height: 100%;
+
+			}
+			a{
+				text-decoration: inherit;
+				color: inherit;
+			}
+			input[type="file"] {
+				-webkit-appearance: none;
+				cursor: move;
+            }
+
+
+
+		</style>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(function(){
+            $("a").on("click",function(){
+            	console.log($(this).hasClass("active"));
+                if(!$(this).hasClass("active")){
+                	$(this).addClass("active");
+                }else{
+                	$(this).removeClass("active");
+                }
+            });
+        });
+        </script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<a class="upload-btn" href="javascript:void(0)">
+				<span>选择文件</span>
+				 <input type="file" name="up1" value="" /> 
+			</a>
+		</div>
+	</body>
+
 </html>
