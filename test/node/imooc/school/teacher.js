@@ -1,4 +1,5 @@
+//2.模块 teacher
 function add(teacher){
 	console.log('Add teacher:'+teacher);
 }
-exports.add = add;
+module.exports.add = add;//导出模块
