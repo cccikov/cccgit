@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		html,body{
+			padding:0;
+			margin:0;
+		}
+		#wrap{
+			padding: 0 15px
+		}
+		table{
+			min-width: 100%;
+			border-collapse: collapse;
+			margin:20px 0;
+			text-align: left;
+		}
+		th,.th{
+			font-weight: 700;
+		}
+		td,th{
+			padding:8px;
+			border:1px solid #ddd;
+		}
+		caption{
+			padding:5px 0;
+			font-weight: 700;
+		}
+		.y td:nth-of-type(2n),.y th:nth-of-type(2n){
+			background: #fff;
+		}
+		.y td:nth-of-type(2n+1),.y th:nth-of-type(2n+1){
+			background: #fafafa;
+		}
+
+		.x tr:nth-of-type(2n){
+			background: #fff;
+		}
+		.x tr:nth-of-type(2n+1){
+			background: #fafafa;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+
+<body>
+	<div id="wrap">
+		encodeURI()/decodeURI()函数,encodeURIComponent()/decodeURIComponent(),函数escape()/unescape()函数
+		<table class="table1 y">
+			<caption>表格1</caption>
+			<tr>
+				<th>原字符串</th>
+				<th>encodeURI()/decodeURI()函数</th>
+				<th>encodeURIComponent()/decodeURIComponent()函数</th>
+				<th>escape()/unescape()</th>
+			</tr>
+		</table>
+		<table class="table2 y">
+			<caption>表格2</caption>
+			<tr>
+				<th>原字符串</th>
+				<th>encodeURI()/decodeURI()函数</th>
+				<th>encodeURIComponent()/decodeURIComponent()函数</th>
+				<th>escape()/unescape()</th>
+			</tr>
+		</table>
+		<table class="table3 x">
+			<caption>表格3</caption>
+		</table>
+		<table class="table4 x">
+			<caption>表格4</caption>
+		</table>
+		<p>总结:可以看出,</p>
+	</div>
+	<script type="text/javascript">
+	var a = "http://www.w3school.com.cn/"; //ASCII 字母和数字
+	var b = "*-_.+@/"; //ASCII 标点符号
+	var c = "@+,/?:&=$#"; //特殊含义的 ASCII 标点符号
+	var d = " "; //空格
+	var e = "。，" //句号
+	var f = "哈哈" //中文
+
+	var strArr = [a, b, c, d, e, f];
+	/*for(var k in strArr){
+		console.log(strArr[k]);
+	}
+	console.log("%c----------------","color:#f00");
+	for(var j in strArr){
+		console.log(encodeURI(strArr[j]));
+	}
+	console.log("%c----------------","color:#f00");
+	for(var m in strArr){
+		console.log(encodeURIComponent(strArr[m]));
+	}
+	console.log("%c----------------","color:#f00");
+	for(var n in strArr){
+		console.log(escape(strArr[n]));
+	}*/
+
+	var fn1 = function(str) {
+		return str;
+	}
+	var fn2 = function(str) {
+		return encodeURI(str);
+	}
+	var fn3 = function(str) {
+		return encodeURIComponent(str);
+	}
+	var fn4 = function(str) {
+		return escape(str);
+	}
+	var fnArr = [fn1, fn2, fn3, fn4];
+	for (var i in strArr) {
+		// 方法一
+		$('<tr><td>' + strArr[i] + '</td><td>' + encodeURI(strArr[i]) + '</td><td>' + encodeURIComponent(strArr[i]) + '</td><td>' + escape(strArr[i]) + '</td></tr>').appendTo(".table1");
+
+		//	方法2
+		var tr = $("<tr></tr>");
+		for (var j = 0; j < fnArr.length; j++) {
+			$("<td>" + fnArr[j](strArr[i]) + "</td>").appendTo(tr);
+		}
+		tr.appendTo('.table2');
+	}
+	var th = ['原字符串', 'encodeURI()/decodeURI()函数', 'encodeURIComponent()/decodeURIComponent()函数', 'escape()/unescape()'];
+	for (var i2 in fnArr) {
+
+		// 方法一
+		var tr = $('<tr></tr>');
+		$('<td class="th">' + th[i2] + '</td>').appendTo(tr);
+		for (var m in strArr) {
+			$('<td>' + fnArr[i2](strArr[m]) + '</td>').appendTo(tr);
+		}
+		tr.appendTo('.table3');
+
+		//方法二
+		$('<tr><td class="th">' + th[i2] + '</td><td>' + fnArr[i2](strArr[0]) + '</td><td>' + fnArr[i2](strArr[1]) + '</td><td>' + fnArr[i2](strArr[2]) + '</td><td>' + fnArr[i2](strArr[3]) + '</td><td>' + fnArr[i2](strArr[4]) + '</td><td>' + fnArr[i2](strArr[5]) + '</td></tr>').appendTo('.table4');
+	}
+	</script>
+</body>
+
+</html>
