@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="description" content="" />
+    <title>Selection</title>
+    <script src='js/jquery.min.js' type="text/javascript"></script>
+    <script src='js/ccc.js' type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            btn.onclick = function() {
+                var userSelection, text; //  "w3c range" ≈ "mozilla Selection" ≠ "microsoft textrange"
+                if (window.getSelection) { //现代浏览器,Selection对象
+                    userSelection = window.getSelection();
+                } else if (document.Selection) { //ie浏览器 考虑到opera，应该放在后面,text ranges
+                    userSelection = document.Selection.createrange();
+                }
+                console.log(userSelection)
+                text = userSelection.text ? userSelection.text : userSelection;
+                alert(text); // 虽然格式不是字符串,但是浏览器还是会弹出你选择的内容
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+        lorem ipsum dolor sit amet, consectetur adipisicing elit. ab cum molestias placeat dolores ducimus consequuntur reprehenderit impedit culpa voluptates, fugiat natus, delectus inventore amet incidunt, eaque eum nam assumenda ipsum sunt eveniet quis alias nobis ut. voluptate, itaque accusamus error. officia blanditiis ab omnis pariatur incidunt accusantium, enim cum itaque, dolor doloremque nulla minus placeat error natus qui odit vitae assumenda distinctio laborum cupiditate deleniti reprehenderit explicabo. magni cupiditate amet velit accusamus, aut odio enim, perferendis facilis, officia vero, reiciendis voluptatem corporis. ipsa deserunt eius, nostrum unde laudantium architecto praesentium id iste accusantium, quis illum sed nihil aliquid vitae, ea?
+    </p>
+    <button id="btn">获取选择内容</button>
+</body>
+
+</html>
