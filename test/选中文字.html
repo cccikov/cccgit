@@ -9,14 +9,18 @@
 	<body>
 		<script type="text/javascript">
 			function selectText() {
-				if(document.selection) {
-					var range = document.body.createTextRange();
-					range.moveToElementText(document.getElementById('selectable'));
-					range.select();
-				} else if(window.getSelection) {
+				if (window.getSelection) {
+					//现代浏览器
+					// userSelection = window.getSelection();
 					var range = document.createRange();
 					range.selectNode(document.getElementById('selectable'));
 					window.getSelection().addRange(range);
+				} else if (document.selection) {
+					//IE浏览器 考虑到Opera，应该放在后面
+					// userSelection = document.selection.createRange();
+					var range = document.body.createTextRange();
+					range.moveToElementText(document.getElementById('selectable'));
+					range.select();
 				}
 			}
 		</script>
