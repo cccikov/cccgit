@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>click() focus() blur() select()</title>
+		<style type="text/css">
+			.item {
+				margin: 10px 5px;
+			}
+            .selBtn,.selBtnOri{
+                width: 100px;
+            }
+		</style>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+                var eventObj = {
+                    "click":function(el){
+                        el.click();
+                    },
+                    "focus":function(el){
+                        el.focus();
+                    },
+                    "blur":function(el){
+                        el.blur();
+                    },
+                    "select":function(el){
+                        el.select();
+                    },
+                }
+                var eventObjOri = {
+                    "click":function(el){
+                        el[0].click();
+                    },
+                    "focus":function(el){
+                        el[0].focus();
+                    },
+                    "blur":function(el){
+                        el[0].blur();
+                    },
+                    "select":function(el){
+                        el[0].select();
+                    },
+                }
+
+                function handle(origin){
+                    var that = this;
+                    var value = $("#selIn").val().trim();
+                    if(!value){
+                        $("#selIn").select();//一旦select就会focus();
+                        return ;
+                    }
+                    var eventType = that.attr("data-event");
+                    var obj = $("#theform " + value).eq(0) || $("#theform " + value)
+                    console.log(obj,eventType);
+
+                    var origin = origin || false;
+                    if(origin){
+                        eventObjOri[eventType](obj);
+                    }else{
+                        eventObj[eventType](obj);
+                    }
+                }
+
+				$(".selBtn").on("click",function(){
+                    handle.call($(this));
+				});
+                $(".selBtnOri").on("click",function(){
+                    handle.call($(this),true);
+                });
+
+                $("a")[0].onclick = function(){
+                    alert("a");
+                }
+			});
+		</script>
+	</head>
+
+	<body>
+		<form id="theform">
+			<textarea name="" rows="5" cols="40"></textarea>
+			<div class="item">
+				<label for="">
+                <span>text</span>
+                <input type="text">
+            </label>
+			</div>
+			<div class="item">
+				<label for="">
+                <span>password</span>
+                <input type="password">
+            </label>
+			</div>
+			<div class="item">
+				<label for="">
+                <span>file</span>
+                <input type="file">
+            </label>
+			</div>
+			<div class="item">
+				<label for="">
+                <span>checkbox</span>
+                <input type="checkbox">
+            </label>
+			</div>
+
+			<div class="item">
+				<label for="">
+	                <span>man</span>
+	                <input type="radio" name="sex">
+	            </label>
+				<label for="">
+	                <span>woman</span>
+	                <input type="radio" name="sex">
+	            </label>
+			</div>
+			<h5>按钮类</h5>
+			<div class="item">
+				<a href="http://www.baidu.com">百度</a>
+			</div>
+			<div class="item">
+				<input onclick="alert('type=button')" type="button" name="" value="input type=button 提交">
+			</div>
+			<div class="item">
+				<button>Element button 提交</button>
+			</div>
+			<div class="item">
+				<input type="submit" name="" id="" value="submit 按钮" />
+			</div>
+			<div class="item">
+				<input type="reset" name="" id="" value="reset 按钮" />
+			</div>
+		</form>
+
+
+		<h4>事件</h4>
+		<label for="">
+            <span>请填写对应的选择器 如"textarea" 或者 "[type='text']"</span><br />
+			<input type="text" name="" id="selIn" value="" />
+            <br/>
+			<button class="selBtn" data-event="click">click()</button>
+			<button class="selBtn" data-event="focus">focus()</button>
+			<button class="selBtn" data-event="blur">blur()</button>
+			<button class="selBtn" data-event="select">select()</button>
+            <br/>
+            <button class="selBtnOri" data-event="click">原生click()</button>
+            <button class="selBtnOri" data-event="focus">原生focus()</button>
+            <button class="selBtnOri" data-event="blur">原生blur()</button>
+            <button class="selBtnOri" data-event="select">原生select()</button>
+		</label>
+
+
+        <p>
+            总结:
+            <br />a标签要用原生的click()才会触发跳转,jq的click()仅仅会触发click事件
+        </p>
+	</body>
+
+</html>
