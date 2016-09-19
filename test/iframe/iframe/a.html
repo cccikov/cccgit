@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>iframe之间的操作</title>
+		<style type="text/css">
+			html,body{
+				padding:0;
+				margin:0;
+			}
+			iframe{
+				display: block;
+				margin:20px auto;
+				border:1px solid #000000
+			}
+			h5{
+				width: 80%;
+				margin:20px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<p>我是a.html</p>
+		<h5>第一层iframe</h5>
+		<iframe src="b.html" id="ifr" name="ifr" width="80%" height="600"></iframe>
+		<button id="btn1">操作iframe b</button>
+		<button id="btn2">操作iframe c</button>
+		<p id="action"></p>
+
+		<script type="text/javascript">
+			var frameObj = document.getElementById("ifr");
+			frameObj.onload = function(){
+				console.log(frameObj.contentDocument);//获取了iframe 的 document
+				console.log(window.frames['ifr'].document);//获取iframe的document 等价于 window.frames.ifr.document ; window.frames包含页面全部iframe,通过属性名(iframe的name属性)获得对应的iframe对象
+				console.log(frameObj.contentDocument == window.frames['ifr'].document); // true 以上两种方法获得内容是相等的
+				console.log(window.ifr.document)//或者window可以不写,获取iframe的document,由于没有全局属性ifr,所以ifr就是那个iframe
+				console.log(window.frames === window);//true window对象竟然和window.frames是一样的 看来还是用 frameObj.contentDocument
+
+				// 子iframe的document
+				var sonDoc = frameObj.contentDocument;
+				var sonAction = sonDoc.getElementById("action");
+				// 子iframe含有的iframe
+				var sonFrameList = sonDoc.getElementsByTagName('iframe');
+
+				// 孙iframe的document
+				var grandsonDoc = sonDoc.getElementById(sonFrameList[0].id).contentDocument;
+				var grandsonAction = grandsonDoc.getElementById("action");
+
+
+				btn1.onclick = function(){
+					sonAction.innerHTML = "是在a.html那里改变的";
+				}
+				btn2.onclick = function(){
+					grandsonAction.innerHTML = "是在a.html那里改变的";
+				}
+
+
+			}
+		</script>
+	</body>
+</html>

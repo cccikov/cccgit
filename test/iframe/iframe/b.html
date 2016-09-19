@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>iframe之间的操作</title>
+		<style type="text/css">
+			html,body{
+				padding:0;
+				margin:0;
+				background: #eee;
+			}
+			iframe{
+				display: block;
+				margin:20px auto;
+				border:1px solid #000000
+			}
+			h5{
+				width: 80%;
+				margin:20px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<p>我是b.html</p>
+		<h5>第二层iframe</h5>
+		<iframe src="c.html" id="ifr" name="ifr" width="80%" height="400px"></iframe>
+		<button id="btn1">操作iframe a</button>
+		<button id="btn2">操作iframe c</button>
+		<p id="action"></p>
+	</body>
+</html>

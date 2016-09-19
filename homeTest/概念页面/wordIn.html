@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("button").click(function() {
+					alert($(window.top.document));
+					$(window.top.document).find("p").html("aaaaaaaaaaaaa");
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<button>hi</button>
+	</body>
+
+</html>
