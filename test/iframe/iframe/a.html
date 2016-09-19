@@ -41,15 +41,13 @@
 				var sonAction = sonDoc.getElementById("action");
 				// 子iframe含有的iframe
 				var sonFrameList = sonDoc.getElementsByTagName('iframe');
+				btn1.onclick = function(){
+					sonAction.innerHTML = "是在a.html那里改变的";
+				}
 
 				// 孙iframe的document
 				var grandsonDoc = sonDoc.getElementById(sonFrameList[0].id).contentDocument;
 				var grandsonAction = grandsonDoc.getElementById("action");
-
-
-				btn1.onclick = function(){
-					sonAction.innerHTML = "是在a.html那里改变的";
-				}
 				btn2.onclick = function(){
 					grandsonAction.innerHTML = "是在a.html那里改变的";
 				}

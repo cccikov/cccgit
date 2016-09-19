@@ -31,6 +31,24 @@
 		<button id="btn1">操作iframe a</button>
 		<button id="btn2">操作iframe b</button>
 		<p id="action"></p>
+		<script type="text/javascript">
+			window.onload = function(){
+				// 获取顶层窗口document
+				var topDoc = window.top.document;
+				var topAction = topDoc.getElementById("action");
+				btn1.onclick = function(){
+					topAction.innerHTML = "是在c.html那里改变的";
+					console.log(parent.parent === top);//true
+				}
+
+				// 获取父级窗口document
+				var parentDoc = window.parent.document;
+				var parentAction = parentDoc.getElementById("action");
+				btn2.onclick = function(){
+					parentAction.innerHTML = "是在c.html那里改变的";
+				}
+			}
+		</script>
 	</body>
 
 </html>

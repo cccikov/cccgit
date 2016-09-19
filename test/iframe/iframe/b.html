@@ -27,5 +27,22 @@
 		<button id="btn1">操作iframe a</button>
 		<button id="btn2">操作iframe c</button>
 		<p id="action"></p>
+
+		<script type="text/javascript">
+			window.onload = function(){
+				// 获取父级窗口document
+				var parentDoc = window.parent.document;
+				var parentAction = parentDoc.getElementById("action");
+				btn1.onclick = function(){
+					parentAction.innerHTML = "是在b.html那里改变的"
+				}
+
+				// 获取子iframe窗口action
+				var sonAction = ifr.document.getElementById("action");
+				btn2.onclick = function(){
+					sonAction.innerHTML = "是在b.html那里改变的"
+				}
+			}
+		</script>
 	</body>
 </html>
