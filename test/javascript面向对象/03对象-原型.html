@@ -41,10 +41,12 @@
 			 * 数组原型
 			 */
 			var a = [1, 2, 3, 4, 5];
-			Array.prototype.fuck = function() {
-				alert("fuck");
+			if(!Array.prototype.fuck){ //先判断有无有这个方法
+				Array.prototype.fuck = function() {
+					alert("fuck");
+				}
 			}
-			//a.fuck();
+			// a.fuck();
 
 			/*
 			 * 标签的原型
