@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		#wrap{
+			position: relative;
+		}
+		html,body{
+			background: #232323;
+		}
+		.out,.mid,.in{
+			position: absolute;
+			top:0;
+			left:0;
+			width: 600px;
+			height: 600px;
+			line-height: 600px;
+		}
+		img{
+			max-width: 100%;
+			vertical-align: middle;
+		}
+		#wrap{
+			width: 600px;
+			height: 600px;
+			border:1px solid red;
+			margin: 10px;
+			perspective: 1000px;
+			overflow: hidden;
+		}
+		#trans{
+			transform-style:preserve-3d;
+			width: 600px;
+			height: 600px;
+			margin:0 auto;
+			/*居中好重要,因为#trans的父元素是设置景深的元素*/
+
+		}
+		.out{
+			transform: translate3d(0,0,150px);
+		}
+		.mid{
+			transform: translate3d(0,0,50px);
+		}
+		.in{
+			transform: translate3d(0,0,00px);
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="trans">
+			<div class="out">
+				<img src="img/1.png"/>
+			</div>
+			<div class="mid">
+				<img src="img/2.png"/>
+			</div>
+			<div class="in">
+				<img src="img/3.png"/>
+			</div>
+		</div>
+	</div>
+	<script src='js/jquery.min.js' type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#trans").on("mousemove",function(e){
+				var that = $(this);
+				var l = that.offset().left;
+				var t = that.offset().top;
+				var w = that.width();
+				var h = that.height();
+
+				angleX = (e.clientX - l - w/2)/60;
+				angleY = (e.clientY - t - h/2)/60;
+
+				that.css("transform","rotate3d(1,0,0,"+angleY+"deg) rotate3d(0,1,0,"+-angleX+"deg)")
+			});
+		});
+	</script>
+</body>
+</html>
