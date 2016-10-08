@@ -8,10 +8,11 @@ ccc.trim = function(str) {
     }
 };
 
-// 去除全部空格
-ccc.trimAll = function(str) {
+// 去除全部空格或者换行,第二个参数表示替换空格或者换行的字符串
+ccc.trimAll = function(str,toStr) {
     // return str.replace(/\s*/g, '');
-    return str.replace(/\s+/g, '');
+    var toStr = toStr || "";
+    return str.replace(/\s+/g,toStr);
 };
 // 获取样式
 ccc.getStyle = function(element, StyleName) {
