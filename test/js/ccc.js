@@ -1,11 +1,15 @@
 var ccc = new Object();
 ccc.cst = new Object(); //constructor
-// 去除首尾空格
+// 去除首尾空格  
 ccc.trim = function(str) {
     if (str) {
+    	if(str.trim){
+			return str.trim();
+		}
         // return str.replace(/(^\s*)|(\s*$)/g, '');
         return str.replace(/(^\s+)|(\s+$)/g, '');
     }
+    return ;
 };
 
 // 去除全部空格或者换行,第二个参数表示替换空格或者换行的字符串
