@@ -3,13 +3,15 @@ ccc.cst = new Object(); //constructor
 // 去除首尾空格
 ccc.trim = function(str) {
     if (str) {
-        return str.replace(/(^\s*)|(\s*$)/g, '');
+        // return str.replace(/(^\s*)|(\s*$)/g, '');
+        return str.replace(/(^\s+)|(\s+$)/g, '');
     }
 };
 
 // 去除全部空格
 ccc.trimAll = function(str) {
-    return str.replace(/\s*/g, '');
+    // return str.replace(/\s*/g, '');
+    return str.replace(/\s+/g, '');
 };
 // 获取样式
 ccc.getStyle = function(element, StyleName) {
