@@ -14,6 +14,13 @@ ccc.trimAll = function(str,toStr) {
     var toStr = toStr || "";
     return str.replace(/\s+/g,toStr);
 };
+
+// 去除全部换行,第二个参数表示替换换行的字符串
+ccc.newLine = function(str,toStr){
+	var toStr = toStr || "";
+    return str.replace(/(\n+)|(\r+)|(\r\n)/g,toStr);
+}
+
 // 获取样式
 ccc.getStyle = function(element, StyleName) {
     if (window.getComputedStyle) {
