@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    div {
+        word-wrap: break-word;
+    }
+
+    p {
+        display: inline-block;
+        width: 100px;
+        border-bottom: 1px solid #eee;
+        margin: 5px 10px;
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/ccc.js"></script>
+    <script type="text/javascript">
+	    $(function() {
+
+	        $(window).on("keydown", function(e) {
+	            // e.preventDefault();
+	            e.stopPropagation();
+	            var wrapHtml = $("#wrap").html();
+	            var kc = e.keyCode;
+	            var kcv = String.fromCharCode(kc);
+	            wrapHtml += ("<p><span style='color:red;font-weight:700;'>" + kc + "</span>" + ":" + "<span style='color:blue;'>" + kcv + "</span>" + "&nbsp;</p>");
+	            $("#wrap").html(wrapHtml);
+	        });
+	        $(document).on("keypress", function(e) {
+	            e.preventDefault();
+	            e.stopPropagation();
+	            var wrapHtml = $("#wrap2").html();
+	            var kc = e.keyCode;
+	            var kcv = String.fromCharCode(kc);
+	            wrapHtml += ("<p><span style='color:red;font-weight:700;'>" + kc + "</span>" + ":" + "<span style='color:blue;'>" + kcv + "</span>" + "&nbsp;</p>");
+	            $("#wrap2").html(wrapHtml);
+	        });
+
+	    });
+    </script>
+
+    <div id="wrap">
+    </div>
+    <div id="wrap2">
+    </div>
+</body>
+
+</html>
