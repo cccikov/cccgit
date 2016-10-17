@@ -4,21 +4,35 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta name="viewport" content="width=320,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <style>
+        html{
+            overflow: hidden;
+        }
+        body{
+            overflow: hidden;
+        }
         * {
             margin: 0;
             padding: 0;
         }
 
         #demo {
+            position: relative;
             width: 100%;
-            height: 1200px;
+            height: 2200px;
             background: #ddd;
             background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(#b8c4cb), to(#f6f6f8));
         }
+        p{
+            position: absolute;
+            left:0;
+            width:100%;
+        }
     </style>
 </head>
-<body style="overflow:hidden;">
+<body>
     <div id="demo" style="transform:translateY(0px);">
+        <p style="top:0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, consequatur voluptatum tenetur mollitia sapiente maxime laborum inventore ea dolore ducimus, sint corrupti rem odio non impedit laboriosam quis quod. Qui!</p>
+        <p style="bottom:0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat cupiditate excepturi nam magni sint saepe fugiat, sit provident inventore, ad? Iure quam temporibus modi officiis optio cum explicabo voluptates aut.</p>
     </div>
     <script type="text/javascript">
         function Touch(dom) {
@@ -27,42 +41,40 @@
             this.pagey = 0;
             this.movex = 0;
             this.movey = 0;
-            this.x = 0;
-            this.y = 0;
-            this.cy = 0;
-            this.cheight = document.compatMode === "CSS1Compat" ? document.documentElement.clientHeight : document.body.clientHeight;//可视区域高度
-            this.sheight = document.compatMode === "CSS1Compat" ? document.documentElement.scrollHeight : document.body.scrollHeight;//document总高度
+            this.deltaX = 0;
+            this.deltaY = 0;//手指移动距离
+            this.scrollY = 0; // 相当于scrollTop
+            this.clientH = document.compatMode === "CSS1Compat" ? document.documentElement.clientHeight : document.body.clientHeight;//可视区域高度
+            this.bodyH = document.compatMode === "CSS1Compat" ? document.documentElement.scrollHeight : document.body.scrollHeight;//document总高度
             if (typeof this.createTouch != "function") {
                 Touch.prototype.createTouch = function () {
                     var than = this; //这里addEventListener里面的this变成dom
                     than.dom.addEventListener('touchstart', function (e) {
-                        than.pagex = e.changedTouches[0].clientX;
-                        than.pagey = e.changedTouches[0].clientY;
+                        than.pagex = e.touches[0].clientX; // 因为这里没有出现滚动条 , 所以clientX 和 pageX 的值是相等的
+                        than.pagey = e.touches[0].clientY; // 手指点下时的位置
                     });
                     than.dom.addEventListener('touchmove', function (e) {
-                    	console.log(than.cy);
-                    	e.preventDefault();
-                        than.movex = e.changedTouches[0].clientX;
-                        than.movey = e.changedTouches[0].clientY;
-                        than.x = than.movex - than.pagex;
-                        than.y = than.movey - than.pagey;
-                        if ((than.cy + than.y) >= 150) {
+                        than.movex = e.touches[0].clientX;
+                        than.movey = e.touches[0].clientY; // 手指移动时的位置
+                        than.deltaX = than.movex - than.pagex;
+                        than.deltaY = than.movey - than.pagey; // 两个相减 , 就是手指移动的距离
+                        if ((than.scrollY + than.deltaY) >= 150) {// 上面拉下来(到极限)
                             than.dom.setAttribute("style", "transform:translateY(150px)");
-                        } else if ((-than.cheight + than.cy + than.y) < -(than.sheight + 150)) {
-                            than.dom.setAttribute("style", "transform:translateY(" + (-than.sheight + than.cheight - 150) + "px)");
-                        } else {
-                            than.dom.setAttribute("style", "transform:translateY(" + (than.cy + than.y) + "px)");
+                        } else if ((-than.clientH + than.scrollY + than.deltaY) < -(than.bodyH + 150)) {// 底下拉上来(到极限) , scrollY , deltaY的值都是负数 ; 所以就是屏幕高度+已经滚上去的高度+移动距离 < body高度+150
+                            than.dom.setAttribute("style", "transform:translateY(" + (-than.bodyH + than.clientH - 150) + "px)");
+                        } else {//普通滑动(两个极限之间)
+                            than.dom.setAttribute("style", "transform:translateY(" + (than.scrollY + than.deltaY) + "px)");
                         }
                     });
                     than.dom.addEventListener('touchend', function (e) {
-                        if ((than.cy + than.y) >= 0) {
+                        if ((than.scrollY + than.deltaY) >= 0) {// 上面拉下来
                             than.dom.setAttribute("style", "transform:translateY(0px);transition:all 500ms ease 0s");
-                            than.cy = 0;
-                        } else if ((-than.cheight + than.cy + than.y) < -than.sheight) {
-                            than.dom.setAttribute("style", "transform:translateY(" + (-than.sheight + than.cheight) + "px);transition:all 500ms ease 0s");
-                            than.cy = (-than.sheight + than.cheight);
-                        } else {
-                            than.cy = than.cy + than.y;
+                            than.scrollY = 0;
+                        } else if ((-than.clientH + than.scrollY + than.deltaY) < -than.bodyH) {// 底下拉上来
+                            than.dom.setAttribute("style", "transform:translateY(" + (-than.bodyH + than.clientH) + "px);transition:all 500ms ease 0s");
+                            than.scrollY = (-than.bodyH + than.clientH);
+                        } else {//普通滑动
+                            than.scrollY = than.scrollY + than.deltaY;
                         }
                     });
                 }
@@ -72,6 +84,11 @@
         var dom = document.getElementById("demo");
         var newTouch = new Touch(dom);
         newTouch.createTouch();
+
+
+        window.addEventListener("touchmove",function(e){
+            e.preventDefault();
+        },false);
     </script>
 </body>
 </html>
