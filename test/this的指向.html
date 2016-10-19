@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于this的指向</title>
+
+    <script type="text/javascript">
+        function smartCut(){
+            console.log('%c..小分割..', 'color: #fff; background: #4f0; font-size: 12px;');
+        }
+        function longCut(){
+            console.log('%c\n........................这是一条美丽动人的分割线...............................\n', 'color: #fff; background: #f40; font-size: 24px;');
+        }
+
+        /*
+         *  正
+         *  文
+         *  开
+         *  始
+         */
+
+        /*
+         *  情况1  函数直接调用
+         */
+        function fn(){
+            console.log(this);
+        }
+        fn();//window
+
+        function fnOut(){
+            console.log(this);
+            function fnIn(){
+                console.log(this);
+            }
+            fnIn();
+        }
+        fnOut(); // window window
+        // 所以函数直接调用 , this都是window全局对象;
+
+        /******************************大分割*************************************/
+        longCut();
+
+
+        /*
+         *  情况2  函数是对象的方法 , 使用时是该对象调用
+         */
+
+        var ccc = {
+            "length":"12cm",
+            "color":"black",
+            "cutHair":function(){
+                console.log(this);
+                var that = this;
+                function fn1(){
+                    console.log(this);
+                    // console.log(that);
+                }
+                fn1();
+            }
+        };
+        ccc.cutHair()// ccc window
+        // cutHair是作为ccc的方法调用的,this就指向ccc ; 而里面的fn1是作为一个函数那样普通执行 , 所以指向window
+
+        /****小分割***/
+        smartCut();
+
+        // 构造函数
+        function person(name,age,length){
+            console.log(this);
+            this.name = name;
+            this.age = age;
+            this.length = length;
+            this.personfn = function(){
+                console.log(this);
+            }
+        }
+
+        var cong = new person("ccc",25,12);//cong对象
+        cong.personfn();//cong对象
+
+        /****小分割***/
+        smartCut();
+
+        // 若构造函数作为普通调用
+        person()//window
+        personfn()//window
+
+         /******************************大分割*************************************/
+        longCut();
+
+
+        /*
+         *  情况3  call/apply 强行掰弯 , 强行把this指向对象
+         */
+        var tomato = {
+            "name":"臭茄"
+        }
+        ccc.cutHair.call(tomato);//tomato window
+        cong.personfn.apply(tomato);//tomato
+        // 你看,被强行掰弯了
+
+        /****小分割***/
+        smartCut();
+
+        // 所以call,apply可以使对象可以用其他对象有而自己没有的方法
+        // e.g.
+        var obj = {}//这是个object对象
+        // obj.push();//我想使用push方法 , 坑吗 , 那是array对象的方法来的 , 所以这样做会报错 , 但是我们可以使用强行掰弯啊
+        Array.prototype.push.call(obj,1,2,3,4,5);
+        console.log(obj);//这样1,2,3,4,5就在这个obj里面了 , 但是看起来怪怪的 , 所以一般使用储存性的对象 , 定义的时候就定义为Array var obj = [] ,因为Array继承于Object , 所以可以用array的方法 , 也可以用object的方法
+    </script>
+</head>
+<body>
+
+</body>
+</html>
