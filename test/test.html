@@ -4,33 +4,178 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script type="text/javascript">
-    function buildList(list) {
-        var result = [];
-        for (var i = 0; i < list.length; i++) {
-            (function(i) {
-                var item = 'item' + i;
-                result.push(function() {
-                    console.log(item + ' ' + list[i])
-                });
-            })(i)
-        }
-        return result;
-    }
-
-    function testList() {
-        var fnlist = buildList([1, 2, 3]);
-        // Using j only to help prevent confusion -- could use i.
-        for (var j = 0; j < fnlist.length; j++) {
-            fnlist[j]();
-        }
-    }
-
-    testList()
-    </script>
+    <script type="text/javascript" src = "js/ccc.js"></script>
 </head>
 
 <body>
+    <script type="text/javascript">
+
+        // function shikigami(num){
+        //     if(num>2){
+        //         for(var i = 0 ;i < num ;i++ ){
+        //             this[i] = new shikigami(num-1);
+        //         }
+        //     }else{
+        //         this[0] = "level2";
+        //     }
+        // }
+        // var arr = new shikigami(5);
+
+
+
+        /****************************************************************************/
+        function seeObj(obj){
+            var str = ccc.jsonToStr(obj);
+            var obj = ccc.strToJson(str);
+            return obj;
+        }
+
+
+        function Shikigami(name,level,star){
+            if(arguments.length>0){
+                this.name = name;
+                this.level = level;
+                this.star = star;
+            }
+        }
+        Shikigami.prototype.need = function(level){
+            var level;//因为level 是形参 所以 优先级比变量声明高 , var level 被忽略
+            level = level || 0;
+            console.log(level);
+        }
+
+        function Forfeed(){
+        }
+        Forfeed.prototype = new Array();//这个不可以写在函数里面,为什么呢??
+
+        var star = [];
+
+        function star2(name,level,star){
+            var name = name || "***";
+            var level = level || 0;
+            var star = star || 2;
+            Shikigami.call(this,name,level,star);
+            // this.feed = new Forfeed();
+        }
+
+        function star3(name,level,star){
+            var name = name || "***";
+            var level = level || 20;
+            var star = star || 3;
+            Shikigami.call(this,name,level,star);
+            this.feed = new Forfeed();
+            for(var i=0;i<2;i++){
+                this.feed.push(new star2());
+            }
+        }
+
+        function star4(name,level,star){
+            var name = name || "***";
+            var level = level || 25;
+            var star = star || 4;
+            Shikigami.call(this,name,level,star);
+            this.feed = new Forfeed();
+            for(var i=0;i<3;i++){
+                this.feed.push(new star3());
+            }
+        }
+
+        function star5(name,level,star){
+            var name = name || "***";
+            var level = level || 30;
+            var star = star || 5;
+            Shikigami.call(this,name,level,star);
+            this.feed = new Forfeed();
+            for(var i=0;i<4;i++){
+                this.feed.push(new star4());
+            }
+        }
+
+        function star6(name,level,star){
+            var name = name || "***";
+            var level = level || 35;
+            var star = star || 6;
+            Shikigami.call(this,name,level,star);
+            this.feed = new Forfeed();
+            for(var i=0;i<5;i++){
+                this.feed.push(new star5());
+            }
+        }
+
+        star2.prototype = new Shikigami();
+        star3.prototype = new Shikigami();
+        star4.prototype = new Shikigami();
+        star5.prototype = new Shikigami();
+        star6.prototype = new Shikigami();
+
+        var yingcao = new star6();
+        yingcao.need();
+
+        /*function A(){
+            A.prototype.sayHi = function(){
+                console.log("hi");
+            }
+        }
+        var a = new A();
+
+        function B(){
+        }
+        B.prototype = new A();
+
+        var b = new B();
+        // b.sayHi();
+        console.log(b);*/
+
+
+/*        function A(){
+            A.prototype.sayHi = function(){
+                console.log("hi");
+            }
+        }
+
+        function B(){
+            B.prototype = {
+                sayHi : function(){
+                    console.log("hi");
+                }
+            }
+        }
+
+        function C(){
+        }
+        C.prototype = new Array();
+
+        var a = new A();
+        var b = new B();
+        var c = new C();
+        console.log(a,b,c);
+        //  构造函数里面不可以覆盖prototype , 只能添加属性 ; 要覆盖,只能在构造函数外面*/
+
+
+        /*function testOrder(arg) {
+            console.log(arg); // arg是形参，不会被重新定义
+            console.log(a); // 因为函数声明比变量声明优先级高，所以这里a是函数
+            var arg = 'hello'; // var arg;变量声明被忽略， arg = 'hello'被执行
+            var a = 10; // var a;被忽视; a = 10被执行，a变成number
+            function a() {
+                console.log('fun');
+            } // 被提升到作用域顶部
+            console.log(a); // 输出10
+            console.log(arg); // 输出hello
+        };
+        testOrder('hi');
+        /* 输出：
+            hi
+            function a() {
+                console.log('fun');
+            }
+            10
+            hello
+        */*/
+
+
+
+    </script>
 </body>
 
 </html>
