@@ -8,7 +8,7 @@
 	<script type="text/javascript">
 		/*
 		 * 原型链继承
-		 */ 
+		 */
 		/*function SuperType(){
 			this.color=["red","blue","green"];
 		}
@@ -21,8 +21,8 @@
 		//用原型链方法继承的问题是，继承于父类的属性和方法是共享的，因为是在Subtype原型中*/
 
 		/*
-		 * 借助构造函数
-		 */ 
+		 * 借助构造函数 这种方法不能继承超类型prototype的属性方法
+		 */
 		function Up(name){
 			this.name = name;
 			this.num = [1,2,3,4];
@@ -43,7 +43,7 @@
 
 		/*
 		 *   组合继承 最常用
-		 */ 
+		 */
 		console.clear();
 		function SuperType(name){
 			this.name = name;
@@ -78,7 +78,7 @@
 		 * name:"N",
 		 * color:["red","blue","green"],
 		 * sayHi:function(){}
-		 * 
+		 *
 		 * age:25,
 		 * down1:"down",
 		 */
@@ -87,7 +87,7 @@
 		 * name:"Sub.prototype",
 		 * color:["red","blue","green"],
 		 * sayHi:function(){……}
-		 * 
+		 *
 		 * sayAge:function(){……}
 		 * constructor:function SubType(name,age),
 		 */
@@ -101,7 +101,7 @@
 		 * name:"G",
 		 * color:["red","blue","green"],
 		 * sayHi:function(){}
-		 * 
+		 *
 		 * age:88,
 		 * down1:"down",
 		 */
@@ -110,7 +110,7 @@
 		 * name:"Sub.prototype",
 		 * color:["red","blue","green"],
 		 * sayHi:function(){……}
-		 * 
+		 *
 		 * sayAge:function(){……}
 		 * constructor:function SubType(name,age),
 		 */
@@ -123,7 +123,7 @@
 
 		/*
 		 *  原型式继承
-		 */ 
+		 */
 		console.clear();
 		function object(o){
 			function F(){};
