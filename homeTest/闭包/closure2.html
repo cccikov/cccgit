@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    function fn0() {
+        function buildList(list) {
+            var result = [];
+            for (var i = 0; i < list.length; i++) {
+                var item = 'item' + i;
+                result.push(function() {
+                    console.log(item + ' ' + list[i])
+                });
+            }
+            return result;
+        }
+
+        function testList() {
+            var fnlist = buildList([1, 2, 3]);
+            // Using j only to help prevent confusion -- could use i.
+            for (var j = 0; j < fnlist.length; j++) {
+                fnlist[j]();
+            }
+        }
+        testList();
+    }
+
+    function fn1() {
+        function buildList(list) {
+            var result = [];
+            for (var i = 0; i < list.length; i++) {
+                (function(i) {
+                    var item = 'item' + i;
+                    result.push(function() {
+                        console.log(item + ' ' + list[i])
+                    });
+                })(i)
+            }
+            return result;
+        }
+
+        function testList() {
+            var fnlist = buildList([1, 2, 3]);
+            // Using j only to help prevent confusion -- could use i.
+            for (var j = 0; j < fnlist.length; j++) {
+                fnlist[j]();
+            }
+        }
+        testList()
+    }
+
+    function fn2() {
+        function buildList(list) {
+            var result = [];
+            for (var i = 0; i < list.length; i++) {
+                (function() {
+                    var i = arguments[0];
+                    var item = 'item' + i;
+                    result.push(function() {
+                        console.log(item + ' ' + list[i])
+                    });
+                })(i)
+            }
+            return result;
+        }
+
+        function testList() {
+            var fnlist = buildList([1, 2, 3]);
+            // Using j only to help prevent confusion -- could use i.
+            for (var j = 0; j < fnlist.length; j++) {
+                fnlist[j]();
+            }
+        }
+        testList();
+    }
+
+    function fn3() {
+        function buildList(list) {
+            var result = [];
+            for (var i = 0; i < list.length; i++) {
+                (function() {
+                    /*var i = i;
+                    这样i会报undefined是因为
+                    上面写法实际是
+                    var i;
+                    i = i;
+                    重新定义一个变量i , 但是没有赋值 , 所以i就是undefined , 然后又让i = i,那还是没有定义*/
+                    var k = i;
+                    var item = 'item' + k;
+                    result.push(function() {
+                        console.log(item + ' ' + list[k])
+                    });
+                })()
+            }
+            return result;
+        }
+
+        function testList() {
+            var fnlist = buildList([1, 2, 3]);
+            // Using j only to help prevent confusion -- could use i.
+            for (var j = 0; j < fnlist.length; j++) {
+                fnlist[j]();
+            }
+        }
+        testList();
+    }
+
+    fn0();
+    fn1();
+    fn2();
+    fn3();
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
