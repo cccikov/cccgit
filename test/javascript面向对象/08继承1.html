@@ -30,6 +30,7 @@
 			}
 		};
 		Down.prototype = new Up();// Down继承了Up,Down的原型是Up的实例，所有在Up的属性和方法都被Down继承
+		//这种覆盖prototype的写法只能写在构造函数外面,不能想动态原型模式那样写在构造函数里面。  构造函数里面不可以覆盖prototype , 只能添加属性 ; 要覆盖,只能在构造函数外面
 		Down.prototype.getRole = function() {
 			console.log(this.role);
 		}
