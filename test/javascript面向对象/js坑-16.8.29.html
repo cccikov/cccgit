@@ -34,7 +34,7 @@
 
 		Foo.getName(); //2
 		getName(); //4 由于声明提升 所以getName（5）会被4覆盖
-		Foo().getName();//1 因为不是this.getName 所以里面的getName就是变量getName，重新赋值。
+		Foo().getName();//1 因为不是this.getName 所以里面的getName就是全局变量getName，重新赋值而已。
 		getName(); //1
 		new Foo.getName(); //2
 		new Foo().getName(); //3 因为Foo构造函数里面不是使用this.getName 所以是调用prototype里面的方法

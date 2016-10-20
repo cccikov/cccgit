@@ -127,7 +127,7 @@
         console.log(b);*/
 
 
-/*        function A(){
+        /*function A(){
             A.prototype.sayHi = function(){
                 console.log("hi");
             }
@@ -174,14 +174,15 @@
         */
 
 
-function fn(a){
+        function fn(a){
+            console.log(a);
+            (function(){
+                var a = a;
                 console.log(a);
-                (function(){
-                    var a = a;
-                    console.log(a);
-                })()
-            }
-            fn(1);
+            })()
+        }
+        fn(1);\
+
 
 
     </script>
