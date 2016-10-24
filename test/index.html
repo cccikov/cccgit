@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    p {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        pointer-events: none;
+    }
+
+    p * {
+        pointer-events: none;
+    }
+
+    p span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+    }
+
+    p span.animate {
+        animation-name: up;
+        animation-timing-function: linear;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+
+    @keyframes up {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -50%) translate(0, 300%);
+        }
+        30%{
+            opacity: 0.8;
+        }
+        50% {
+            opacity: 0.8;
+            transform: translate(-50%, -50%);
+        }
+        70%{
+            opacity: 0.8;
+        }
+        to {
+            opacity: 0;
+            transform: translate(-50%, -50%) translate(0, -300%);
+        }
+    }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#add").on("click", function() {
+            console.log($("span").is(".animate"));
+            if ($("span").is(".animate")) {
+                $("span").removeClass("animate");
+                setTimeout(function() {
+                    $("span").addClass("animate")
+                }, 20);//少于一帧 , 因为16.7 cpu来不及处理
+            } else {
+                $("span").addClass("animate");
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <p>
+            <span class="low">关注成功</span>
+        </p>
+    </div>
+    <ul>
+        <li>
+            <a id="add" href="javascript:void(0)">关注成功</a>
+        </li>
+        <li>
+            <a id="remove" href="javascript:void(0)">取消关注</a>
+        </li>
+    </ul>
+</body>
+
+</html>
