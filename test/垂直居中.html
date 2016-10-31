@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>垂直居中方法汇总</title>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        .demo1{
+            line-height:100px;
+            padding:0 20px;
+            margin: 10px 0;
+            background: #eee;
+        }
+        .demo1 .p1{
+            display: inline-block;
+            background: #faa;
+        }
+        .demo1 .p2{
+            display: inline-block;
+            background: #faa;
+            line-height: 40px;
+        }
+        .demo1 .p3{
+            display: inline-block;
+            background: #faa;
+            height: 40px;
+        }
+        .demo1 .p4{
+            display: inline-block;
+            background: #faa;
+            height: 40px;
+            line-height: 40px;
+        }
+         .demo1 .p5{
+            display: inline-block;
+            background: #faa;
+            height: 40px;
+            line-height: 40px;
+            vertical-align: top;
+        }
+        .demo1 .p6{
+            display: inline-block;
+            background: #faa;
+            height: 40px;
+            line-height: 40px;
+            vertical-align: middle;
+        }
+        .no-word p{
+            width: 96px;
+        }
+    </style>
+    <script type="text/javascript">
+        // alert(document.compatMode);
+    </script>
+</head>
+<body>
+    <div class="demo1">
+        <p class="p1">Lorem ipsum.</p>
+        <p class="p2">Lorem ipsum.</p>
+        <p class="p3">Lorem ipsum.</p>
+        <p class="p4">Lorem ipsum.</p>
+        <p class="p5">Lorem ipsum.</p>
+    </div>
+    <div class="demo1 no-word">
+        <p class="p1"></p>
+        <p class="p2"></p>
+        <p class="p3"></p>
+        <p class="p4"></p>
+        <p class="p5"></p>
+        <p class="p6"></p>
+    </div>
+    <h5>
+        关键css是 p设置display:inline-block , inline-block会受line-height的影响,从而居中;<br>
+        但是由于inline-block元素如果没有设定高度,也会继承line-height , 就会导致第一种情况 元素的高度变成与line-height一样高;<br>
+        <br>
+        <br>
+        可以看得出,如果没有设置vertical-align,元素的位置是受文字影响的;<br>
+        如果没有文字,元素是放在baseline左右的位置的(vertical-align默认值为baseline)<br>
+
+        所以设置display:inline-block , 元素高度 , 元素自己的
+
+
+    </h5>
+</body>
+</html>
