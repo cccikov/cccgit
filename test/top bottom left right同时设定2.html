@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <p>都可以看得出设置的反方向会有个边界一样。以为默认为auto（计算值为0）</p>
+    <p>都可以看得出设置的反方向会有个边界一样。因为默认为auto（若内容要超出定位父元素时,计算值为0）</p>
 
     <div class="demo3">
     	<h5>left:50px;right:0;和第一个是一样的</h5>
@@ -89,7 +89,7 @@
     </div>
 
     <p style="margin:100px 0 0">
-    	总结：脱离文档流（absolute，fixed）若width未设定，元素会自动拉伸或者缩短宽度来满足left，right；同理若height未设定，元素会自动拉伸或者缩短高度来满足top,bottom。只要是为非relative是，top,right,bottom,left 任意一个方向未指定值时，该方向都auto（计算值为0）
+    	总结：脱离文档流（absolute，fixed）若width未设定，元素会自动拉伸或者缩短宽度来满足left，right；同理若height未设定，元素会自动拉伸或者缩短高度来满足top,bottom。只要是为非relative是，top,right,bottom,left 任意一个方向未指定值时，该方向都auto（若内容要超出定位父元素时,计算值为0）
     </p>
 </body>
 
