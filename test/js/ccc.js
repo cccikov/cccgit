@@ -1,6 +1,6 @@
 var ccc = new Object();
 ccc.cst = new Object(); //constructor
-// 去除首尾空格  
+// 去除首尾空格
 ccc.trim = function(str) {
     if (str) {
     	if(str.trim){
@@ -25,26 +25,67 @@ ccc.newLine = function(str,toStr){
     return str.replace(/(\n+)|(\r+)|(\r\n)/g,toStr);
 }
 
-// 获取样式
-ccc.getStyle = function(element, StyleName) {
-    if (window.getComputedStyle) {
-        return window.getComputedStyle(element)[StyleName]
-    } else if (element.currentStyle) {
-        return element.currentStyle[StyleName]
+// 获取css样式
+ccc.getStyle = function(element,StyleName){
+    if(!element.style[StyleName]){
+        if(window.getComputedStyle){
+            return window.getComputedStyle(element)[StyleName]
+        }else if(element.currentStyle){//读取样式表样式
+            return element.currentStyle[StyleName]
+        }
+    }else{
+        return element.style[StyleName];
     }
+
     return
 }
-ccc.getStyleList = function(element) {
-    if (window.getComputedStyle) {
+
+ccc.getStyleList = function(element){
+    if(window.getComputedStyle){
         return window.getComputedStyle(element)
-    } else if (element.currentStyle) {
+    }else if(element.currentStyle){
         return element.currentStyle
     }
     return
 }
-ccc.setStyle = function(element, StyleName, val) {
+
+ccc.setStyle = function(element,StyleName,val){
     element.style[StyleName] = val
 }
+
+// 去除行内样式
+ccc.removeStyle = function(obj,styleStr){
+    if(obj.hasAttribute("style")){//有行内样式
+        var objStyle = obj.getAttribute("style").replace(/\s*/g, '');
+        objStyle = objStyle.replace(styleStr,"");
+        obj.setAttribute("style",objStyle);
+        return objStyle;
+    }else{
+        return null;
+    }
+}
+
+// 没有attrValue时为获取节点attrName属性的值, 有的时候设置attrName的值为attrValue
+ccc.attr = function(obj,attrName,attrValue){
+    if(obj.hasAttribute(attrName)){//有这个属性
+        if(!arguments[2]){//只有两个参数
+            return obj.getAttribute(attrName);
+        }else{
+            obj.setAttribute(attrName,attrValue);
+            return obj.getAttribute(attrName);
+        }
+    }
+    return null
+}
+
+// 去除节点属性
+ccc.removeAttr = function(obj,attrName){
+    if(obj.hasAttribute(attrName)){//有这个属性
+        obj.removeAttribute(attrName);
+        return null
+    }
+}
+
 
 //判断是否数字（或者转型后为数字）
 ccc.isNumber = function(str) {
