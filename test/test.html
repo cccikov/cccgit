@@ -1,27 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>去除行内样式,属性</title>
-</head>
-<body>
-    <div id="demo" style="background: #f00;color:#123;height:200px;overflow: hidden;" data-flag = "true">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </div>
-    <script type="text/javascript" src="js/ccc.js"></script>
+    <title>模拟select</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <style type="text/css">
+    .select {
+        box-sizing: border-box;
+        float: left;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #e0e0e0;
+        border-radius: 15px;
+        overflow: hidden;
+        font-size: 14px;
+        color: #757575;
+        text-align: center;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        transition: height 0.3s;
+        background: #fff;
+    }
+
+    .select .option-default {
+        color: #9e9e9e;
+    }
+
+    .select .option {
+        color: #757575;
+    }
+
+    .select .option:before {
+        content: "";
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .select .option:hover {
+        background: #f9f9f9;
+    }
+
+    .select .option:active {
+        background: #e0e0e0;
+    }
+
+    .select.acitve {
+        height: auto;
+    }
+
+    .select.acitve .option-default {
+        color: #e0e0e0;
+    }
+
+
+    /*border也在变色里面*/
+    .select1 .option {
+        color: #757575;
+        border-top: 1px solid #e0e0e0;
+    }
+    .select1 .option:before {
+        display:none;
+    }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-            var obj = document.getElementById("demo");
-            obj.getAttribute("data-flag");
-            obj.hasAttribute("data-flag");
-            obj.removeAttribute("data-flag");
-            obj.setAttribute("data-flag","asdasd");
+    var obj = [{
+        id: "aaa",
+        value: "value1"
+    }, {
+        id: "bbb",
+        value: "value2"
+    }, ]
 
-
+    for (var i in obj) {
+        if (obj[i].id == "aaa") {
+            console.log(obj[i].value);
+        }
+    }
     </script>
+</head>
+
+<body>
+    <ul class="select acitve">
+        <li class="option-default">选择</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+    </ul>
+    <ul class="select select1 acitve">
+        <li class="option-default">选择</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+    </ul>
 </body>
+
 </html>
