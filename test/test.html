@@ -58,32 +58,65 @@
     .select.acitve .option-default {
         color: #e0e0e0;
     }
-
-
     /*border也在变色里面*/
+
     .select1 .option {
         color: #757575;
         border-top: 1px solid #e0e0e0;
     }
+
     .select1 .option:before {
-        display:none;
+        display: none;
     }
     </style>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-    var obj = [{
-        id: "aaa",
-        value: "value1"
-    }, {
-        id: "bbb",
-        value: "value2"
-    }, ]
+    var num = 1646516.129;
 
-    for (var i in obj) {
-        if (obj[i].id == "aaa") {
-            console.log(obj[i].value);
+    function fixNum(num) {
+        var numArr = num.toFixed(2).split(".");
+        numArr[0] = Number(numArr[0]).toLocaleString();
+        return numArr.join(".");
+    }
+    console.log(fixNum(num));
+
+    function formatDate(d,sameDay) {
+        var now = new Date(d);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        month < 10 ? month = "0" + month : month = month;
+        var day = now.getDate();
+        day < 10 ? day = "0" + day : day = day;
+        var hour = now.getHours();
+        hour < 10 ? hour = "0" + hour : hour = hour;
+        var minute = now.getMinutes();
+        minute < 10 ? minute = "0" + minute : minute = minute;
+        var second = now.getSeconds();
+        second < 10 ? second = "0" + second : second = second;
+        console.log(sameDay);
+        if(sameDay){
+            return hour + ":" + minute;
+        }else{
+            return year + "-" + month + "-" + day + "   " + hour + ":" + minute + ":" + second;
         }
     }
+
+
+    var nowDate = new Date();
+    // var dataData = 1478034679811;
+    var dataData = 1478166946763;
+
+    dataData = new Date(dataData);
+
+    var nowDay = nowDate.getDate();
+    var dataDay = dataData.getDate();
+
+    var theSameDay = true;
+
+    if (dataDay != nowDay || (nowDate.getTime() - dataData.getTime() > 86400000)) { //不是同一天
+        theSameDay = false;
+    }
+    console.log(formatDate(dataData,theSameDay));
     </script>
 </head>
 
