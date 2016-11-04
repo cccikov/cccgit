@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>出现横向滚动条的时候,顶栏、底栏显示不全</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin:0;
+        }
+        h2{
+            margin: 30px 0 5px;
+        }
+
+
+        .header{
+            background: #7abf72;
+            height:25px;
+            text-align: center;
+        }
+        .main{
+            width: 1024px;
+            height: 100px;
+            line-height: 100px;
+            margin: 0 auto;
+            text-align: center;
+            background: #daa6a6;
+        }
+        .footer{
+            background: #ddefa8;
+            height:25px;
+            text-align: center;
+        }
+
+        #wrap{
+            min-width: 1024px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">header</div>
+    <div class="main">main</div>
+    <div class="footer">footer</div>
+
+    <p>
+        造成这种原因是<br>
+        一般,html,body标签的宽度没有设定,默认100%,即是屏幕宽度.<br>
+        同样header,footer默认宽度也是100%
+    </p>
+
+    <h2>方法一</h2>
+    <div id="wrap">
+        <div class="header">header</div>
+        <div class="main">main</div>
+        <div class="footer">footer</div>
+    </div>
+    <p>用一个div将全部内容包裹着,通过这个div来控制整个页面的最小宽度</p>
+
+    <h2>方法二</h2>
+    <button id="btn2">方法二</button>
+    <script type="text/javascript">
+        var btn2 = document.getElementById("btn2");
+        btn2.onclick = function(){
+            document.body.style.display = "inline-block";
+        }
+    </script>
+    <p>将body的display设置为inline-block,因为inline-block元素的宽度由内容决定</p>
+
+    <h2>方法三</h2>
+    <button id="btn3">方法三</button>
+    <script type="text/javascript">
+        var btn3 = document.getElementById("btn3");
+        var header = document.querySelector(".header");
+        var footer = document.querySelector(".footer");
+        btn3.onclick=function(){
+            header.style.minWidth = "1024px";
+            footer.style.minWidth = "1024px";
+        }
+    </script>
+    <p>header,footer设置min-width</p>
+
+</body>
+</html>

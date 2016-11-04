@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模拟select</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <style type="text/css">
+    .select {
+        box-sizing: border-box;
+        float: left;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #e0e0e0;
+        border-radius: 15px;
+        overflow: hidden;
+        font-size: 14px;
+        color: #757575;
+        text-align: center;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        transition: height 0.3s;
+        background: #fff;
+    }
+
+    .select .option-default {
+        color: #9e9e9e;
+    }
+
+    .select .option {
+        color: #757575;
+    }
+
+    .select .option:before {
+        content: "";
+        display: block;
+        width: 80%;
+        margin: 0 auto;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .select .option:hover {
+        background: #f9f9f9;
+    }
+
+    .select .option:active {
+        background: #e0e0e0;
+    }
+
+    .select.acitve {
+        height: auto;
+    }
+
+    .select.acitve .option-default {
+        color: #e0e0e0;
+    }
+    /*border也在变色里面*/
+
+    .select1 .option {
+        color: #757575;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .select1 .option:before {
+        display: none;
+    }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    var num = 1646516.129;
+
+    function fixNum(num) {
+        var numArr = num.toFixed(2).split(".");
+        numArr[0] = Number(numArr[0]).toLocaleString();
+        return numArr.join(".");
+    }
+    console.log(fixNum(num));
+
+    function formatDate(d,sameDay) {
+        var now = new Date(d);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        month < 10 ? month = "0" + month : month = month;
+        var day = now.getDate();
+        day < 10 ? day = "0" + day : day = day;
+        var hour = now.getHours();
+        hour < 10 ? hour = "0" + hour : hour = hour;
+        var minute = now.getMinutes();
+        minute < 10 ? minute = "0" + minute : minute = minute;
+        var second = now.getSeconds();
+        second < 10 ? second = "0" + second : second = second;
+        console.log(sameDay);
+        if(sameDay){
+            return hour + ":" + minute;
+        }else{
+            return year + "-" + month + "-" + day + "   " + hour + ":" + minute + ":" + second;
+        }
+    }
+
+
+    var nowDate = new Date();
+    // var dataData = 1478034679811;
+    var dataData = 1478166946763;
+
+    dataData = new Date(dataData);
+
+    var nowDay = nowDate.getDate();
+    var dataDay = dataData.getDate();
+
+    var theSameDay = true;
+
+    if (dataDay != nowDay || (nowDate.getTime() - dataData.getTime() > 86400000)) { //不是同一天
+        theSameDay = false;
+    }
+    console.log(formatDate(dataData,theSameDay));
+    </script>
+</head>
+
+<body>
+    <ul class="select acitve">
+        <li class="option-default">选择</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+    </ul>
+    <ul class="select select1 acitve">
+        <li class="option-default">选择</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+        <li class="option">山东宏旺</li>
+    </ul>
+</body>
+
+</html>
