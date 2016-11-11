@@ -3,134 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>css clip</title>
-    <link rel="bookmark" type="image/x-icon" href="img/ccc.ico" />
-    <link rel="shortcut icon" href="img/ccc.ico">
-    <style type="text/css">
-    html,
-    body {
-        padding: 0;
-        margin: 0;
-        font-size: 12px;
-    }
-    h5{
-        margin:20px 10px 0;
-    }
-
-    #clip,
-    #clipPath {
-        overflow: hidden;
-        padding: 5px;
-    }
-
-    .demo {
-        position: relative;
-        float: left;
-        width: 300px;
-        height: 300px;
-        border: 1px solid #eaeaea;
-        margin: 5px;
-    }
-
-    .demo span {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #ffb1b1;
-    }
-
-    .demo:before {
-        position: absolute;
-        z-index: 100;
-        width: 100%;
-        padding: 10px;
-        margin: 50px 0;
-        text-align: center;
-    }
-
-    #clip .demo1 span {
-        clip: rect(10px auto auto auto);
-    }
-
-    #clip .demo1:before {
-        content: "clip:rect(10px auto auto auto);"
-    }
-
-    #clip .demo2 span {
-        clip: rect(10px 280px auto auto);
-    }
-
-    #clip .demo2:before {
-        content: "clip:rect(10px 280px auto auto);"
-    }
-
-    #clip .demo3 span {
-        clip: rect(10px 280px 280px 20px);
-    }
-
-    #clip .demo3:before {
-        content: "clip:rect(10px 280px 280px 20px);"
-    }
-
-    #clipPath .demo1 span {
-        clip-path: inset(10px 0 0 0);
-        -webkit-clip-path: inset(10px 0 0 0);
-    }
-
-    #clipPath .demo2 span {
-        clip-path: inset(10px 20px 0 0);
-        -webkit-clip-path: inset(10px 20px 0 0);
-    }
-
-    #clipPath .demo3 span {
-        clip-path: inset(10px 20px 20px 20px);
-        -webkit-clip-path: inset(10px 20px 20px 20px);
-    }
-
-    #clipPath .demo1:before {
-        content: "clip-path: inset(10px 0 0 0);"
-    }
-
-    #clipPath .demo2:before {
-        content: "clip-path: inset(10px 20px 0 0);"
-    }
-
-    #clipPath .demo3:before {
-        content: "clip-path: inset(10px 20px 20px 20px);"
-    }
-    </style>
+    <title>Document</title>
 </head>
 
 <body>
-    <h5>clip</h5>
-    <div id="clip">
-        <div class="demo demo1">
-            <span></span>
-        </div>
-        <div class="demo demo2">
-            <span></span>
-        </div>
-        <div class="demo demo3">
-            <span></span>
-        </div>
-    </div>
-    <h5>clip-path</h5>
-    <div id="clipPath">
-        <div class="demo demo1">
-            <span></span>
-        </div>
-        <div class="demo demo2">
-            <span></span>
-        </div>
-        <div class="demo demo3">
-            <span></span>
-        </div>
-    </div>
-    <p>
-        总结:
-    </p>
+    <textarea id="input"></textarea>
+    <script type="text/javascript">
+    function autoTextarea(obj,paddingHeight){
+        obj.style.overflow="hidden";
+        obj.oninput = function(){
+            obj.style.height = "auto";
+            obj.style.height = (obj.scrollHeight-paddingHeight) + "px";
+
+        }
+        obj.onpropertychange = function(){
+            obj.style.height = "auto";
+            obj.style.height = (obj.scrollHeight-paddingHeight) + "px";
+        }
+    }
+    autoTextarea(input, 4);
+    </script>
 </body>
 
 </html>

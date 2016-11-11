@@ -13,30 +13,77 @@
 
 	<body>
 		<textarea name="test" id="test" rows="5" cols=""></textarea>
+		<textarea name="message" id="message" rows="5" cols=""></textarea>
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			$(function(){
-				var oldLen = nowLen = 0;
+			/*$(function(){
 				$("#test").on("input",function(){
 					$("#test").css("height","auto");
-					$("#test").height($(this)[0].scrollHeight-4);
+					$("#test").height($(this)[0].scrollHeight-4);//因为jq的height是设置真实高度
 				});
+			});*/
+
+			/*// 优化版
+			$(function(){
+				$("#test").on("input",function(){
+					var that = $(this);
+					var paddingHeight = Number(that.css("padding-top").slice(0,-2)) + Number(that.css("padding-bottom").replace("px",""));
+					that.css("height","auto").height($(this)[0].scrollHeight-paddingHeight);//因为jq的height()是设置content高度,无论有无box-sizing
+				});
+			});*/
+
+			// 封装成函数
+			function autoTextarea(obj){
+				// 若传进来的是字符串(id名),自动获取该对象
+				obj = typeof obj == "string" ? document.getElementById(obj) : obj;
+
+				if($==jQuery){//在jq环境里面
+					obj = obj instanceof jQuery ? obj : $(obj);//无论是否jq都将该对象变成jq对象
+					var paddingHeight = Number(obj.css("padding-top").slice(0,-2)) + Number(obj.css("padding-bottom").replace("px",""));
+					obj.on('input propertychange',function(){
+						obj.css("height","auto").height($(this)[0].scrollHeight-paddingHeight);
+					});
+				}else{//非jq环境下 , 未必是原生 , 但是使用原生js方法
+					if(obj.addEventListener){//ie8以上
+						obj.addEventListener("input",function(){
+							obj.style.height = "auto";
+							obj.style.height = obj.scrollHeight + "px";
+						},false);
+						obj.addEventListener("propertychange",function(){
+							obj.style.height = "auto";
+							obj.style.height = obj.scrollHeight + "px";
+						},false);
+					}else{
+						obj.oninput = function(){
+							obj.style.height = "auto";
+							obj.style.height = obj.scrollHeight + "px";
+						}
+						obj.onpropertychange = function(){
+							obj.style.height = "auto";
+							obj.style.height = obj.scrollHeight + "px";
+						}
+					}
+				}
+			}
+			// autoTextarea($("#test"));
+			// autoTextarea(document.getElementById("test"));
+			autoTextarea("test");
+
+
+			$('#message').on("input",function(){
+				var textarea =  $(this).css('height','auto');
+				if(this.scrollHeight > 140 && textarea.height()!=140){
+					textarea.height(140);
+				}
+				else if(this.scrollHeight > textarea.height()){
+					textarea.height(this.scrollHeight);
+				}
+				var content = textarea.val();
+				if(content.length > 150){
+					textarea.val(content.substr(0,150));
+				}
+				$('body').scrollTop($('body')[0].scrollHeight);
 			});
-			
-//			$('#message').on("input",function(){
-//				var textarea =  $(this).css('height','auto');
-//				if(this.scrollHeight > 140 && textarea.height()!=140){
-//					textarea.height(140);
-//				}
-//				else if(this.scrollHeight > textarea.height()){
-//					textarea.height(this.scrollHeight);
-//				}
-//				var content = textarea.val();
-//				if(content.length > 150){
-//					textarea.val(content.substr(0,150));
-//				}
-//				$('body').scrollTop($('body')[0].scrollHeight);
-//			});
 		</script>
 	</body>
 

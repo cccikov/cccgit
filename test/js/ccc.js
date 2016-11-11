@@ -27,17 +27,15 @@ ccc.newLine = function(str,toStr){
 
 // 获取css样式
 ccc.getStyle = function(element,StyleName){
-    if(!element.style[StyleName]){
+    if(element.style[StyleName]){
+        return element.style[StyleName];
+    }else{
         if(window.getComputedStyle){
             return window.getComputedStyle(element)[StyleName]
         }else if(element.currentStyle){//读取样式表样式
             return element.currentStyle[StyleName]
         }
-    }else{
-        return element.style[StyleName];
     }
-
-    return
 }
 
 ccc.getStyleList = function(element){
