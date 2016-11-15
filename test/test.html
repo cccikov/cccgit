@@ -7,21 +7,39 @@
 </head>
 
 <body>
-    <textarea id="input"></textarea>
     <script type="text/javascript">
-    function autoTextarea(obj,paddingHeight){
-        obj.style.overflow="hidden";
-        obj.oninput = function(){
-            obj.style.height = "auto";
-            obj.style.height = (obj.scrollHeight-paddingHeight) + "px";
-
-        }
-        obj.onpropertychange = function(){
-            obj.style.height = "auto";
-            obj.style.height = (obj.scrollHeight-paddingHeight) + "px";
+    function apartNum(n,mul) {//mul 10倍数 10 100 1000 ....
+        switch (n) {
+            case 1:{
+				return [0.2*mul,0.4*mul,0.6*mul,0.8*mul,1*mul];
+            }
+            case 2:{
+                return apartNum(n/2,mul*2);
+            }
+            case 3:{
+                return [0.5*mul,1*mul,1.5*mul,2*mul,2.5*mul,3*mul];
+            }
+            case 4:{
+                return apartNum(n/4,mul*4);
+            }
+            case 5:{
+                return apartNum(n/5,mul*5);
+            }
+            case 6:{
+                return apartNum(n/2,mul*2);
+            }
+            case 7:{
+                return [1*mul,2*mul,3*mul,4*mul,5*mul,6*mul,7*mul];
+            }
+            case 8:{
+                return apartNum(n/8,mul*8);
+            }
+            case 9:{
+                return apartNum(n/3,mul*3);
+            }
         }
     }
-    autoTextarea(input, 4);
+    console.log(apartNum(3,10));
     </script>
 </body>
 
