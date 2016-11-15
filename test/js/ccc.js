@@ -345,31 +345,39 @@ ccc.hasPrototypeProperty = function(object, name) {
 // URL API
 // 创建一个url指向上传的file
 ccc.getFileUrl = function(fileObj) {
-        var URL = window.URL || window.webkitURL; //URL兼容写法
+    var URL = window.URL || window.webkitURL; //URL兼容写法
+    if(URL){
         return URL.createObjectURL(fileObj);
+    }else{
+        return '';
     }
-    // 取消将这个url指向file
+}
+
+// 取消将这个url指向file imageonload之后就要取消指向,objectURL为通过上面方法获得的url地址
 ccc.cancelFileUrl = function(objectURL) {
     var URL = window.URL || window.webkitURL; //URL兼容写法
     URL.revokeObjectURL(objectURL);
 }
 
-// FileReader API
-ccc.fileReader = function(fileObj, callback) {
-        var fileReader = new FileReader(); //创建fileReader对象
-        fileReader.readAsDataURL(fileObj);
-        fileReader.onload = function(e) {
-            src = e.target.result //一个base64的url，若是图片，可以直接写在url上
-            callback(src); //callback函数的第一个参数是src
-        }
-    }
-    /*e.g.
-    input.on("change",function(){
-    	var fileObj = $(this)[0].files[0];
-    	ccc.fileReader(fileObj,function(e){
-    		console.log(e);
-    	});
-    });*/
+ // FileReader API
+ ccc.fileReader = function(fileObj,callback) {//因为事件是异步的,所以只能通过回调函数方式
+     var fileReader = new FileReader(); //创建fileReader对象
+     fileReader.readAsDataURL(fileObj);
+     fileReader.onload = function(e) {
+         var src = this.result || e.target.result //一个base64的url，若是图片，可以直接写在url上
+         if(callback){
+             callback(src);
+         }
+     }
+ }
+/* // e.g
+var upload = document.getElementById("upload");
+upload.onchange = function(e){
+    var file = e.target.files[0] || this.files[0];
+    ccc.fileReader(file,function(src){
+        theImg.src = src;
+    });
+}*/
 
 // 获取url参数
 ccc.getUrlParam = function(name) {

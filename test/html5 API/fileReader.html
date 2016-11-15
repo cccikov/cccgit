@@ -5,8 +5,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <title>Image preview example</title>
     <script type="text/javascript">
-        oFReader = new FileReader(), rFilter =
-            /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+        oFReader = new FileReader(),
+        rFilter =/^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
         oFReader.onload = function(event) {
             console.log(event);//事件对象自己本身方法
@@ -28,6 +28,7 @@
 </head>
 
 <body onload="loadImageFile();">
+    <!-- 暂时不知道body上面的onload事件有什么目的 -->
     <form name="uploadForm">
         <table>
             <tbody>

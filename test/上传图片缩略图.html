@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>上传图片缩略图</title>
+	<style type="text/css">
+		.thumbnail,.thumbnail2{
+			width: 200px;
+			height: 200px;
+			line-height: 200px;
+			text-align: center;
+			border:1px solid #eee;
+		}
+		.thumbnail img ,.thumbnail2 img{
+			max-height: 100%;
+			max-width: 100%;
+			vertical-align: middle;
+		}
+	</style>
+	<script type="text/javascript" src='js/ccc.js'></script>
+	<script type="text/javascript" src='js/jquery.min.js'></script>
+	<script type="text/javascript">
+		$(function(){
+			$(".uploadInput").on("change",function(e){
+
+				var that = $(this);
+				var file  = that[0].files[0];
+
+				// fileReader API 方法
+				ccc.fileReader(file,function(src){
+					// console.log(src);//base64 src
+					that.siblings('.thumbnail').html("<img src='"+src+"'>");
+				});
+
+				// URL API 方法 没有fileReader兼容性好
+				var imageUrl = ccc.getFileUrl(file);
+				// console.log(imageUrl);
+				var image = new Image();
+				image.src = imageUrl;
+				image.onload = function(){
+					ccc.cancelFileUrl(imageUrl);
+				}
+				$(".thumbnail2").html('');
+				$(image).appendTo('.thumbnail2');
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<div class="upload-item">
+			<input type="file" class="uploadInput" name="">
+			<div class="thumbnail"></div>
+			<div class="thumbnail2"></div>
+		</div>
+	</div>
+</body>
+</html>
