@@ -2,45 +2,151 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>纵坐标分割</title>
+	<style type="text/css">
+		#canvas{
+			border:1px solid #eee;
+			width: 100%;
+		}
+	</style>
 </head>
 
 <body>
-    <script type="text/javascript">
-    function apartNum(n,mul) {//mul 10倍数 10 100 1000 ....
-        switch (n) {
-            case 1:{
-				return [0.2*mul,0.4*mul,0.6*mul,0.8*mul,1*mul];
-            }
-            case 2:{
-                return apartNum(n/2,mul*2);
-            }
-            case 3:{
-                return [0.5*mul,1*mul,1.5*mul,2*mul,2.5*mul,3*mul];
-            }
-            case 4:{
-                return apartNum(n/4,mul*4);
-            }
-            case 5:{
-                return apartNum(n/5,mul*5);
-            }
-            case 6:{
-                return apartNum(n/2,mul*2);
-            }
-            case 7:{
-                return [1*mul,2*mul,3*mul,4*mul,5*mul,6*mul,7*mul];
-            }
-            case 8:{
-                return apartNum(n/8,mul*8);
-            }
-            case 9:{
-                return apartNum(n/3,mul*3);
-            }
+	<canvas id="canvas"></canvas>
+	<script type="text/javascript">
+		function apartNum(n){
+			var n = parseInt(n); //取整数部分
+			var digit  = String(n).length;//数位
+			var mul  = Math.pow(10,digit-1)//倍数
+
+			//最近一个可以被5分割的数
+			var near = Math.ceil(n*10/mul); //先将数字转化为最为接近的10位数
+			if(near<50){//本来之前只有这个,打算可以被5整除的数就可以了,但是60,70,80,90这些也符合,但是这些数作为坐标分割出来的数会不好看,所以就有了以50这个界限作为分割
+				while(!(near%5==0)){
+					near++;
+				}
+			}else{//若大于50 , 只取75
+				while(!(near%25==0)){
+					near++;
+				}
+			}
+			near = near/10*mul;
+
+			return {
+				"mul":mul,
+				"near":near,
+				"apart":[near/5,near/5*2,near/5*3,near/5*4,near/5*5]
+			};
+		}
+
+		function arryMax(arr){
+			var arr = arr.slice();
+			arr = arr.sort(function(a,b){
+				return b-a;
+			});
+			return arr[0]
+		}
+
+		var data = [4,56,64,142,123];
+		var dataXName = ["星期一","星期二","星期三","星期四","星期五"];
+		var dataYName = apartNum(arryMax(data));
+		var max = dataYName.near;
+		dataYName = dataYName.apart;
+		console.log(dataYName,max);
+
+
+		/*
+		 *
+		 *  canvas
+		 *
+		 */
+		var canvas = document.getElementById('canvas');
+		var mul = 1 //倍数
+		canvas.width=800*mul;
+		canvas.height=600*mul;
+		var padding = 80*mul;
+		var cw = canvas.width;
+		var ch = canvas.height;
+		var mw = canvas.width-2*padding;//main width
+		var mh = canvas.height-2*padding;//main height
+		var x0 = padding;//坐标x轴起始位置
+        var y0 = padding+mh//坐标y轴起始位置
+        var ctx = canvas.getContext('2d');
+
+        ctx.lineWidth = 2 * mul;
+
+        // 画点函数
+        function point(x,y){
+        	// x = x+x0;
+        	// y = y0-y;//减去多少就是向上移动多少嘛
+	        ctx.beginPath();
+	    	ctx.fillStyle = "#fff";
+		    ctx.arc(x, y, 6*mul, 0, 2*Math.PI, true);
+		    ctx.closePath();
+		    ctx.fill();
+
+		    ctx.beginPath();
+		    ctx.fillStyle = "#ffa726";
+		    ctx.arc(x, y, 4*mul, 0, 2*Math.PI, true);
+		    ctx.closePath();
+		    ctx.fill();
         }
-    }
-    console.log(apartNum(3,10));
-    </script>
+
+        function line(arr){
+        	var len = arr.length;
+        	var arrX = [];
+        	var arrY = arr.slice();
+        	for(var i=0;i<len;i++){
+        		arrY[i] =y0-arrY[i]
+        		arrX.push((mw*0.95)/(len-1)*i+x0);//为了避免点占满整个坐标轴 , 所以坐标轴的宽度乘以0.95 , 这样最多只会占到95%
+        	}
+        	console.log(arrY,arrX);
+    		ctx.beginPath();
+    		ctx.strokeStyle = "#ffa726";
+        	for(var i=0;i<len;i++){
+        		if(i==0){
+        			ctx.moveTo(arrX[i],arrY[i]);
+        		}else{
+        			ctx.lineTo(arrX[i],arrY[i]);
+        		}
+        	}
+        	ctx.stroke();
+        	for(var i=0;i<len;i++){
+        		point(arrX[i],arrY[i]);
+        	}
+        }
+
+        ctx.strokeStyle = "#757575";
+        /*坐标轴*/
+        ctx.beginPath();
+
+        // 箭头
+        ctx.moveTo(x0,padding);
+        ctx.lineTo(x0-15*mul,padding+20*mul);
+        ctx.moveTo(x0,padding);
+        ctx.lineTo(x0+15*mul,padding+20*mul);
+
+        ctx.moveTo(x0+mw,y0);
+        ctx.lineTo(x0+mw-20*mul,y0-15*mul);
+        ctx.moveTo(x0+mw,y0);
+        ctx.lineTo(x0+mw-20*mul,y0+15*mul);
+
+        // x,y轴
+        ctx.moveTo(x0,padding);
+        ctx.lineTo(x0,y0);//80,10+mh 为坐标轴起点位置
+        ctx.lineTo(x0+mw,y0);
+        ctx.stroke();
+
+        console.log(mw,mh);
+
+        line([0,100,123,432,323,67,123,345]);
+
+
+
+
+	</script>
 </body>
 
 </html>
