@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>纵坐标分割</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    function toSimple(n){
+        var n = parseInt(n); //取整数部分
+        var digit  = String(n).length;//数位
+        var mul  = Math.pow(10,digit-1)//倍数
+
+        //最近一个可以被5分割的数
+        var near = Math.ceil(n*10/mul); //先将数字转化为最为接近的10位数
+        if(near<50){//本来之前只有这个,打算可以被5整除的数就可以了,但是60,70,80,90这些也符合,但是这些数作为坐标分割出来的数会不好看,所以就有了以50这个界限作为分割
+            while(!(near%5==0)){
+                near++;
+            }
+        }else{//若大于50 , 只取75 , 100
+            while(!(near%25==0)){
+                near++;
+            }
+        }
+        near = near/10*mul;
+
+        return {
+            "mul":mul,
+            "near":near,
+            "apart":[near/5*mul,near/5*mul*2,near/5*mul*3,near/5*mul*4,near/5*mul*5]
+        };
+    }
+    console.log(toSimple(1543).apart);
+    console.log(toSimple(1543));
+    </script>
+</body>
+
+</html>
