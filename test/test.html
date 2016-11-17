@@ -1,200 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>纵坐标分割</title>
+	<title>icon</title>
 	<style type="text/css">
-		#canvas{
-			border:1px solid #eee;
-			width: 100%;
+		*{
+			padding:0;
+			margin:0;
+		}
+		html,body{
+			background: #eee;
+		}
+		.demo{
+			margin:15px 12px;
 		}
 	</style>
-	<script type="text/javascript">
-		function draw(obj,mul){
-			var canvas = document.getElementById('canvas');
-			var mul = mul || 1//倍数
-			canvas.width=800*mul;
-			canvas.height=600*mul;
-			var padding = 80*mul;
-			var cw = canvas.width;
-			var ch = canvas.height;
-			var mw = canvas.width-2*padding;//main width
-			var mh = canvas.height-2*padding;//main height
-			var x0 = padding;//坐标x轴起始位置
-			var y0 = padding+mh//坐标y轴起始位置
-			var ctx = canvas.getContext('2d');
-
-			ctx.lineWidth = 2 * mul;
-
-			// 画点函数
-			function drawPoint(x,y){
-				// x = x+x0;
-				// y = y0-y;//减去多少就是向上移动多少嘛
-				ctx.beginPath();
-				ctx.fillStyle = "#fff";
-				ctx.arc(x, y, 6*mul, 0, 2*Math.PI, true);
-				ctx.closePath();
-				ctx.fill();
-
-				ctx.beginPath();
-				ctx.fillStyle = "#ffa726";
-				ctx.arc(x, y, 4*mul, 0, 2*Math.PI, true);
-				ctx.closePath();
-				ctx.fill();
-			}
-
-			function drawLine(arrX,arrY){
-				var len = arrX.length;
-				ctx.beginPath();
-				ctx.strokeStyle = "#ffa726";
-				for(var i=0;i<len;i++){
-					if(i==0){
-						ctx.moveTo(arrX[i],arrY[i]);
-					}else{
-						ctx.lineTo(arrX[i],arrY[i]);
-					}
-				}
-				ctx.stroke();
-				for(var i=0;i<len;i++){
-					drawPoint(arrX[i],arrY[i]);
-				}
-			}
-
-			/*画坐标轴*/
-			function drawAxis(){
-				/*坐标轴*/
-				ctx.strokeStyle = "#757575";
-				ctx.beginPath();
-				// 箭头
-				ctx.moveTo(x0,padding);
-				ctx.lineTo(x0-15*mul,padding+20*mul);
-				ctx.moveTo(x0,padding);
-				ctx.lineTo(x0+15*mul,padding+20*mul);
-
-				ctx.moveTo(x0+mw,y0);
-				ctx.lineTo(x0+mw-20*mul,y0-15*mul);
-				ctx.moveTo(x0+mw,y0);
-				ctx.lineTo(x0+mw-20*mul,y0+15*mul);
-
-				// x,y轴
-				ctx.moveTo(x0,padding);
-				ctx.lineTo(x0,y0);//80,10+mh 为坐标轴起点位置
-				ctx.lineTo(x0+mw,y0);
-				ctx.stroke();
-				// console.log(mw,mh);
-			}
-
-			function apartNum(n){ //传入数据里面的最大值 , 通过这个方法找到坐标y轴的分割方法
-				var n = parseInt(n); //取整数部分
-				var digit  = String(n).length;//数位
-				var mul  = Math.pow(10,digit-1)//倍数
-
-				//最近一个可以被5分割的数
-				var near = Math.ceil(n*10/mul); //先将数字转化为最为接近的10位数
-				if(near<50){//本来之前只有这个,打算可以被5整除的数就可以了,但是60,70,80,90这些也符合,但是这些数作为坐标分割出来的数会不好看,所以就有了以50这个界限作为分割
-					while(!(near%5==0)){
-						near++;
-					}
-				}else{//若大于50 , 只取75
-					while(!(near%25==0)){
-						near++;
-					}
-				}
-				near = near/10*mul;
-
-				return {
-					"mul":mul,
-					"near":near,//坐标y轴最大值
-					"apart":[near/5,near/5*2,near/5*3,near/5*4,near/5*5]
-				};
-			}
-
-			function arryMax(arr){//找出一个数组里面的最大值
-				var arr = arr.slice();
-				arr = arr.sort(function(a,b){
-					return b-a;
-				});
-				return arr[0]
-			}
-
-
-			function dataToAxis(arr){//将坐标转化为canvas坐标轴坐标 , 主要是y轴
-				var len = arr.length;
-				var arrX = [];
-				var arrY = arr.slice();
-				// 数据处理
-				for(var i=0;i<len;i++){
-					arrY[i] =y0-arrY[i]
-					arrX.push((mw*0.95)/(len-1)*i+x0);//为了避免点占满整个坐标轴 , 所以坐标轴的宽度乘以0.95 , 这样最多只会占到95%
-				}
-				return {
-					"x":arrX,
-					"y":arrY
-				}
-			}
-
-			function dataTodraw(obj){
-				drawAxis();//画坐标轴
-				var dataY = obj.y.slice();
-				var len = dataY.length
-				var apatrResult = apartNum(arryMax(dataY));
-				var near = apatrResult.near;//坐标y轴最大值
-				console.log(near);
-				var dataYName = apatrResult.apart;//坐标y轴划分
-				var dataYNamePosi = [];
-
-				var rate = mh*0.95/near;
-
-				for (var i=0;i<dataY.length;i++){//为了让数据尽可能的充满坐标轴,以及为了不让数据溢出坐标轴,所以按比例对数据进行处理
-					// 按比例处理y轴数据
-					dataY[i] = dataY[i]*rate;
-				}
-				var canAxis = dataToAxis(dataY);//转化为canvas坐标
-				drawLine(canAxis.x,canAxis.y);
-
-				// y轴坐标名
-				for (var j1=0;j1<dataYName.length;j1++){
-					dataYNamePosi[j1] = dataYName[j1]*rate;
-				}
-				dataYNamePosi = dataToAxis(dataYNamePosi).y;//将坐标转化为canvas坐标轴坐标
-				ctx.textBaseline = "alphabetic";
-				ctx.textAlign = "end";
-				ctx.fillStyle = "#757575";
-				ctx.font = 24+"px serif";
-				for (var j2=0;j2<dataYName.length;j2++){
-					ctx.fillText(dataYName[j2], x0-padding/4, dataYNamePosi[j2]);
-				}
-
-				// x轴坐标名
-				var dataXNamePosi = canAxis.x;
-				var dataXName = obj.xName;
-				ctx.textAlign = "center";
-				ctx.textBaseline = "top";
-				for(var j3=0;j3<dataXNamePosi.length;j3++){
-					if(dataXName && dataXName[j3]){
-						ctx.fillText(dataXName[j3], dataXNamePosi[j3], y0+padding/4);
-					}else{
-						ctx.fillText(j3, dataXNamePosi[j3], y0+padding/4);
-					}
-				}
-
-			}
-			dataTodraw(obj);
-		}
-	</script>
 </head>
-
 <body>
-	<canvas id="canvas"></canvas>
-	<script type="text/javascript">
-		var obj = {
-			"y":[0,50,61,2,1,123,456],
-			"xName":["星期一","星期二","星期三","星期四","星期五"]
-		}
-		draw(obj);
-	</script>
+	<div class="demo demo1">
+		<p class="line1">Lorem ipsum dolor sit amet.</p>
+		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt laborum, recusandae nobis consequatur? Animi in voluptas nemo, alias aliquam.</p>
+	</div>
+	<div class="demo demo2">
+		<p class="line1">Lorem ipsum dolor sit amet.</p>
+		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima rem in itaque, maxime, culpa officiis. Aut necessitatibus excepturi quasi omnis.</p>
+	</div>
+	<div class="demo demo3">
+		<p class="line1">Lorem ipsum dolor sit amet.</p>
+		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis vel voluptatem suscipit minima, non incidunt pariatur recusandae ducimus ullam illo?</p>
+	</div>
+	<div class="demo demo4">
+		<p class="line1">Lorem ipsum dolor sit amet.</p>
+		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque magni voluptatem porro possimus nesciunt quae doloremque eaque perferendis ducimus. Dolorem.</p>
+	</div>
+	<div class="demo demo5">
+		<p class="line1">Lorem ipsum dolor sit amet.</p>
+		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At nam, veniam inventore ipsam id aspernatur magnam, voluptates illo! Molestiae, quos.</p>
+	</div>
 </body>
-
 </html>
