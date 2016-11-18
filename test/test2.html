@@ -35,8 +35,16 @@
     if (!Array.prototype.tolast) {
         Array.prototype.tolast = function(posi) {
             var mid = this[posi];
-            this.splice(posi, 1);
+            this.splice(posi, 1);//删除
             this.push(mid);
+            return this;
+        }
+    }
+    if(!Array.prototype.toPosi){
+        Array.prototype.toPosi = function(oldPosi,newPosi){
+            var mid = this[oldPosi];
+            this.splice(oldPosi,1);//删除
+            this.splice(newPosi,0,mid);
             return this;
         }
     }
@@ -354,10 +362,21 @@
             var _index = that.index();
             if(that.is(".active")){
                 that.appendTo('.list').removeClass('active');
+
                 data[_index].state = "inactive";
                 data.tolast(_index);
-            }
 
+                inactiveNum++;
+            }else{
+                var newPosi = (data.length - 1 - inactiveNum)+1;
+
+                that.addClass('active').insertAfter('.item:eq('+(newPosi-1)+')');
+
+                data[_index].state = "active";
+                data.toPosi(_index,newPosi);
+
+                inactiveNum--;
+            }
             console.clear();
             console.log(JSON.stringify(data));
         });
