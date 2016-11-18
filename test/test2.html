@@ -4,101 +4,371 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        ul,li{
+            list-style: none;
+        }
+        .list{
+            user-select:none;
+            -webkit-user-select:none;
+        }
+        .item{
+            float: left;
+            width: 80px;
+            line-height: 25px;
+            border-radius: 6px;
+            border:1px solid #eee;
+            margin:5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .item.active{
+            background: #ff9898;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    if (!Array.prototype.tolast) {
+        Array.prototype.tolast = function(posi) {
+            var mid = this[posi];
+            this.splice(posi, 1);
+            this.push(mid);
+            return this;
+        }
+    }
+    var data = [{
+        "id": 0,
+        "state": "active"
+    }, {
+        "id": 1,
+        "state": "active"
+    }, {
+        "id": 2,
+        "state": "active"
+    }, {
+        "id": 3,
+        "state": "active"
+    }, {
+        "id": 4,
+        "state": "active"
+    }, {
+        "id": 5,
+        "state": "active"
+    }, {
+        "id": 6,
+        "state": "active"
+    }, {
+        "id": 7,
+        "state": "active"
+    }, {
+        "id": 8,
+        "state": "active"
+    }, {
+        "id": 9,
+        "state": "active"
+    }, {
+        "id": 10,
+        "state": "active"
+    }, {
+        "id": 11,
+        "state": "active"
+    }, {
+        "id": 12,
+        "state": "active"
+    }, {
+        "id": 13,
+        "state": "active"
+    }, {
+        "id": 14,
+        "state": "active"
+    }, {
+        "id": 15,
+        "state": "active"
+    }, {
+        "id": 16,
+        "state": "active"
+    }, {
+        "id": 17,
+        "state": "active"
+    }, {
+        "id": 18,
+        "state": "active"
+    }, {
+        "id": 19,
+        "state": "active"
+    }, {
+        "id": 20,
+        "state": "active"
+    }, {
+        "id": 21,
+        "state": "active"
+    }, {
+        "id": 22,
+        "state": "active"
+    }, {
+        "id": 23,
+        "state": "active"
+    }, {
+        "id": 24,
+        "state": "active"
+    }, {
+        "id": 25,
+        "state": "active"
+    }, {
+        "id": 26,
+        "state": "active"
+    }, {
+        "id": 27,
+        "state": "active"
+    }, {
+        "id": 28,
+        "state": "active"
+    }, {
+        "id": 29,
+        "state": "active"
+    }, {
+        "id": 30,
+        "state": "active"
+    }, {
+        "id": 31,
+        "state": "active"
+    }, {
+        "id": 32,
+        "state": "active"
+    }, {
+        "id": 33,
+        "state": "active"
+    }, {
+        "id": 34,
+        "state": "active"
+    }, {
+        "id": 35,
+        "state": "active"
+    }, {
+        "id": 36,
+        "state": "active"
+    }, {
+        "id": 37,
+        "state": "active"
+    }, {
+        "id": 38,
+        "state": "active"
+    }, {
+        "id": 39,
+        "state": "active"
+    }, {
+        "id": 40,
+        "state": "active"
+    }, {
+        "id": 41,
+        "state": "active"
+    }, {
+        "id": 42,
+        "state": "active"
+    }, {
+        "id": 43,
+        "state": "active"
+    }, {
+        "id": 44,
+        "state": "active"
+    }, {
+        "id": 45,
+        "state": "active"
+    }, {
+        "id": 46,
+        "state": "active"
+    }, {
+        "id": 47,
+        "state": "active"
+    }, {
+        "id": 48,
+        "state": "active"
+    }, {
+        "id": 49,
+        "state": "active"
+    }, {
+        "id": 50,
+        "state": "active"
+    }, {
+        "id": 51,
+        "state": "active"
+    }, {
+        "id": 52,
+        "state": "active"
+    }, {
+        "id": 53,
+        "state": "active"
+    }, {
+        "id": 54,
+        "state": "active"
+    }, {
+        "id": 55,
+        "state": "active"
+    }, {
+        "id": 56,
+        "state": "active"
+    }, {
+        "id": 57,
+        "state": "active"
+    }, {
+        "id": 58,
+        "state": "active"
+    }, {
+        "id": 59,
+        "state": "active"
+    }, {
+        "id": 60,
+        "state": "active"
+    }, {
+        "id": 61,
+        "state": "active"
+    }, {
+        "id": 62,
+        "state": "active"
+    }, {
+        "id": 63,
+        "state": "active"
+    }, {
+        "id": 64,
+        "state": "active"
+    }, {
+        "id": 65,
+        "state": "active"
+    }, {
+        "id": 66,
+        "state": "active"
+    }, {
+        "id": 67,
+        "state": "active"
+    }, {
+        "id": 68,
+        "state": "active"
+    }, {
+        "id": 69,
+        "state": "active"
+    }, {
+        "id": 70,
+        "state": "active"
+    }, {
+        "id": 71,
+        "state": "active"
+    }, {
+        "id": 72,
+        "state": "active"
+    }, {
+        "id": 73,
+        "state": "active"
+    }, {
+        "id": 74,
+        "state": "active"
+    }, {
+        "id": 75,
+        "state": "active"
+    }, {
+        "id": 76,
+        "state": "active"
+    }, {
+        "id": 77,
+        "state": "active"
+    }, {
+        "id": 78,
+        "state": "active"
+    }, {
+        "id": 79,
+        "state": "active"
+    }, {
+        "id": 80,
+        "state": "active"
+    }, {
+        "id": 81,
+        "state": "active"
+    }, {
+        "id": 82,
+        "state": "active"
+    }, {
+        "id": 83,
+        "state": "active"
+    }, {
+        "id": 84,
+        "state": "active"
+    }, {
+        "id": 85,
+        "state": "active"
+    }, {
+        "id": 86,
+        "state": "active"
+    }, {
+        "id": 87,
+        "state": "active"
+    }, {
+        "id": 88,
+        "state": "active"
+    }, {
+        "id": 89,
+        "state": "active"
+    }, {
+        "id": 90,
+        "state": "active"
+    }, {
+        "id": 91,
+        "state": "active"
+    }, {
+        "id": 92,
+        "state": "active"
+    }, {
+        "id": 93,
+        "state": "active"
+    }, {
+        "id": 94,
+        "state": "active"
+    }, {
+        "id": 95,
+        "state": "active"
+    }, {
+        "id": 96,
+        "state": "active"
+    }, {
+        "id": 97,
+        "state": "active"
+    }, {
+        "id": 98,
+        "state": "active"
+    }, {
+        "id": 99,
+        "state": "active"
+    }];
 
+    var inactiveNum = 0;//记录有多少个是inactive
+
+    $(function(){
+        for (var j = 0; j < data.length; j++) {
+            $("<li class='item "+data[j].state+"'>"+data[j].id+"</li>").appendTo(".list");
+        }
+
+        $('.list').on("click",'.item',function(){
+            var that  = $(this);
+            var _index = that.index();
+            if(that.is(".active")){
+                that.appendTo('.list').removeClass('active');
+                data[_index].state = "inactive";
+                data.tolast(_index);
+            }
+
+            console.clear();
+            console.log(JSON.stringify(data));
+        });
+    });
+    </script>
 </head>
 
 <body>
-    <div id="wrap">
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-        <p class="pro">Lorem ipsum dolor sit amet.</p>
-    </div>
-    <script type="text/javascript">
-        var jQdom = $(".pro");
-        var tagDom = document.getElementsByTagName("p");
-        var classDom = document.getElementsByClassName("pro");
-        var queryDom1 = document.querySelectorAll(".pro");
-        var queryDom2 = document.querySelectorAll("p");
+    <ul class="list">
 
-        var p1 = $("p").eq(0);
-        var p2 = $(".pro").eq(0);
-        console.log(p1 == p2);//false
-        console.log(p1[0]==p2[0]);//true
-
-
-        for(var a = 0;a<classDom.length;a++){
-            classDom[a].index = a;
-            classDom[a].onclick = function(){
-                alert(this.index);
-            }
-        }
-
-        var arr = [jQdom, tagDom, classDom, queryDom1, queryDom2];
-
-
-
-        // 复制dom
-        // 方法1 - 不过这个方法每循环一次就重绘一次，有可能会产生性能问题
-        for (var i = 0; i < 5; i++) {
-            $("<p class='pro' data-num=" + i + ">" + arr[i].toString() + "</p>").appendTo("#wrap");
-        }
-
-        // 方法二 - 有个中间体先承载着，然后中间体再插入document
-        var mid = ""; //中间体
-        for (var j = 0; j < 5; j++) {
-            mid += "<p class='pro' data-num=" + j + ">" + arr[j].toString() + "2</p>"
-        }
-        $(mid).appendTo("#wrap");
-
-        var mid2 = $("<div id='wrap2'></div>"); //中间体
-        for (var k = 0; k < 5; k++) {
-            $("<p class='pro' data-num=" + k + ">" + arr[k].toString() + "3</p>").appendTo(mid2);
-        }
-        mid2.insertAfter("#wrap");
-
-        // 方法三，克隆
-        for (var l = 0; l < 5; l++) {
-            var temple = jQdom.eq(0).clone(); //模板
-            temple.attr("data-num", l).html(arr[l].toString() + "4").appendTo("#wrap2");
-        }
-
-        var len = "";
-        for (var n = 0; n < arr.length; n++) {
-            len += arr[n].length + " ";
-        }
-        console.log(len); //20 40 40 20 20
-        // 可以看出jq获取的dom节点，还有用querySelectorAll,获得的节点都不是实时变化的。而用ByTagName，ByClassName是实时变化的。虽然ByTagName，ByClassName获取的节点是实时变化的，但是如果在新增节点前已经绑定了事件，新节点还是会没有绑定事件，所以无论哪一种方法，要实时绑定事件都要用事件委托。
-        jQdom = $(".pro");
-        queryDom1 = document.querySelectorAll(".pro");
-        queryDom2 = document.querySelectorAll("p");
-        arr = [jQdom, tagDom, classDom, queryDom1, queryDom2];
-
-        var len = "";
-        for (var m = 0; m < arr.length; m++) {
-            len += arr[m].length + " ";
-        }
-        console.log(len); //40 40 40 40 40
-
-
-    </script>
+    </ul>
 </body>
 
 </html>
