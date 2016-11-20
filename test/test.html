@@ -1,41 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
-	<title>icon</title>
-	<style type="text/css">
-		*{
-			padding:0;
-			margin:0;
+	<title>Document</title>
+	<script type="text/javascript">
+	var company = {
+		"bootstrapped": true,
+		"in_process_packages": [],
+		"installed_packages": [
+			"All Autocomplete",
+			"AutoFileName",
+			"Boxy Theme",
+			"BracketHighlighter",
+			"ConvertToUTF8",
+			"Emmet",
+			"Git",
+			"HTML-CSS-JS Prettify",
+			"LESS",
+			"Material Theme",
+			"Monokai - Spacegray",
+			"Nodejs",
+			"Package Control",
+			"Predawn",
+			"Predawn Monokai",
+			"Solarized Color Scheme",
+			"SublimeCodeIntel",
+			"Theme - Bamboo",
+			"Theme - Brogrammer",
+			"Theme - Flatland",
+			"Theme - Glacier",
+			"Theme - itg.flat",
+			"Theme - Soda",
+			"Theme - Solarized Flat",
+			"Theme - Solarized Space",
+			"View In Browser"
+		]
+	}
+	var home = {
+		"bootstrapped": true,
+		"in_process_packages": [],
+		"installed_packages": [
+			"All Autocomplete",
+			"AutoFileName",
+			"Boxy Theme",
+			"BracketHighlighter",
+			"Emmet",
+			"Git",
+			"HTML-CSS-JS Prettify",
+			"LESS",
+			"Material Theme",
+			"Monokai - Spacegray",
+			"Monokai Gray",
+			"Package Control",
+			"Predawn",
+			"Predawn Monokai",
+			"SideBarEnhancements",
+			"Solarized Color Scheme",
+			"SublimeCodeIntel",
+			"Theme - Asphalt",
+			"Theme - Brogrammer",
+			"Theme - Flatland",
+			"Theme - Glacier",
+			"Theme - itg.flat",
+			"Theme - Monokai",
+			"Theme - Soda",
+			"Theme - Sodarized",
+			"Theme - Solarized Flat",
+			"Theme - Solarized Space",
+			"Theme - Spacegray",
+			"View In Browser"
+		]
+	}
+
+	var comPackage = company.installed_packages;
+	var homPackage = home.installed_packages;
+
+	if(!Array.prototype.hasVal){
+		Array.prototype.hasVal = function (val){
+			for(var i in this){
+				if(this[i]==val){
+					return true;
+				}
+			}
 		}
-		html,body{
-			background: #eee;
+	}
+
+	for(var i in comPackage){
+		if(!homPackage.hasVal(comPackage[i])){
+			console.log(comPackage[i]);
 		}
-		.demo{
-			margin:15px 12px;
+	}
+	console.log("\n")
+	for(var i in homPackage){
+		if(!comPackage.hasVal(homPackage[i])){
+			console.log(homPackage[i]);
 		}
-	</style>
+	}
+
+	</script>
 </head>
+
 <body>
-	<div class="demo demo1">
-		<p class="line1">Lorem ipsum dolor sit amet.</p>
-		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt laborum, recusandae nobis consequatur? Animi in voluptas nemo, alias aliquam.</p>
-	</div>
-	<div class="demo demo2">
-		<p class="line1">Lorem ipsum dolor sit amet.</p>
-		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima rem in itaque, maxime, culpa officiis. Aut necessitatibus excepturi quasi omnis.</p>
-	</div>
-	<div class="demo demo3">
-		<p class="line1">Lorem ipsum dolor sit amet.</p>
-		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis vel voluptatem suscipit minima, non incidunt pariatur recusandae ducimus ullam illo?</p>
-	</div>
-	<div class="demo demo4">
-		<p class="line1">Lorem ipsum dolor sit amet.</p>
-		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque magni voluptatem porro possimus nesciunt quae doloremque eaque perferendis ducimus. Dolorem.</p>
-	</div>
-	<div class="demo demo5">
-		<p class="line1">Lorem ipsum dolor sit amet.</p>
-		<p class="line2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At nam, veniam inventore ipsam id aspernatur magnam, voluptates illo! Molestiae, quos.</p>
-	</div>
 </body>
+
 </html>
