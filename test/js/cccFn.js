@@ -70,8 +70,7 @@ function autoTextarea(obj,paddingHeight){
     }
 }*/
 
-// 这个数组是否有这个值   这个方法没有必要 直接用 Array.prototype.indexOf(ie9以及以上
-)
+// 这个数组是否有这个值   这个方法没有必要 直接用 Array.prototype.indexOf(ie9以及以上)
 if(!Array.prototype.hasVal){
     Array.prototype.hasVal = function (val){
         for(var i in this){
@@ -79,6 +78,7 @@ if(!Array.prototype.hasVal){
                 return i;
             }
         }
-        return false;
+        return -1;
     }
 }
+
