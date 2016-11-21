@@ -69,3 +69,16 @@ function autoTextarea(obj,paddingHeight){
         obj.style.height = (obj.scrollHeight-paddingHeight) + "px";
     }
 }*/
+
+// 这个数组是否有这个值   这个方法没有必要 直接用 Array.prototype.indexOf(ie9以及以上
+)
+if(!Array.prototype.hasVal){
+    Array.prototype.hasVal = function (val){
+        for(var i in this){
+            if(this[i]==val){
+                return i;
+            }
+        }
+        return false;
+    }
+}
