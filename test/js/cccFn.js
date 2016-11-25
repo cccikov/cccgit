@@ -90,7 +90,10 @@ function hasClass(obj, cls) {
 }
 
 function addClass(obj, cls) {
-    if (!this.hasClass(obj, cls)) obj.className += " " + cls;
+    if (!this.hasClass(obj, cls)){
+        obj.className = obj.className.trim();//可以避免空格越来越多
+        obj.className += " " + cls;
+    }
 }
 
 function removeClass(obj, cls) {
