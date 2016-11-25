@@ -1,0 +1,65 @@
+// 只会在less显示的注释
+/* less css都会显示的注释 */
+
+/* 变量 */
+@fs12:12px;
+@red:#f00;
+.demo1{
+	font-size: @fs12;
+	color:@red;
+}
+
+
+/* 混合 */
+.a{
+	text-align: center;
+}
+.b{
+	vertical-align: top;
+}
+.demo2{
+	.a;
+	.b;
+}
+
+// 若混合加上括号不会被编译成css
+.a(){
+	text-align: center;
+}
+.b(){
+	vertical-align: top;
+}
+.demo3{
+	.a;
+	.b;
+}
+
+// 函数版 混合 括号里面为默认值
+.a(@ta:center){
+	text-align: @ta;
+}
+.b(@va:top){
+	vertical-align: @va;
+}
+.demo4{
+	.a(left);
+	.b(middle);
+}
+
+/* 嵌套 */
+// css可以写得像html那样嵌套 &代表本选择器
+.outer{
+	height:500px;
+	.middle{
+		height:300px;
+		&:before{
+			content: "asdasd";
+		}
+		.inner{
+			height:100px;
+			&.active{
+				background: red;
+			}
+		}
+	}
+}

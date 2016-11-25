@@ -1,0 +1,41 @@
+/* less css都会显示的注释 */
+/* 变量 */
+.demo1 {
+  font-size: 12px;
+  color: #ff0000;
+}
+/* 混合 */
+.a {
+  text-align: center;
+}
+.b {
+  vertical-align: top;
+}
+.demo2 {
+  text-align: center;
+  vertical-align: top;
+}
+.demo3 {
+  text-align: center;
+  vertical-align: top;
+}
+.demo4 {
+  text-align: left;
+  vertical-align: middle;
+}
+/* 嵌套 */
+.outer {
+  height: 500px;
+}
+.outer .middle {
+  height: 300px;
+}
+.outer .middle:before {
+  content: "asdasd";
+}
+.outer .middle .inner {
+  height: 100px;
+}
+.outer .middle .inner.active {
+  background: red;
+}
