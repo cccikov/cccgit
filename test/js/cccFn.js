@@ -86,6 +86,7 @@ if(!Array.prototype.hasVal){
 
 function hasClass(obj, cls) {
     return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+     // return !!obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));  //这个是返回布尔型
 }
 
 function addClass(obj, cls) {
