@@ -3,105 +3,98 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>限制input</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		#wrap {
+			padding: 15px 30px;
+		}
+
+		ul,
+		li {
+			list-style: none;
+		}
+
+		li {
+			margin: 20px 0;
+		}
+
+		li p {
+			margin: 5px 0;
+		}
+
+		li input {
+			width: 200px;
+			padding: 6px 12px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		li input:focus{
+			outline: none;
+			box-shadow:  0 0 2px #458b8e;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript">
-	var company = {
-		"bootstrapped": true,
-		"in_process_packages": [],
-		"installed_packages": [
-			"All Autocomplete",
-			"AutoFileName",
-			"Boxy Theme",
-			"BracketHighlighter",
-			"ConvertToUTF8",
-			"Emmet",
-			"Git",
-			"HTML-CSS-JS Prettify",
-			"LESS",
-			"Material Theme",
-			"Monokai - Spacegray",
-			"Nodejs",
-			"Package Control",
-			"Predawn",
-			"Predawn Monokai",
-			"Solarized Color Scheme",
-			"SublimeCodeIntel",
-			"Theme - Bamboo",
-			"Theme - Brogrammer",
-			"Theme - Flatland",
-			"Theme - Glacier",
-			"Theme - itg.flat",
-			"Theme - Soda",
-			"Theme - Solarized Flat",
-			"Theme - Solarized Space",
-			"View In Browser"
-		]
-	}
-	var home = {
-		"bootstrapped": true,
-		"in_process_packages": [],
-		"installed_packages": [
-			"All Autocomplete",
-			"AutoFileName",
-			"Boxy Theme",
-			"BracketHighlighter",
-			"Emmet",
-			"Git",
-			"HTML-CSS-JS Prettify",
-			"LESS",
-			"Material Theme",
-			"Monokai - Spacegray",
-			"Monokai Gray",
-			"Package Control",
-			"Predawn",
-			"Predawn Monokai",
-			"SideBarEnhancements",
-			"Solarized Color Scheme",
-			"SublimeCodeIntel",
-			"Theme - Asphalt",
-			"Theme - Brogrammer",
-			"Theme - Flatland",
-			"Theme - Glacier",
-			"Theme - itg.flat",
-			"Theme - Monokai",
-			"Theme - Soda",
-			"Theme - Sodarized",
-			"Theme - Solarized Flat",
-			"Theme - Solarized Space",
-			"Theme - Spacegray",
-			"View In Browser"
-		]
-	}
-
-	var comPackage = company.installed_packages;
-	var homPackage = home.installed_packages;
-
-	if(!Array.prototype.hasVal){
-		Array.prototype.hasVal = function (val){
-			for(var i in this){
-				if(this[i]==val){
-					return true;
+		$(function() {
+			$(".onlyNum").on("keydown", function(e) {
+				console.log(e.keyCode);
+				if (!e.shiftKey) {
+					if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) && e.keyCode != 8 ) {
+						return false;
+					}
+				} else {
+					return false;
 				}
-			}
-		}
-	}
+			});
+			/*利用这种return false的方法是对中文字符无效的*/
+			/*$("input").on("keydown",function(e){
+				return false;
+			});*/
 
-	for(var i in comPackage){
-		if(!homPackage.hasVal(comPackage[i])){
-			console.log(comPackage[i]);
-		}
-	}
-	console.log("\n")
-	for(var i in homPackage){
-		if(!comPackage.hasVal(homPackage[i])){
-			console.log(homPackage[i]);
-		}
-	}
 
+			$("#longText").on("keydown", function(e) {
+				console.log(e.keyCode); //jq的事件对象已经封装好，不用再 var e = e || window.event;这种方式，直接第一个参数就是事件对象
+				if (e.keyCode == 50) { //限制e.keyCode为50的不能输出
+					return false;
+				}
+				if ($(this).val().length > 10) { //限制字数为10个
+					return false;
+				}
+			});
+		});
 	</script>
 </head>
 
 <body>
+	<div id="wrap">
+		<ul>
+			<li>
+				<p>只能输入数字</p>
+				<input class="onlyNum" type="text" name="">
+			</li>
+			<li>
+				<p>只能输入数字加点</p>
+				<input class="" type="text" name="">
+			</li>
+			<li>
+				<p>只能输入中文</p>
+				<input class="" type="text" name="">
+			</li>
+			<li>
+				<p>只能输入非中文</p>
+				<input class="" type="text" name="">
+			</li>
+			<li>
+				<p>只能输入250个字</p>
+				<input class="" type="text" name="">
+			</li>
+		</ul>
+	</div>
 </body>
 
 </html>
