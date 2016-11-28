@@ -389,6 +389,21 @@ ccc.getUrlParam = function(name) {
     return null;
 }
 
+// 一个参数时表示 返回页面url 参数名为name的值;第二参数表示name参数的新值,返回新的url地址
+ccc.urlParam = function(name,newVal) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); //以 name 开头或者以 "&"+name 开头，中间是 "=" + 若干个非&的字符 ,后面是结尾 或者 以 "&"结尾
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        var oldVal = r[2];
+        if(newVal){
+            return window.location.href.replace(name+"="+oldVal,name+"="+newVal);//一定要有属性名,为了避免修改了那些与这个值相同的其他参数
+        }else{
+            return unescape(oldVal)
+        }
+    }
+    return null;
+}
+
 ccc.specialObj = {
     "win":window,
     "doc":document,
