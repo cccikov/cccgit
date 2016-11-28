@@ -110,8 +110,3 @@ function toggleClass(obj,cls){
         addClass(obj, cls);
     }
 }
-
-function toggleClassTest(){
-    var obj = document. getElementById('test');
-    toggleClass(obj,"testClass");
-}
