@@ -5,90 +5,128 @@
     <meta charset="UTF-8">
     <title>限制input</title>
     <style type="text/css">
-    * {
-        padding: 0;
-        margin: 0;
-    }
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-    #wrap {
-        padding: 15px 30px;
-        color: #666;
-    }
+        #wrap {
+            padding: 15px 30px;
+            color: #666;
+        }
 
-    ul,
-    li {
-        list-style: none;
-    }
+        ul,
+        li {
+            list-style: none;
+        }
 
-    li {
-        margin: 20px 0;
-    }
+        li {
+            margin: 20px 0;
+        }
 
-    li p {
-        margin: 5px 0;
-    }
+        li p {
+            margin: 5px 0;
+        }
 
-    li input {
-        width: 200px;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        color: #757575;
-    }
+        li input {
+            width: 200px;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #757575;
+        }
 
-    li input:focus {
-        outline: none;
-        box-shadow: 0 0 2px #458b8e;
-    }
+        li input:focus {
+            outline: none;
+            box-shadow: 0 0 2px #458b8e;
+        }
 
-    .onlyNum2 {
-        -webkit-appearance: none;
-    }
+        li.warning input {
+            border: 1px solid #d27070;
+            box-shadow: 0 0 4px #ff0000;
+        }
+        .warning{
+            position: relative;
+        }
+        .warning :after{
+            content:"";
+            position: absolute;
+            top:0px;
+            left:-20px;
+            width: 16px;
+            height: 16px;
+            background: url(img/information128red.png) center / contain no-repeat;
+        }
 
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
+        .onlyNum2 {
+            -webkit-appearance: none;
+        }
 
-    input[type="number"] {
-        -moz-appearance: textfield;
-    }
-    /*ie x */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
 
-    ::-ms-clear,
-    ::-ms-reveal {
-        display: none;
-    }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        /*ie x */
+
+        ::-ms-clear,
+        ::-ms-reveal {
+            display: none;
+        }
     </style>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-    $(function() {
-        $(".onlyNum").on("keydown", function(e) {
-            console.log(e.keyCode);
-            if (!e.shiftKey) {
-                if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) && e.keyCode != 8) {
+        $(function() {
+            /*
+             *  以上都是通过js自动修正，自动阻止，但是还是不完善，特别是但是中文输入的时候，输入法的影响，中文的句号逗号都好难阻止
+             */
+            // 只能数字
+            $(".onlyNum").on("keydown", function(e) {
+                console.log(e.keyCode);
+                if (!e.shiftKey) {
+                    if (!((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) && e.keyCode != 8) {
+                        return false;
+                    }
+                } else {
                     return false;
                 }
-            } else {
+            });
+            /*利用这种return false的方法是对中文字符无效的*/
+            /*$("input").on("keydown",function(e){//即使这样还是可以输入中文字符
                 return false;
-            }
-        });
-        /*利用这种return false的方法是对中文字符无效的*/
-        /*$("input").on("keydown",function(e){
-        	return false;
-        });*/
+            });*/
 
 
-        $("#longText").on("keydown", function(e) {
-            console.log(e.keyCode); //jq的事件对象已经封装好，不用再 var e = e || window.event;这种方式，直接第一个参数就是事件对象
-            if (e.keyCode == 50) { //限制e.keyCode为50的不能输出
-                return false;
-            }
-            if ($(this).val().length > 10) { //限制字数为10个
-                return false;
-            }
+            /*只能输入中文*/
+            $(".onlyChinese").on("input", function() {
+                var that = $(this);
+                var val = that.val();
+                that.val(val.replace(/[^\u4e00-\u9fa5]/g, ""));
+            });
+
+            /*这种用输入法输入中文的时候阻止不了*/
+            $(".onlyLen").on("keydown", function(e) {
+                var that = $(this);
+                var val = that.val();
+                console.log(e.keyCode); //jq的事件对象已经封装好，不用再 var e = e || window.event;这种方式，直接第一个参数就是事件对象
+                if (e.keyCode == 50) { //限制e.keyCode为50(大键盘2)的不能输出
+                    return false;
+                }
+                if (val.length > 10 && e.keyCode !=8 ) { //限制字数为10个
+                    return false;
+                }
+            });
+
+            /*
+             *  以下是通过正则判断，当输入错误的时候，不主动阻止，而是给予提示，让用户自己修改
+             */
+
+
+
         });
-    });
     </script>
 </head>
 
@@ -100,24 +138,27 @@
                 <input class="onlyNum" type="text" name="">
             </li>
             <li>
-                <p>只能输入数字</p>
+                <p>只能输入数字 type="number"</p>
                 <input class="onlyNum" type="number" name="">
             </li>
             <li>
-                <p>只能输入数字加点</p>
-                <input class="" type="text" name="">
-            </li>
-            <li>
-                <p>只能输入中文</p>
-                <input class="" type="text" name="">
+                <p>只能输入数字加点 type="number"</p>
+                <input class="" type="number" name="">
             </li>
             <li>
                 <p>只能输入非中文</p>
-                <input class="" type="text" name="">
+                <input class="nochina" type="text" name="">
             </li>
             <li>
-                <p>只能输入250个字</p>
-                <input class="" type="text" name="">
+                <p>只能输入10个字</p>
+                <input class="onlyLen" type="text" name="">
+            </li>
+        </ul>
+        <hr />
+        <ul class="method2">
+            <li>
+                <p>只能输入10个字</p>
+                <input class="onlyLen" type="text" name="">
             </li>
         </ul>
     </div>
