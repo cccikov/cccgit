@@ -24,13 +24,13 @@
 					alert(this.name);
 				}
 			}*/
-	
+
 			var person1 = new Person();
 
 			/*
 			 * 实例内部有一个叫做[[prototype]]的指针，指向构造函数的原型对象。
 			 * 但是我们却无法访问[[prototype]]。
-			 * 
+			 *
 			 * isPrototypeof()方法，用于检测特定实例是否原型的实例，true表示是。
 			 */
 			console.log(Person.prototype.isPrototypeOf(person1)); //true,表示person1实例的[[prototype]]指向Person Prototype
@@ -70,19 +70,19 @@
 
 			console.log(hasPrototypeProperty(person1, "name")); //true 属性在原型中
 			console.log(hasPrototypeProperty(person1, "age")); //false 属性在对象中
-			
+
 			console.log("%c-----------我是分隔符-----------", "color:red");
-			
+
 			//枚举属性
 			for(var pro in person1){
 				console.log("person1."+pro,"=",person1[pro]);
 			}//person1.age = 50,person1.name = Nocholas,person1.job = Software Engineer,person1.sayName = () {alert(this.name);}. 除了 constructor，其他属性都被枚举出来
-			
+
 
 			// Object.keys()方法  ECMAScript5，返回一个包含所有可枚举实例属性的字符串
 			console.log(Object.keys(person1.constructor.prototype));//等价于Object.keys(Person.prototype)，["name", "age", "job", "sayName"]
 			console.log(Object.keys(person1));//["age"]
-			
+
 			// Object.getOwnPropertyNames() 得到全部实例属性，无论是否可枚举
 			console.log(Object.getOwnPropertyNames(person1));//["age"]
 			console.log(Object.getOwnPropertyNames(Person.prototype));//["constructor", "name", "age", "job", "sayName"]
@@ -95,7 +95,13 @@
 			}
 			person1.sayHi();//hi
 
-			// 这种是错误写法，因为后面重写了原型，而且enemy仍是指向之前的原型
+
+
+
+
+			/*
+			 * 以下这种是错误写法，因为后面重写了原型，friend仍是指向之前的原型
+			 */
 			var friend = new Person();
 			Person.prototype = {
 				constructor:Person,
@@ -104,7 +110,48 @@
 				}
 			}
 			//var friend = new Person(); 只有在重写后新建的实例才是，指向新原型
-			friend.sayFu();//报错
+			// friend.sayFu();//报错
+
+
+			/*
+			 * 一个容易让人忽略的重写prototype情况
+			 */
+			var n = 0;
+			function Transport(){
+				Transport.prototype = {//重写prototype
+					"constructor":Transport,
+					"proNum":n++
+				}
+			}
+
+			var car = new Transport();
+			var plane = new Transport();
+			var ship = new Transport();
+			if(car.proNum != undefined){
+				console.log(car.proNum);
+			}else{
+				console.log("car对象没有proNum属性")
+			}
+			if(plane.proNum != undefined){
+				console.log(plane.proNum);
+			}else{
+				console.log("plane对象没有proNum属性")
+			}
+			if(ship.proNum != undefined){
+				console.log(ship.proNum);
+			}else{
+				console.log("ship对象没有proNum属性")
+			}
+
+			// 输出：
+			// car对象没有proNum属性
+			// 0
+			// 1
+
+			//因为重写prototype后，要在重写后创建的实例对象才是指向新的prototype，所以覆盖prototype这种写法若是写在构造函数里面，每新建一个实例对象，prototype就指向新的对象，所以下一个实例才是指向前一个prototype，所以第一个创建的对象就会得不到prototype的内容。特别是继承，会涉及重写prototype，所以为了使用正常，重写prototype都是应该在构造函数外面
+
+
+
 
 		</script>
 	</body>
