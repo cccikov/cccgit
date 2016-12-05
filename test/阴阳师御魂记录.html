@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>阴阳师御魂记录</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		.item{
+			margin:30px;
+			color:#757575;
+		}
+		label{
+			display: inline-block;
+			margin:5px 0;
+		}
+		h5{
+			margin:0 0 15px 0;
+		}
+		input{
+			width: 50px;
+			padding:6px 0;
+			border:none;
+			border-radius: 5px;
+			margin:0 50px 0 0;
+			text-align: center;
+			box-shadow: 0px 0px 2px rgba(120,120,120,0.3);
+		}
+		input:focus{
+			outline: none;
+		}
+	</style>
+	<script type="text/javascript" src="js/ccc.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			if($("#json").html().trim()!=""){
+				var json = ccc.strToJson($("#json").html());
+			}else{
+				var json = ccc.getStorage("yys") || {};
+				$("#json").html(ccc.jsonToStr(json));
+			}
+			console.log(json);
+			// 进入页面操作
+			for(var i in json){
+				var ele = $("#"+i);
+				if(ele.find("h5").html() ==  json[i].title){
+					ele.find('input').each(function(item,key){
+						$(key).val(json[i].detail[item]);
+					});
+				}else{
+					alert("数据错误");
+				}
+			}
+
+			$("input").on("input change",function(){
+				var that = $(this);
+				var label = that.parent();
+				var _index = label.index(label);
+				console.log(_index);
+				var parents = that.parents(".item");
+				var id = parents.attr("id");
+				var title = parents.find("h5").html();
+				if(!json[id]){
+					json[id] = new Object();
+				}
+				json[id].title = title;
+				if(!json[id].detail){
+					json[id].detail = [0,0,0,0,0,0];
+				}
+				json[id].detail[_index] = Number(that.val());
+				ccc.setStorage("yys",json);
+				$("#json").html(ccc.jsonToStr(json));
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="bangjing" class="item">
+			<h5>蚌精</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="meiyao" class="item">
+			<h5>魅妖</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="zhennv" class="item">
+			<h5>针女</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="xueyouhun" class="item">
+			<h5>雪幽魂</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="dizangfo" class="item">
+			<h5>地藏佛</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="fuyi" class="item">
+			<h5>蝠翼</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="niepanzhihuo" class="item">
+			<h5>涅盘之火</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="sanwei" class="item">
+			<h5>三味</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="wangliangzhixia" class="item">
+			<h5>魍魉之匣</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="beifu" class="item">
+			<h5>被服</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="zhaocaimao" class="item">
+			<h5>招财猫</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="fanzhen" class="item">
+			<h5>反枕</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="lunrudao" class="item">
+			<h5>轮入道</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="rinvsishi" class="item">
+			<h5>日女巳时</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="jingji" class="item">
+			<h5>镜姬</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="zhongling" class="item">
+			<h5>钟灵</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="zheng" class="item">
+			<h5>狰</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="huoling" class="item">
+			<h5>火灵</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="mingwu" class="item">
+			<h5>鸣屋</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="xinyan" class="item">
+			<h5>心眼</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="shuyao" class="item">
+			<h5>树妖</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="wangqie" class="item">
+			<h5>网切</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="yinmoluo" class="item">
+			<h5>阴摩罗</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+		<div id="poshi" class="item">
+			<h5>破势</h5>
+			<label>
+				1
+				<input type="number">
+			</label>
+			<label>
+				2
+				<input type="number">
+			</label>
+			<label>
+				3
+				<input type="number">
+			</label>
+			<label>
+				4
+				<input type="number">
+			</label>
+			<label>
+				5
+				<input type="number">
+			</label>
+			<label>
+				6
+				<input type="number">
+			</label>
+		</div>
+	</div>
+
+	<div id="json">
+		{"bangjing":{"title":"蚌精","detail":["4","6","5","5","4",5]},"meiyao":{"title":"魅妖","detail":[5,0,0,0,0,0]},"zhennv":{"title":"针女","detail":[2,0,0,0,0,0]}}
+	</div>
+</body>
+</html>
