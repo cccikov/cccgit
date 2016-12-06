@@ -46,6 +46,9 @@
     [data-state='well']{
     	border-color:#75e275;
     }
+    [data-state='zero'] input{
+        background:#940404;
+    }
     [data-state='warning'] input{
     	background:#ff8c8c;
     	border-color:#ff8c8c;
@@ -59,8 +62,14 @@
     	border-color:#75e275;
     }
 
-    input:focus {
+    #wrap input:focus {
         /*outline: none;*/
+        background: none;
+    }
+
+    textarea{
+        width: 90%;
+        height:10em;
     }
     </style>
     <script type="text/javascript" src="js/ccc.js"></script>
@@ -75,13 +84,13 @@
         var newDay = (new Date(newTime)).getDate();
         if ((newTime - oldTime > 86400000) || (newTime - oldTime < 86400000 && oldDay != newDay)) { //超过24小时
             console.log("超过24小时,或者虽然还没有超过24小时，但是已经不是同一天了");
-            var json = ccc.strToJson($("#json").html());
+            var json = ccc.strToJson($("#json").val());
             ccc.setStorage("yys", json);
             ccc.setStorage("time", newTime);
         } else { //同一天
             console.log("同一天");
             var json = ccc.getStorage("yys") || {};
-            $("#json").html(ccc.jsonToStr(json));
+            $("#json").val(ccc.jsonToStr(json));
         }
         console.log(json);
 
@@ -92,12 +101,15 @@
                 ele.find('input').each(function(item, key) {
                     var data = json[i].detail[item];
                     var parent = $(key).parent();
-                    if (data < 3) {
-                    	parent.attr("data-state","warning");
+                    if(data <= 0){
+                        parent.attr("data-state","zero");
+                    }
+                    else if (data < 3) {
+                        parent.attr("data-state","warning");
                     } else if (data < 5) {
-                    	parent.attr("data-state","normal");
+                        parent.attr("data-state","normal");
                     } else {
-                    	parent.attr("data-state","well");
+                        parent.attr("data-state","well");
                     }
                     $(key).val(data);
                 });
@@ -108,12 +120,27 @@
 
         $("input").on("input change", function() {
             var that = $(this);
+            var val = that.val();
+            val = Number(val);
+            that.val(val);
             var label = that.parent();
             var parents = that.parents(".item");
             var _index = parents.find("label").index(label);
-            console.log(_index);
             var id = parents.attr("id");
             var title = parents.find("h5").html();
+
+            console.log(val);
+            if(val <= 0){
+                label.attr("data-state","zero");
+            }
+            else if (val < 3) {
+                label.attr("data-state","warning");
+            } else if (val < 5) {
+                label.attr("data-state","normal");
+            } else {
+                label.attr("data-state","well");
+            }
+
             if (!json[id]) {
                 json[id] = new Object();
             }
@@ -121,9 +148,9 @@
             if (!json[id].detail) {
                 json[id].detail = [0, 0, 0, 0, 0, 0];
             }
-            json[id].detail[_index] = Number(that.val());
+            json[id].detail[_index] = val;
             ccc.setStorage("yys", json);
-            $("#json").html(JSON.stringify(json));
+            $("#json").val(JSON.stringify(json));
         }).on("focus", function() {
             this.select();
         });
@@ -805,9 +832,9 @@
             </label>
         </div>
     </div>
-    <div id="json">
-        {"bangjing":{"title":"蚌精","detail":[4,6,5,3,3,5]},"meiyao":{"title":"魅妖","detail":[5,2,6,2,5,1]},"zhennv":{"title":"针女","detail":[6,2,4,1,3,5]},"xueyouhun":{"title":"雪幽魂","detail":[7,5,6,4,8,4]},"mingwu":{"title":"鸣屋","detail":[0,0,0,1,0,0]},"yinmoluo":{"title":"阴摩罗","detail":[0,0,0,4,0,0]},"zhongling":{"title":"钟灵","detail":[4,0,0,0,0,0]},"zheng":{"title":"狰","detail":[0,0,0,3,0,0]},"poshi":{"title":"破势","detail":[0,0,0,0,0,1]},"dizangfo":{"title":"地藏佛","detail":[8,3,8,0,6,6]},"fuyi":{"title":"蝠翼","detail":[3,1,6,1,5,0]},"niepanzhihuo":{"title":"涅盘之火","detail":[5,5,6,3,6,3]},"sanwei":{"title":"三味","detail":[0,0,0,0,0,2]}}
-    </div>
+    <textarea id="json">
+        {"bangjing":{"title":"蚌精","detail":[5,6,5,3,3,5]},"meiyao":{"title":"魅妖","detail":[5,2,6,2,5,1]},"zhennv":{"title":"针女","detail":[6,2,4,1,3,5]},"xueyouhun":{"title":"雪幽魂","detail":[7,5,6,4,8,4]},"mingwu":{"title":"鸣屋","detail":[6,2,6,0,8,3]},"yinmoluo":{"title":"阴摩罗","detail":[6,2,2,3,6,3]},"zhongling":{"title":"钟灵","detail":[3,3,4,1,3,2]},"zheng":{"title":"狰","detail":[8,1,5,4,5,2]},"poshi":{"title":"破势","detail":[6,0,8,0,3,2]},"dizangfo":{"title":"地藏佛","detail":[8,3,8,0,6,6]},"fuyi":{"title":"蝠翼","detail":[3,1,6,1,6,0]},"niepanzhihuo":{"title":"涅盘之火","detail":[5,5,6,3,6,3]},"sanwei":{"title":"三味","detail":[7,2,8,2,8,2]},"wangliangzhixia":{"title":"魍魉之匣","detail":[6,4,6,5,2,5]},"beifu":{"title":"被服","detail":[3,3,3,2,6,0]},"zhaocaimao":{"title":"招财猫","detail":[4,2,0,0,1,1]},"fanzhen":{"title":"反枕","detail":[4,1,5,2,5,1]},"lunrudao":{"title":"轮入道","detail":[1,1,3,2,2,1]},"rinvsishi":{"title":"日女巳时","detail":[5,5,6,1,4,1]},"jingji":{"title":"镜姬","detail":[8,4,4,2,6,0]},"huoling":{"title":"火灵","detail":[8,8,5,6,1,7]},"xinyan":{"title":"心眼","detail":[5,2,5,4,7,6]},"shuyao":{"title":"树妖","detail":[8,0,8,2,4,3]},"wangqie":{"title":"网切","detail":[7,5,8,4,8,3]}}
+   </textarea>
 </body>
 
 </html>
