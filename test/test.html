@@ -25,6 +25,19 @@
         console.log(a.name);
         console.log(a.age);
 
+
+
+        var a;
+        function person(){
+            this.name = "ccc";
+            console.log(this);
+            a=this;
+        }
+        new person();//这些实例存放在哪里
+        new person();
+        new person();
+        new person();
+
     </script>
 </body>
 </html>
