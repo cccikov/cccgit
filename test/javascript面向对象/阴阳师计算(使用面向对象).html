@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src = "../js/ccc.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+       /* // 通过递归方式生成 创建深层次对象
+        function shikigami(num){
+            if(num>2){
+                for(var i = 0 ;i < num ;i++ ){
+                    this[i] = new shikigami(num-1);
+                }
+            }else{
+                this[0] = "level2";
+            }
+        }
+        var arr = new shikigami(5);*/
+
+        /****************************************************************************/
+
+        // 式神构造函数
+        function Shikigami(name,level,star){
+            if(arguments.length>0){
+                this.name = name;
+                this.level = level;
+                this.star = star;
+            }
+        }
+
+
+        // 狗粮构造函数
+        function Forfeed(star){
+            for(var i=0;i<star;i++){
+                this.push(new Star(star));
+            }
+        }
+        Forfeed.prototype = new Array();//这个不可以写在函数里面,为什么呢??
+
+        var starData = {
+            "star2":{
+                "level":0,
+            },
+            "star3":{
+                "level":20,
+            },
+            "star4":{
+                "level":25,
+            },
+            "star5":{
+                "level":30,
+            },
+            "star6":{
+                "level":35,
+            }
+        }
+
+        function Star(star,obj){
+            if(star){
+                obj = obj || starData["star"+star];
+                var name = obj.name || "***";
+                var level = level || obj.level;
+                Shikigami.call(this,name,level,star);//当前式神
+                // 狗粮
+                if(star>2){
+                    this.feed = new Forfeed(star-1);
+                }
+            }
+        }
+        Star.prototype = new Shikigami();
+
+        Shikigami.prototype.need = function(star){//需要多少star狗粮
+            var that = this;
+            var num = 0;
+            var stop = true;
+            if(that.star > star){
+                do{
+                    num = 10;
+                    stop = false;
+                }while(stop);
+            }
+            return num;
+        }
+
+        var yingcao = new Star(6,{
+            name:"萤草",
+            level:39
+        });
+        console.log(yingcao);
+        console.log(yingcao.need(2));
+
+
+
+    </script>
+</body>
+
+</html>
