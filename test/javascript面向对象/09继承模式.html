@@ -59,7 +59,7 @@
 
 		function SubType(name,age){
 			//继承实例属性，方法
-			SuperType.call(this,name);//这个可以覆盖原型里面超类型的实例属性（子类的这部分属性由共享属性变成实例属性）。
+			SuperType.call(this,name);//这个可以覆盖原型里面超类型的实例属性（子类的这部分属性由共享属性变成实例属性）。这种方式是不会继承prototype里面的方法、属性，因为call、apply只是函数的调用方式，只是将函数里面的this指向调用的对象，是不会涉及prototype的，所以要继承prototype里面的属性、方法，还要通过new继承prototype
 			this.age = age;
 			this.down = "down";
 		};
