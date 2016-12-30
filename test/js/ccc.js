@@ -89,6 +89,11 @@ ccc.removeAttr = function(obj,attrName){
 ccc.isNumber = function(str) {
     return !isNaN(str); // 返回 true false
 };
+/*/^\d+(\.\d){0,2}$/ 最多两位小数的数字
+function isNum(str){
+    var rep = /^\d+(\.\d){0,2}$/;
+    return rep.test(Number(str));
+}*/
 
 // 判断是否真数字（Number对象）
 ccc.isRealNumber = function(str) {
