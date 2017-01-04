@@ -91,7 +91,7 @@ ccc.isNumber = function(str) {
 };
 /*/^\d+(\.\d){0,2}$/ 最多两位小数的数字
 function isNum(str){
-    var rep = /^\d+(\.\d){0,2}$/;
+    var rep = /^\d+\.?\d{0,2}$/;//  \d+ -- 至少一个数字 ; \.? -- 小数点可有可无 ; \d{0,2} -- 小数点后可以有0到2位数
     return rep.test(Number(str));
 }*/
 
