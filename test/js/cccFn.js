@@ -110,3 +110,33 @@ function toggleClass(obj,cls){
         addClass(obj, cls);
     }
 }
+
+// 上传文件限制 , 配合 <input class="file" type="file" name="" accept="image/png,image/x-png,image/jpeg,image/gif,image/bmp"> 效果更佳
+function fileLimit(obj){
+    var that = obj;//jq对象
+    if (that[0].files) { //现代浏览器,支持files API浏览器
+        var file = that[0].files[0];
+    } else {
+        var filePath = that.val();
+        var fileSystem = new ActiveXObject("Scripting.FileSystemObject");//ie 自带 Active-x插件
+        var file = fileSystem.GetFile(filePath);
+    }
+    var fileName = file.name;
+    var fileType = file.type;
+    var fileSize = file.size/1024/1024;
+
+
+
+    var fileSuffix = fileName.slice(fileName.lastIndexOf(".") + 1); //后缀
+    if (fileSuffix != "jpg" && fileSuffix != "png" && fileSuffix != "gif" && fileSuffix != "bmp") {
+        that.add(".file-name").val('');
+        alert("上传的文件格式错误，请上传格式为jpg、png、bmp、gif的图片文件");
+        return false;
+    }
+
+    if(fileSize>1){
+        alert("上传的文件不得大于1m");
+        return false;
+    }
+
+}
