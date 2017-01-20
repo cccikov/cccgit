@@ -10,6 +10,16 @@ function fixNum(num){
     return numArr.join(".");
 }
 
+//保留小数的计算
+function sum(arr,range){//arr是需要计算的数组 , range是保留小数的位数
+    var mul = Math.pow(10,range)
+    var res = 0;
+    for(var i in arr){
+        res += parseInt(Number(arr[i])*mul);
+    }
+    return res/mul;
+}
+
 // Textarea自适应高度  传入对象,可以是原生dom,jqdom,元素id名;若该元素未设置了box-sizing且不在jq环境下,第二个参数为padding-top加上padding-bottom的和
 function autoTextarea(obj,paddingHeight){
     // 若传进来的是字符串(id名),自动获取该对象
