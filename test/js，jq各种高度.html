@@ -20,22 +20,24 @@
 				console.log($(window).innerHeight());
 				console.log($(window).outerHeight());
 				console.log($(window).outerHeight(true));
+				console.log($("body").height());
 				console.log($(document).height());
+				console.log($("html").height());
 				console.log($(document.documentElement).height());
-				
+
 				console.log(window.innerHeight);
 				console.log(window.outerHeight);
 				console.log(window.screen.height);
 				console.log(document.body.scrollHeight);
 				console.log(document.documentElement.scrollHeight)
-				
-				
+
+
 				$(window).on("scroll", function() {
 //					console.log(document.documentElement.clientHeight);
 				});
 			});
 		</script>
-		
+
 	</body>
 
 </html>
