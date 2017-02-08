@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var n = 0;
+        $("iframe").on("load", function() {
+            n++;
+            if (n == 2) { //全部iframe加载完毕
+                var ifm1 = $(window.frames["iframe1"].document);
+                var ifm2 = $(window.frames["iframe2"].document);
+                ifm1.find("#btn1").on("click", function() {
+                    $("<p>顶部iframe中js操作</p>").appendTo(ifm2.find("body"));
+                });
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <iframe id="iframe1" name="iframe1" src="in1.html"></iframe>
+    <iframe id="iframe2" name="iframe2" src="in2.html"></iframe>
+</body>
+
+</html>

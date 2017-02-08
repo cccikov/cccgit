@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var parentIfm = $(window.parent.document);
+            var ifm1 = $(window.parent.frames["iframe1"].document);
+            var ifm2 = $(window.parent.frames["iframe2"].document);
+            $("#btn2").on("click",function(){
+                $("<p>iframe1中js操作</p>").appendTo(ifm2.find("body"));
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <p>我是iframe1</p>
+    <button id="btn1">按钮1</button>
+    <button id="btn2">按钮2</button>
+</body>
+
+</html>
