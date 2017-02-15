@@ -5,10 +5,12 @@
 		<title>YouTube红色激光</title>
 		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			$({property: 0}).animate({property: 100}, {
+			console.log($({property: 0}));
+			$({property: 0,some:100}).animate({property: 100,some:-100}, {
 			    duration: 3000,
 			    step: function() {
 			        var percentage = Math.round(this.property);
+			        console.log(this);
 
 			        $('#progress').css('width',  percentage+"%");
 
@@ -44,7 +46,7 @@
 	</head>
 	<body>
 		<div id="progress">
-			
+
 		</div>
 	</body>
 </html>
