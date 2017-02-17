@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度情人节</title>
+    <style type="text/css">
+        html,body{
+            height:100%;
+            margin:0;
+        }
+        div{
+            /*width: 270px;*/
+            /* height: 129px; */
+            height:100%;
+            background: url(img/baidu.png) 0 0 no-repeat;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var left = 0;
+            var top = 0;
+            var timer = setInterval(function(){
+                /*left-=270;
+                if(left <= -27540){
+                    // clearInterval(timer);
+                    left = 0;
+                }
+                $("div").css("background","url(img/baidu.png) "+left+"px 0 no-repeat")*/
+
+                top+=0.5;
+                left-=270.5;
+                 $("div").css("background","url(img/baidu.png) "+left+"px "+top+"px repeat")
+            },50);
+        });
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
