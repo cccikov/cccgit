@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Document</title>
+	<title>到底加载更多</title>
 	<style type="text/css">
 		*{
 			padding:0;
@@ -45,14 +45,14 @@
 				$('<li>'+index+'</li>').appendTo($("ul"));
 			}
 		}
-		
+
 		if($("li:last").offset().top<window.screen.height-$("li:last").height()){
 			var timer2 = setTimeout(function(){
 				add();
 			},1000);
 		}
 
-		$("#wrap").on("scroll",function(){
+		$("#wrap").on("scroll",function(){//因为这里滚动的是wrap,所以offset().top变成窗口位置
 			var heightPoint = window.screen.height-$("li:last").height();
 			if($("li:last").offset().top<heightPoint && falg){
 				falg = false;

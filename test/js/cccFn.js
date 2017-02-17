@@ -171,3 +171,26 @@ String.prototype.appearMaxTimes = function() {
     }
     return arr.length == 1 ? arr[0] : arr;
 };
+
+
+
+// 是否到底部
+function isbottom(){//onscroll时候判断，浏览器滚动条时候
+    var top = $(".waiting").offset().top;
+    var h = $(".waiting").outerHeight();
+    var winH = $(window).height();
+    var scrollTop = $(window).scrollTop();
+    // 最低下 top+h = winH+scrollTop
+    return top<=winH+scrollTop;
+}
+/*// 或者
+$("#wrap").on("scroll",function(){//因为这里滚动的是wrap,所以offset().top变成窗口位置
+    var heightPoint = window.screen.height-$("li:last").height();
+    if($("li:last").offset().top<heightPoint && falg){
+        falg = false;
+        var timer = setTimeout(function(){
+            add();
+            falg = true;
+        },1000);
+    }
+});*/
