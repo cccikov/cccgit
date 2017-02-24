@@ -6,12 +6,14 @@
 			$(document).ready(function() {
 				$("#b01").click(function() {
 					$.ajax({
-						url: "test1.txt",
+						url: "js/data.json",
 						async: true,
 						success:function(result){
 							console.log(result);
-							$("#myDiv").html(result);
-						}
+							$("#myDiv").html(" "+result+" ");
+						},
+//						dataType:"text",
+						dataType:"json",//请求的json一定要是名和值都用双引号括住
 					});
 					
 				});
