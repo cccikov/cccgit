@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="按钮,button,动画,animate,animation">
+    <title>按钮 动画</title>
+    <style type="text/css">
+    a {
+        position: relative;
+        display: inline-block;
+        width: 64px;
+        height: 24px;
+        border: 3px solid #DADADA;
+        border-radius: 15px;
+        transition: all 0.3s;
+    }
+
+    a span {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 15px;
+        background: #dadada;
+        transition: all 0.3s;
+    }
+
+    a.active {
+        background: #3AC069;
+        border-color: #3AC069;
+    }
+
+    a.active span {
+        width: 20px;
+        height: 20px;
+        top: 2px;
+        left: 42px;
+        background: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("a").on("click", function() {
+            var that = $(this);
+            if (that.is(".active")) {
+                that.removeClass("active");
+            } else {
+                that.addClass("active");
+            }
+        });
+    });
+    </script>
+    <a href="javascript:void(0)">
+        <span></span>
+    </a>
+</body>
+
+</html>
