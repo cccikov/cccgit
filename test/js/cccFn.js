@@ -151,6 +151,18 @@ function fileLimit(obj) {
 
 }
 
+/*中间变星星*/
+String.prototype.star = function(start,end){
+    var num = end-start;
+    var str = this;
+    var starStr = "";
+    for(var i = 0;i<num;i++){
+        starStr = starStr + "*";
+    }
+    str = str.slice(0,start)+starStr+str.slice(end);
+    return str;
+}
+
 /*在字符串里面找出重复最多的字符*/
 String.prototype.appearMaxTimes = function() {
     var maxNum = 0,
@@ -172,7 +184,73 @@ String.prototype.appearMaxTimes = function() {
     return arr.length == 1 ? arr[0] : arr;
 };
 
+/*将posi位置字符换成newStr,posi可以为数字也可以为由数组组成的数组*/
+String.prototype.change = function(posi, newStr) {
+    if (!isNaN(str)) { //posi是数字
+        return this.slice(0, posi) + newStr + this.slice(posi + 1);//将字符串posi前面的那段 + 新字符newStr + 字符串posi后面那段 拼成新的字符串；
+    } else if (Array.isArray && Array.isArray(posi)) {//posi为数组的时候，es6 Array.isArray判断 注意兼容性
+        var str = this;
+        for (var i = 0, len = posi.length; i < len; i++) {
+            str = str.slice(0, posi[i]) + newStr + str.slice(posi[i] + 1);//for循环拼接
+        }
+        return str;
+    }
+}
 
+/*将在ori中匹配到的字符，转化为tar中对应的字符*/
+String.prototype.exchange = function(ori, tar) {
+    var str = "",
+        flag = false;//标记是否有匹配到ori中的字符
+    for (var i = 0, len = this.length; i < len; i++) {//str字符串遍历一个个字符
+        flag = false;
+        for (var j = 0, len2 = ori.length; j < len2; j++) {//遍历ori，将str字符串的字符与ori进行比较
+            if (this.charAt(i) == ori[j]) {//判断是否匹配
+                str += tar[j];//匹配到了，将str对应的字符换成tar[i]中的。
+                flag = true;//标记为true
+            }
+        }
+        if (!flag) {//没有匹配到，就str中字符换成会原来那个。
+            str += this[i];
+        }
+    }
+    return str;
+};
+String.prototype.exchange2 = function(ori, tar) {
+    var str = "";
+    for (var i = 0, len = this.length; i < len; i++) {
+        var j = 0,
+            len2 = ori.length;
+        while (this.charAt(i) != ori[j] && j < len2) {//匹配到或者遍历完ori退出
+            j++
+        }
+        if (j < len2) {//如果j小于ori长度，表示匹配到
+            str += tar[j];//匹配到了，用tar对应字符
+        } else {//匹配不到
+            str += this[i]//用回原来字符
+        }
+    }
+    return str;
+};
+// e.g. var a = "AGCT"; a.exchange("ATCG", "TAGC")//TCGA ,A=>T,T=>A,C=>G,G=>C
+// 传一个哈希表，属性名为匹配字符，值为目标字符
+String.prototype.exchange3 = function(hash) {
+    var arr = this.split("");
+    for (var i = 0, len = arr.length; i < len; i++) {
+        // (arr[i] in hashTable) && (arr[i] = hashTable[arr[i]])
+        (hashTable[arr[i]]) && (arr[i] = hashTable[arr[i]])//如果与哈希表匹配，则执行后面操作，否则因为false，将跳过后面操作
+    }
+    return arr.join("");
+};
+/*
+var hashTable = {
+    "T": "A",
+    "A": "T",
+    "G": "C",
+    "C": "G"
+}
+var a = "AGCT";
+console.log(a.exchange3(hashTable)); //TCGA
+*/
 
 // 是否到底部
 function isbottom(){//onscroll时候判断，浏览器滚动条时候
