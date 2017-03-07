@@ -6,10 +6,12 @@
     <title>判断</title>
     <style type="text/css">
     #wrap {
+        /*box-sizing: border-box;*/
         width: 100px;
         height: 80px;
-        /*padding:10px 15px 20px 30px;*/
-        padding-left:20px;
+        padding: 10px 15px 20px 30px;
+        /*padding-left: 20px;*/
+        border: 2px solid #ccc;
         background: #f00;
     }
     </style>
@@ -21,10 +23,24 @@
         if (typeof dom == "string") {
             dom = document.getElementById(dom);
         }
-        if(dom){
+        if (dom) {
             this.dom = dom;
-            this.innerWidth = dom.offsetWidth;
-            this.innerHeight = dom.offsetHeight;
+            Ele.prototype.innerWidth = function() {
+                return dom.offsetWidth;
+            };
+            Ele.prototype.innerHeight = function() {
+                return dom.offsetHeight
+            };
+            Ele.prototype.width = function() {
+                var paddingArr = this.getStyle("padding").match(/\d+/g);
+                var border = this.getStyle("borderWidth").match(/\d+/g)[0];
+                return dom.offsetWidth - paddingArr[1] - paddingArr[3] - border * 2;
+            }
+            Ele.prototype.height = function() {
+                var paddingArr = this.getStyle("padding").match(/\d+/g);
+                var border = this.getStyle("borderWidth").match(/\d+/g)[0];
+                return dom.offsetHeight - paddingArr[0] - paddingArr[2] - border * 2;
+            }
             Ele.prototype.getStyle = function(StyleName) {
                 if (dom.style[StyleName]) {
                     return dom.style[StyleName];
@@ -39,17 +55,20 @@
             }
         }
     }
-    window.onload=function(){
+    window.onload = function() {
         var wrap = new Ele("wrap");
-        console.log(wrap.innerWidth);
-        var reg = /\d+/g;
-        //        /(^|&)ie=([^&]*)(&|$)/i
-        console.log(wrap.getStyle("padding").match(reg));
+        console.log(wrap.innerWidth());
+        console.log(wrap.innerHeight());
+        console.log(wrap.width());
+        console.log(wrap.height());
+    }
 
+    /*
+        //        /(^|&)ie=([^&]*)(&|$)/i
         var reg2 = /(^|&)(ie)=([^&]*)(&|$)/i;//每个括号就是一个子表达式
         var str2 = window.location.search.substr(1);
         console.log(str2.match(reg2));
-    }
+    */
     </script>
     <div id="wrap"></div>
 </body>
