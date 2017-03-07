@@ -272,3 +272,14 @@ $("#wrap").on("scroll",function(){//因为这里滚动的是wrap,所以offset().
         },1000);
     }
 });*/
+
+
+// 判断ie版本 7-10
+function ieVersion(){
+    var reg = /msie\s(\d+)\.0/i;
+    var agent = navigator.userAgent.toLowerCase();
+    if(reg.test(agent)){
+        return agent.match(reg)[1];
+    }
+    return null
+}
