@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>判断</title>
+    <style type="text/css">
+    #wrap {
+        width: 100px;
+        height: 80px;
+        /*padding:10px 15px 20px 30px;*/
+        padding-left:20px;
+        background: #f00;
+    }
+    </style>
 </head>
+
 <body>
     <script type="text/javascript">
-        /*作用域链*/
-        var x = 1;
-        function fn1(){
-            console.log(x);
+    function Ele(dom) {
+        if (typeof dom == "string") {
+            dom = document.getElementById(dom);
         }
-        function fnIn(){
-            var x = 10;
-            fn1();
+        if(dom){
+            this.dom = dom;
+            this.innerWidth = dom.offsetWidth;
+            this.innerHeight = dom.offsetHeight;
+            Ele.prototype.getStyle = function(StyleName) {
+                if (dom.style[StyleName]) {
+                    return dom.style[StyleName];
+                } else {
+                    if (window.getComputedStyle) {
+                        return window.getComputedStyle(dom)[StyleName]
+                    } else if (dom.currentStyle) { //读取样式表样式
+                        return dom.currentStyle[StyleName]
+                    }
+                }
+                return null;
+            }
         }
-        fnIn();
-
-        var a = new Eve();
-        function Eve(dom){
-            this.name = "fuck";
-        }
-        Eve.prototype.age="16";
-        console.log(a.name);
-        console.log(a.age);
-
-
-
-        var a;
-        function person(){
-            this.name = "ccc";
-            console.log(this);
-            a=this;
-        }
-        new person();//这些实例存放在哪里
-        new person();
-        new person();
-        new person();
-
+    }
+    window.onload=function(){
+        var wrap = new Ele("wrap");
+        console.log(wrap.innerWidth);
+        var reg = /\d+/g;
+        console.log(wrap.getStyle("padding").match(reg));
+    }
     </script>
+    <div id="wrap"></div>
 </body>
+
 </html>
