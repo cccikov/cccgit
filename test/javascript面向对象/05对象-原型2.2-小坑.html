@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    /*情况一*/
+    ! function() {
+        function Direction(ele) {
+            if (this.init) {
+                console.log("对象方法定义前");
+                this.init();
+            }
+            this.init = function() {
+                console.log("hello");
+            }
+            if (this.init) {
+                console.log("对象方法定义后");
+                this.init();
+            }
+        }
+        var a = new Direction();
+    }();
+    console.log("----------------");
+    /*情况二*/
+    ! function() {
+        var a = new Direction();
+        function Direction(ele) {
+            if (this.init) {
+                console.log("对象方法定义前");
+                this.init();
+            }
+            Direction.prototype.init = function() {
+                console.log("hello");
+            }
+            if (this.init) {
+                console.log("对象方法定义后");
+                this.init();
+            }
+        }
+    }();
+    console.log("----------------");
+    /*情况三*/
+    ! function() {
+        function Direction(ele) {
+            if (this.init) {
+                console.log("有init方法");
+                this.init();
+            } else {
+                console.log("没有init方法");
+            }
+        }
+        var a = new Direction();
+        console.log(a.init);
+        Direction.prototype.init = function() {
+            console.log("hello");
+        }
+        console.log(a.init); //虽然实例是先于 原型方法定义，但是由于实例一直都是指向那个原型prototype，所以对prototype一修改(是修改,不是重写)就让全部实例都有了这个方法。
+        var b = new Direction(); //一但创建实例的时候,实例的原型就指向构造函数的原型,所以构造函数里面的this就是这个实例是有init这个方法的。
+    }();
+
+
+    /*情况一和情况二的构造函数里面没有立即有init方法的原因的,虽然在创建实例之前已经定义了函数(函数声明提前,虽然函数体也会提前),但是函数没有执行,实例化的时候才执行函数,才在里面创建新的方法(新方法是用函数表达式方式声明的,所以不会提前)*/
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
