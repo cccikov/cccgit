@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <title>判断</title>
     <style type="text/css">
+    #out{
+        position: absolute;
+        top:100px;
+        left:100px;
+        padding:100px;
+    }
     #wrap {
         /*box-sizing: border-box;*/
         width: 100px;
@@ -25,23 +31,23 @@
         }
         if (dom) {
             this.dom = dom;
-            Ele.prototype.innerWidth = function() {
+            Ele.prototype.innerWidth = function() {//获取元素宽度(包括padding,border)
                 return dom.offsetWidth;
             };
-            Ele.prototype.innerHeight = function() {
+            Ele.prototype.innerHeight = function() {//获取元素高度(包括padding,border)
                 return dom.offsetHeight
             };
-            Ele.prototype.width = function() {
+            Ele.prototype.width = function() {//获取元素content宽度
                 var paddingArr = this.getStyle("padding").match(/\d+/g);
                 var border = this.getStyle("borderWidth").match(/\d+/g)[0];
                 return dom.offsetWidth - paddingArr[1] - paddingArr[3] - border * 2;
             }
-            Ele.prototype.height = function() {
+            Ele.prototype.height = function() {//获取元素content高度
                 var paddingArr = this.getStyle("padding").match(/\d+/g);
                 var border = this.getStyle("borderWidth").match(/\d+/g)[0];
                 return dom.offsetHeight - paddingArr[0] - paddingArr[2] - border * 2;
             }
-            Ele.prototype.getStyle = function(StyleName) {
+            Ele.prototype.getStyle = function(StyleName) {//获取元素css样式
                 if (dom.style[StyleName]) {
                     return dom.style[StyleName];
                 } else {
@@ -53,6 +59,19 @@
                 }
                 return null;
             }
+            Ele.prototype.docOffset = function() {//元素的文档坐标
+                var x = dom.offsetLeft;
+                var y = dom.offsetTop;
+                while (dom.offsetParent) {
+                    x = x + dom.offsetParent.offsetLeft + dom.offsetParent.clientLeft;
+                    y = y + dom.offsetParent.offsetTop + dom.offsetParent.clientTop;
+                    dom = dom.offsetParent;
+                }
+                return {
+                    "left": x,
+                    "top": y
+                }
+            }
         }
     }
     window.onload = function() {
@@ -61,6 +80,7 @@
         console.log(wrap.innerHeight());
         console.log(wrap.width());
         console.log(wrap.height());
+        console.log(wrap.docOffset().top);
     }
 
     /*
@@ -70,7 +90,9 @@
         console.log(str2.match(reg2));
     */
     </script>
-    <div id="wrap"></div>
+    <div id="out">
+        <div id="wrap"></div>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式 match方法</title>
+</head>
+<body>
+    <script type="text/javascript">
+        {
+            let reg = /(^|&)tn=([^&]*)(&|$)/i;
+            let str = "https://www.baidu.com/s?wd=mix&rsv_spt=1&rsv_iqid=0x89e20c4800344e7e&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=15&rsv_sug1=11&rsv_sug7=100"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));//["&tn=baiduhome_pg&","&","baiduhome_pg","&"]
+            /*
+                没有g修饰符
+                数组第一个:匹配到的字符 &tn=baiduhome_pg&
+                其余的就存放子表达式匹配到的内容
+                第一个子表达式(^|&) 匹配到的是 "&"
+                第二个子表达式(^|&) 匹配到的是 "baiduhome_pg"
+                第三个子表达式(^|&) 匹配到的是 "&"
+            */
+        }
+        {
+            let reg = /123456/;
+            let str = "123456";
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));//["123456"]
+        }
+        {
+            let reg = /(12)(345)6/;
+            let str = "123456";
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));//["123456","12","345"]
+        }
+
+
+
+        {
+            let reg = /\d+/g;
+            let str = "10px 0 20px 50px"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));//["10","0","20","50"]
+            /*
+                有g修饰符
+                数组里面是所有匹配的字符
+            */
+        }
+        {
+            let reg = /(\d+)/g;
+            let str = "10px 0 20px 50px"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));//["10","0","20","50"]
+            /*
+                有g修饰符
+                数组里面是所有匹配的字符
+                不管有没有
+            */
+        }
+    </script>
+</body>
+</html>
