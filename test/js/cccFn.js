@@ -283,3 +283,56 @@ function ieVersion(){
     }
     return null
 }
+
+
+
+/*获取元素信息*/
+function Ele(dom) {
+    if (typeof dom == "string") {
+        dom = document.getElementById(dom);
+    }
+    if (dom) {
+        this.dom = dom;
+        Ele.prototype.innerWidth = function() {//获取元素宽度(包括padding,border)
+            return dom.offsetWidth;
+        };
+        Ele.prototype.innerHeight = function() {//获取元素高度(包括padding,border)
+            return dom.offsetHeight
+        };
+        Ele.prototype.width = function() {//获取元素content宽度
+            var paddingArr = this.getStyle("padding").match(/\d+/g);
+            var border = this.getStyle("borderWidth").match(/\d+/g)[0];
+            return dom.offsetWidth - paddingArr[1] - paddingArr[3] - border * 2;
+        }
+        Ele.prototype.height = function() {//获取元素content高度
+            var paddingArr = this.getStyle("padding").match(/\d+/g);
+            var border = this.getStyle("borderWidth").match(/\d+/g)[0];
+            return dom.offsetHeight - paddingArr[0] - paddingArr[2] - border * 2;
+        }
+        Ele.prototype.getStyle = function(StyleName) {//获取元素css样式
+            if (dom.style[StyleName]) {
+                return dom.style[StyleName];
+            } else {
+                if (window.getComputedStyle) {
+                    return window.getComputedStyle(dom)[StyleName]
+                } else if (dom.currentStyle) { //读取样式表样式
+                    return dom.currentStyle[StyleName]
+                }
+            }
+            return null;
+        }
+        Ele.prototype.docOffset = function() {//元素的文档坐标
+            var x = dom.offsetLeft;
+            var y = dom.offsetTop;
+            while (dom.offsetParent) {
+                x = x + dom.offsetParent.offsetLeft + dom.offsetParent.clientLeft;
+                y = y + dom.offsetParent.offsetTop + dom.offsetParent.clientTop;
+                dom = dom.offsetParent;
+            }
+            return {
+                "left": x,
+                "top": y
+            }
+        }
+    }
+}
