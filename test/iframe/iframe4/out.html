@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>out</title>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+</head>
+<body>
+    <iframe id="ifr" name="ifr" frameborder="0" src="in.html"></iframe>
+    <!-- 什么都不处理的时候 -->
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        iframe{
+            display: block;
+            width: 1000px;
+            min-height: 300px;
+            border:none;
+            margin:50px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            $("#ifr").on("load", function() {
+                var that = $(this).css("opacity","1");
+                var ifrH = $(window.frames['ifr'].document.body)[0].scrollHeight;//跨域会不行
+                console.log(ifrH);
+                that.height(ifrH);
+            });
+        });
+    </script>
+
+    <!-- 处理方式一 失败 -->
+    <!-- <style type="text/css">
+
+        iframe{
+            /*min-height: 999px;*/
+            /*min-height: 1000px;*/
+            height: 10000px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+           $("#ifr").on("load", function() {
+               var that = $(this).css("opacity","1");
+               var ifrH = $(window.frames['ifr'].document.body).find(".wrap")[0].scrollHeight;//服务器环境
+               console.log(ifrH);
+               that.height(ifrH);
+           });
+        });
+    </script> -->
+
+     <!-- 处理方式二 成功 -->
+    <style type="text/css">
+        iframe{
+            width: 1017px;
+        }
+    </style>
+</body>
+</html>
