@@ -336,3 +336,9 @@ function Ele(dom) {
         }
     }
 }
+
+
+// 重置iframe高度
+function resetFrameH(frame){
+    frame.style.height = frame.contentDocument.body.offsetHeight+"px";//跨域会不行
+}
