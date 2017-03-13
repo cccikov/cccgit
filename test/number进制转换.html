@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>js 进制转换</title>
+    <script type="text/javascript">
+    {
+        console.log(077); //8进制77
+        console.log(0x77); //16进制77
+    }
+    {
+        // 转为10进制
+        console.log(parseInt("11", 2)); //3
+        console.log(parseInt("11", 3)); //4
+        console.log(parseInt("11", 4)); //5
+        console.log(parseInt("11", 5)); //6
+        console.log(parseInt("11", 6)); //7
+        console.log(parseInt("11", 7)); //8
+        console.log(parseInt("11", 8)); //9
+        console.log(parseInt("11", 9)); //10
+        console.log(parseInt("11", 0)); //11
+        console.log(parseInt("077", 0)); //77
+        console.log(parseInt("0x77", 0)); //119
+    }
+    {
+        // 十进制转为其他进制
+        let num = 255;
+        console.log(num.toString(2));// 11111111
+        console.log(num.toString(3));// 100110
+        console.log(num.toString(4));// 3333
+        console.log(num.toString(5));// 2010
+        console.log(num.toString(6));// 1103
+        console.log(num.toString(7));// 513
+        console.log(num.toString(8));// 377
+        console.log(num.toString(9));// 313
+        console.log(num.toString(10));// 255
+        console.log(num.toString(16));// ff
+    }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
