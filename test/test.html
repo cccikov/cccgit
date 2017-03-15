@@ -3,96 +3,91 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>判断</title>
-    <style type="text/css">
-    #out{
-        position: absolute;
-        top:100px;
-        left:100px;
-        padding:100px;
+    <title>配置</title>
+    <script type="text/javascript">
+    /*Preferences*/
+    {
+        "color_scheme": "Packages/Color Scheme - Default/Solarized (Light).tmTheme",
+        "draw_indent_guides": true,
+        "font_options": [],
+        "font_size": 12,
+        "gutter": true,
+        "highlight_line": true,
+        "ignored_packages": [
+            "APICloudWiFiSync",
+            "ConvertToUTF8",
+            "Sublime-APICloud-Loader",
+            "Sublime-APICloud-Package",
+            "Sublime-APICloud-Snippet",
+            "Vintage"
+        ],
+        "line_numbers": true,
+        "line_padding_bottom": 5,
+        "line_padding_top": 5,
+        "margin": 0,
+        "rulers": [
+            100
+        ],
+        "show_definitions": false,
+        "show_encoding": true,
+        "tab_size": 4,
+        "theme": "Boxy Solarized Light.sublime-theme",
+        "translate_tabs_to_spaces": false,
+        "trim_trailing_white_space_on_save": true,
+        "word_wrap": "auto"
     }
-    #wrap {
-        /*box-sizing: border-box;*/
-        width: 100px;
-        height: 80px;
-        padding: 10px 15px 20px 30px;
-        /*padding-left: 20px;*/
-        border: 2px solid #ccc;
-        background: #f00;
+
+    /*Package Control*/
+    {
+        "bootstrapped": true,
+        "in_process_packages":
+        [
+        ],
+        "installed_packages":
+        [
+            "All Autocomplete",
+            "AutoFileName",
+            "Boxy Theme",
+            "BracketHighlighter",
+            "Color Highlighter",
+            "ConvertToUTF8",
+            "Emmet",
+            "FileDiffs",
+            "Git",
+            "GitGutter",
+            "HTML-CSS-JS Prettify",
+            "LESS",
+            "Material Theme",
+            "Monokai - Spacegray",
+            "Monokai Gray",
+            "Nodejs",
+            "Package Control",
+            "Predawn",
+            "Predawn Monokai",
+            "SideBarEnhancements",
+            "Solarized Color Scheme",
+            "SublimeCodeIntel",
+            "Theme - Asphalt",
+            "Theme - Bamboo",
+            "Theme - Brogrammer",
+            "Theme - Flatland",
+            "Theme - Glacier",
+            "Theme - itg.flat",
+            "Theme - Monokai",
+            "Theme - Soda",
+            "Theme - Sodarized",
+            "Theme - Solarized Flat",
+            "Theme - Solarized Space",
+            "Theme - Spacegray",
+            "View In Browser"
+        ]
     }
-    </style>
+
+
+    </script>
 </head>
 
 <body>
-    <script type="text/javascript">
-    function Ele(dom) {
-        if (typeof dom == "string") {
-            dom = document.getElementById(dom);
-        }
-        if (dom) {
-            this.dom = dom;
-            Ele.prototype.innerWidth = function() {//获取元素宽度(包括padding,border)
-                return dom.offsetWidth;
-            };
-            Ele.prototype.innerHeight = function() {//获取元素高度(包括padding,border)
-                return dom.offsetHeight
-            };
-            Ele.prototype.width = function() {//获取元素content宽度
-                var paddingArr = this.getStyle("padding").match(/\d+/g);
-                var border = this.getStyle("borderWidth").match(/\d+/g)[0];
-                return dom.offsetWidth - paddingArr[1] - paddingArr[3] - border * 2;
-            }
-            Ele.prototype.height = function() {//获取元素content高度
-                var paddingArr = this.getStyle("padding").match(/\d+/g);
-                var border = this.getStyle("borderWidth").match(/\d+/g)[0];
-                return dom.offsetHeight - paddingArr[0] - paddingArr[2] - border * 2;
-            }
-            Ele.prototype.getStyle = function(StyleName) {//获取元素css样式
-                if (dom.style[StyleName]) {
-                    return dom.style[StyleName];
-                } else {
-                    if (window.getComputedStyle) {
-                        return window.getComputedStyle(dom)[StyleName]
-                    } else if (dom.currentStyle) { //读取样式表样式
-                        return dom.currentStyle[StyleName]
-                    }
-                }
-                return null;
-            }
-            Ele.prototype.docOffset = function() {//元素的文档坐标
-                var x = dom.offsetLeft;
-                var y = dom.offsetTop;
-                while (dom.offsetParent) {
-                    x = x + dom.offsetParent.offsetLeft + dom.offsetParent.clientLeft;
-                    y = y + dom.offsetParent.offsetTop + dom.offsetParent.clientTop;
-                    dom = dom.offsetParent;
-                }
-                return {
-                    "left": x,
-                    "top": y
-                }
-            }
-        }
-    }
-    window.onload = function() {
-        var wrap = new Ele("wrap");
-        console.log(wrap.innerWidth());
-        console.log(wrap.innerHeight());
-        console.log(wrap.width());
-        console.log(wrap.height());
-        console.log(wrap.docOffset().top);
-    }
-
-    /*
-        //        /(^|&)ie=([^&]*)(&|$)/i
-        var reg2 = /(^|&)(ie)=([^&]*)(&|$)/i;//每个括号就是一个子表达式
-        var str2 = window.location.search.substr(1);
-        console.log(str2.match(reg2));
-    */
-    </script>
-    <div id="out">
-        <div id="wrap"></div>
-    </div>
 </body>
 
 </html>
