@@ -43,22 +43,20 @@
 </head>
 
 <body>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        $("a").on("click", function() {
-            var that = $(this);
-            if (that.is(".active")) {
-                that.removeClass("active");
-            } else {
-                that.addClass("active");
-            }
-        });
-    });
-    </script>
-    <a href="javascript:void(0)">
+    <a id="btn" class="button" href="javascript:void(0)">
         <span></span>
     </a>
+    <script type="text/javascript">
+        var btn = document.getElementById("btn");
+        btn.onclick=function(){
+            var that = this;
+            if(that.className.indexOf("active")>-1){
+                that.className = that.className.replace(" active","");
+            }else{
+                that.className+=" active";
+            }
+        }
+    </script>
 </body>
 
 </html>
