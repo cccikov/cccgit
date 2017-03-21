@@ -42,6 +42,8 @@
 				alert(this.name);
 			}
 
+			personZero.sayName();//调用对象方法
+
 			//字面量创建
 			//var person0 = {
 			//	name: "ccc",
@@ -59,6 +61,8 @@
 			person0.sayName = function() {
 				alert(this.name);
 			}
+
+			person0.sayName();//调用对象方法
 
 			// 工厂模式
 			function createPerson(name, age, job) {
@@ -86,7 +90,7 @@
 			var person3 = new Person("nicholas2", 39, "old software engineer");
 			var person4 = new Person("greg2", 33, "old doctor");
 
-			//(实例上)constructor的属性,是指向构造函数本身 
+			//(实例上)constructor的属性,是指向构造函数本身
 			console.log(person3.constructor); //function Person(name, age, job){……}
 			console.log(person3.constructor == Person); //true
 
