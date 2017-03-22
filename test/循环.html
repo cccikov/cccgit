@@ -71,7 +71,7 @@
     }()
     ! function(){//有时候遍历数组的时候，为了避免每次都要循环都要获取数组长度，在之前就定义一个变量存储起来
     	var sum = 0;
-    	for(var i = 0,len = numArr.length;i<len;i++){
+    	for(var i = 0,len = numArr.length;i<len;i++){ //相当于 var len =numArr.length;   for(var i = 0;i<len;i++){
     		sum += numArr[i];
     	}
     	console.log(sum);//55
