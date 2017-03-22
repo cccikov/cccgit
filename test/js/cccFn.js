@@ -92,6 +92,46 @@ if (!Array.prototype.hasVal) {
     }
 }
 
+// 数组插入值
+if(!Array.prototype.insert){
+    Array.prototype.insert = function(posi,item){
+        this.splice(posi,0,item);
+        return this;
+    }
+}
+// 根据索引位置删除值
+if(!Array.prototype.remove){
+    Array.prototype.remove = function(posi){
+        this.splice(posi,1);
+        return this;
+    }
+}
+// 数组交换值
+if(!Array.prototype.exchage){
+    Array.prototype.exchage = function(posi1,posi2){//两个位置交换
+        if(this.length-1 < posi1 || this.length-1 < posi2 || posi1 == posi2){
+            return this;
+        }
+        var mid = this[posi1];
+        this[posi1] = this[posi2];
+        this[posi2] = mid;
+        return this;
+    }
+}
+// 将一个值位置上移
+if(!Array.prototype.exchageUp){
+    Array.prototype.exchageUp = function(posi){
+        this.exchage(posi,posi-1);
+        return this;
+    }
+}
+// 将一个值的位置下移
+if(!Array.prototype.exchageDown){
+    Array.prototype.exchageDown = function(posi){
+        this.exchage(posi,posi+1);
+        return this;
+    }
+}
 
 
 function hasClass(obj, cls) {
