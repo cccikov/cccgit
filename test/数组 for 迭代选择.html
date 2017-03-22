@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数组 for 迭代选择</title>
+    <script type="text/javascript">
+    // 数组插入值
+    if (!Array.prototype.insert) {
+        Array.prototype.insert = function(posi, item) {
+            this.splice(posi, 0, item);
+            return this;
+        }
+    }
+    // 根据索引位置删除值
+    if (!Array.prototype.remove) {
+        Array.prototype.remove = function(posi) {
+            this.splice(posi, 1);
+            return this;
+        }
+    }
+    // 数组交换值
+    if (!Array.prototype.exchage) {
+        Array.prototype.exchage = function(posi1, posi2) { //两个位置交换
+            if (this.length - 1 < posi1 || this.length - 1 < posi2 || posi1 == posi2) {
+                return this;
+            }
+            var mid = this[posi1];
+            this[posi1] = this[posi2];
+            this[posi2] = mid;
+            return this;
+        }
+    }
+    // 将一个值位置上移
+    if (!Array.prototype.exchageUp) {
+        Array.prototype.exchageUp = function(posi) {
+            this.exchage(posi, posi - 1);
+            return this;
+        }
+    }
+    // 将一个值的位置下移
+    if (!Array.prototype.exchageDown) {
+        Array.prototype.exchageDown = function(posi) {
+            this.exchage(posi, posi + 1);
+            return this;
+        }
+    }
+    var arr = [{
+            "url": "about:blank",
+            "icon": "default",
+            "name": "空白",
+            "id": "0"
+        }, {
+            "url": "http://www.baidu.com",
+            "icon": "baidu",
+            "name": "百度",
+            "id": "1"
+        }, {
+            "url": "http://www.so.com",
+            "icon": "360",
+            "name": "360",
+            "id": "2"
+        }, {
+            "url": "http://www.qq.com",
+            "icon": "qq",
+            "name": "腾讯",
+            "id": "3"
+        }, {
+            "url": "http://www.sohu.com",
+            "icon": "souhu",
+            "name": "搜狐",
+            "id": "4"
+        },
+
+        {
+            "url": "http://www.sina.com",
+            "icon": "sina",
+            "name": "新浪",
+            "id": "5"
+        }, {
+            "url": "http://www.jd.com",
+            "name": "京东",
+            "id": "6"
+        }, {
+            "url": "home.html",
+            "name": "home",
+            "id": "9"
+        }
+    ];
+
+    window.onload = function() {
+        /*方法一*/
+        for (var i = 0, len = arr.length; i < len; i++) {
+            var newP = document.createElement('p');
+             newP.innerHTML = arr[i].name ? arr[i].name : "undefined";
+            document.getElementById("demo1").appendChild(newP);
+        }
+
+        /*方法二*/
+        arr.forEach(function(val,key){
+            var newP = document.createElement('p');
+            newP.innerHTML = val.name ? val.name : "undefined";
+            document.getElementById("demo2").appendChild(newP);
+        });
+
+        /*方法三*/
+        for(var i in arr){
+            console.log(i);
+            var newP = document.createElement('p');
+            newP.innerHTML = arr[i].name ? arr[i].name : "undefined";
+            document.getElementById("demo3").appendChild(newP);
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <p>
+        总结:
+        可以看出遍历数组最好是使用 for循环 或者 forEach ; 虽然for-in显得比较方便快捷,但是for-in会把可枚举的属性都遍历出来 , 所以当Array引用类型有新增prototype属性的时候就会被遍历出来
+        而forEach ie9以下是不支持的,
+        所以最好还是使用for循环遍历数组
+    </p>
+    <hr>
+    <div id="demo1"></div>
+    <hr>
+    <div id="demo2"></div>
+    <hr>
+    <div id="demo3"></div>
+</body>
+
+</html>
