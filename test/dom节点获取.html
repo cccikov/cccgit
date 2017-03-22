@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>dom 获取节点</title>
+    <script type="text/javascript">
+    window.onload = function() {
+        /*从document获取dom*/
+        var wrap = document.getElementById("wrap");
+        var id = document.getElementsByName("id");
+        console.log(wrap, id);
+
+        var p = document.getElementsByTagName("p");
+        var para = document.getElementsByClassName("para");
+        console.log(p, para);
+
+        var queryPara = document.querySelectorAll(".para");
+        var queryParaOne = document.querySelector(".para");
+        console.log(queryPara, queryParaOne);
+
+        /*从element那里获取dom*/
+        var wrap_p = wrap.getElementsByTagName("p");
+        var wrap_para = wrap.getElementsByClassName("para");
+        console.log(wrap_p, wrap_para);
+
+        var wrap_queryPara = wrap.querySelectorAll(".para");
+        var wrap_queryParaOne = wrap.querySelector(".para");
+        console.log(wrap_queryPara, wrap_queryParaOne);
+
+        console.log("--------------------------------------")
+        /*创建dom*/
+        for (var i = 0; i < 3; i++) {
+            var newP = document.createElement("p");
+            newP.className = "para";
+            newP.innerHTML = "这是一个新建的段落";
+            wrap.appendChild(newP);
+        }
+        console.log(p, para);
+        console.log(queryPara, queryParaOne);
+
+    }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <h6>获取节点</h6>
+        <p class="para">这是一个段落</p>
+        <p class="para">这是一个段落</p>
+        <p>这是一个其他段落</p>
+        <ul class="list">
+            <li class="item">列表</li>
+            <li class="item">列表</li>
+            <li class="item">列表</li>
+        </ul>
+        <input type="text" name="id">
+    </div>
+    <p class="para">这是一个段落</p>
+    <p class="para">这是一个段落</p>
+    <p>这是一个其他段落</p>
+</body>
+
+</html>
