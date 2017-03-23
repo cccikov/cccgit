@@ -83,7 +83,7 @@
 			<p>
 				总结：input type="checkbox"
 				<br />设置默认值：可以通过checked属性。
-				<br />修改值：也可以通过设置原生js属性checked，不能通过设置js属性value，（设置标签属性checked也不行，设置标签属性checked只能是默认值，选择过之后就不行了）。
+				<br />修改值：也可以通过设置原生js属性checked，不能通过设置js属性value，（设置标签属性checked也不行，设置标签属性checked只能是默认值，选择过之后就不行了）(jquery-1.7.2 版本是可以通过修改标签属性checked来更改值;但是jquery-1.11.3就不可以,可能后面修复这个bug,因为标签属性checked只是表明默认选上,而不是真的选上)。
 				<br />读取：通过读取js属性value。通过读取js属性checked判断勾选情况，jq可以通过is(":checked");
 			</p>
 		</div>
