@@ -1,89 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>配置</title>
-    <script type="text/javascript">
-    /*Preferences*/
-    {
-        "color_scheme": "Packages/Color Scheme - Default/Solarized (Light).tmTheme", //编辑器主题
-        "draw_indent_guides": true, //沟与文本之间画一条竖线
-        "fade_fold_buttons": false, //隐藏折叠按钮
-        "font_options": [], //文字配置,斜体,加粗等
-        "font_size": 12, //文字大小
-        "gutter": true, //沟,就是一般放行数的那一列东西
-        "highlight_line": true, //高亮编辑中的那一行
-        "ignored_packages": [
-            "APICloudWiFiSync", //APICloud 插件
-            "ConvertToUTF8", //通过本插件，您可以编辑并保存目前编码不被 Sublime Text 支持的文件，特别是中日韩用户使用的 GB2312，GBK，BIG5，EUC-KR，EUC-JP 等。ConvertToUTF8 同时支持 Sublime Text 2 和 3。
-            "Sublime-APICloud-Loader", //APICloud 插件
-            "Sublime-APICloud-Package", //APICloud 插件
-            "Sublime-APICloud-Snippet", //APICloud 插件
-            "Vintage" //进入类似vim 模式。按 esc 键会进入了一个 command mode
-        ],
-        "line_numbers": true, //行数
-        "line_padding_bottom": 5, //文本每行的上内边距
-        "line_padding_top": 5, //文本每行的下内边距
-        "margin": 0, //沟与文本区之间的距离
-        "rulers": [
-            100
-        ], //垂直标尺位置,view - rulers 那里同样可以设置
-        "show_definitions": false, //查看函数是在哪里定义的,hover函数时看
-        "show_encoding": true, //右下角设置编码格式
-        "tab_size": 4, //缩进,右下角可以设置
-        "theme": "Boxy Solarized Light.sublime-theme", //ui主题
-        "translate_tabs_to_spaces": false, //将tabs缩进转为空格缩进
-        "trim_trailing_white_space_on_save": true, //保存文件时,自动清除无用空格
-        "word_wrap": "auto", //内容换行:true 换行,false 不换行 ,auto 自动. view - Word Wrap可以设置
-    }
-
-    /*Package Control*/
-    {
-        "bootstrapped": true,
-        "in_process_packages": [],
-        "installed_packages": [
-            "All Autocomplete", //根据打开的文件自动补全
-            "AutoFileName", //自动补全文件地址
-            "Boxy Theme", //主题
-            "BracketHighlighter", //成对符号高亮 如html标签 引号"" 括号{}[]
-            "Color Highlighter", //css 颜色高亮
-            "ConvertToUTF8", //通过本插件，您可以编辑并保存目前编码不被 Sublime Text 支持的文件，特别是中日韩用户使用的 GB2312，GBK，BIG5，EUC-KR，EUC-JP 等。ConvertToUTF8 同时支持 Sublime Text 2 和 3。
-            "Emmet", //Emmet语法 快速编写html css
-            "FileDiffs", //检测文件之间的不同
-            "Git", //git插件
-            "GitGutter", //显示git 的修改
-            "HTML-CSS-JS Prettify", //html,js,css代码整理
-            "LESS", //增加less语法
-            "Material Theme",
-            "Monokai - Spacegray",
-            "Monokai Gray",
-            "Nodejs", //nodejs插件 可以直接运行nodejs文件
-            "Package Control", //Package Control,管理全部插件,全部插件的基础,最先安装插件
-            "Predawn",
-            "Predawn Monokai",
-            "SideBarEnhancements", //增强侧边栏(邮件)
-            "Solarized Color Scheme",
-            "SublimeCodeIntel", //代码自动补全引擎 , js jq python ...好多语言都可以(所以好大)
-            "Theme - Asphalt",
-            "Theme - Bamboo",
-            "Theme - Brogrammer",
-            "Theme - Flatland",
-            "Theme - Glacier",
-            "Theme - itg.flat",
-            "Theme - Monokai",
-            "Theme - Soda",
-            "Theme - Sodarized",
-            "Theme - Solarized Flat",
-            "Theme - Solarized Space",
-            "Theme - Spacegray",
-            "View In Browser" //在浏览器打开,现在基本不用
-        ]
-    }
-    </script>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>测试</title>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        html,body{
+            height:100%;
+        }
+        #wrap{
+            height:100%;
+        }
+        .left{
+            float: left;
+            width: 120px;
+            height:100%;
+            overflow: auto;
+        }
+        .right{
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            height:100%;
+            padding:30px 0 0;
+        }
+        .right-top{
+            position: absolute;
+            width: 100%;
+            line-height: 30px;
+            top:0;
+            left:0;
+        }
+        .right-content{
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
 </head>
-
 <body>
+    <div id="wrap">
+        <div class="left">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="right">
+            <h5 class="right-top">我是标题</h5>
+            <div class="right-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae dolorum vitae eveniet sunt laudantium, doloremque vel a, animi quam fuga enim tenetur at molestias voluptatibus veritatis cum, quod labore. Accusantium quis ratione, saepe unde sint ex itaque minima, aspernatur. Repellendus, voluptate? Labore sequi, temporibus tempora odit est iste excepturi ad. Asperiores dolor velit dignissimos distinctio dolore totam voluptates est expedita! Quia inventore mollitia amet ipsam doloremque corrupti neque dolorem. Sit ea cum adipisci ipsam eius beatae blanditiis delectus dignissimos facilis ab perferendis, quae cumque corporis sapiente libero maiores assumenda excepturi pariatur tenetur porro laudantium mollitia, molestiae odit impedit amet. Soluta provident reprehenderit eum impedit ex, aperiam ad corporis cum voluptatum eligendi tempora nam dignissimos optio quod ut iste cupiditate nemo rem modi minus! In dolorem corporis rem rerum placeat animi optio doloremque, harum sunt labore ipsum exercitationem, eaque quas fuga, qui eius maxime laudantium, ex obcaecati architecto. Voluptas repellendus, a voluptatum autem quasi atque dolores qui amet. Nesciunt facere dolores, architecto molestias voluptatum error deserunt iste laudantium cum consectetur, expedita, consequuntur fuga nulla. Sapiente consequuntur aliquid beatae similique omnis repellendus recusandae ratione, eligendi ea placeat at quidem, explicabo corrupti alias, tempora facilis commodi odio nulla. Molestias labore obcaecati, velit tenetur deleniti qui. Eos dolor harum quibusdam voluptatum, culpa voluptatibus impedit ut explicabo rerum similique aut porro itaque, nisi cum blanditiis minus iste sunt dolorem vel eaque laborum, possimus assumenda. Sequi odit modi distinctio architecto consectetur officia expedita velit ratione deleniti magnam assumenda laborum quos maiores nam, aut repellendus odio quod recusandae, incidunt, magni iure. Assumenda neque voluptate nihil suscipit eaque unde officia consectetur error facere qui dolorem, totam, iste recusandae velit animi quas repudiandae, eligendi hic magnam obcaecati veritatis odit dolores perferendis delectus veniam. Eligendi, modi minus quis quia accusamus perferendis aut, nemo excepturi repudiandae aliquam rerum ipsum a rem iste nihil omnis sequi! Nam dolorum ex harum facilis minima numquam, dignissimos nisi. Ut deleniti tenetur perferendis totam nemo corporis laborum a. Et rem praesentium minus magni, explicabo totam, nostrum cum nulla mollitia, quaerat tenetur quis sint quod corporis quasi in minima. Dolorem ullam quaerat, nisi adipisci eius aut ipsum dicta, accusamus deserunt cumque iste ea incidunt rerum aliquid eligendi earum ducimus praesentium quos. Officiis, aspernatur. Quod doloribus culpa veritatis assumenda, laudantium architecto possimus sit nam, reiciendis et, ratione maiores deleniti magni suscipit eaque, molestias labore voluptatem illo repellendus quam! Accusantium molestiae quaerat recusandae harum ut reprehenderit illo repellat inventore distinctio optio animi beatae quisquam eaque error obcaecati laboriosam temporibus velit aliquam nam magni perspiciatis rem, magnam. Possimus quo esse ipsum, exercitationem cumque minima repudiandae suscipit. Aperiam minima nemo eius porro eveniet aliquam fugiat tempora perspiciatis distinctio odit dicta, rem at, facere accusantium est, maiores ad numquam harum voluptates. Ratione, atque ex omnis. Quae, error temporibus ipsa ullam autem ab expedita voluptas possimus perspiciatis libero. Temporibus, consequuntur quod sapiente, dolorum soluta et? Dignissimos expedita magnam eum eos unde, iste numquam illo nihil fuga perspiciatis, nobis corrupti. Suscipit at neque tempore veniam ullam omnis error distinctio, nihil pariatur. Sint, placeat voluptatibus.</div>
+        </div>
+    </div>
 </body>
-
 </html>
