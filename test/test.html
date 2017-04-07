@@ -1,60 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>测试</title>
-    <style type="text/css">
-        *{
-            padding:0;
-            margin:0;
+    <title>Document</title>
+    <script type="text/javascript">
+    /*辗转相除法*/
+    function gcd(n1, n2) {
+        var mid, remain;
+        if (n2 > n1) {
+            mid = n2;
+            n2 = n1;
+            n1 = mid;
         }
-        html,body{
-            height:100%;
+        while (n2 > 0) {
+            remain = n1 % n2;
+            n1 = n2;
+            n2 = remain;
         }
-        #wrap{
-            height:100%;
+        return n1;
+    }
+
+    function screen(n1, n2) {
+        var gcdN = gcd(n1, n2);
+        return (n1 / gcdN) + ":" + (n2 / gcdN);
+    }
+
+    function isInt(num) {
+        return Math.floor(num) == num;
+    }
+
+    for (var i = 720; i <= 6000; i++) {
+        var w = i * 16 / 9;
+        if (isInt(w) && w % 4 == 0 && i % 4 == 0 && i % 10 == 0) {
+            console.log(w + "*" + i);
         }
-        .left{
-            float: left;
-            width: 120px;
-            height:100%;
-            overflow: auto;
-        }
-        .right{
-            box-sizing: border-box;
-            position: relative;
-            overflow: hidden;
-            height:100%;
-            padding:30px 0 0;
-        }
-        .right-top{
-            position: absolute;
-            width: 100%;
-            line-height: 30px;
-            top:0;
-            left:0;
-        }
-        .right-content{
-            height: 100%;
-            overflow: auto;
-        }
-    </style>
+    }
+
+    function ppi(w, h, size) {
+        return Math.pow((Math.pow(w, 2) + Math.pow(h, 2)), (1 / 2)) / size;
+    }
+
+    function ppi2(w, size) {
+        var h = 9 / 16 * w;
+        return Math.pow((Math.pow(w, 2) + Math.pow(h, 2)), (1 / 2)) / size;
+    }
+
+    function perfectW(size, ppi) {
+        return Math.pow(Math.pow(ppi * size, 2) / (1 + 9 / 16 * 9 / 16), (1 / 2));
+    }
+    </script>
 </head>
+
 <body>
-    <div id="wrap">
-        <div class="left">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-        <div class="right">
-            <h5 class="right-top">我是标题</h5>
-            <div class="right-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae dolorum vitae eveniet sunt laudantium, doloremque vel a, animi quam fuga enim tenetur at molestias voluptatibus veritatis cum, quod labore. Accusantium quis ratione, saepe unde sint ex itaque minima, aspernatur. Repellendus, voluptate? Labore sequi, temporibus tempora odit est iste excepturi ad. Asperiores dolor velit dignissimos distinctio dolore totam voluptates est expedita! Quia inventore mollitia amet ipsam doloremque corrupti neque dolorem. Sit ea cum adipisci ipsam eius beatae blanditiis delectus dignissimos facilis ab perferendis, quae cumque corporis sapiente libero maiores assumenda excepturi pariatur tenetur porro laudantium mollitia, molestiae odit impedit amet. Soluta provident reprehenderit eum impedit ex, aperiam ad corporis cum voluptatum eligendi tempora nam dignissimos optio quod ut iste cupiditate nemo rem modi minus! In dolorem corporis rem rerum placeat animi optio doloremque, harum sunt labore ipsum exercitationem, eaque quas fuga, qui eius maxime laudantium, ex obcaecati architecto. Voluptas repellendus, a voluptatum autem quasi atque dolores qui amet. Nesciunt facere dolores, architecto molestias voluptatum error deserunt iste laudantium cum consectetur, expedita, consequuntur fuga nulla. Sapiente consequuntur aliquid beatae similique omnis repellendus recusandae ratione, eligendi ea placeat at quidem, explicabo corrupti alias, tempora facilis commodi odio nulla. Molestias labore obcaecati, velit tenetur deleniti qui. Eos dolor harum quibusdam voluptatum, culpa voluptatibus impedit ut explicabo rerum similique aut porro itaque, nisi cum blanditiis minus iste sunt dolorem vel eaque laborum, possimus assumenda. Sequi odit modi distinctio architecto consectetur officia expedita velit ratione deleniti magnam assumenda laborum quos maiores nam, aut repellendus odio quod recusandae, incidunt, magni iure. Assumenda neque voluptate nihil suscipit eaque unde officia consectetur error facere qui dolorem, totam, iste recusandae velit animi quas repudiandae, eligendi hic magnam obcaecati veritatis odit dolores perferendis delectus veniam. Eligendi, modi minus quis quia accusamus perferendis aut, nemo excepturi repudiandae aliquam rerum ipsum a rem iste nihil omnis sequi! Nam dolorum ex harum facilis minima numquam, dignissimos nisi. Ut deleniti tenetur perferendis totam nemo corporis laborum a. Et rem praesentium minus magni, explicabo totam, nostrum cum nulla mollitia, quaerat tenetur quis sint quod corporis quasi in minima. Dolorem ullam quaerat, nisi adipisci eius aut ipsum dicta, accusamus deserunt cumque iste ea incidunt rerum aliquid eligendi earum ducimus praesentium quos. Officiis, aspernatur. Quod doloribus culpa veritatis assumenda, laudantium architecto possimus sit nam, reiciendis et, ratione maiores deleniti magni suscipit eaque, molestias labore voluptatem illo repellendus quam! Accusantium molestiae quaerat recusandae harum ut reprehenderit illo repellat inventore distinctio optio animi beatae quisquam eaque error obcaecati laboriosam temporibus velit aliquam nam magni perspiciatis rem, magnam. Possimus quo esse ipsum, exercitationem cumque minima repudiandae suscipit. Aperiam minima nemo eius porro eveniet aliquam fugiat tempora perspiciatis distinctio odit dicta, rem at, facere accusantium est, maiores ad numquam harum voluptates. Ratione, atque ex omnis. Quae, error temporibus ipsa ullam autem ab expedita voluptas possimus perspiciatis libero. Temporibus, consequuntur quod sapiente, dolorum soluta et? Dignissimos expedita magnam eum eos unde, iste numquam illo nihil fuga perspiciatis, nobis corrupti. Suscipit at neque tempore veniam ullam omnis error distinctio, nihil pariatur. Sint, placeat voluptatibus.</div>
-        </div>
-    </div>
 </body>
+
 </html>
