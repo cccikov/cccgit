@@ -12,12 +12,12 @@
 				padding: 0;
 				margin: 0;
 			}
-			
+
 			.clearfix {
 				*zoom: 1;
 				margin:5px 0;
 			}
-			
+
 			.clearfix:after {
 				display: block;
 				overflow: hidden;
@@ -26,26 +26,26 @@
 				visibility: hidden;
 				content: ".";
 			}
-			
+
 			.wrap {
 				padding: 0 15px;
 			}
-			
+
 			.demo {
 				margin: 0 0 20px;
 			}
-			
+
 			.left {
 				line-height: 40px;
 				border: 1px solid #ccc;
 				background: rgba(0, 255, 0, 0.5);
 				text-align: center;
 			}
-			
+
 			.right {
 				position: relative;
 				top:2px;
-				
+
 				line-height: 50px;
 				border: 1px solid #ccc;
 				background: rgba(255, 255, 0, 0.5);
@@ -75,7 +75,7 @@
 							float: left;
 							width: 100px;
 						}
-						
+
 						.demo1 .right {
 							overflow: hidden;
 						}
@@ -91,12 +91,12 @@
 							float: right;
 							width: 100px;
 						}
-						
+
 						.demo1-1 .left {
 							overflow: hidden;
 						}
 					</style>
-					<p>自适应的，设置overflow：hidden的元素在html结构中是要放在最后</p>
+					<p>自适应的，设置overflow：hidden的元素在html结构中是要放在最后；原理overflow:hidden触发BFC</p>
 				</div>
 
 				<div class="part">
@@ -109,14 +109,14 @@
 						.demo2 {
 							position: relative;
 						}
-						
+
 						.demo2 .left {
 							/*float: left;*/
 							position: absolute;
 							left: 0;
 							width: 200px;
 						}
-						
+
 						.demo2 .right {
 							margin: 0 0 0 200px;
 						}
@@ -157,7 +157,7 @@
 							min-width: 50px;
 							max-width: 200px;
 							/*max-width: 30%;*/
-							
+
 							white-space: nowrap;
 							text-overflow: ellipsis;
 							overflow: hidden;
