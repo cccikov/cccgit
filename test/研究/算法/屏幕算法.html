@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>屏幕算法</title>
+    <script type="text/javascript">
+    /*辗转相除法*/
+    function gcd(n1, n2) {
+        var mid, remain;
+        if (n2 > n1) {
+            mid = n2;
+            n2 = n1;
+            n1 = mid;
+        }
+        while (n2 > 0) {
+            remain = n1 % n2;
+            n1 = n2;
+            n2 = remain;
+        }
+        return n1;
+    }
+
+    function screen(n1, n2) {
+        var gcdN = gcd(n1, n2);
+        return (n1 / gcdN) + ":" + (n2 / gcdN);
+    }
+
+    function isInt(num) {
+        return Math.floor(num) == num;
+    }
+
+    for (var i = 720; i <= 6000; i++) {
+        var w = i * 16 / 9;
+        if (isInt(w) && w % 4 == 0 && i % 4 == 0 && i % 10 == 0) {
+            console.log(w + "*" + i);
+        }
+    }
+
+    function ppi(w, h, size) {
+        return Math.pow((Math.pow(w, 2) + Math.pow(h, 2)), (1 / 2)) / size;
+    }
+
+    function ppi2(w, size) {
+        var h = 9 / 16 * w;
+        return Math.pow((Math.pow(w, 2) + Math.pow(h, 2)), (1 / 2)) / size;
+    }
+
+    function perfectW(size, ppi) {
+        return Math.pow(Math.pow(ppi * size, 2) / (1 + 9 / 16 * 9 / 16), (1 / 2));
+    }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

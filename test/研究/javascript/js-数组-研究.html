@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>js 数组研究</title>
+    <script type="text/javascript">
+    /*其实数组删除,插入(现有方法splice)，都可以通过数组复制(slice)+数组合并(concat) 实现数组拼接来完成*/
+    {
+        let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        /*在第五位插入一个999,888*/
+        let arr1 = arr.slice(0, 5).concat([999, 888], arr.slice(5)); //[0, 1, 2, 3, 4, 999, 888, 5, 6, 7, 8, 9]
+        /*等价于*/
+        arr.splice(5, 0, 999, 888);
+        console.log(arr); //[0, 1, 2, 3, 4, 999, 888, 5, 6, 7, 8, 9]
+    }
+
+    {
+        let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        /*删除第二位到第六位(不包括第六位)的数*/
+        let arr1 = arr.slice(0, 2).concat(arr.slice(6)); //[0, 1, 6, 7, 8, 9]
+        /*等价于*/
+        arr.splice(2, (6 - 2));
+        console.log(arr); //[0, 1, 6, 7, 8, 9]
+        console.log(JSON.stringify(arr) === JSON.stringify(arr1));
+    }
+
+    {
+        let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let arr1 = arr;
+        let arr2 = arr.slice(0);
+        arr.splice(5, 0, 999, 888);
+        console.log(arr, arr1, arr2);
+    }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
