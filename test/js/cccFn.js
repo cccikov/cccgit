@@ -93,9 +93,21 @@ if (!Array.prototype.hasVal) {
 }
 
 // 数组插入值
-if(!Array.prototype.insert){
+/*if(!Array.prototype.insert){
     Array.prototype.insert = function(posi,item){
         this.splice(posi,0,item);
+        return this;
+    }
+}*/
+if (!Array.prototype.insert) {
+    Array.prototype.insert = function(posi, item) {
+        if (arguments.length == 2) {
+            this.splice(posi, 0, item);
+        } else if (arguments.length > 2) {
+            for (var i = 1, len = arguments.length; i < len; i++) {
+                this.splice(posi + (i - 1), 0, arguments[i]);
+            }
+        }
         return this;
     }
 }
