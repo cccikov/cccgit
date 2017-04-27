@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    function fn1() {
+        console.log("fn1 this指向", this);
+
+        return function fn2() {
+            console.log("fn2 this指向", this);
+
+            return function fn3() {
+                console.log("fn3 this指向", this);
+            }
+        }
+    }
+    var obj = {
+        "name": "ccc"
+    }
+    var d1 = fn1(); //window
+    var d2 = d1.apply(obj); //obj
+    var d3 = d2(); //window
+
+
+    function fn() {
+        console.log("fn this指向", this);
+
+        function innerFn() {
+            console.log("innerFn this指向", this);
+        }
+        innerFn();
+    }
+    fn.apply(obj);
+    /*
+        fn this指向 obj
+        innerFn this指向 Window
+    */
+
+    /*es5 中 this的指向是由函数的调用方式决定的，而不是由函数的定义的位置决定*/
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
