@@ -37,3 +37,17 @@
 | zebra stripes | are neat      |    $1 |
 
 `var hehe = null;//代码`
+
+    // 4个空格,代码段
+    var wrap = document.getElementById("wrap");
+
+
+* * *
+
+***
+
+*****
+
+- - -
+
+---------------------------------------
