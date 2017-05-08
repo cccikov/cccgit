@@ -53,6 +53,7 @@
     // 4个空格,代码段
     var wrap = document.getElementById("wrap");
 
+<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>
 
 * * *
 
