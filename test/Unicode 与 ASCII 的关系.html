@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Unicode 与 ASCII 的关系</title>
+    <script type="text/javascript">
+        // ASCII编码 只包含127个字符 美国标准，英文字母+阿拉伯数字+一些标点符号 1个字节表示
+        // Unicode是由于在多语言使用下，不可能用ASCII编码，就采用至少2个字节，而且前127个字符是采用ASCII编码
+
+
+        console.log("\101");// "A"      8进制ASCII码
+        console.log("\x41");// "A"      16进制ASCII码
+        console.log(String.fromCharCode(65));// "A"
+        console.log("\u0041");// "A"    Unicode写法，对于ASCII编码字符来说就是在前面加0
+
+        console.log("A".charCodeAt());// 65 charCodeAt返回的是十进制的Unicode码，若是前127位也就是ASCII码
+
+        console.log(0o101,0101);// 65 65 前者为es6写法 转化为10进制都是65
+        console.log(0x41);// 65 十六进制转十进制
+        console.log(0x0041);// 65 Unicode写法0041转十进制
+
+        console.log(0b01000001);// 65   "A"的ASCII码二进制写法01000001转为十进制
+        /**
+         * 综上所述，其实就是为了说明Unicode的前127就是ASCII
+         */
+
+        //ps: 那utf-8是什么呢，如果文本好多英文，也有少量中文，用ascii表示不全，用Unicode（至少2字节）由浪费空间；这是utf-8就出现了，UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节，就是会更加所需让不同字符占用不同字节数
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

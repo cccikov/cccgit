@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    /*var old = [
+        "All Autocomplete", //根据打开的文件自动补全
+        "AutoFileName", //自动补全文件地址
+        "Boxy Theme", //主题 安装这个的时候会提示安装一个A File Icon 插件，不要按确定，安装之后那些文件图标就改不回来了
+        "BracketHighlighter", //成对符号高亮 如html标签 引号"" 括号{}[]
+        "Color Highlighter", //css 颜色高亮 !!!!!!!!!!!!!在win7家庭普通版会出现性能问题
+        "ConvertToUTF8", //通过本插件，您可以编辑并保存目前编码不被 Sublime Text 支持的文件，特别是中日韩用户使用的 GB2312，GBK，BIG5，EUC-KR，EUC-JP 等。ConvertToUTF8 同时支持 Sublime Text 2 和 3。
+        "Emmet", //Emmet语法 快速编写html css
+        "FileDiffs", //检测文件之间的不同
+        "Git", //git插件
+        "GitGutter", //显示git 的修改
+        "HTML-CSS-JS Prettify", //html,js,css代码整理
+        "LESS", //增加less语法
+        "Material Theme", ////主题 安装这个的时候会提示安装一个A File Icon 插件，不要按确定，安装之后那些文件图标就改不回来了
+        "Monokai - Spacegray",
+        "Monokai Gray",
+        "Nodejs", //nodejs插件 可以直接运行nodejs文件
+        "Package Control", //Package Control,管理全部插件,全部插件的基础,最先安装插件
+        "Predawn",
+        "Predawn Monokai",
+        "SideBarEnhancements", //增强侧边栏(右键)
+        "Solarized Color Scheme",
+        "SublimeCodeIntel", //代码自动补全引擎 , js jq python ...好多语言都可以(所以好大)
+        "Theme - Asphalt",
+        "Theme - Bamboo",
+        "Theme - Brogrammer",
+        "Theme - Flatland",
+        "Theme - Glacier",
+        "Theme - itg.flat",
+        "Theme - Monokai",
+        "Theme - Soda",
+        "Theme - Sodarized",
+        "Theme - Solarized Flat",
+        "Theme - Solarized Space",
+        "Theme - Spacegray",
+        "View In Browser" //在浏览器打开,现在基本不用
+    ];
+    var now = [
+        "Agila Theme",
+        "All Autocomplete",
+        "Anaconda",
+        "Ant Color Scheme",
+        "AutoFileName",
+        "Boxy Theme",
+        "BracketHighlighter",
+        "ConvertToUTF8",
+        "CSS3",
+        "DocBlockr",
+        "Emmet",
+        "FileDiffs",
+        "Git",
+        "GitGutter",
+        "HTML-CSS-JS Prettify",
+        "JavaScript Completions",
+        "LESS",
+        "Markdown Preview",
+        "MarkdownEditing",
+        "Material Theme",
+        "Monokai - Spacegray",
+        "Nodejs",
+        "Package Control",
+        "Predawn",
+        "Predawn Monokai",
+        "Python 3",
+        "SideBarEnhancements",
+        "Solarized Color Scheme",
+        "SublimeCodeIntel",
+        "Theme - Bamboo",
+        "Theme - Brogrammer",
+        "Theme - Flatland",
+        "Theme - Glacier",
+        "Theme - itg.flat",
+        "Theme - Soda",
+        "Theme - Soda SolarizedDark",
+        "Theme - Solarized Flat",
+        "Theme - Solarized Space",
+        "TypeScript",
+        "View In Browser"
+    ];*/
+
+    var old = {
+        "All Autocomplete": "haha",
+        "AutoFileName": "haha",
+        "Boxy Theme": "haha",
+        "BracketHighlighter": "haha",
+        "Color Highlighter": "haha",
+        "ConvertToUTF8": "haha",
+        "Emmet": "haha",
+        "FileDiffs": "haha",
+        "Git": "haha",
+        "GitGutter": "haha",
+        "HTML-CSS-JS Prettify": "haha",
+        "LESS": "haha",
+        "Material Theme": "haha",
+        "Monokai - Spacegray": "haha",
+        "Monokai Gray": "haha",
+        "Nodejs": "haha",
+        "Package Control": "haha",
+        "Predawn": "haha",
+        "Predawn Monokai": "haha",
+        "SideBarEnhancements": "haha",
+        "Solarized Color Scheme": "haha",
+        "SublimeCodeIntel": "haha",
+        "Theme - Asphalt": "haha",
+        "Theme - Bamboo": "haha",
+        "Theme - Brogrammer": "haha",
+        "Theme - Flatland": "haha",
+        "Theme - Glacier": "haha",
+        "Theme - itg.flat": "haha",
+        "Theme - Monokai": "haha",
+        "Theme - Soda": "haha",
+        "Theme - Sodarized": "haha",
+        "Theme - Solarized Flat": "haha",
+        "Theme - Solarized Space": "haha",
+        "Theme - Spacegray": "haha",
+        "View In Browser": "haha"
+    };
+
+    var now = {
+        "Agila Theme": "haha",
+        "All Autocomplete": "haha",
+        "Anaconda": "haha",
+        "Ant Color Scheme": "haha",
+        "AutoFileName": "haha",
+        "Boxy Theme": "haha",
+        "BracketHighlighter": "haha",
+        "ConvertToUTF8": "haha",
+        "CSS3": "haha",
+        "DocBlockr": "haha",
+        "Emmet": "haha",
+        "FileDiffs": "haha",
+        "Git": "haha",
+        "GitGutter": "haha",
+        "HTML-CSS-JS Prettify": "haha",
+        "JavaScript Completions": "haha",
+        "LESS": "haha",
+        "Markdown Preview": "haha",
+        "MarkdownEditing": "haha",
+        "Material Theme": "haha",
+        "Monokai - Spacegray": "haha",
+        "Nodejs": "haha",
+        "Package Control": "haha",
+        "Predawn": "haha",
+        "Predawn Monokai": "haha",
+        "Python 3": "haha",
+        "SideBarEnhancements": "haha",
+        "Solarized Color Scheme": "haha",
+        "SublimeCodeIntel": "haha",
+        "Theme - Bamboo": "haha",
+        "Theme - Brogrammer": "haha",
+        "Theme - Flatland": "haha",
+        "Theme - Glacier": "haha",
+        "Theme - itg.flat": "haha",
+        "Theme - Soda": "haha",
+        "Theme - Soda SolarizedDark": "haha",
+        "Theme - Solarized Flat": "haha",
+        "Theme - Solarized Space": "haha",
+        "TypeScript": "haha",
+        "View In Browser": "haha"
+    };
+
+    function diff(old, now) {
+        let diffObj = {
+            "oldOnly": [],
+            "nowOnly": []
+        }
+
+        if (Array.isArray(old)) { //是数组
+
+            let oldLen = old.length;
+            let nowLen = now.length;
+
+            for (let i = 0; i < nowLen; i++) {
+                if (old.indexOf(now[i]) < 0) {
+                    diffObj.nowOnly.push(now[i]);
+                }
+            }
+            for (let i = 0; i < oldLen; i++) {
+                if (now.indexOf(old[i]) < 0) {
+                    diffObj.oldOnly.push(old[i]);
+                }
+            }
+
+            /*for (let i = 0; i < nowLen; i++) {
+                let flag;
+                for (let j = 0; j < oldLen; j++) {
+                    if (old[j] == now[i]) {
+                        flag = true;
+                    }
+                }
+                if (!flag) {
+                    diffObj.nowOnly.push(now[i]);
+                }
+            }
+            for (let i = 0; i < oldLen; i++) {
+                let flag;
+                for (let j = 0; j < nowLen; j++) {
+                    if (now[j] == old[i]) {
+                        flag = true;
+                    }
+                }
+                if (!flag) {
+                    diffObj.oldOnly.push(old[i]);
+                }
+            }*/
+
+            /*for (let i = 0; i < nowLen; i++) {
+            	// now[i]
+                let flag, j = 0;
+                while (!flag && j<oldLen){
+                	if (now[i] == old[j]) {
+                		flag = true;
+                    }
+                    j++;
+                }
+                if (!flag) {
+                    diffObj.nowOnly.push(now[i]);
+                }
+            }
+            for (let i = 0; i < oldLen; i++) {
+            	//old[i]
+                let flag, j = 0;
+                while (!flag && j<nowLen){
+                	if (old[i] == now[j]) {
+                		flag = true;
+                    }
+                    j++;
+                }
+                if (!flag) {
+                    diffObj.oldOnly.push(old[i]);
+                }
+            }*/
+        } else { //是对象
+
+            for (let i in now) {
+                // now[i]
+                if (!(i in old)) {
+                    diffObj.nowOnly.push(i);
+                }
+            }
+            for (let i in old) {
+                // old[i] i
+                if (!(i in now)) {
+                    diffObj.oldOnly.push(i);
+                }
+            }
+        }
+        return diffObj;
+
+    }
+
+    console.log(diff(old, now));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
