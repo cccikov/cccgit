@@ -398,3 +398,13 @@ function Ele(dom) {
 function resetFrameH(frame){
     frame.style.height = frame.contentDocument.body.offsetHeight+"px";//跨域会不行
 }
+
+// 让数字只能符合某种间隔,比如0 20 40 60,一般可以用于拖拽的格子
+function grid(v,len) {
+    var len = len || 20;
+    var r = parseInt(v / len) * len;
+    if (Math.abs(v % len) > len/2) {
+        r += v > 0 ? len : -len;
+    }
+    return r;
+}

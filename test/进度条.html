@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Document</title>
+    <title>进度条</title>
     <style type="text/css">
         .pipe{
             position: relative;
@@ -27,7 +27,7 @@
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function(){
-            $(".pipe1").animate({"width":"85%"},1000);
+            $(".pipe1").animate({"width":"85%"},4000);//jq这个变化动画 会设置overflow:hidden,所以在走的时候回看不到
             $(".pipe2").width("85%");
         });
     </script>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>进度条2</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+        function ProgressBar(obj){
+            this.obj = obj;
+            this.wrap = obj.find(".wrap");
+            this.pipe = obj.find(".pipe").width(obj.width());
+            this.p = obj.find("p");
+            this.percent = 100;
+            this.setPer(0);
+        }
+        ProgressBar.prototype.setPer = function(num){
+            this.wrap.width(num+"%");
+            this.p.css("left",num+"%").html(num+"%");
+        }
+        ProgressBar.prototype.setPerTween =function(num){
+            var that = this;
+            var t = 0;
+            var d = 90;//帧
+            var c = num;
+            var b = 0;
+            var nowNum = 0,timer;//缓存
+
+            timer = window.requestAnimationFrame(function() {
+                move();
+            });
+
+            function move(){
+                t+=1;
+                nowNum = that.tween(t,b,c,d);
+
+                that.wrap.width(nowNum+"%");
+                that.p.css("left",nowNum+"%").html(Math.floor(nowNum*10)/10+"%");
+
+                timer = window.requestAnimationFrame(function() {
+                    move();
+                });
+                if (t >= d) {
+                    window.cancelAnimationFrame(timer);
+                }
+            }
+
+        }
+        ProgressBar.prototype.tween =function(t,b,c,d){
+            return c*((t=t/d-1)*t*t + 1) + b;
+        }
+        $(function(){
+            $(".test-move").width("100%");
+
+            var bar = new ProgressBar($(".bar-test"));
+            bar.setPerTween(100);
+        });
+    </script>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    h4{
+        margin:15px 12px;
+    }
+    .color {
+        background: linear-gradient(to right, #fdfff4 0%, #d2ffde 100%);
+        background: -webkit-linear-gradient(to right, #fdfff4 0%, #d2ffde 100%);
+        background: -webkit-linear-gradient(left, #fdfff4 0%, #d2ffde 100%);
+    }
+    /*d2ffde  e5ff57*/
+
+    .progressbar {
+        margin:10px 30px;
+        color: #644e98;
+        border: 1px solid #566392;
+        border-radius: 15px;
+    }
+
+    .test-move{
+        transition:width 1.5s cubic-bezier(0.39, 0.85, 0.62, 0.96);
+        width: 0%;
+        /*触发gpu*/
+        webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+
+    /*布局1*/
+    .progressbar1 {
+        line-height: 30px;
+        padding:2px;
+    }
+
+    .progressbar1 .pipe {
+        border-radius: 15px;
+    }
+    .progressbar1 p{
+        box-sizing: border-box;
+        min-width: 100px;
+        padding: 0 30px;
+        text-align: right;
+    }
+
+    /*布局2*/
+    .progressbar2 {
+        line-height: 30px;
+        padding:2px;
+    }
+    .progressbar2 .pipe {
+        position: relative;
+        height: 30px;
+        border-radius: 15px;
+    }
+    .progressbar2 p{
+        position: absolute;
+        top: 0;
+        left:90%;
+        /*用padding-left,padding-left百分比效果是一样的,但是由于position是脱离文档流,所以会流畅一点*/
+    }
+
+    /*布局3*/
+    .progressbar3 {
+        margin-top: 40px;
+        line-height: 30px;
+        padding:2px;
+    }
+    .progressbar3 .pipe {
+        position: relative;
+        height: 30px;
+        border-radius: 15px;
+    }
+    .progressbar3 p{
+        position: absolute;
+        right:-20px;
+        top: -30px;
+        width: 40px;
+        text-align: center;
+    }
+
+    /*布局4*/
+    .progressbar4 {
+        position: relative;
+        width: 500px;
+        padding:2px;
+        margin-top: 40px;
+    }
+    .progressbar4 .wrap {
+        overflow: hidden
+    }
+    .progressbar4 .pipe{
+        width: 500px;
+        height:30px;
+        border-radius: 15px;
+    }
+    .progressbar4 p{
+        position: absolute;
+        top: -30px;
+        left:100%;
+        width: 40px;
+        line-height: 30px;
+        margin:0 0 0 -20px;
+        text-align: center;
+    }
+    .bar-test{
+        width: auto;
+    }
+    .bar-test .pipe{
+        width: auto;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div class="progressbar progressbar4 bar-test">
+        <div class="wrap">
+            <div class="pipe color">
+            </div>
+        </div>
+        <p style="left: 100%">100%</p>
+    </div>
+
+    <h4>布局1</h4>
+    <div class="progressbar progressbar1">
+        <div class="pipe color" style="width: 2%;">
+            <p>2%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar1">
+        <div class="pipe color" style="width: 20%;">
+            <p>20%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar1">
+        <div class="pipe color" style="width: 80%;">
+            <p>80%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar1">
+        <div class="pipe color" style="width: 100%;">
+            <p>100%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar1">
+        <div class="pipe color test-move">
+            <p>100%</p>
+        </div>
+    </div>
+
+    <h4>布局2</h4>
+    <div class="progressbar progressbar2">
+        <div class="pipe color" style="width: 2%;">
+            <p>2%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar2">
+        <div class="pipe color" style="width: 20%;">
+            <p>20%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar2">
+        <div class="pipe color" style="width: 80%;">
+            <p>80%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar2">
+        <div class="pipe color" style="width: 100%;">
+            <p>100%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar2">
+        <div class="pipe color test-move">
+            <p>100%</p>
+        </div>
+    </div>
+
+    <h4>布局3</h4>
+    <div class="progressbar progressbar3">
+        <div class="pipe color" style="width: 0%;">
+            <p>0%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar3">
+        <div class="pipe color" style="width: 20%;">
+            <p>20%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar3">
+        <div class="pipe color" style="width: 80%;">
+            <p>80%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar3">
+        <div class="pipe color" style="width: 100%;">
+            <p>100%</p>
+        </div>
+    </div>
+    <div class="progressbar progressbar3">
+        <div class="pipe color test-move">
+            <p>100%</p>
+        </div>
+    </div>
+
+    <h4>布局4</h4>
+    <div class="progressbar progressbar4">
+        <div class="wrap" style="width: 0%;">
+            <div class="pipe color">
+            </div>
+        </div>
+        <p style="left: 0%">0%</p>
+    </div>
+    <div class="progressbar progressbar4">
+        <div class="wrap" style="width: 99%;">
+            <div class="pipe color">
+            </div>
+        </div>
+        <p style="left: 99%">99%</p>
+    </div>
+    <div class="progressbar progressbar4">
+        <div class="wrap" style="width: 100%;">
+            <div class="pipe color">
+            </div>
+        </div>
+        <p style="left: 100%">100%</p>
+    </div>
+
+
+</body>
+
+</html>
