@@ -289,7 +289,7 @@ String.prototype.exchange2 = function(ori, tar) {
 };
 // e.g. var a = "AGCT"; a.exchange("ATCG", "TAGC")//TCGA ,A=>T,T=>A,C=>G,G=>C
 // 传一个哈希表，属性名为匹配字符，值为目标字符
-String.prototype.exchange3 = function(hash) {
+String.prototype.exchange3 = function(hashTable) {
     var arr = this.split("");
     for (var i = 0, len = arr.length; i < len; i++) {
         // (arr[i] in hashTable) && (arr[i] = hashTable[arr[i]])

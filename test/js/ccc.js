@@ -76,6 +76,21 @@ ccc.attr = function(obj,attrName,attrValue){
     return null
 }
 
+// 获取ele全部属性
+ccc.allAttr = function(ele) {
+    var attrMap = ele.attributes;
+    var obj = {};
+    var arr = [];
+    for (var i = 0,len = attrMap.length; i < len; i++) {
+        arr.push(attrMap[i].name);
+        obj[attrMap[i].name] = attrMap[i].value;
+    }
+    return {
+        "attrNode":arr,//有哪些属性
+        "attr":obj//具体属性以及值
+    };
+}
+
 // 去除节点属性
 ccc.removeAttr = function(obj,attrName){
     if(obj.hasAttribute(attrName)){//有这个属性
