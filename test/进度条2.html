@@ -19,7 +19,7 @@
             this.wrap.width(num+"%");
             this.p.css("left",num+"%").html(num+"%");
         }
-        ProgressBar.prototype.setPerTween =function(num){
+        ProgressBar.prototype.setPerTween =function(num,fn){
             var that = this;
             var t = 0;
             var d = 90;//帧
@@ -28,10 +28,10 @@
             var nowNum = 0,timer;//缓存
 
             timer = window.requestAnimationFrame(function() {
-                move();
+                move(fn);
             });
 
-            function move(){
+            function move(fn){
                 t+=1;
                 nowNum = that.tween(t,b,c,d);
 
@@ -39,10 +39,13 @@
                 that.p.css("left",nowNum+"%").html(Math.floor(nowNum*10)/10+"%");
 
                 timer = window.requestAnimationFrame(function() {
-                    move();
+                    move(fn);
                 });
                 if (t >= d) {
                     window.cancelAnimationFrame(timer);
+                    if(fn){//回调函数执行
+                        fn();
+                    }
                 }
             }
 
@@ -53,8 +56,14 @@
         $(function(){
             $(".test-move").width("100%");
 
-            var bar = new ProgressBar($(".bar-test"));
-            bar.setPerTween(100);
+            var bar1 = new ProgressBar($(".bar-test").eq(0));
+            bar1.setPerTween(100);
+
+            var bar2 = new ProgressBar($(".bar-test").eq(1));
+            bar2.setPerTween(60,function(){
+                console.log("动画完成");
+            });
+            console.log("语句完成");
         });
     </script>
     <style type="text/css">
@@ -177,6 +186,13 @@
 
 <body>
 
+    <div class="progressbar progressbar4 bar-test">
+        <div class="wrap">
+            <div class="pipe color">
+            </div>
+        </div>
+        <p style="left: 100%">100%</p>
+    </div>
     <div class="progressbar progressbar4 bar-test">
         <div class="wrap">
             <div class="pipe color">
