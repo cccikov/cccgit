@@ -263,7 +263,7 @@
                 }
 
                 console.log(eventDom[el]);
-                
+
                 /*
                  * 结构
                  * eventDom包含着许多dom节点(eventDom[el]),如document，a#btn等;
@@ -456,7 +456,7 @@
             }, "我是参数c");
 
             var haha = function(e, a) {
-                console.log("我是没有指针的匿名函数", e, a);
+                console.log("我是有指针的匿名函数", e, a);
             }
             ccc.on(document, "click", haha, "ccc");
             haha = function(e, a) { //改变了指针，原生和jq都不能吧
