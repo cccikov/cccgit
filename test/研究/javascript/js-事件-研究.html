@@ -32,6 +32,27 @@
         btn.removeEventListener("click", fn2, false);//删除监听器2,但是不是删除事件,事件还在,只是删除监听器.而且还有其他监听呢
 
         // 我们通常还把注册监听器叫做绑定事件。给ele注册监听器,叫做给ele绑定事件。把removeEventListener叫做删除事件(移除事件)，但是只是移除监听器而已。我觉得是由于，添加监听器之前，事件的触发并没有任何反应，所以注册监听器就好像给对象绑定了事件一样。想上面一样，会叫做删除btn的（一个）click事件，但是明明事件还在，触发时还会触发fn1的监听器呢，所以其实只是删除监听器。但是绑定/删除事件会显得更加通俗易懂，便于交流。
+
+
+        /**
+         * 自定义事件(现代浏览器才有)
+         */
+
+        //document上绑定自定义事件oneating
+        document.addEventListener('oneating', function (e) {
+           alert(e.mingzi+'，'+e.message);
+        }, false);
+
+        //创建event的对象实例。
+        var event = document.createEvent('HTMLEvents');
+        // 3个参数：事件类型，是否冒泡，是否阻止浏览器的默认行为
+        event.initEvent("oneating", true, true);
+        /*属性，随便自己定义*/
+        event.mingzi = 'hello,我是李小贱';
+        event.message = '我今天24岁';
+
+        //触发自定义事件oneating
+        document.dispatchEvent(event);
     </script>
 </body>
 </html>
