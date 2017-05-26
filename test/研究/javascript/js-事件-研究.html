@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对于事件的研究</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <script type="text/javascript">
+        btn.addEventListener("click",fn1,false);//给btn注册click事件的监听器,监听btn的click事件触发,触发时调用fn1函数.监听器是我们不能获取的对象,展示给我们的面前就只有里面的函数.况且js中函数自带有监听器(eventListener)接口,监听器调用时会调用里面函数,所以调用监听器与调用函数没有什么区别;函数可以作为监听器,但是监听器一定是函数(监听器是要有eventListener接口的对象,只是仅仅函数有这个接口,可以直接作为监听器).
+
+        // 感觉eventListener接口功能就是监听事件发生,所以监听器一定要有这个接口,js函数都有这个接口,所以可以直接作为监听器
+
+        btn.addEventListener("click",fn2,false);
+        btn.addEventListener("click",fn1,false);//这个含有fn1函数的监听器已经注册过了,所以就不可以再注册了
+
+
+        // 如果监听器用的是匿名函数，则可以注册多次，但是由于匿名，也无法被移除。
+        btn.addEventListener("click",function(){
+            fn2();
+        },false);
+        btn.addEventListener("click",function(){
+            fn2();
+        },false);
+
+        function fn1(){
+            console.log("监听器1的回调函数");
+        }
+        function fn2(){
+            console.log("监听器2的回调函数");
+        }
+        btn.removeEventListener("click", fn2, false);//删除监听器2,但是不是删除事件,事件还在,只是删除监听器.而且还有其他监听呢
+
+        // 我们通常还把注册监听器叫做绑定事件。给ele注册监听器,叫做给ele绑定事件。把removeEventListener叫做删除事件(移除事件)，但是只是移除监听器而已。我觉得是由于，添加监听器之前，事件的触发并没有任何反应，所以注册监听器就好像给对象绑定了事件一样。想上面一样，会叫做删除btn的（一个）click事件，但是明明事件还在，触发时还会触发fn1的监听器呢，所以其实只是删除监听器。但是绑定/删除事件会显得更加通俗易懂，便于交流。
+    </script>
+</body>
+</html>
