@@ -217,9 +217,11 @@
 
     $(function() {
         tableMove = new Float({
+            // 横向表头
             tableTitle: $("#content tr").eq(0),
-            // yTr: $("#content tr").slice(1),
-            // yTd: $("#content tr").slice(1).find("td:nth-of-type(-n+2)"),
+            // 纵向表头
+            yTr: $("#content tr").slice(1),// 除了第一条tr之外其他的tr
+            yTd: $("#content tr").slice(1).find("td:nth-of-type(-n+2)"),// 每排tr的前两个.
         });
         console.log(tableMove);
     });
