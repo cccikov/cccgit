@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>利用float的特性,让文字布局</title>
+</head>
+
+<body>
+    <style type="text/css">
+    p {
+        height: 3em;
+        line-height: 1.5;
+        overflow: hidden;
+    }
+    p .left {
+        float: left;
+        width: 30px;
+        height: 1em;
+    }
+    p .right {
+        float: right;
+        width: 30px;
+        height: 1em;
+    }
+    </style>
+    <p>
+        <span class="left"></span><span class="right"></span>
+         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    <p>利用float的特性,来让文字起到特定的布局,文字会围绕浮动元素</p>
+</body>
+
+</html>
