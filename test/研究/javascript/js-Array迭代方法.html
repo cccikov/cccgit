@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Array迭代方法</title>
+    <script type="text/javascript">
+    /**
+     * every
+     */
+    var arr = [0, 1, 2, 3, 4, 5, 6, 7];
+
+    // every 对数组中的每一项运行一个函数，如果每一项都返回true，则返回true
+    var everyResult = arr.every(function(key, index, arr) {
+        // console.log(key, index, arr);
+        // return key < 10;
+        return key < 5;
+    });
+    console.log(everyResult);
+
+    // some 对数组中的每一项运行一个函数，如果有任何一项返回true，则返回true
+    var someResult = arr.some(function(key, index, arr) {
+        // console.log(key, index, arr);
+        // return key < 10;
+        return key < 5;
+    });
+    console.log(someResult);
+
+
+    // filter 对数组中的每一项运行一个函数，返回true的项组成的数组
+    var filterResult = arr.filter(function(key, index, arr){
+        // console.log(key, index, arr);
+        return key>3;
+    });
+    console.log(filterResult);//[4, 5, 6, 7]
+
+    // map 对数组中的每一项运行一个函数，返回每次函数调用的返回值的数组
+    var mapResult = arr.map(function(key,index){
+    	return 2*3;
+    });
+  	console.log(mapResult);
+
+  	// forEach 对数组中的每一项运行一个函数，没有返回
+  	var forEachResult = arr.forEach(function(key,index){
+  		return key;
+  	});
+  	console.log(forEachResult);
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
