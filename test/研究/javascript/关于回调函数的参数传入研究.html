@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回调函数的参数传入研究</title>
+    <script type="text/javascript">
+        /**
+         * 一般函数,都是先定义函数,再根据不同的参数进行调用;而回调函数通常都是先 定义了怎么调用(包括参数有哪些),再定义函数体
+         */
+
+        //一般函数,先定义,再使用,每次调用的函数体都一样.
+        function sum(num1,num2){
+            return num1+num2;
+        }
+        console.log(sum(1,2));//3
+
+        // 回调函数,函数体可以是一样的(定义好的函数),也可以是不一样的(匿名函数),匿名函数用得比较多,就像addEventListener那样,回调函数都是不一样的
+        function foreach(arr,fn){//fn为回调函数
+            var len = arr.length;
+            for (var i = 0; i < len; i++) {
+                fn(arr[i]);//这里已经定义了是怎么调用的,以及传入的参数
+            }
+        }
+
+        var arr = [0, 1, 2, 3, 4, 5, 6, 7];
+        foreach(arr,function(key,index){//这里再定义回调函数的函数体
+            console.log(key,index);
+        });
+
+        // 如果我想回调函数里面可以用的参数不单单是数组的值,而且还要下标,整个数组,那么就应该在定义回调函数调用的地方,给它传入.
+        function foreach2(arr,fn){//fn为回调函数
+            var len = arr.length;
+            for (var i = 0; i < len; i++) {
+                fn(arr[i],i,arr);// 在这里定义回调函数调用的地方,改变传入的参数
+            }
+        }
+        foreach2(arr,function(key,index){
+            console.log(key,index);
+        });
+
+        // 一般函数可以理解为,定义好方法,然后根据不同的参数,做不同的运算;而回调函数一样的参数(相当于数据),对这个参数进行不同的操作,得到我们想要的结果.
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <title>Array迭代方法</title>
     <script type="text/javascript">
-    /**
-     * every
-     */
+
     var arr = [0, 1, 2, 3, 4, 5, 6, 7];
 
-    // every 对数组中的每一项运行一个函数，如果每一项都返回true，则返回true
+    /**
+     * every 对数组中的每一项运行一个函数，如果每一项都返回true，则返回true
+     */
     var everyResult = arr.every(function(key, index, arr) {
         // console.log(key, index, arr);
         // return key < 10;
@@ -18,7 +18,9 @@
     });
     console.log(everyResult);
 
-    // some 对数组中的每一项运行一个函数，如果有任何一项返回true，则返回true
+    /**
+     * some 对数组中的每一项运行一个函数，如果有任何一项返回true，则返回true
+     */
     var someResult = arr.some(function(key, index, arr) {
         // console.log(key, index, arr);
         // return key < 10;
@@ -26,25 +28,167 @@
     });
     console.log(someResult);
 
-
-    // filter 对数组中的每一项运行一个函数，返回true的项组成的数组
-    var filterResult = arr.filter(function(key, index, arr){
+    /**
+     * filter 对数组中的每一项运行一个函数，返回true的项组成的数组
+     */
+    var filterResult = arr.filter(function(key, index, arr) {
         // console.log(key, index, arr);
-        return key>3;
+        return key > 3;
     });
-    console.log(filterResult);//[4, 5, 6, 7]
+    console.log(filterResult); //[4, 5, 6, 7]
 
-    // map 对数组中的每一项运行一个函数，返回每次函数调用的返回值的数组
-    var mapResult = arr.map(function(key,index){
-    	return 2*3;
+    /**
+     * map 对数组中的每一项运行一个函数，返回每次函数调用的返回值的数组
+     */
+    var mapResult = arr.map(function(key, index) {
+        return 2 * key;
     });
-  	console.log(mapResult);
+    console.log(mapResult);
 
-  	// forEach 对数组中的每一项运行一个函数，没有返回
-  	var forEachResult = arr.forEach(function(key,index){
-  		return key;
-  	});
-  	console.log(forEachResult);
+    /**
+     * forEach 对数组中的每一项运行一个函数，没有返回
+     */
+    var forEachResult = arr.forEach(function(key, index) {
+        console.log(key,index,arr);
+        return key;
+    });
+    console.log(forEachResult);
+
+    // forEach 可以通过 for 循环来实现
+    function forEach(arr, fn) {
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            fn(arr[i],i,arr);
+        }
+    }
+    forEach(arr,function(key,index,arr){
+        console.log(key,index,arr);
+    });
+
+
+
+
+
+
+    // 可以通过forEach 来实现 every some filter map forEach
+
+
+
+
+
+
+
+
+    // forEach来实现every
+    function every(arr,fn){
+        var trueNum = 0;
+        arr.forEach(function(key,index,arr){
+
+            if(fn(key,index,arr)){//如果函数返回值
+                trueNum++
+            }
+
+        });
+        if(trueNum == arr.length){
+            return true
+        }else{
+            return false
+        }
+    }
+    var everyResult1 = every(arr,function(key){
+        return key < 15;
+    });
+    console.log(everyResult1);
+
+    //for循环来实现every
+    function every2(arr,fn){
+        var trueNum = 0;
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+
+            if(fn(arr[i],i,arr)){
+                trueNum++
+            }
+
+        }
+        if(trueNum == arr.length){
+            return true
+        }else{
+            return false
+        }
+    }
+    var everyResult2 = every(arr,function(key){
+        return key < 7;
+    });
+    console.log(everyResult2);
+
+
+
+
+
+
+
+    // some
+    function some(arr,fn){
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            if(fn(arr[i],i,arr)){
+                return true;
+            }
+        }
+        return false
+    }
+    var someResult1 = some(arr,function(key){
+        return key>5;
+    });
+    console.log(someResult1);
+
+
+
+
+
+
+
+
+    // filter
+    function filter(arr,fn){
+        var len = arr.length;
+        var newArr = [];
+        var key,index;
+        for (var i = 0; i < len; i++) {
+            key = arr[i];
+            index = i;
+            if(fn(key,index,arr)){
+                newArr.push(key);
+            }
+        }
+        return newArr;
+    }
+    console.log(filter(arr,function(key){
+        return key>5
+    }));
+
+
+
+
+
+
+
+    // map
+    function map(arr,fn){
+        var len = arr.length;
+        var newArr = [];
+        var key,index;
+        for (var i = 0; i < len; i++) {
+            key = arr[i];
+            index = i;
+            newArr.push(fn(key,index,arr));
+        }
+        return newArr;
+    }
+    console.log(map(arr,function(key){
+        return 2 * key;
+    }));
     </script>
 </head>
 

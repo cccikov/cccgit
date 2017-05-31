@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>test</title>
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript">
+    // !function x(){
+    //     console.log("哈哈");
+    // }();
+    // console.log(x);
+    // // js将funciton关键字当作一个函数声明的开始，所以在前面加一个 ! 将这个语句变成表达式。
+    // // 所以这里并没有声明函数x , 所以x就是未声明 , not defined
+
+    window.onload = function() {
+        document.addEventListener("click", function() {
+            console.log("document");
+        }, true);
+        wrap.addEventListener("click", function() {
+            console.log("wrap");
+        }, false);
+        btn.addEventListener("click", function() {
+            console.log("btn");
+        }, false);
+    }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <button id="btn">按钮</button>
+    </div>
 </body>
+
 </html>
