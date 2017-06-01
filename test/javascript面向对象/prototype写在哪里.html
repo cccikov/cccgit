@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>prototype写在哪里</title>
+    <script type="text/javascript">
+    /**
+     * 我们要知道一个对象创建的过程,new 的时候就已经把实例的 _proto_ 指向了构造函数的原型了,然后在执行构造函数
+     */
+
+    function Person() {
+        console.log("构造函数执行");
+        this.type = "human";
+        if (this.name) {
+            console.log("已经有了name属性了 , name是 " + this.name);
+        }
+    }
+    Person.prototype.name = "ccc";
+    console.log("已经在原型添加了一个name属性");
+
+    new Person();
+    // 已经在原型添加了一个name属性
+    // 构造函数执行
+    // 已经有了name属性了 , name是 ccc
+
+    /*因为在new 的时候,Person.prototype.name = "ccc";语句已经执行了,所以是有this.name的;*/
+
+    /**
+     * 如果prototype写在构造函数里面的话
+     */
+    function Tree() {
+        console.log("构造函数执行");
+        console.log(this.height);
+        Tree.prototype.height = "100m";
+        console.log("设置prototype的height属性");
+    }
+    new Tree();
+    //构造函数执行
+    // undefined
+    // 设置prototype的height属性
+
+    new Tree();
+    // 构造函数执行
+    // 100m , 因为上面第一次new的时候设置了,所以第二次就有
+    // 设置prototype的height属性
+
+    /*所以 如果prototype写在构造函数里面 , 要调用的语句必须写在设置语句的后面*/
+
+    /**
+     * prototype写在构造函数里面有两个问题
+     */
+
+    /*1. prototype会多次改动 , 虽然改动后一样 , 但是有那个改动操作 , 浪费资源*/
+    let times = 0;
+
+    function Boy() {
+        times++;
+        Boy.prototype.name = "ccc";
+        Boy.prototype.test = "这是第" + times + "次设置prototype属性了"
+    }
+    console.log(new Boy().test); // 这是第1次设置prototype属性了
+    console.log(new Boy().test); // 这是第2次设置prototype属性了
+    console.log(new Boy().test); // 这是第3次设置prototype属性了
+    console.log(new Boy().test); // 这是第4次设置prototype属性了
+
+    /*虽然name的值没有变 , 但是已经设置多个了 , 这与prototype的作用共享属性,共享方法背道而驰了,这样就变成直接在里面通过this.name这样的实例属性来写差不多了.*/
+
+    /*解决办法也是有的,通过动态原型模式,其实就是加个if判断*/
+    times = 0;
+    function Boys() {
+        times++;
+        if (!Boys.prototype.name) {
+            Boys.prototype.name = "ccc";
+        }
+        if (!this.test) {
+            Boys.prototype.test = "这是第" + times + "次设置prototype属性了"
+        }
+    }
+    console.log(new Boys().test); // 这是第1次设置prototype属性了
+    console.log(new Boys().test); // 这是第1次设置prototype属性了
+    console.log(new Boys().test); // 这是第1次设置prototype属性了
+    console.log(new Boys().test); // 这是第1次设置prototype属性了
+    /*这样就不会重复多次修改了,但是如果多起来的话,还是挺麻烦的,每个属性就要一个if判断.*/
+
+
+    /*2. 如果改写了整个prototype的话 , 第一个实例就没有prototype那些属性,方法;就算写在调用语句前面也是一样,因为一旦prototype重写,就会变成指向新的prototype了*/
+
+
+
+
+
+    /**
+     * 归根到底,因为构造函数实质也是函数 , 所以代码的运行顺序符合函数的运行
+     */
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

@@ -3,32 +3,103 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>test</title>
+    <title>事件委托</title>
+    <style type="text/css">
+        #wrap.active{
+            background: red;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-    // !function x(){
-    //     console.log("哈哈");
-    // }();
-    // console.log(x);
-    // // js将funciton关键字当作一个函数声明的开始，所以在前面加一个 ! 将这个语句变成表达式。
-    // // 所以这里并没有声明函数x , 所以x就是未声明 , not defined
+    $(function() {
+        let p = document.getElementsByTagName('p');
+        for(let i = 0,len = p.length;i<len;i++){
+            p[i].addEventListener("click", function(e){
+                console.log(this);
+                console.log(e.target);
+            }, false);
+        }
 
-    window.onload = function() {
-        document.addEventListener("click", function() {
-            console.log("document");
-        }, true);
-        wrap.addEventListener("click", function() {
-            console.log("wrap");
+        wrap.addEventListener("click", function(e){
+            let target = e.target;
+            if(target.id == "" && target.className.indexOf("text") >= 0 && target.tagName.toLocaleLowerCase() == "p"){
+                console.dir(target);
+                console.log(this);
+            }
         }, false);
-        btn.addEventListener("click", function() {
-            console.log("btn");
-        }, false);
-    }
+
+        // $("#wrap").on("click", "p", function() {
+            // console.log(this);
+        // });
+
+        for(let i = 0;i<4;i++){
+            $("<p class='text'>新p元素</p>").appendTo("#wrap");
+        }
+
+
+
+
+
+        function ClassList(dom){// 有没有办法做到,new 之后立即就是一个className的数组呢??如果不做成new 呢,查查创建对象的各种模式,可以使用寄生构造函数模式,现在终于明白存在的意义了,通常我们都过new一个来创建的对象都是object类型,但是如果我们想new一个创建出来的对象是一个数组类型呢 , return的类型只能是复杂类型数据,不可以是5种基本数据类型(因为这几种类型不可以有属性)
+            this.dom = dom;
+            this.classList = this.dom.className.match(/\S+/g);
+        }
+        ClassList.prototype._setClassName = function(){
+            this.dom.className = this.classList.join(" ");
+        }
+        ClassList.prototype.contains = function(str){
+            if(!!str && typeof str == "string"){
+                return this.classList.indexOf(str) != -1;
+            }
+            return false;
+        }
+        ClassList.prototype.add = function(str){
+            if(typeof str == "string"){
+                if(!this.contains(str)){
+                    this.classList.push(str);
+                    this._setClassName();
+                }
+            }
+        }
+        ClassList.prototype.remove = function(str){
+            if(this.contains(str)){
+                console.log("remove");
+                let index = this.classList.indexOf(str);
+                this.classList.splice(index,1);
+                this._setClassName();
+                this.remove(str);//通过递归方式去消除重复的class
+            }
+        }
+        ClassList.prototype.toggle = function(str){
+            if(this.contains(str)){
+                this.remove(str);
+            }else{
+                this.add(str);
+            }
+        }
+
+        let wrapList = new ClassList(wrap);
+        console.log(wrapList.classList);
+        console.log(wrapList.contains("container"));
+        console.log(wrapList.add("container"));
+        console.log(wrapList.add());
+        console.log(wrapList.remove("fuck2"));
+        wrap.onclick = function(){
+            wrapList.toggle("active")
+        }
+
+// 构造函数是new的时候才运行的 , 所以如果prototype写在构造函数里面 , 特别是重写 :一new的时候就绑定prototype,再执行构造函数,但是构造函数里面重写,所以就会造成第一个实例的prototype没有修改到.
+
+
+    });
     </script>
 </head>
 
 <body>
-    <div id="wrap">
-        <button id="btn">按钮</button>
+    <div class="wrap btn content container container wrap___---content" id="wrap">
+        <p class="text">Lorem.</p>
+        <p class="text">Lorem.</p>
+        <p class="text">Lorem.</p>
     </div>
 </body>
 
