@@ -17,18 +17,18 @@
 			Person.prototype.age = 29;
 			Person.prototype.job = "Software Engineer";
 			Person.prototype.sayName = function() {
-				alert(this.name);
+				console.log(this.name);
 			}
 
-			//Person.prototype = {
-			//	constructor:Person,//这里一定要重定向，上面的写法不用重定向是因为prototype本身就会自动获取constructor属性，而这里是重写了原型对象，若不加相当于把constructor删除，这样实例的constructor都是Object,因为Person是Object的实例，所以当Person.prototype.constructor删除后，就找到Object原型的属性constructor，当然就指向Object。这里涉及一个继承的问题
-			//	name: "Nicholas",
-			//	age: 29,
-			//	job: "Software Engineer",
-			//	sayName: function() {
-			//		alert(this.name);
-			//	}
-			//}
+			/*Person.prototype = {
+				constructor:Person,//这里一定要重定向，上面的写法不用重定向是因为prototype本身就会自动获取constructor属性，而这里是重写了原型对象，若不加相当于把constructor删除，这样实例的constructor都是Object,因为Person是Object的实例，所以当Person.prototype.constructor删除后，就找到Object原型的属性constructor，当然就指向Object。这里涉及一个继承的问题
+				name: "Nicholas",
+				age: 29,
+				job: "Software Engineer",
+				sayName: function() {
+					console.log(this.name);
+				}
+			}*/
 
 			var person1 = new Person();
 			var person2 = new Person();
@@ -37,16 +37,41 @@
 
 			console.dir(person1.constructor); //function Person()
 
+			Person.prototype.sayName = function(){
+				console.log("我的名字 " + this.name);
+			}
+			person1.sayName(); //"Nicholas"
+			person2.sayName(); //"Nicholas"
+			// 对共同的方法进行修改,全部实例上的方法也会跟着修改,如果是只用构造函数的话,只能在构造函数里面修改
+
+			Person.prototype.sayHi = function(){
+				console.log("hi");
+			}
+			person1.sayHi(); //"hi"
+			person2.sayHi(); //"hi"
+			// 同样的,在prototype上添加新的方法,全部实例也会有了新的方法
+
+
+
+
+
+
+
+
+
+
+
+
 			/*
 			 * 数组原型
 			 */
 			var a = [1, 2, 3, 4, 5];
 			if(!Array.prototype.fuck){ //先判断有无有这个方法
 				Array.prototype.fuck = function() {
-					alert("fuck");
+					console.log("fuck");
 				}
 			}
-			// a.fuck();
+			a.fuck();
 
 			/*
 			 * 标签的原型
@@ -54,13 +79,14 @@
 			var wrap = document.getElementById("wrap");
 			console.dir(a);
 			HTMLElement.prototype.haha = function() {
-					alert("hihi");
-				}
-				//			wrap.haha();
+				console.log("hihi");
+			}
+			wrap.haha();
+
 			Object.prototype.diao = function() {
-					alert("diao");
-				}
-				//			wrap.diao();
+				console.log("diao");
+			}
+			wrap.diao();//因为一切对象都是继承于Object,或者说大多数引用类型都是Object的实例
 		</script>
 	</body>
 

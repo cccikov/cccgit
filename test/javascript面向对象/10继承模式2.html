@@ -21,8 +21,8 @@
 			};
 			return clone;  //返回这个对象
 		}
-		
-		
+
+
 		var person = {
 			name:"N",
 			num:[1,2,3]
@@ -30,17 +30,17 @@
 		var anotherPerson = createAnother(person);
 		anotherPerson.sayHi();
 		// 我们想another这一类对象都继承于person ,但是又想比person都多一些属性，方法，这时候就可以使用寄生式继承；新对象+增强=寄生式继承。
-		
+
 		/*
 		 * 寄生组合式继承
-		 * 组合继承是js最常见的继承模式，但是其最大的缺点在于无论什么清苦啊想，都会调用两次超类型构造函数(子类构造函数一次，创建子类原型一次)
+		 * 组合继承是js最常见的继承模式，但是其最大的缺点在于无论什么情况啊，都会调用两次超类型构造函数(子类构造函数一次，创建子类原型一次)
 		 */
 		function inheritPrototype(subType,superType){
 			var prototype = Object(superType.prototype);//只是读取superType的原型，没有读取实例
 			prototype.constructor = subType;
 			subType.prototype = prototype;
 		};
-		
+
 		function SuperType(name){
 			this.name = name;
 			this.num = [1,2,3];
@@ -48,14 +48,14 @@
 		SuperType.prototype.sayName = function(){
 			console.log(this.name);
 		}
-		
+
 		function SubType(name,age){
 			SuperType.call(this,name);
 			this.age = age;
 		}
-		
+
 		inheritPrototype(SubType,SuperType);
-		
+
 		var instance = new SubType("ccc",25);
 		console.log(instance);//SubType
 		console.log(SubType.prototype);//Object

@@ -8,9 +8,10 @@
 
 	<body>
 		<script type="text/javascript">
-			/*
-			 * 原型链继承
-			 */
+		/*
+		 * 原型链继承
+		 */
+
 		//Up引用类型
 		function Up() {
 			this.name = "up";
@@ -37,32 +38,31 @@
 		}
 
 		//实例
-		var instance = new Down();
+		var obj1 = new Down();
 
-		instance.sayHi();//hi,I`m Up
-		instance.getName(); //up
-		instance.getRole(); //son
-		instance.sayGg();//glhf
+		obj1.sayHi();//hi,I`m Up
+		obj1.getName(); //up
+		obj1.getRole(); //son
+		obj1.sayGg();//glhf
 
 		// 全部引用类型都继承于Object，也是通过原型链来继承的
-		console.log(instance instanceof Down,instance instanceof Up,instance instanceof Object);//true true true
-		console.log(Down.prototype.isPrototypeOf(instance),Up.prototype.isPrototypeOf(instance),Object.prototype.isPrototypeOf(instance));//true true true
+		console.log(obj1 instanceof Down,obj1 instanceof Up,obj1 instanceof Object);//true true true
+		console.log(Down.prototype.isPrototypeOf(obj1),Up.prototype.isPrototypeOf(obj1),Object.prototype.isPrototypeOf(obj1));//true true true
 		// 可以看出instance 同时是 Down Up Object的实例，Down继承于Up，而Up继承于Object。
 
 		// 覆盖超类型（父类）中的方法
 		Down.prototype.getName = function(){
 			console.log("down");
 		}
-		instance.getName();//down
-		var instance2 = new Up();
-		instance2.getName();//up
+		obj1.getName();//down
+		var obj2 = new Up();
+		obj2.getName();//up
 		// 读取属性的时候，现在实例找，再在原型一直往上找，直至Object为止
 
-
-		var instancePro = Object.getPrototypeOf(instance);
-		console.log(instancePro);//Up
-		var instanceProPro = Object.getPrototypeOf(instancePro);
-		console.log(instanceProPro);//Object
+		var objPro = Object.getPrototypeOf(obj1);
+		console.log(objPro);//Up
+		var objProPro = Object.getPrototypeOf(objPro);
+		console.log(objProPro);//Object
 
 		</script>
 	</body>

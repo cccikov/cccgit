@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性,方法写在constructor里面还是prototype里面</title>
+    <script type="text/javascript">
+
+        function Person(name){
+            this.name = name;
+            this.type = "Human";
+            this.colors = ["red","green","white"]
+        }
+        Person.prototype.sayName = function(){
+            console.log(this.name);
+        }
+        Person.prototype.nums = [1,3,6,2];
+        Person.prototype.gender = "female";
+
+        // 原型属性方法是共享的,构造函数上定义的属性方法都是实例属性方法,是实例自己的
+
+        var person1 = new Person("ccc");
+        var person2 = new Person("tomato");
+
+        console.log(person1.type,person2.type,person1.gender,person2.gender);//Human Human female female
+        person1.type = "Terran";
+        person1.gender = "male"
+        console.log(person1.type,person2.type,person1.gender,person2.gender);//Terran Human male female
+        // 这里看起来好像prototype属性和实例属性没有什么大区别,由于gender是基本数据类型,修改其实就是赋值,但是一旦赋值,就会变成实例属性
+
+        delete person1.gender;
+        Person.prototype.gender = "male";
+        console.log(person1.type,person2.type,person1.gender,person2.gender);//Terran Human male male
+        // 如果想要共享的属性的数据类型是基本数据类型,则通过prototype去修改
+
+
+        console.log(person1.colors,person1.nums,person2.colors,person2.nums);
+        // ["red", "green", "white"]  [1, 3, 6, 2]
+        // ["red", "green", "white"]  [1, 3, 6, 2]
+        person1.colors.push("yellow");
+        person1.nums.push(100);
+        console.log(person1.colors,person1.nums,person2.colors,person2.nums);
+        // ["red", "green", "white", "yellow"]  [1, 3, 6, 2, 100]
+        // ["red", "green", "white"]            [1, 3, 6, 2, 100]
+
+        // 对于Array或者Object或者function这样的复杂类型就看出来了
+        // 实例属性的修改,并不会影响其他实例该同名属性的值,如:colors
+        // 但是prototype的属性的修改,就会让全部实例的那个prototype属性也跟着修改
+
+        /**
+         * 所以,想这个属性方法是实例自己的,就写在构造函数里面,创建实例时,属性方法就是独立的;
+         * 但是如果想全部实例都共享这个属性方法就写在prototype里面
+         *
+         * 一般来说,实例的数据,比如一些字符串(name..),数字(id..),都是希望是独立的,虽然有可能值是相同的,但是是不希望相互干扰的
+         * 对于方法来说,一般都是共享的,都是写在prototype里面的.
+         * 也有可能有些实例方法,但是不应该写在构造函数里面,应该是创建实例后,在实例上添加,如果添加到构造函数上了,每个实例都是这个操作一样的方法,但是却不是同一个方法.
+         */
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

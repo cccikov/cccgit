@@ -24,7 +24,10 @@
     // 构造函数执行
     // 已经有了name属性了 , name是 ccc
 
-    /*因为在new 的时候,Person.prototype.name = "ccc";语句已经执行了,所以是有this.name的;*/
+    /*因为在new创建实例的时候,将构造函数作用域赋给新对象时(四步中的第二步),就已经把实例的[[prototype]]指针指向构造函数Person的原型 Person Prototype;由于在new之前,该原型已经添加了新属性Person.prototype.name = "ccc";语句已经执行了,所以是有this.name的;*/
+
+
+
 
     /**
      * 如果prototype写在构造函数里面的话
@@ -46,6 +49,8 @@
     // 设置prototype的height属性
 
     /*所以 如果prototype写在构造函数里面 , 要调用的语句必须写在设置语句的后面*/
+
+
 
     /**
      * prototype写在构造函数里面有两个问题
@@ -85,7 +90,25 @@
 
 
     /*2. 如果改写了整个prototype的话 , 第一个实例就没有prototype那些属性,方法;就算写在调用语句前面也是一样,因为一旦prototype重写,就会变成指向新的prototype了*/
+    times = 0;
+    function Girl(){
+        times++;
+        this.name = "第"+times+"个实例";
+        Girl.prototype = {
+            constructor:Girl,
+            mark:"第"+times+"个时修改的prototype"
+        }
+    }
+    Girl.prototype.mark = "旧原型"
+    var girl1 = new Girl();
+    var girl2 = new Girl();
+    var girl3 = new Girl();
+    console.log(girl1.name+" "+girl1.mark); // 第1个实例 旧原型
+    console.log(girl2.name+" "+girl2.mark); // 第2个实例 第1个时修改的prototype
+    console.log(girl3.name+" "+girl3.mark); // 第3个实例 第2个时修改的prototype
 
+    /*new创建的时候的第二步,已经将girl1的[[prototype]]指向了Girl原型,再运行构造函数,然而在构造函数里面重写(不是单单的修改,把prototype都指向了一个新对象)了,这时的Girl构造函数就指向新的原型,girl1还是指向旧的原型,所以girl2就指向新原型1,但是继续重写,所以girl3又指向更新的原型....所以这样一直下去,实例[[prototype]]总是指向上一个实例创建时重写的原型*/
+    /*!!!!!!!!!!!!!!!!!!所以重写原型一定不可以放在构造函数里面*/
 
 
 
@@ -93,6 +116,29 @@
     /**
      * 归根到底,因为构造函数实质也是函数 , 所以代码的运行顺序符合函数的运行
      */
+
+    /*最安全的做法是,prototype写在构造函数外面,不使用重写*/
+    function Man(name){
+        this.name = name;
+    }
+    Man.prototype.sayHi = function(){
+        console.log("hi,my name is "+this.name);
+    }
+    var ccc = new Man("ccc");
+    ccc.sayHi();
+
+    /*但是如果方法过多的话,就会要重复写prototype多次,所以prototype写在构造函数外面,使用重写也比较常用*/
+    function Woman(name){
+        this.name = name;
+    }
+    Woman.prototype = {
+        constructor:Woman,
+        sayHi : function(){
+            console.log("hi,my name is "+this.name);
+        }
+    }
+    var tomato = new Woman("tomato");
+    tomato.sayHi();
     </script>
 </head>
 

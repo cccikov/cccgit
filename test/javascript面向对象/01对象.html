@@ -33,39 +33,48 @@
 		</p>
 		<script type="text/javascript">
 			//普通模式(一个个建)
-			//new Object()创建
-			var personZero = new Object();
-			personZero.name = "Nicholas";//添加新属性
-			personZero.age = 29;
-			personZero.job = "Softwar Enginerr";
-			personZero.sayName = function() {
-				alert(this.name);
+
+
+			/**
+			 * new Object()创建
+			 */
+			var person = new Object();
+			person.name = "Nicholas";//添加新属性
+			person.age = 29;
+			person.job = "Softwar Enginerr";
+			person.sayName = function() {
+				console.log(this.name);
 			}
+			person.sayName();//调用对象方法
 
-			personZero.sayName();//调用对象方法
-
-			//字面量创建
-			//var person0 = {
-			//	name: "ccc",
-			//	age: 40,
-			//	job: "teacher",
-			//	sayName: function() {
-			//		alert(this.name);
-			//	}
-			//}
-			//字面量创建2
-			var person0 = {};
-			person0.name = "ccc";
-			person0.age = 40;
-			person0.job = "teacher";
-			person0.sayName = function() {
-				alert(this.name);
+			/**
+			 * 字面量创建
+			 */
+			var boy = {
+				name: "ccc",
+				age: 40,
+				job: "teacher",
+				sayName: function() {
+					console.log(this.name);
+				}
 			}
+			/*//字面量创建2
+			var boy = {};
+			boy.name = "ccc";
+			boy.age = 40;
+			boy.job = "teacher";
+			boy.sayName = function() {
+				console.log(this.name);
+			}*/
+			boy.sayName();//调用对象方法
 
-			person0.sayName();//调用对象方法
 
-			// 工厂模式
-			function createPerson(name, age, job) {
+
+
+			/**
+			 * 工厂模式
+			 */
+			function createPeople(name, age, job) {
 				var o = new Object(); //var o = {};
 				o.name = name;
 				o.age = age;
@@ -75,10 +84,14 @@
 				}
 				return o;
 			}
-			var person1 = createPerson("nicholas", 29, "software engineer");
-			var person2 = createPerson("greg", 23, "doctor");
+			var people1 = createPeople("nicholas", 29, "software engineer");
+			var people2 = createPeople("greg", 23, "doctor");
 
-			//构造函数模式
+
+
+			/**
+			 * 构造函数模式
+			 */
 			function Person(name, age, job) {
 				this.name = name;
 				this.age = age;
@@ -87,38 +100,47 @@
 						alert(this.name);
 					} //等价于 this.sayName = new Function("alert(this.name)");
 			}
-			var person3 = new Person("nicholas2", 39, "old software engineer");
-			var person4 = new Person("greg2", 33, "old doctor");
+			var person1 = new Person("nicholas2", 39, "old software engineer");
+			var person2 = new Person("greg2", 33, "old doctor");
 
-			//(实例上)constructor的属性,是指向构造函数本身
-			console.log(person3.constructor); //function Person(name, age, job){……}
-			console.log(person3.constructor == Person); //true
+			//(实例上)constructor(构造函数)属性,是指向构造函数本身
+			console.log(person1.constructor); //function Person(name, age, job){……}
+			console.log(person1.constructor == Person); //true,证明constructor就是指向构造函数
 
 			//instanceof用于判断是否该构造函数的实例
-			console.log(person3 instanceof Person); //true person3是Person的实例
-			console.log(person3 instanceof Object); //ture 同时person3也是Object的实例
+			console.log(person1 instanceof Person); //true person1是Person的实例
+			console.log(person1 instanceof Object); //ture 同时person1也是Object的实例
 
-			console.log(person3.constructor, person3.constructor == Person, typeof(person3), person3 instanceof Person); //function Person(name, age, job){……} , true , object , true;
+			console.log(person1.constructor, person1.constructor == Person, typeof(person1), person1 instanceof Person); //function Person(name, age, job){……} , true , object , true;
+
+
 
 			//不使用new
 			var person5 = Person("ccc3", 33, "hahah"); //person5 为 underfinded ，因为Person并没有return任何东西。
-			// console.log(person5);
+			console.log(person5);// undefined
 
 			//构造函数作为普通函数一样执行
 			Person("ccc3", 33, "hahah"); //添加到window ，在全局作用域中调用一个函数，this对象总是指向global对象(在浏览器中就是window对象)。 相当于var name = "ccc3"; var age = 33;……………………
-			// console.log(name,this);//ccc3,window        在全局作用域中调用一个函数，this对象总是指向global对象(在浏览器中就是window对象)。
+			console.log(name,this,this.name === window.name);//ccc3,window,true        在全局作用域中调用一个函数，this对象总是指向global对象(在浏览器中就是window对象)。
+
 
 			//在另一个对象的作用域中调用
 			var person6 = {}; //相当于 new创建的第1步。
 			Person.call(person6, "ccc6", 55, "cleaner"); //person6就变成Person的新实例，相当于new创建的第2，3，4步，这也一种创建实例的方法
 			console.log(person6);
 
-			//证明不同实例上的同名函数是不相等的
-			console.log(person3.sayName == person4.sayName); //false
 
-			// console.log(person0, person1, person2,person3,person4);
-			// person0.name = person1.name = person2.name = person3.name = person4.name = "bbb";
-			// console.log(person0, person1, person2,person3,person4);
+			/**
+			 * 单纯只用构造函数创建对象的不足,不同实例上的同名函数是不相等;就比如Array,每个实例都有concat方法,而且是同一个的函数的
+			 */
+
+			//证明不同实例上的同名函数是不相等的
+			console.log(person1.sayName == person2.sayName); //false
+			console.log([1,3].concat === [1,2].concat);// true
+
+			console.log(person, people1, people2,person1,person2);
+			person.name = people1.name = people2.name = person1.name = person2.name = "bbb";
+			console.log(person, people1, people2,person1,person2);
 		</script>
 	</body>
 

@@ -9,9 +9,9 @@
 	<body>
 		<script type="text/javascript">
 			/*
-			 *   组合使用构造函数模式和原型模式 ， 最常用
+			 *   组合使用构造函数模式和原型模式,最常用
 			 */
-			/*function Person(name, age, job) {
+			function Person(name, age, job) {
 				this.name = name;
 				this.age = age;
 				this.job = job;
@@ -35,10 +35,11 @@
 			person1.friend.push("van");
 			person1.teacher.push("Mr Li");
 
-			console.log(person1.friend, person2.friend); //["Shelbey", "Court", "van"] ["Shelbey", "Court"]
-			console.log(person1.teacher, person2.teacher); //["Mr Wang", "Mr Li"] ["Mr Wang", "Mr Li"]
+			console.log(person1.friend, person2.friend); // ["Shelbey", "Court", "van"] ["Shelbey", "Court"]
+			console.log(person1.teacher, person2.teacher); // ["Mr Wang", "Mr Li"] ["Mr Wang", "Mr Li"]
 
-			//可以看出，在构造函数中设置的属性，即使同名值相同也不是同一属性；在原型中定义的属性才是大家共用的属性。*/
+			// 可以看出，在构造函数中设置的属性，即使同名值相同也不是同一属性；在原型中定义的属性才是大家共用的属性。
+			// 也是最符合面向对象语言的编程习惯
 
 			/*
 			 *  动态原型模型
@@ -60,7 +61,7 @@
 			/*
 			 *  寄生构造函数模式，感觉就是工厂模式强行变成构造函数模式
 			 */
-			function Person(name,age,job){
+			/*function Person(name,age,job){
 				var o = new Object();
 				o.name = name;
 				o.age = age;
@@ -95,7 +96,9 @@
 			var colors = new SpecialArray("red", "blue", "green"); //有没有new都一样
 			console.log(colors); //"red,blue,green"
 			console.log(colors.toPipedString()); //"red|blue|green"
-			// 学到现在，我们看得出来，javascript创建对象构造函数方式才是一种正解（可能比较高大上吧），但是构造函数可能比较难对将要被创建的对象做一些处理（或者我们要创建的对象不是单纯的Object，而是其他引用类型），这些处理可能用工厂模式会比较容易，但是又为了要高大上一点就有了寄生模式（可能是寄生其他其他引用类型，或者寄生于工厂模式的意思吧）吧。
+			// 构造函数可能比较难对将要被创建的对象做一些处理（或者我们要创建的对象不是单纯的Object，而是其他引用类型），这些处理可能用工厂模式会比较容易;寄生模式可能是寄生其他其他引用类型，或者寄生于工厂模式的意思吧。
+			// 通常我们都过new一个来创建的对象都是Object类型,但是如果我们想new一个创建出来的对象是一个Array类型呢
+			// !!!注意,寄生模式构造函数返回值只能是Array,或者是Object,或者其他复杂类型;不可以是5种基本数据类型,因为这几种类型不可以设置属性*/
 
 			/*
 			 *  稳妥构造函数模式  适合在一些要求安全环境使用

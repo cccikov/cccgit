@@ -21,7 +21,7 @@
 			Person.prototype.sayName = function() {
 				alert(this.name);
 			}
-			
+
 			function People() {}
 			People.prototype = {
 				//constructor:People,//用这种json写法一定要重定向
@@ -32,7 +32,7 @@
 					alert(this.name);
 				}
 			}
-			
+
 			var person1 = new Person();
 			var people1 = new People();
 
@@ -56,9 +56,9 @@
 		<p>
 			概念：<br />
 			function Person() -- 构造函数<br />
-			Person.prototype -- 构造函数指针，指向原型对象<br />
+			Person.prototype -- 构造函数指向原型对象的指针，<br />
 			person1 -- 实例<br />
-			person1的[[Prototype]] -- 构造函数的指针，指向原型对象(不可以直接访问)<br />
+			person1的[[Prototype]] -- 实例指向原型对象的指针(不可以直接访问)<br />
 			Person Prototype -- (Person及Person实例)的原型对象<br />
 			原型对象上的constructor属性 -- 指向回构造函数(Person)
 		</p>
@@ -68,11 +68,11 @@
 			从图中可以看出，<br />
 			实例<strong>(peron1)</strong>没有prototype属性，但有[[prototype]]内部属性指向构造函数<strong>(Person)</strong>的原型对象(Person Prototype)（Person.prototype也是指向Person Prototype）<br />
 			解析器读取实例属性的时候，先读取实例的属性，如果实例自身没有；则在实例的原型那里寻找。<br />
-			所以实例<strong>(person1)</strong>的constructor属性 就是 构造函数<strong>(Person)</strong>的原型对象(Person Prototype)的constructor属性 指向构造函数<strong>(Person)</strong>本身 
+			所以实例<strong>(person1)</strong>的constructor属性 就是 构造函数<strong>(Person)</strong>的原型对象(Person Prototype)的constructor属性 指向构造函数<strong>(Person)</strong>本身
 		</p>
 		<p>实例(peron1)的[[prototype]]内部属性，和Person.prototype都是指向      构造函数(Person) 的 原型对象（Person Prototype）</p>
 		<p>实例(peron1)，和Person的constructor属性       其实就是原型对象（Person Prototype）的constructor属性    指向     构造函数（Person）</p>
-		
+
 	</body>
 
 </html>
