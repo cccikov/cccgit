@@ -40,9 +40,16 @@
 
 
 
-        function ClassList(dom){// 有没有办法做到,new 之后立即就是一个className的数组呢??如果不做成new 呢,查查创建对象的各种模式,可以使用寄生构造函数模式,现在终于明白存在的意义了,通常我们都过new一个来创建的对象都是object类型,但是如果我们想new一个创建出来的对象是一个数组类型呢 , return的类型只能是复杂类型数据,不可以是5种基本数据类型(因为这几种类型不可以有属性)
+        function ClassList(dom,bool){
             this.dom = dom;
             this.classList = this.dom.className.match(/\S+/g);
+            if(bool){//如果是true的时候,就变成是寄生构造函数模式
+                var arr = this.classList;//由于this.classList是arr,所以指向同一个内存位置,所以classList改变,arr也会改变;但是这样的话,添加属性,this.classList同样也会添加属性.
+                for(var i in this){//this就是ClassList的实例,所以this的属性方法全部获取
+                    arr[i] = this[i];
+                }
+                return arr
+            }
         }
         ClassList.prototype._setClassName = function(){
             this.dom.className = this.classList.join(" ");
@@ -78,14 +85,17 @@
             }
         }
 
-        let wrapList = new ClassList(wrap);
+        let wrapList = new ClassList(wrap,true);
+        console.log(wrapList);
         console.log(wrapList.classList);
+        console.log(wrapList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList);
         console.log(wrapList.contains("container"));
         console.log(wrapList.add("container"));
         console.log(wrapList.add());
         console.log(wrapList.remove("fuck2"));
         wrap.onclick = function(){
             wrapList.toggle("active")
+            console.log(wrapList);
         }
 
 // 构造函数是new的时候才运行的 , 所以如果prototype写在构造函数里面 , 特别是重写 :一new的时候就绑定prototype,再执行构造函数,但是构造函数里面重写,所以就会造成第一个实例的prototype没有修改到.

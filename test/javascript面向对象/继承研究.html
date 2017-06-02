@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承研究</title>
+    <script type="text/javascript">
+
+        function Biology(option){// 生物类
+            this.bio = new Object();
+            if(option){
+                this.bio.kingdom = option.kingdom || "植物界";
+                this.name = option.name || "a biology";
+                this.state = option.state || "life"
+            }
+            this.bio.level = "界 - kingdom"
+        }
+        Biology.prototype.life = function(){
+            console.log("necessities of life")
+        }
+
+
+
+        function Animal(option){// 动物类
+            this.bio = {};//如果没有这句,继承prototype的时候,就会直接是修改prototype中的 bio 属性,而不是修改实例bio属性;因为Biology 实例的bio属性是Object(复杂数据类型);而Animal实例本身没有bio属性,哪里还有bio.level;如果是直接给this.bio赋值还好,会自动创建实例属性;但是是给this.bio.level赋值,所以只能找到已经存在的bio属性,就是prototype中的该属性.所以现在就是创建实例的bio属性.
+            if(option){
+                option.kingdom = "动物界";// 写死kingdom 写死方法1
+                Biology.call(this,option);// 继承 Biology
+                // this.bio.kingdom = "动物界";// 写死方法2
+
+                this.bio.phylum  = option.phylum ||  "原生动物门";
+                this.size = option.size || "normal";
+                this.name = option.name || "an animal";
+            }
+            this.bio.level = "门 - phylum"
+        }
+        Animal.prototype = new Biology();
+        Animal.prototype.constructor = Animal;
+        Animal.prototype.move = function(){
+            console.log("get food fight")
+        }
+
+
+
+        function Human(option){// 人类
+            this.bio = new Object();
+            if(option){
+                Animal.call(this,option); // 继承 Human
+                this.bio.phylum = "脊索动物门";// 写死phylum 这里与上面写死kingdom方式不一样,上面时通过修改option,这里是直接修改this的属性.两种方法都可以,不过这种更加直观
+                this.bio.class = "哺乳纲";// 写死
+                this.bio.order = "灵长目";// 写死
+                this.bio.family = "人科";// 写死
+                this.bio.genus = "人属";// 写死
+                this.bio.species = "智人种";// 写死
+                this.gender = option.gender || "male";
+                console.log(option.name);
+                this.name = option.name || "some one";
+            }
+            this.bio.level = "种 - species";
+        }
+        Human.prototype = new Animal();
+        Human.prototype.constructor = Human;
+        Human.prototype.work = function(){
+            console.log("i can do the job");
+        }
+
+
+
+        var human1 = new Human({
+            "kingdom":"哈哈界",
+            "phylum":"什么鬼动物门",
+            "class":"刚纲",
+            "order":"醒目",
+            "family":"万科",
+            "genus":"亲属",
+            "species":"蠢人种",//以上乱写都不会有事,因为已经写死了
+            "name":"ccc",
+            "state":"Legendary",
+            size:"1.8m",
+        });
+        console.log(human1);
+
+
+
+        function Male(option){
+            option = option || {};
+            Human.call(this,option);//一般是先继承再写别的属性方法;如果现在这个类实例的属性方法,就会被超类的同名的实例属性方法覆盖.如果本来就是要覆盖的,那为什么还要写,所以都是先写继承
+            this.size = option.size || "1.75m";
+            this.gender = "male";
+        }
+        function Female(option){
+            option = option || {};
+            Human.call(this,option);
+            this.size = option.size || "1.65m";
+            this.gender = "female";
+        }
+        Male.prototype = Female.prototype = new Human();
+        Male.prototype.constructor = Male;
+        Male.prototype.sex = function(){
+            console.log("i have a dick");
+        }
+        Female.prototype.constructor = Female;
+        Female.prototype.sex = function(){
+            console.log("i need a dick");
+        }
+
+        var man = new Male({name:"ccc","size":"1.78m"});
+        var woman = new Female();
+        console.log(man,woman);
+
+        // 这像一条连续的链那样继承
+        // Male → Human → Animal → Biology
+
+
+
+        /**
+         * 上面那样继承之外,还有一种方法可以使用别的类的方法,就是让实例属性成为别的类的实例
+         */
+
+        function Computer() {
+            this.name = "电脑";
+            this.keyboard = new Keyboard();
+            this.mouse = new Mouse();
+        }
+        Computer.prototype.effect = function(){
+            console.log("工作,娱乐");
+        }
+
+        function Keyboard() {
+            this.name = "键盘";
+        }
+        Keyboard.prototype.effect = function(){
+            console.log("input");
+        }
+
+        function Mouse() {
+            this.name = "鼠标";
+        }
+        Mouse.prototype.effect = function(){
+            console.log("操作鼠标");
+        }
+
+
+        function Desk(){
+            this.name = "桌子";
+            this.computer = new Computer();
+        }
+        Desk.prototype.effect = function(){
+            console.log("用来放东西");
+        }
+
+        function Chair() {
+            this.name = "椅子";
+        }
+        Chair.prototype.effect = function(){
+            console.log("用来坐");
+        }
+
+        function House(){
+            this.name = "房子";
+            this.desk = new Desk();
+            this.chair = new Chair();
+        }
+        House.prototype.effect = function(){
+            console.log("living")
+        }
+
+        var house = new House();
+        console.log(house);//House {name: "房子", desk: Desk, chair: Chair}
+        house.desk.effect();//用来放东西
+        house.desk.computer.effect();//工作,娱乐
+    </script>
+</head>
+<body>
+
+</body>
+</html>
