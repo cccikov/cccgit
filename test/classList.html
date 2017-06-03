@@ -3,38 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>classList</title>
+    <style type="text/css">
+    	.wrap.active{
+			background: #f00;
+    	}
+    </style>
 </head>
 <body>
     <div class="a b c" id="test">
-
     </div>
+    <div class="wrap btn content container container wrap___---content" id="wrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, velit.</div>
     <script type="text/javascript">
 		var obj = document.getElementById("test");
 		console.log(obj.classList);//["a", "b", "c"]
 		console.dir(obj.classList);
-		
+
 		console.log(obj.classList.length);//3
-		
+
 		console.log(obj.classList.item(1));//b
 		console.log(obj.classList.item(3));//null
-		
+
 		console.log(obj.classList.contains("a"));//true
 		console.log(obj.classList.contains("d"));//false
-		
+
 		console.log(obj.classList.add("d"));//underfined
 		console.log(obj.classList);//["a", "b", "c", "d"]
-		
+
 		console.log(obj.classList.remove("c"));//underfined
 		console.log(obj.classList);//["a", "b", "d"]
-		
+
 		console.log(obj.classList.toggle("a"));//false
 		console.log(obj.classList);//["b", "d"]
-		
+
 		console.log(obj.classList.toggle("a"));//true
 		console.log(obj.classList);//["b", "d", "a"]
 
 		obj.classList = ["a"];
 		console.log(obj.classList);
+
+
+
+
+		// 实现classList接口
+		function ClassList(dom,bool){
+		    this.dom = dom;
+		    this.classList = this.dom.className.match(/\S+/g);
+		    if(bool){//如果是true的时候,就变成是寄生构造函数模式
+		        var arr = this.classList;//由于this.classList是arr,所以指向同一个内存位置,所以classList改变,arr也会改变;但是这样的话,添加属性,this.classList同样也会添加属性.
+		        for(var i in this){//this就是ClassList的实例,所以this的属性方法全部获取
+		            arr[i] = this[i];
+		        }
+		        return arr
+		    }
+		}
+		ClassList.prototype._setClassName = function(){
+		    this.dom.className = this.classList.join(" ");
+		}
+		ClassList.prototype.contains = function(str){
+		    if(!!str && typeof str == "string"){
+		        return this.classList.indexOf(str) != -1;
+		    }
+		    return false;
+		}
+		ClassList.prototype.add = function(str){
+		    if(typeof str == "string"){
+		        if(!this.contains(str)){
+		            this.classList.push(str);
+		            this._setClassName();
+		        }
+		    }
+		}
+		ClassList.prototype.remove = function(str){
+		    if(this.contains(str)){
+		        console.log("remove");
+		        let index = this.classList.indexOf(str);
+		        this.classList.splice(index,1);
+		        this._setClassName();
+		        this.remove(str);//通过递归方式去消除重复的class
+		    }
+		}
+		ClassList.prototype.toggle = function(str){
+		    if(this.contains(str)){
+		        this.remove(str);
+		    }else{
+		        this.add(str);
+		    }
+		}
+
+		let wrapList = new ClassList(wrap,true);
+		console.log(wrapList);
+		console.log(wrapList.classList);
+		console.log(wrapList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList.classList);
+		console.log(wrapList.contains("container"));
+		console.log(wrapList.add("container"));
+		console.log(wrapList.add());
+		console.log(wrapList.remove("fuck2"));
+		wrap.onclick = function(){
+		    wrapList.toggle("active")
+		    console.log(wrapList);
+		}
     </script>
 </body>
 </html>

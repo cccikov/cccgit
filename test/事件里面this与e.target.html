@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件里面 this 与 e.target</title>
+    <script type="text/javascript">
+    window.onload = function() {
+        wrap.addEventListener("click", function(e) {
+            console.clear();
+            console.log(this); //注册了click事件侦听器的元素
+            console.log(e.target); //点击中的元素
+            alert("注册了click事件侦听器的元素" + this.tagName.toLowerCase() + "#" + this.id + " , " + "点中的元素是" + e.target.tagName.toLowerCase() + (e.target.id == "" ? "" : "#") + e.target.id);
+        }, false);
+    }
+    </script>
+    <style type="text/css">
+        #wrap *{
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <p id="p">我是p元素</p>
+        <a href="javascript:void(0)">a标签</a>
+        <br />
+        <span>span</span>
+        <p>事件里面</p>
+        <p>e.target返回的是触发事件的dom节点</p>
+        <p>this是返回绑定侦听器的dom节点</p>
+        <p>比如click事件，一个元素注册了click事件侦听器，触发事件时，this就指向这个元素，e.target就指向点中的元素（可以时它的子元素，也可以是它本身）</p>
+    </div>
+</body>
+
+</html>
