@@ -19,20 +19,31 @@
 				btn.className = 'btn btn' + i;
 				btn.innerHTML = i;
 				btnWrap.appendChild(btn);
+
+				var btn = document.createElement('button');
+				btn.innerHTML = i;
+				btnWrap.appendChild(btn);
 			}
-			btnWrap.onclick = function(e) {
+			/*btnWrap.onclick = function(e) {
 				var e = e || window.event;
 				console.log(e);
 				var that = e.target || e.srcElement;
 				that.style.background = "red";
-			}
+			}*/
 			btnWrap.addEventListener("click", function(e) {
 				var e = e || window.event;
-				console.log(e);
+				// console.log(e);
 				var that = e.target || e.srcElement;
-				alert(that.innerHTML);
+				// console.dir(that);
+				console.log(that.className.indexOf("btn")>-1 && that.tagName.toLowerCase() == "button");
+				if(that.className.indexOf("btn")>-1 && that.tagName.toLowerCase() == "button"){
+					that.style.background = "red";
+					console.log(that.innerHTML);
+				}
 			}, false);
 		</script>
+		<p>作用：可以给动态生成的dom，绑定事件侦听器</p>
+		<p>对于原生js来说，可能获取dom比较麻烦，所以事件委托也可相当于可以同时给多个绑定事件侦听器</p>
 	</body>
 
 </html>
