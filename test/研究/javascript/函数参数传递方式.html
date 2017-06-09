@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数参数传递方式</title>
+    <script type="text/javascript">
+        // 参数的传递是通过按值(复制)传递 , 而不是按引用(就像读取对象那样)
+        {
+            let obj = {
+                "name":"ccc"
+            }
+            !function(arg){
+                arg.name = "tomato";
+            }(obj);
+            console.log(obj.name);// tomato
+            // 因为js中对象的复制也是复制指针,所以看不出来
+        }
+
+        {
+            let obj = {
+                "name":"ccc"
+            }
+            !function(arg){
+                arg.name = "tomato";
+                arg = new Object();
+                arg.name = "aaa";
+            }(obj);
+            console.log(obj.name);// tomato
+        }
+
+        {
+            // 如果是按值来传递 , 把obj的值传给参数
+            let obj = {
+                "name":"ccc"
+            }
+            !function(){
+                let arg = obj;//按值
+                arg.name = "tomato";
+                arg = new Object();
+                arg.name = "aaa";
+            }();
+            console.log(obj.name);// tomato
+        }
+
+        {
+            // 如果是按引用来传递 , 意思就是把整个obj传进函数里面进行运算
+            let obj = {
+                "name":"ccc"
+            }
+            !function(){
+                obj.name = "tomato";
+                obj = new Object();
+                obj.name = "aaa";
+            }();
+            console.log(obj.name);// aaa
+        }
+
+        // 所以结果表明是按值来传递
+    </script>
+</head>
+<body>指针
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数 caller callee</title>
+    <script type="text/javascript">
+        function fn(){
+            console.log(arguments.callee);
+            console.log(arguments.callee === fn);
+            console.log(fn.caller);
+        }
+        fn(); // fn true null
+
+        // callee 还可以用于递归
+        var n = 0;
+        function di(){
+            n ++;
+            if (n<100) {
+                arguments.callee();// 相当于di();
+            }
+        }
+        di();
+        console.log(n);//100
+
+        // caller
+        function a(){
+            console.log(a.caller);
+            console.log(arguments.callee.caller);
+            return "a";
+        }
+        function b(){
+            a();
+        }
+        b();
+
+
+        /**
+         * arguments.callee 表示自身函数
+         * arguments.callee.caller 表示调用本函数的函数
+         */
+    </script>
+</head>
+<body>
+
+</body>
+</html>
