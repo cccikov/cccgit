@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承问题</title>
+    <script type="text/javascript">
+        function Animal(){
+        }
+        Animal.prototype.behaviour = function(){
+            console.log("捕食");
+        }
+        Animal.prototype.sex = function(){
+            console.log("繁殖");
+        }
+
+        function Human(){
+        }
+
+        // 错误 继承
+        /*Human.prototype = Animal.prototype;*/
+
+        // 正确 继承
+        Human.prototype = new Animal();
+        Human.prototype.constructor = Human;
+
+
+        Human.prototype.behaviour = function(){
+            console.log("工作");
+        }
+
+        let cat = new Animal();
+        cat.behaviour();
+
+        let person = new Human();
+        person.behaviour();
+
+        console.log(cat,person);
+
+        // 虽然 直接将子类.prototype = 父类.prototype 可以获取父类,但是由于子类会添加自己的方法,但是由于等于后,对子类prototype改变同时也会改变父类prototype,那为什么还要继承呢 , 干脆全部方法直接写在父类好过啦;而且甚至还会修改了父类的方法;等于的话子类的constructor也会是父类的构造函数
+        //总之好多问题 , 还是不要偷懒 , 用回正确的继承方式.
+    </script>
+</head>
+<body>
+
+</body>
+</html>

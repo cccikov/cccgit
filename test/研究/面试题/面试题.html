@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>面试题</title>
+    <script type="text/javascript">
+    function Foo() {
+        getName = function() {
+            console.log(1);
+        };
+        return this;
+    }
+    Foo.getName = function() {
+        console.log(2);
+    };
+    Foo.prototype.getName = function() {
+        console.log(3);
+    };
+    var getName = function() {
+        console.log(4);
+    };
+
+    function getName() {
+        console.log(5);
+    }
+
+    //请写出以下输出结果：
+    Foo.getName(); // 2
+    /**
+     * 因为是直接调用Foo.getName方法 所以为2
+     * 因为声明提前,所以Foo这个对象早就定义了
+     * 所以Foo.getName是符合语法的
+     */
+
+    getName(); // 4
+    /**
+     * 全局中有两处定义 getName 一处是4,一处是5
+     * 由于函数声明提前是声明和函数体都提前 所以是先运行 5 → 4
+     * 所以会被4覆盖,输出4
+     */
+
+    Foo().getName(); // 1
+    /**
+     * 分成两部分
+     * Foo() 执行 重新给getName定义新函数 输出1
+     * 输出this(window) , 但是没有变量接收
+     */
+
+
+    getName(); // 1
+    /**
+     * 因为上面已经重新定义了函数getName,所以输出1
+     */
+
+    new Foo.getName(); //2
+    /**
+     * 用new方式执行函数和普通方式执行函数 是几乎一样的 所以输出2
+     */
+
+    new Foo().getName(); //3
+    /**
+     * 先new Foo(),这样就会返回那个Foo实例 , 再调用实例的方法getName
+     * 由于Foo构造函数里面不是采用 this.getName写法 , 所以是没有实例方法的 , 再往上找 , 在prototype里面找到 , 所以输出3
+     */
+
+    new new Foo().getName(); //3
+    /**
+     * new (new Foo().getName)() 同上执行
+     * 其实就是用new去执行函数 , 输出3
+     */
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
