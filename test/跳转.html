@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>页面跳转</title>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>js跳转</title>
+</head>
 
-	<body>
-	</body>
+<body>
+    <p>
+        <a href="a.html">a标签 相对路径</a>
+        <a href="/cccgit/test/a.html?name=ccc">a标签 绝对路径</a>
+        <a href="a.html?id=123">a标签 加参数</a>
+    </p>
+    <p>
+        <button onclick='window.location.assign("a.html")'>assign 相对路径</button>
+        <button onclick='window.location.assign("/cccgit/test/a.html?name=ccc")'>assign 绝对路径</button>
+        <button onclick='window.location.assign("a.html?id=123")'>assign 加参数</button>
+    </p>
+    <p>
+        <button onclick='window.location.href = "a.html"'>href 相对路径</button>
+        <button onclick='window.location.href = "/cccgit/test/a.html?name=ccc"'>href 绝对路径</button>
+        <button onclick='window.location.href = "a.html?id=123"'>href 加参数</button>
+    </p>
+    <p>
+        <button onclick='window.location.replace("a.html")'>replace 相对路径</button>
+        <button onclick='window.location.replace("/cccgit/test/a.html?name=ccc")'>replace 绝对路径</button>
+        <button onclick='window.location.replace("a.html?id=123")'>replace 加参数</button>
+    </p>
+    <p>
+        <button onclick='window.open("a.html")'>window.open 相对路径</button>
+        <button onclick='window.open("/cccgit/test/a.html?name=ccc")'>window.open 绝对路径</button>
+        <button onclick='window.open("a.html?id=123")'>window.open 加参数</button>
+    </p>
+    <p>
+        <button onclick='console.log(document.URL);document.URL = "hahaha"'>document.URL</button>
+        document.URL只能读取,不能修改
+    </p>
+    <p>
+        a标签跳转 同 assign 同 修改href 差不多
+        <br> 除了是在新窗口打开外也没什么区别
+        <br> replace虽然看起来也差不多 , 但是好像不会修改history , 导致无法返回
+    </p>
+</body>
 
 </html>

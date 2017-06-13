@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图片最大</title>
+    <style type="text/css">
+    .img-wrap {
+        height: 50px;
+        width: 50px;
+        border: 1px solid red;
+        text-align: center;
+    }
+
+    .img-wrap img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .img-wrap2 {
+        height: 500px;
+        width: 500px;
+        border: 1px solid red;
+        background: url("img/canvas.png") center/contain no-repeat;
+    }
+
+    .img {
+        width: 1200px;
+        height: 300px;
+        line-height: 300px;
+        border: 1px solid red;
+        text-align: center;
+    }
+
+    .img img {
+        /* display: block; */
+        vertical-align: middle;
+        position: relative;
+        top: -2px;
+        /* img 3px 又不能设置display: block; 否则js那里就要width,height都设置 */
+    }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        let wrapRate = $(".img").eq(0).height() / $(".img").eq(0).width();
+        let imgNum = $("img").size();
+        let onloadImgNum = 0;
+        $("img").on("load", function() {
+            onloadImgNum++;
+            if (onloadImgNum == imgNum) {
+                $(".img img").each(function(index, key) {
+                    var that = $(key);
+                    var rate = that.height() / that.width();
+                    if (rate > wrapRate) {
+                        that.height("100%");
+                    } else {
+                        that.width("100%");
+                    }
+                });
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="img-wrap">
+        <img src="img/canvas.png">
+    </div>
+    <div class="img-wrap2">
+    </div>
+    <div class="img">
+        <img src="img/height.png">
+    </div>
+    <div class="img">
+        <img src="img/width.png">
+    </div>
+</body>
+
+</html>
