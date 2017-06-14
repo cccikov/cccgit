@@ -3,36 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>回调函数</title>
-    <script type="text/javascript">
-
-
-        function getTest() {
-            let test = null;
-            setTimeout(function() {
-                test = 2;
-            }, 2000);
-            return test;
-        }
-        let id = getTest();
-        console.log(id); //null 因为异步,所以不应该在函数执行后面操作,应该在回调函数中操作.
-
-
-
-        //采用回调函数方式
-        function getTest2(cb) {
-            let test = null;
-            setTimeout(function() {
-                test = 2;
-                cb(test);
-            }, 2000);
-        }
-        getTest2(function(data) {
-            let id = data;
-            console.log(id); //2
-        });
-
-    </script>
+    <title>测试</title>
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
 </head>
 
 <body>

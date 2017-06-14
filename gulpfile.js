@@ -7,16 +7,15 @@ let reload = browserSync.reload;
 
 
 // 文件路径
-let onePath = "test/css"; // 因为输入地址也会用到 , 所以不能用glob写法
-let lessPath = onePath+"/*.less"; // 需要装换less路径
-let less2cssPath = onePath; // less装换css后存放路径
-let cssPath = onePath+"/*.css"; // 需要压缩的css路径
-let css2miniPath = onePath+"/min"; // 压缩后的css路径
+let lessPath = "test/**/*.less"; // 需要装换less路径
+let less2cssPath = "test/css"; // less装换css后存放路径
+let cssPath = "test/css/**/*.css"; // 需要压缩的css路径
+let css2miniPath = "test/css/min"; // 压缩后的css路径
 
-let browserSyncPath = ["test/**/*.html","test/**/*.js","test/**/*.css"];// 监视同步路径
-let browserSyncWithoutCssPath = ["test/**/*.html","{test/**/,./}*.js"]; // 监视路径不要css
+let browserSyncPath = ["test/**/*.html", "test/**/*.js", "test/**/*.css"]; // 监视同步路径
+let browserSyncWithoutCssPath = ["test/**/*.html", "test/**/*.js"]; // 监视路径不要css
 let browserSyncRootPath = "./test/";
-let browserSyncIndex = "test.html";// 服务器启动的时候,默认打开的文件
+let browserSyncIndex = "test.html"; // 服务器启动的时候,默认打开的文件
 
 
 /**
@@ -28,7 +27,7 @@ let browserSyncIndex = "test.html";// 服务器启动的时候,默认打开的�
  * {} 类似正则的分组 src/{index,layout}.less 会 拆分为"src/index.less","src/layout.less" 即{index,layout}有点类似/(index)|(layout)/g
  */
 
-gulp.task('default', ["less","syncLess2"], function() {
+gulp.task('default', ["less", "syncLess2"], function() {
     console.log("********\n执行了 less & syncLess2\n********");
 });
 
@@ -37,22 +36,29 @@ gulp.task('default', ["less","syncLess2"], function() {
 /**
  * 转换less
  */
-function lessFn(path,destPath) {// 只有path是event.path的时候才可以忽略destPath
-    destPath = destPath || path.split("\\").slice(0,-1).join("/");//如果path是event.path,写入文件路径就是被读取文件的当前文件夹
+// 装换less封装函数
+function lessFn(path, destPath) { // 只有path是event.path的时候才可以忽略destPath
+    let path_separator = path.includes("\\") ? "\\" : "/"; // 路径分隔符 windows 是"\" , linux是"/"
+    let pathArr = path.split(path_separator);
+    let arrLen = pathArr.length;
+    let removeIndex = -1; //删除数组的下标
+    if (pathArr[arrLen - 1] == "") { //因为如果是文件夹的话是以\结尾 , 那么数组的最后一个就为 ""
+        removeIndex = -2;
+    }
+    destPath = destPath || pathArr.slice(0, removeIndex).join("/"); //如果path是event.path,写入文件路径就是被读取文件的当前文件夹
     return gulp.src(path)
-               .pipe(less())
-               .pipe(gulp.dest(destPath)); // 返回流,调用后在返回值后面再流的操作
+            .pipe(less())
+            .pipe(gulp.dest(destPath)); // 返回流,调用后在返回值后面再流的操作
 }
 // 转换全部less
 gulp.task("less", function() {
-    lessFn(lessPath,less2cssPath)
+    lessFn(lessPath, less2cssPath)
 });
 
 // 自动编译less
 gulp.task("autoLess", function() {
-    gulp.watch(lessPath, ['less'])// 后面的任务不要是监视任务,是一次性任务(任务里面没有watch),否则就会出现好多重监视
+    gulp.watch(lessPath, ['less']) // 后面的任务不要是监视任务,是一次性任务(任务里面没有watch),否则就会出现好多重监视
 });
-
 
 // 这个是只会去转换修改的那个文件 , 而不会转换全部less , 减少性能消耗. 考拉就是单个装换
 gulp.task("autoOneLess", function() {
@@ -70,15 +76,15 @@ gulp.task("autoOneLess", function() {
 gulp.task("minicss", function() {
     gulp.src(cssPath)
         .pipe(minicss())
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(css2miniPath));
 });
 
 // less & minicss
 gulp.task("lessmini", function() {
-    lessFn(path,destPath)
+    lessFn(path, destPath)
         .pipe(minicss())
-        .pipe(rename({suffix: '.min'}))//重命名
+        .pipe(rename({ suffix: '.min' })) //重命名
         .pipe(gulp.dest(css2miniPath));
 });
 
@@ -90,11 +96,7 @@ gulp.task("lessmini", function() {
 // 静态服务器
 gulp.task('server', function() {
     browserSync.init({
-        /*server: {
-            baseDir: browserSyncRootPath,// 指定服务器的根目录
-            index:"test.html"// 指定服务器启动的时候,默认打开的文件
-        }*/
-        server: browserSyncRootPath // 等于server: {baseDir: browserSyncRootPath}
+        server: browserSyncRootPath
     });
 });
 
@@ -103,17 +105,13 @@ gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
             baseDir: browserSyncRootPath,
-            index:browserSyncIndex
+            index: browserSyncIndex
         }
     });
-    gulp.watch(browserSyncPath).on("change", function(event){
+    gulp.watch(browserSyncPath).on("change", function(event) {
         gulp.src(event.path).pipe(browserSync.reload({ stream: true }));
     });
 });
-
-
-
-
 
 
 
@@ -125,7 +123,7 @@ gulp.task('syncLess', function() {
     browserSync.init({
         server: {
             baseDir: browserSyncRootPath,
-            index:browserSyncIndex
+            index: browserSyncIndex
         }
     });
 
@@ -134,20 +132,20 @@ gulp.task('syncLess', function() {
         lessFn(event.path);
     });
     // 监视文件变化同步浏览器
-    gulp.watch(browserSyncPath).on("change", function(event){
+    gulp.watch(browserSyncPath).on("change", function(event) {
         gulp.src(event.path).pipe(browserSync.reload({ stream: true }));
     });
 });
 
 // 方式2 监视的是less , 转换后 reload
-function synclessFn(path){
+function synclessFn(path) {
     lessFn(path).pipe(browserSync.reload({ stream: true }));
 }
 gulp.task('syncLess2', function() {
     browserSync.init({
         server: {
             baseDir: browserSyncRootPath,
-            index:browserSyncIndex
+            index: browserSyncIndex
         }
     });
     // 转换less 并刷新
@@ -155,7 +153,7 @@ gulp.task('syncLess2', function() {
         synclessFn(event.path);
     });
     // 监视文件变化同步浏览器
-    gulp.watch(browserSyncWithoutCssPath).on("change", function(event){
+    gulp.watch(browserSyncWithoutCssPath).on("change", function(event) {
         gulp.src(event.path).pipe(browserSync.reload({ stream: true }));
     });
 });
