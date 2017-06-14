@@ -7,7 +7,7 @@ let reload = browserSync.reload;
 
 
 // 文件路径
-let lessPath = "test/**/*.less"; // 需要装换less路径
+let lessPath = "test/css/**/*.less"; // 需要装换less路径
 let less2cssPath = "test/css"; // less装换css后存放路径
 let cssPath = "test/css/**/*.css"; // 需要压缩的css路径
 let css2miniPath = "test/css/min"; // 压缩后的css路径
@@ -68,7 +68,7 @@ gulp.task("autoLess", function() {
 gulp.task("autoOneLess", function() {
     gulp.watch(lessPath).on('change', function(event) {
         if (ifFile(event.path)) {
-            lessFn(event.path);
+            lessFn(event.path,less2cssPath);
         } else {
             console.log("***************************没有执行lessFn,因为是个文件夹")
         }
@@ -138,7 +138,7 @@ gulp.task('syncLess', function() {
     // 转换less
     gulp.watch(lessPath).on('change', function(event) {
         if (ifFile(event.path)) {
-            lessFn(event.path);
+            lessFn(event.path,less2cssPath);
         } else {
             console.log("***************************没有执行lessFn,因为是个文件夹")
         }
@@ -150,8 +150,8 @@ gulp.task('syncLess', function() {
 });
 
 // 方式2 监视的是less , 转换后 reload
-function synclessFn(path) {
-    lessFn(path).pipe(browserSync.reload({ stream: true }));
+function synclessFn(path,destPath) {
+    lessFn(path,destPath).pipe(browserSync.reload({ stream: true }));
 }
 gulp.task('syncLess2', function() {
     browserSync.init({
@@ -163,7 +163,8 @@ gulp.task('syncLess2', function() {
     // 转换less 并刷新
     gulp.watch(lessPath).on('change', function(event) {
         if (ifFile(event.path)) {
-            synclessFn(event.path);
+            console.log(lessPath,event.path,less2cssPath);
+            synclessFn(event.path,less2cssPath);
         } else {
             console.log("***************************没有执行synclessFn,因为是个文件夹")
         }
