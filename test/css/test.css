@@ -1,0 +1,10 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html {
+  background: #fefefe;
+}
+html p {
+  margin: 20px 0;
+}
