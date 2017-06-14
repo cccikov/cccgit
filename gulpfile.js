@@ -37,18 +37,22 @@ gulp.task('default', ["less", "syncLess2"], function() {
  * 转换less
  */
 // 装换less封装函数
-function lessFn(path, destPath) { // 只有path是event.path的时候才可以忽略destPath
+function ifFile(path) { //node fs模块也有这个方法 但是是根据文件去判断的吧 我这个是根据路径去判断
     let path_separator = path.includes("\\") ? "\\" : "/"; // 路径分隔符 windows 是"\" , linux是"/"
     let pathArr = path.split(path_separator);
     let arrLen = pathArr.length;
-    let removeIndex = -1; //删除数组的下标
     if (pathArr[arrLen - 1] == "") { //因为如果是文件夹的话是以\结尾 , 那么数组的最后一个就为 ""
-        removeIndex = -2;
+        return false
     }
-    destPath = destPath || pathArr.slice(0, removeIndex).join("/"); //如果path是event.path,写入文件路径就是被读取文件的当前文件夹
+    return true;
+}
+
+function lessFn(path, destPath) { // 只有path是event.path的时候才可以忽略destPath
+    let path_separator = path.includes("\\") ? "\\" : "/"; // 路径分隔符 windows 是"\" , linux是"/"
+    destPath = destPath || path.split(path_separator).slice(0, -1).join("/"); //如果path是event.path,写入文件路径就是被读取文件的当前文件夹
     return gulp.src(path)
-            .pipe(less())
-            .pipe(gulp.dest(destPath)); // 返回流,调用后在返回值后面再流的操作
+        .pipe(less())
+        .pipe(gulp.dest(destPath)); // 返回流,调用后在返回值后面再流的操作
 }
 // 转换全部less
 gulp.task("less", function() {
@@ -63,7 +67,11 @@ gulp.task("autoLess", function() {
 // 这个是只会去转换修改的那个文件 , 而不会转换全部less , 减少性能消耗. 考拉就是单个装换
 gulp.task("autoOneLess", function() {
     gulp.watch(lessPath).on('change', function(event) {
-        lessFn(event.path);
+        if (ifFile(event.path)) {
+            lessFn(event.path);
+        } else {
+            console.log("***************************没有执行lessFn,因为是个文件夹")
+        }
     });
 });
 
@@ -129,7 +137,11 @@ gulp.task('syncLess', function() {
 
     // 转换less
     gulp.watch(lessPath).on('change', function(event) {
-        lessFn(event.path);
+        if (ifFile(event.path)) {
+            lessFn(event.path);
+        } else {
+            console.log("***************************没有执行lessFn,因为是个文件夹")
+        }
     });
     // 监视文件变化同步浏览器
     gulp.watch(browserSyncPath).on("change", function(event) {
@@ -150,7 +162,11 @@ gulp.task('syncLess2', function() {
     });
     // 转换less 并刷新
     gulp.watch(lessPath).on('change', function(event) {
-        synclessFn(event.path);
+        if (ifFile(event.path)) {
+            synclessFn(event.path);
+        } else {
+            console.log("***************************没有执行synclessFn,因为是个文件夹")
+        }
     });
     // 监视文件变化同步浏览器
     gulp.watch(browserSyncWithoutCssPath).on("change", function(event) {
