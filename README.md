@@ -41,6 +41,16 @@
     // 4个空格,代码段
     var wrap = document.getElementById("wrap");
 
+```javascript
+// 3个` 可加代码语法 不用缩进
+var wrap = document.getElementById("wrap");
+```
+
+```
+// 3个` 可加代码语法 不用缩进
+var wrap = document.getElementById("wrap");
+```
+
 <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>
 
 
