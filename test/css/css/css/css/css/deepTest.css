@@ -1,3 +1,4 @@
+/*只转换修改的less文件方式*/
 * {
-  padding: 1px;
+  color: red;
 }
