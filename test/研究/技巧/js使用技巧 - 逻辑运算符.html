@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js使用技巧 - 逻辑运算符js使用技巧 - 逻辑运算符</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        function fn(cb){
+            // ...
+            cb && cb();
+            // 等价于
+            // if(cb){
+            //     cb()
+            // }
+            return arguments;
+        }
+        console.log(fn(function(){
+            console.log("lorem");
+        }));
+        console.log(fn());
+
+
+
+
+
+        function fn2(obj){
+            obj = obj || {};
+
+            obj.arr || (obj.arr = []);
+            //等价于
+            // if(!obj.arr){
+            //     obj.arr = []
+            // }
+            // 用来初始化对象,特别是有些时候我们需要给对象的属性添加属性时,不知道该属性定义了没有,就可以用这种方式
+            obj.arr.push(Math.random() > 0.5 ? 1 : 0);
+            return obj;
+        }
+        console.log(fn2());
+        console.log(fn2({arr:["a","b"]}));
+
+    </script>
+</body>
+</html>
