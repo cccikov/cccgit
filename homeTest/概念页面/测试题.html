@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>测试题 - 闭包</title>
 	</head>
 
 	<body>
@@ -13,14 +13,14 @@
 				var i = 0;
 				console.log(i);
 				return function() {
-					console.log("in"+i);
+					console.log("in",i);
 					i = 100;
 				}
 			}
-			f1 = Foo();
-			f1();
-			f1();
-			f1();
+			f1 = Foo();// 0
+			f1();// in 0
+			f1();// in 100
+			f1();// in 100
 		</script>
 	</body>
 
