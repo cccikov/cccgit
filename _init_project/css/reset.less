@@ -1,0 +1,39 @@
+/* 代替base.css作为清除默认样式less */
+
+// 清除默认样式
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+//超链接
+body{
+    // font: 12px/1.5 Verdana, Arial, 'simsun';
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul,li{
+    list-style:none;
+}
+// hover效果
+.mouse-hover:hover {
+    text-decoration: underline;
+}
+// 清除浮动
+.clearfix() {
+    &:after {
+        content: '';
+        display: block;
+        clear: both
+    }
+}
+//超出隐藏
+.elli() {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
