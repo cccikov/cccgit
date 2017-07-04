@@ -10,35 +10,28 @@
 
         //wait与防抖的用法一样，只要wait的时间间隔内触发两个，就会合并为一次；mustRun只要没达到mustRun的时间，无论触发间隔为多少，都会触发一次事件
         function throttle(func, wait, mustRun) {
-            var timeout,
-                startTime = new Date();
+            var timeout;
+            var startTime = new Date();
 
             return function() {
-                var context = this,
-                    args = arguments,
-                    curTime = new Date();
+                var _this = this;
+                var args = arguments; //获取参数
+                var curTime = new Date();
 
                 clearTimeout(timeout);
-                // 如果达到了规定的触发时间间隔，触发 handler
-                if (curTime - startTime >= mustRun) {
-                    func.apply(context, args);
+                if (curTime - startTime >= mustRun) { // 如果达到了规定的触发时间间隔，触发 handler
+                    func.apply(_this, args);
                     startTime = curTime;
-                    // 没达到触发间隔，重新设定定时器
-                } else {
+                } else { // 没达到触发间隔，重新设定定时器
                     timeout = setTimeout(func, wait);
                 }
             };
         };
 
-
         var index = 0
         $(window).on("scroll", throttle(function() {
             console.log(index++);
-        },500,5000));
-
-
-
-
+        },500,1000));
 
     });
     </script>
