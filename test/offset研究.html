@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>offset研究</title>
+    <style type="text/css">
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    body * {
+        padding: 5px;
+        margin: 7px;
+    }
+
+    table {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0;
+        margin: 5px 0;
+        text-align: center;
+        border-collapse: collapse;
+        line-height: 1.2;
+    }
+
+    table tr {
+        padding: 0;
+        border: 1px solid #f5f5f5;
+        margin: 0;
+    }
+
+    #tips {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        width: 100%;
+        border-top: 1px solid #ccc;
+        margin: 0;
+        background: #fff;
+        box-shadow: 0px -6px 16px 0px rgba(0, 0, 0, 0.5);
+        font-size: 12px;
+    }
+    #tips p{
+        margin: 5px;
+        padding: 0;
+    }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    function Offset(jqdoms) {
+        var _this = this;
+        _this.doms = jqdoms
+        _this.refresh();
+        $(document).on("click", function() {
+            _this.refresh();
+        }).on("scroll", function() {
+            _this.refresh();
+        });
+    }
+    Offset.prototype.refresh = function() {
+        var _this = this;
+        $(".active").find("tr").slice(1).remove();
+        _this.doms.forEach(function(key) {
+            let tr = `<tr>
+                <td>${key[0].tagName.toLowerCase()+(key[0].id != ""?"#"+key[0].id:"")+(key[0].className != ""?"#"+key[0].className:"")}</td>
+                <td>${key[0].offsetTop}</td>
+                <td>${key.offset().top}</td>
+                <td>${key.position().top}</td>
+                <td>${key[0].scrollTop}</td>
+                <td>${key[0].offsetParent.scrollTop}</td>
+                <td>${key[0].offsetParent.scrollTop + key.offset().top}</td>
+                <td>${key[0].offsetParent.scrollTop + key.position().top}</td>
+            </tr>`;
+            $(tr).appendTo(".active");
+        });
+    }
+
+    $(function() {
+        new Offset([
+            $("p"),
+            $("#wrap")
+        ]);
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+    </div>
+    <div id="tips">
+        <p>padding: 5px;margin: 7px;</p>
+        <table class="active">
+            <tr>
+                <th>元素</th>
+                <th>原生offsetTop</th>
+                <th>JQuery offset().top</th>
+                <th>JQuery position().top</th>
+                <th>原生 scrollTop</th>
+                <th>定位父元素 scrollTop</th>
+                <th>父 scrollTop + JQ offset().top</th>
+                <th>父 scrollTop + JQ position().top</th>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
