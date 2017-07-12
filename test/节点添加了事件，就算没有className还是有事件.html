@@ -27,6 +27,6 @@
 			<li class="hello">6</li>
 		</ul>
 		<button class="btn">removeClassName</button>
-		<p>总结：所以我们只要在节点上添加事件，就算没有我们用于找节点时的className，节点上的事件也不会消失。所以对于一些className会变化的节点添加事件，可以通过事件委托；或者在事件函数中判断有无这个className来区分不同的执行函数（常见就是判断有无active is(".active")）</p>
+		<p>总结：所以我们只要在节点上添加事件，就算没有我们用于找节点时的className，节点上的事件也不会消失。因为className只是节点对象的一个属性 , 事件是绑定在节点上的 . 所以对于一些className会变化的节点添加事件，可以通过事件委托；或者在事件函数中判断有无这个className来区分不同的执行函数（常见就是判断有无active is(".active")）</p>
 	</body>
 </html>
