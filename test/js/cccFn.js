@@ -1,4 +1,10 @@
 /*收集一些平时工作的封装的方法*/
+// 请在服务器环境打开
+onlyServer (){
+    if (window.location.protocol.substr(0, 4) === "file") {
+        alert("请在服务器环境打开，本地无法运行！！！");
+    }
+}
 
 // 数字保留两个小数,并且逢千有个逗号
 function fixNum(num) {
