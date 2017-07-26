@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>setter getter</title>
+    <script type="text/javascript">
+    // 方式一
+    var lost = {
+        loc: "Island",
+        get location() { // 设置location值时运行
+            return this.loc;
+        },
+        set location(val) { // 读取location值时运行
+            this.loc = val;
+        }
+    };
+    lost.location = "Another island";
+
+
+    // 方式二
+    var lost = {
+        loc: "Island"
+    };
+    Object.defineProperty(lost, "location", {
+        get: function() { // 设置location值时运行
+            console.log("读取location值");
+            return this.loc;
+        },
+        set: function(val) { // 读取location值时运行
+            console.log("设置location值");
+            this.loc = val;
+        }
+    });
+    lost.location = "Another island"; // 设置location值
+
+    console.log(lost.location, lost.loc); // 读取location值 // Another island  Another island
+
+
+
+    // 作用可以设置一个属性是只读的
+    var obj = {
+        get name(){
+            return "ccc";
+        },
+        set name(value){
+            console.error("你尝试设置的值为"+value+";但name是只读属性 , 不可设置");
+        }
+    }
+    obj.name = "tomato";
+    console.log(obj.name)
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
