@@ -53,8 +53,10 @@
 					grandsonAction.innerHTML = "是在a.html那里改变的";
 				}
 
+				console.log(window.frames['ifr'].testFrameVariable);
+				console.log(window.frames['ifr']); // 就是ifr 的顶层环境
 				console.log(testFrameVariable); // 是读不到iframe_b中的定义的变量
-
+				console.log(testFrameVariable2); // 是读不到iframe_b中的定义的变量
 			}
 		</script>
 	</body>
