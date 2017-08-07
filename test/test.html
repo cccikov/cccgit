@@ -1,97 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
-    <title>测试</title>
-    <link rel="stylesheet" type="text/css" href="css/test.css">
-    <!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
-    <!-- <script type="text/javascript" src="js/test.js"></script> -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>屏幕坏点测试</title>
+    <style type="text/css">
+    html,
+    body {
+        background: #000;
+    }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
-    function asyncFn(fn) {
-        // 传参
-        return function(...args) {
-            // 回调函数
-            return function(cb) {
-                let call
-                args.push(function() {
-                    if (call) return
-                    call = true
-                    cb.apply(null, arguments)
-                })
-                try {
-                    fn.apply(null, args)
-                } catch (err) {
-                    //...
-                }
+    $(function() {
+        var _index = 0;
+        var color = ["#000", "#f00", "#f0f", "#00f", "#0ff", "#0f0", "#ff0", "#fff"];
+
+        function tap() {
+            _index++;
+            if (_index >= color.length) {
+                _index = 0;
             }
+            $("html").add("body").css("background", color[_index]);
         }
-    }
 
-    function readFile(name, cb) {
-        setTimeout(() => {
-            // read file done
-            let err, data = 'success'
-            cb(err, data)
-        }, 1000)
-    }
+        $("html").on("touchstart", function(e) {
 
+            var oriTime = new Date().getTime();
+            var _that = $(this);
+            var oriY = e.originalEvent.touches[0].clientY;
+            var oriX = e.originalEvent.touches[0].clientX;
+            var moveFlag = false;
 
+            _that.on("touchmove", function() {
+                var nowY = e.originalEvent.touches[0].clientY;
+                var nowX = e.originalEvent.touches[0].clientX;
+                var nowTime = new Date().getTime();
+                var deltaTime = nowTime - oriTime;
+            });
 
-    asyncFn(readFile)('./text.txt')((err, data) => {
-        console.log(data)
-    })
-    </script>
-    <script type="text/javascript">
-    ! function() {
-        let arr = [2, 4, 7, 9];
-        let result = arr.reduce(function(previousValue, currentValue, currentIndex, array) {
-            console.log(previousValue, currentValue, currentIndex, array);
-            console.log("上一次调用回调函数返回的值----", previousValue);
-            console.log("数组中当前被处理的元素----", currentValue);
-            console.log("数组中当前被处理的元素的索引----", currentIndex);
-            console.log("当前的数组----", array);
-            return previousValue + currentValue;
-        }, 100);
-        console.log(result);
-    }
-
-
-
-
-
-    {
-        // const pipeline = (...funcs) => val => funcs.reduce((a, b) => b(a), val);
-        /*const pipeline = (...funcs) => {
-            return val => {
-                return funcs.reduce((a, b) => {
-                    return b(a);
-                }, val)
-            }
-        };*/
-
-        const pipeline = function(...funcs) {
-                return function(val) {
-                    return funcs.reduce(function(a, b) {
-                        return b(a);
-                    }, val);
+            _that.on("touchend", function() {
+                var nowTime = new Date().getTime();
+                var deltaTime = nowTime - oriTime;
+                if (deltaTime < 300 && !moveFlag) {
+                    tap();
                 }
-            }
-            //形成闭包就类似 pipeline执行完之后还保留着 , 所以funcs还存在
+                _that.off("touchend").off("touchmove");
+            });
+        });
 
-        const plus1 = a => a + 1;
-        const mult2 = a => a * 2;
-        const addThenMult = pipeline(plus1, mult2);
-
-
-        // addThenMult(5); // 12
-        console.log(addThenMult(5));
-    }
+    });
     </script>
 </head>
 
 <body>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </body>
 
 </html>
