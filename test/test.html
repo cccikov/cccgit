@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -78,19 +78,19 @@
                     return
                 }
 
-                if (l >= 4 ) {
+                if (l >= 4) {
                     move--;
                     l = r = 0;
                 }
 
-                if (r >= 4 ) {
+                if (r >= 4) {
                     move++;
                     l = r = 0;
                 }
             }
 
             img.style.background = "url(img/bg.png) left " + move * 212 + "px top 0px repeat";
-            tip.innerHTML = direct + r +" " + l;
+            tip.innerHTML = direct + r + " " + l;
             oz = z;
 
         }, 16.7, 16.7);
@@ -100,8 +100,7 @@
 </head>
 
 <body>
-    <div id="img">
-    </div>
+    <div id="img"></div>
     <div id="tip"></div>
 </body>
 
