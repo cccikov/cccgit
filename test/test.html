@@ -3,95 +3,106 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>测试</title>
-    <link rel="stylesheet" type="text/css" href="css/test.css">
-    <!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
-    <!-- <script type="text/javascript" src="js/test.js"></script> -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>陀螺仪感应器</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #img {
+        display: inline-block;
+        height: 211px;
+        width: 212px;
+        background: url(img/bg.png) left 0px top 0px repeat;
+    }
+    </style>
     <script type="text/javascript">
-    function asyncFn(fn) {
-        // 传参
-        return function(...args) {
-            // 回调函数
-            return function(cb) {
-                let call
-                args.push(function() {
-                    if (call) return
-                    call = true
-                    cb.apply(null, arguments)
-                })
-                try {
-                    fn.apply(null, args)
-                } catch (err) {
-                    //...
+    function throttle(func, wait, mustRun) {
+        var timeout;
+        var startTime = new Date();
+        var oz = null;
+
+        return function() {
+            var _this = this;
+            var args = arguments; //获取参数
+            var curTime = new Date();
+
+            clearTimeout(timeout);
+            if (curTime - startTime >= mustRun) { // 如果达到了规定的触发时间间隔，触发 handler
+                func.apply(_this, args);
+                startTime = curTime;
+            } else { // 没达到触发间隔，重新设定定时器
+                timeout = setTimeout(func, wait);
+            }
+        };
+    };
+    1
+
+    window.onload = function() {
+        var img = document.getElementById("img");
+        var tip = document.getElementById("tip");
+
+        var oz;
+        var direct;
+        var l = 0;
+        var r = 0
+        var move = 0;
+        var handler = throttle(function(event) {
+            // var gamma = event.gamma;
+            // var beta = event.beta;
+            var alpha = Math.round(event.alpha);
+
+            // var x = parseInt(gamma/100);
+            // var y = parseInt(beta/100);
+            var z = alpha;
+
+            if (oz) {
+                var left = z - oz; // 逆时针转动距离
+                var right = oz - z; // 顺时针转动距离
+                if (left < 0) {
+                    left += 360;
+                }
+                if (right < 0) {
+                    right += 360;
+                }
+
+                if (left < right) { // 在这么短时间里面肯定是转的距离小的方向是转动方向
+                    direct = "逆时针";
+                    l++;
+                } else if (left > right) {
+                    direct = "顺时针";
+                    r++
+                } else {
+                    return
+                }
+
+                if (l >= 4 ) {
+                    move--;
+                    l = r = 0;
+                }
+
+                if (r >= 4 ) {
+                    move++;
+                    l = r = 0;
                 }
             }
-        }
-    }
 
-    function readFile(name, cb) {
-        setTimeout(() => {
-            // read file done
-            let err, data = 'success'
-            cb(err, data)
-        }, 1000)
-    }
+            img.style.background = "url(img/bg.png) left " + move * 212 + "px top 0px repeat";
+            tip.innerHTML = direct + r +" " + l;
+            oz = z;
 
-
-
-    asyncFn(readFile)('./text.txt')((err, data) => {
-        console.log(data)
-    })
-    </script>
-    <script type="text/javascript">
-    ! function() {
-        let arr = [2, 4, 7, 9];
-        let result = arr.reduce(function(previousValue, currentValue, currentIndex, array) {
-            console.log(previousValue, currentValue, currentIndex, array);
-            console.log("上一次调用回调函数返回的值----", previousValue);
-            console.log("数组中当前被处理的元素----", currentValue);
-            console.log("数组中当前被处理的元素的索引----", currentIndex);
-            console.log("当前的数组----", array);
-            return previousValue + currentValue;
-        }, 100);
-        console.log(result);
-    }
-
-
-
-
-
-    {
-        // const pipeline = (...funcs) => val => funcs.reduce((a, b) => b(a), val);
-        /*const pipeline = (...funcs) => {
-            return val => {
-                return funcs.reduce((a, b) => {
-                    return b(a);
-                }, val)
-            }
-        };*/
-
-        const pipeline = function(...funcs) {
-                return function(val) {
-                    return funcs.reduce(function(a, b) {
-                        return b(a);
-                    }, val);
-                }
-            }
-            //形成闭包就类似 pipeline执行完之后还保留着 , 所以funcs还存在
-
-        const plus1 = a => a + 1;
-        const mult2 = a => a * 2;
-        const addThenMult = pipeline(plus1, mult2);
-
-
-        // addThenMult(5); // 12
-        console.log(addThenMult(5));
+        }, 16.7, 16.7);
+        window.addEventListener('deviceorientation', handler, false);
     }
     </script>
 </head>
 
 <body>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <div id="img">
+    </div>
+    <div id="tip"></div>
 </body>
 
 </html>

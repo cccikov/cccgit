@@ -8,7 +8,7 @@
     <script type="text/javascript">
     $(function() {
 
-        //wait与防抖的用法一样，只要wait的时间间隔内触发两个，就会合并为一次；mustRun只要没达到mustRun的时间，无论触发间隔为多少，都会触发一次事件
+        //wait与防抖的用法一样，只要wait的时间间隔内触发事件两个，就会合并为一次（或者可以说是触发后wait毫秒后不再触发才运行）；mustRun只要没达到mustRun的时间，无论触发间隔为多少，都会触发一次事件
         function throttle(func, wait, mustRun) {
             var timeout;
             var startTime = new Date();
@@ -31,7 +31,7 @@
         var index = 0
         $(window).on("scroll", throttle(function() {
             console.log(index++);
-        },500,1000));
+        },500,5000));
 
     });
     </script>
