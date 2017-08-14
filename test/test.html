@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>陀螺仪感应器</title>
     <style type="text/css">
+
     * {
         padding: 0;
         margin: 0;
@@ -17,6 +18,7 @@
         width: 212px;
         background: url(img/bg.png) left 0px top 0px repeat;
     }
+
     </style>
     <script type="text/javascript">
     function throttle(func, wait, mustRun) {
@@ -38,7 +40,6 @@
             }
         };
     };
-    1
 
     window.onload = function() {
         var img = document.getElementById("img");
@@ -75,7 +76,7 @@
                     direct = "顺时针";
                     r++
                 } else {
-                    return
+                    return;
                 }
 
                 if (l >= 4) {

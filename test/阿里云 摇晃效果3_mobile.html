@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>阿里云摇晃效果3_手机版</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #wrap {
+        position: relative;
+    }
+
+    html,
+    body {
+        position: relative;
+        height: 100%;
+        background: #24282c linear-gradient(-180deg, rgba(55, 60, 65, 0.00) 38%, #00DEFF 100%);
+        ;
+    }
+
+    #wrap {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        width: 100%;
+        height: 100%;
+        /* border: 1px solid red; */
+        perspective: 1000px;
+        overflow: hidden;
+    }
+
+    #trans {
+        transform-style: preserve-3d;
+        width: 100%;
+        height: 100%;
+        /*居中好重要,因为#trans的父元素是设置景深的元素*/
+    }
+
+    .out,
+    .mid,
+    .in {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /*line-height: 600px;*/
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    .out {
+        transform: translate3d(0, 0, 150px);
+        background: url(img/ali150.png) center/cover no-repeat;
+    }
+
+    .mid {
+        transform: translate3d(0, 0, 100px);
+        background: url(img/ali100.png) center/cover no-repeat;
+    }
+
+    .in {
+        transform: translate3d(0, 0, 50px);
+        background: url(img/ali50.png) center/cover no-repeat;
+    }
+
+    #tip {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="trans">
+            <div class="out">
+            </div>
+            <div class="mid">
+            </div>
+            <div class="in">
+            </div>
+        </div>
+    </div>
+    <div id="tip"></div>
+    <script src='js/jquery.min.js' type="text/javascript"></script>
+    <script type="text/javascript">
+    function throttle(func, wait, mustRun) {
+        var timeout;
+        var startTime = new Date();
+        var oz = null;
+
+        return function() {
+            var _this = this;
+            var args = arguments; //获取参数
+            var curTime = new Date();
+
+            clearTimeout(timeout);
+            if (curTime - startTime >= mustRun) { // 如果达到了规定的触发时间间隔，触发 handler
+                func.apply(_this, args);
+                startTime = curTime;
+            } else { // 没达到触发间隔，重新设定定时器
+                timeout = setTimeout(func, wait);
+            }
+        };
+    };
+
+    function log(str) {
+        $("#tip").html(str)
+    }
+
+    $(function() {
+        $("body").on("mousemove", function(e) {
+            var that = $(this);
+            var trans = $("#trans");
+            var l = trans.offset().left;
+            var t = trans.offset().top;
+            var w = trans.width();
+            var h = trans.height();
+
+            angleX = (e.clientX - l - w / 2) / 90; // l + w / 2 就是图像中点的位置
+            angleY = (e.clientY - t - h / 2) / 90;
+            trans.css("transform", "rotate3d(1,0,0," + angleY + "deg) rotate3d(0,1,0," + -angleX + "deg)")
+        });
+
+        $("#wrap").on("touchmove", function(e) {
+            e.preventDefault();
+            var that = $(this);
+            var trans = $("#trans");
+            var l = trans.offset().left;
+            var t = trans.offset().top;
+            var w = trans.width();
+            var h = trans.height();
+
+            var clientX = e.originalEvent.touches[0].clientX
+            var clientY = e.originalEvent.touches[0].clientY
+
+
+            angleX = (clientX - l - w / 2) / 60; // l + w / 2 就是图像中点的位置
+            angleY = (clientY - t - h / 2) / 60;
+            trans.css("transform", "rotate3d(1,0,0," + angleY + "deg) rotate3d(0,1,0," + -angleX + "deg)");
+        });
+
+        var oz = null;
+        var turnZ = 0
+        var deltaZ = 0;
+        var alldeltaZ = 0;
+        $(window).on('deviceorientation', throttle(function(e) {
+            var event = e.originalEvent;
+            var alpha = event.alpha
+            var gamma = event.gamma;
+            var beta = event.beta;
+
+            var z = Math.round(alpha); // 0 - 360
+            var x = Math.round(beta); // -180 - 180
+            var y = Math.round(gamma);
+
+
+
+
+            if (oz) {
+                var left = z - oz; // 逆时针转动距离
+                var right = oz - z; // 顺时针转动距离
+                if (left < 0) {
+                    left += 360;
+                }
+                if (right < 0) {
+                    right += 360;
+                }
+
+                if (left < right) { // 在这么短时间里面肯定是转的距离小的方向是转动方向
+                    deltaZ = left;
+                } else if (left > right) {
+                    deltaZ = -right
+                } else {
+                    return;
+                }
+            }
+            oz = z;
+            alldeltaZ += deltaZ;
+
+
+            log("Z:" + z + " Y:" + y + " X:" + x);
+            // log(alldeltaZ);
+            var trans = $("#trans");
+            trans.css("transform", "rotate3d(1,0,0," + x / 9 + "deg) rotate3d(0,1,0," + alldeltaZ + "deg)");
+
+        }, 16.7 * 2, 16.7 * 2));
+    });
+    </script>
+</body>
+
+</html>
