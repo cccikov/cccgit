@@ -1,6 +1,6 @@
 /*收集一些平时工作的封装的方法*/
 // 请在服务器环境打开
-onlyServer (){
+onlyServer() {
     if (window.location.protocol.substr(0, 4) === "file") {
         alert("请在服务器环境打开，本地无法运行！！！");
     }
@@ -89,9 +89,9 @@ function autoTextarea(obj, paddingHeight) {
 // 这个数组是否有这个值   这个方法没有必要 直接用 Array.prototype.indexOf(ie9以及以上)
 if (!Array.prototype.hasVal) {
     Array.prototype.hasVal = function(val) {
-        if(this.indexOf){
-            return this.indexOf(val)>0
-        }else{
+        if (this.indexOf) {
+            return this.indexOf(val) > 0
+        } else {
             for (var i in this) {
                 if (this[i] == val) {
                     return true;
@@ -122,16 +122,16 @@ if (!Array.prototype.insert) {
     }
 }
 // 根据索引位置删除值
-if(!Array.prototype.remove){
-    Array.prototype.remove = function(posi){
-        this.splice(posi,1);
+if (!Array.prototype.remove) {
+    Array.prototype.remove = function(posi) {
+        this.splice(posi, 1);
         return this;
     }
 }
 // 数组交换值
-if(!Array.prototype.exchage){
-    Array.prototype.exchage = function(posi1,posi2){//两个位置交换
-        if(this.length-1 < posi1 || this.length-1 < posi2 || posi1 == posi2){
+if (!Array.prototype.exchage) {
+    Array.prototype.exchage = function(posi1, posi2) { //两个位置交换
+        if (this.length - 1 < posi1 || this.length - 1 < posi2 || posi1 == posi2) {
             return this;
         }
         var mid = this[posi1];
@@ -141,16 +141,16 @@ if(!Array.prototype.exchage){
     }
 }
 // 将一个值位置上移
-if(!Array.prototype.exchageUp){
-    Array.prototype.exchageUp = function(posi){
-        this.exchage(posi,posi-1);
+if (!Array.prototype.exchageUp) {
+    Array.prototype.exchageUp = function(posi) {
+        this.exchage(posi, posi - 1);
         return this;
     }
 }
 // 将一个值的位置下移
-if(!Array.prototype.exchageDown){
-    Array.prototype.exchageDown = function(posi){
-        this.exchage(posi,posi+1);
+if (!Array.prototype.exchageDown) {
+    Array.prototype.exchageDown = function(posi) {
+        this.exchage(posi, posi + 1);
         return this;
     }
 }
@@ -214,14 +214,14 @@ function fileLimit(obj) {
 }
 
 /*中间变星星*/
-String.prototype.star = function(start,end){
-    var num = end-start;
+String.prototype.star = function(start, end) {
+    var num = end - start;
     var str = this;
     var starStr = "";
-    for(var i = 0;i<num;i++){
+    for (var i = 0; i < num; i++) {
         starStr = starStr + "*";
     }
-    str = str.slice(0,start)+starStr+str.slice(end);
+    str = str.slice(0, start) + starStr + str.slice(end);
     return str;
 }
 
@@ -249,11 +249,11 @@ String.prototype.appearMaxTimes = function() {
 /*将posi位置字符换成newStr,posi可以为数字也可以为由数组组成的数组*/
 String.prototype.change = function(posi, newStr) {
     if (!isNaN(str)) { //posi是数字
-        return this.slice(0, posi) + newStr + this.slice(posi + 1);//将字符串posi前面的那段 + 新字符newStr + 字符串posi后面那段 拼成新的字符串；
-    } else if (Array.isArray && Array.isArray(posi)) {//posi为数组的时候，es6 Array.isArray判断 注意兼容性
+        return this.slice(0, posi) + newStr + this.slice(posi + 1); //将字符串posi前面的那段 + 新字符newStr + 字符串posi后面那段 拼成新的字符串；
+    } else if (Array.isArray && Array.isArray(posi)) { //posi为数组的时候，es6 Array.isArray判断 注意兼容性
         var str = this;
         for (var i = 0, len = posi.length; i < len; i++) {
-            str = str.slice(0, posi[i]) + newStr + str.slice(posi[i] + 1);//for循环拼接
+            str = str.slice(0, posi[i]) + newStr + str.slice(posi[i] + 1); //for循环拼接
         }
         return str;
     }
@@ -262,16 +262,16 @@ String.prototype.change = function(posi, newStr) {
 /*将在ori中匹配到的字符，转化为tar中对应的字符*/
 String.prototype.exchange = function(ori, tar) {
     var str = "",
-        flag = false;//标记是否有匹配到ori中的字符
-    for (var i = 0, len = this.length; i < len; i++) {//str字符串遍历一个个字符
+        flag = false; //标记是否有匹配到ori中的字符
+    for (var i = 0, len = this.length; i < len; i++) { //str字符串遍历一个个字符
         flag = false;
-        for (var j = 0, len2 = ori.length; j < len2; j++) {//遍历ori，将str字符串的字符与ori进行比较
-            if (this.charAt(i) == ori[j]) {//判断是否匹配
-                str += tar[j];//匹配到了，将str对应的字符换成tar[i]中的。
-                flag = true;//标记为true
+        for (var j = 0, len2 = ori.length; j < len2; j++) { //遍历ori，将str字符串的字符与ori进行比较
+            if (this.charAt(i) == ori[j]) { //判断是否匹配
+                str += tar[j]; //匹配到了，将str对应的字符换成tar[i]中的。
+                flag = true; //标记为true
             }
         }
-        if (!flag) {//没有匹配到，就str中字符换成会原来那个。
+        if (!flag) { //没有匹配到，就str中字符换成会原来那个。
             str += this[i];
         }
     }
@@ -282,13 +282,13 @@ String.prototype.exchange2 = function(ori, tar) {
     for (var i = 0, len = this.length; i < len; i++) {
         var j = 0,
             len2 = ori.length;
-        while (this.charAt(i) != ori[j] && j < len2) {//匹配到或者遍历完ori退出
+        while (this.charAt(i) != ori[j] && j < len2) { //匹配到或者遍历完ori退出
             j++
         }
-        if (j < len2) {//如果j小于ori长度，表示匹配到
-            str += tar[j];//匹配到了，用tar对应字符
-        } else {//匹配不到
-            str += this[i]//用回原来字符
+        if (j < len2) { //如果j小于ori长度，表示匹配到
+            str += tar[j]; //匹配到了，用tar对应字符
+        } else { //匹配不到
+            str += this[i] //用回原来字符
         }
     }
     return str;
@@ -299,7 +299,7 @@ String.prototype.exchange3 = function(hashTable) {
     var arr = this.split("");
     for (var i = 0, len = arr.length; i < len; i++) {
         // (arr[i] in hashTable) && (arr[i] = hashTable[arr[i]])
-        (hashTable[arr[i]]) && (arr[i] = hashTable[arr[i]])//如果与哈希表匹配，则执行后面操作，否则因为false，将跳过后面操作
+        (hashTable[arr[i]]) && (arr[i] = hashTable[arr[i]]) //如果与哈希表匹配，则执行后面操作，否则因为false，将跳过后面操作
     }
     return arr.join("");
 };
@@ -315,13 +315,13 @@ console.log(a.exchange3(hashTable)); //TCGA
 */
 
 // 是否到底部
-function isbottom(){//onscroll时候判断，浏览器滚动条时候
+function isbottom() { //onscroll时候判断，浏览器滚动条时候
     var top = $(".waiting").offset().top;
     var h = $(".waiting").outerHeight();
     var winH = $(window).height();
     var scrollTop = $(window).scrollTop();
     // 最低下 top+h = winH+scrollTop
-    return top<=winH+scrollTop;
+    return top <= winH + scrollTop;
 }
 /*// 或者
 $("#wrap").on("scroll",function(){//因为这里滚动的是wrap,所以offset().top变成窗口位置
@@ -337,10 +337,10 @@ $("#wrap").on("scroll",function(){//因为这里滚动的是wrap,所以offset().
 
 
 // 判断ie版本 7-10
-function ieVersion(){
+function ieVersion() {
     var reg = /msie\s(\d+)\.0/i;
     var agent = navigator.userAgent.toLowerCase();
-    if(reg.test(agent)){
+    if (reg.test(agent)) {
         return agent.match(reg)[1];
     }
     return null
@@ -355,23 +355,23 @@ function Ele(dom) {
     }
     if (dom) {
         this.dom = dom;
-        Ele.prototype.innerWidth = function() {//获取元素宽度(包括padding,border)
+        Ele.prototype.innerWidth = function() { //获取元素宽度(包括padding,border)
             return dom.offsetWidth;
         };
-        Ele.prototype.innerHeight = function() {//获取元素高度(包括padding,border)
+        Ele.prototype.innerHeight = function() { //获取元素高度(包括padding,border)
             return dom.offsetHeight
         };
-        Ele.prototype.width = function() {//获取元素content宽度
+        Ele.prototype.width = function() { //获取元素content宽度
             var paddingArr = this.getStyle("padding").match(/\d+/g);
             var border = this.getStyle("borderWidth").match(/\d+/g)[0];
             return dom.offsetWidth - paddingArr[1] - paddingArr[3] - border * 2;
         }
-        Ele.prototype.height = function() {//获取元素content高度
+        Ele.prototype.height = function() { //获取元素content高度
             var paddingArr = this.getStyle("padding").match(/\d+/g);
             var border = this.getStyle("borderWidth").match(/\d+/g)[0];
             return dom.offsetHeight - paddingArr[0] - paddingArr[2] - border * 2;
         }
-        Ele.prototype.getStyle = function(StyleName) {//获取元素css样式
+        Ele.prototype.getStyle = function(StyleName) { //获取元素css样式
             if (dom.style[StyleName]) {
                 return dom.style[StyleName];
             } else {
@@ -383,7 +383,7 @@ function Ele(dom) {
             }
             return null;
         }
-        Ele.prototype.docOffset = function() {//元素的文档坐标
+        Ele.prototype.docOffset = function() { //元素的文档坐标
             var x = dom.offsetLeft;
             var y = dom.offsetTop;
             while (dom.offsetParent) {
@@ -401,16 +401,26 @@ function Ele(dom) {
 
 
 // 重置iframe高度
-function resetFrameH(frame){
-    frame.style.height = frame.contentDocument.body.offsetHeight+"px";//跨域会不行
+function resetFrameH(frame) {
+    frame.style.height = frame.contentDocument.body.offsetHeight + "px"; //跨域会不行
 }
 
 // 让数字只能符合某种间隔,比如0 20 40 60,一般可以用于拖拽的格子
-function grid(v,len) {
+function grid(v, len) {
     var len = len || 20;
     var r = parseInt(v / len) * len;
-    if (Math.abs(v % len) > len/2) {
+    if (Math.abs(v % len) > len / 2) {
         r += v > 0 ? len : -len;
     }
     return r;
+}
+
+/**
+ * 得到随机整数方法
+ * @param  {number} max 需要得到的随机数最大值
+ * @param  {number} min 需要得到的随机数最小值
+ * @return {number}     随机整数
+ */
+function ranInt(max, min) {
+    return parseInt(Math.random() * (max - min + 1) + min)
 }

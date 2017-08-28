@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>try ... catch</title>
+    <script type="text/javascript">
+    ///////////////////
+    // try ... catch //
+    ///////////////////
+
+    function ranInt(max, min) {
+        return parseInt(Math.random() * (max - min + 1) + min)
+    }
+
+    var errorArr = [new Error("错误"), new EvalError("错误"), new RangeError("超出范围"), new ReferenceError("无效引用"), new SyntaxError("语法错误"), new TypeError("参数错误")];
+
+    var min = 0;
+    var max = errorArr.length;
+
+    try {
+        throw errorArr[ranInt(max, min)]
+    } catch (e) {
+        if (e instanceof TypeError) {
+            // statements to handle TypeError exceptions
+            console.error("TypeError")
+        } else if (e instanceof RangeError) {
+            // statements to handle RangeError exceptions
+            console.error("RangeError")
+        } else if (e instanceof EvalError) {
+            // statements to handle EvalError exceptions
+            console.error("EvalError")
+        } else {
+            // statements to handle any unspecified exceptions
+            console.error("其他错误"); // pass exception object to error handler
+        }
+    } finally {
+        console.log("都会执行");
+    }
+
+    //
+
+
+
+    try {
+        try {
+            throw new Error("oops");
+        } finally {
+            console.log("内部", "finally");
+        }
+    } catch (error) {
+        console.error("外边", error.message);
+    } finally {
+        console.log("外边", "finally");
+    }
+    // finally
+    // 外边 oops
+
+
+    try {
+        try {
+            throw new Error("oops");
+        } catch (error) {
+            console.error("内部", error.message);
+        } finally {
+            console.log("内部", "finally");
+        }
+    } catch (error) {
+        console.error("外边", error.message);
+    } finally {
+        console.log("外边", "finally");
+    }
+    // 内部 oops
+    // finally
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
