@@ -422,5 +422,10 @@ function grid(v, len) {
  * @return {number}     随机整数
  */
 function ranInt(max, min) {
+    if (min > max) {
+        var mid = max;
+        max = min;
+        min = mid;
+    }
     return parseInt(Math.random() * (max - min + 1) + min)
 }
