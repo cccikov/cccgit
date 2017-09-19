@@ -32,6 +32,8 @@
 		<button id="btn2">操作iframe b</button>
 		<p id="action"></p>
 		<script type="text/javascript">
+			console.log(top.variableA);
+
 			window.onload = function(){
 				// 获取顶层窗口document
 				var topDoc = window.top.document;

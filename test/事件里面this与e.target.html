@@ -9,6 +9,8 @@
         wrap.addEventListener("click", function(e) {
             console.clear();
             console.log(this); //注册了click事件侦听器的元素
+            console.log(e.currentTarget); //注册了click事件侦听器的元素
+            console.log(e.currentTarget === this);
             console.log(e.target); //点击中的元素
             alert("注册了click事件侦听器的元素" + this.tagName.toLowerCase() + "#" + this.id + " , " + "点中的元素是" + e.target.tagName.toLowerCase() + (e.target.id == "" ? "" : "#") + e.target.id);
         }, false);

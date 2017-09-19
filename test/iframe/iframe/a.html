@@ -29,6 +29,8 @@
 		<p id="action"></p>
 
 		<script type="text/javascript">
+			var variableA = "我是a里面的变量";
+
 			var frameObj = document.getElementById("ifr");
 			frameObj.onload = function(){
 				console.log(frameObj.contentDocument);//获取了iframe 的 document
@@ -55,8 +57,8 @@
 
 				console.log(window.frames['ifr'].testFrameVariable);
 				console.log(window.frames['ifr']); // 就是ifr 的顶层环境
-				console.log(testFrameVariable); // 是读不到iframe_b中的定义的变量
-				console.log(testFrameVariable2); // 是读不到iframe_b中的定义的变量
+				// console.log(testFrameVariable); // 是读不到iframe_b中的定义的变量
+				// console.log(testFrameVariable2); // 是读不到iframe_b中的定义的变量
 			}
 		</script>
 	</body>
