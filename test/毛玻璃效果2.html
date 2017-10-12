@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>毛玻璃</title>
+    <style>
+    .blur {
+        /* Chrome, Opera */
+        -webkit-filter: blur(10px);
+        -moz-filter: blur(10px);
+        -ms-filter: blur(10px);
+        filter: blur(10px);
+        filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+        /* IE6~IE9 */
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        /*filter: blur(2px);*/
+        background: url(img/02bg.png) left 0px top 0px no-repeat fixed;
+        /*body 元素设置毛玻璃效果 , body的背景不会模糊 所以背景要设置在别的元素*/
+    }
+
+    #wrap {
+        position: relative;
+        height: 100%;
+        background: url(img/02bg.png) left 0px top 0px no-repeat fixed;
+        background-attachment: fixed;
+        /* background-attachment: fixed 背景是相对于浏览器窗口进行定位*/
+    }
+
+    #wrap.blur {
+        filter: blur(10px);
+    }
+
+    div.main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 10;
+        width: 500px;
+        height: 375px;
+        line-height: 2em;
+        padding: 20px;
+        border-radius: 20px;
+        margin: -187px 0 0 -250px ;
+        text-indent: 2em;
+        color:#fff;
+        overflow: hidden;
+    }
+
+    div.main:after {
+        content: "123123123123123123";
+        /*display: inline-block;*/
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        z-index: -1;
+        height: 435px;
+        /*375 + padding 40px + blur 10 */
+        width: 560px;
+        background: url(img/02bg.png) left 0px top 0px no-repeat fixed;
+        /* background-attachment: fixed 背景是相对于浏览器窗口进行定位*/
+        /* 所以与后面的背景重叠起来 */
+        filter: blur(10px);
+    }
+
+    #win{
+        display: none;
+        position:fixed;
+        top:50%;
+        left:50%;
+        z-index: 1000;
+        transform: translate(-50%,-50%);
+        height:500px;
+        width: 700px;
+        padding:50px;
+        border-radius: 20px;
+        background: #fff;
+        font-size: 50px;
+    }
+    #win.active{
+        display: block;
+    }
+    </style>
+    <script type="text/javascript">
+        function alink_click(){
+            var wrap = document.getElementById("wrap");
+            var win = document.getElementById("win");
+            win.classList.add("active");
+            wrap.classList.add("blur");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="main">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <a href="javascript:void(0)" onclick="alink_click()">点击我</a>
+        </div>
+    </div>
+    <div id="win">
+        我是浮窗
+    </div>
+</body>
+
+</html>

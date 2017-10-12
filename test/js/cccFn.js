@@ -16,6 +16,43 @@ function fixNum(num) {
     return numArr.join(".");
 }
 
+// 格式化银行卡
+function formatBankCard(card) {
+    var len = card.length;
+    var arr = [];
+    var n = 0;
+    while (n < len) {
+        arr.push(card.slice(n, n + 4));
+        n += 4;
+    };
+    return arr.join(" ");
+}
+console.log(formatBankCard(number));
+
+// 格式化数字 , 逢千逗号
+function formatNum(num) {
+    num = num.toString();
+    var decimal = ""; //小数
+    var integer = ""; //整数
+    var point = num.indexOf(".");
+    var arr = [];
+    if (point != -1) {
+        decimal = num.slice(point+1);
+        integer = num.slice(0,point);
+    }else{
+        integer = num;
+        decimal = "00";
+    }
+    var len = integer.length;
+    var n = len;
+    while(n>3){
+        n-=3;
+        arr.unshift(num.substr(n,3));
+    }
+    arr.unshift(num.slice(0,n));
+    return arr.join(",")+"."+decimal;
+}
+
 //保留小数的计算
 function sum(arr, range) { //arr是需要计算的数组 , range是保留小数的位数
     var mul = Math.pow(10, range)
