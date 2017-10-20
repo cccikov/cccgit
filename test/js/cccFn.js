@@ -466,3 +466,27 @@ function ranInt(max, min) {
     }
     return parseInt(Math.random() * (max - min + 1) + min)
 }
+
+
+
+/**
+ * 获取滚动条位置处理
+ * @return {number} 浏览器滚动条位置
+ */
+function getScrollTop() {
+    return document.documentElement.scrollTop || document.body.scrollTop;
+}
+
+/**
+ * 设置浏览器滚动条位置
+ * @param {number} top 需要设置浏览器滚动条的位置
+ */
+function setScrollTop(top) {
+    document.documentElement.scrollTop = document.body.scrollTop = top;
+    setTimeout(function() { // 虽然是在window.onload里面 , 但是有时页面进入的时候 , 还是设置不成功 , 初步猜测 , 可能是页面虽然加载好 , 但是还没有渲染完成, 还没有滚动条 , 所以设置失败 ; 特别是刷新的时候,  如果是直接跳转过来还好
+        if (getScrollTop() != top) { // 判断是否设置值 , 不是的话重新设置
+            /*console.log("执行");*/
+            setScrollTop(top);
+        }
+    }, 16.7); // 经过试验 其实定时器时间设为1都也只是执行一次
+}
