@@ -182,11 +182,11 @@ gulp.task('syncKoala', function() {
             baseDir: browserSyncRootPath,
             index: browserSyncIndex
         },
-        port: 8080,
+        port: 5000,
         ui: {// ui的默认端口
-            port: 8081,
+            port: 5001,
             weinre: { // 不知道什么鬼 "weinre"好像也是用于远程调试的nodejs工具
-                port: 8082
+                port: 5002
             }
         }
     });

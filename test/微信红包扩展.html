@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>30秒内出现20次数字1 , 但是间隔随机</title>
+    <script>
+        // 返回随机整数
+        function ranInt(max, min) {
+            if (min > max) {
+                var mid = max;
+                max = min;
+                min = mid;
+            }
+            return parseInt(Math.random() * (max - min + 1) + min)
+        }
+
+        // 返回数字数组总和
+        function arrSum(arr) {
+            var sum = 0;
+            for (var i = 0, len = arr.length; i < len; i++) {
+                sum += arr[i];
+            }
+            return sum;
+        }
+
+
+
+
+        /**
+         *  begin
+         */
+
+        // 先取20个随机数
+        var arr = []; // 存放随机数
+        var sum = 0; // 数字总和
+        for (var i = 0; i < 20; i++) {
+            var num = ranInt(100, 1);
+            sum += num;
+            arr.push(num);
+        }
+
+        // 思路是 求出每个随机数占总数的百分比 , 然后再通过这个百分比去瓜分30秒
+        var second = 30 * 1000; // 总毫秒数
+        var remain = second; // 剩余毫秒数
+        var secondArr = []; // 毫秒数组
+        for (var i = 0; i < arr.length; i++) {
+            var item = parseInt(second * arr[i] / sum);
+            if (i < arr.length - 1) {
+                secondArr.push(item); // 将分好的毫秒数放入 毫秒数组
+                remain -= item;
+            } else {
+                secondArr.push(remain);// 由于item采用了取整 , 所以总数和未必是second ; 这里最后一个数是second减前面所有数后剩余的数 , 这样总和就是second;
+            }
+        }
+
+
+        // 测试
+        console.log(secondArr, arrSum(secondArr), arrSum(secondArr) == second); // 数组无论怎么变 , 总数都为second
+
+
+
+        var n = secondArr.length - 1;
+        function numShow(arr, time) {
+            setTimeout(function () {
+                console.log("出现了");
+                document.body.innerHTML += ('<p> 我是数字' + (n + 1) + ' </p>');
+                n--;
+                if (n >= 0) {
+                    numShow(arr, secondArr[n]);
+                }
+            }, time);
+        }
+        numShow(secondArr, secondArr[n]);
+
+    </script>
+
+</head>
+
+<body>
+    <p>30秒内出现20次数字1 , 但是间隔随机</p>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>负margin应用2</title>
+	<style>
+		.tab-nav{
+			overflow: hidden;
+		}
+		.tab-nav a{
+			float: left;
+			padding:6px 12px;
+			border:1px solid #ccc;
+			margin: 0 -1px 0 0;
+			color:inherit;
+			text-decoration: none;
+		}
+		.tab-box div{
+			display: none;
+			padding:20px;
+			border:1px solid #ccc;
+			margin: -1px 0 0;
+		}
+		.tab-box .active{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="tab">
+		<div class="tab-nav">
+			<a href="javascript:void(0)">tab按钮1</a>
+			<a href="javascript:void(0)">tab按钮2</a>
+			<a href="javascript:void(0)">tab按钮3</a>
+			<a href="javascript:void(0)">tab按钮4</a>
+			<a href="javascript:void(0)">tab按钮5</a>
+		</div>
+		<div class="tab-box">
+			<div class="active">tab内容01 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cumque laborum sed recusandae? Explicabo non aliquid, esse. Qui reprehenderit perferendis, debitis nostrum at cum, reiciendis sint quo dolorum facilis numquam.</div>
+			<div>tab内容02 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cumque laborum sed recusandae? Explicabo non aliquid, esse. Qui reprehenderit perferendis, debitis nostrum at cum, reiciendis sint quo dolorum facilis numquam.</div>
+			<div>tab内容03 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cumque laborum sed recusandae? Explicabo non aliquid, esse. Qui reprehenderit perferendis, debitis nostrum at cum, reiciendis sint quo dolorum facilis numquam.</div>
+			<div>tab内容04 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cumque laborum sed recusandae? Explicabo non aliquid, esse. Qui reprehenderit perferendis, debitis nostrum at cum, reiciendis sint quo dolorum facilis numquam.</div>
+			<div>tab内容05 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, cumque laborum sed recusandae? Explicabo non aliquid, esse. Qui reprehenderit perferendis, debitis nostrum at cum, reiciendis sint quo dolorum facilis numquam.</div>
+		</div>
+	</div>
+</body>
+</html>
