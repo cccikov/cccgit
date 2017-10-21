@@ -1,6 +1,6 @@
 /*收集一些平时工作的封装的方法*/
 // 请在服务器环境打开
-onlyServer() {
+function onlyServer() {
     if (window.location.protocol.substr(0, 4) === "file") {
         alert("请在服务器环境打开，本地无法运行！！！");
     }
@@ -27,7 +27,6 @@ function formatBankCard(card) {
     };
     return arr.join(" ");
 }
-console.log(formatBankCard(number));
 
 // 格式化数字 , 逢千逗号
 function formatNum(num) {
@@ -37,20 +36,20 @@ function formatNum(num) {
     var point = num.indexOf(".");
     var arr = [];
     if (point != -1) {
-        decimal = num.slice(point+1);
-        integer = num.slice(0,point);
-    }else{
+        decimal = num.slice(point + 1);
+        integer = num.slice(0, point);
+    } else {
         integer = num;
         decimal = "00";
     }
     var len = integer.length;
     var n = len;
-    while(n>3){
-        n-=3;
-        arr.unshift(num.substr(n,3));
+    while (n > 3) {
+        n -= 3;
+        arr.unshift(num.substr(n, 3));
     }
-    arr.unshift(num.slice(0,n));
-    return arr.join(",")+"."+decimal;
+    arr.unshift(num.slice(0, n));
+    return arr.join(",") + "." + decimal;
 }
 
 //保留小数的计算
@@ -480,13 +479,14 @@ function getScrollTop() {
 /**
  * 设置浏览器滚动条位置
  * @param {number} top 需要设置浏览器滚动条的位置
+ * @param {boolean} until 是否需要一直设置浏览器滚动条的位置 , 知道浏览器滚动条的位置 为top , 一般是页面进入的时候才需要设置为true , 其他时候可以忽略
  */
-function setScrollTop(top) {
+function setScrollTop(top, until) {
     document.documentElement.scrollTop = document.body.scrollTop = top;
     setTimeout(function() { // 虽然是在window.onload里面 , 但是有时页面进入的时候 , 还是设置不成功 , 初步猜测 , 可能是页面虽然加载好 , 但是还没有渲染完成, 还没有滚动条 , 所以设置失败 ; 特别是刷新的时候,  如果是直接跳转过来还好
-        if (getScrollTop() != top) { // 判断是否设置值 , 不是的话重新设置
+        if (getScrollTop() != top && until) { // 判断是否设置值 , 不是的话重新设置 , 这个判断只能是放在定时器里面 , 因为如果是直接在外面判断的话 , 可能由于刚设置的原因 , getScrollTop()是等于top的
             /*console.log("执行");*/
             setScrollTop(top);
         }
-    }, 16.7); // 经过试验 其实定时器时间设为1都也只是执行一次
+    }, 16.7); // 经过试验 其实定时器时间设为1都也只是执行一次 ,
 }
