@@ -1,108 +1,62 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>陀螺仪感应器</title>
-    <style type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 
-    * {
-        padding: 0;
-        margin: 0;
-    }
+    <script src="./js/reg.js"></script>
+    <script src="./js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
 
-    #img {
-        display: inline-block;
-        height: 211px;
-        width: 212px;
-        background: url(img/bg.png) left 0px top 0px repeat;
-    }
-
-    </style>
-    <script type="text/javascript">
-    function throttle(func, wait, mustRun) {
-        var timeout;
-        var startTime = new Date();
-        var oz = null;
-
-        return function() {
-            var _this = this;
-            var args = arguments; //获取参数
-            var curTime = new Date();
-
-            clearTimeout(timeout);
-            if (curTime - startTime >= mustRun) { // 如果达到了规定的触发时间间隔，触发 handler
-                func.apply(_this, args);
-                startTime = curTime;
-            } else { // 没达到触发间隔，重新设定定时器
-                timeout = setTimeout(func, wait);
+            var ajax = null;
+            function cb(tip) {
+                console.log(tip);
             }
-        };
-    };
 
-    window.onload = function() {
-        var img = document.getElementById("img");
-        var tip = document.getElementById("tip");
+            $("#phone").on("blur", function () {
+                var _this = $(this);
+                var test = ["required", "tel"];
+                var value = _this.val();
 
-        var oz;
-        var direct;
-        var l = 0;
-        var r = 0
-        var move = 0;
-        var handler = throttle(function(event) {
-            // var gamma = event.gamma;
-            // var beta = event.beta;
-            var alpha = Math.round(event.alpha);
 
-            // var x = parseInt(gamma/100);
-            // var y = parseInt(beta/100);
-            var z = alpha;
-
-            if (oz) {
-                var left = z - oz; // 逆时针转动距离
-                var right = oz - z; // 顺时针转动距离
-                if (left < 0) {
-                    left += 360;
-                }
-                if (right < 0) {
-                    right += 360;
+                // 验证正则
+                var flag = true;
+                var n = 0;
+                var len = test.length;
+                var result, tip;
+                while (n < len && flag) {
+                    result = reg[test[n]](value);
+                    flag = !!result.val;
+                    if (!flag) {
+                        tip = result.tip;
+                        break;
+                    }
+                    n++;
                 }
 
-                if (left < right) { // 在这么短时间里面肯定是转的距离小的方向是转动方向
-                    direct = "逆时针";
-                    l++;
-                } else if (left > right) {
-                    direct = "顺时针";
-                    r++
-                } else {
+                /* 需要ajax获取 */
+                if (!ajax && !flag) {
+                    cb && cb(tip);
                     return;
+                } else {
+
                 }
 
-                if (l >= 4) {
-                    move--;
-                    l = r = 0;
-                }
 
-                if (r >= 4) {
-                    move++;
-                    l = r = 0;
-                }
-            }
+                console.log("正确");
+            });
 
-            img.style.background = "url(img/bg.png) left " + move * 212 + "px top 0px repeat";
-            tip.innerHTML = direct + r + " " + l;
-            oz = z;
-
-        }, 16.7, 16.7);
-        window.addEventListener('deviceorientation', handler, false);
-    }
+        });
     </script>
 </head>
 
 <body>
-    <div id="img"></div>
-    <div id="tip"></div>
+    <input type="text" id="phone" name="phone">
+    <input type="text">
 </body>
 
 </html>
