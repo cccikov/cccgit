@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>原生parents</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+
+        var jqNum = 0;
+        $(document).on("click", "div", function() {
+            console.log(jqNum);
+            jqNum++;
+        });
+
+
+        var jsNum = 0
+        var ele = document.getElementById("btn");
+        /*while(ele.parentNode && jsNum<50){
+            ele = ele.parentNode
+            console.log(jsNum,ele.parentNode);
+            jsNum++
+        }*/
+
+        /*function getParent(ele){
+            console.log(ele.parentNode)
+            ele = ele.parentNode;
+            if(ele){
+                getParent(ele);
+            }
+        }
+        getParent(ele);*/
+
+
+
+
+        function getParent2(ele) {
+            var arr = []
+            var start = new Date().getTime()
+
+            function getParent(ele) {
+                ele = ele.parentNode;
+                if (!!ele) {
+                    if (ele.tagName && ele.tagName.toLowerCase() == "div") {
+                        arr.push(ele);
+                    }
+                    getParent(ele);
+                }
+            }
+            getParent(ele);
+
+            var end = new Date().getTime();
+            console.log(end-start);
+            return arr;
+        }
+
+        console.log(getParent2(ele));
+
+    });
+    </script>
+</head>
+
+<body>
+    <div>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <div>
+                                    <div>
+                                        <div>
+                                            <div>
+                                                <div>
+                                                    <div>
+                                                        <div>
+                                                            <div>
+                                                                <div>
+                                                                    <div>
+                                                                        <div>
+                                                                            <div>
+                                                                                <div>
+                                                                                    <div>
+                                                                                        <div>
+                                                                                            <div>
+                                                                                                <div>
+                                                                                                    <div>
+                                                                                                        <div>
+                                                                                                            <div>
+                                                                                                                <div>
+                                                                                                                    <div>
+                                                                                                                        <div>
+                                                                                                                            <div>
+                                                                                                                                <div>
+                                                                                                                                    <div>
+                                                                                                                                        <div>
+                                                                                                                                            <div>
+                                                                                                                                                <div>
+                                                                                                                                                    <div>
+                                                                                                                                                        <div>
+                                                                                                                                                            <button id="btn">我是按钮</button>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript"></script>
+</body>
+
+</html>
