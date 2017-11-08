@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	$.ajax({
+	    url: "https://cccikov.github.io/remoteData/array.json",
+	    async: true,
+	    success: function(result) {
+	        console.log(result)
+	    },
+	});
+	$.ajax({
+	    url: "https://cccikov.github.io/remoteData/object.json",
+	    async: true,
+	    success: function(result) {
+	        console.log(result)
+	    },
+	});
+	$.ajax({
+	    url: "https://cccikov.github.io/remoteData/text.txt",
+	    async: true,
+	    success: function(result) {
+	        console.log(result)
+	    },
+	});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
