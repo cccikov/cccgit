@@ -46,10 +46,32 @@
 var wrap = document.getElementById("wrap");
 ```
 
+``` javascript
+// 3个` 可加代码语法 不用缩进
+var wrap = document.getElementById("wrap");
+```
+
+``` js
+// 3个` 可加代码语法 不用缩进
+var wrap = document.getElementById("wrap");
+```
+
 ```
 // 3个` 可加代码语法 不用缩进
 var wrap = document.getElementById("wrap");
 ```
+
+``` diff
+webpack-demo
+|- package.json
+|- webpack.config.js
+|- /dist
+|- /src
+- |- inde.js
++ |- another-module.js
+|- /node_modules
+```
+
 
 <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>
 
@@ -121,6 +143,9 @@ var wrap = document.getElementById("wrap");
 通常来说，通过相隔一行(有时需要两行，有时如果语法明显也可以不换行，但是未markdown文件看起来舒服，建议还是换语法就隔一行)来表示新的语法
 
 我是另外一个p
+
+有些不间隔一行需要通过空格+空格+回车换行
+就是这样换行
 
 
 1. 我是列表
