@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,45 @@
     <title>file API</title>
     <script src="../js/jquery.min.js" charset="utf-8"></script>
     <script type="text/javascript">
-        $(function(){
-            $("#uploadfile").on("change",function(){
+        $(function () {
+            $("#uploadfile").on("change", function () {
                 var that = this;//原生js
                 var file = that.files[0];
                 console.dir(file);
                 var name = file.name;
                 var size = file.size;
                 var type = file.type;
-                console.log(name,size,type);
+                console.log(name, size, type);
+
+                size = size / 1024 / 1024;
+                type = type.split("/")[0];
+                console.log(name, size, type);
+
+                if (type != "image") {
+                    this.value = "";
+                    console.log("你上传的文件格式错误，请上传图片！！");
+                    return false;
+                }
+
+                if (size > 5) {
+                    this.outerHTML = this.outerHTML;
+                    console.log("你上传的图片大于5m");
+                    return false;
+                }
+
             });
-            $("#uploadfile2").on("change",function(){
+
+            $("#uploadfile2").on("change", function () {
                 var that = this;//原生js
                 var files = that.files;
-                for(var i =0;i<files.length;i++){
+                for (var i = 0; i < files.length; i++) {
                     console.log(files[i].name);
                 }
             });
         });
     </script>
 </head>
+
 <body>
     <label for="uploadfile">选择一个文件</label>
     <input id="uploadfile" type="file">
@@ -34,4 +54,5 @@
     <label for="uploadfile">选择多个文件</label>
     <input id="uploadfile2" type="file" multiple>
 </body>
+
 </html>
