@@ -7,13 +7,14 @@
 		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$(function(){
-				var video = $("#myVideo")[0];
+				video = $("#myVideo")[0];
 				console.dir(video);
 				video.autoplay = true;
 			});
 		</script>
 	</head>
 	<body>
+		<video controls src="video/BigBuckBunny_640x360.mp4"></video>
 		<video id="myVideo" controls="" width="320">
 			<source src="video/BigBuckBunny_640x360.mp4" type="video/mp4"></source>
 			<source src="video/BigBuckBunny_640x360.ogv" type="video/ogg"></source>

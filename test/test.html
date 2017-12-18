@@ -1,62 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
-    <script src="./js/reg.js"></script>
-    <script src="./js/jquery-1.11.3.min.js"></script>
-    <script>
-        $(function () {
-
-            var ajax = null;
-            function cb(tip) {
-                console.log(tip);
-            }
-
-            $("#phone").on("blur", function () {
-                var _this = $(this);
-                var test = ["required", "tel"];
-                var value = _this.val();
-
-
-                // 验证正则
-                var flag = true;
-                var n = 0;
-                var len = test.length;
-                var result, tip;
-                while (n < len && flag) {
-                    result = reg[test[n]](value);
-                    flag = !!result.val;
-                    if (!flag) {
-                        tip = result.tip;
-                        break;
-                    }
-                    n++;
-                }
-
-                /* 需要ajax获取 */
-                if (!ajax && !flag) {
-                    cb && cb(tip);
-                    return;
-                } else {
-
-                }
-
-
-                console.log("正确");
-            });
-
-        });
-    </script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
-
 <body>
-    <input type="text" id="phone" name="phone">
     <input type="text">
+    <script type="text/javascript">
+        var input = $("input")
+    </script>
 </body>
-
 </html>

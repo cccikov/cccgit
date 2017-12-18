@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>input时间属性</title>
-		<script type="text/javascript">
-			document.getElementById('datePicker').valueAsDate = new Date();
-		</script>
-	</head>
-	<body>
-		<input type="month" name="" id="" value="" />
-		<input type="week" name="" id="" value="" />
-		<input type="time" name="" id="" value="" />
-		<input type="datetime" name="" id="" value="" />
-		<input type="datetime-local" id="datePicker" name="datePicker" id="" value="2014-03-15T08:00:59" /><!--value要有个T-->
-		
-		<input type="text" value="123" />
-	</body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>input时间属性</title>
+</head>
+
+<body>
+    <input type="month" name="" id="" value="" />
+    <input type="week" name="" id="" value="" />
+    <input type="time" name="" id="" value="" />
+    <input type="date" name="" id="date" value="1991-09-15" />
+    <input type="datetime" name="" id="" value="" />
+    <input type="datetime-local" id="datePicker" name="datePicker" id="" value="2014-03-15T08:00:59" />
+    <!--value要有个T-->
+    <input type="text" value="123" />
+
+
+
+
+    <script type="text/javascript">
+	    // document.getElementById('datePicker').valueAsDate = new Date();
+	    document.getElementById('date').addEventListener("change", function() {
+	        console.log(this.value);
+	    }, false);
+    </script>
+</body>
+
 </html>
