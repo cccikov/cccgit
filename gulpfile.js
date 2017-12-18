@@ -49,8 +49,8 @@ function synclessFn(path, base, destPath) {// 用于浏览器同步刷新 , 先�
 /**
  * default 任务
  */
-gulp.task('default', ["less", "syncKoala"], function() {
-    console.log("********\n执行了 less & syncKoala\n********");
+gulp.task('default', ["web"], function () {
+    console.log("********\n执行了 web \n********");
 });
 
 
@@ -209,3 +209,36 @@ gulp.task('syncKoala', function() {
 
 
 
+gulp.task('web', function () {
+
+    browserSync.init({
+        server: {
+            baseDir: "./test",
+            index: "test.html"
+        },
+        port: 3000,
+        ui: { // ui的默认端口
+            port: 3001,
+            weinre: { // 不知道什么鬼 "weinre"好像也是用于远程调试的nodejs工具
+                port: 3002
+            }
+        }
+    });
+
+    // 转换less
+    gulp.watch("test/css/**/*.less").on('change', function (event) {
+        gulp.src("test/css/**/*.less", { // 这个是全部css变化且刷新
+                base: "test/css"
+            })
+            .pipe(less())
+            .pipe(gulp.dest("test/css"));
+    });
+
+    // 监视文件变化同步浏览器
+    gulp.watch(["test/**/*.html", "test/js/*.js", "test/css/*.css"]).on("change", function (event) {
+        gulp.src(event.path).pipe(browserSync.reload({
+            stream: true
+        }));
+    });
+
+});
