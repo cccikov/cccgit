@@ -60,25 +60,25 @@ gulp.task('default', ["web"], function () {
  */
 
 // 转换全部less
-gulp.task("less", function() {
+gulp.task("less", function () {
     lessFn(lessPath, lessBasePath, less2cssPath);
 });
 
 // 自动编译less
-gulp.task("autoLess", function() {
+gulp.task("autoLess", function () {
     gulp.watch(lessPath, ['less']) // 后面的任务不要是监视任务,是一次性任务(任务里面没有watch),否则就会出现好多重监视
 });
 
 //"只转换修改的less文件方式" 这个是只会去转换修改的那个文件 , 而不会转换全部less , 减少性能消耗. 考拉就是单个装换
-gulp.task("autoOneLess", function() {
-    gulp.watch(lessPath).on('change', function(event) {
+gulp.task("autoOneLess", function () {
+    gulp.watch(lessPath).on('change', function (event) {
         lessFn(event.path, lessBasePath, less2cssPath);
     });
 });
 
 // koala式转换less
-gulp.task("koala", function() {
-    gulp.watch(lessPath).on('change', function(event) {
+gulp.task("koala", function () {
+    gulp.watch(lessPath).on('change', function (event) {
         if (isFile(event.path)) {
             lesskoala(event.path);
         } else {
@@ -93,7 +93,7 @@ gulp.task("koala", function() {
  * 压缩css
  */
 // minicss
-gulp.task("minicss", function() {
+gulp.task("minicss", function () {
     gulp.src(cssPath)
         .pipe(minicss())
         .pipe(rename({ suffix: '.min' }))
@@ -101,7 +101,7 @@ gulp.task("minicss", function() {
 });
 
 // less & minicss
-gulp.task("lessmini", function() {
+gulp.task("lessmini", function () {
     lessFn(path, destPath)
         .pipe(minicss())
         .pipe(rename({ suffix: '.min' })) //重命名
@@ -114,21 +114,21 @@ gulp.task("lessmini", function() {
  * browser-sync
  */
 // 静态服务器
-gulp.task('server', function() {
+gulp.task('server', function () {
     browserSync.init({
         server: browserSyncRootPath
     });
 });
 
 // 浏览器同步
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
     browserSync.init({
         server: {
             baseDir: browserSyncRootPath,
             index: browserSyncIndex
         }
     });
-    gulp.watch(browserSyncPath).on("change", function(event) {
+    gulp.watch(browserSyncPath).on("change", function (event) {
         gulp.src(event.path).pipe(browserSync.reload({ stream: true }));
     });
 });
@@ -139,7 +139,7 @@ gulp.task('browser-sync', function() {
  * 浏览器同步 同时 转换less
  */
 // 方式1 实际监视的是css , "只转换修改的less文件方式" 只是less转换的时候触发css变化(可能不能用全部转换方法,只能用哪个less变化就装换哪个)
-gulp.task('syncLess', function() {
+gulp.task('syncLess', function () {
     browserSync.init({
         server: {
             baseDir: browserSyncRootPath,
@@ -148,17 +148,17 @@ gulp.task('syncLess', function() {
     });
 
     // 转换less
-    gulp.watch(lessPath).on('change', function(event) {
+    gulp.watch(lessPath).on('change', function (event) {
         lessFn(event.path, lessBasePath, less2cssPath);
     });
     // 监视文件变化同步浏览器
-    gulp.watch(browserSyncPath).on("change", function(event) {
+    gulp.watch(browserSyncPath).on("change", function (event) {
         gulp.src(event.path).pipe(browserSync.reload({ stream: true }));
     });
 });
 
 // 方式2 监视的是less , 转换后 reload
-gulp.task('syncLess2', function() {
+gulp.task('syncLess2', function () {
     browserSync.init({
         server: {
             baseDir: browserSyncRootPath,
@@ -166,17 +166,17 @@ gulp.task('syncLess2', function() {
         }
     });
     // 转换less 并刷新 "只转换修改的less文件方式"
-    gulp.watch(lessPath).on('change', function(event) {
+    gulp.watch(lessPath).on('change', function (event) {
         synclessFn(event.path, lessBasePath, less2cssPath);
     });
     // 监视文件变化同步浏览器
-    gulp.watch(browserSyncWithoutCssPath).on("change", function(event) {
+    gulp.watch(browserSyncWithoutCssPath).on("change", function (event) {
         gulp.src(event.path).pipe(browserSync.reload({ stream: true }));
     });
 });
 
 // koala式less转换后的css就保存在所在文件夹
-gulp.task('syncKoala', function() {
+gulp.task('syncKoala', function () {
     browserSync.init({
         server: {
             baseDir: browserSyncRootPath,
@@ -191,7 +191,7 @@ gulp.task('syncKoala', function() {
         }
     });
     // 转换less
-    gulp.watch(lessPath).on('change', function(event) {
+    gulp.watch(lessPath).on('change', function (event) {
         if (isFile(event.path)) {
             lesskoala(event.path)
                 .pipe(browserSync.reload({
@@ -202,7 +202,7 @@ gulp.task('syncKoala', function() {
         }
     });
     // 监视文件变化同步浏览器
-    gulp.watch(browserSyncWithoutCssPath).on("change", function(event) {
+    gulp.watch(browserSyncWithoutCssPath).on("change", function (event) {
         gulp.src(event.path).pipe(browserSync.reload({ stream: true }));
     });
 });
@@ -228,14 +228,17 @@ gulp.task('web', function () {
     // 转换less
     gulp.watch("test/css/**/*.less").on('change', function (event) {
         gulp.src("test/css/**/*.less", { // 这个是全部css变化且刷新
-                base: "test/css"
-            })
+            base: "test/css"
+        })
             .pipe(less())
-            .pipe(gulp.dest("test/css"));
+            .pipe(gulp.dest("test/css"))
+            .pipe(browserSync.reload({
+                stream: true
+            }));
     });
 
     // 监视文件变化同步浏览器
-    gulp.watch(["test/**/*.html", "test/js/*.js", "test/css/*.css"]).on("change", function (event) {
+    gulp.watch(["test/**/*.html", "test/js/*.js"]).on("change", function (event) {
         gulp.src(event.path).pipe(browserSync.reload({
             stream: true
         }));
