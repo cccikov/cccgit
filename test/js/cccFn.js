@@ -18,6 +18,8 @@ function fixNum(num) {
 
 // 格式化银行卡
 function formatBankCard(card) {
+    card = String(card);
+    card = card.replace(/\s/g,"");
     var len = card.length;
     var arr = [];
     var n = 0;
