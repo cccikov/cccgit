@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addEventListener 研究</title>
+
+</head>
+<body>
+    <button id="btn">按钮</button>
+
+    <script type="text/javascript">
+        function handle(card,spacing){
+            card = String(card);
+            card = card.replace(/\s/g,"");
+            var len = card.length;
+            var spacing = spacing || 4 ;
+            var arr = [];
+            var n = 0;
+            while (n < len) {
+                arr.push(card.slice(n, n + spacing));
+                n += spacing;
+            };
+            console.log(arr.join(" "));
+        }
+
+        var btn = document.getElementById("btn");
+
+        // 假设要执行某个必须传参数的函数
+        btn.addEventListener("click",function(){
+            handle("1237901982370129387",4);
+        },false);
+        // 但是这样就清除不了这个监听器
+    </script>
+</body>
+</html>

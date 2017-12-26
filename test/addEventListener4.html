@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addEventListener 研究</title>
+
+</head>
+<body>
+    <button id="btn">按钮</button>
+
+    <script type="text/javascript">
+        // 函数-步骤1
+        var num = 123123; // 会变得
+        // 函数-步骤2
+        function fn(){
+            console.log(num);
+        }
+        // 函数-执行
+        fn();
+
+        /* 之前的所说的添加监听器方式(不用传参)有点类似 , 函数不使用参数也是这样 , 但是这样会好麻烦 , 每个需要运行函数 fn 的地方 都要写出[函数-步骤1] [函数-步骤2]([函数-步骤1] [函数-步骤2]需要写多次) , 有了传参后就不用了 */
+
+        // 传参-步骤1
+        function fn2(num){
+            console.log(num);
+        }
+        // 函数-执行
+        fn2(127389123);
+
+        /* 这样只需要引用 有[传参-步骤1]的js文件([传参-步骤1]只需要写一次) , 在需要运行函数 fn2 的地方直接运行就可以了 。*/
+
+
+
+        /* 添加监听器可不可以做成这样呢，可以，使用面向对象就可以了，把相同功能写成一个类（构造函数） */
+
+
+
+        function Btn(dom,data){
+            var _this = this;
+            _this.dom = dom;
+            _this.data = data;
+
+            function handle(num){
+                console.log(num);
+            }
+
+            function listener(){
+                handle.apply(this,[_this.data])
+            }
+            _this.listener = listener;
+
+            _this.dom.addEventListener("click",_this.listener,false);
+        }
+        Btn.prototype.removeListener = function(){
+            var _this = this;
+            _this.dom.removeEventListener("click",_this.listener,false);
+        }
+
+
+
+
+
+        var btn = document.getElementById('btn');
+        var btnObj =new Btn(btn,123123123); // 只需要一句语句就可以了
+        setTimeout(function(){
+            btnObj.removeListener();
+            console.log("清除监听器");
+        },5000);
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

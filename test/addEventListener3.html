@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addEventListener 研究</title>
+
+</head>
+<body>
+    <button id="btn" data-num="1237901982370129387">按钮</button>
+    <input type="number" id="num" name="num" value="1237901982370129387">
+
+    <script type="text/javascript">
+        var number = "1237901982370129387";
+        var btnClickData = {
+            num:"1237901982370129387"
+            // 甚至handle也可以卸载对象里面 , 一个对象包含 dom 监听器 数据 全部内容
+        }
+
+        function handle(card,spacing){
+            // 除了传参
+
+            // 1.还可以使用全局变量作为数据存储
+            var card = number;
+
+            // 2.怕太多全局变量 , 还可以使用对象
+            var card = btnClickData.num
+
+            // 3.一般事件都和dom绑定 , 数据可以写在dom中
+            var card = this.getAttribute("data-num");
+            var card = document.getElementById("num").value;
+
+
+            card = String(card);
+            card = card.replace(/\s/g,"");
+            var len = card.length;
+            var spacing = spacing || 4 ;
+            var arr = [];
+            var n = 0;
+            while (n < len) {
+                arr.push(card.slice(n, n + spacing));
+                n += spacing;
+            };
+            console.log(arr.join(" "));
+        }
+
+        var btn = document.getElementById("btn");
+
+        // 可以清除这个监听器
+        btn.addEventListener("click",handle,false);
+
+
+        // 其实事件里面需要传参的情况还是比较少的 , 因为一般与dom关联 , 重要数据都可以写在dom上 ; 如果真的要传参,匿名函数也是不错的选择,因为好少情况需要清除监听器
+        btn.addEventListener("click",function(){
+            handle.apply(this,["1237901982370129387"]);
+        },false);
+
+
+
+    </script>
+</body>
+</html>
