@@ -483,6 +483,7 @@ function getScrollTop() {
  * 设置浏览器滚动条位置
  * @param {number} top 需要设置浏览器滚动条的位置
  * @param {boolean} until 是否需要一直设置浏览器滚动条的位置 , 知道浏览器滚动条的位置 为top , 一般是页面进入的时候才需要设置为true , 其他时候可以忽略
+ * @return {boolean} 是否设置成功
  */
 function setScrollTop(top, until) {
     document.documentElement.scrollTop = document.body.scrollTop = top;
@@ -492,4 +493,28 @@ function setScrollTop(top, until) {
             setScrollTop(top);
         }
     }, 16.7); // 经过试验 其实定时器时间设为1都也只是执行一次 ,
+    return getScrollTop() == top;
+}
+
+/**
+ * 获取元素的文档坐标
+ */
+function documentPis(ele) {
+    var left = ele.offsetLeft;
+    var top = ele.offsetTop;
+    while (ele.offsetParent) {
+        left = left + ele.offsetParent.offsetLeft + ele.offsetParent.clientLeft;
+        //        父级的左偏移量                       父级的border宽度
+        top = top + ele.offsetParent.offsetTop + ele.offsetParent.clientTop;
+        //        父级的上偏移量                       父级的border宽度
+        ele = ele.offsetParent;
+    }
+    return { left: left, top: top }; //返回一个json
+}
+
+/**
+ * 窗口坐标
+ */
+function winPis(ele) {
+    return documentPis(ele).top - getScrollTop();
 }
