@@ -518,3 +518,24 @@ function documentPis(ele) {
 function winPis(ele) {
     return documentPis(ele).top - getScrollTop();
 }
+
+
+
+
+/**
+ * 检测capsLock是否锁定
+ * @param  {object} e 事件对象
+ * @return {boolean}   capsLock是否锁定
+ */
+function capsLock(e) { // onkeypress 事件里面
+    var keyCode = e.keyCode || e.which; // 按键的keyCode
+    var isShift = e.shiftKey || keyCode === 16 || false; // shift键是否按住
+    //指定位置的字符的 Unicode 编码 , 通过与shift键对于的keycode，就可以判断capslock是否开启了
+    // (keyCode >= 65 && keyCode <= 90) 是大写字母
+    // (keyCode >= 97 && keyCode <= 122) 是小写字母
+    if (((keyCode >= 65 && keyCode <= 90) && !isShift) || ((keyCode >= 97 && keyCode <= 122) && isShift)) {
+        return true
+    } else {
+        return false
+    }
+}
