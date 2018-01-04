@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>href javascript:fn() 小坑</title>
+    <script type="text/javascript">
+        function hi(num){
+            console.log(num);
+            return num;
+        }
+
+        function fn(num){
+            console.log(num);
+        }
+    </script>
+</head>
+
+<body>
+    <a href="javascript:hi(134)">按钮</a>
+    <a href="javascript:fn(134)">按钮</a>
+    <p> href="javascript:fn()" 运行一个函数, 如果函数有return, 在chrome以外的浏览器会跳转</p>
+</body>
+
+</html>
