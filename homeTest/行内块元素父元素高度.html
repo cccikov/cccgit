@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>行内块元素父元素高度</title>
+    <style>
+	    p {
+	        line-height: 30px;
+	        outline: 1px solid #f00;
+	    }
+
+	    input {
+	        line-height: 30px;
+	        border: none;
+	        padding: 0;
+	        outline: 1px solid #ccc
+	    }
+
+	    input.top {
+	        vertical-align: top;
+	    }
+
+	    input.middle {
+	        vertical-align: middle;
+	    }
+
+	    input.baseline {
+	        vertical-align: baseline;
+	    }
+
+	    input.bottom {
+	        vertical-align: bottom;
+	    }
+    </style>
+</head>
+
+<body>
+    <p>
+        <input type="" name="">
+    </p>
+    <p>
+        <input class="top" type="" name=""> vertical-align: top; 把元素的顶端与行中最高元素的顶端对齐
+    </p>
+    <p>
+        <input class="middle" type="" name=""> vertical-align: middle; 	把此元素放置在父元素的中部。
+    </p>
+    <p>
+        <input class="baseline" type="" name=""> vertical-align: baseline; 	默认。元素放置在父元素的基线上
+    </p>
+    <p>
+        <input class="bottom" type="" name=""> vertical-align: bottom; 把元素的顶端与行中最低的元素的顶端对齐。
+    </p>
+    <div>当行内块元素及其父元素同时设置line-height的时候，父元素的高度还会受行内块元素vertical-align的值影响；line-height不是高度，元素会被子元素撑开，特别是两者的line-height相同，子元素放在父元素的baseline（一般baseline位置是一行的中间再略下一点）上面，就会把父元素的底部撑大</div>
+</body>
+
+</html>
