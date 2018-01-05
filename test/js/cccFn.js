@@ -17,11 +17,11 @@ function fixNum(num) {
 }
 
 // 格式化银行卡
-function formatBankCard(card,spacing) {
+function formatBankCard(card, spacing) {
     card = String(card);
-    card = card.replace(/\s/g,"");
+    card = card.replace(/\s/g, "");
     var len = card.length;
-    var spacing = spacing || 4 ;
+    var spacing = spacing || 4;
     var arr = [];
     var n = 0;
     while (n < len) {
@@ -537,5 +537,20 @@ function capsLock(e) { // onkeypress 事件里面
         return true
     } else {
         return false
+    }
+}
+
+/**
+ * 判断页面是否第一次进入
+ * @return {boolean} true 代表第一次进入
+ */
+function firstEntry() {
+    // 注意 需要判断的页面 必须且只能运行一次这个函数
+    var firstEnter = window.sessionStorage.getItem("hasEnter") != "true";
+    window.sessionStorage.setItem("hasEnter", "true");
+    if (firstEnter) { // 新页面打开
+        return true;
+    } else { // 返回 , 或者刷新页面 , 就是这个选项卡曾经打开过这个页面
+        return false;
     }
 }
