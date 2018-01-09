@@ -55,6 +55,63 @@ function formatNum(num) {
     return arr.join(",") + "." + decimal;
 }
 
+/*
+function formatNum(num) { // 本来toLocaleString就可以实现这个功能 , 但是搜狗这个傻逼浏览器
+    num = num.toString();
+    var decimal = ""; //小数
+    var integer = ""; //整数
+    var point = num.indexOf(".");
+    var arr = [];
+    if (point != -1) {
+        decimal = num.slice(point + 1);
+        integer = num.slice(0, point);
+    } else {
+        integer = num;
+        decimal = "";
+    }
+    var len = integer.length;
+    var n = len;
+    while (n > 3) {
+        n -= 3;
+        arr.unshift(num.substr(n, 3));
+    }
+    arr.unshift(num.slice(0, n));
+    if(decimal != ""){
+        return arr.join(",") + "." + decimal;
+    }
+    return arr.join(",");
+}
+
+function formatNum(str) {
+    str = "" + str;
+    var newStr = "";
+    var count = 0;
+
+    if (str.indexOf(".") == -1) {
+        for (var i = str.length - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr;
+            } else {
+                newStr = str.charAt(i) + newStr;
+            }
+            count++;
+        }
+        str = newStr;
+    } else {
+        for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr;
+            } else {
+                newStr = str.charAt(i) + newStr; //逐个字符相接起来
+            }
+            count++;
+        }
+        str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+    }
+    return str;
+}
+*/
+
 //保留小数的计算
 function sum(arr, range) { //arr是需要计算的数组 , range是保留小数的位数
     var mul = Math.pow(10, range)
