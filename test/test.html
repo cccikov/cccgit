@@ -1,66 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <style type="text/css">
-    .input-wrap {
-        overflow: hidden;
-        line-height: 30px;
-    }
-
-    .input-wrap input {
-        vertical-align: top;
-        line-height: 30px;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 0 12px;
-        // background: none;
-    }
-    </style>
-    <input id="input" type="text" name="">
-    <input id="check" type="checkbox" name="">
-    <script type="text/javascript">
-    // Object.prototype.hi = "hi";
-    // var obj = {
-    //     a:"haha"
-    // };
-    // console.dir(obj);
-    // for(var i in obj){
-    //     console.log(i);
-    // }
-
-    // input.onkeydown = function(e){
-    //     console.log(e.key,"down");
-    //     if(e.key == "Process"){
-    //         console.log("在使用输入法输入");
-    //     }
-    // }
-    // input.onkeypress = function(e){
-    //     console.log(e.key,"press");
-    // }
-    // input.onkeyup = function(e){
-    //     console.log(e.key,"up");
-    // }
-
-    function firstEntry() {
-        // 注意 需要判断的页面 必须且只能运行一次这个函数
-        var firstEnter = window.sessionStorage.getItem("hasEnter") != "true";
-        window.sessionStorage.setItem("hasEnter", "true");
-        if (firstEnter) { // 新页面打开
-            return true;
-        } else { // 返回 , 或者刷新页面 , 就是这个选项卡曾经打开过这个页面
-            return false;
-        }
-    }
-
-    console.log(firstEntry());
-    </script>
-
+    <title>测试</title>
+    <link rel="stylesheet" type="text/css" href="css/test.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
 </head>
 
 <body>
+
 </body>
 
 </html>
