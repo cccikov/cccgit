@@ -1,18 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>js中复制值的问题</title>
     <script type="text/javascript">
-
     </script>
 </head>
+
 <body>
     <h4>4.1 基本类型和引用类型的值</h4>
     <p>基本数据类型：Undefined、Null、Boolean、Number和String。这5种基本数据类型是按值访问的，因为可以操作保存在变量中的实际的值。</p>
     <p>引用类型的值是保存在内存中的对象。与其他语言不同，JavaScript不允许直接访问内存中的位置，也就是说不能直接操作对象的内存空间。在操作对象时，实际上是在操作对象的引用而不是实际的对象。为此，引用类型的值是按引用访问的。</p>
-
-    <p>操作储存对象的变量(或者是对象的属性, 就是保存这个对象的容器)就是操作引用</p>
+    <p>操作储存对象(广义上的对象, 指的是引用类型; 狭义上的对象, 一切都是对象, 连字符串都是对象)的变量(或者是对象的属性, 就是保存这个对象的容器)就是操作引用</p>
     <p>操作储存基本数据类型的变量(或者是对象的属性, 就是保存这个基本数据类型的容器)就是直接操作值</p>
+    <p>如果一些类型的传递, 想实时同步传递过来的数据, 把这个数据做成函数是一个常见的选择</p>
+    <input type="text" id="username" value="ccc">
+    <input type="text" id="age" value="27">
+    <script>
+        var options = {
+            username: username.value,
+            age: age.value,
+        };
+
+        function say(options) {
+            function getData() { // 假设say是一个类, getData是里面的一个方法, 但是需要更加页面不同的数据做出不同的操作
+                var keys = Object.keys(options);
+                var obj = {};
+                keys.forEach(function (item) {
+                    obj[item] = options[item];
+                });
+                console.log(obj); // 操作
+            }
+
+            setInterval(getData, 1000); // getData的触发是根据某些事件, 或者是某些请求后触发, 所以是异步的
+        }
+
+        var options2 = {
+            username: function () {
+                return username.value;
+            },
+            age: function () {
+                return age.value;
+            },
+        };
+
+        function say2(options) {
+            function getData() {
+                var keys = Object.keys(options);
+                var obj = {};
+                keys.forEach(function (item) {
+                    obj[item] = options[item]();
+                });
+                console.log(obj);
+            }
+
+            setInterval(getData, 1000);
+        }
+
+        username.onkeydown = function (e) {
+            options.event = e;
+            options2.event = function () {
+                return e;
+            }
+        }
+        // say(options); // 一旦传入就不会变化, 操作结果永远都是这样, 肯定不行啦
+        say2(options2); // 会实时变化
+    </script>
+    <p>ps:以上的对象, 指的都是广义上的对象, 即引用类型</p>
 </body>
+
 </html>
