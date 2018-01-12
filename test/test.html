@@ -1,17 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>测试</title>
-    <link rel="stylesheet" type="text/css" href="css/test.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/test.js"></script>
     <script type="text/javascript">
         var inner;
         function fn(num){
-            if(num==0){
+            if(!inner){
                 inner = function(){
                     console.log(num);
                 }
@@ -24,6 +20,17 @@
         fn(1);
         fn(2);
         fn(3);
+        // 为什么这里的inner读不出变化的num呢
+
+
+        var a = 10;
+        function fn2(){
+            console.log(a);
+        }
+        fn2();
+        a = 20;
+        fn2();
+        // 为什么这里的fn2却可以读出变化的a
     </script>
 </head>
 
