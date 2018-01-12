@@ -8,6 +8,23 @@
     <link rel="stylesheet" type="text/css" href="css/test.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/test.js"></script>
+    <script type="text/javascript">
+        var inner;
+        function fn(num){
+            if(num==0){
+                inner = function(){
+                    console.log(num);
+                }
+            }else{
+                inner();
+            }
+        }
+
+        fn(0);
+        fn(1);
+        fn(2);
+        fn(3);
+    </script>
 </head>
 
 <body>
