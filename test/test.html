@@ -1,76 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>测试</title>
-    <script type="text/javascript">
-        var inner;
-
-        function fn(num) {
-            if (!inner) {
-                inner = function() {
-                    console.log(num);
-                }
-            } else {
-                inner();
-            }
-        }
-
-        fn(0);
-        fn(1); // 0
-        fn(2); // 0
-        fn(3); // 0
-        // 为什么这里的inner读不出变化的num呢
-
-
-        var a = 10;
-
-        function fn2() {
-            console.log(a);
-        }
-        fn2(); // 10
-        a = 20;
-        fn2(); // 20
-        // 为什么这里的fn2却可以读出变化的a
-    </script>
 </head>
-
 <body>
-    <div>假设fn(0)执行的时候函数里面的环境叫做 环境1 , 在环境1里面定义了inner</div>
-    <div>fn(1)执行的时候环境函数里面的叫做 环境2 , 执行环境1的inner , 所以直接读取环境1的num</div>
-    <div>fn(0), fn(1) 运行时的环境都是全局执行环境下, 也是和fn2两次运行的环境一样</div>
-
-
-    <div>至于fn2 , 由于一直都是在全局执行环境下 , 所以永远都是读取a</div>
-    <a href="../homeTest/闭包/closure1.html">闭包</a>
-    <a href="for循环一些小知识.html">for循环</a>
-
-
-    <script type="text/javascript">
-        function f1() {　　　　
-            var n = 999;　　　　
-            nAdd = function() {
-                n += 1
-            }　　　　
-            function f2() {　　　　　　
-                alert(n);　　　　
-            }　　　　
-            return f2;　　
-        }　　
-        var result = f1();　　
-        result(); // 999
-        　　
-        nAdd();　　
-        result(); // 1000
-    </script>
-    <p>闭包</p>
-    <p>f1()第一次执行的时候, f1函数里面的环境叫做 f1_1, f1所在的环境是全局执行环境</p>
-    <p>result()第一次执行时所在的环境是f1_1, 所以读取f1_1里面的n, 即999</p>
-    <p>nAdd()第一次执行时所在的环境也是f1_1, 所以读取f1_1里面的n, 改变f1_1里面的n, 导致f1_1里面的n变成1000</p>
-    <p>result()再次执行的时候, 还是在f1_1环境, 读取的f1_1环境里面的n, 由于上一步被改变了, 所以是1000</p>
-
 
 </body>
-
 </html>
