@@ -76,7 +76,7 @@ function formatNum(num) { // 本来toLocaleString就可以实现这个功能 , �
         arr.unshift(num.substr(n, 3));
     }
     arr.unshift(num.slice(0, n));
-    if(decimal != ""){ // 有小数位才显示小数 , 有多少位小数就显示多少位
+    if (point != -1) {  // 有小数位才显示小数 , 有多少位小数就显示多少位
         return arr.join(",") + "." + decimal;
     }
     return arr.join(",");
