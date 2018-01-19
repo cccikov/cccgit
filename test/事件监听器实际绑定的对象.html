@@ -12,12 +12,12 @@
     <p>将按钮的id去掉，并增加一个id为“btn”的button按钮，触发事件还是在原来的button上</p>
     <a href="javascript:fn2()">重写body innerHTML内容</a>
     <p>重写body innerHTML内容后，原来的元素都没有，重写后都是新元素，相当元素被替换了，所以没有button可以触发事件</p>
-    <p>由此证明，事件监听器实际绑定的对象是元素，而不是css选择器或者什么鬼</p>
+    <p>由此证明，dom1级2级事件监听器实际绑定的对象是元素，而不是css选择器或者什么鬼</p>
 </body>
 <script type="text/javascript">
     var btn = document.getElementById("btn");
     btn.onclick = function() {
-        console.log("我是按钮元素");
+        alert("我是按钮元素");
     }
 
     function fn1() {
@@ -29,7 +29,7 @@
     }
 
     function fn2(){
-        document.body.innerHTML += "<p>haha</p>";
+        document.body.innerHTML = document.body.innerHTML;
     }
 </script>
 
