@@ -4,6 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>事件监听器实际绑定的对象</title>
+    <script type="text/javascript">
+        var btn;
+        window.onload = function() {
+            btn = document.getElementById("btn");
+            btn.onclick = function() {
+                alert("我是按钮元素");
+            }
+        }
+
+        function fn1() {
+            btn.removeAttribute("id");
+            var newBtn = document.createElement("button");
+            newBtn.setAttribute("id", "btn");
+            newBtn.innerHTML = "按钮2，但是id为btn"
+            document.body.appendChild(newBtn);
+        }
+
+        function fn2() {
+            document.body.innerHTML = document.body.innerHTML;
+        }
+
+    </script>
+
+
 </head>
 
 <body>
@@ -14,23 +38,5 @@
     <p>重写body innerHTML内容后，原来的元素都没有，重写后都是新元素，相当元素被替换了，所以没有button可以触发事件</p>
     <p>由此证明，dom1级2级事件监听器实际绑定的对象是元素，而不是css选择器或者什么鬼</p>
 </body>
-<script type="text/javascript">
-    var btn = document.getElementById("btn");
-    btn.onclick = function() {
-        alert("我是按钮元素");
-    }
-
-    function fn1() {
-        btn.removeAttribute("id");
-        var newBtn = document.createElement("button");
-        newBtn.setAttribute("id", "btn");
-        newBtn.innerHTML = "按钮2，但是id为btn"
-        document.body.appendChild(newBtn);
-    }
-
-    function fn2(){
-        document.body.innerHTML = document.body.innerHTML;
-    }
-</script>
 
 </html>
