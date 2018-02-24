@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>异步变同步</title>
+    <script type="text/javascript">
+    // 异步操作函数
+    function async(arg, cb) {
+        setTimeout(function() {
+            cb && cb(arg);
+        }, 16.7);
+    }
+
+    async("hi", function(data) {
+        console.log(data);
+    });
+
+
+    var arr = ("abcdfghjklmn").split("");
+
+
+    for (var i = 0; i < 10; i++) {
+        async(arr, function(data) {
+            console.log(i, data[i]);
+        });
+    }
+    // 如for循环里面是个异步操作 , i经常不是获取我们本来想要的
+
+
+    /////////
+    // 方法1 立即执行的匿名函数 , 通过传参的方式//
+    /////////
+    for (var j = 0; j < 10; j++) {
+        (function(i) {
+            async(arr, function(data) {
+                console.log(i, data[i]);
+            });
+        })(j);
+    }
+
+
+    ///////////////////
+    // 方法2 改写为函数递归执行 //
+    ///////////////////
+    (function iterator(i) {
+        if (i >= 10) {
+            console.log("全部完成");
+            return
+        }
+
+        async(arr, function(data) {
+            console.log(i, data[i]);
+            iterator(i + 1);
+        });
+    })(0)
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

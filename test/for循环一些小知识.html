@@ -1,41 +1,33 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
-	<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" charset="utf-8">
-		$(function(){
-			/*for(var i = 0;i<9;i++){
-				setTimeout(function(){
-					console.log(i);
-					$("p").eq(i).html(i);
-				},i*1000);
-			}*/
-			//上述方法不行是因为，定时器是延时执行的，当执行定时器里面的函数时，其实for循环早就走完了，所以i就等于9，相当于执行了9个i等于就的函数.
-			
-			for(var i=0;i<10;i++){
-				showI(i);
-			}
-			function showI(i){
-				setTimeout(function(){
-					console.log(i);
-					$("p").eq(i).html(i);
-				},i*1000);
-			}
-		});
-	</script>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+    $(function() {
+        for (var i = 0; i < 9; i++) {
+            setTimeout(function() {
+                console.log(i); // for循环里面如果涉及异步操作 , 异步操作读取的i是已经循环完的i
+            }, 16.7);
+        }
+        //上述方法不行是因为，定时器是延时执行的，当执行定时器里面的函数时，其实for循环早就走完了，所以i就等于9，相当于执行了9个i等于就的函数.
+
+        for (var j = 0; j < 10; j++) {
+            showI(j);
+        }
+
+        function showI(i) {
+            setTimeout(function() {
+                console.log(i);
+            }, 1000);
+        }
+    });
+    </script>
 </head>
+
 <body>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
-	<p></p>
 </body>
+
 </html>
