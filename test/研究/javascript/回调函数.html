@@ -24,7 +24,7 @@
             let test = null;
             setTimeout(function() {
                 test = 2;
-                cb(test);
+                cb && cb(test); // 有cb才执行回调
             }, 2000);
         }
         getTest2(function(data) {
