@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>escape,encodeURI(),encodeURIComponent()</title>
+    <script type="text/javascript">
+        /**
+         * http://192.168.1.183:3000/哈哈/index.html?name=我是中文参数&age=18岁
+         * 浏览器会自动解释为 (虽然chrome还是现实上面的, 但是只要一复制 , 或者读取location.href还是显示下面的)
+         * http://192.168.1.183:3000/%E5%93%88%E5%93%88/index.html?name=%E6%88%91%E6%98%AF%E4%B8%AD%E6%96%87%E5%8F%82%E6%95%B0&age=18%E5%B2%81
+         */
+
+        /*escape()/unescape()函数    ECMAScript5 (ECMA-262 v3 )开始 已经不推荐使用 , 用 decodeURI() 和 decodeURIComponent() 取而代之。*/
+
+        var url = "http://192.168.1.183:3000/哈哈/index.html?name=我是中文参数&age=18岁";
+        var encodeURI_url = encodeURI(url);
+        var encodeURIComponent_url = encodeURIComponent(url);
+        console.log(encodeURI_url); // http://192.168.1.183:3000/%E5%93%88%E5%93%88/index.html?name=%E6%88%91%E6%98%AF%E4%B8%AD%E6%96%87%E5%8F%82%E6%95%B0&age=18%E5%B2%81    // 还是一个正常的链接 , 因为没有对  ;/?:@&=+$,# 进行处理 ; 而且这和浏览器的处理是一样的
+        console.log(encodeURIComponent_url); // http%3A%2F%2F192.168.1.183%3A3000%2F%E5%93%88%E5%93%88%2Findex.html%3Fname%3D%E6%88%91%E6%98%AF%E4%B8%AD%E6%96%87%E5%8F%82%E6%95%B0%26age%3D18%E5%B2%81
+
+
+        var query_val = "我是中文参数"; // name参数的值;
+        var encodeURI_query_val = encodeURI(query_val);
+        var encodeURIComponent_query_val = encodeURIComponent(query_val);
+        console.log(encodeURI_query_val == encodeURIComponent_query_val); // true 其实对于参数值的处理 , 两个都是一样的
+
+
+        var query_encode_val = "%E6%88%91%E6%98%AF%E4%B8%AD%E6%96%87%E5%8F%82%E6%95%B0"; // name参数实际显示在浏览器的值
+        var decodeURI_query_encode_val = decodeURI(query_encode_val);
+        var decodeURIComponent_query_encode_val = decodeURIComponent(query_encode_val);
+        console.log(decodeURI_query_encode_val, decodeURIComponent_query_encode_val); // 我是中文参数 我是中文参数
+
+
+        ////////////////////////////////////////////////////////////////////////
+        // encodeURI()/decodeURI() 是对整个href(url)进行处理 因为它不会对 ;/?:@&=+$,# 这些字符也会进行处理 //
+        ////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // encodeURIComponent() / decodeURIComponent()  是对href(url)的query部分(其实应该是参数值)进行处理 , 因为它对 ;/?:@&=+$,# 这些字符也会进行处理 //
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /**
+            ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+            │                                            href                                             │
+            ├──────────┬──┬─────────────────────┬─────────────────────┬───────────────────────────┬───────┤
+            │ protocol │  │        auth         │        host         │           path            │ hash  │
+            │          │  │                     ├──────────────┬──────┼──────────┬────────────────┤       │
+            │          │  │                     │   hostname   │ port │ pathname │     search     │       │
+            │          │  │                     │              │      │          ├─┬──────────────┤       │
+            │          │  │                     │              │      │          │ │    query     │       │
+            "  https:   //    user   :   pass   @ sub.host.com : 8080   /p/a/t/h  ?  query=string   #hash "
+            │          │  │          │          │   hostname   │ port │          │                │       │
+            │          │  │          │          ├──────────────┴──────┤          │                │       │
+            │ protocol │  │ username │ password │        host         │          │                │       │
+            ├──────────┴──┼──────────┴──────────┼─────────────────────┤          │                │       │
+            │   origin    │                     │       origin        │ pathname │     search     │ hash  │
+            ├─────────────┴─────────────────────┴─────────────────────┴──────────┴────────────────┴───────┤
+            │                                            href                                             │
+            └─────────────────────────────────────────────────────────────────────────────────────────────┘
+         */
+
+        /*这么说好像就没有 encodeURIComponent() / decodeURIComponent() 什么事 ; 其实encodeURI()/decodeURI()只适合处理 一般情况下的整个url*/
+
+        // 如果对于参数值有 ;/?:@&=+$,# 字符的时候 , 无论是编码encodeURIComponent() 组成字符串替换href ; 还是从href获取参数值解码decodeURIComponent() ; 都是要用encodeURIComponent() / decodeURIComponent()
+        // 所以一般来说 encodeURI()/decodeURI() 是可以满足处理这个url的编码/解码的
+        // 但是对于参数值部分还是最好使用  encodeURIComponent() / decodeURIComponent() ccc.js里面的 getUrlParam方法也是使用 decodeURIComponent()来解码获取参数值的
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
