@@ -1,184 +1,194 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-		<meta charset="UTF-8">
-		<title>负margin应用</title>
-		<style type="text/css">
-			*{
-				margin:0;
-			}
-			.wrap{
-				padding:15px;
-				margin:20px;
-				background: red;
-			}
-			[class*="inner"]{
-				height: 30px;
-				background: rgba(0,0,255,0.5);
-				color:#fff;
-			}
-			.inner1{
-				margin:0 -15px;
-			}
-			.inner2{
-				margin:-15px 0;
-			}
-			.inner3{
-				margin:-25px;
-			}
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta charset="UTF-8">
+        <title>负margin应用</title>
+        <style type="text/css">
+            *{
+                margin:0;
+            }
+            .wrap{
+                padding:15px;
+                margin:20px;
+                background: red;
+            }
+            [class*="inner"]{
+                height: 30px;
+                background: rgba(0,0,255,0.5);
+                color:#fff;
+            }
+            .inner1{
+                margin:0 -15px;
+            }
+            .inner2{
+                margin:-15px 0;
+            }
+            .inner3{
+                margin:-25px;
+            }
 
-			.detail{
-				width: 300px;
-				height: 300px;
-				border:1px solid #ddd;
-				margin: 20px auto;
-			}
-			.row{
-				font-size: 0;
-			}
-			.row:nth-child(1),.row:nth-child(3){
-				text-align:center;
-			}
-			.row>*{
-				font-size: 12px;
-			}
-			[class*="detail"] [class*="side"]{
-				display: inline-block;
-				width: 80px;
-				height: 80px;
-				background: rgba(255,0,0,.5);
-				vertical-align: middle;
-			}
-			[class*="detail"] [class*="middle"]{
-				display: inline-block;
-				width: 140px;
-				height: 140px;
-				background: rgba(0,0,255,.5);
-				vertical-align: middle;
-			}
+            .detail{
+                width: 300px;
+                height: 300px;
+                border:1px solid #ddd;
+                margin: 20px auto;
+            }
+            .row{
+                font-size: 0;
+            }
+            .row:nth-child(1),.row:nth-child(3){
+                text-align:center;
+            }
+            .row>*{
+                font-size: 12px;
+            }
+            [class*="detail"] [class*="side"]{
+                display: inline-block;
+                width: 80px;
+                height: 80px;
+                background: rgba(255,0,0,.5);
+                vertical-align: middle;
+            }
+            [class*="detail"] [class*="middle"]{
+                display: inline-block;
+                width: 140px;
+                height: 140px;
+                background: rgba(0,0,255,.5);
+                vertical-align: middle;
+            }
 
-			.middle1{
-				margin-top: -20px;
-			}
-			.middle2{
-				margin-right: -20px;
-			}
-			.middle3{
-				margin-bottom: -20px;
-			}
-			.middle4{
-				margin-left: -20px;
-			}
-			.middle5{
-				margin: -20px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="wrap">
-			<div class="inner">正常情况下，定高height: 30px;</div>
-		</div>
-		<div class="wrap">
-			<div class="inner1">margin:0 -15px;</div>
-		</div>
-		<div class="wrap">
-			<div class="inner2">margin:-15px 0;</div>
-		</div>
-		<div class="wrap">
-			<div class="inner3">margin:-25px;</div>
-		</div>
+            .middle1{
+                margin-top: -20px;
+            }
+            .middle2{
+                margin-right: -20px;
+            }
+            .middle3{
+                margin-bottom: -20px;
+            }
+            .middle4{
+                margin-left: -20px;
+            }
+            .middle5{
+                margin: -20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="inner">正常情况下，定高height: 30px;</div>
+        </div>
+        <div class="wrap">
+            <div class="inner1">margin:0 -15px;</div>
+        </div>
+        <div class="wrap">
+            <div class="inner2">margin:-15px 0;</div>
+        </div>
+        <div class="wrap">
+            <div class="inner3">margin:-25px;</div>
+        </div>
 
-		<div class="detail">
-			<div class="row">
-				<div class="side-t"></div>
-			</div>
-			<div class="row">
-				<div class="side-l"></div><div class="middle"></div><div class="side-r"></div>
-			</div>
-			<div class="row">
-				<div class="side-b"></div>
-			</div>
-		</div>
+        <div class="detail">
+            <div class="row">
+                <div class="side-t"></div>
+            </div>
+            <div class="row">
+                <div class="side-l"></div><div class="middle"></div><div class="side-r"></div>
+            </div>
+            <div class="row">
+                <div class="side-b"></div>
+            </div>
+        </div>
 
-		<div class="detail">
-			<div class="row">
-				<div class="side-t"></div>
-			</div>
-			<div class="row">
-				<div class="side-l"></div>
-				<div class="middle1">
-					margin-top: -20px;
-				</div>
-				<div class="side-r"></div>
-			</div>
-			<div class="row">
-				<div class="side-b"></div>
-			</div>
-		</div>
-		<div class="detail">
-			<div class="row">
-				<div class="side-t"></div>
-			</div>
-			<div class="row">
-				<div class="side-l"></div>
-				<div class="middle2">
-					margin-right: -20px;
-				</div>
-				<div class="side-r"></div>
-			</div>
-			<div class="row">
-				<div class="side-b"></div>
-			</div>
-		</div>
-		<div class="detail">
-			<div class="row">
-				<div class="side-t"></div>
-			</div>
-			<div class="row">
-				<div class="side-l"></div>
-				<div class="middle3">
-					margin-bottom: -20px;
-				</div>
-				<div class="side-r"></div>
-			</div>
-			<div class="row">
-				<div class="side-b"></div>
-			</div>
-		</div>
-		<div class="detail">
-			<div class="row">
-				<div class="side-t"></div>
-			</div>
-			<div class="row">
-				<div class="side-l"></div>
-				<div class="middle4">
-					margin-left: -20px;
-				</div>
-				<div class="side-r"></div>
-			</div>
-			<div class="row">
-				<div class="side-b"></div>
-			</div>
-		</div>
-		<div class="detail">
-			<div class="row">
-				<div class="side-t"></div>
-			</div>
-			<div class="row">
-				<div class="side-l"></div>
-				<div class="middle5">
-					margin: -20px;
-				</div>
-				<div class="side-r"></div>
-			</div>
-			<div class="row">
-				<div class="side-b"></div>
-			</div>
-		</div>
+        <div class="detail">
+            <div class="row">
+                <div class="side-t"></div>
+            </div>
+            <div class="row">
+                <div class="side-l"></div>
+                <div class="middle1">
+                    margin-top: -20px;
+                </div>
+                <div class="side-r"></div>
+            </div>
+            <div class="row">
+                <div class="side-b"></div>
+            </div>
+        </div>
+        <div class="detail">
+            <div class="row">
+                <div class="side-t"></div>
+            </div>
+            <div class="row">
+                <div class="side-l"></div>
+                <div class="middle2">
+                    margin-right: -20px;
+                </div>
+                <div class="side-r"></div>
+            </div>
+            <div class="row">
+                <div class="side-b"></div>
+            </div>
+        </div>
+        <div class="detail">
+            <div class="row">
+                <div class="side-t"></div>
+            </div>
+            <div class="row">
+                <div class="side-l"></div>
+                <div class="middle3">
+                    margin-bottom: -20px;
+                </div>
+                <div class="side-r"></div>
+            </div>
+            <div class="row">
+                <div class="side-b"></div>
+            </div>
+        </div>
+        <div class="detail">
+            <div class="row">
+                <div class="side-t"></div>
+            </div>
+            <div class="row">
+                <div class="side-l"></div>
+                <div class="middle4">
+                    margin-left: -20px;
+                </div>
+                <div class="side-r"></div>
+            </div>
+            <div class="row">
+                <div class="side-b"></div>
+            </div>
+        </div>
+        <div class="detail">
+            <div class="row">
+                <div class="side-t"></div>
+            </div>
+            <div class="row">
+                <div class="side-l"></div>
+                <div class="middle5">
+                    margin: -20px;
+                </div>
+                <div class="side-r"></div>
+            </div>
+            <div class="row">
+                <div class="side-b"></div>
+            </div>
+        </div>
 
-		<p style="background: rgba(0,0,0,.1);">hi</p>
-		<p style="margin:-10px 0 0">hi hi hi</p>
+        <p style="background: rgba(0,0,0,.1);">hi</p>
+        <p style="margin:-10px 0 0">hi hi hi</p>
 
-	</body>
+        <p>
+            margin是边距，是元素自身与别的元素的距离；
+        </p>
+        <p>
+            正数的时候，是元素自身与别的元素隔开，由于文档流（ 将窗体自上而下分成一行行，并在每行中按左至右的顺序排放元素）的原因，改变margin-top和margin-left，会导致元素自身移动来符合文档流；而改变margin-bottom和margin-right会导致后面和右面的元素移动来符合文档流
+        </p>
+        <p>
+            负数的时候，是让别的元素进入自己里面，同理由于文档流，改变margin-top和margin-left，会导致元素自身移动来符合文档流；而改变margin-bottom和margin-right会导致后面和右面的元素移动来符合文档流
+        </p>
+
+    </body>
 </html>
