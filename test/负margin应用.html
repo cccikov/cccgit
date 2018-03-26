@@ -8,6 +8,9 @@
             *{
                 margin:0;
             }
+            .text p{
+                padding:12px;
+            }
             .wrap{
                 padding:15px;
                 margin:20px;
@@ -88,6 +91,13 @@
         <div class="wrap">
             <div class="inner3">margin:-25px;</div>
         </div>
+
+
+        <div class="text">
+            <p>下面蓝色元素代表的是设置负margin的元素</p>
+            <p>红色元素可以是周围的元素 ，也可以看成是父元素的padding</p>
+        </div>
+
 
         <div class="detail">
             <div class="row">
@@ -180,15 +190,17 @@
         <p style="background: rgba(0,0,0,.1);">hi</p>
         <p style="margin:-10px 0 0">hi hi hi</p>
 
-        <p>
-            margin是边距，是元素自身与别的元素的距离；
-        </p>
-        <p>
-            正数的时候，是元素自身与别的元素隔开，由于文档流（ 将窗体自上而下分成一行行，并在每行中按左至右的顺序排放元素）的原因，改变margin-top和margin-left，会导致元素自身移动来符合文档流；而改变margin-bottom和margin-right会导致后面和右面的元素移动来符合文档流
-        </p>
-        <p>
-            负数的时候，是让别的元素进入自己里面，同理由于文档流，改变margin-top和margin-left，会导致元素自身移动来符合文档流；而改变margin-bottom和margin-right会导致后面和右面的元素移动来符合文档流
-        </p>
+        <div class="text">
+            <p>
+                margin是边距，是元素自身与别的元素的距离；
+            </p>
+            <p>
+                正数的时候，是元素自身与别的元素隔开，由于文档流（ 将窗体自上而下分成一行行，并在每行中按左至右的顺序排放元素）的原因，改变margin-top和margin-left，会导致元素自身移动来符合文档流；而改变margin-bottom和margin-right会导致后面和右面的元素(或者是父元素的padding)移动来符合文档流
+            </p>
+            <p>
+                负数的时候，是让别的元素进入自己里面，同理由于文档流，改变margin-top和margin-left，会导致元素自身移动来符合文档流；而改变margin-bottom和margin-right会导致后面和右面的元素移动来符合文档流
+            </p>
+        </div>
 
     </body>
 </html>
