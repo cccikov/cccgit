@@ -216,11 +216,11 @@ gulp.task('web', function () {
             baseDir: "./test",
             index: "test.html"
         },
-        port: 3000,
+        port: 3008,
         ui: { // ui的默认端口
-            port: 3001,
+            port: 3009,
             weinre: { // 不知道什么鬼 "weinre"好像也是用于远程调试的nodejs工具
-                port: 3002
+                port: 3010
             }
         }
     });
