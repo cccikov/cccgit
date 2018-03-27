@@ -189,6 +189,15 @@
     console.log(map(arr,function(key){
         return 2 * key;
     }));
+
+
+
+    // 数组迭代方法除了可以传一个回调函数外，还可以传一个对象：当执行回调 函数时用作this的值(参考对象)。
+
+
+    arr.forEach(function(key, index) {
+        console.log(this);
+    },{"name":"ccc"});
     </script>
 </head>
 
