@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数字自增到最大值</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $(".num").each(function(index, value) {
+            var _this = $(value);
+            var max = _this.attr("data-val");
+            var current = 0;
+            var per = (max - current) / 50;
+
+            var digits;
+            var flag = isInteger(max);
+            if (flag) {
+                digits = -1;
+            } else {
+                digits = decimal_length(max);
+            }
+
+            var timer = setInterval(function() {
+                current = current + per;
+                if (current >= max) {
+                    current = max;
+                    clearInterval(timer);
+                }
+                console.log(num_handle(current, digits));
+                _this.html(num_handle(current, digits));
+            }, 50);
+        });
+
+        function num_handle(num, digits) {
+            // 数字处理 , 如果 digits为-1时 , 则只取整数部分 ; 如果是其他整数 , 则根据digits取多少位小数
+            num = Number(num);
+            digits = Math.floor(digits);
+            if (digits == -1) {
+                return Math.floor(num);
+            } else {
+                return num.toFixed(digits);
+            }
+        }
+
+    });
+
+
+    function isInteger(num) {
+        // return num % 1 === 0;
+        return Math.floor(num) === num;
+    }
+
+    function decimal_length(num) {
+        num = num.toString();
+        var point = num.indexOf(".");
+        if (point != -1) {
+            var integer = num.slice(0, point);
+            var decimal = num.slice(point + 1);
+        } else {
+            var integer = num;
+            var decimal = "";
+        }
+        return decimal.length;
+    }
+
+    function integer_length(num) {
+        num = Math.floor(num);
+        return num.toString().length;
+    }
+    </script>
+</head>
+
+<body>
+    <span class="num" data-val="260">0</span>
+    <span class="num" data-val="10.2">0</span>
+    <span class="num" data-val="2345">0</span>
+    <span class="num" data-val="80">0</span>
+</body>
+
+</html>

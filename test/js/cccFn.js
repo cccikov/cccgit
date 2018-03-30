@@ -611,3 +611,11 @@ function firstEntry() {
         return false;
     }
 }
+
+// 响应式 rem布局
+function baseFontSize() {
+    var rootfontsize = $(window).width() / 20;
+    rootfontsize = rootfontsize > 20 ? 20 : rootfontsize;
+    $("html").css("fontSize", rootfontsize + "px");
+    return rootfontsize;
+}
