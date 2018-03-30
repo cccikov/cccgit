@@ -1,32 +1,114 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <title>内部元素溢出居中</title>
     <style type="text/css">
-        .out{
-            width: 120px;
-            margin: 0 auto;
-            overflow: hidden;
-            text-align: center;
-        }
-        .in{
-            position: relative;
-            top: 0;
-            left: 50%;
-            margin: 0 0 0 -100px;
-            width: 200px;
-        }
+    [id*="demo"] {
+        margin: 0 0 50px;
+        padding: 12px;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+    }
+    .out{
+        background: #f0f0f0;
+    }
+
+    #demo1 {
+        overflow: hidden;
+    }
+
+    #demo1 .out {
+        position: relative;
+        width: 1024px;
+        line-height: 100px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    #demo1 .in {
+        position: absolute;
+        top: 0;
+        left: -300px;
+        width: 100px;
+        height: 100px;
+        background: #ff0;
+    }
+
+    #demo2 .out {
+        overflow: hidden;
+        text-align: center;
+    }
+
+    #demo2 .in {
+        position: relative;
+        top: 0;
+        left: 50%;
+        width: 1360px;
+        margin:  0 0 0 -680px;
+        text-align: left;
+    }
+    #demo2 .in-box{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background: #ff0;
+        text-align: center;
+    }
+
+
+    #demo3 .out {
+        overflow: hidden;
+        text-align: center;
+    }
+
+    #demo3 .in {
+        position: relative;
+        top: 0;
+        left: 50%;
+        min-width: 1360px;
+        text-align: left;
+        transform: translate(-50%, 0);
+    }
+    #demo3 .in-box{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        background: #ff0;
+        text-align: center;
+    }
     </style>
 </head>
+
 <body>
-    <div class="out">
-        <div class="in">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+    <div id="demo1">
+        <div class="out">
+            out
+            <div class="in">
+                in
+            </div>
+        </div>
+    </div>
+    <div id="demo2">
+        <div class="out">
+            <div class="in">
+                <div class="in-box">
+                    in-box
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="demo3">
+        <div class="out">
+            <div class="in">
+                <div class="in-box">
+                    in-box
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
