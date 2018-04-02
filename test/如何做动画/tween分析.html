@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tween.js 解释</title>
+    <script type="text/javascript">
+    var easeIn = function(t, b, c, d) {
+        // t/=d => t=t/d
+        console.log(c * (t / d) * (t / d) + b == c * (t /= d) * t + b);
+        return c * (t /= d) * t + b;
+    }
+
+    var Linear = function(t, b, c, d) {
+        return c * t / d + b;
+    }
+
+
+    /*
+     * tween 相当于 transition-timing-function , 即规定速度效果的速度曲线。
+     *
+     * 就是"值"的变化曲线 , 根据这个变化曲线 , "值"的变化就会有所不同 , 就会让"值"在[0,d]区间中 , 达到不同的变化效果
+     *
+     * 看成是函数做图的话
+     * t是自变量 ; b , c ,d 都是常量
+     *
+     * t 的是区间[0 , d]
+     * t=0的时候 , 纵坐标值一定是b ; t=d的时候 , 纵坐标值一定是b+c
+     * 纵坐标值的变化区间是 [b , b+c] (虽然某些函数 , t在0-d之间的时候 , 纵坐标值会超过b+c , 或者小于b ; 但是在起点和终点的值一定是b和b+c)
+     *
+     * 如果对整个函数做图
+     * c是决定起点和终点 , 纵坐标的跨度
+     * b就是起点时的值
+     *
+     * 所以任何tween的函数 , 都可以简化为
+     * c*a+b a的值范围为[0,1] ((虽然某些函数 , t在0-d之间的时候 , a值会超过1 , 或者小于0 ; 但是在起点和终点的值一定是0和1))
+     *
+     * 所以决定图形真正关键在于a , 即核心
+     *
+     * 所以以后看到涉及变化的函数 , 函数某部分的值的范围是[0,1] (自变量最小值的时候为0 , 最大值的时候为1) 就要注意这部分可能是transition-timing-function的核心部分
+     *
+     *
+     * linear里面 a = t/d = 1/d * t
+     * easeIn里面 a = (t/d)² = (1/d)² * t²
+     *
+     * 由于d是常量 , 1/d 和 1/d² 也是常量
+     *
+     * linear就是一个 一次函数
+     * easeIn是一个 二次函数
+     *
+     *
+     */
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
