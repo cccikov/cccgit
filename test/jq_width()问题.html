@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <style type="text/css">
+    div {
+        width: 400px;
+        padding: 100px;
+        margin: 20px 0;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .border-box {
+        box-sizing: border-box;
+    }
+    </style>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="div1" class="border-box">哈哈哈哈</div>
+    <div id="div2">哈哈哈哈</div>
+
+    <a href="javascript:void(0)" onclick="click1()">width(400)</a> <br>
+    <a href="javascript:void(0)" onclick="click2()">css("width","400px")</a>
+
+    <p>结论: width() 永远都是读取或者设置content(内容)的宽度 ; css("width") 是直接设置width 行内css属性</p>
+
+    <script type="text/javascript">
+        $(function() {
+            console.log($("#div1").width(), $("#div2").width());
+            console.log($("#div1").css("width"), $("#div2").css("width"));
+        });
+
+        function click1() {
+            $("#div1").width(400);
+            $("#div2").width(400);
+        }
+
+        function click2() {
+            $("#div1").css("width","400px");
+            $("#div2").css("width","400px");
+        }
+    </script>
+</body>
+
+</html>
