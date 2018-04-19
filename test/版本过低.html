@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>警告：浏览器版本过低</title>
+    <link rel="shortcut icon" href="img/warning.ico" />
+    <link rel="icon" href="img/warning.ico" />
+    <style type="text/css">
+        html,
+        body {
+            position: relative;
+            min-width: 1280px;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            background: #f2f3f7;
+            font-family: "微软雅黑";
+        }
+
+        #wrap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            padding: 130px 300px;
+            margin: -270px 0 0 -600px;
+            background: #fff;
+        }
+
+
+        #wrap h1{
+            margin: 18px 0 9px;
+            font-size: 30px;
+            font-weight: normal;
+            color: #333;
+        }
+
+        #wrap p{
+            margin: 0 0 25px;
+            font-size: 16px; color: #878787;
+        }
+
+        #wrap div {
+            padding: 50px 0 0;
+            border-top: 1px solid #f0f1f4;
+            text-align: center;
+        }
+
+        #wrap a {
+            display: inline-block;
+            text-decoration: none;
+            margin: 0 50px;
+        }
+        img {
+            width: 90px;
+            height: auto;
+            border: none;
+            /* a标签直接嵌套图片会有蓝色border */
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+        <style type="text/css">
+            .ie-tips{
+                line-height:24px;
+                padding: 0 12px;
+                background:#fffcde;
+                color:#545454;
+                font-size: 14px;
+                margin: 0;
+            }
+            .ie-tips a{
+                color:blue;
+                text-decoration:underline;
+            }
+        </style>
+        <p class="ie-tips">！！！提醒：您的浏览器版本过低，为了您的安全着想，请升级您的浏览器，或者使用别的浏览器（推荐使用<a target="_blank" href="https://www.baidu.com/s?ie=UTF-8&wd=chrome">chrome浏览器</a>）</p>
+    <![endif]-->
+    <div id="wrap">
+        <h1>XXXX提醒您</h1>
+        <p>您的IE浏览器不被支持或者版本过低。为了得到我们网站最好的体验及支付安全，我们 建议您升级至IE11或尝试其他浏览器</p>
+        <div>
+            <a href="https://www.baidu.com/s?ie=UTF-8&wd=chrome" target="_blank">
+                <img src="img/chrome_2014_512.png" alt="chrome">
+            </a>
+            <a href="http://www.firefox.com.cn/" target="_blank">
+                <img src="img/firefox_512.png" alt="firefox_512.png">
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
