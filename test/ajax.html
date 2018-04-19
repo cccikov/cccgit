@@ -1,32 +1,32 @@
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#b01").click(function() {
-					$.ajax({
-						url: "js/data.json",
-						async: true,
-						success:function(result){
-							console.log(result);
-							$("#myDiv").html(" "+result+" ");
-						},
-//						dataType:"text",
-						dataType:"json",//请求的json一定要是名和值都用双引号括住
-					});
-					
-				});
-			});
-		</script>
-	</head>
+<!DOCTYPE html>
+<html lang="en">
 
-	<body>
+<head>
+    <meta charset="UTF-8" />
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+	    $(document).ready(function() {
+	        $("#btn").click(function() {
+	            $.ajax({
+	                url: "js/data.json",
+	                async: true,
+	                success: function(result) {
+	                    console.log(result);
+	                    $("#myDiv").html(" " + result + " ");
+	                },
+	                // dataType: "text",
+	                dataType: "json", //请求的json一定要是名和值都用双引号括住
+	            });
+	        });
+	    });
+    </script>
+</head>
 
-		<div id="myDiv">
-			<h2>通过 AJAX 改变文本</h2></div>
-		<button id="b01" type="button">改变内容</button>
-
-	</body>
+<body>
+    <div id="myDiv">
+        <h2>通过 AJAX 改变文本</h2>
+    </div>
+    <button id="btn" type="button">改变内容</button>
+</body>
 
 </html>
