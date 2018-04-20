@@ -8,7 +8,7 @@
 	    $(document).ready(function() {
 	        $("#btn").click(function() {
 	            $.ajax({
-	                url: "js/data.json",
+	                url: "js/data.json?time="+new Date().getTime(),
 	                async: true,
 	                success: function(result) {
 	                    console.log(result);

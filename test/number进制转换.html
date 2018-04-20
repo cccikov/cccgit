@@ -6,8 +6,13 @@
     <title>js 进制转换</title>
     <script type="text/javascript">
     {
-        console.log(077); //8进制77
-        console.log(0x77); //16进制77
+        console.log(0b111); //2进制111 7
+        console.log(0B111); //2进制111 7
+        console.log(077); //8进制77 63
+        console.log(0o77); //8进制77 63
+        console.log(0O77); //8进制77 63
+        console.log(0x77); //16进制77 119
+        console.log(0X77); //16进制77 119
     }
     {
         // 转为10进制
@@ -20,8 +25,13 @@
         console.log(parseInt("11", 8)); //9
         console.log(parseInt("11", 9)); //10
         console.log(parseInt("11", 0)); //11
+        console.log(parseInt("77", 0)); //77
         console.log(parseInt("077", 0)); //77
+        console.log(parseInt("077", 8)); //63
+        console.log(parseInt("77", 8)); //63
         console.log(parseInt("0x77", 0)); //119
+        console.log(parseInt("0x77", 16)); //119
+        console.log(parseInt("77", 16)); //119
     }
     {
         // 十进制转为其他进制
