@@ -72,6 +72,30 @@
     }
     // 内部 oops
     // finally
+
+
+
+    try {
+        fn();
+        console.log("这里放的是正常的代码，就是你想执行的");
+    } catch (err) {
+        console.log("很不好彩，你以为理想的代码，由于某些原因发生了错误，就不走上面了，走这里" + "\n错误信息：" + err);
+    } finally {
+        console.log("无论出错与否都走这里");
+    }
+
+
+    /**
+     * 实际上 try...catch应该尽可能少的使用，因为好多时候可以使用if去代替
+     */
+    if(typeof fn != "undefined" && typeof fn == "function"){
+        fn();
+    }else{
+        console.log("没有这个 fn 函数");
+    }
+
+    // function fn(){console.log("fn 函数执行")};
+
     </script>
 </head>
 
