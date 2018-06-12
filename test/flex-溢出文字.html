@@ -24,7 +24,7 @@
     .flex .column2 {
         min-width: 1px;
         /* 基本上：除非您明确指定“最小宽度”或“宽度”或“最大宽度”，否则flex项目将拒绝缩小到最小内在宽度以下。 */
-        /* 意思就是除非设置了min-width 或者 width 或者 max-width，否则 */
+        /* 意思就是除非设置了min-width 或者 width 或者 max-width，否则flex项目的宽度都不会缩小得比内容宽度小 */
         /* https://bugzilla.mozilla.org/show_bug.cgi?id=1086218#c4 */
         /* https://stackoverflow.com/questions/26465745/ellipsis-in-flexbox-container */
     }
