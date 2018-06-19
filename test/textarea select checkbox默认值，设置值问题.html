@@ -1,168 +1,216 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>textarea值的问题</title>
-		<style type="text/css">
-			.wrap {
-				padding: 0 20px;
-			}
-		</style>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>textarea值的问题</title>
+    <style type="text/css">
+    .wrap {
+        padding: 0 20px;
+    }
+    </style>
+</head>
 
-	<body>
-		<!-- textarea -->
-		<div class="wrap">
-			<h4>textarea</h4>
-			<textarea name="textarea1" id="textarea1" cols="30" rows="10" value="我是textarea1"></textarea>
-			<textarea name="textarea2" id="textarea2" cols="30" rows="10">我是textarea2</textarea>
-			<button id="textareaAttr">标签属性value</button>
-			<button id="textareaJs">js属性value</button>
-			<button id="textareaINN">js属性innerHTML</button>
-			<button id="textareaValue">js属性value</button>
-			<p>
-				总结：textarea
-				<br /> 设置默认值:写在便签之间,写在标签上的value无用。
-				<br /> 修改值:通过设置js属性value；设置标签属性value不行（设置innerHTML(或innerText)在没有输入过或者没有设置过value(js属性)可以，一但输入过或者设置过value（js属性）就不再行了，所以不推荐通过innerHTML修改值）。
-				<br /> 读取值:只能通过读取js属性value,不能通过innerHTML。
-			</p>
-		</div>
-		<hr />
-		<!-- select -->
-		<div class="wrap">
-			<h4>select</h4>
-			<select id="select1" name="select1" value="02">
-		        <option value="01">01</option>
-		        <option value="02">02</option>
-		        <option value="03">03</option>
-		        <option value="04">04</option>
-		        <option value="05">05</option>
-		    </select>
-			<select id="select2" name="select2">
-		        <option value="01">01</option>
-		        <option value="02" selected="">02</option>
-		        <option value="03">03</option>
-		        <option value="04">04</option>
-		        <option value="05">05</option>
-		    </select>
-			<select id="select3" name="select3">
-		        <option value="01">01</option>
-		        <option value="02" selected="">02</option>
-		        <option value="03">03</option>
-		        <option value="04">04</option>
-		        <option value="05">05</option>
-		    </select>
-			<button id="selBtn">第一个是通过设置标签value属性（01），第二个是通过修改option的selected属性（03），第三个是通过设置js属性value(05)</button>
-			<button id="selectValue">读取</button>
-			<p>
-				总结：select
-				<br />设置默认值：在要默认选上的option上设置selected属性。
-				<br />修改值：通过设置js属性value值；改变便签value属性也不行，(用js设置selected属性看似行，但只要有操作过select标签就不行了，因为selected只是默认值，一旦操作过，默认值就不起作用)
-				<br />读取：只能通过读取js属性value。
-			</p>
-		</div>
-		<hr/>
-		<!-- 选择表单 -->
-		<div class="wrap">
-			<h4>checkbox</h4>
-			<label>
-	        	<input type="checkbox" name="checkbox1" id="checkbox1" value="1" checked/>
-	        	checkbox1
-			</label>
-			<label>
-	        	<input type="checkbox" name="checkbox2" id="checkbox2" value="2" />
-	        	checkbox2
-			</label>
-			<label>
-	        	<input type="checkbox" name="checkbox3" id="checkbox3" value="3" />
-	        	checkbox3
-			</label>
-			<button id="cheBtn">value（js属性），便签属性checked，js属性checked</button>
-			<button id="checkValue">读取value，以及勾选情况</button>
-			<p>
-				总结：input type="checkbox"
-				<br />设置默认值：可以通过checked属性。
-				<br />修改值：也可以通过设置原生js属性checked，不能通过设置js属性value，（设置标签属性checked也不行，设置标签属性checked只能是默认值，选择过之后就不行了）(jquery-1.7.2 版本是可以通过修改标签属性checked来更改值;但是jquery-1.11.3就不可以,可能后面修复这个bug,因为标签属性checked只是表明默认选上,而不是真的选上)。
-				<br />读取：通过读取js属性value。通过读取js属性checked判断勾选情况，jq可以通过is(":checked");
-			</p>
-		</div>
-		<hr />
+<body>
+    <!-- textarea -->
+    <div class="wrap">
+        <h4>textarea</h4>
+        <textarea name="textarea1" id="textarea1" cols="30" rows="10" value="我是textarea1"></textarea>
+        <textarea name="textarea2" id="textarea2" cols="30" rows="10">我是textarea2</textarea>
+        <button id="textareaAttr">标签属性value</button>
+        <button id="textareaJs">js属性value</button>
+        <button id="textareaINN">js属性innerHTML</button>
+        <button id="textareaValue">js属性value</button>
+        <p>
+            总结：textarea
+            <br /> 设置默认值:写在便签之间,写在标签上的value无用。
+            <br /> 修改值:通过设置js属性value；设置标签属性value不行（设置innerHTML(或innerText)在没有输入过或者没有设置过value(js属性)可以，一但输入过或者设置过value（js属性）就不再行了，所以不推荐通过innerHTML修改值）。
+            <br /> 读取值:只能通过读取js属性value,不能通过innerHTML。
+        </p>
+    </div>
+    <hr />
+    <!-- select -->
+    <div class="wrap">
+        <h4>select</h4>
+        <select id="select1" name="select1" value="02">
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+        <select id="select2" name="select2">
+            <option value="01">01</option>
+            <option value="02" selected="">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+        <select id="select3" name="select3">
+            <option value="01">01</option>
+            <option value="02" selected="">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+        </select>
+        <button id="selBtn">第一个是通过设置标签value属性（01），第二个是通过修改option的selected属性（03），第三个是通过设置js属性value(05)</button>
+        <button id="selectValue">读取</button>
+        <p>
+            总结：select
+            <br />设置默认值：在要默认选上的option上设置selected属性。
+            <br />修改值：通过设置js属性value值；改变便签value属性也不行，(用js设置selected属性看似行，但只要有操作过select标签就不行了，因为selected只是默认值，一旦操作过，默认值就不起作用)
+            <br />读取：只能通过读取js属性value。
+        </p>
+    </div>
+    <hr/>
+    <!-- 选择表单 -->
+    <div class="wrap">
+        <h4>checkbox</h4>
+        <label>
+            <input type="checkbox" name="checkbox1" id="checkbox1" value="1" checked/> checkbox1
+        </label>
+        <label>
+            <input type="checkbox" name="checkbox2" id="checkbox2" value="2" /> checkbox2
+        </label>
+        <label>
+            <input type="checkbox" name="checkbox3" id="checkbox3" value="3" /> checkbox3
+        </label>
+        <button id="cheBtn">value（js属性），便签属性checked，js属性checked</button>
+        <button id="checkValue">读取value，以及勾选情况</button>
+        <p>
+            总结：input type="checkbox"
+            <br />设置默认值：可以通过checked属性。
+            <br />修改值：也可以通过设置原生js属性checked，不能通过设置js属性value，（设置标签属性checked也不行，设置标签属性checked只能是默认值，选择过之后就不行了）(jquery-1.7.2 版本是可以通过修改标签属性checked来更改值;但是jquery-1.11.3就不可以,可能后面修复这个bug,因为标签属性checked只是表明默认选上,而不是真的选上)。
+            <br />读取：通过读取js属性value。通过读取js属性checked判断勾选情况，jq可以通过is(":checked");
+        </p>
+    </div>
+    <hr />
+    <div class="wrap">
+        <h4>input</h4>
+        <input type="text" id="text" name="" value="我是默认值">
+        <input type="password" id="password" name="password" placeholder="请输入密码">
+        <input type="tel" id='phone' name="phone" placeholder="请输入手机号码">
+        <button id="setAttr">设置attr</button>
+        <button id="setValue">设置value</button>
+        <button id="getAttr">读取attr</button>
+        <button id="getValue">读取value</button>
+        <p>一般都默认是写在标签上value；通过设置js属性value设置值；通过读取js属性value读取值; 标签属性上的value不可以用了设置或者读取 有一种情况是可以的 , 就是从未设置过js属性value 和 jq方法val() [jq 的val()实际也是调用原生的js属性value], 是可以通过设置属性value的方法来设置值 ; 一旦在input上输入过(就是操作过input), 或者用js属性value设置过就会失效</p>
+    </div>
+    <hr />
+    <div class="wrap">
+        <h4>radio</h4>
+        <input class="gender" type="radio" checked name="gender" value="男">男
+        <input class="gender" type="radio" name="gender" value="女">女
+        <input class="gender" type="radio" name="gender" value="中性">中性
+        <input class="gender" type="radio" name="gender" value="双性">双性
+        <input class="gender" type="radio" name="gender" value="变性">变性
+        <br>
+        <button id="radio1">读取第一个radio的值</button>
+        <button id="radio2">设置第一个radio的值为"公"</button>
+        <button id="radio3">读取这个name为gender表单的值</button>
+        <button id="radio4">设置这个name为gender表单的值为"中性"</button>
+        <p>radio标签比较特殊，因为可以多个元素绑定一个name，如果是读取或者设置单个radio的值，直接读取该标签的js属性value就可以了。但是要读取以这个name的radio表单值，需要在具有这个name的radio标签中找出选中的那个标签（checked），并读取这个标签的值</p>
+    </div>
+    <hr />
+    <p>
+        总结：对于表单元素来说，如果要通过js去读取和设置表单值，只能通过js属性value去读取和设置；而标签属性value只适合写html的时候，作为默认值，这个标签属性value不一样用js去改变。
+    </p>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    /*
+     * textarea
+     */
+    // 标签属性value
+    $("#textareaAttr").on("click", function() {
+        $("textarea").attr("value", "这是通过标签属性value修改的");
+    });
+    // js属性value
+    $("#textareaJs").on("click", function() {
+        $("textarea").val("这是通过js属性value修改的");
+    });
+    // js属性innerHTML
+    $("#textareaINN").on("click", function() {
+        $("textarea").html("这是通过js属性innerHTML修改的")
+    });
+    // 读取
+    $("#textareaValue").on("click", function() {
+        console.log($("textarea").val());
+    });
 
-		<div class="wrap">
-			<h4>input</h4>
-			<input type="text" id="text" name="" value="我是默认值">
-			<input type="password" id="password" name="password" placeholder="请输入密码">
-			<input type="tel" id='phone' name="phone" placeholder="请输入手机号码">
-			<button id="setAttr">设置attr</button>
-			<button id="setValue">设置value</button>
-			<button id="getAttr">读取attr</button>
-			<button id="getValue">读取value</button>
-			<p>而其他文本类输入表单，一般都默认是写在标签上value；通过设置js属性value，或者标签属性value修改值；通过读取js属性value，或者标签属性value</p>
-		</div>
+    /*
+     * select
+     */
 
-		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			/*
-			 * textarea
-			 */
-			// 标签属性value
-			$("#textareaAttr").on("click", function() {
-				$("textarea").attr("value", "这是通过标签属性value修改的");
-			});
-			// js属性value
-			$("#textareaJs").on("click", function() {
-				$("textarea").val("这是通过js属性value修改的");
-			});
-			// js属性innerHTML
-			$("#textareaINN").on("click", function() {
-				$("textarea").html("这是通过js属性innerHTML修改的")
-			});
-			// 读取
-			$("#textareaValue").on("click", function() {
-				console.log($("textarea").val());
-			});
+    $("#selBtn").on("click", function() {
+        $("#select1").attr("value", "01");
+        $("#select2").find("option").attr("selected", false).eq(2).attr("selected", true);
+        $("#select3").val("05");
+    });
+    $("#selectValue").on("click", function() {
+        console.log($("#select1").val(), $("#select2").val(), $("#select3").val());
+    });
 
-			/*
-			 * select
-			 */
+    /*
+     * checkbox
+     */
+    $("#cheBtn").on("click", function() {
+        $("#checkbox1").attr("checked", false).val("1");
+        $("#checkbox2").attr("checked", true);
+        $("#checkbox3").get(0).checked = true;
+    });
+    $("#checkValue").on("click", function() {
+        console.log($("#checkbox1").val(), $("#checkbox1").is(":checked"), $("#checkbox1")[0].checked);
+        console.log($("#checkbox2").val(), $("#checkbox2").is(":checked"), $("#checkbox2")[0].checked);
+        console.log($("#checkbox3").val(), $("#checkbox3").is(":checked"), $("#checkbox3")[0].checked);
+    });
+    //
+    $("#setAttr").on("click", function() {
+        $("#text,#password,#phone").attr("value", "通过标签value");
+    });
+    $("#setValue").on("click", function() {
+        $("#text,#password,#phone").val("通过属性value");
+    });
+    $("#getAttr").on("click", function() {
+        console.log($("#text").attr("value"));
+    });
+    $("#getValue").on("click", function() {
+        console.log($("#text").val());
+    });
 
-			$("#selBtn").on("click", function() {
-				$("#select1").attr("value", "01");
-				$("#select2").find("option").attr("selected", false).eq(2).attr("selected", true);
-				$("#select3").val("05");
-			});
-			$("#selectValue").on("click", function() {
-				console.log($("#select1").val(), $("#select2").val(), $("#select3").val());
-			});
 
-			/*
-			 * checkbox
-			 */
-			$("#cheBtn").on("click", function() {
-				$("#checkbox1").attr("checked", false).val("1");
-				$("#checkbox2").attr("checked", true);
-				$("#checkbox3").get(0).checked = true;
-			});
-			$("#checkValue").on("click", function() {
-				console.log($("#checkbox1").val(), $("#checkbox1").is(":checked"), $("#checkbox1")[0].checked);
-				console.log($("#checkbox2").val(), $("#checkbox2").is(":checked"), $("#checkbox2")[0].checked);
-				console.log($("#checkbox3").val(), $("#checkbox3").is(":checked"), $("#checkbox3")[0].checked);
-			});
-			//
-			$("#setAttr").on("click",function(){
-				$("#text,#password,#phone").attr("value","通过标签value");
-			});
-			$("#setValue").on("click",function(){
-				$("#text,#password,#phone").val("通过属性value");
-			});
-			$("#getAttr").on("click",function(){
-				console.log($("#text").attr("value"));
-			});
-			$("#getValue").on("click",function(){
-				console.log($("#text").val());
-			});
-		</script>
-	</body>
+    /**
+     * radio
+     */
+    $("#radio1").on("click", function() {
+        var el = $(".gender").eq(0);
+        console.log(el.val())
+    });
+
+    $("#radio2").on("click", function() {
+        var el = $(".gender").eq(0);
+        el.val("公")
+    });
+
+    $("#radio3").on("click", function() {
+        var el;
+        $(".gender").each(function(index, key) {
+            if(key.checked){
+            	el = $(key);
+            }
+        });
+        console.log(el.val());
+    });
+
+    $("#radio4").on("click", function() {
+        var el;
+        $(".gender").each(function(index, key) {
+            if(key.value == "中性"){
+            	el = $(key);
+            }
+        });
+        el[0].checked = true;
+    });
+    </script>
+</body>
 
 </html>
