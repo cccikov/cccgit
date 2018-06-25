@@ -5,11 +5,30 @@
 		<meta charset="utf-8">
 		<title>测试vertical</title>
 		<link rel="stylesheet" type="text/css" href="index.css" />
+		<script type="text/javascript">
+			function notInlineBlock() {
+			    var spans = document.getElementsByTagName("span");
+			    for (let i = 0, len = spans.length; i < len; i++) {
+			    	spans[i].style.display = "inline";
+			    }
 
+			    var is = document.getElementsByTagName("i");
+			    for (let i = 0, len = is.length; i < len; i++) {
+			    	is[i].style.display = "inline";
+			    }
+			}
+		</script>
 	</head>
 
 	<body>
-		<h3>红线非baseline，只是用用于对比,为了方便显示，i,span一般设置了inline-block（为了表现line-height占的高度，撑开父元素的原因，i是模拟父元素的文本），但实际不影响</h3>
+		<a style="position: fixed;bottom:0;right:0;z-index:1000" href="javascript:notInlineBlock()">取消inline-block</a>
+
+		<h2>vertical-align 该属性定义行内元素（inline inline-block）（是设置元素相对于父元素的对齐方式，而不是设置本元素里面文字的对齐方式，table属性好像可以影响文字）的基线相对于该元素所在行的基线的垂直对齐。</h2>
+
+		<h3>红线非baseline，只是用用于对比，为了方便显示。i,span一般设置了inline-block（为了表现line-height设置的高度），用于研究不同vertical-align的元素撑开父元素的原因，实际上就算将i,span设置为inline，也不会影响父元素高度，因为元素的line-height本来占据的高度，以及vertical-align让元素产生垂直方向上错位，才是导致父元素的高度不等于line-height的原因（一行文字的时候）。点击屏幕右下角的链接取消设置为inline-block</h3>
+
+		<h3>i是模拟父元素的文本（没有设置vertical-align），即i标签的高度为父元素的line-height的高度；span是设置vertical-align的元素</h3>
+
 		<div class="same">
 			<p>Lorem ipsum dolor sit amet.</p>
 			<p><span>Lorem ipsum dolor sit amet.</span></p>
@@ -30,7 +49,7 @@
 				<p class="percent2 left">-100% <i>i i i</i><span>span span span</span></p>
 			</div>
 		</div>
-		
+
 		<h3>以下字体大小会不一样,</h3>
 		<div class="font">
 			<p class="baseline">baseline默认。元素放置在父元素的基线上 <i>i i i</i><span>span span span</span></p>
@@ -50,7 +69,7 @@
 				<p class="percent2 left">-100% <i>i i i</i><span>span span span</span></p>
 			</div>
 		</div>
-		
+
 		<h3>以下span，em字体大小会不一样,line-height为1.42</h3>
 		<div class="font2">
 			<p class="baseline">baseline默认。元素放置在父元素的基线上 <i>i i i</i><span>span span span</span><em>em em em</em></p>
@@ -70,7 +89,7 @@
 				<p class="percent2 left">-100% <i>i i i</i><span>span span span</span><em>em em em</em></p>
 			</div>
 		</div>
-		
+
 		<h3>以下line-height为1.42，个个元素vertical各不相同</h3>
 		<div class="complex">
 			<p class="c1">Lorem ipsum.<i>top</i><span>bottom</span><em>middle</em></p>
@@ -78,6 +97,8 @@
 			<p class="c3">Lorem ipsum.<i>top</i><span>bottom</span><em>middle</em></p>
 			<p class="c4">Lorem ipsum.<i>top</i><span>bottom</span><em>middle</em></p>
 		</div>
+
+		<h3>table</h3>
 		<table border="1">
 			<tr>
 				<td>top</td>
