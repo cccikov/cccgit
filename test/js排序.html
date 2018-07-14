@@ -79,11 +79,22 @@
 
                     // 遍历元素，对比大小，将最大的移到最后
                     for (var j = 0; j < i - 1; j++) {
-                        if (arr[j] > arr[j + 1]) {
+                        if (arr[j] > arr[j + 1]) { // arr[j] - arr[j + 1]>0
                             let bigger = arr[j];
                             arr[j] = arr[j + 1];
                             arr[j + 1] = bigger;
                         }
+                        /*
+                        // 如果a是arr[j],b是arr[j+1];可以根据a，b的相对大小去实现顺序还是倒序
+                        let a = arr[j],
+                            b = arr[j + 1];
+                        if (a > b) { // a-b>0
+                            let bigger = a;
+                            a = b;
+                            b = bigger;
+                            arr[j] = a;
+                            arr[j + 1] = b;
+                        } */
                     }
 
                 }
@@ -133,6 +144,9 @@
          * 持续每次对越来越少的元素重复上面的步骤，直到以最后一位数作为基准
          */
 
+        document.write(`<h3>选择排序</h3>`);
+        document.write(`<p>原始数组： ${[9, 8, 1, 6, 2, 3, 0, 4, 7, 5]}</p>`);
+
         {
             let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
 
@@ -150,11 +164,11 @@
                             arr[i] = smaller;
                         }
                     }
-
                 }
 
                 return arr;
             }
+
 
             // 倒序
             function selection_reverse(arr) {
@@ -171,29 +185,87 @@
                             arr[i] = bigger;
                         }
                     }
-
                 }
 
                 return arr;
             }
 
-            console.log(selection(arr));
-            console.log(selection_reverse(arr));
+            var sort = selection(arr);
+            var sort_reverse = selection_reverse(arr);
+
+            document.write(`<p>选择排序： ${sort}</p>`);
+            document.write(`<p>选择排序倒序： ${sort_reverse}</p>`);
         }
 
 
 
+        /*
+         * sort 排序
+         *
+         * arr .sort（[compareFunction]）
+         * compareFunction 可选的
+         *         指定定义排序顺序的函数。如果省略，则根据每个元素的字符串转换，根据每个字符的Unicode代码点值对数组进行排序。
+         *
+         *         如果没有指明 compareFunction ，那么元素会按照转换为的字符串的诸个字符的Unicode位点进行排序
+         *
+         * 返回值
+         *         排序的数组。
+         *
+         *
+         */
 
+        /**
+         * 如果 compareFunction(a, b) 小于 0 ，那么 a 会被排列到 b 之前；
+         * 如果 compareFunction(a, b) 等于 0 ， a 和 b 的相对位置不变。备注： ECMAScript 标准并不保证这一行为，而且也不是所有浏览器都会遵守（例如 Mozilla 在 2003 年之前的版本）；
+         * 如果 compareFunction(a, b) 大于 0 ， b 会被排列到 a 之前。
+         * compareFunction(a, b) 必须总是对相同的输入返回相同的比较结果，否则排序的结果将是不确定的。
+         */
 
-        /*let a = arr[j],
-           b = arr[j + 1];
-        if (a > b) { // a-b>0
-           let bigger = a;
-           a = b;
-           b = bigger;
-           arr[j] = a;
-           arr[j + 1] = b;
-        }*/
+        {
+            // 一般用法，顺序
+            let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
+            arr.sort();
+            console.log(arr);
+        } {
+            // 使用函数
+            let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
+            arr.sort(function (a, b) {
+                return a - b;
+            });
+            console.log(arr);
+        } {
+            let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
+            arr.sort(function (a, b) {
+                return a - b;
+            });
+            console.log(arr);
+        } {
+            // 不改变顺序
+            let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
+            arr.sort(function (a, b) {
+                console.log(a, b);
+                return 1; // 由于返回的数都是正数，所以前面的数永远都排在后面的数前面
+            });
+            console.log(arr);
+        } {
+            // 颠倒顺序
+            let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
+            arr.sort(function (a, b) {
+                console.log(a, b);
+                return -1; // 由于返回的数都是负数，所以前面的数永远都排在后面的数前面
+            });
+            console.log(arr);
+        } {
+            let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            var n = 0;
+            arr.sort(function (a, b) {
+                n++;
+                console.log(a, b);
+                return Math.random() > 0.5 ? -1 : 1;
+            });
+            console.log(n);
+            /*会发现sort里面调用的函数返回的数不同，比较次数是不同的,所以sort不适合乱序，是因为，不是每个数比较的次数都相同,特别函数值返回时正数的时候,次数会变少,所以不是真正的打乱顺序*/
+        }
     </script>
 </head>
 
