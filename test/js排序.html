@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>排序</title>
+    <script>
+        /**
+         * 1.乱序
+         */
+        document.write(`<h3>乱序</h3>`);
+        document.write(`<p>原始数组： ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}</p>`);
+
+        {
+            // 乱序 1
+            let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+            // 以前常用方法是这样
+            arr.sort(function (a, b) {
+                return Math.random() > 0.5 ? -1 : 1;
+            });
+
+            console.log(arr);
+            // 但是会发现，其实这不是真正的乱序，比如0一般都是在前半段，9一般都是在后半段，这和sort的原理有关，后面说
+
+            document.write(`<p>arr.sort： ${arr}</p>`);
+        }
+
+        {
+            // 乱序 2
+            let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+            function randomSort(arr) {
+                var arr = arr.slice(); // 复制原数组
+                var newArr = [];
+
+                while (arr.length > 0) {
+                    var index = parseInt(Math.random() * ((arr.length - 1) - 0 + 1) + 0); // 返回0至(数组长度-1)的整数；作为抽出索引
+                    var val = arr.splice(index, 1)[0]; // 取出对应索引的值。然后原数组长度就会减短。
+                    newArr.push(val); // 将值添加到新数组
+                }
+
+                return newArr;
+            }
+
+            var randomArr = randomSort(arr);
+            console.log(randomArr);
+            // 比起sort方法乱序，不仅更加正确，而且还不会修改原数组
+
+            document.write(`<p>randomSort： ${randomArr}</p>`);
+        }
+
+
+
+
+
+        /**
+         * 冒泡排序 Bubble
+         *
+         * 比较相邻的元素。如果第一个比第二个大，就交换他们两个
+         * 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。
+         *
+         * 针对所有的元素重复以上的步骤，除了最后一个。
+         *
+         * 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较
+         */
+
+        document.write(`<h3>冒泡排序</h3>`);
+        document.write(`<p>原始数组： ${[9, 8, 1, 6, 2, 3, 0, 4, 7, 5]}</p>`);
+
+        {
+            let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
+
+            /* 顺序 */
+            function bubble(arr) {
+                var arr = arr.slice();
+                // 不断减少遍历长度
+                for (var i = arr.length; i > 0; i--) {
+
+                    // 遍历元素，对比大小，将最大的移到最后
+                    for (var j = 0; j < i - 1; j++) {
+                        if (arr[j] > arr[j + 1]) {
+                            let bigger = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = bigger;
+                        }
+                    }
+
+                }
+
+                return arr;
+            }
+
+
+            // 倒序
+            function bubble_reverse(arr) {
+                var arr = arr.slice();
+                // 不断减少遍历长度
+                for (var i = arr.length; i > 0; i--) {
+
+                    // 遍历元素，对比大小，将最小的移到最后
+                    for (var j = 0; j < i - 1; j++) {
+                        if (arr[j] < arr[j + 1]) {
+                            let smaller = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = smaller;
+                        }
+                    }
+
+                }
+
+                return arr;
+            }
+
+            var sort = bubble(arr);
+            var sort_reverse = bubble_reverse(arr);
+
+            document.write(`<p>冒泡排序： ${sort}</p>`);
+            document.write(`<p>冒泡排序倒序： ${sort_reverse}</p>`);
+
+        }
+
+
+
+        /**
+         * 选择排序 Selection
+         *
+         * 因为第一个元素作为基准对比后面的元素，如果第一个大，就交换。
+         * 这样下去，第一个数肯定是最小的。
+         *
+         * 针对所有的元素重复以上的步骤，除了第一个。
+         *
+         * 持续每次对越来越少的元素重复上面的步骤，直到以最后一位数作为基准
+         */
+
+        {
+            let arr = [9, 8, 1, 6, 2, 3, 0, 4, 7, 5];
+
+            function selection(arr) {
+                var arr = arr.slice();
+
+                // 以每个元素来作为基准
+                for (var i = 0; i < arr.length; i++) {
+
+                    // 与基准后面的元素作对比
+                    for (var j = i + 1; j < arr.length; j++) {
+                        if (arr[i] > arr[j]) {
+                            smaller = arr[j];
+                            arr[j] = arr[i];
+                            arr[i] = smaller;
+                        }
+                    }
+
+                }
+
+                return arr;
+            }
+
+            // 倒序
+            function selection_reverse(arr) {
+                var arr = arr.slice();
+
+                // 以每个元素来作为基准
+                for (var i = 0; i < arr.length; i++) {
+
+                    // 与基准后面的元素作对比
+                    for (var j = i + 1; j < arr.length; j++) {
+                        if (arr[i] < arr[j]) {
+                            bigger = arr[j];
+                            arr[j] = arr[i];
+                            arr[i] = bigger;
+                        }
+                    }
+
+                }
+
+                return arr;
+            }
+
+            console.log(selection(arr));
+            console.log(selection_reverse(arr));
+        }
+
+
+
+
+
+        /*let a = arr[j],
+           b = arr[j + 1];
+        if (a > b) { // a-b>0
+           let bigger = a;
+           a = b;
+           b = bigger;
+           arr[j] = a;
+           arr[j + 1] = b;
+        }*/
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
