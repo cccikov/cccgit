@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>属性检测</title>
+    <script type="text/javascript">
+    var obj = {
+        a: undefined,
+        b: null,
+        c: 0,
+        d: ""
+    }
+
+
+    /* 一般判断是否有无这个属性，是直接通过判断这个属性的Boolean， */
+    console.log(!!obj.name); // false 没有name这个属性
+    if (obj.name) {
+        console.log("有name这个属性")
+    } else {
+        console.log("没有name这个属性");
+    }
+    if (!obj.name) {
+        console.log("没有name这个属性");
+    }
+
+    /* 但是如果属性值转化为Boolean为false的时候，就不适用了 */
+    console.log(!!obj.a); // false 但是实际是有a这个属性的
+    if (obj.c) {
+        console.log("有c这个属性")
+    } else {
+        console.log("没有c这个属性");
+    }
+    if (!obj.d) {
+        console.log("没有d这个属性");
+    }
+
+
+    /* 最正确的方式是，使用操作符 in */
+    console.log("name" in obj); // false
+    console.log("a" in obj); // true
+    console.log("b" in obj); // true
+    console.log("c" in obj); // true
+    console.log("d" in obj); // true
+
+
+
+    /* 一般情况下是可以直接通过boolean来判断，但是如果那个属性值是0 "" false 的时候也是有效的，那最好就用 in 操作符 */
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
