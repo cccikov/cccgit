@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>String API</title>
+    <script type="text/javascript">
+    function show(arr) {
+        console.log("");
+        arr.forEach(function(key, i) {
+            console.log(i + "", key);
+        });
+        console.log("");
+    }
+
+
+    /**
+     * String API
+     */
+
+    /* str.slice */
+    show([
+        "slice",
+        ("0123456789").slice(),
+        ("0123456789").slice(2),
+        ("0123456789").slice(2, 3),
+        ("0123456789").slice(2, -3),
+        ("0123456789").slice(2, 0),
+    ]);
+
+    /* str.substring */
+    show([
+        "substring",
+        ("0123456789").substring(),
+        ("0123456789").substring(2),
+        ("0123456789").substring(2, 3),
+        ("0123456789").substring(2, -3),
+        ("0123456789").substring(2, 0),
+    ]);
+
+    /* str.substr */
+    show([
+        "substr",
+        ("0123456789").substr(),
+        ("0123456789").substr(2),
+        ("0123456789").substr(2, 3),
+    ]);
+
+
+    /* str.split */
+    show([
+        "split",
+        ("abc hahah asd asd asd asd as d").split(" "),
+        ("abc hahah asd asd asd asd as d").split(" ", 2),
+        ("abc hahah asd asd asd asd as d").split(""),
+        ("abc hahah asd asd asd asd as d").split(),
+    ]);
+
+    var str = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, quae. Sequi quisquam dolor debitis blanditiis nulla magni culpa quasi nobis explicabo nesciunt, saepe iste! Corporis hic accusamus minima, explicabo nam."
+    console.log(str.replace("m", "haha"));
+    console.log(str.replace(/m/g, "haha"));
+    console.log(str.replace(/m/g, "$&"));
+    console.log("abem".replace(/(e)/g, "$`"));
+    console.log("abemgfeasdm".replace(/a|(e)|(m)/g, "$1$2"));
+    console.log(str.replace(/m/g, function() {
+        return "fuck";
+    }));
+    console.log(str.replace(/(e)(m)/g, function(match, p1, p2, offset, string) {
+        console.log(arguments)
+        console.log(match, p1, p2, offset, string);
+        return offset;
+    }));
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
