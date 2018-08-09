@@ -50,7 +50,8 @@
     ]);
 
     // 转化为布尔值，利用逻辑运算符!，同时两个!，即!!
-    show([!!"str", // true
+    show([
+        !!"str", // true
         !!123, // true
         !![1, 2, 3], // true
         !!{}, // true
@@ -75,7 +76,7 @@
     // 转为字符串还可以使用从Object原型中继承的原型方法toString（复制数据类型如Array Date会改写toString），每种类型都可调用
     show([
         "toString()",
-        (100).toString(), // "100"
+        (100).toString(), // "100" 数字一般都会加括号，因为.对于数字来说是小数点
         true.toString(), // "true"
         [1, 2, 3].toString(), // "1,2,3"
         {}.toString(), // "[object Object]"
@@ -137,7 +138,7 @@
         [1, 2, 3] + "", // 我都说是调用我的啦
         String([1, 2, 3]), // 我都说是调用我的啦
     ]);
-    // 事实证明，转化为字符串都是调用toString原型方法，
+    // 事实证明，转化为字符串都是调用toString原型方法。
     show([
         Boolean(false), // false
         new Boolean(false), // Boolean {false}
