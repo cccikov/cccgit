@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>类型转换</title>
+    <script type="text/javascript">
+    function show(arr) {
+        console.log("");
+        arr.forEach(function(key, i) {
+            console.log(i + "", key);
+        });
+        console.log("");
+    }
+
+
+
+    /* js中五种基本类型：string、number、boolean、null、undefined；除去特殊的两个null和undefined，就是string、number、boolean之间的转换。 */
+
+    /**
+     * 隐式转换，一般是利用操作符
+     */
+
+    // 转化为字符串，利用字符串拼接，实际上都是调用toString()
+    show([
+        100 + "", // "100"
+        true + "", // "true"
+        [1, 2, 3] + "", // "1,2,3"
+        {} + "", // "[object Object]"
+        new Date() + "", // "Thu Aug 09 2018 19:50:59 GMT+0800 (中国标准时间)"
+        null + "", // "null"
+        undefined + "", // "undefined"
+    ]);
+
+    // 转化为数组，利用运算符*，由于+号遇到字符串会变成字符串拼接，所以使用* / -
+    show([
+        "123" * 1, // 123
+        "123" / 1, // 123
+        "123" - 0, // 123
+        true + 0, // 1
+        true - 0, // 1
+        true * 1, // 1
+        true / 1, // 1
+        [1, 2, 3] * 1, // NaN
+        {}* 1, // NaN
+        null * 1, // 0
+        undefined * 1, // NaN
+        new Date() * 1, // 1533815659450
+    ]);
+
+    // 转化为布尔值，利用逻辑运算符!，同时两个!，即!!
+    show([!!"str", // true
+        !!123, // true
+        !![1, 2, 3], // true
+        !!{}, // true
+        !!null, // false
+        !!undefined, // false
+    ]);
+
+    /**
+     * 显式转换 一般是直接调用构造函数
+     */
+    // 转为字符串 实际上还是调用该类型的toString方法（如果有的话）
+    show([
+        "String()",
+        String(100), // "100"
+        String(true), // "true"
+        String([1, 2, 3]), // "1,2,3"
+        String({}), // "[object Object]"
+        String(new Date()), // Thu Aug 09 2018 19:56:31 GMT+0800 (中国标准时间)
+        String(null), // "null"
+        String(undefined), // "undefined"
+    ]);
+    // 转为字符串还可以使用从Object原型中继承的原型方法toString（复制数据类型如Array Date会改写toString），每种类型都可调用
+    show([
+        "toString()",
+        (100).toString(), // "100"
+        true.toString(), // "true"
+        [1, 2, 3].toString(), // "1,2,3"
+        {}.toString(), // "[object Object]"
+        new Date().toString(), // Thu Aug 09 2018 19:56:31 GMT+0800 (中国标准时间)
+        // null.toString(), // 报错
+        // undefined.toString(), // 报错
+    ]);
+
+    // 转化为数字
+    show([
+        "Number()",
+        Number("123.1"), // 123.1
+        Number(true), // 1
+        Number([1, 2, 3]), // NaN
+        Number({}), // NaN
+        Number(null), // 0
+        Number(undefined), // NaN
+        Number(new Date()), // 1533816064379
+    ]);
+    // parseInt() parseFloat() 实际上先将参数转化为字符串，再在字符串里面找出有效数字，所以数组是有可能转化为数字的，对象是永远不可能是因为对象转为字符串后是"[object Object]"是没有数字的
+    show([
+        parseInt("123.1"), // 123
+        parseInt("0x10"), // 16 16进制写法
+        parseInt(true), // NaN
+        parseInt([1, 2, 3]), // 1
+        parseInt({ age: 18 }), // NaN
+        parseInt(null), // NaN
+        parseInt(undefined), // NaN
+        parseInt(new Date()), // NaN
+    ]);
+    show([
+        parseFloat("123.1"), // 123.1
+        parseFloat("0x10"), // 0 使用 parseFloat() 方法的另一不同之处在于，字符串必须以十进制形式表示浮点数
+        parseFloat(true), // NaN
+        parseFloat([1, 2, 3]), // 1
+        parseFloat({ age: 18 }), // NaN
+        parseFloat(null), // NaN
+        parseFloat(undefined), // NaN
+        parseFloat(new Date()), // NaN
+    ]);
+
+    // 转化为boolean
+    show([
+        Boolean("str"), // true
+        Boolean(123), // true
+        Boolean([1, 2, 3]), // true
+        Boolean({}), // true
+        Boolean(null), // false
+        Boolean(undefined), // false
+        Boolean(new Date()), // true
+    ]);
+
+
+
+    Array.prototype.toString = function() {
+        return "我都说是调用我的啦";
+    }
+    show([
+        [1, 2, 3] + "", // 我都说是调用我的啦
+        String([1, 2, 3]), // 我都说是调用我的啦
+    ]);
+    // 事实证明，转化为字符串都是调用toString原型方法，
+    show([
+        Boolean(false), // false
+        new Boolean(false), // Boolean {false}
+        !!Boolean(false), // false
+        !!new Boolean(false), // true 由于使用的是new，所以返回的是对象而不是Boolean，而对象只要不是null，转为布尔值都是true
+    ]);
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
