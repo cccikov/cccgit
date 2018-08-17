@@ -36,7 +36,7 @@
 		 * 组合继承是js最常见的继承模式，但是其最大的缺点在于无论什么情况啊，都会调用两次超类型构造函数(子类构造函数一次，创建子类原型一次)
 		 */
 		function inheritPrototype(subType,superType){
-			var prototype = Object(superType.prototype);//只是读取superType的原型，没有读取实例
+			var prototype = object(superType.prototype);//只是读取superType的原型，没有读取实例
 			prototype.constructor = subType;
 			subType.prototype = prototype;
 		};
@@ -58,7 +58,7 @@
 
 		var instance = new SubType("ccc",25);
 		console.log(instance);//SubType
-		console.log(SubType.prototype);//Object
+		console.log(SubType.prototype);//SuperType 
 	</script>
 </body>
 </html>

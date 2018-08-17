@@ -114,13 +114,14 @@
 		// 就是直接调用超类构造函数,把超类构造函数指向子类的this;然后让子类的prototype成为超类的实例;虽然子类实例的某些属性方法可能会同时存在于实例还有[[prototype]]上,但是由于实例上存在,先读取实力上的属性方法
 
 		/*
-		 *  原型式继承
+		 *  原型式继承（继承于一个对象）
 		 */
 		function object(o){
-			function F(){};
-			F.prototype = o;//继承于o
-			return new F();
+			function Per(){};
+			Per.prototype = o;//继承于o
+			return new Per();
 		};
+		// 就是直接将新对象的prototype直接指向o
 		var person = {
 			"name":"person",
 			"num":[1,2,3]
@@ -147,7 +148,7 @@
 		});
 		console.log(ddd.name);//ddd
 
-
+		// 就是类似利用单独利用原型来创建对象，还是使用重写原型的方式
 	</script>
 </body>
 </html>
