@@ -21,7 +21,7 @@
 			}
 
 			/*Person.prototype = {
-				constructor:Person,//这里一定要重定向，上面的写法不用重定向是因为prototype本身就会自动获取constructor属性，而这里是重写了原型对象，若不加相当于把constructor删除，这样实例的constructor都是Object,因为Person是Object的实例，所以当Person.prototype.constructor删除后，就找到Object原型的属性constructor，当然就指向Object。这里涉及一个继承的问题
+				constructor:Person,//这里一定要重定向，上面的写法不用重定向是因为prototype本身就会自动获取constructor属性，而这里是重写了原型对象，若不加相当于把constructor删除，这样实例的constructor都是Object,因为Person是Object的实例，所以当Person.prototype.constructor删除后，就找到Object原型的属性constructor，当然就指向Object。这里涉及一个继承的问题。但是，这种写法会导致constructor可枚举
 				name: "Nicholas",
 				age: 29,
 				job: "Software Engineer",

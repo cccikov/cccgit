@@ -29,7 +29,7 @@
 			<br /> 4、返回新对象(相当于返回this)。
 		</p>
 		<p>
-			构造函数缺点：<br /> 以构造函数方式创造函数，会导致不同的作用域链和标识符解析，就是每个Person实例都包含一个不同的Function实例的本质。不通实例上的同名函数是不相等的。
+			构造函数缺点：<br /> 以构造函数方式创造函数，会导致不同的作用域链和标识符解析，就是每个Person实例都包含一个不同的Function实例的本质。即不同实例上的同名函数是不相等的。
 		</p>
 		<script type="text/javascript">
 			//普通模式(一个个建)
@@ -59,7 +59,7 @@
 				}
 			}
 			/*//字面量创建2
-			var boy = {};
+			var boy = {}; // 相当于 new Object();
 			boy.name = "ccc";
 			boy.age = 40;
 			boy.job = "teacher";
@@ -116,7 +116,7 @@
 
 
 			//不使用new
-			var person5 = Person("ccc3", 33, "hahah"); //person5 为 underfinded ，因为Person并没有return任何东西。
+			var person5 = Person("ccc3", 33, "hahah"); //person5 为 underfinded ，因为Person并没有return任何东西。除了保存了返回值，其他和下面构造函数作为普通函数一样执行一样
 			console.log(person5);// undefined
 
 			//构造函数作为普通函数一样执行
