@@ -36,6 +36,7 @@
 			person2.sayName(); //"Nicholas"
 
 			console.dir(person1.constructor); //function Person() Person的实例本身没有constructor属性，就会往原形上找，所以这里输出的是Person.prototype.constructor
+			console.log(person1.constructor == Person.prototype.constructor)
 
 			Person.prototype.sayName = function(){
 				console.log("我的名字 " + this.name);
