@@ -8,131 +8,230 @@
 
 <body>
     <script type="text/javascript">
-    //
 
 
 
-    /*
-     * 原型链继承
-     */
-    /*
 
-    //超类引用类型
-    function SuperType(param) {
-        this.super_property = "父类";
-        this.super_parameter = param;
-        this.super_obj = {
-            "name":"ccc"
+        /*
+         * 原型链继承
+         */
+        /*
+
+        //超类引用类型
+        function SuperType(param) {
+            this.super_property = "父类";
+            this.super_parameter = param;
+            this.super_obj = {
+                "name":"ccc"
+            }
+        };
+        SuperType.prototype.super_method = function(){
+            console.log("我是父类")
         }
-    };
-    SuperType.prototype.super_method = function(){
-        console.log("我是父类")
-    }
 
-    //子类引用类型
-    function SubType(param) {
-        this.sub_property = "子类";
-        this.sub_parameter = param;
-    };
-    SubType.prototype = new SuperType("父类参数"); // 继承
-    SubType.prototype.constructor = SubType;
+        //子类引用类型
+        function SubType(param) {
+            this.sub_property = "子类";
+            this.sub_parameter = param;
+        };
+        SubType.prototype = new SuperType("父类参数"); // 继承
+        SubType.prototype.constructor = SubType;
 
-    // 实例
-    var instance1 = new SubType("子类参数");
-    var instance2 = new SubType("子类参数");
+        // 实例
+        var instance1 = new SubType("子类参数");
+        var instance2 = new SubType("子类参数");
 
-    instance1.super_obj.name = "傻逼";// 修改超类的实例属性值
-    instance1.super_obj.age = "3岁";// 增加超类的实例属性值
+        instance1.super_obj.name = "傻逼";// 修改超类的实例属性值
+        instance1.super_obj.age = "3岁";// 增加超类的实例属性值
 
-    console.log(instance1,instance2);
+        console.log(instance1,instance2);
 
 
-    // 缺点1：传参问题，对于超类的参数在继承的时候就要传递了，但是实际情况有可能是子类实例化的时候才知道这个参数值。
-    // 缺点2：超类的实例属性，变成了子类的原型属性，就是说全部子类实例共用这个属性。
+        // 缺点1：传参问题，对于超类的参数在继承的时候就要传递了，但是实际情况有可能是子类实例化的时候才知道这个参数值。
+        // 缺点2：超类的实例属性，变成了子类的原型属性，就是说全部子类实例共用这个属性。
 
-    */
+        */
 
 
 
-    /**
-     * 构造函数
-     */
-
-    /*
 
 
-    //超类引用类型
-    function SuperType(param) {
-        this.super_property = "父类";
-        this.super_parameter = param;
-        this.super_obj = {
-            "name": "ccc"
+
+
+
+
+
+
+
+        /**
+         * 构造函数继承
+         */
+
+        /*
+
+
+        //超类引用类型
+        function SuperType(param) {
+            this.super_property = "父类";
+            this.super_parameter = param;
+            this.super_obj = {
+                "name": "ccc"
+            }
+        };
+        SuperType.prototype.super_method = function() {
+            console.log("我是父类")
         }
-    };
-    SuperType.prototype.super_method = function() {
-        console.log("我是父类")
-    }
 
-    //子类引用类型
-    function SubType(param1, param2) {
-        this.sub_property = "子类";
-        this.sub_parameter = param1;
-        param2 = "经过子类处理 " + param2;
-        SuperType.call(this, param2); // 继承
-    };
+        //子类引用类型
+        function SubType(param1, param2) {
+            this.sub_property = "子类";
+            this.sub_parameter = param1;
+            param2 = "经过子类处理 " + param2;
+            SuperType.call(this, param2); // 继承
+        };
 
-    // 实例
-    var instance1 = new SubType("子类参数", "父类参数");
-    var instance2 = new SubType("子类参数", "父类参数");
+        // 实例
+        var instance1 = new SubType("子类参数", "父类参数");
+        var instance2 = new SubType("子类参数", "父类参数");
 
-    instance1.super_obj.name = "傻逼"; // 修改超类的实例属性值
-    instance1.super_obj.age = "3岁"; // 增加超类的实例属性值
+        instance1.super_obj.name = "傻逼"; // 修改超类的实例属性值
+        instance1.super_obj.age = "3岁"; // 增加超类的实例属性值
 
-    console.log(instance1, instance2);
+        console.log(instance1, instance2);
 
-    // 缺点1：超类原型中的属性方法将无法被子类继承
-    // 缺点2：无法通过原型链得知继承关系
+        // 缺点1：超类原型中的属性方法将无法被子类继承
+        // 缺点2：无法通过原型链得知继承关系
 
 
-    */
+        */
 
-    /**
-     * 组合继承，原型链+构造函数继承
-     */
 
-    //超类引用类型
-    function SuperType(param) {
-        this.super_property = "父类";
-        this.super_parameter = param;
-        this.super_obj = {
-            "name": "ccc"
+
+
+
+
+
+
+
+
+
+
+        /**
+         * 组合继承，原型链+构造函数继承
+         */
+
+        /*
+
+        //超类引用类型
+        function SuperType(param) {
+            this.super_property = "父类";
+            this.super_parameter = param;
+            this.super_obj = {
+                "name": "ccc"
+            }
+        };
+        SuperType.prototype.super_method = function() {
+            console.log("我是父类")
         }
-    };
-    SuperType.prototype.super_method = function() {
-        console.log("我是父类")
-    }
 
-    //子类引用类型
-    function SubType(param1, param2) {
-        this.sub_property = "子类";
-        this.sub_parameter = param1;
-        param2 = "经过子类处理 " + param2;
-        SuperType.call(this, param2); // 继承
-    };
-    SubType.prototype = new SuperType("父类参数"); // 继承
-    SubType.prototype.constructor = SubType;
-    SubType.prototype.sub_method = function() {
-        console.log("我是子类")
-    }
+        //子类引用类型
+        function SubType(param1, param2) {
+            this.sub_property = "子类";
+            this.sub_parameter = param1;
+            param2 = "经过子类处理 " + param2;
+            SuperType.call(this, param2); // 继承
+        };
+        SubType.prototype = new SuperType("父类参数"); // 继承
+        SubType.prototype.constructor = SubType;
+        SubType.prototype.sub_method = function() {
+            console.log("我是子类")
+        }
 
-    // 实例
-    var instance1 = new SubType("子类参数", "父类参数");
-    var instance2 = new SubType("子类参数", "父类参数");
+        // 实例
+        var instance1 = new SubType("子类参数", "父类参数");
+        var instance2 = new SubType("子类参数", "父类参数");
 
-    instance1.super_obj.name = "傻逼"; // 修改超类的实例属性值
-    instance1.super_obj.age = "3岁"; // 增加超类的实例属性值
+        instance1.super_obj.name = "傻逼"; // 修改超类的实例属性值
+        instance1.super_obj.age = "3岁"; // 增加超类的实例属性值
 
-    console.log(instance1, instance2);
+        console.log(instance1, instance2);
+
+
+        */
+
+
+
+
+        /*
+         * 原型式继承（继承于一个对象）
+         * es5 中的 Object.create();
+         */
+
+        /*
+
+        function object(o) {
+            // 就是直接将新对象的prototype直接指向o
+            function F() { };
+            F.prototype = o; // 继承于o
+            return new F();
+        };
+
+        // 原对象，就是父对象；
+        var super_instance = {
+            "name": "ccc",
+            "age": 18
+        };
+
+        // 子对象
+        var sub_instance1 = object(super_instance);
+        var sub_instance2 = Object.create(super_instance);
+        // 对比起上面几个继承方法来说，个人觉得这个更偏向于是创建对象的方法，因为没有涉及引用类型，只是这个对象是继承于另外一个对象
+        console.log(sub_instance1,sub_instance2);
+
+        // 优点：不需要专门定义构造函数去创建对象
+        // 缺点：继承于同一个父对象的子对象是共享对应的属性，就好像直接使用原型模式那样
+
+
+        */
+
+
+
+
+        /*
+		 * 寄生式继承（一个增强原来创建对象方式的函数）
+         * 本质上就是将一些每次都会增加的属性封装成函数
+         * 不会改变实例与原来创建对象方式的关系
+		 */
+
+
+        /*
+        // 原创建对象方式。
+        function Person(){
+            this.type = "human"
+        }
+        Person.eat = function(){
+            console.log("eating");
+        }
+
+        function create_teacher(name){
+            var person = new Person();
+            person.name = name;
+            person.profession = "teacher";
+            person.teach = function(){
+                console.log("教书育人");
+            }
+            return person;
+        }
+
+        var teacher1 = create_teacher("Tom"); // 还是 Person 的实例
+        var teacher2 = create_teacher("Mary"); // 还是 Person 的实例
+        console.log(teacher1,teacher2);
+
+        // 缺点：增加都是实例属性，就和构造函数创建对象一样，方法不是共用同一个。
+
+        */
+
+
     </script>
 </body>
 

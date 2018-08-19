@@ -117,9 +117,9 @@
 		 *  原型式继承（继承于一个对象）
 		 */
 		function object(o){
-			function Per(){};
-			Per.prototype = o;//继承于o
-			return new Per();
+			function F(){};
+			F.prototype = o;//继承于o
+			return new F();
 		};
 		// 就是直接将新对象的prototype直接指向o
 		var person = {

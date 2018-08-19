@@ -7,7 +7,7 @@
 <body>
 	<script type="text/javascript">
 		/*
-		 * 寄生式继承
+		 * 寄生式继承（一种增强原来创建对象方式的方法）
 		 */
 		function object(o){
 			function F(){};
@@ -15,7 +15,7 @@
 			return new F();
 		};
 		function createAnother(original){
-			var clone = object(original); // 通过调用函数创建一个新对象，这里可以是任何返回新对象的函数（构造函数，原型式，工厂模式，原型链继承）
+			var clone = object(original); // 通过调用函数创建一个新对象，这里可以是任何返回新对象的函数或者方式（构造函数，原型式，工厂模式，原型链继承）
 			clone.sayHi = function(){   //以某种方式来增强这个对象
 				console.log("hi");
 			};
