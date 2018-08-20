@@ -25,8 +25,7 @@
     function inheritPrototype(subType, superType) {
         // subType.prototype = Object.create(superType.prototype); // 将 subType.prototype的原型 指向 superType的原型；虽然 subType.prototype的原型 不完全是 superType 的实例（没有superType的实例属性，但是用instanceof检测还是属于superType的实例），但是由于原型指向这个 superType的原型 这个对象，只要 superType的原型 有所变化，subType的实例上都会反映出来
         subType.prototype = object(superType.prototype)
-        console.log(subType.prototype);
-        // subType.prototype.constructor = subType;
+        subType.prototype.constructor = subType;
     }
 
     //超类引用类型
@@ -52,8 +51,6 @@
         // SuperType.call(this, param2);  // 只是继承超类构造函数中的属性方法，不会继承超类原型中的属性方法
     };
 
-    // new SubType("1","2");
-
     // 继承
     inheritPrototype(SubType, SuperType); // 只是继承超类原型中的属性方法，不会继承超类构造函数中的属性方法
 
@@ -61,6 +58,10 @@
     var instance = new SubType("子类参数", "父类参数");
 
     console.log(instance);
+
+
+
+    /* 疑问：为什么不能让子类的原型直接指向父类的原型呢？因为都是指向同一个对象的话我们修改子类原型，来给子类全部实例添加共用属性方法的时候，就会将父类的原型也修改了，父类的实例也会出现了变化 */
     </script>
 </body>
 

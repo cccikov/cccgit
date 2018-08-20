@@ -259,8 +259,7 @@
         function inheritPrototype(subType,superType){
             // subType.prototype = Object.create(superType.prototype); // 将 subType.prototype的原型 指向 superType的原型；虽然 subType.prototype的原型 不完全是 superType 的实例（没有superType的实例属性，但是用instanceof检测还是属于superType的实例），但是由于原型指向这个 superType的原型 这个对象，只要 superType的原型 有所变化，subType的实例上都会反映出来
             subType.prototype = object(superType.prototype)
-            console.log(subType.prototype);
-            // subType.prototype.constructor = subType;
+            subType.prototype.constructor = subType;
         }
 
         //超类引用类型
@@ -285,8 +284,6 @@
             // 继承
             // SuperType.call(this, param2);  // 只是继承超类构造函数中的属性方法，不会继承超类原型中的属性方法
         };
-
-        // new SubType("1","2");
 
         // 继承
         inheritPrototype(SubType,SuperType); // 只是继承超类原型中的属性方法，不会继承超类构造函数中的属性方法

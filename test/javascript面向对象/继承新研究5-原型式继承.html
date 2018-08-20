@@ -35,6 +35,42 @@
 
     // 优点：不需要专门定义构造函数去创建对象
     // 缺点：继承于同一个父对象的子对象是共享对应的属性，就好像直接使用原型模式那样
+
+
+    /*只有构造函数可以直接指定原型是哪个对象。非构造函数（原型对象和实例对象）只能通过调用构造函数成为这个构造函数的实例才能选择原型是指向哪个对象；或者通过Object.create()来继承于某个对象作为自身的原型对象*/
+    (function() {
+        // 一个对象
+        var obj = {
+            name: "ccc"
+        }
+
+        /* 构造函数选择自己的原型 */
+        function A() {}
+        A.prototype = obj; // 构造函数改变自己原型，构造函数的原型是obj了，这个原型是让自己作为构造函数创建的实例拥有obj属性的原型，而不是自己作为Function实例指的那个原型(__proto__)
+        console.log("", new A().name); // 构造函数A的实例已经有obj的属性了
+
+        /* 实例选择自己的原型 */
+        // 只能让一个构造函数的原型是我们想要的对象，然后成为这个构造函数的实例，才能让自身的原型是我们想要的对象（原型式继承封装的就是这一步）
+        // 或者调用
+        function F(){};
+        F.prototype = obj;
+        var instance1 = new F(); // 这个实例的原型(__proto__)是obj了
+        console.log(instance1);
+
+        var instance2 = Object.create(obj); // 这个实例的原型(__proto__)是obj了
+        console.log(instance2);
+
+
+
+        /* 让某个构造函数原型的原型指向obj呢 */
+        A.prototype = new F(); // 这个实例的原型(__proto__)是obj了
+        console.log(new A()); // 实例原型的原型已经指向obj了
+
+        A.prototype = Object.create(obj); // 这个实例的原型(__proto__)是obj了
+        console.log(new A());
+
+
+    })();
     </script>
 </body>
 
