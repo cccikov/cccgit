@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>继承新研究</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    /*
+     * 寄生式继承（一个增强原来创建对象方式的函数）
+     * 本质上就是将一些每次都会增加的属性封装成函数
+     * 不会改变实例与原来创建对象方式的关系
+     */
+
+    // 原创建对象方式。
+    function Person() {
+        this.type = "human"
+    }
+    Person.eat = function() {
+        console.log("eating");
+    }
+
+    function create_teacher(name) {
+        var person = new Person();
+        person.name = name;
+        person.profession = "teacher";
+        person.teach = function() {
+            console.log("教书育人");
+        }
+        return person;
+    }
+
+    var teacher1 = create_teacher("Tom"); // 还是 Person 的实例
+    var teacher2 = create_teacher("Mary"); // 还是 Person 的实例
+    console.log(teacher1, teacher2);
+
+    // 缺点：增加都是实例属性，就和构造函数创建对象一样，方法不是共用同一个。
+    </script>
+</body>
+
+</html>

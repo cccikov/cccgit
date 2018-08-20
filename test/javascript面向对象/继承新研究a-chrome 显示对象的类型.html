@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>继承新研究</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+    function object(o) {
+        function F() {};
+        F.prototype = o; // 继承于o，F就是o的子类，每次调用都会新建一个F
+        return new F(); // 新对象就是F的实例，新对象的prototype直接指向o，新对象就是o的子类实例
+        // 每次返回的对象都是由新的构造函数产生的实例，所以就算传进来o一样，返回值都不是不同的对象，因为构造函数不同，但是返回值的原型是相同的，都是o。
+    };
+
+    // 关于 chrome 显示对象的类型，是根据该对象原型的constructor(但是一般来说实例原型的constructor就是指向构造函数，除非改写了prototype)，如果原型中没有constructor，如果是构造函数调用创造出来的则根据构造函数；如果不是构造函数调用创造出来的则是Object
+    function Aaa() {}
+    // console.log(new Aaa());
+    // console.log(new Aaa());
+
+    function Bbb() {}
+
+    function Ccc() {}
+
+
+    function Ddd() {}
+    Ddd.prototype = Aaa.prototype
+    console.log("Ddd实例", new Ddd());
+    console.log("Aaa实例", new Aaa());
+    console.log("Aaa原型", Aaa.prototype);
+
+    Aaa.prototype = object(Ccc.prototype)
+    console.log("Aaa原型原型式继承于Ccc")
+    Bbb.prototype = object(Ccc.prototype)
+    console.log("Aaa原型", Aaa.prototype);
+    console.log("Aaa原型是Ccc的实例", Aaa.prototype instanceof Ccc)
+    console.log("Aaa实例", new Aaa());
+    console.log("Aaa原型", Aaa.prototype);
+
+
+
+
+    console.log(Object.getPrototypeOf(Aaa.prototype) == Object.getPrototypeOf(Bbb.prototype))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>继承新研究</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+    /**
+     * 涉及继承
+     *
+     * 是基于 构造函数模式和原型模式组合 创造实例的方式来讨论的
+     *
+     * x.prototype 要看成是一个整体是一个对象
+     *
+     */
+
+    function SuperType(param) {
+        this.super_property = "父类";
+        this.super_parameter = param;
+        this.super_obj = {
+            "name": "ccc"
+        }
+    };
+    SuperType.prototype.super_method = function() {
+        console.log("我是父类")
+    }
+
+
+    var instance = new SuperType("父类参数")
+
+    console.log(instance)
+    console.log(instance instanceof SuperType)
+    </script>
+</body>
+
+</html>

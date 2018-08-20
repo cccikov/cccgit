@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>继承新研究</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    /*
+     * 寄生组合式继承
+     *
+     * 虽然组合继承是js最常见的继承模式，但是其最大的缺点在于无论什么情况啊，都会调用两次超类型构造函数(子类构造函数一次，创建子类原型一次)；
+     * 而且子类型的原型中会有父类型的实例属性，并且这部分属性也会在因为子类在构造函数中也继承了而被覆盖
+     */
+
+    function object(o) {
+        function F() {};
+        F.prototype = o; // 继承于o，F就是o的子类，每次调用都会新建一个F
+        return new F(); // 新对象就是F的实例，新对象的prototype直接指向o，新对象就是o的子类实例
+    };
+
+
+    function inheritPrototype(subType, superType) {
+        // subType.prototype = Object.create(superType.prototype); // 将 subType.prototype的原型 指向 superType的原型；虽然 subType.prototype的原型 不完全是 superType 的实例（没有superType的实例属性，但是用instanceof检测还是属于superType的实例），但是由于原型指向这个 superType的原型 这个对象，只要 superType的原型 有所变化，subType的实例上都会反映出来
+        subType.prototype = object(superType.prototype)
+        console.log(subType.prototype);
+        // subType.prototype.constructor = subType;
+    }
+
+    //超类引用类型
+    function SuperType(param) {
+        this.super_property = "父类";
+        this.super_parameter = param;
+        this.super_obj = {
+            "name": "ccc"
+        }
+    };
+    SuperType.prototype.super_method = function() {
+        console.log("我是父类")
+    }
+
+
+    //子类引用类型
+    function SubType(param1, param2) {
+        this.sub_property = "子类";
+        this.sub_parameter = param1;
+        param2 = "经过子类处理 " + param2;
+
+        // 继承
+        // SuperType.call(this, param2);  // 只是继承超类构造函数中的属性方法，不会继承超类原型中的属性方法
+    };
+
+    // new SubType("1","2");
+
+    // 继承
+    inheritPrototype(SubType, SuperType); // 只是继承超类原型中的属性方法，不会继承超类构造函数中的属性方法
+
+    // 实例
+    var instance = new SubType("子类参数", "父类参数");
+
+    console.log(instance);
+    </script>
+</body>
+
+</html>

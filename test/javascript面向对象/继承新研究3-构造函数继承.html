@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>继承新研究</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    /**
+     * 构造函数继承
+     */
+
+    //超类引用类型
+    function SuperType(param) {
+        this.super_property = "父类";
+        this.super_parameter = param;
+        this.super_obj = {
+            "name": "ccc"
+        }
+    };
+    SuperType.prototype.super_method = function() {
+        console.log("我是父类")
+    }
+
+    //子类引用类型
+    function SubType(param1, param2) {
+        this.sub_property = "子类";
+        this.sub_parameter = param1;
+        param2 = "经过子类处理 " + param2;
+        SuperType.call(this, param2); // 继承
+    };
+
+    // 实例
+    var instance1 = new SubType("子类参数", "父类参数");
+    var instance2 = new SubType("子类参数", "父类参数");
+
+    instance1.super_obj.name = "傻逼"; // 修改超类的实例属性值
+    instance1.super_obj.age = "3岁"; // 增加超类的实例属性值
+
+    console.log(instance1, instance2);
+
+    // 缺点1：超类原型中的属性方法将无法被子类继承
+    // 缺点2：无法通过原型链得知继承关系
+    </script>
+</body>
+
+</html>
