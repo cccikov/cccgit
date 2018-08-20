@@ -4,46 +4,136 @@
 <head>
     <meta charset="UTF-8">
     <title>继承新研究</title>
+    <style type="text/css">
+    body img {
+        vertical-align: top;
+    }
+
+    pre {
+        font-size: 18px;
+    }
+    </style>
 </head>
 
 <body>
-    <script type="text/javascript">
+    <pre>
+        一、 构造函数与原型中constructor是同一个函数（正常情况下都是这样）:显示为该构造函数的类型
 
+        二、 构造函数与原型中constructor是不同一个函数（一般是改写或者继承）
+
+            1、 原型中没有constructor属性：显示为创造这个对象构造函数的类型
+
+            2、 原型中有constructor属性
+
+                a. 不是作为别的构造函数的原型：显示为创造这个对象的构造函数的类型
+
+                b. 作为别的构造函数的原型（就是涉及继承了）
+
+                    ① 这个原型所在的构造函数在继承前创建了实例：显示为创造这个原型的构造函数的类型
+                    ② 这个原型所在的构造函数在继承前没有创建了实例：显示为这个原型的原型的constructor的值
+                    ③ 这个原型所在的构造函数在继承前创建了实例，但是继承后又创建了实例（一般继承后都会创建新实例，不然继承做什么）：显示为这个原型的原型的constructor的值
+
+                c. 作为别的构造函数的原型，但在chrome中作为实例的内部属性__proto__显示时：显示为这个原型的原型的constructor的值
+    </pre>
+    <img src="./img/chrome.png">
+    <img src="./img/chrome2.png">
+    <script type="text/javascript">
     function object(o) {
-        function F() {};
-        F.prototype = o; // 继承于o，F就是o的子类，每次调用都会新建一个F
-        return new F(); // 新对象就是F的实例，新对象的prototype直接指向o，新对象就是o的子类实例
-        // 每次返回的对象都是由新的构造函数产生的实例，所以就算传进来o一样，返回值都不是不同的对象，因为构造函数不同，但是返回值的原型是相同的，都是o。
+        function Middle() {};
+        Middle.prototype = o;
+        return new Middle();
     };
 
-    // 关于 chrome 显示对象的类型，是根据该对象原型的constructor(但是一般来说实例原型的constructor就是指向构造函数，除非改写了prototype)，如果原型中没有constructor，如果是构造函数调用创造出来的则根据构造函数；如果不是构造函数调用创造出来的则是Object
-    function Aaa() {}
-    // console.log(new Aaa());
-    // console.log(new Aaa());
+    ! function() {
+        /*构造函数与原型中constructor是同一个函数（正常情况下都是这样）:显示为该构造函数的类型*/
+        function F() {}
 
-    function Bbb() {}
+        console.log("构造函数与原型中constructor是同一个函数（正常情况下都是这样）:显示为该构造函数的类型:");
+        console.log(new F());
+        console.log("");
+        console.log("");
 
-    function Ccc() {}
+    }();
 
+    ! function() {
+        /*原型中没有constructor属性*/
+        function F() {}
+        F.prototype = {}
 
-    function Ddd() {}
-    Ddd.prototype = Aaa.prototype
-    console.log("Ddd实例", new Ddd());
-    console.log("Aaa实例", new Aaa());
-    console.log("Aaa原型", Aaa.prototype);
-
-    Aaa.prototype = object(Ccc.prototype)
-    console.log("Aaa原型原型式继承于Ccc")
-    Bbb.prototype = object(Ccc.prototype)
-    console.log("Aaa原型", Aaa.prototype);
-    console.log("Aaa原型是Ccc的实例", Aaa.prototype instanceof Ccc)
-    console.log("Aaa实例", new Aaa());
-    console.log("Aaa原型", Aaa.prototype);
+        console.log("原型中没有constructor属性:");
+        console.log(new F());
+        console.log("");
+        console.log("");
+    }();
 
 
 
+    ! function() {
+        /*原型中有constructor属性-不是作为别的构造函数的原型*/
+        function Aaa() {}
 
-    console.log(Object.getPrototypeOf(Aaa.prototype) == Object.getPrototypeOf(Bbb.prototype))
+        function F() {}
+        F.prototype = {
+            constructor: Aaa
+        }
+
+        console.log("原型中有constructor属性-不是作为别的构造函数的原型:");
+        console.log(new F());
+        console.log("");
+        console.log("");
+
+    }();
+    ! function() {
+        /*作为别的构造函数的原型*/
+        function Aaa() {}
+
+        function F() {}
+
+        // 原型式继承，未封装
+        F.prototype = object(Aaa.prototype);
+
+        console.log("作为别的构造函数的原型-继承前没有创建了实例:");
+        console.log("作为原型", F.prototype);
+        console.log("实例", new F());
+        console.log("");
+        console.log("");
+
+    }();
+    ! function() {
+        /*作为别的构造函数的原型*/
+        function Aaa() {}
+
+        function F() {}
+        new F();
+
+        // 原型式继承，未封装
+        F.prototype = object(Aaa.prototype);
+
+        console.log("作为别的构造函数的原型-继承前有创建了实例:");
+        console.log("作为原型", F.prototype);
+        console.log("实例", new F());
+        // console.log(Object.getPrototypeOf(new F()) == F.prototype);
+        console.log("");
+        console.log("");
+
+    }();
+    ! function() {
+        /*作为别的构造函数的原型*/
+        function Aaa() {}
+
+        function F() {}
+        new F();
+
+        // 原型式继承，未封装
+        F.prototype = object(Aaa.prototype);
+
+        console.log("作为别的构造函数的原型-继承前有创建了实例,集成后也调用了:");
+        console.log("实例", new F());
+        console.log("作为原型", F.prototype);
+        console.log("实例", new F());
+        console.log("");
+        console.log("");
+    }();
     </script>
 </body>
 
