@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>继承新研究</title>
+    <title>继承新研究4-组合继承</title>
 </head>
 
 <body>
     <script type="text/javascript">
+    function show(o) {
+        console.log("\n", "\n", "\n", o, "\n", "\n", "\n", "\n", "\n")
+    }
+
     /**
      * 组合继承，原型链+构造函数继承
      */
@@ -26,13 +30,15 @@
 
     //子类引用类型
     function SubType(param1, param2) {
+        param2 = "经过子类处理 " + param2;
+        SuperType.call(this, param2); // 先继承，再写子类的实例属性
         this.sub_property = "子类";
         this.sub_parameter = param1;
-        param2 = "经过子类处理 " + param2;
-        SuperType.call(this, param2); // 继承
     };
     SubType.prototype = new SuperType("父类参数"); // 继承
     SubType.prototype.constructor = SubType;
+
+    // 继续在子类原型里面添加方法
     SubType.prototype.sub_method = function() {
         console.log("我是子类")
     }
@@ -44,7 +50,8 @@
     instance1.super_obj.name = "傻逼"; // 修改超类的实例属性值
     instance1.super_obj.age = "3岁"; // 增加超类的实例属性值
 
-    console.log(instance1, instance2);
+    show(instance1);
+    show(instance2);
     </script>
 </body>
 

@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>继承新研究</title>
+    <title>继承新研究7-寄生组合式继承</title>
 </head>
 
 <body>
     <script type="text/javascript">
+    function show(o) {
+        console.log("\n", "\n", "\n", o, "\n", "\n", "\n", "\n", "\n")
+    }
+
     /*
      * 寄生组合式继承
      *
@@ -43,21 +47,26 @@
 
     //子类引用类型
     function SubType(param1, param2) {
+        // 继承
+        param2 = "经过子类处理 " + param2;
+        SuperType.call(this, param2);  // 只是继承超类构造函数中的属性方法，不会继承超类原型中的属性方法
+
         this.sub_property = "子类";
         this.sub_parameter = param1;
-        param2 = "经过子类处理 " + param2;
-
-        // 继承
-        // SuperType.call(this, param2);  // 只是继承超类构造函数中的属性方法，不会继承超类原型中的属性方法
     };
 
     // 继承
     inheritPrototype(SubType, SuperType); // 只是继承超类原型中的属性方法，不会继承超类构造函数中的属性方法
 
+    // 继续在子类原型里面添加方法
+    SubType.prototype.sub_method = function() {
+        console.log("我是子类")
+    }
+
     // 实例
     var instance = new SubType("子类参数", "父类参数");
 
-    console.log(instance);
+    show(instance);
 
 
 

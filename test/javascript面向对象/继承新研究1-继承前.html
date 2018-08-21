@@ -3,11 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>继承新研究</title>
+    <title>继承新研究1-继承前</title>
 </head>
 
 <body>
     <script type="text/javascript">
+    function show(o) {
+        console.log("\n", "\n", "\n", o, "\n", "\n", "\n", "\n", "\n")
+    }
 
     /**
      * 涉及继承
@@ -29,11 +32,21 @@
         console.log("我是父类")
     }
 
+    //子类引用类型
+    function SubType(param) {
+        this.sub_property = "子类";
+        this.sub_parameter = param;
+    };
+    SubType.prototype.sub_method = function() {
+        console.log("我是子类")
+    }
 
-    var instance = new SuperType("父类参数")
+    var instance_super = new SuperType("父类参数")
+    var instance_sub = new SubType("子类参数")
 
-    console.log(instance)
-    console.log(instance instanceof SuperType)
+    show(instance_super);
+    show(instance_sub);
+    console.log(instance_super instanceof SuperType);
     </script>
 </body>
 

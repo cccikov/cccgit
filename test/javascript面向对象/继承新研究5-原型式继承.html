@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>继承新研究</title>
+    <title>继承新研究5-原型式继承</title>
 </head>
 
 <body>
     <script type="text/javascript">
+    function show(o) {
+        console.log("\n", "\n", "\n", o, "\n", "\n", "\n", "\n", "\n")
+    }
+
     /*
      * 原型式继承（继承于一个对象）
      * es5 中的 Object.create();
@@ -23,15 +27,17 @@
 
     // 原对象，就是父对象；
     var super_instance = {
-        "name": "ccc",
-        "age": 18
+        "super_name": "ccc",
+        "super_age": 18
     };
 
     // 子对象
     var sub_instance1 = object(super_instance);
     var sub_instance2 = Object.create(super_instance);
     // 对比起上面几个继承方法来说，个人觉得这个更偏向于是创建对象的方法，因为没有涉及引用类型，只是这个对象是继承于另外一个对象
-    console.log(sub_instance1, sub_instance2);
+    show(super_instance)
+    show(sub_instance1);
+    show(sub_instance2);
 
     // 优点：不需要专门定义构造函数去创建对象
     // 缺点：继承于同一个父对象的子对象是共享对应的属性，就好像直接使用原型模式那样
