@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>animation</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #ani {
+        animation-name: test;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        /*控制运动曲线*/
+        animation-duration: 5s;
+        animation-play-state: paused;
+    }
+
+    #ani:hover {
+        animation-play-state: running;
+    }
+
+    #ani2 {
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        /*控制运动曲线*/
+        animation-duration: 5s;
+    }
+
+    #ani2:hover {
+        animation-name: test;
+    }
+
+    @keyframes test {
+        /*这里也可以通过百分比不同 控制运动曲线*/
+        from {
+            transform: translate3d(0, 0, 0);
+        }
+        50% {
+            transform: translate3d(200px, 0, 0);
+        }
+        to {
+            transform: translate3d(300px, 0, 0);
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div id="ani">hover me</div>
+    <div id="ani2">hover me2</div>
+    元素其实只要有了animation-name就已经是有了动画，因为已经与@keyframes互相绑定了，只是没有animation-duration(持续时间)，没有动起来而已。
+</body>
+
+</html>
