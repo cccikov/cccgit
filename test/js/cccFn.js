@@ -620,7 +620,7 @@ function baseFontSize() {
     return rootfontsize;
 }
 
-//
+// 获取url 路径部分
 function getPath(str) {
     var path_reg = /(.+)\?/; // 任意字符到?为止
     var path = str.match(path_reg);

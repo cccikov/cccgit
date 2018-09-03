@@ -8,7 +8,7 @@
     var str = "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/split?name=&age=12&gender=female"
     var str2 = "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/split"
 
-
+    // 获取url 路径部分
     function getPath(str) {
         var path_reg = /(.+)\?/; // 任意字符到?为止
         var path = str.match(path_reg);
