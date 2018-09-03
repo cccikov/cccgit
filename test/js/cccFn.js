@@ -619,3 +619,71 @@ function baseFontSize() {
     $("html").css("fontSize", rootfontsize + "px");
     return rootfontsize;
 }
+
+//
+function getPath(str) {
+    var path_reg = /(.+)\?/; // 任意字符到?为止
+    var path = str.match(path_reg);
+    if (path) {
+        path = path[1];
+    } else {
+        path = str;
+    }
+
+    var path_arr = path.split("/");
+    return {
+        "hostname": path_arr[2],
+        "file": path_arr[path_arr.length],
+        "arr": path_arr,
+        "path": path,
+    }
+}
+
+function urlParse(str) {
+    var url = document.createElement('a'); // a标签的dom对象（HTMLAnchorElement）实现了类似location实例的接口
+    url.href = str;
+    var obj = {
+        href: url.href, // https://developer.mozilla.org/en-US/search?q=URL#search-results-close-container
+        protocol: url.protocol, // https:
+        host: url.host, // developer.mozilla.org
+        hostname: url.hostname, // developer.mozilla.org
+        port: url.port, // (blank - https assumes port 443)
+        pathname: url.pathname, // /en-US/search
+        search: url.search, // ?q=URL
+        hash: url.hash, // #search-results-close-container
+        origin: url.origin // https://developer.mozilla.org
+    }
+    url = null;
+
+    // searchParse
+    var search = obj.search.substr(1);
+    var searchjson = {};
+    if (search) {
+        search.split("&").forEach(function(val) {
+            var single = val.split("=");
+            var key = single[0];
+            var value = single[1];
+            searchjson[key] = value;
+        });
+    }
+
+    obj.searchjson = searchjson;
+
+    return obj;
+}
+
+// search 解析
+function searchParse(search) {
+    var search = search || window.location.search;
+    search = search.substr(1);
+    var searchjson = {};
+    if (search) {
+        search.split("&").forEach(function(val) {
+            var single = val.split("=");
+            var key = single[0];
+            var value = single[1];
+            searchjson[key] = value;
+        });
+    }
+    return searchjson;
+}

@@ -10,7 +10,7 @@
 
 
     function getPath(str) {
-        var path_reg = /(.+)\?/;
+        var path_reg = /(.+)\?/; // 任意字符到?为止
         var path = str.match(path_reg);
         if (path) {
             path = path[1];
@@ -60,6 +60,7 @@
         return obj;
     }
 
+    // search 解析
     function searchParse(search) {
         var search = search || window.location.search;
         search = search.substr(1);
