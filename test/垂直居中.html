@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>居中</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        [id*=demo] {
+            margin: 10px;
+            padding: 10px;
+            height: 150px;
+            box-shadow: 0px 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        [id*=demo] p {
+            padding: 0 10px;
+            box-shadow: 0px 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* demo2 */
+        #demo2 {
+            line-height: 150px;
+        }
+
+        #demo2>p {
+            vertical-align: middle;
+            display: inline-block;
+            line-height: 1.5;
+        }
+
+        /* demo3 */
+        #demo3 {
+            line-height: 150px;
+        }
+
+        #demo3>div {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+        /* demo4 */
+        #demo4 {
+            position: relative;
+            height: 150px;
+        }
+
+        #demo4 p {
+            position: absolute;
+            top: 50%;
+            height: 50px;
+            margin-top: -25px;
+        }
+
+        /* demo5 */
+        #demo5 {
+            position: relative;
+            height: 150px;
+            /* 缺点：由于脱离文档流，父元素要设置高度 */
+        }
+
+        #demo5 p {
+            position: absolute;
+            top: 50%;
+            transform: translate(0,-50%);
+        }
+
+        /* demo6 */
+        #demo6{
+            width:800px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        /* demo7 */
+        #demo7{
+            display: flex;
+            align-items: center
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo2">
+        <p>父元素高度确定。设为inline-block;vertical-align: middle。父line-height为高度</p>
+    </div>
+    <div id="demo3">
+        <div>
+            <p>父元素高度确定。设为inline-block;vertical-align: middle。父line-height为高度</p>
+            <p>父元素高度确定。设为inline-block;vertical-align: middle。父line-height为高度</p>
+            <p>父元素高度确定。设为inline-block;vertical-align: middle。父line-height为高度</p>
+        </div>
+    </div>
+    <div id="demo4">
+        <p>当前元素高度确定。position，top：50%，负margin</p>
+    </div>
+    <div id="demo5">
+        <p>当前元素高度确定。position，left：50%，transform: translate(0,50%);</p>
+    </div>
+    <div id="demo6">
+        <p>display:table-cell；一般用于垂直居中</p>
+    </div>
+    <div id="demo7">
+        <p>任意情况 flex布局</p>
+    </div>
+</body>
+
+</html>
