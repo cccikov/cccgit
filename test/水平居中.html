@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>居中</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        [id*=demo] {
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0px 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        [id*=demo] p {
+            padding: 0 10px;
+            box-shadow: 0px 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #demo1 p {
+            width: 80%;
+            /* width: 400px; */
+            margin: 0 auto;
+        }
+
+        #demo2 {
+            text-align: center;
+        }
+
+        #demo2>p {
+            display: inline-block;
+        }
+
+        #demo3 {
+            text-align: center;
+        }
+
+        #demo3 p {
+            display: inline-block;
+        }
+
+        #demo4{
+            position:relative;
+            height: 100px;
+            /* 缺点：由于脱离文档流，父元素要设置高度 */
+            /* 缺点2：由于设置left，所以不设宽度的话，子的宽度就是福德50% */
+        }
+        #demo4 p{
+            position:absolute;
+            left:50%;
+            width: 400px;
+            margin-left:-200px;
+        }
+
+
+        #demo5{
+            position:relative;
+            height: 100px;
+            /* 缺点：由于脱离文档流，父元素要设置高度 */
+        }
+        #demo5 p{
+            position:absolute;
+            left:50%;
+            transform: translate(-50%,0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo1">
+        <p>固定宽度（设立宽度）。margin:0 auto</p>
+    </div>
+    <div id="demo2">
+        <p>根据内容自适应宽度。设为inline-block。父text-align:center</p>
+    </div>
+    <div id="demo3">
+        <div>
+            <p>根据内容自适应宽度。设为inline-block。父text-align:center</p>
+        </div>
+        <div>
+            <p>根据内容自适应宽度。设为inline-block。父text-align:center</p>
+        </div>
+        <div>
+            <p>根据内容自适应宽度。设为inline-block。父text-align:center</p>
+        </div>
+    </div>
+    <div id="demo4">
+        <p>具体宽度，一般是配合垂直居中使用。position，left：50%，负margin</p>
+    </div>
+    <div id="demo5">
+        <p>内容宽度，一般是配合垂直居中使用。position，left：50%，transform: translate(-50%,0);</p>
+    </div>
+</body>
+
+</html>

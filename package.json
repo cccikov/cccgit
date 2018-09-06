@@ -4,8 +4,9 @@
   "description": "github project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"browser-sync start --server --files \"test/**/*.html,test/**/*.css,test/**/*.js\" --startPath \"test\" --index \"test.html\"" 
+    "test": "browser-sync start --server --files \"test/**/*.html,test/**/*.css,test/**/*.js\" --startPath \"test\" --index \"test.html\"",
+    "some": "browser-sync start --server --files \"test/**/*.html,test/**/*.css,test/**/*.js\" --startPath \"test\" --index \"test.html\"",
+    "start":"browser-sync start --server --files \"test/**/*.html,test/**/*.css,test/**/*.js\" --startPath \"test\" --index \"test.html\""
   },
   "repository": {
     "type": "git",
