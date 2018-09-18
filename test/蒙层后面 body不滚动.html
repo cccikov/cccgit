@@ -57,14 +57,22 @@
         $("p").on("click", function() {
             $("#mask").show();
             $("#suspend").show();
-            $("body").css("overflow","hidden"); // 发现其实好简单，只需要body设置overflow：hidden就可以了。设置overflow:hidden不会影响之前滚动的位置
+            sT = $("html").scrollTop()
+            $(this).css({
+                "position": "fixed",
+                "top": -sT
+            });
         });
         $("#mask").on("click", function() {
             $(this).hide();
             $("#suspend").hide();
-            $("body").css("overflow","auto");
+            $("p").css("position", "static");
+            $("html").scrollTop(sT);
+        }).on("touchmove", function(e) {
+            e.preventDefault();
         });
         $("#suspend").on("touchmove", function(e) {
+            // e.preventDefault();//如果悬浮窗不需要滚动的话，可以
 
         });
     });
