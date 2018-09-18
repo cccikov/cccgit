@@ -356,6 +356,9 @@ ccc.getCookie = function(cookieName, value) {
 ccc.clearCookie = function(cname) {
     setCookie(cname, "", -1);
 }
+ccc.clearCookie = function(cname) {
+    document.cookie = cname + "= ; expires=" + new Date(0);
+}
 
 //判断属性是否存在于原型中
 ccc.hasPrototypeProperty = function(object, name) {
