@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .flex {
+        margin: 0 10px 0 100px;
+        display: flex;
+        /* flex-direction: column; */
+    }
+
+    .flex .column1 {
+        flex: 0 0;
+        padding: 0 100px;
+    }
+
+    .flex .column2 {
+		overflow: hidden;
+    }
+
+    .flex .column2 p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <div class="column2">
+            <p>中国，是以华夏文明为源泉、中华文化为基础，并以汉族为主体民族的多民族国家，通用汉语、汉字，汉族与少数民族被统称为“中华民族”，又自称为炎黄子孙、龙的传人。</p>
+            <p>123123</p>
+        </div>
+        <div class="column1">column1</div>
+    </div>
+</body>
+
+</html>
