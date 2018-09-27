@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>video 音频自动播放问题</title>
+	<title>video 视频自动播放问题</title>
 	<style>
 		* {
 			padding: 0;
@@ -29,7 +29,7 @@
 		<video id="video" controls preload webkit-playsinline playsinline muted src="./video/BigBuckBunny_640x360.mp4"></video>
 		<p>移动浏览器里，都是要求用户的真实操作来（touchend、click、doubleclick 或 keydown 事件等标准的事件）触发调用play()
 			来实现第一次播放，才能自动播放音视频。只要播放过了，就可以不再需要通过真实操作来调用play();</p>
-
+		<p>始终允许静音自动播放。</p>
 	</div>
 	<script>
 		video.play(); // 对于video 来说，只要静音了，就可以直接调用video的play();
