@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>audio 音频自动播放问题</title>
 	<style>
@@ -22,7 +22,7 @@
 
 <body>
 	<div id="wrap">
-		<audio id="audio" controls preload src="./audio/background.mp3" loop></audio>
+		<audio id="audio" autoplay controls preload src="./audio/background.mp3" loop></audio>
 		<p>移动浏览器里，都是要求用户的真实操作来（touchend、click、doubleclick 或 keydown 事件等标准的事件）触发调用play()
 			来实现第一次播放，才能自动播放音视频。只要播放过了，就可以不再需要通过真实操作来调用play();</p>
 	</div>
@@ -35,8 +35,8 @@
 				document.getElementById("audio").play();
 			}, false)
 			a.click();
-			// chrome uc 不可以，chrome不承认这种通过js的点击
-			// qq 微信  可以
+			// chrome uc 微信 不可以，chrome不承认这种通过js的点击
+			// qq 可以
 			// 使用这种方式应该还要判断 window.onload 媒体loadedmetadata情况
 		}
 		// way1();
@@ -47,20 +47,54 @@
 			function listener(e) {
 				e.preventDefault(); // 一定要禁用默认事件。
 				e.stopPropagation();
+				console.log("进入事件监听器");
+				var audio = document.getElementById("audio")
+				audio.play();
 
-				document.getElementById("audio").play();
-
-				if (e.type == "touchend") {
+				if (!audio.paused) {
+					console.log("删除事件监听器");
+					document.getElementById("wrap").removeEventListener("click", listener, false);
 					document.getElementById("wrap").removeEventListener("touchstart", listener, false);
+					document.getElementById("wrap").removeEventListener("touchmove", listener, false);
 					document.getElementById("wrap").removeEventListener("touchend", listener, false);
 				}
 			}
-			document.getElementById("wrap").addEventListener("touchend", listener, false); // touchend 是必须的，除了touchend还需要 touchstart或者touchmove其中一个，但是还是在touchend事件里面触发。
+			document.getElementById("wrap").addEventListener("click", listener, false);
 			document.getElementById("wrap").addEventListener("touchstart", listener, false);
+			document.getElementById("wrap").addEventListener("touchmove", listener, false);
+			document.getElementById("wrap").addEventListener("touchend", listener, false); // touchend 是必须的，除了touchend还需要 touchstart或者touchmove其中一个，但是还是在touchend事件里面触发。
 
 			// qq chrome uc 微信都可以
 		}
 		way2();
+
+		audio.addEventListener("loadedmetadata", function () {
+			way1();
+		});
+
+
+		/*
+		 * 微信，亲测，只有ios有效
+		 */
+		//判斷 WeixinJSBridge 是否存在
+		if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+			audio.play();
+		} else {
+			//監聽客户端抛出事件"WeixinJSBridgeReady"
+			if (document.addEventListener) {
+				document.addEventListener("WeixinJSBridgeReady", function () {
+					audio.play();
+				}, false);
+			} else if (document.attachEvent) {
+				document.attachEvent("WeixinJSBridgeReady", function () {
+					audio.play();
+				});
+				document.attachEvent("onWeixinJSBridgeReady", function () {
+					audio.play();
+				});
+			}
+		}
+
 	</script>
 </body>
 
