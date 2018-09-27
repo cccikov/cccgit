@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>video 音频自动播放问题</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		html,
+		body,
+		#wrap {
+			height: 100%;
+		}
+
+		video{
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="wrap">
+		<video id="video" controls preload webkit-playsinline playsinline muted src="./video/BigBuckBunny_640x360.mp4"></video>
+		<p>移动浏览器里，都是要求用户的真实操作来（touchend、click、doubleclick 或 keydown 事件等标准的事件）触发调用play()
+			来实现第一次播放，才能自动播放音视频。只要播放过了，就可以不再需要通过真实操作来调用play();</p>
+
+	</div>
+	<script>
+		video.play(); // 对于video 来说，只要静音了，就可以直接调用video的play();
+
+		// 方法1
+		function way1() {
+			// 我们可以创建一个按钮，让按钮的事件是触发 play() ，然后我们再让js去触发点击事件来达到所谓的真实操作
+			var a = document.createElement("a");
+			a.addEventListener("click", function () {
+				document.getElementById("video").play();
+			}, false)
+			a.click();
+			// chrome uc 不可以，chrome不承认这种通过js的点击
+			// qq 微信  可以
+			// 使用这种方式应该还要判断 window.onload 媒体loadedmetadata情况
+		}
+		// way1();
+
+		// way2
+		function way2() {
+			// 对于移动端来说，用户肯定不自觉地触摸屏幕。我们就绑定touchend事件，记住不可以绑定在 window document html body 对象
+			function listener(e) {
+				e.preventDefault(); // 一定要禁用默认事件。
+				e.stopPropagation();
+
+				document.getElementById("video").play();
+
+				if(e.type == "touchend"){
+					document.getElementById("wrap").removeEventListener("touchstart", listener, false);
+					document.getElementById("wrap").removeEventListener("touchend", listener, false);
+				}
+			}
+			document.getElementById("wrap").addEventListener("touchend", listener, false); // touchend 是必须的，除了touchend还需要 touchstart或者touchmove其中一个，但是还是在touchend事件里面触发。
+			document.getElementById("wrap").addEventListener("touchstart", listener, false);
+
+			// qq chrome uc 微信都可以
+		}
+		// way2();
+	</script>
+</body>
+
+</html>
