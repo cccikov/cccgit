@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js属性 和 标签属性 的区别</title>
+</head>
+<body>
+    <p>js属性（dom属性）（Properties），存储着个dom的一切信息，是dom对象(object)的属性，js可以直接通过这个dom对象读取属性方式读取，修改js属性有可能会修改标签的属性，如style属性，className属性； 标签属性（Attributes），元素的附加信息，一般与样式有关（style class id），或者记录一些信息（data-*），js是通过setAttribute() 等 xxxAttribute() 方法修改，jq是使用attr() 添加修改，会改标签的属性</p>
+
+    <div id="wrap" class="top left" style="color:red;height:50px;padding:30px" data-name="自定义标签属性"> id="wrap" class="top left" style="color:red;height:10px;padding:30px" data-name="自定义标签属性" 等直接在标签中看到的属性就是标签属性。</div>
+    <script type="text/javascript">
+        var wrap = document.getElementById("wrap");
+        console.dir(wrap); // 里面看到的都是js属性
+        console.log(wrap.id);
+        console.log(wrap.className);
+        console.log(wrap.style);
+
+        console.log(wrap.attributes); // attributes这个js属性里面就存放这标签属性
+        console.log(wrap.attributes["data-name"].textContent); // attributes这个js属性里面就存放这标签属性
+
+        // 以下就是标签属性名，标签上的名字是怎么写，getAttribute 参数也是怎么写； 标签上的值是怎么样，下面就返回同样的值的字符串
+        console.log(wrap.getAttribute("id"));
+        console.log(wrap.getAttribute("class"));
+        console.log(wrap.getAttribute("data-name"));
+        console.log(wrap.getAttribute("style"));
+    </script>
+
+
+    <p>js属性（dom属性（Properties）一般归js 用</p>
+    <p>标签属性（Attributes）归html 用</p>
+    <p>但是js一般也可以通过标签属性来达到改变样式等目的。有些js属性也可以直接修改标签属性，如className，id，style</p>
+
+</body>
+</html>
