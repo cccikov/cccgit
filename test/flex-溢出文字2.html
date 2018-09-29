@@ -17,29 +17,36 @@
     }
 
     .flex .column1 {
-        flex: 0 0;
-        padding: 0 100px;
+        overflow: hidden;
+        /* 默认flex-shrink为1，是可以缩小的，但是不会缩小得比内容还小 */
+
+        /* 要不就设置宽度，让flex元素 缩小得比内容还小*/
+        /* 要不就设置overflow非visible。让里面得内容不溢出 */
     }
 
-    .flex .column2 {
-		overflow: hidden;
-    }
-
-    .flex .column2 p {
+    .flex .column1 p {
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+    }
+
+    .flex .column2 {
+        width: 200px;
+        padding: 0 100px;
+        flex-shrink: 0;/* 设置了flex-shrink: 0后，就不会被压缩 */
+        background: #f5f5fd;
+        text-align: center;
     }
     </style>
 </head>
 
 <body>
     <div class="flex">
-        <div class="column2">
+        <div class="column1">
             <p>中国，是以华夏文明为源泉、中华文化为基础，并以汉族为主体民族的多民族国家，通用汉语、汉字，汉族与少数民族被统称为“中华民族”，又自称为炎黄子孙、龙的传人。</p>
             <p>123123</p>
         </div>
-        <div class="column1">column1</div>
+        <div class="column2">column1</div>
     </div>
 </body>
 

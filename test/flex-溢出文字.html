@@ -17,33 +17,38 @@
     }
 
     .flex .column1 {
-        flex: 0 0;
-        padding: 0 100px;
+        min-width: 0px;
+        /* 基本上：除非您明确指定“最小宽度”或“宽度”或“最大宽度”，否则flex元素将拒绝缩小到最小内在宽度以下。 */
+        /* 意思就是除非设置了min-width 或者 width 或者 max-width，否则flex元素的宽度都不会缩小得比内容宽度小 */
+        /* https://bugzilla.mozilla.org/show_bug.cgi?id=1086218#c4 */
+        /* https://stackoverflow.com/questions/26465745/ellipsis-in-flexbox-container */
+
+        /* 默认flex-shrink为1，是可以缩小的，但是不会缩小得比内容还小 */
+    }
+
+    .flex .column1 p {
+        text-overflow: ellipsis;
+        /* overflow: hidden; */
+        white-space: nowrap;
     }
 
     .flex .column2 {
-        min-width: 1px;
-        /* 基本上：除非您明确指定“最小宽度”或“宽度”或“最大宽度”，否则flex项目将拒绝缩小到最小内在宽度以下。 */
-        /* 意思就是除非设置了min-width 或者 width 或者 max-width，否则flex项目的宽度都不会缩小得比内容宽度小 */
-        /* https://bugzilla.mozilla.org/show_bug.cgi?id=1086218#c4 */
-        /* https://stackoverflow.com/questions/26465745/ellipsis-in-flexbox-container */
-    }
-
-    .flex .column2 p {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
+        width: 200px;
+        padding: 0 100px;
+        flex-shrink: 0;/* 设置了flex-shrink: 0后，就不会被压缩 */
+        background: #f5f5fd;
+        text-align: center;
     }
     </style>
 </head>
 
 <body>
     <div class="flex">
-        <div class="column2">
+        <div class="column1">
             <p>中国，是以华夏文明为源泉、中华文化为基础，并以汉族为主体民族的多民族国家，通用汉语、汉字，汉族与少数民族被统称为“中华民族”，又自称为炎黄子孙、龙的传人。</p>
             <p>123123</p>
         </div>
-        <div class="column1">column1</div>
+        <div class="column2">column1</div>
     </div>
 </body>
 
