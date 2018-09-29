@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>flex</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0
+		}
+
+		[id*=demo] {
+			margin: 20px;
+			box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+		}
+	</style>
+</head>
+
+<body>
+	<div id="demo1">
+		<div class="flex1">
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dolore iusto ducimus nam atque id autem
+				similique accusantium dolorum officia.</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+			<p>
+				上面这里是没有设置宽度的，所以宽度由内容决定以及flex决定，默认的flex-shrink: 1;
+				大家都是等比例缩放。主轴方向为水平，默认高度受容器的align-items:stretch
+				影响，占满容器高度，而容器高度（不设置height的情况下）又是受这条轴线上高度最大的flex元素决定的，所以默认高度就是当前交叉轴中flex元素高度最高的高度。
+			</p>
+		</div>
+
+		<div class="flex2">
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dolore iusto ducimus nam atque id autem
+				similique accusantium dolorum officia.</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+			<p>
+				下面是由设置宽度width:50%，默认的flex-shrink: 1;
+				大家都是等比例缩放，由于进行flex之前，大家的宽度都是一致的，缩放比例也是一样，所以最后大家的宽度一样。但是也可以看出，现在宽度是没有50%的。width和flex会共同影响尺寸。
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo1 .flex1 {
+			display: flex;
+		}
+
+		#demo1 .flex1 p {
+			outline: 1px solid red;
+		}
+
+		#demo1 .flex2 {
+			display: flex;
+		}
+
+		#demo1 .flex2 p {
+			width: 50%;
+			outline: 1px solid red;
+		}
+	</style>
+
+
+	<div id="demo2">
+		<div class="flex">
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dolore iusto ducimus nam atque id autem
+				similique accusantium dolorum officia.</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+			<p>
+				width，height只是进行flex布局前的尺寸；一旦进行flex布局，会在原有的高度宽度基础上进行调整.所以flex-basis会覆盖width的设置（主轴方向为水平的时候，主轴方向为垂直的时候覆盖的时height）。
+				为了避免这种覆盖的情况出现，flex-basis一般设为auto
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo2 .flex {
+			display: flex;
+		}
+
+		#demo2 .flex p {
+			width: 200px;
+			flex: 0 1 100px;
+			outline: 1px solid red;
+		}
+	</style>
+
+
+
+
+	<div id="demo3">
+		<div class="flex1">
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dolore iusto ducimus nam atque id autem
+				similique accusantium dolorum officia.</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+			<p>
+				设置换行后，flex元素没有进行宽度限制时；flex元素会根据内容，尽可能的占据宽度，最大为占满容器宽度。行为有点类型inline-block;
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo3 .flex1 {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		#demo3 .flex1 p {
+			outline: 1px solid red;
+		}
+	</style>
+
+	<div id="demo4">
+		<div class="flex1">
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dolore iusto ducimus nam atque id autem
+				similique accusantium dolorum officia.</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+			<p>
+				设置换行后，默认高度受容器的align-items:stretch
+				影响，占满交叉轴高度，而交叉轴的高度（容器不设置height）又是受这条轴线上高度最大的flex元素决定的，所以flex元素默认高度就是当前交叉轴中flex元素高度最高的高度
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo4 .flex1 {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		#demo4 .flex1 p {
+			width: 33%;
+			outline: 1px solid red;
+		}
+	</style>
+
+	<p style="margin:12px;background:#f5f5d5;">flex-grow flex-shrink flex-basis （即系简写后的flex），都是决定flex元素在主轴方向上如何分配空间</p>
+
+	<div id="demo5">
+		<div class="flex1">
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>
+				将主轴方向变为垂直后，由于 align-items:stretch
+				的影响，占满交叉轴。不设置flex-wrap的情况下，默认只有一条轴的情况下，交叉轴空间就变成了容器的宽度，所以flex元素就占满了容器宽度，布局上有点类别普通的display：block块元素布局。
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo5 .flex1 {
+			display: flex;
+			flex-direction: column;
+		}
+
+		#demo5 .flex1 p {
+			outline: 1px solid red;
+		}
+
+		#demo5 .flex1 p:last-of-type {
+			width: 50%;
+		}
+	</style>
+
+	<div id="demo6">
+		<div class="flex1">
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>
+				flex 决定flex元素在主轴方向上如何分配空间，如果主轴方向为垂直时，设置了高度，flex空间就会根据flex设置分配垂直空间
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo6 .flex1 {
+			display: flex;
+			flex-direction: column;
+			height: 500px;
+		}
+
+		#demo6 .flex1 p {
+			flex-grow: 1;
+			outline: 1px solid red;
+		}
+	</style>
+
+	<div id="demo7">
+		<div class="flex1">
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>
+				虽然，flex元素会受父元素flex项目的align-items的影响，但是还是可以通过height来说设置高度（主轴方向为水平），可以通过width来说设置宽度（主轴方向为垂直）（见demo5）
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo7 .flex1 {
+			display: flex;
+		}
+
+		#demo7 .flex1 p {
+			flex: 1 1;
+			outline: 1px solid red;
+		}
+		#demo7 .flex1 p:nth-last-of-type(2){
+			height: 50px;
+		}
+	</style>
+
+	<div id="demo8">
+		<div class="flex1">
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>
+				align-items 设置不为 stretch 的时候。flex元素的高度由自己内容决定（主轴方向为水平），宽度由自己内容决定（主轴方向为垂直时）
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo8 .flex1 {
+			display: flex;
+			align-items: flex-start;
+		}
+
+		#demo8 .flex1 p {
+			flex: 1 1;
+			outline: 1px solid red;
+		}
+	</style>
+
+	<div id="demo9">
+		<div class="flex1">
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.Lorem ipsum dolor.Lorem ipsum dolor.Lorem ipsum dolor.Lorem ipsum dolor.Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.Lorem ipsum dolor.Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>
+				设置flex-wrap:wrap后，每条交叉轴的高度由轴中最高元素决定（主轴方向为水平）
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo9 .flex1 {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		#demo9 .flex1 p {
+			flex: 1 1 33.33333%;
+			outline: 1px solid red;
+		}
+	</style>
+
+<div id="demo10">
+		<div class="flex1">
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid eligendi expedita illo, et adipisci incidunt eaque quidem magni nobis. Sed tempore vero enim, minima praesentium ipsam quo quam blanditiis officiis optio laboriosam temporibus assumenda. Amet et soluta in quam recusandae asperiores perspiciatis. Doloremque ut est minus excepturi molestias itaque aliquid!</p>
+			<p>
+				flex项目设置flex-wrap:wrap后，以及height后，多条交叉轴占满容器高度。
+			</p>
+		</div>
+	</div>
+	<style>
+		#demo10 .flex1 {
+			display: flex;
+			flex-wrap: wrap;
+			height:600px;
+			/* align-content:flex-start; */
+			/* align-content:center */
+		}
+
+		#demo10 .flex1 p {
+			flex: 1 1 33.33333%;
+			outline: 1px solid red;
+		}
+	</style>
+
+</body>
+
+</html>
