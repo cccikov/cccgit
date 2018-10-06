@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>手势放大缩小</title>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #test {
+        position: fixed;
+        background: #f00;
+        width: 100px;
+        height: 100px;
+    }
+
+
+    #wrap {
+        position: fixed;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #container {
+        position: relative;
+    }
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    #cons {
+        pointer-events: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="cons"></div>
+    <div id="wrap">
+        <div id="container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function imgPromise(src) {
+        return new Promise(function(resolve, reject) {
+            var img = document.createElement("img");
+            img.src = src;
+            img.addEventListener("load", function() {
+                resolve(img);
+            }, false);
+        });
+    }
+    imgPromise("./img/huxing.png").then((img) => {
+        container = document.getElementById("container");
+        var containerW = img.width;
+        var containerH = img.height;
+
+        // 窗口尺寸
+        // var winW = window.innerWidth;
+        // var winH = window.innerHeight;
+
+        // if (containerW / containerH > winW / winH) { // 即系相同大小下，图片更宽
+        //     var rate = winW / containerW;
+        // } else { // 即系相同大小下，图片更高
+        //     var rate = winH / containerH;
+        // }
+
+
+        canvas.width = containerW;
+        canvas.height = containerH;
+
+        container.appendChild(img);
+    });
+
+    // $(container).css("transform", "translate(100px,100px) scale(1.2)")
+
+    $(container).on("touchstart", function(e) {
+        var that = $(this);
+        var newPX = oldPX = e.originalEvent.touches[0].clientX;
+        var newPY = oldPY = e.originalEvent.touches[0].clientY;
+        var deltaX = deltaY = 0;
+        var newScale = oldScale = 1;
+        if (e.originalEvent.touches.length > 1) {
+            var start = e.originalEvent.touches; //得到第一组两个点;
+        }
+
+        that.off("touchmove").on("touchmove", function(e) { //要注意添加事件的对象
+            e.preventDefault();
+
+            /////////////////////
+            // 获取 transform 属性 //
+            /////////////////////
+            var transform = that[0].style.transform || "";
+            // 块的位置
+
+            if (e.originalEvent.touches.length == 1) { // 单指操作时
+
+                var reg = /translate\(.+?\)/g;
+                var reg2 = /(-)?\d+(\.)?\d*/g;
+
+                // var Eleft = that.position().left;
+                // var Etop = that.position().top;
+
+                ///////////////////////////////
+                // 获取 transform 中的 translate //
+                ///////////////////////////////
+                var translate = transform.match(reg);
+                if (translate) {
+                    var translateTL = translate[0].match(reg2);
+                }
+                var transLeft = !!translateTL ? Number(translateTL[0]) : 0;
+                var transTop = !!translateTL ? Number(translateTL[1]) : 0;
+
+                newPX = e.originalEvent.touches[0].clientX;
+                deltaX = newPX - oldPX; //这个相当于速度
+
+                newPY = e.originalEvent.touches[0].clientY;
+                deltaY = newPY - oldPY;
+
+                var left = transLeft + deltaX;
+                var top = transTop + deltaY;
+
+                var nowTranslate = "translate(" + left + "px," + top + "px)";
+
+                if (translate) {
+                    /////////////////////////////////////////////////////////////
+                    // 如果本来就有 translate，为了不影响其他的transform，那么就利用正则替换translate部分 //
+                    /////////////////////////////////////////////////////////////
+                    transform = transform.replace(reg, nowTranslate);
+                } else {
+                    //////////////
+                    // 如果没有，就加上 //
+                    //////////////
+                    transform += nowTranslate;
+                }
+
+                // that.css("transform", transform);
+                oldPY = newPY;
+                oldPX = newPX;
+
+            } else if (e.originalEvent.touches.length == 2) {
+                var reg = /scale\(.+?\)/g;
+                var reg2 = /(-)?\d+(\.)?\d*/g;
+
+                var scale = transform.match(reg);
+                if (scale) {
+                    var scaleX = scale[0].match(reg2);
+                }
+                scaleX = scaleX ? Number(scaleX) : 1;
+                console.log(scale);
+
+                //得到第二组两个点
+                var now = e.originalEvent.touches;
+                //得到缩放比例， getDistance 是勾股定理的一个方法
+
+                var newScale = (getDistance(now[0], now[1]) / getDistance(start[0], start[1]));
+
+                var scaleDelta = newScale - oldScale;
+
+                // 对缩放 比例 取整
+                // var x = ((1 + scaleDelta) * scaleX).toFixed(2);
+                var x = scaleX + scaleDelta;
+
+                var nowScale = "scale(" + x + ")";
+
+                if (scale) {
+                    /////////////////////////////////////////////////////////////
+                    // 如果本来就有 scale，为了不影响其他的transform，那么就利用正则替换scale部分 //
+                    /////////////////////////////////////////////////////////////
+                    transform = transform.replace(reg, nowScale);
+                } else {
+                    //////////////
+                    // 如果没有，就加上 //
+                    //////////////
+                    transform += nowScale;
+                }
+                oldScale = newScale;
+            }
+            that.css("transform", transform);
+        });
+    }).on("touchend", function(e) {
+        $(this).off("touchmove");
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //缩放 勾股定理方法
+    function getDistance(p1, p2) {
+        var x = p2.pageX - p1.pageX,
+            y = p2.pageY - p1.pageY;
+        var dis = Math.sqrt((x * x) + (y * y));
+        return dis;
+    };
+    </script>
+</body>
+
+</html>
