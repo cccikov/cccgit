@@ -52,6 +52,7 @@
         left: 0;
         width: 100%;
         height: 100%;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
     }
 
     #cons {
@@ -101,8 +102,11 @@
 
     // $(container).css("transform", "scale(0.2)")
 
-    $(container).on("touchstart", function(e) {
-        var that = $(this);
+    $("#wrap").on("touchstart", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var that = $("#container");
+        var _this = $(this);
         var newPX = oldPX = e.originalEvent.touches[0].clientX;
         var newPY = oldPY = e.originalEvent.touches[0].clientY;
         var deltaX = deltaY = 0;
@@ -111,8 +115,10 @@
             var start = e.originalEvent.touches; //得到第一组两个点;
         }
 
-        that.off("touchmove").on("touchmove", function(e) { //要注意添加事件的对象
+
+        _this.off("touchmove").on("touchmove", function(e) { //要注意添加事件的对象
             e.preventDefault();
+            e.stopPropagation();
 
             /////////////////////
             // 获取 transform 属性 //
@@ -144,8 +150,34 @@
                 newPY = e.originalEvent.touches[0].clientY;
                 deltaY = newPY - oldPY;
 
-                var left = transLeft + deltaX;
-                var top = transTop + deltaY;
+                // 获取4边距离
+                var offsets = getOffset(that);
+
+                /**
+                 * offsets.left < -150 && offsets.right > 0 && deltaX < 0       左边已经超出了
+                 * offsets.left > 0 && offsets.right < -150 && deltaX > 0       右边已经超出了
+                 * offsets.top < -150 && offsets.bottom > 0 && deltaY < 0
+                 * offsets.bottom < -150 && offsets.top > 0 && deltaY > 0
+                 */
+
+
+                if (offsets.left < -300 && offsets.right > 0 && deltaX < 0) { // 左边已经超出了
+                    var stopHorizontal = true;
+                }
+                if (offsets.left > 0 && offsets.right < -300 && deltaX > 0) { // 右边已经超出了
+                    var stopHorizontal = true;
+                }
+
+                if (offsets.top < -300 && offsets.bottom > 0 && deltaY < 0) {
+                    var stopVertical = true;
+                }
+
+                if (offsets.bottom < -300 && offsets.top > 0 && deltaY > 0) {
+                    var stopVertical = true;
+                }
+
+                var left = stopHorizontal ? transLeft : transLeft + deltaX;
+                var top = stopVertical ? transTop : transTop + deltaY;
 
                 var nowTranslate = "translate(" + left + "px," + top + "px)";
 
@@ -158,7 +190,7 @@
                     //////////////
                     // 如果没有，就加上 //
                     //////////////
-                    transform = nowTranslate + transform;  // 由于transform的各个属性书写顺序决定他们改变顺序，所以先位移再缩放是最优的
+                    transform = nowTranslate + transform; // 由于transform的各个属性书写顺序决定他们改变顺序，所以先位移再缩放是最优的
                 }
 
                 // that.css("transform", transform);
@@ -185,8 +217,15 @@
                 var scaleDelta = newScale - oldScale;
 
                 // 对缩放 比例 取整
-                // var x = ((1 + scaleDelta) * scaleX).toFixed(2);
-                var x = scaleX + scaleDelta;
+                var x = ((1 + scaleDelta) * scaleX).toFixed(2);
+                // var x = scaleX + scaleDelta;
+
+                if (x > 4) {
+                    x = 4
+                }
+                if (x < 0.8) {
+                    x = 0.8
+                }
 
                 var nowScale = "scale(" + x + ")";
 
@@ -224,7 +263,23 @@
 
 
 
-
+    function getOffset(jqdom) {
+        var winH = window.innerHeight;
+        var winW = window.innerWidth;
+        var width = jqdom.width();
+        var height = jqdom.height();
+        var left = jqdom.offset().left;
+        var top = jqdom.offset().top;
+        var right = winW - width - left;
+        var bottom = winH - height - top;
+        var offsets = [Number(top.toFixed(2)), Number(right.toFixed(2)), Number(bottom.toFixed(2)), Number(left.toFixed(2))];
+        return {
+            top: offsets[0],
+            right: offsets[1],
+            bottom: offsets[2],
+            left: offsets[3],
+        };
+    }
 
 
 
