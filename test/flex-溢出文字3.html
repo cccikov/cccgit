@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>flex-溢出文字</title>
+    <style type="text/css">
+    .elli {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        outline: 1px solid #f00;
+    }
+    </style>
+</head>
+
+<body>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <div id="demo1">
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <p class="elli">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+    #demo1 {
+        background: #fafafa;
+    }
+
+    #demo1 div {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+    </style>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <div id="demo2">
+        <div>
+            <div>
+                <div>
+                    <div class="inner">
+                        <p class="elli">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+    #demo2 {
+        background: #fafafa;
+    }
+
+    #demo2 div {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+
+    #demo2 .inner {
+        /*单独设某层以下属性，还是会撑开；因为只是某层设置，但它的父元素还是flex元素的话，并且没有进行宽度限制，通过百分比或者min-width的限制是无效的；因为父元素同样是可被撑开的，是根据子元素决定，但是子元素的宽度又是百分比，所以相互依赖这就矛盾，所以父元素还是保持被撑开，百分比限制变得无意义。除非是特定数值，但是设定特定数值很难满足自适应*/
+        /*min-width: 0px;
+        overflow:hidden;
+        width: 100%;
+        max-width: 100%;*/
+
+        /*width:500px;*/
+
+        width: 50%;
+        /*其实百分比还是有效，还是可以成功将溢出变为省略号的，但是不是我们所想的再可视范围内变成省略号*/
+        /*对于宽度是由内容决定的元素来说，子元素设定百分百宽度是没有任何限制效果的；因为宽度由内容决定，子元素的宽度也由父元素决定，而且还是设定百分百，所以就不存在溢出，就不会出现省略号*/
+    }
+    </style>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <div id="demo3">
+        <div>
+            <div>
+                <div>
+                    <div class="inner">
+                        <p class="elli">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+    #demo3 {
+        background: #fafafa;
+    }
+
+    #demo3 div {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        /*注意是每层限制*/
+        /*min-width: 0px;*/
+        /*overflow:hidden;*/
+        width: 100%;
+        /*max-width: 100%;*/
+        /* 由于层层限制，所以宽度是被限制成功了。但是这样做好麻烦，特别是代码不是自己写的时候，或者使用插件，怎么知道哪些父元素是弹性元素 */
+    }
+    </style>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <div id="demo4">
+        <div>
+            <div>
+                <div>
+                    <div class="inner">
+                        <p class="elli">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+    #demo4 {
+        background: #fafafa;
+    }
+
+    #demo4 div {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+
+    #demo4 .inner {
+        display: block;
+        flex: 0 0 100%;
+        width: 116px;
+    }
+    </style>
+</body>
+
+</html>

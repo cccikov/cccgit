@@ -17,18 +17,24 @@
     }
 
     .flex .column1 {
+
         min-width: 0px;
+        /*max-width: 100%;*/
+        /*width:50%;*/
+
         /* 基本上：除非您明确指定“最小宽度”或“宽度”或“最大宽度”，否则flex元素将拒绝缩小到最小内在宽度以下。 */
         /* 意思就是除非设置了min-width 或者 width 或者 max-width，否则flex元素的宽度都不会缩小得比内容宽度小 */
         /* https://bugzilla.mozilla.org/show_bug.cgi?id=1086218#c4 */
         /* https://stackoverflow.com/questions/26465745/ellipsis-in-flexbox-container */
+        /* 选择min-width的原因是，min-width不会影响元素占满父元素宽度或者不会影响填满剩余空间（剩余宽度）；而width和max-width是有可能会影响占满父元素的或者影响填满剩余空间，值是好难设置的 */
+
 
         /* 默认flex-shrink为1，是可以缩小的，但是不会缩小得比内容还小 */
     }
 
     .flex .column1 p {
         text-overflow: ellipsis;
-        /* overflow: hidden; */
+        overflow: hidden;
         white-space: nowrap;
     }
 
