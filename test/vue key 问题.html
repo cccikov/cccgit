@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    li {
+        margin: 20px;
+    }
+    </style>
+    <script type="text/javascript" src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul>
+            <li :data-id="val.id" :key="val.id" v-for="(val,i) in arr">{{val.id}}</li>
+        </ul>
+        <ul>
+            <li :data-id="val.id" v-for="(val,i) in arr">{{val.id}}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    new Vue({
+        el: "#wrap",
+        data: {
+            arr: [{
+                id: 123
+            }]
+        },
+        mounted() {
+            this.$nextTick(function() {
+                document.querySelectorAll("li").forEach(function(item, key) {
+                    var dataId = item.getAttribute("data-id");
+                    item.addEventListener("click", function() {
+                        console.log(dataId);
+                        console.log(this);
+                    }, false);
+                    item.style.background = '#f00'
+                });
+                this.arr.unshift({
+                    id: 234
+                });
+            })
+        }
+    });
+    </script>
+</body>
+
+</html>
