@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>移动端 e.preventDefault 失效 报错</title>
+    <style>
+        #wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrap"></div>
+    <script>
+        /**
+         * window document document.body document.documentElement touch事件 e.preventDefault()是无效的 chrome从54版本开始不支持
+         */
+
+        // document.addEventListener("touchmove", function (e) {
+        //     console.log("document");
+        //     e.preventDefault();
+        // }, false);
+
+        // window.addEventListener("touchmove", function (e) {
+        //     console.log("window");
+        //     e.preventDefault();
+        // }, false);
+
+        // document.body.addEventListener("touchmove", function (e) {
+        //     console.log("document.body");
+        //     e.preventDefault();
+        // }, false);
+
+        // document.documentElement.addEventListener("touchmove", function (e) {
+        //     console.log("document.documentElement");
+        //     e.preventDefault();
+        // }, false);
+
+
+        /**
+         * 只能通过别的对象去禁用 移动端 的默认touch事件
+         */
+        wrap.addEventListener("touchmove",function(e){
+            console.log("wrap");
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
