@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+    function scale(e) {
+        console.log(e.type);
+        document.body.innerHTML += e.type+ " ";
+    }
+    document.addEventListener("wheel", scale, false);
+    document.addEventListener("mousewheel", scale, false);
+
+    // 其中 mousewheel 是非标准事件
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
