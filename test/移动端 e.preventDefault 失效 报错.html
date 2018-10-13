@@ -14,7 +14,6 @@
             height: 100%;
         }
     </style>
-
 </head>
 
 <body>
@@ -46,12 +45,30 @@
 
 
         /**
-         * 只能通过别的对象去禁用 移动端 的默认touch事件
+         * 可以通过别的对象去禁用 移动端 的默认touch事件
          */
-        wrap.addEventListener("touchmove",function(e){
-            console.log("wrap");
-            e.preventDefault();
-        });
+        // wrap.addEventListener("touchmove",function(e){
+        //     console.log("wrap");
+        //     e.preventDefault();
+        // });
+
+        /**
+         * 也可以通过 passive(顺从浏览器的默认行为的意思) 为 false
+         * 该属性的目的主要是为了在阻止事件默认行为导致的卡顿
+         */
+
+        // document.addEventListener("touchmove", function(e) {
+        //     console.log("document");
+        //     e.preventDefault();
+        // }, {
+        //     capture: false, // 捕获，是否将传播类型由冒泡变成捕获
+        //     passive: false // 顺从，是否顺从浏览的默认行为 表示 listener 永远不会调用 preventDefault()。如果 listener 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告。
+        // });
+
+        /**
+         * 据规范，passive 选项的默认值始终为false。但是，这引入了处理某些触摸事件（以及其他）的事件监听器在尝试处理滚动时阻止浏览器的主线程的可能性，从而导致滚动处理期间性能可能大大降低。
+         * 为防止出现此问题，某些浏览器（特别是Chrome和Firefox）已将touchstart和touchmove事件的passive选项的默认值更改为true文档级节点 Window，Document，document.documentElement和Document.body。这可以防止调用事件监听器，因此在用户滚动时无法阻止页面呈现
+         */
     </script>
 </body>
 
