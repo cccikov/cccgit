@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>promise</title>
+    <script type="text/javascript">
+    let obj = {
+        name: "ccc"
+    };
+
+    setTimeout(function() {
+        let age = obj.main.age;
+        let name = obj.main.name;
+        let id = obj.main.id;
+        console.log("到这了")
+    });
+
+    /**
+     * 这里有错不会报错
+     * 是因为在promise中用了catch，catch会捕获promise任何错误，所以一旦使用catch，catch回调函数里面一定要操作，不然错了都不知道
+     */
+    Promise.resolve({ name: "ccc" }).then(
+        response => {
+            console.log(response)
+            let age = obj.main.age;
+            let name = obj.main.name;
+            let id = obj.main.id;
+            console.log("到这了")
+        }
+    ).catch(err => {})
+
+    Promise.resolve({ name: "ccc" }).then(
+        response => {
+            console.log(response)
+            let age = obj.main.age;
+            let name = obj.main.name;
+            let id = obj.main.id;
+            console.log("到这了")
+        }
+    ).catch(err => {
+        console.log(err)
+        console.error(err)
+    })
+
+    Promise.reject({ name: "ccc" }).then(
+        response => {
+            console.log(response)
+            let age = obj.main.age;
+            let name = obj.main.name;
+            let id = obj.main.id;
+            console.log("到这了")
+        }
+    ).catch(err => {
+        console.log(err)
+        console.error(err)
+    })
+
+
+    let age = obj.main.age;
+    let name = obj.main.name;
+    let id = obj.main.id;
+    console.log("到这了")
+
+    console.log(document)
+
+    </script>
+</head>
+
+<body>
+    <p>
+        javascript中，任何错误都会阻塞；只有在错误之前开启的异步操作会继续执行
+    </p>
+    <p>
+
+    </p>
+</body>
+
+</html>
