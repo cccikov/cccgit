@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>禁用浏览器默认touchstart</title>
+    <script>
+        document.addEventListener("touchstart", function (e) {
+            e.preventDefault(); // 禁用浏览器默认的touchstart事件会使浏览器页面的点击失效
+        }, {
+            capture: false, // 捕获，是否将传播类型由冒泡变成捕获
+            passive: false // 顺从，是否顺从浏览的默认行为 表示 listener 永远不会调用 preventDefault()。如果 listener 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告。
+        })
+
+        document.addEventListener("touchmove", function (e) {
+            e.preventDefault();
+        }, {
+            capture: false, // 捕获，是否将传播类型由冒泡变成捕获
+            passive: false // 顺从，是否顺从浏览的默认行为 表示 listener 永远不会调用 preventDefault()。如果 listener 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告。
+        })
+    </script>
+</head>
+
+<body>
+    <button onclick="alert('点击了')">按钮</button>
+</body>
+
+</html>

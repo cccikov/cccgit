@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>数组批量删除</title>
+    <script type="text/javascript">
+
+    const arr = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"];
+    const delTar = ["b", "f", "i"];
+    const delTar2 = ["c", "d", "e", ];
+    const delTar3 = arr.slice();
+
+
+    /**
+     * !!! 错误的删除方法
+     * 只要删除的目标在原数组中是相邻的，就会出错
+     * 由于是按照顺序开始遍历，所以当删除当前元素的时候，后面的元素的索引就前移，这就导致遍历的时候会忽略了紧接着删除元素的元素。所以会导致删除不完全
+     * 解决方式：倒序遍历删除或者实时控制遍历索引和长度
+     */
+    function delItems_wrong(arr, tarArr) {
+        arr = arr.slice();
+        for (let i = 0, len = arr.length; i < len; i++) {
+            console.log(arr[i], i);
+            if (tarArr.indexOf(arr[i]) != -1) {
+                arr.splice(i, 1);
+            }
+        }
+        return arr;
+    }
+
+    // console.log(arr, delItems_wrong(arr, delTar))
+    // console.log(arr, delItems_wrong(arr, delTar2))
+    // console.log(arr, delItems_wrong(arr, delTar3))
+
+    /**
+     * 倒序遍历删除
+     * 由于倒序遍历，就算索引前移也可一确保每个元素都是被遍历到
+     */
+    function delItems(arr, tarArr) {
+        arr = arr.slice();
+        for (let i = arr.length; i >= 0; i--) {
+            console.log(arr[i], i);
+            if (tarArr.indexOf(arr[i]) != -1) {
+                arr.splice(i, 1);
+            }
+        }
+        return arr;
+    }
+
+    // console.log(arr, delItems(arr, delTar))
+    // console.log(arr, delItems(arr, delTar2))
+    // console.log(arr, delItems(arr, delTar3))
+
+
+    /**
+     * 实时控制遍历索引和长度
+     */
+    function delItems2(arr, tarArr) {
+        arr = arr.slice();
+        let len = arr.length;
+        let i = 0;
+        while (i < len) {
+            console.log(arr[i], i);
+            if (tarArr.indexOf(arr[i]) != -1) {
+                arr.splice(i, 1);
+                len--;
+                continue; // 或者 i-- 也可以
+            }
+            i++;
+        }
+        return arr;
+    }
+
+    console.log(arr, delItems2(arr, delTar))
+    console.log(arr, delItems2(arr, delTar2))
+    console.log(arr, delItems2(arr, delTar3))
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
