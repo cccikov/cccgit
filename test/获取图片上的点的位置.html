@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>获取图片上的点的位置</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .img-wrap {
+        position: relative;
+        top: 100px;
+        left: 100px;
+        width: 800px;
+    }
+
+    .img-wrap img {
+        display: block;
+        width: 100%;
+    }
+
+    .point {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        transform: translate(-50%, -50%);
+        border-radius: 100px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+        transition: box-shadow 0.3s;
+    }
+
+    .point:hover {
+        box-shadow: 0 0 12px rgba(231, 65, 65, 0.5);
+        cursor: pointer;
+    }
+    </style>
+    <script type="text/javascript">
+    window.addEventListener("load", load, false);
+
+    function Point(wrap, x, y) {
+        var _this = this;
+        // 初始化a标签
+        var a = document.createElement("a");
+        a.classList.add("point");
+        a.draggable = false; // 不可拖拽
+        a.href = "javascript:void(0)"
+        a.style.left = x + "px";
+        a.style.top = y + "px";
+        wrap.appendChild(a);
+        _this.x = x;
+        _this.y = y
+        _this.dom = a;
+
+
+
+        a.addEventListener("click", function(e) {
+            console.log(e.currentTarget);
+        }, false);
+    }
+
+    function load() {
+        var img = document.querySelectorAll("img")[0];
+        var wrap = document.querySelectorAll(".img-wrap")[0]
+        img.draggable = false; // 不可拖拽
+
+        function mousedown(e) {
+            var x = e.offsetX;
+            var y = e.offsetY;
+            var dom = e.currentTarget;
+            Point(wrap, x, y);
+            console.dir(dom);
+            console.log(e.offsetX * dom.naturalWidth / dom.width, e.offsetY * dom.naturalHeight / dom.height);
+        }
+        img.addEventListener("mousedown", mousedown, false)
+    }
+    </script>
+</head>
+
+<body>
+    <div class="img-wrap">
+        <img src="./img/01bg.png">
+    </div>
+</body>
+
+</html>
