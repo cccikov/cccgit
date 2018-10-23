@@ -20,14 +20,14 @@
 
 
         //采用回调函数方式
-        function getTest2(cb) {
+        function getTest2(cb) { // cb-回调函数，其实只是原函数getTest2的一个参数
             let test = null;
             setTimeout(function() {
                 test = 2;
-                cb && cb(test); // 有cb才执行回调
+                cb && cb(test); // 有cb才执行回调，如果有传入cb这个参数，就调用这个cb，并在调用cb时传入一个参数
             }, 2000);
         }
-        getTest2(function(data) {
+        getTest2(function(data) { // 在这里，cb是一个匿名函数，这个匿名函数有一个data的参数；所以回调函数调用的时候，就是执行这个匿名函数；上面调用回调函数传的参数，就可以在回调函数体中获取这个值了；就可以实现异步传数据了
             let id = data;
             console.log(id); //2
         });
