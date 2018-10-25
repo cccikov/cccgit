@@ -687,3 +687,35 @@ function searchParse(search) {
     }
     return searchjson;
 }
+
+
+/**
+ * 数组去重
+ */
+function removeDuplicate(arr) {
+    var newArr = []; // 记住数组中已经有的元素
+    arr.forEach(function(item) {
+        console.log(item)
+        if (newArr.indexOf(item) == -1) {
+            newArr.push(item);
+        }
+    });
+    return newArr
+}
+function removeDuplicate2(arr) {
+    var arr = arr.slice(); // 复制数组，避免修改原数组
+    var hasArr = []; // 记住数组中已经有的元素
+    let len = arr.length;
+    let i = 0;
+    while (i < len) {
+        if (hasArr.indexOf(arr[i]) == -1) { // 没有重复
+            hasArr.push(arr[i]);
+        } else { // 有重复
+            arr.splice(i, 1);
+            len--;
+            continue; // 或者 i-- 也可以
+        }
+        i++;
+    }
+    return arr
+}

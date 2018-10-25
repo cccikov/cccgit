@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>面试题-红绿灯</title>
+    <script type="text/javascript">
+    // 红灯亮三秒，绿灯亮一秒，黄灯亮一秒，交替重复亮灯
+    function light(color) {
+        console.log(color);
+        // light("red")  light("green")  light("yellow")
+    }
+
+    function run(color) {
+        light(color);
+        if (color == "red") {
+            var timeout = 3000;
+            var color = "green";
+        } else if (color == "green") {
+            var timeout = 1000;
+            var color = "yellow";
+        } else {
+            var timeout = 1000;
+            var color = "red";
+        }
+        setTimeout(function() {
+            run(color);
+        }, timeout);
+    }
+    run("red");
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
