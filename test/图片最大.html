@@ -4,53 +4,199 @@
 <head>
     <meta charset="UTF-8">
     <title>图片最大</title>
-    <style type="text/css">
-    .img-wrap {
-        height: 50px;
-        width: 50px;
-        border: 1px solid red;
-        text-align: center;
-    }
-
-    .img-wrap img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-    .img-wrap2 {
-        height: 500px;
-        width: 500px;
-        border: 1px solid red;
-        background: url("img/canvas.png") center/contain no-repeat;
-    }
-
-    .img {
-        width: 1200px;
-        height: 300px;
-        line-height: 300px;
-        border: 1px solid red;
-        text-align: center;
-    }
-
-    .img img {
-        /* display: block; */
-        vertical-align: middle;
-        position: relative;
-        top: -2px;
-        /* img 3px 又不能设置display: block; 否则js那里就要width,height都设置 */
-    }
-    </style>
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <style type="text/css">
+        body{
+            padding: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h5>原图片</h5>
+    <div id="demo1">
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-portrait.png">
+        </p>
+    </div>
+    <style type="text/css">
+        #demo1{
+            overflow: auto;
+            white-space: nowrap
+        }
+        #demo1 p{
+            display: inline-block;
+        }
+    </style>
+
+
+    <h5>限制最大，居中</h5>
+    <div id="demo2">
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-portrait.png">
+        </p>
+    </div>
+    <style type="text/css">
+        #demo2{
+            overflow: hidden;
+            padding: 10px;
+        }
+        #demo2 p{
+            float: left;
+            margin: 10px;
+            box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+        #demo2 p img{
+            max-height: 100%;
+            max-width: 100%;
+            vertical-align: middle;
+            margin: -3px 0 0;
+        }
+    </style>
+
+    <h5>背景，contain，显示全部</h5>
+    <div id="demo3">
+        <p style="background-image: url(./img/screenTiny/screen-xldpi-landscape.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-xldpi-portrait.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-ldpi-landscape.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-ldpi-portrait.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-xhdpi-landscape.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-xhdpi-portrait.png)"></p>
+    </div>
+    <style type="text/css">
+        #demo3{
+            overflow: hidden;
+            padding: 10px;
+        }
+        #demo3 p{
+            float: left;
+            margin: 10px;
+            box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+
+            width: 200px;
+            height: 200px;
+            background: url("./img/screenTiny/screen-xldpi-portrait.png") center/contain no-repeat;
+        }
+    </style>
+
+
+    <h5>背景，cover，占满</h5>
+    <div id="demo4">
+        <p style="background-image: url(./img/screenTiny/screen-xldpi-landscape.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-xldpi-portrait.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-ldpi-landscape.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-ldpi-portrait.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-xhdpi-landscape.png)"></p>
+        <p style="background-image: url(./img/screenTiny/screen-xhdpi-portrait.png)"></p>
+    </div>
+    <style type="text/css">
+        #demo4{
+            overflow: hidden;
+            padding: 10px;
+        }
+        #demo4 p{
+            float: left;
+            margin: 10px;
+            box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+
+            width: 200px;
+            height: 200px;
+            background: url("./img/screenTiny/screen-xldpi-portrait.png") center/cover no-repeat;
+        }
+    </style>
+
+
+
+    <h5>js</h5>
+    <div id="demo5">
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-portrait.png">
+        </p>
+    </div>
+    <style type="text/css">
+        #demo5{
+            overflow: hidden;
+            padding: 10px;
+        }
+        #demo5 p{
+            float: left;
+            margin: 10px;
+            box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+        #demo5 p img{
+            max-height: 100%;
+            max-width: 100%;
+            vertical-align: middle;
+            margin: -3px 0 0;
+        }
+    </style>
     <script type="text/javascript">
     $(function() {
-        let wrapRate = $(".img").eq(0).height() / $(".img").eq(0).width();
-        let imgNum = $("img").size();
+        var imgs = $("#demo5 img")
+        let imgNum = imgs.size();
         let onloadImgNum = 0;
-        $("img").on("load", function() {
+        imgs.on("load", function() {
             onloadImgNum++;
             if (onloadImgNum == imgNum) {
-                $(".img img").each(function(index, key) {
-                    var that = $(key);
+                imgs.each(function(key, val) {
+                    var that = $(val);
+                    var parent = that.parent();
+                    let wrapRate = parent.height() / parent.width();
                     var rate = that.height() / that.width();
                     if (rate > wrapRate) {
                         that.height("100%");
@@ -62,20 +208,9 @@
         });
     });
     </script>
-</head>
 
-<body>
-    <div class="img-wrap">
-        <img src="img/canvas.png">
-    </div>
-    <div class="img-wrap2">
-    </div>
-    <div class="img">
-        <img src="img/height.png">
-    </div>
-    <div class="img">
-        <img src="img/width.png">
-    </div>
+
+
 </body>
 
 </html>
