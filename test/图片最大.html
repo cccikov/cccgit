@@ -211,6 +211,75 @@
 
 
 
+    <h5>js</h5>
+    <div id="demo6">
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-ldpi-portrait.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-landscape.png">
+        </p>
+        <p>
+            <img src="./img/screenTiny/screen-xhdpi-portrait.png">
+        </p>
+    </div>
+    <style type="text/css">
+        #demo6{
+            overflow: hidden;
+            padding: 10px;
+        }
+        #demo6 p{
+            float: left;
+            margin: 10px;
+            box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #demo6 img{
+            flex: 0 0 auto;
+        }
+
+    </style>
+    <script type="text/javascript">
+    $(function() {
+        var imgs = $("#demo6 img")
+        let imgNum = imgs.size();
+        let onloadImgNum = 0;
+        imgs.on("load", function() {
+            onloadImgNum++;
+            if (onloadImgNum == imgNum) {
+                imgs.each(function(key, val) {
+                    var that = $(val);
+                    var parent = that.parent();
+                    let wrapRate = parent.height() / parent.width();
+                    var rate = that.height() / that.width();
+                    if (rate < wrapRate) {
+                        that.height("100%");
+                    } else {
+                        that.width("100%");
+                    }
+                });
+            }
+        });
+    });
+    </script>
+
+
+
 </body>
 
 </html>
