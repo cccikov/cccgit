@@ -145,22 +145,22 @@
     <h5>js</h5>
     <div id="demo5">
         <p>
-            <img src="./img/screenTiny/screen-xldpi-landscape.png">
+            <img data-src="./img/screenTiny/screen-xldpi-landscape.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-xldpi-portrait.png">
+            <img data-src="./img/screenTiny/screen-xldpi-portrait.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-ldpi-landscape.png">
+            <img data-src="./img/screenTiny/screen-ldpi-landscape.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-ldpi-portrait.png">
+            <img data-src="./img/screenTiny/screen-ldpi-portrait.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-xhdpi-landscape.png">
+            <img data-src="./img/screenTiny/screen-xhdpi-landscape.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-xhdpi-portrait.png">
+            <img data-src="./img/screenTiny/screen-xhdpi-portrait.png">
         </p>
     </div>
     <style type="text/css">
@@ -186,26 +186,22 @@
         }
     </style>
     <script type="text/javascript">
-    $(function() {
-        var imgs = $("#demo5 img")
-        let imgNum = imgs.size();
-        let onloadImgNum = 0;
-        imgs.on("load", function() {
-            onloadImgNum++;
-            if (onloadImgNum == imgNum) {
-                imgs.each(function(key, val) {
-                    var that = $(val);
-                    var parent = that.parent();
-                    let wrapRate = parent.height() / parent.width();
-                    var rate = that.height() / that.width();
-                    if (rate > wrapRate) {
-                        that.height("100%");
-                    } else {
-                        that.width("100%");
-                    }
-                });
-            }
-        });
+    var imgs = $("#demo5 img")
+    imgs.on("load", function() {
+        console.log(this)
+        var that = $(this);
+        var parent = that.parent();
+        let wrapRate = parent.height() / parent.width();
+        var rate = that.height() / that.width();
+        if (rate > wrapRate) {
+            that.height("100%");
+        } else {
+            that.width("100%");
+        }
+    });
+    imgs.each(function(key,val){
+        var src = $(val).attr("data-src")
+        $(val).attr("src",src)
     });
     </script>
 
@@ -214,22 +210,22 @@
     <h5>js</h5>
     <div id="demo6">
         <p>
-            <img src="./img/screenTiny/screen-xldpi-landscape.png">
+            <img data-src="./img/screenTiny/screen-xldpi-landscape.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-xldpi-portrait.png">
+            <img data-src="./img/screenTiny/screen-xldpi-portrait.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-ldpi-landscape.png">
+            <img data-src="./img/screenTiny/screen-ldpi-landscape.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-ldpi-portrait.png">
+            <img data-src="./img/screenTiny/screen-ldpi-portrait.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-xhdpi-landscape.png">
+            <img data-src="./img/screenTiny/screen-xhdpi-landscape.png">
         </p>
         <p>
-            <img src="./img/screenTiny/screen-xhdpi-portrait.png">
+            <img data-src="./img/screenTiny/screen-xhdpi-portrait.png">
         </p>
     </div>
     <style type="text/css">
@@ -252,29 +248,24 @@
         #demo6 img{
             flex: 0 0 auto;
         }
-
     </style>
     <script type="text/javascript">
-    $(function() {
-        var imgs = $("#demo6 img")
-        let imgNum = imgs.size();
-        let onloadImgNum = 0;
-        imgs.on("load", function() {
-            onloadImgNum++;
-            if (onloadImgNum == imgNum) {
-                imgs.each(function(key, val) {
-                    var that = $(val);
-                    var parent = that.parent();
-                    let wrapRate = parent.height() / parent.width();
-                    var rate = that.height() / that.width();
-                    if (rate < wrapRate) {
-                        that.height("100%");
-                    } else {
-                        that.width("100%");
-                    }
-                });
-            }
-        });
+    var imgs = $("#demo6 img")
+    imgs.on("load", function() {
+        console.log(this)
+        var that = $(this);
+        var parent = that.parent();
+        let wrapRate = parent.height() / parent.width();
+        var rate = that.height() / that.width();
+        if (rate < wrapRate) {
+            that.height("100%");
+        } else {
+            that.width("100%");
+        }
+    });
+    imgs.each(function(key,val){
+        var src = $(val).attr("data-src")
+        $(val).attr("src",src)
     });
     </script>
 
