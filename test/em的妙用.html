@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>em的妙用</title>
+    <style>
+    p {
+        height: 4em;
+        /* 配合line-height 限制只能显示几行 */
+        line-height: 2;
+        margin: 0;
+        overflow: hidden;
+        font-size: 14px;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+    }
+    span{
+        display: inline-block;
+        width: 4em;
+        /* 用来限制可以限制多少个字 */
+        white-space: nowrap;
+        overflow: hidden;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+    }
+    </style>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <span>爱神的箭阿三来得及</span>
+</body>
+
+</html>
