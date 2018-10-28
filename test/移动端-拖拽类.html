@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>移动端-拖拽类</title>
+    <style type="text/css">
+    .wrap {
+        width: 320px;
+        padding: 10px;
+        margin: 20px;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .wrap img {
+        display: block;
+        max-width: 100%;
+    }
+    </style>
+    <script type="text/javascript">
+
+    /////////////
+    // 拖拽类     //
+    /////////////
+    function Drag(el) {
+        this._init(el);
+    }
+    Drag.prototype._init = function(el) {
+        var _this = this;
+        var isStr = typeof el === "string" && el != null && el != undefined;
+        el = isStr ? document.querySelectorAll(el)[0] : el;
+        var isElement = !!(el && (el.nodeType == 1 || el.nodeType == 9));
+        if (!isElement) {
+            if (el instanceof NodeList) {
+                console.error("请传入单个dom");
+            } else {
+                console.error("请传入正确的dom对象或者选择器");
+            }
+        }
+        _this.el = el;
+        console.log(el.style);
+
+        Object.assign(el.style, {
+            "transform": "translate3d(0,0,0)",
+            "will-change": "transform"
+        });
+
+        var touchData = {};
+
+        el.addEventListener("touchstart", wrap_touchstart, false);
+
+
+        /**
+         * 点击操作
+         */
+        function wrap_touchstart(e) {
+            // 触控手指大于1的时候，退出
+            if (e.touches.length > 1) {
+                return
+            }
+
+            if (e.touches.length == 1) {
+                document.addEventListener("touchmove", doc_touchmove, {
+                    capture: false,
+                    passive: false
+                });
+                document.addEventListener("touchend", doc_touchend, false);
+                Object.assign(touchData, {
+                    oldClientX: e.touches[0].clientX,
+                    oldClientY: e.touches[0].clientY
+                });
+                // console.log(touchData);
+            }
+        }
+
+
+        /**
+         * 移动操作
+         */
+        function doc_touchmove(e) {
+            e.preventDefault();
+            Object.assign(touchData, {
+                clientX: e.touches[0].clientX,
+                clientY: e.touches[0].clientY
+            });
+
+            /**
+             * 初始量
+             */
+            let translate3dReg = /translate3d\(.+?\)/g; // 获取translate3d正则
+            let translate3dValueReg = /(-)?\d+(\.)?\d*/g; // 属性数值正则
+
+            let originTranslate3d = _this.el.style.transform.match(translate3dReg)[0];
+            let [, originLeft, originTop] = originTranslate3d.match(translate3dValueReg); // 获取dom的初始量
+            originLeft = Number(originLeft);
+            originTop = Number(originTop);
+
+            /**
+             * 距离屏幕位置
+             */
+            let clientRect = _this.el.getBoundingClientRect();
+
+            /**
+             * 变化量
+             */
+            let deltaX = touchData.clientX - touchData.oldClientX; // 变化变化量
+            let deltaY = touchData.clientY - touchData.oldClientY; // 变化变化量
+
+            // 限制
+            if (clientRect.left <= 0 && deltaX < 0) {
+                deltaX = 0
+            }
+
+            if (clientRect.right >= window.innerWidth && deltaX > 0) {
+                deltaX = 0
+            }
+
+            if (clientRect.top <= 0 && deltaY < 0) {
+                deltaY = 0
+            }
+
+            if (clientRect.bottom >= window.innerHeight && deltaY > 0) {
+                deltaY = 0
+            }
+
+            /**
+             * 变化后的量
+             */
+            let left = originLeft + deltaX;
+            let top = originTop + deltaY;
+
+            // 限制
+
+            let translate3d = "translate3d(" + left + "px," + top + "px,0)";
+
+            /**
+             * 设置样式
+             */
+            _this.el.style.transform = _this.el.style.transform.replace(translate3dReg, translate3d);
+
+            /**
+             * 现在的值变成下次的旧值
+             */
+            Object.assign(touchData, {
+                oldClientX: touchData.clientX,
+                oldClientY: touchData.clientY
+            });
+
+        }
+
+        /**
+         * 手指离开屏幕操作
+         */
+        function doc_touchend(e) {
+            // console.log("document_end", e)
+
+            // 只有当没有手指的时候才移除
+            if (e.touches.length == 0) {
+                document.removeEventListener("touchmove", doc_touchmove, false);
+                document.removeEventListener("touchend", doc_touchend, false);
+            }
+        }
+    }
+
+
+
+
+    window.addEventListener("load", load, false);
+    function load() {
+        new Drag(".wrap");
+    }
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <img src="./img/screenTiny/screen-xhdpi-landscape.png">
+    </div>
+</body>
+
+</html>
