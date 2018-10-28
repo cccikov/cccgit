@@ -23,8 +23,18 @@
         console.log(wrap.getAttribute("class"));
         console.log(wrap.getAttribute("data-name"));
         console.log(wrap.getAttribute("style"));
-    </script>
 
+        // 设置样式(通过js属性)
+        wrap.style.fontSize = "18px";
+        Object.assign(wrap.style,{
+            "font-family":"微软雅黑",
+            "font-style":"italic"
+        });
+        // 设置样式(通过标签属性)
+        wrap.setAttribute("style",wrap.getAttribute("style")+"font-weight:800;box-shadow:0px 0px 12px rgba(0,0,0,0.3);");
+        // 甚至乱写也会出现在标签上
+        wrap.setAttribute("style",wrap.getAttribute("style")+"123aklsjdal1j23");
+    </script>
 
     <p>js属性（dom属性（Properties）一般归js 用</p>
     <p>标签属性（Attributes）归html 用</p>
