@@ -55,11 +55,6 @@
          * 点击操作
          */
         function wrap_touchstart(e) {
-            // 触控手指大于1的时候，退出
-            if (e.touches.length > 1) {
-                return
-            }
-
             if (e.touches.length == 1) {
                 document.addEventListener("touchmove", doc_touchmove, {
                     capture: false,
@@ -80,6 +75,12 @@
          */
         function doc_touchmove(e) {
             e.preventDefault();
+
+            // 触控手指大于1的时候，退出
+            if (e.touches.length > 1) {
+                return
+            }
+
             Object.assign(touchData, {
                 clientX: e.touches[0].clientX,
                 clientY: e.touches[0].clientY
