@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>获取图片上的点的位置-vue版</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #img-wrap {
+        position: relative;
+        top: 100px;
+        left: 100px;
+        width: 800px;
+    }
+
+    #img-wrap img {
+        display: block;
+        width: 100%;
+    }
+
+    .point {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        transform: translate(-50%, -50%);
+        border-radius: 100px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+        transition: box-shadow 0.3s;
+        text-decoration: none;
+        text-align: center;
+        color: inherit;
+    }
+
+    .point:hover {
+        box-shadow: 0 0 12px rgba(231, 65, 65, 0.5);
+        cursor: pointer;
+    }
+    </style>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="img-wrap">
+        <img src="./img/01bg.png" @mousedown="mousedown">
+        <a v-for="(val,index) in pointArr" href="javascript:void(0)" :style="{top:val.y+'px',left:val.x+'px'}" class="point" draggable="false">{{index+1}}</a>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el:"#img-wrap",
+            data:{
+                pointArr:[]
+            },
+            methods:{
+                mousedown(e){
+                    var el = e.currentTarget;
+                    var x = e.offsetX;
+                    var y = e.offsetY;
+                    var realX = e.offsetX * el.naturalWidth / el.width;
+                    var realY = e.offsetY * el.naturalHeight / el.height;
+                    var obj = {
+                        x,y,realX,realY
+                    }
+                    this.pointArr.push(obj);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
