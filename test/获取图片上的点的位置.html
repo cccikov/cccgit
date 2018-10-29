@@ -29,10 +29,14 @@
         left: 0;
         width: 30px;
         height: 30px;
+        line-height: 30px;
         transform: translate(-50%, -50%);
         border-radius: 100px;
         box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
         transition: box-shadow 0.3s;
+        text-decoration: none;
+        text-align: center;
+        color: inherit;
     }
 
     .point:hover {
@@ -43,10 +47,11 @@
     <script type="text/javascript">
     window.addEventListener("load", load, false);
 
-    function Point(wrap, x, y) {
+    function Point(wrap, x, y, html) {
         var _this = this;
         // 初始化a标签
         var a = document.createElement("a");
+        a.innerHTML = html;
         a.classList.add("point");
         a.draggable = false; // 不可拖拽
         a.href = "javascript:void(0)"
@@ -55,25 +60,41 @@
         wrap.appendChild(a);
         _this.x = x;
         _this.y = y
-        _this.dom = a;
-
-
+        _this.el = a;
 
         a.addEventListener("click", function(e) {
-            console.log(e.currentTarget);
+            console.log(_this.getData());
+            _this.del();
         }, false);
     }
+    Point.prototype.getData = function() {
+        return {
+            el: this.el,
+            x: this.x,
+            y: this.y
+        }
+    }
+    Point.prototype.del = function() {
+        var parent = this.el.parentNode;
+        parent.removeChild(this.el);
+    }
+
+    var domArr = [];
 
     function load() {
         var img = document.querySelectorAll("img")[0];
         var wrap = document.querySelectorAll(".img-wrap")[0]
         img.draggable = false; // 不可拖拽
 
+        var n = 0;
+
         function mousedown(e) {
             var x = e.offsetX;
             var y = e.offsetY;
             var dom = e.currentTarget;
-            Point(wrap, x, y);
+            n++;
+            var point = new Point(wrap, x, y, n);
+            domArr.push(point)
             console.dir(dom);
             console.log(e.offsetX * dom.naturalWidth / dom.width, e.offsetY * dom.naturalHeight / dom.height);
         }
