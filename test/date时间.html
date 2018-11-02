@@ -68,6 +68,46 @@
 				console.log(date);//Mon Oct 02 2017 02:03:05 GMT+0800
 			}();
 
+			console.log("%c========================", "color:red")
+
+			//////////////
+			// 获取当前时间对象 //
+			//////////////
+			console.log(new Date());
+			console.log(new Date().getTime()); // 时间戳
+			console.log(Date.now()); // 时间戳 相当于上面
+
+			console.log("%c-----------------------", "color:red")
+			//////////
+			// 设置时间对象 //
+			//////////
+			console.log(new Date(1514736000000)); // 通过时间戳
+			var date = new Date();
+			date.setTime(1514736000000);
+			console.log(date); // 通过时间戳
+
+			console.log("%c---", "color:red")
+
+			console.log(new Date(2018, null)); // 通过年 , 但是第二参数也不可以省略，不然会以为是时间戳 要不就加上引号
+			console.log(new Date(2018, 0)); // 通过年月 注意 月只要不是字符串，都是从0开始算，
+			console.log(new Date(2018, 1, 3)); // 通过年月日
+			console.log(new Date(2018, 1, 3, 23)); // 通过年月日
+			console.log(new Date(2018, 1, 3, 23, 59, 59, 999)); // 通过年月日 时分秒 毫秒
+
+			console.log("%c---", "color:red")
+
+			console.log(new Date("2018-09-01T23:59:58")); // ISO8601 的标准格式
+			console.log(new Date("2018-09-01 23:59:58")); // T 可换为空格
+			console.log(new Date("2018-09-01"));
+			console.log(new Date("2018-09"));
+			console.log(new Date("2018"));
+
+			console.log("%c---", "color:red")
+
+			console.log(new Date("2018/09/11 13:45:34"));
+			console.log(new Date("2018/09/11")); // 年/月/日
+			console.log(new Date("09/11/2018")); // 月/日/年
+			console.log(new Date("11/09/2018")); // 月/日/年
 
 		</script>
 	</body>
