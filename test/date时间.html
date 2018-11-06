@@ -112,8 +112,8 @@
 			console.log("%c========================", "color:red")
 
 			let today = new Date();
-			let tomonth = today.getMonth();
-			let toyear = today.getFullYear();
+			let month = today.getMonth();
+			let year = today.getFullYear();
 			let oneDay = 1000*60*60*24;
 			today = Math.floor(today/oneDay)*oneDay; // 当天开始的时间戳（UTC）所以北京时间是加8个小时
 			today = new Date(today);
@@ -124,15 +124,16 @@
 			console.log(today,weekStart,weekStartByMon);
 			// 上周
 			let lastWeek = new Date(weekStart-7*oneDay);
-			console.log(lastWeek);
+			let lastWeekByMon = new Date(weekStartByMon-7*oneDay);
+			console.log(lastWeek,lastWeekByMon);
 
 			console.log("%c---", "color:red")
 
-			// 本月
-			let month = new Date(toyear,tomonth);
-			console.log(month);
+			// 本月开始时间
+			let monthStart = new Date(year,month);
+			console.log(monthStart);
 			// 上个月
-			let lastMonth = new Date(toyear,tomonth-1);
+			let lastMonth = new Date(year,month-1);
 			console.log(lastMonth);
 
 
