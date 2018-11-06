@@ -109,6 +109,33 @@
 			console.log(new Date("09/11/2018")); // 月/日/年
 			console.log(new Date("11/09/2018")); // 月/日/年
 
+			console.log("%c========================", "color:red")
+
+			let today = new Date();
+			let tomonth = today.getMonth();
+			let toyear = today.getFullYear();
+			let oneDay = 1000*60*60*24;
+			today = Math.floor(today/oneDay)*oneDay; // 当天开始的时间戳（UTC）所以北京时间是加8个小时
+			today = new Date(today);
+			// 获取本周
+			let week = today.getDay();
+			let weekStart = new Date(today-week*oneDay); // 以周日作为起点
+			let weekStartByMon = new Date(today-(week-1)*oneDay); // 以周一作为起点
+			console.log(today,weekStart,weekStartByMon);
+			// 上周
+			let lastWeek = new Date(weekStart-7*oneDay);
+			console.log(lastWeek);
+
+			console.log("%c---", "color:red")
+
+			// 本月
+			let month = new Date(toyear,tomonth);
+			console.log(month);
+			// 上个月
+			let lastMonth = new Date(toyear,tomonth-1);
+			console.log(lastMonth);
+
+
 		</script>
 	</body>
 
