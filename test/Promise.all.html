@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Promise.all</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <script type="text/javascript">
+    function ranInt(max, min) {
+        if (min > max) {
+            var mid = max;
+            max = min;
+            min = mid;
+        }
+        return parseInt(Math.random() * (max - min + 1) + min)
+    }
+
+    function axios(str) {
+        return new Promise(function(resolve, reject) {
+            var timeout = ranInt(2000, 500);
+            setTimeout(function() {
+                resolve({ timeout, str })
+            }, timeout)
+        });
+    }
+
+
+
+    ! function() {
+        function finish() {
+            return new Promise(function(resolve, reject) {
+                axios("第一个请求").then(function(value) {
+                    console.log(value);
+                    return axios("第二个请求");
+                }).then(function(value) {
+                    console.log(value);
+                    return axios("第三个请求");
+                }).then(function(value) {
+                    console.log(value);
+                    resolve("finish")
+                })
+            });
+        }
+        finish().then(function(val) {
+            console.warn(val);
+        });
+    }
+    // ();
+
+
+
+    ! function() {
+        var n = 0;
+
+        function finish() {
+            n++;
+            if (n == 3) {
+                console.warn("finish");
+            }
+        }
+
+        axios("第一个请求").then(function(value) {
+            console.log(value);
+            finish();
+        });
+        axios("第二个请求").then(function(value) {
+            console.log(value);
+            finish();
+        });
+        axios("第三个请求").then(function(value) {
+            console.log(value);
+            finish();
+        });
+    }
+    // ();
+
+
+
+
+    ! function() {
+
+        function finish(cb) {
+            var n = 0;
+            return function() {
+                n++;
+                if (n == 3) {
+                    if (cb) {
+                        cb("finish");
+                    }
+                }
+            }
+        }
+
+        var finish_fn = finish(function(val) {
+            console.log(val)
+        });
+
+        axios("第一个请求").then(function(value) {
+            console.log(value);
+            finish_fn();
+        });
+        axios("第二个请求").then(function(value) {
+            console.log(value);
+            finish_fn();
+        });
+        axios("第三个请求").then(function(value) {
+            console.log(value);
+            finish_fn();
+        });
+    }
+    // ();
+
+
+
+    ! function() {
+
+        var axios1 = axios("第一个请求");
+        var axios2 = axios("第二个请求");
+        var axios3 = axios("第三个请求");
+
+        Promise.all([axios1, axios2, axios3]).then(function(val) {
+            console.log(val);
+            console.log("all done")
+        }).catch(function(err) {
+            console.error(err);
+            console.log("some error")
+        });
+
+        Promise.race([axios1, axios2, axios3]).then(function(val) {
+            console.log(val);
+        }).catch(function(err) {
+            console.error(err);
+        });
+    }
+    ();
+    </script>
+</body>
+
+</html>

@@ -210,6 +210,11 @@ ccc.isAndroid = function() {
 ccc.isIphone = function() {
     return (/iphone/gi).test(navigator.appVersion.toLowerCase());
 }
+
+ccc.isIos = function(){
+    return (/(iPhone|iPad|iPod|iOS)/i).test(navigator.userAgent.toLowerCase());
+}
+
 ccc.isXBrowser = function(name) { //msie(或者trident) chrome firefox
     var reg = new RegExp(name, "gi");
     return reg.test(navigator.userAgent.toLowerCase());
