@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8" />
-		<title>displaynone变displayblock过渡效果</title>
-		<style>
-			.out {
+<head>
+    <meta charset="UTF-8" />
+    <title>displaynone变displayblock过渡效果</title>
+    <style>
+        .out {
 				opacity: 0;
 				display: none;
 				transition: opacity 1.5s;
@@ -15,27 +15,50 @@
 				opacity: 1;
 			}
 		</style>
-		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(function() {
-				$("button").on("click", function() {
-					$(".out").show();
-					setTimeout(function(){ // 由于是连续两个操作，并且后一个操作依赖前一个的状态，所以在下一轮“事件循环”的开始时执行
-						$(".out").addClass("active");
-					});//1ms谁看得出来不是同步
-					//如果处理内容多的话，可能不行，就设个一帧的时间16.7
-				});
-			});
-		</script>
-	</head>
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    $(function() {
+        $(".show").on("click", function() {
+            $(".out").show().addClass("show");
+            setTimeout(function() { // 由于是连续两个操作，并且后一个操作依赖前一个的状态，所以在下一轮“事件循环”的开始时执行
+                $(".out").addClass("active");
+            }); //1ms谁看得出来不是同步
+            //如果处理内容多的话，可能不行，就设个一帧的时间16.7
+        });
 
-	<body>
-		<div class="out">
-			<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt repellendus esse accusantium itaque suscipit vel eligendi voluptatum inventore maiores in quo adipisci. Aliquid officiis neque eum mollitia possimus itaque reprehenderit!</span>
-			<p class="in">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga!</p>
-		</div>
-		<button>出现</button>
-		<p>display:none 变 display:block 动画，可以从height,width,opacity其他样式入手，变display:block先不显示出来，稍微延迟一下在改变其他样式</p>
-	</body>
+
+        /////////////
+        // 消失有两种方法 //
+        /////////////
+
+        // 方法1
+        $(".out").on("transitionend", function() {
+            var _this = $(this);
+            if (!_this.is(".show")) {
+                console.log("消失结束");
+                $(".out").hide();
+            }
+        });
+
+        $(".hide").on("click", function() {
+            $(".out").removeClass("active show");
+        	// 方法2
+            // setTimeout(function() {
+            //     $(".out").hide();
+            // }, 1500);
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="out">
+        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt repellendus esse accusantium itaque suscipit vel eligendi voluptatum inventore maiores in quo adipisci. Aliquid officiis neque eum mollitia possimus itaque reprehenderit!</span>
+        <p class="in">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga!</p>
+    </div>
+    <button class="show">出现</button>
+    <button class="hide">消失</button>
+    <p>display:none 变 display:block 动画，可以从height,width,opacity其他样式入手，变display:block先不显示出来，稍微延迟一下在改变其他样式</p>
+</body>
 
 </html>
