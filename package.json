@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/cccikov/cccgit#readme",
   "devDependencies": {
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.26.3",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.4.1",
     "gulp-less": "^3.3.0",
