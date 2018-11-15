@@ -24,5 +24,8 @@
     "gulp-clean-css": "^3.4.1",
     "gulp-less": "^3.3.0",
     "gulp-rename": "^1.2.2"
+  },
+  "dependencies": {
+    "qrcodejs2": "0.0.2"
   }
 }
