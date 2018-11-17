@@ -166,6 +166,13 @@ ccc.isEmptyObject = function(obj) {
         // }
         // return false;//这种方式如果实例全是函数也会判断为空
 };
+
+// 简单点的方式
+ccc.isEmptyObject = function(obj) {
+    return Object.values(obj).length>0;
+    // return Object.keys(obj).length>0;
+};
+
 /*var isEmptyValue = function(value) {
  var type;
  if(value == null) { // 等同于 value === undefined || value === null
