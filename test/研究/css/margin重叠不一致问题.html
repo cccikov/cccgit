@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>margin重叠不一致问题</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    * {
+        margin: 0;
+    }
+
+    .out {
+        background: #f5f5f5;
+    }
+
+    .wrap {
+        background: #eee;
+        min-height: 300px;
+        /* webkit */
+    }
+
+    .mar-bto {
+        margin: 0 0 100px;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- https://stackoverflow.com/questions/45310276/css-odd-behavior-min-height-and-margin-collapse -->
+    <div class="out">
+        <div class="wrap">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, soluta!</p>
+            <div class="mar-bto">这个元素设置了margin-bttom:100px</div>
+        </div>
+        haha
+    </div>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <hr>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <div class="demo2">
+        <div class="container">
+            <p>Welcome</p>
+        </div>
+        <div class="after">
+            Main content.
+        </div>
+        <style type="text/css">
+        .demo2{
+            padding: 20px 0;
+        }
+        .demo2 .container {
+            min-height: 100px;
+            background-color: lightgreen;
+        }
+
+        .demo2 p {
+            margin-bottom: 50px;
+        }
+        </style>
+    </div>
+
+    <p>
+        父元素与其第一个或最后一个子元素之间<br>
+        如果在父元素与其第一个子元素之间不存在边框、内边距、行内内容，也没有创建块格式化上下文、或者清除浮动将两者的 margin-top 分开；或者在父元素与其最后一个子元素之间不存在边框、内边距、行内内容、height、min-height、max-height将两者的 margin-bottom 分开，那么这两对外边距之间会产生折叠。此时子元素的外边距会“溢出”到父元素的外面。
+    </p>
+    <p>
+        但是在chrome浏览器（或者webkit内核）中，设置了min-height的元素，即使这个高度足以和最后一个子元素的margin-bottom分开；但是子元素的外边距还是会“溢出”到父元素的外面。
+    </p>
+</body>
+
+</html>
