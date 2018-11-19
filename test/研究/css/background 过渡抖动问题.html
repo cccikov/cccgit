@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>background 过渡抖动问题</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    .wrap {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .item:nth-of-type(1) {
+        width: 40px;
+        height: 40px;
+        background: url("../../img/background过渡抖动问题/01.png") center/contain no-repeat;
+        transition: background 1s, width 1s, height 1s;
+    }
+
+    .item:nth-of-type(1).active {
+        width: 76px;
+        height: 76px;
+        background-image: url("../../img/background过渡抖动问题/01_active.png")
+    }
+
+    .item:nth-of-type(2) {
+        width: 40px;
+        height: 40px;
+        background: url("../../img/background过渡抖动问题/01.png") center/contain no-repeat;
+        transition: background 1s, transform 1s;
+    }
+
+    .item:nth-of-type(2).active {
+        transform: scale(2);
+        background-image: url("../../img/background过渡抖动问题/01_active.png")
+    }
+
+    .item:nth-of-type(3) {
+        width: 80px;
+        height: 80px;
+        background: url("../../img/background过渡抖动问题/01.png") center/contain no-repeat;
+        transition: background 10s;
+    }
+
+    .item:nth-of-type(3).active {
+        background-image: url("../../img/background过渡抖动问题/01_active.png")
+    }
+
+    /* 经过发现，抖动是由于切换 background-image 的过渡效果 */
+
+    .item:nth-of-type(4) {
+        width: 40px;
+        height: 40px;
+        opacity: 0.5;
+        background: url("../../img/background过渡抖动问题/01_active.png") center/contain no-repeat;
+        transition: width 1s, height 1s, opacity 1s;
+    }
+
+    .item:nth-of-type(4).active {
+        width: 76px;
+        height: 76px;
+        opacity: 1;
+    }
+
+
+    .new-item {
+        width: 40px;
+        height: 40px;
+        background: url("../../img/background过渡抖动问题/02.png") center/contain no-repeat;
+        transition: width 1s, height 1s, background 1s;
+    }
+
+    .new-item.active {
+        width: 76px;
+        height: 76px;
+        background-image: url("../../img/background过渡抖动问题/02_active.png")
+    }
+    </style>
+    <script type="text/javascript" src="https://cccikov.github.io/cccgit/test/js/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="wrap">
+            <div class="item" @click="fn(index)" v-for="(val,index) in [0,1,2,3]" :class="{active:type == index}"></div>
+        </div>
+        <div class="wrap">
+            <p class="new-item" @click="fn(index)" v-for="(val,index) in [0,1,2,3]" :class="{active:type == index}"></p>
+        </div>
+    </div>
+    <p>经过发现，抖动是由于切换 background-image 的过渡效果</p>
+    <p>解决方式：采用透明度</p>
+    <p>解决方式2：采用同样大小的图片作为背景</p>
+    <script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data: {
+            type: 0
+        },
+        methods: {
+            fn(index) {
+                this.type = index;
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
