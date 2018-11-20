@@ -9,6 +9,7 @@
     <script src="../js/jquery.min.js" charset="utf-8"></script>
     <script type="text/javascript">
         $(function () {
+            var fileReader = new FileReader();//创建fileReader对象
             $("#uploadfile").on("change", function () {
                 var that = this;//原生js
 
@@ -48,6 +49,17 @@
                     return false;
                 }
 
+                fileReader.readAsDataURL(file);
+            });
+
+            fileReader.addEventListener("load",function(e){
+                var url = e.target.result;
+                var img = new Image();
+                img.src = url;
+                img.addEventListener("load",function(){
+                    console.log("图片宽高",this.width,this.height,this.naturalWidth,this.naturalHeight)
+                    alert("上传的图片宽为"+this.width+"px，高为"+this.height+"px")
+                });
             });
 
             $("#uploadfile2").on("change", function () {
