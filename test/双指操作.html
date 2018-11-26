@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>测试</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    .wrap {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transform-style: preserve-3d;
+        perspective: 500px;
+    }
+
+    .wrap img {
+        max-width: 100%;
+        will-change: transform;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="img-wrap">
+            <img id="img" src="./img/Internet_Explorer.png" style="transform:scale(1.5) rotate3d(0,1,0,0deg)">
+        </div>
+    </div>
+    <script type="text/javascript">
+    let datas, // 记录手机点数据
+        dis, //  双指距离
+        startTime,
+        type; // scale rotate
+    let img = document.getElementById("img");
+
+    document.addEventListener("touchstart", touch, false);
+    document.addEventListener("touchend", touch, false);
+
+
+    function touch(e) {
+        let fingers = e.touches.length;
+        if (fingers === 2) {
+            // 屏幕上有两只手指
+            datas = [{
+                    // 手指1数据
+                    x: parseInt(e.touches[0].clientX), // 记录初始的值
+                    y: parseInt(e.touches[0].clientY),
+                },
+                {
+                    // 手指2数据
+                    x: parseInt(e.touches[1].clientX),
+                    y: parseInt(e.touches[1].clientY),
+                }
+            ];
+            dis = getDistance(datas[0], datas[1]);
+            startTime = new Date();
+            type = null;
+            document.addEventListener("touchmove", touchmove, false);
+            console.clear();
+        } else {
+            // 屏幕上不是两只手指
+            document.removeEventListener("touchmove", touchmove, false);
+        }
+    }
+
+    function touchmove(e) {
+        var curTime = new Date();
+        if (curTime - startTime >= 1000 / 30) { // 如果达到了规定的触发时间间隔，触发 handler
+
+            datas[0].new_x = parseInt(e.touches[0].clientX);
+            datas[0].new_y = parseInt(e.touches[0].clientY);
+            datas[1].new_x = parseInt(e.touches[1].clientX);
+            datas[1].new_y = parseInt(e.touches[1].clientY);
+
+            // 和上次触摸的变化量
+            datas[0].delta_x = datas[0].new_x - datas[0].x;
+            datas[1].delta_x = datas[1].new_x - datas[1].x;
+
+            // 与上次触摸的距离变化
+            let new_dis = getDistance(datas[0], datas[1]);
+            let delta_dis = new_dis - dis;
+
+
+
+            ////////////////////////////////////////////////////////
+            // 确定是双指缩放还是双指移动后，执行 reset() 所以delta量是每次touchmove的变换量 //
+            ////////////////////////////////////////////////////////
+            /* 双指移动 */
+            if (type === "rotate") {
+                console.log("双指移动");
+                let reg = /rotate3d\(.?0.?,.?1.?,.?0.?,(.*?)deg\)/;
+                let result = img.style.transform.match(reg);
+                let angle = result ? Number(result[1]) : 0;
+
+                 let delta_x;
+                if(Math.abs(datas[0].delta_x)<Math.abs(datas[1].delta_x)){
+                    delta_x = datas[0].delta_x;
+                }else{
+                    delta_x = datas[1].delta_x;
+                }
+
+                angle += delta_x ;
+
+                img.style.transform = img.style.transform.replace(reg, "rotate3d(0,1,0," + angle + "deg)");
+                console.log(img.style.transform);
+
+                reset();
+            }
+
+            /* 双指缩放 */
+            if (type === "scale") {
+                console.log("双指缩放");
+                let reg = /scale\((.*?)\)/;
+                let result = img.style.transform.match(reg);
+                let scale = result ? Number(result[1]) : 1;
+
+                let rate = new_dis / dis;
+
+                scale = scale * rate;
+
+                img.style.transform = img.style.transform.replace(reg, "scale(" + scale + ")");
+                console.log(img.style.transform);
+
+                reset();
+            }
+
+
+            /*
+             * 确定 双指方式
+             *
+             * 首先，如果双指是同时移动的话
+             * 两个 delta_x 的方向是相同的，即系相除的时候，不会是负数 result > 0 && isFinite(result)
+             */
+            let result = datas[0].delta_x / datas[1].delta_x;
+            if (!type && (Math.abs(datas[0].delta_x) > 10 || Math.abs(datas[1].delta_x) > 10 || Math.abs(datas[0].delta_y) > 10 || Math.abs(datas[1].delta_y) > 10)) {
+
+                console.log("%c" + datas[0].delta_x + " " + datas[1].delta_x, "font-size:20px;color:red;");
+                console.log("%c" + result, "font-size:20px;color:red;");
+                console.log("%c" + delta_dis, "font-size:20px;color:#0f0;");
+                /////////////////////////////////////////////////////////////////////////
+                // 由于在确定 是双指缩放还是双指移动前，都没有执行 reset() 所以delta量是和toushstart或者touchend的变换量 //
+                /////////////////////////////////////////////////////////////////////////
+                if (result > 0 && isFinite(result) && delta_dis < 40) {
+                    type = "rotate";
+                    reset();
+                } else {
+                    type = "scale";
+                    reset();
+                }
+            }
+
+
+            /**
+                var curTime = new Date();
+
+                if (curTime - startTime >= mustRun) { // 如果达到了规定的触发时间间隔，触发 handler
+
+                    // 执行的代码，来达到节流效果
+
+                    startTime = curTime;
+                }
+             */
+
+            function reset() {
+                datas[0].x = datas[0].new_x;
+                datas[0].y = datas[0].new_y;
+                datas[1].x = datas[1].new_x;
+                datas[1].y = datas[1].new_y;
+                dis = new_dis;
+            }
+
+            startTime = curTime;
+            console.log("\n\n\n\n\n")
+        }
+
+    }
+
+    //缩放 勾股定理方法
+    function getDistance(p1, p2) {
+        var x = (p2.new_x || p2.x) - (p1.new_x || p1.x),
+            y = (p2.new_y || p2.y) - (p1.new_y || p1.y);
+        var dis = Math.sqrt((x * x) + (y * y));
+        return dis;
+    };
+
+
+    // 节流函数
+    function throttle(func, delay) {
+        console.log("asdasd");
+        var startTime = new Date();
+
+        return function() {
+            var _this = this;
+            var args = arguments; //获取参数
+            var curTime = new Date();
+
+            if (curTime - startTime >= delay) { // 如果达到了规定的触发时间间隔，触发 handler
+                func.apply(_this, args);
+                startTime = curTime;
+            }
+        };
+    };
+    </script>
+</body>
+
+</html>
