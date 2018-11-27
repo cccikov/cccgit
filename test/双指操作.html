@@ -27,7 +27,7 @@
 <body>
     <div class="wrap">
         <div class="img-wrap">
-            <img id="img" src="./img/Internet_Explorer.png" style="transform:scale(1.5) rotate3d(0,1,0,0deg)">
+            <img id="img" src="./img/Internet_Explorer.png" style="transform:scale3d(1,1,1) rotate3d(0,1,0,0deg)">
         </div>
     </div>
     <script type="text/javascript">
@@ -114,15 +114,15 @@
             /* 双指缩放 */
             if (type === "scale") {
                 console.log("双指缩放");
-                let reg = /scale\((.*?)\)/;
+                let reg = /scale3d\((.*?),(.*?),(.*?)\)/;
                 let result = img.style.transform.match(reg);
                 let scale = result ? Number(result[1]) : 1;
 
                 let rate = new_dis / dis;
 
-                scale = scale * rate;
+                scale *= rate;
 
-                img.style.transform = img.style.transform.replace(reg, "scale(" + scale + ")");
+                img.style.transform = img.style.transform.replace(reg, "scale3d("+scale+","+scale+","+scale+")");
                 console.log(img.style.transform);
 
                 reset();
