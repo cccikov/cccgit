@@ -42,6 +42,11 @@
 				大家都是等比例缩放，由于进行flex之前，大家的宽度都是一致的，缩放比例也是一样，所以最后大家的宽度一样。但是也可以看出，现在宽度是没有50%的。width和flex会共同影响尺寸。
 			</p>
 		</div>
+
+		<div class="flex3">
+			<p>Lorem ipsum dolor.</p>
+			<p>Lorem ipsum dolor.</p>
+		</div>
 	</div>
 	<style>
 		#demo1 .flex1 {
@@ -59,6 +64,22 @@
 		#demo1 .flex2 p {
 			width: 50%;
 			outline: 1px solid red;
+		}
+
+		#demo1 .flex3 {
+			display: flex;
+		}
+
+		#demo1 .flex3 p {
+			flex:1 1 auto;
+			outline: 1px solid red;
+		}
+
+		#demo1 .flex3 p:nth-of-type(1) {
+			width: 100px;
+		}
+		#demo1 .flex3 p:nth-of-type(2) {
+			width:400px;
 		}
 	</style>
 
