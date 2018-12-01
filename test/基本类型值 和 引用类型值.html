@@ -114,9 +114,81 @@
         obj_obj.b.level = "b"; // 其中一个修改了
         console.log(obj_obj.a === obj_obj.b, obj_obj.a, obj_obj.b, obj_obj); // true  {level: "b"}  {level: "b"}  {a: {level: "b"}, b: {level: "b"}}
 
-        obj_obj.b = {level: "b"}; // 等于一个字面量，就是一个新值，即使包含的内容一样
+        obj_obj.b = { level: "b" }; // 等于一个字面量，就是一个新值，即使包含的内容一样
         console.log(obj_obj.a === obj_obj.b, obj_obj.a, obj_obj.b, obj_obj); // false {level: "b"}  {level: "b"}  {a: {level: "b"}, b: {level: "b"}}
     }();
+    </script>
+    <script type="text/javascript">
+    //////////////
+    // 应用类型值的应用 //
+    //////////////
+    var list = [{
+            "bigIcon": null,
+            "children": [],
+            "code": "role",
+            "fid": "1445659315790S0044I7F000001R5084",
+            "name": "角色管理",
+            "operations": [],
+            "orderNo": 1,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.system.Role.d"
+        },
+        {
+            "bigIcon": null,
+            "children": [],
+            "code": "user",
+            "fid": "1396189646967S0002I7F000001R5961",
+            "name": "用户管理",
+            "operations": [],
+            "orderNo": 2,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.system.User.d"
+        },
+        {
+            "bigIcon": "",
+            "children": [],
+            "code": "department",
+            "fid": "1445659202372S0040I7F000001R7456",
+            "name": "部门管理",
+            "operations": [],
+            "orderNo": 3,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.system.Department.d"
+        },
+        {
+            "bigIcon": null,
+            "children": [],
+            "code": "workflow",
+            "fid": "1447833509841S0127I7F000001R6324",
+            "name": "流程设置",
+            "operations": [],
+            "orderNo": 4,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.workflow.Workflow.d"
+        },
+        {
+            "bigIcon": null,
+            "children": [],
+            "code": "workflowOrder",
+            "fid": "1447841249528S0124I7F000001R1692",
+            "name": "流程实例",
+            "operations": [],
+            "orderNo": 5,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.workflow.WorkflowOrder.d"
+        }
+    ];
+
+    var role = list[0]; // 我们将role等于其中的一个值
+    role.name = "角色扮演"; // 修改role信息
+    role.fid = "123123";
+
+    console.log(list); // 会发现原始数据的也改变了，因为list[0]是一个引用类型值，所以role也是指向同一个值，所以role改变值的时候，list[0]也会随之改变
     </script>
 </head>
 
