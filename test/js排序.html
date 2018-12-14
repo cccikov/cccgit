@@ -265,6 +265,30 @@
             });
             console.log(n);
             /*会发现sort里面调用的函数返回的数不同，比较次数是不同的,所以sort不适合乱序，是因为，不是每个数比较的次数都相同,特别函数值返回时正数的时候,次数会变少,所以不是真正的打乱顺序*/
+        }{
+            // 根据对象属性排序
+            let arr = [
+                {
+                    name:"ccc",
+                    age:18
+                },{
+                    name:"asd",
+                    age:12
+                },{
+                    name:"sdf",
+                    age:30
+                },{
+                    name:"dfg",
+                    age:24
+                },{
+                    name:"fgh",
+                    age:18
+                },
+            ];
+            arr.sort(function(a,b){
+                return a.age-b.age
+            });
+            console.log(arr);
         }
     </script>
 </head>
