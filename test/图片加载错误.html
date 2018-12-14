@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>图片加载错误</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+        .bg-wrap{
+            display: inline-block;
+            width: 300px;
+            height: 150px;
+            background: url("./img/chrome_2014_512.png") center/contain no-repeat;
+            border: 1px solid #eee;
+        }
+        .bg-wrap img{
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+    function imgErr(tar) {
+        console.dir(tar)
+        tar.src = "./img/screenTiny/screen-ldpi-landscape.png";
+    }
+
+    window.addEventListener("DOMContentLoaded", function() {
+        /* 注意，不能是load事件，因为load事件是资源加载好，那么那时候img都已经开始加载资源了，error也触发，这时候再绑定事件监听器是无效的 */
+
+        // 给全部含有 .img className的元素添加图片错误处理；添加事件不能等到
+        document.querySelectorAll(".img").forEach(val => {
+            val.addEventListener("error", function(e) {
+                this.src = "./img/screenTiny/screen-ldpi-landscape.png";
+            }, false);
+        });
+
+
+        document.querySelectorAll(".parent-err").forEach(val => {
+            val.addEventListener("error", function(e) {
+                var _this = this.parentNode;
+                this.src="./img/screenTiny/screen-ldpi-landscape.png";
+                _this.style["background-image"] = "url(./img/screenTiny/screen-ldpi-landscape.png)"
+            }, false);
+        });
+
+    }, false);
+    </script>
+</head>
+
+<body>
+    <!-- 假如默认图片是这个：screen-xhdpi-landscape -->
+    <p>图片加载错误可以使用通过 error 进行修改</p>
+    <div>
+        <img src="wrong-src">
+        <p>不处理</p>
+    </div>
+    <div>
+        <img src="wrong-src" onerror="imgErr(this)">
+        <p>通过html事件处理程序解决</p>
+    </div>
+    <div>
+        <img class="img" src="wrong-src1">
+        <img class="img" src="wrong-src2">
+        <p>通过dom 2级事件处理程序解决</p>
+    </div>
+
+    <div>
+        <div style="background-image: url(wrong-src3)" class="bg-wrap">
+            <img class="parent-err" src="wrong-src3">
+        </div>
+        <p>如果图片是以背景出现，可以在这个元素里面用一个image引用同样的资源，如果该图片错误，背景也是错误的</p>
+    </div>
+</body>
+
+</html>
