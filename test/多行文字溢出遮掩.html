@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>多行文字溢出遮掩</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        p{
+            position: relative;
+            height: 6em;
+            line-height: 1.5;
+            overflow: hidden;
+        }
+        p::after{
+            content:"";
+            position: absolute;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            background: linear-gradient(rgba(255,255,255,0) 50%,rgba(255,255,255,1));
+        }
+    </style>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia quaerat facere aliquid, quibusdam, rem
+        architecto fugit debitis cumque hic sapiente nostrum voluptas culpa non aut excepturi quam. Eos ex molestias
+        quibusdam tempora reprehenderit aliquam ipsa veniam, soluta eaque facere doloribus at iure, culpa repudiandae,
+        libero repellendus? Perspiciatis corporis excepturi asperiores nemo corrupti, dolorum, veritatis cum in natus
+        beatae non alias quisquam eos ex illo neque sequi nulla optio quam est. Aperiam voluptates mollitia vitae
+        repellendus, rerum laborum delectus cum eius eveniet iure fugiat adipisci, veniam excepturi. Explicabo numquam
+        pariatur itaque quae, praesentium nostrum sapiente quo provident inventore dolore asperiores iste sed
+        perferendis reiciendis nobis? Iusto alias, amet animi laborum necessitatibus, incidunt beatae quidem quisquam
+        perspiciatis magni, provident obcaecati esse? Eius dolores cupiditate veritatis alias, voluptatum impedit,
+        maxime sed nihil tempora, quos excepturi error assumenda unde. Eveniet, vel, nemo, soluta optio beatae laborum
+        dicta quo aliquam neque eum nihil quisquam? Libero nihil corporis eligendi sequi atque repellat animi error
+        ullam totam, porro consequuntur voluptatibus dolores, distinctio esse nam iusto autem? Natus odio eum atque
+        obcaecati, assumenda pariatur numquam, fuga sequi quisquam voluptatem reiciendis, nam possimus rerum sit
+        aliquam. Rem minima laudantium qui maiores aliquam itaque doloribus ab eveniet optio. Cum architecto rerum illo
+        unde repellat nam id, consequatur expedita? Perferendis porro deserunt exercitationem temporibus officia rerum,
+        perspiciatis delectus doloremque ducimus cumque sapiente obcaecati ex. Sit labore, corrupti vero error suscipit
+        sed non facilis voluptates recusandae quae aspernatur reprehenderit id ipsa laboriosam officia ducimus
+        repellendus aperiam, ex atque tempora necessitatibus quam. Ratione praesentium, nostrum aut inventore eveniet
+        accusamus labore voluptatem voluptates! Accusantium, sapiente harum corrupti, ea exercitationem obcaecati
+        consectetur, fuga voluptatibus nesciunt natus voluptates. Accusamus modi illo sequi sit nemo harum rerum autem,
+        in maxime dignissimos ducimus minus minima dolores? Molestias est praesentium dignissimos omnis fugit,
+        asperiores dolores explicabo dolorem? Excepturi tempora praesentium distinctio fuga deserunt quasi id explicabo
+        cumque nihil. Expedita, perspiciatis inventore. Modi rem rerum cupiditate et. Dolor sequi a perferendis
+        laboriosam reiciendis nesciunt quisquam odit saepe totam repellendus unde laudantium corporis quas, alias
+        aspernatur asperiores dolores possimus labore, assumenda amet libero deleniti porro temporibus. Accusantium,
+        eveniet ut qui necessitatibus, aspernatur vitae nostrum vel temporibus eos culpa doloribus molestias nihil sint
+        repellendus architecto aliquid natus in. Inventore, odio minus? Molestiae dolor exercitationem nostrum.
+        Nesciunt ipsum excepturi, voluptate repellendus tempore asperiores est, debitis quidem voluptas at illum
+        deserunt numquam alias quibusdam assumenda corporis magnam ut sequi, doloremque iste totam quos et reiciendis
+        aperiam. Minima harum, voluptatum expedita, labore ad illo a minus magnam dolore quisquam impedit eligendi
+        assumenda nobis ducimus excepturi consequatur consequuntur libero nam! Magnam quam consequuntur inventore
+        commodi voluptatibus. Exercitationem dolores eveniet repudiandae repellendus quae fugiat incidunt, enim ipsam.
+        Cum nostrum maxime itaque dolorem est eius repellat animi, quae, accusamus, voluptate molestias perspiciatis
+        pariatur quo! Nemo quaerat dolorum eius mollitia ipsa porro et esse sunt nobis, fugit voluptatum doloribus
+        error nisi maxime, animi corporis vitae aliquid. Quasi vero placeat doloribus nesciunt nam tempora sint est
+        eligendi labore, fugit quo unde. Ullam ratione error, magnam atque labore quia aliquid molestiae?</p>
+</body>
+
+</html>
