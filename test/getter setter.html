@@ -12,40 +12,50 @@
         name: "ccc",
         set userName(val) {
             console.log("%c\n设置属性 , 赋值的时候 " + val, "font-size:20px;color:#345678");
-            this.name = val + " bySetttingUserName"
+            this.name = val + " bySetttingUserName";
         },
         get userName() {
             // 无参数的
             console.log("%c\n读取属性", "font-size:20px;color:#345678");
-            return { "userName": this.name };
+            return this.name.split(" ");
         }
     }
 
 
-    console.log(obj)
-    console.log(obj.userName)
-    console.log(obj.userName.name)
+    console.log(obj);
+    console.log(obj.userName);
+    console.log(obj.userName[0]);
     obj.userName = "haha";
     console.log(obj.userName);
+    console.log(obj.name);
 
 
     Object.defineProperty(obj, "nickName", {
         get: function() {
             console.log("%c\n读取属性", "font-size:20px;color:#345678");
-            return { "nickName": this.name };
+            return this.name.split(" ");
         },
         set: function(val) {
             console.log("%c\n设置属性 , 赋值的时候 " + val, "font-size:20px;color:#345678");
-            this.name = val + " bySetttingNickName"
+            this.name = val + " bySetttingNickName";
         }
     });
 
 
-    console.log(obj)
-    console.log(obj.nickName)
-    console.log(obj.nickName.name)
+    console.log(obj);
+    console.log(obj.nickName);
+    console.log(obj.nickName[0]);
     obj.nickName = "meme";
     console.log(obj.nickName);
+    console.log(obj.name);
+
+    //////////////////////////
+    // getter 没有参数 有return值 //
+    //////////////////////////
+
+    /////////////////////////////////////
+    // setter 有参数 没有return值（return无意义） //
+    /////////////////////////////////////
     </script>
 </head>
 
