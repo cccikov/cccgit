@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>测试</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            line-height: 3;
+            font-size: 20px;
+        }
+
+        #mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        #mask p {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            background: #fff;
+            width: 60%;
+            height: 60%;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <p>如果我们先拉到顶，继续往上拉，再往下拉。chrome、ios safari没问题，qq、uc会有问题（快到底的时候用力往下拉回，body后短暂滚动）。而且有些时候背后也会滚动</p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa voluptatem dolorum minima, vitae, dignissimos
+        iure commodi vero ad nulla odit aspernatur quisquam quos quasi? Praesentium consequatur molestiae corrupti
+        perspiciatis repellat at ad voluptatem numquam, eveniet, est illum excepturi beatae maxime aut! Eum ratione
+        vero accusantium. Deserunt debitis quaerat sit minus, animi aliquam tempora. Autem nostrum in odio odit
+        laboriosam excepturi blanditiis dolorem consectetur? Quae cumque laboriosam fugiat porro tempore facilis
+        sapiente voluptatem consequuntur eaque? Commodi vel rem laudantium reprehenderit, officiis deleniti facere a
+        reiciendis minus iure! Mollitia soluta nihil sunt ipsa sapiente consequuntur nostrum laudantium, distinctio
+        dolorem voluptatem. Sequi, nihil. Similique enim corporis minus magnam maxime ratione cum soluta repudiandae
+        amet dicta eveniet blanditiis natus quia nostrum consectetur, saepe illum hic velit aliquam? Consectetur
+        voluptatibus necessitatibus sequi ducimus cumque accusantium saepe beatae cum, error natus eaque, totam
+        temporibus repudiandae? Voluptate architecto corporis in minima nostrum repudiandae perspiciatis veritatis
+        deserunt officia rerum autem aperiam facilis, iusto eaque rem tempora ducimus quisquam culpa fuga dolores
+        quidem suscipit reiciendis eos! Illo beatae vero totam eligendi repudiandae blanditiis debitis, nobis
+        consequuntur cum dolor voluptates quod suscipit voluptate soluta amet quisquam dolore voluptas nam delectus
+        magnam repellendus saepe voluptatem. Quis nemo minima est in illum nesciunt temporibus suscipit et ipsum
+        possimus iure, voluptatum optio vitae incidunt amet esse! Voluptas iste placeat nostrum dolor itaque suscipit
+        accusantium qui voluptates animi vero, atque architecto asperiores molestiae? Omnis dolorum nobis itaque nemo
+        quibusdam at perferendis quas earum enim laborum repellendus laboriosam eaque qui sunt, tempora iure tempore
+        sint modi neque optio numquam nam voluptatibus. Sint illo dicta quibusdam magni obcaecati ducimus, maiores
+        commodi vel blanditiis expedita, aspernatur eos. Optio culpa cupiditate voluptatum harum sunt provident dolorum
+        rerum. Nemo, nesciunt. Asperiores repellendus quaerat, aliquam, maiores rerum nam aut ea eveniet, ad illo
+        quidem perferendis eum assumenda dolor ipsum quibusdam reprehenderit. Harum fuga voluptate, ex ad distinctio
+        commodi voluptates suscipit aspernatur in at possimus iste, autem beatae eligendi nostrum itaque rerum, tenetur
+        maxime voluptas impedit. Vitae ipsa earum quas repudiandae eligendi vel non tempora, neque magnam laborum
+        aperiam id, alias ea. Totam architecto dolorem fuga incidunt repellat iusto quaerat exercitationem! Atque ab
+        ipsa rem veritatis reprehenderit incidunt modi laborum et quae laboriosam exercitationem voluptates est,
+        molestiae qui, nemo maxime recusandae dolore quisquam eos sapiente accusantium voluptate eius praesentium quas.
+        Odit aliquid harum reiciendis corporis iste culpa veritatis beatae! Laboriosam, placeat odit. Expedita,
+        accusamus! Molestiae quas, atque officia inventore iusto ipsum praesentium dolor facere porro dolorum, neque
+        nobis possimus in omnis aut cum quos aliquid aspernatur ratione ad eaque eos sapiente. Cupiditate officia
+        tempore magni minus aliquid, rerum omnis nihil dolore fuga expedita nulla voluptatum vero fugit labore
+        assumenda possimus quibusdam architecto! A iure veritatis assumenda placeat. Reiciendis ipsum quisquam
+        quibusdam ullam temporibus, saepe tempore autem. In, molestiae et aliquid iure, quam minima suscipit alias,
+        nemo eaque eum vel? Porro enim ducimus ipsa quasi optio! Quod doloremque ab iste esse? Fugiat ipsam officiis,
+        magnam ea, unde nulla necessitatibus animi iste excepturi modi sequi cum dolor tempora suscipit rem quod maxime
+        ullam.</p>
+
+    <div id="mask">
+        <p id="float">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus ipsum molestias, suscipit,
+            labore voluptas
+            quaerat dolor tempora eligendi modi alias, nulla totam omnis nesciunt soluta quos nam sint velit optio non
+            sunt amet ea. Unde a nesciunt eius sunt tempora voluptatibus quos. Sed sit modi tenetur ducimus in
+            perferendis, quasi suscipit eum, dolorum cum ratione obcaecati aliquam deserunt distinctio debitis. Error
+            doloremque aut facilis omnis alias laudantium exercitationem, ipsum enim obcaecati? Amet minima
+            voluptatibus voluptate fugit eveniet nisi quisquam quibusdam a optio. Illum praesentium sequi tempore
+            facere temporibus, nesciunt placeat, repudiandae blanditiis aspernatur sit voluptatum repellat. Placeat
+            repellat optio temporibus assumenda ex aut voluptates ipsa, esse, omnis, minima illum accusantium minus
+            magnam iusto. Repellendus ipsam quam modi saepe obcaecati, dolorem sint at rerum illo dolorum assumenda
+            fugiat autem distinctio similique tempore aliquid? Laudantium, ab? Harum sunt mollitia odit, at accusantium
+            deserunt itaque tempora quaerat animi veniam atque. Voluptas, quasi animi? Doloremque sequi repellendus,
+            explicabo harum soluta, maxime iure numquam expedita voluptate, repudiandae distinctio voluptas veniam
+            cumque unde illo hic! Neque soluta sed laudantium aliquam voluptatem, illo id obcaecati nisi natus sit
+            doloremque quo reprehenderit facere quam nobis. Quasi eligendi esse aut temporibus omnis cumque illum saepe
+            quas porro doloremque. In culpa ut atque sequi beatae quasi nihil quos corrupti. Minima inventore debitis
+            quaerat eius? Iusto et neque, quidem iure perferendis dicta sint mollitia molestias quisquam consectetur
+            est officiis. Expedita magni voluptatibus repudiandae consectetur dolore eaque aliquid nobis asperiores
+            fugit, incidunt doloremque repellendus sint, consequatur ducimus laudantium quisquam. Modi necessitatibus,
+            magnam quidem nam placeat ad sapiente tempora ex ipsum minima consequuntur quos velit atque similique hic
+            vel ut. Ullam pariatur omnis sed enim eum delectus laboriosam iure necessitatibus ea mollitia dolores
+            quaerat nam ipsam maxime, eveniet sunt voluptatum. Nulla ipsa nisi molestiae ea est eum. Tempore maiores
+            voluptas, officiis quo necessitatibus veniam sint earum similique quam laudantium, eius at architecto ab
+            placeat sed praesentium fugiat eveniet aperiam numquam laboriosam quas recusandae a dolor! Odit debitis
+            ipsam, quo ipsa expedita rem nihil aliquam nemo at suscipit, in nesciunt aspernatur, molestias nam. Dicta,
+            reprehenderit? Sunt, minus. Consequatur totam nulla dolore facilis ipsum voluptates quidem quibusdam,
+            impedit cumque nostrum! Quaerat cumque modi adipisci ducimus odio aspernatur necessitatibus nostrum nulla
+            aut repudiandae, laboriosam labore? Facere atque odit illo mollitia nostrum ipsam dolores perspiciatis
+            veritatis ut, officia rem repellat earum, reprehenderit nesciunt fugit suscipit animi soluta at, cumque
+            doloribus sit dignissimos rerum inventore accusantium. Officiis qui commodi eius unde veritatis fuga
+            debitis non odio id facere, quas distinctio repudiandae natus omnis aspernatur quisquam corrupti sed nemo
+            vitae, reprehenderit molestiae explicabo vel. Repudiandae reiciendis deserunt consequuntur debitis sunt
+            expedita laborum, accusantium necessitatibus reprehenderit optio assumenda consequatur qui delectus totam,
+            fugit libero voluptatum. Totam eveniet obcaecati ratione alias. Eos molestias laboriosam itaque dolor
+            assumenda, omnis voluptates eveniet architecto voluptas ducimus animi, vero aperiam quam asperiores ratione
+            maxime odit autem. Quibusdam modi repellendus qui optio velit. Hic odio nulla amet, omnis illum ab
+            consectetur cumque enim, molestiae placeat est nesciunt cupiditate excepturi molestias iste nisi debitis,
+            possimus corrupti accusamus!</p>
+    </div>
+
+    <script>
+        mask.addEventListener("touchmove", function (e) {
+            e.preventDefault();
+        }, false);
+
+
+        let oldY, newY, edge = null,
+            preventDefault = false,
+            isScroll = false;
+        float.addEventListener("touchstart", touchstart, false);
+        float.addEventListener("touchmove", touchmove, false);
+
+        function touchstart(e) {
+            if (float.scrollTop == 0) {
+                edge = "top"
+            } else if (float.scrollTop == (float.scrollHeight - float.offsetHeight)) {
+                edge = "bottom"
+            } else {
+                edge = "null"
+            }
+
+            oldY = e.touches[0].clientY;
+            isScroll = false;
+        }
+
+        function touchmove(e) {
+            e.stopPropagation();
+
+            console.log(edge, isScroll)
+            if (!isScroll) {
+                newY = e.touches[0].clientY
+                let deltaY = newY - oldY;
+                if (deltaY > 0) { // 向下滑动
+                    console.log('向下滑动');
+                    if (edge == "top") {
+                        preventDefault = true;
+                    } else if (edge == "bottom") {
+                        edge = null;
+                        preventDefault = false;
+                    }
+                } else if (deltaY < 0) { //向上滑动
+                    console.log('向上滑动');
+                    if (edge == "bottom") {
+                        preventDefault = true;
+                    } else if (edge == "top") {
+                        edge = null;
+                        preventDefault = false;
+                    }
+                }
+            }
+
+            isScroll = true;
+            console.log(preventDefault);
+            if (preventDefault) {
+                e.preventDefault();
+            }
+
+            oldY = newY
+        }
+    </script>
+</body>
+
+</html>
