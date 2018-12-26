@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>测试</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #main {
+            font-size: 20px;
+            line-height: 3;
+            word-break: break-all;
+        }
+
+        #mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        #mask #float {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            background: #fff;
+            width: 60%;
+            height: 60%;
+            overflow: auto;
+            line-height: 2;
+        }
+
+        #float P {
+            padding: 0 20px;
+        }
+    </style>
+    <script src="./js/vue.min.js"> </script>
+    <script>
+        window.addEventListener("load", load, false);
+
+
+        // 禁止双指放大
+        document.addEventListener("touchstart", documentTouchstart, {
+            capture: false,
+            passive: false
+        });
+
+        function documentTouchstart(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        }
+
+        function load() {
+            new Vue({
+                el: "#app",
+                data: {
+                    modal: false,
+                },
+                methods: {
+                    showModal() {
+                        this.modal = true;
+                        bodyNoScroll(); // 弹窗出现时调用
+                    },
+                    hideModal() {
+                        this.modal = false;
+                        bodyScrollAgin(); // 弹窗消失时调用
+                    }
+                },
+            });
+        }
+
+
+
+
+        /**
+         * 弹窗出现，禁止body滚动关键代码
+         */
+        let scrollTop = 0;
+        let isPc = !navigator.userAgent.toLowerCase().includes("mobile");
+
+        function bodyNoScroll() {
+            scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            let bodyCssObj;
+            if (isPc) {
+                let barWidth = window.innerWidth - document.body.clientWidth; // 滚动条宽度 颜色f1f1f1
+                bodyCssObj = {
+                    position: "fixed",
+                    top: -scrollTop + "px",
+                    width: "100%",
+                    "padding-right": barWidth + "px",
+                    "box-sizing": "border-box"
+                }
+            } else {
+                bodyCssObj = {
+                    position: "fixed",
+                    top: -scrollTop + "px",
+                    width: "100%"
+                }
+            }
+            Object.assign(document.body.style, bodyCssObj);
+        }
+
+        function bodyScrollAgin() {
+            let bodyCssObj;
+            if (isPc) {
+                bodyCssObj = {
+                    position: "static",
+                    top: 0,
+                    width: "auto",
+                    "padding-right": 0 + "px",
+                    "box-sizing": "content-box"
+                }
+            } else {
+                bodyCssObj = {
+                    position: "static",
+                    top: 0,
+                    width: "auto"
+                }
+            }
+            Object.assign(document.body.style, bodyCssObj);
+            document.documentElement.scrollTop = document.body.scrollTop = scrollTop;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="main" @click="showModal">
+            <p v-for="(val,index) in 90">{{index}}. Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
+                quia.</p>
+        </div>
+        <div id="mask" v-show="modal" @click="hideModal">
+            <div id="float" @click.stop>
+                <p v-for="(val,index) in 90">{{index}}. Lorem ipsum dolor sit amet.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

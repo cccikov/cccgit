@@ -140,9 +140,9 @@
             let deltaY = newY - oldY;
             console.log(deltaY)
 
-            if (float.scrollTop == 0 && deltaY > 0) {
+            if (this.scrollTop == 0 && deltaY > 0) {
                 e.preventDefault();
-            } else if (float.scrollTop == (float.scrollHeight - float.offsetHeight) && deltaY < 0) {
+            } else if (this.scrollTop == (this.scrollHeight - this.offsetHeight) && deltaY < 0) {
                 e.preventDefault();
             } else {
                 edge = "null"
