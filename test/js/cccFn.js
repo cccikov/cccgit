@@ -8,7 +8,7 @@ function onlyServer() {
 
 // 数字保留两个小数,并且逢千有个逗号
 function fixNum(num) {
-    if (typeof(num) == "string") {
+    if (typeof (num) == "string") {
         num = Number(num);
     }
     var numArr = num.toFixed(2).split(".");
@@ -134,7 +134,7 @@ function autoTextarea(obj, paddingHeight) {
         obj.css("overflow", 'hidden');
         var paddingHeight = Number(obj.css("padding-top").slice(0, -2)) + Number(obj.css("padding-bottom").replace("px", ""));
 
-        obj.on('input propertychange', function() {
+        obj.on('input propertychange', function () {
             obj.css("height", "auto").height($(this)[0].scrollHeight - paddingHeight);
         });
 
@@ -143,23 +143,23 @@ function autoTextarea(obj, paddingHeight) {
 
         if (obj.addEventListener) { //ie8以上
 
-            obj.addEventListener("input", function() {
+            obj.addEventListener("input", function () {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
             }, false);
-            obj.addEventListener("propertychange", function() {
+            obj.addEventListener("propertychange", function () {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
             }, false);
 
         } else {
 
-            obj.oninput = function() {
+            obj.oninput = function () {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
 
             }
-            obj.onpropertychange = function() {
+            obj.onpropertychange = function () {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
             }
@@ -184,7 +184,7 @@ function autoTextarea(obj, paddingHeight) {
 
 // 这个数组是否有这个值   这个方法没有必要 直接用 Array.prototype.indexOf(ie9以及以上)
 if (!Array.prototype.hasVal) {
-    Array.prototype.hasVal = function(val) {
+    Array.prototype.hasVal = function (val) {
         if (this.indexOf) {
             return this.indexOf(val) > 0
         } else {
@@ -206,7 +206,7 @@ if (!Array.prototype.hasVal) {
     }
 }*/
 if (!Array.prototype.insert) {
-    Array.prototype.insert = function(posi, item) {
+    Array.prototype.insert = function (posi, item) {
         if (arguments.length == 2) {
             this.splice(posi, 0, item);
         } else if (arguments.length > 2) {
@@ -219,14 +219,14 @@ if (!Array.prototype.insert) {
 }
 // 根据索引位置删除值
 if (!Array.prototype.remove) {
-    Array.prototype.remove = function(posi) {
+    Array.prototype.remove = function (posi) {
         this.splice(posi, 1);
         return this;
     }
 }
 // 数组交换值
 if (!Array.prototype.exchage) {
-    Array.prototype.exchage = function(posi1, posi2) { //两个位置交换
+    Array.prototype.exchage = function (posi1, posi2) { //两个位置交换
         if (this.length - 1 < posi1 || this.length - 1 < posi2 || posi1 == posi2) {
             return this;
         }
@@ -238,14 +238,14 @@ if (!Array.prototype.exchage) {
 }
 // 将一个值位置上移
 if (!Array.prototype.exchageUp) {
-    Array.prototype.exchageUp = function(posi) {
+    Array.prototype.exchageUp = function (posi) {
         this.exchage(posi, posi - 1);
         return this;
     }
 }
 // 将一个值的位置下移
 if (!Array.prototype.exchageDown) {
-    Array.prototype.exchageDown = function(posi) {
+    Array.prototype.exchageDown = function (posi) {
         this.exchage(posi, posi + 1);
         return this;
     }
@@ -310,7 +310,7 @@ function fileLimit(obj) {
 }
 
 /*中间变星星*/
-String.prototype.star = function(start, end) {
+String.prototype.star = function (start, end) {
     var num = end - start;
     var str = this;
     var starStr = "";
@@ -322,7 +322,7 @@ String.prototype.star = function(start, end) {
 }
 
 /*在字符串里面找出重复最多的字符*/
-String.prototype.appearMaxTimes = function() {
+String.prototype.appearMaxTimes = function () {
     var maxNum = 0,
         index = null,
         num = {},
@@ -334,16 +334,22 @@ String.prototype.appearMaxTimes = function() {
         if (num[i] > maxNum) {
             maxNum = num[i];
             arr.splice(0, arr.length); //一旦发现有比maxNum大,清空数组
-            arr.push({ "index": i, "maxNum": num[i] }); //保存当前这组数据
+            arr.push({
+                "index": i,
+                "maxNum": num[i]
+            }); //保存当前这组数据
         } else if (num[i] == maxNum) {
-            arr.push({ "index": i, "maxNum": num[i] }); //添加与maxNum一样大的这组数据
+            arr.push({
+                "index": i,
+                "maxNum": num[i]
+            }); //添加与maxNum一样大的这组数据
         }
     }
     return arr.length == 1 ? arr[0] : arr;
 };
 
 /*将posi位置字符换成newStr,posi可以为数字也可以为由数组组成的数组*/
-String.prototype.change = function(posi, newStr) {
+String.prototype.change = function (posi, newStr) {
     if (!isNaN(str)) { //posi是数字
         return this.slice(0, posi) + newStr + this.slice(posi + 1); //将字符串posi前面的那段 + 新字符newStr + 字符串posi后面那段 拼成新的字符串；
     } else if (Array.isArray && Array.isArray(posi)) { //posi为数组的时候，es6 Array.isArray判断 注意兼容性
@@ -356,7 +362,7 @@ String.prototype.change = function(posi, newStr) {
 }
 
 /*将在ori中匹配到的字符，转化为tar中对应的字符*/
-String.prototype.exchange = function(ori, tar) {
+String.prototype.exchange = function (ori, tar) {
     var str = "",
         flag = false; //标记是否有匹配到ori中的字符
     for (var i = 0, len = this.length; i < len; i++) { //str字符串遍历一个个字符
@@ -373,7 +379,7 @@ String.prototype.exchange = function(ori, tar) {
     }
     return str;
 };
-String.prototype.exchange2 = function(ori, tar) {
+String.prototype.exchange2 = function (ori, tar) {
     var str = "";
     for (var i = 0, len = this.length; i < len; i++) {
         var j = 0,
@@ -391,7 +397,7 @@ String.prototype.exchange2 = function(ori, tar) {
 };
 // e.g. var a = "AGCT"; a.exchange("ATCG", "TAGC")//TCGA ,A=>T,T=>A,C=>G,G=>C
 // 传一个哈希表，属性名为匹配字符，值为目标字符
-String.prototype.exchange3 = function(hashTable) {
+String.prototype.exchange3 = function (hashTable) {
     var arr = this.split("");
     for (var i = 0, len = arr.length; i < len; i++) {
         // (arr[i] in hashTable) && (arr[i] = hashTable[arr[i]])
@@ -451,23 +457,23 @@ function Ele(dom) {
     }
     if (dom) {
         this.dom = dom;
-        Ele.prototype.innerWidth = function() { //获取元素宽度(包括padding,border)
+        Ele.prototype.innerWidth = function () { //获取元素宽度(包括padding,border)
             return dom.offsetWidth;
         };
-        Ele.prototype.innerHeight = function() { //获取元素高度(包括padding,border)
+        Ele.prototype.innerHeight = function () { //获取元素高度(包括padding,border)
             return dom.offsetHeight
         };
-        Ele.prototype.width = function() { //获取元素content宽度
+        Ele.prototype.width = function () { //获取元素content宽度
             var paddingArr = this.getStyle("padding").match(/\d+/g);
             var border = this.getStyle("borderWidth").match(/\d+/g)[0];
             return dom.offsetWidth - paddingArr[1] - paddingArr[3] - border * 2;
         }
-        Ele.prototype.height = function() { //获取元素content高度
+        Ele.prototype.height = function () { //获取元素content高度
             var paddingArr = this.getStyle("padding").match(/\d+/g);
             var border = this.getStyle("borderWidth").match(/\d+/g)[0];
             return dom.offsetHeight - paddingArr[0] - paddingArr[2] - border * 2;
         }
-        Ele.prototype.getStyle = function(StyleName) { //获取元素css样式
+        Ele.prototype.getStyle = function (StyleName) { //获取元素css样式
             if (dom.style[StyleName]) {
                 return dom.style[StyleName];
             } else {
@@ -479,7 +485,7 @@ function Ele(dom) {
             }
             return null;
         }
-        Ele.prototype.docOffset = function() { //元素的文档坐标
+        Ele.prototype.docOffset = function () { //元素的文档坐标
             var x = dom.offsetLeft;
             var y = dom.offsetTop;
             while (dom.offsetParent) {
@@ -544,7 +550,7 @@ function getScrollTop() {
  */
 function setScrollTop(top, until) {
     document.documentElement.scrollTop = document.body.scrollTop = top;
-    setTimeout(function() { // 虽然是在window.onload里面 , 但是有时页面进入的时候 , 还是设置不成功 , 初步猜测 , 可能是页面虽然加载好 , 但是还没有渲染完成, 还没有滚动条 , 所以设置失败 ; 特别是刷新的时候,  如果是直接跳转过来还好
+    setTimeout(function () { // 虽然是在window.onload里面 , 但是有时页面进入的时候 , 还是设置不成功 , 初步猜测 , 可能是页面虽然加载好 , 但是还没有渲染完成, 还没有滚动条 , 所以设置失败 ; 特别是刷新的时候,  如果是直接跳转过来还好
         if (getScrollTop() != top && until) { // 判断是否设置值 , 不是的话重新设置 , 这个判断只能是放在定时器里面 , 因为如果是直接在外面判断的话 , 可能由于刚设置的原因 , getScrollTop()是等于top的
             /*console.log("执行");*/
             setScrollTop(top);
@@ -566,7 +572,10 @@ function documentPis(ele) {
         //        父级的上偏移量                       父级的border宽度
         ele = ele.offsetParent;
     }
-    return { left: left, top: top }; //返回一个json
+    return {
+        left: left,
+        top: top
+    }; //返回一个json
 }
 
 /**
@@ -659,7 +668,7 @@ function urlParse(str) {
     var search = obj.search.substr(1);
     var searchjson = {};
     if (search) {
-        search.split("&").forEach(function(val) {
+        search.split("&").forEach(function (val) {
             var single = val.split("=");
             var key = single[0];
             var value = single[1];
@@ -678,7 +687,7 @@ function searchParse(search) {
     search = search.substr(1);
     var searchjson = {};
     if (search) {
-        search.split("&").forEach(function(val) {
+        search.split("&").forEach(function (val) {
             var single = val.split("=");
             var key = single[0];
             var value = single[1];
@@ -694,7 +703,7 @@ function searchParse(search) {
  */
 function removeDuplicate(arr) {
     var newArr = []; // 记住数组中已经有的元素
-    arr.forEach(function(item) {
+    arr.forEach(function (item) {
         console.log(item)
         if (newArr.indexOf(item) == -1) {
             newArr.push(item);
@@ -702,6 +711,7 @@ function removeDuplicate(arr) {
     });
     return newArr
 }
+
 function removeDuplicate2(arr) {
     var arr = arr.slice(); // 复制数组，避免修改原数组
     var hasArr = []; // 记住数组中已经有的元素
@@ -718,4 +728,21 @@ function removeDuplicate2(arr) {
         i++;
     }
     return arr
+}
+
+
+/**
+ * 判断 addEventListener 是否支持 passive
+ */
+function isPassive() {
+    // 判断 addEventListener 是否支持 passive
+    var supportsPassiveOption = false;
+    try {
+        addEventListener("test", null, Object.defineProperty({}, 'passive', {
+            get: function () {
+                supportsPassiveOption = true;
+            }
+        }));
+    } catch (e) {}
+    return supportsPassiveOption;
 }
