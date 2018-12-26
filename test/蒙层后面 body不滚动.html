@@ -49,6 +49,7 @@
         height: 70%;
         overflow-y: auto;
     }
+
     </style>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript">
@@ -57,7 +58,7 @@
         $("p").on("click", function() {
             $("#mask").show();
             $("#suspend").show();
-            sT = $("html").scrollTop()
+            sT = $("html").scrollTop() || $("body").scrollTop()
             $(this).css({
                 "position": "fixed",
                 "top": -sT
@@ -68,6 +69,7 @@
             $("#suspend").hide();
             $("p").css("position", "static");
             $("html").scrollTop(sT);
+            $("body").scrollTop(sT);
         }).on("touchmove", function(e) {
             e.preventDefault();
         });
