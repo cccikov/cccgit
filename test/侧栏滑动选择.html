@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>侧栏滑动选择</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    ul,
+    li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .side {
+        position: fixed;
+        top: 50%;
+        right: 0px;
+        transform: translate(0, -50%);
+        opacity: 0.3;
+    }
+
+    .side.active {
+        opacity: 0.8;
+    }
+
+    .side li {
+        height: 15px;
+        width: 30px;
+        line-height: 15px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    #text {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        width: 100px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.5);
+        font-size: 50px;
+        color: #fff;
+    }
+
+    #text.show {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <ul class="side">
+        <li>00</li>
+        <li>01</li>
+        <li>02</li>
+        <li>03</li>
+        <li>04</li>
+        <li>05</li>
+        <li>06</li>
+        <li>07</li>
+        <li>08</li>
+        <li>09</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+    </ul>
+    <div id="text">01</div>
+    <script type="text/javascript">
+    function touchmove(e) {
+        e.preventDefault();
+        showText(1);
+        var _this = this;
+        var top = _this.getBoundingClientRect().top;
+        var inTop = e.touches[0].clientY - top;
+        var index = Math.floor(inTop / 15);
+        if (index < 0) {
+            index = 0;
+        }
+        if (index > 27) {
+            index = 27
+        }
+        text.innerHTML = index;
+    }
+
+    function touchend() {
+        showText(0)
+    }
+
+    function showText(flag) {
+        var text = document.getElementById("text");
+        var side = document.querySelectorAll(".side")[0]
+        if (flag) {
+            text.classList.add("show");
+            side.classList.add("active");
+        } else {
+            text.classList.remove("show");
+            side.classList.remove("active");
+        }
+    }
+
+
+
+    document.querySelectorAll(".side")[0].addEventListener("touchmove", touchmove, false);
+    document.querySelectorAll(".side")[0].addEventListener("touchstart", touchmove, false);
+    document.addEventListener("touchend", touchend, false);
+    </script>
+</body>
+
+</html>
