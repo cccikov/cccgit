@@ -8,13 +8,50 @@ function onlyServer() {
 
 // 数字保留两个小数,并且逢千有个逗号
 function fixNum(num) {
-    if (typeof (num) == "string") {
+    if (typeof(num) == "string") {
         num = Number(num);
     }
     var numArr = num.toFixed(2).split(".");
     numArr[0] = Number(numArr[0]).toLocaleString();
     return numArr.join(".");
 }
+
+// 可以自定义格式 日期
+function formatDate(d) {
+    var now = new Date(d);
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    month < 10 ? month = "0" + month : month = month;
+    var day = now.getDate();
+    day < 10 ? day = "0" + day : day = day;
+    var hour = now.getHours();
+    hour < 10 ? hour = "0" + hour : hour = hour;
+    var minute = now.getMinutes();
+    minute < 10 ? minute = "0" + minute : minute = minute;
+    var second = now.getSeconds();
+    second < 10 ? second = "0" + second : second = second;
+    return year + "-" + month + "-" + day + "   " + hour + ":" + minute + ":" + second;
+}
+
+/**
+ * 格式化日期
+ * @param  {[date]} dateObj [时间对象]
+ * @return {[string]}         [格式化后的字符串]
+ */
+function dataFormatter(dateObj) {
+    return dateObj.toLocaleString('zh', {
+            hour12: false,
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        })
+        .replace(/日/g, '')
+        .replace(/\/|年|月/g, '-');
+}
+// console.log(dataFormatter(new Date()))
 
 // 格式化银行卡
 function formatBankCard(card, spacing) {
@@ -134,7 +171,7 @@ function autoTextarea(obj, paddingHeight) {
         obj.css("overflow", 'hidden');
         var paddingHeight = Number(obj.css("padding-top").slice(0, -2)) + Number(obj.css("padding-bottom").replace("px", ""));
 
-        obj.on('input propertychange', function () {
+        obj.on('input propertychange', function() {
             obj.css("height", "auto").height($(this)[0].scrollHeight - paddingHeight);
         });
 
@@ -143,23 +180,23 @@ function autoTextarea(obj, paddingHeight) {
 
         if (obj.addEventListener) { //ie8以上
 
-            obj.addEventListener("input", function () {
+            obj.addEventListener("input", function() {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
             }, false);
-            obj.addEventListener("propertychange", function () {
+            obj.addEventListener("propertychange", function() {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
             }, false);
 
         } else {
 
-            obj.oninput = function () {
+            obj.oninput = function() {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
 
             }
-            obj.onpropertychange = function () {
+            obj.onpropertychange = function() {
                 obj.style.height = "auto";
                 obj.style.height = (obj.scrollHeight - paddingHeight) + "px";
             }
@@ -184,7 +221,7 @@ function autoTextarea(obj, paddingHeight) {
 
 // 这个数组是否有这个值   这个方法没有必要 直接用 Array.prototype.indexOf(ie9以及以上)
 if (!Array.prototype.hasVal) {
-    Array.prototype.hasVal = function (val) {
+    Array.prototype.hasVal = function(val) {
         if (this.indexOf) {
             return this.indexOf(val) > 0
         } else {
@@ -206,7 +243,7 @@ if (!Array.prototype.hasVal) {
     }
 }*/
 if (!Array.prototype.insert) {
-    Array.prototype.insert = function (posi, item) {
+    Array.prototype.insert = function(posi, item) {
         if (arguments.length == 2) {
             this.splice(posi, 0, item);
         } else if (arguments.length > 2) {
@@ -219,14 +256,14 @@ if (!Array.prototype.insert) {
 }
 // 根据索引位置删除值
 if (!Array.prototype.remove) {
-    Array.prototype.remove = function (posi) {
+    Array.prototype.remove = function(posi) {
         this.splice(posi, 1);
         return this;
     }
 }
 // 数组交换值
 if (!Array.prototype.exchage) {
-    Array.prototype.exchage = function (posi1, posi2) { //两个位置交换
+    Array.prototype.exchage = function(posi1, posi2) { //两个位置交换
         if (this.length - 1 < posi1 || this.length - 1 < posi2 || posi1 == posi2) {
             return this;
         }
@@ -238,14 +275,14 @@ if (!Array.prototype.exchage) {
 }
 // 将一个值位置上移
 if (!Array.prototype.exchageUp) {
-    Array.prototype.exchageUp = function (posi) {
+    Array.prototype.exchageUp = function(posi) {
         this.exchage(posi, posi - 1);
         return this;
     }
 }
 // 将一个值的位置下移
 if (!Array.prototype.exchageDown) {
-    Array.prototype.exchageDown = function (posi) {
+    Array.prototype.exchageDown = function(posi) {
         this.exchage(posi, posi + 1);
         return this;
     }
@@ -310,7 +347,7 @@ function fileLimit(obj) {
 }
 
 /*中间变星星*/
-String.prototype.star = function (start, end) {
+String.prototype.star = function(start, end) {
     var num = end - start;
     var str = this;
     var starStr = "";
@@ -322,7 +359,7 @@ String.prototype.star = function (start, end) {
 }
 
 /*在字符串里面找出重复最多的字符*/
-String.prototype.appearMaxTimes = function () {
+String.prototype.appearMaxTimes = function() {
     var maxNum = 0,
         index = null,
         num = {},
@@ -349,7 +386,7 @@ String.prototype.appearMaxTimes = function () {
 };
 
 /*将posi位置字符换成newStr,posi可以为数字也可以为由数组组成的数组*/
-String.prototype.change = function (posi, newStr) {
+String.prototype.change = function(posi, newStr) {
     if (!isNaN(str)) { //posi是数字
         return this.slice(0, posi) + newStr + this.slice(posi + 1); //将字符串posi前面的那段 + 新字符newStr + 字符串posi后面那段 拼成新的字符串；
     } else if (Array.isArray && Array.isArray(posi)) { //posi为数组的时候，es6 Array.isArray判断 注意兼容性
@@ -362,7 +399,7 @@ String.prototype.change = function (posi, newStr) {
 }
 
 /*将在ori中匹配到的字符，转化为tar中对应的字符*/
-String.prototype.exchange = function (ori, tar) {
+String.prototype.exchange = function(ori, tar) {
     var str = "",
         flag = false; //标记是否有匹配到ori中的字符
     for (var i = 0, len = this.length; i < len; i++) { //str字符串遍历一个个字符
@@ -379,7 +416,7 @@ String.prototype.exchange = function (ori, tar) {
     }
     return str;
 };
-String.prototype.exchange2 = function (ori, tar) {
+String.prototype.exchange2 = function(ori, tar) {
     var str = "";
     for (var i = 0, len = this.length; i < len; i++) {
         var j = 0,
@@ -397,7 +434,7 @@ String.prototype.exchange2 = function (ori, tar) {
 };
 // e.g. var a = "AGCT"; a.exchange("ATCG", "TAGC")//TCGA ,A=>T,T=>A,C=>G,G=>C
 // 传一个哈希表，属性名为匹配字符，值为目标字符
-String.prototype.exchange3 = function (hashTable) {
+String.prototype.exchange3 = function(hashTable) {
     var arr = this.split("");
     for (var i = 0, len = arr.length; i < len; i++) {
         // (arr[i] in hashTable) && (arr[i] = hashTable[arr[i]])
@@ -457,23 +494,23 @@ function Ele(dom) {
     }
     if (dom) {
         this.dom = dom;
-        Ele.prototype.innerWidth = function () { //获取元素宽度(包括padding,border)
+        Ele.prototype.innerWidth = function() { //获取元素宽度(包括padding,border)
             return dom.offsetWidth;
         };
-        Ele.prototype.innerHeight = function () { //获取元素高度(包括padding,border)
+        Ele.prototype.innerHeight = function() { //获取元素高度(包括padding,border)
             return dom.offsetHeight
         };
-        Ele.prototype.width = function () { //获取元素content宽度
+        Ele.prototype.width = function() { //获取元素content宽度
             var paddingArr = this.getStyle("padding").match(/\d+/g);
             var border = this.getStyle("borderWidth").match(/\d+/g)[0];
             return dom.offsetWidth - paddingArr[1] - paddingArr[3] - border * 2;
         }
-        Ele.prototype.height = function () { //获取元素content高度
+        Ele.prototype.height = function() { //获取元素content高度
             var paddingArr = this.getStyle("padding").match(/\d+/g);
             var border = this.getStyle("borderWidth").match(/\d+/g)[0];
             return dom.offsetHeight - paddingArr[0] - paddingArr[2] - border * 2;
         }
-        Ele.prototype.getStyle = function (StyleName) { //获取元素css样式
+        Ele.prototype.getStyle = function(StyleName) { //获取元素css样式
             if (dom.style[StyleName]) {
                 return dom.style[StyleName];
             } else {
@@ -485,7 +522,7 @@ function Ele(dom) {
             }
             return null;
         }
-        Ele.prototype.docOffset = function () { //元素的文档坐标
+        Ele.prototype.docOffset = function() { //元素的文档坐标
             var x = dom.offsetLeft;
             var y = dom.offsetTop;
             while (dom.offsetParent) {
@@ -538,25 +575,9 @@ function ranInt(max, min) {
  * 获取滚动条位置处理
  * @return {number} 浏览器滚动条位置
  */
+// window.scrollTo 设置滚动条位置
 function getScrollTop() {
     return document.documentElement.scrollTop || document.body.scrollTop;
-}
-
-/**
- * 设置浏览器滚动条位置
- * @param {number} top 需要设置浏览器滚动条的位置
- * @param {boolean} until 是否需要一直设置浏览器滚动条的位置 , 知道浏览器滚动条的位置 为top , 一般是页面进入的时候才需要设置为true , 其他时候可以忽略
- * @return {boolean} 是否设置成功
- */
-function setScrollTop(top, until) {
-    document.documentElement.scrollTop = document.body.scrollTop = top;
-    setTimeout(function () { // 虽然是在window.onload里面 , 但是有时页面进入的时候 , 还是设置不成功 , 初步猜测 , 可能是页面虽然加载好 , 但是还没有渲染完成, 还没有滚动条 , 所以设置失败 ; 特别是刷新的时候,  如果是直接跳转过来还好
-        if (getScrollTop() != top && until) { // 判断是否设置值 , 不是的话重新设置 , 这个判断只能是放在定时器里面 , 因为如果是直接在外面判断的话 , 可能由于刚设置的原因 , getScrollTop()是等于top的
-            /*console.log("执行");*/
-            setScrollTop(top);
-        }
-    }, 16.7); // 经过试验 其实定时器时间设为1都也只是执行一次 ,
-    return getScrollTop() == top;
 }
 
 /**
@@ -668,7 +689,7 @@ function urlParse(str) {
     var search = obj.search.substr(1);
     var searchjson = {};
     if (search) {
-        search.split("&").forEach(function (val) {
+        search.split("&").forEach(function(val) {
             var single = val.split("=");
             var key = single[0];
             var value = single[1];
@@ -687,7 +708,7 @@ function searchParse(search) {
     search = search.substr(1);
     var searchjson = {};
     if (search) {
-        search.split("&").forEach(function (val) {
+        search.split("&").forEach(function(val) {
             var single = val.split("=");
             var key = single[0];
             var value = single[1];
@@ -703,7 +724,7 @@ function searchParse(search) {
  */
 function removeDuplicate(arr) {
     var newArr = []; // 记住数组中已经有的元素
-    arr.forEach(function (item) {
+    arr.forEach(function(item) {
         console.log(item)
         if (newArr.indexOf(item) == -1) {
             newArr.push(item);
@@ -739,7 +760,7 @@ function isPassive() {
     var supportsPassiveOption = false;
     try {
         addEventListener("test", null, Object.defineProperty({}, 'passive', {
-            get: function () {
+            get: function() {
                 supportsPassiveOption = true;
             }
         }));
