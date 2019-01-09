@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>复制功能</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <input type="text" id="inputText" value="'测试文本'" />
+    <button id="btn">复制</button>
+    <script type="text/javascript">
+    var btn = document.getElementById('btn');
+    btn.addEventListener('click', function() {
+        var inputText = document.getElementById('inputText');
+        var currentFocus = document.activeElement;
+
+        ////////////////////////
+        // inputText.focus(); //
+        // inputText.setSelectionRange(0, inputText.value.length);
+        ////////////////////////
+
+        /* 等价于 */
+        inputText.select();
+
+        document.execCommand('copy', true);
+        currentFocus.focus();
+    });
+    </script>
+</body>
+
+</html>

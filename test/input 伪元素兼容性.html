@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>input 伪元素兼容性</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    label {
+        display: block;
+    }
+
+    label span {
+        display: inline-block;
+        width: 200px;
+    }
+
+    label span::after {
+        content: " : ";
+    }
+
+    input {
+        position: relative;
+        margin: 0 30px;
+    }
+
+    input::before {
+        position: absolute;
+        top: 0;
+        left: -50px;
+        content: "before";
+        color: #00f;
+        border: 1px solid #00f;
+    }
+    input::after {
+        position: absolute;
+        top: 0;
+        right: -50px;
+        content: "after";
+        color: #f00;
+        border: 1px solid #f00;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>input 伪元素兼容性</h1>
+    <label>
+        <span>text</span><input type="text">
+    </label>
+    <label>
+        <span>password</span><input type="password">
+    </label>
+    <label>
+        <span>button</span><input type="button">
+    </label>
+    <label>
+        <span>color</span><input type="color">
+    </label>
+    <label>
+        <span>date</span><input type="date">
+    </label>
+    <label>
+        <span>datetime-local</span><input type="datetime-local">
+    </label>
+    <label>
+        <span>mouth</span><input type="mouth">
+    </label>
+    <label>
+        <span>email</span><input type="email">
+    </label>
+    <label>
+        <span>file</span><input type="file">
+    </label>
+    <label>
+        <span>hidden</span><input type="hidden">
+    </label>
+    <label>
+        <span>image</span><input type="image">
+    </label>
+    <label>
+        <span>number</span><input type="number">
+    </label>
+    <label>
+        <span>range</span><input type="range">
+    </label>
+    <label>
+        <span>reset</span><input type="reset">
+    </label>
+    <label>
+        <span>submit</span><input type="submit">
+    </label>
+    <label>
+        <span>search</span><input type="search">
+    </label>
+    <label>
+        <span>tel</span><input type="tel">
+    </label>
+    <label>
+        <span>url</span><input type="url">
+    </label>
+    <label>
+        <span>checkbox</span><input type="checkbox">
+    </label>
+    <label>
+        <span>radio</span><input type="radio">
+    </label>
+    <p>文本输入的都不支持</p>
+</body>
+
+</html>
