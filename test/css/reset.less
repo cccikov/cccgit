@@ -9,21 +9,27 @@
     border: 0;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 //超链接
-body{
+body {
     // font: 12px/1.5 Verdana, Arial, 'simsun';
 }
+
 a {
     text-decoration: none;
     color: inherit;
 }
-ul,li{
-    list-style:none;
+
+ul,
+li {
+    list-style: none;
 }
+
 // hover效果
 .mouse-hover:hover {
     text-decoration: underline;
 }
+
 // 清除浮动
 .clearfix() {
     &:after {
@@ -32,6 +38,7 @@ ul,li{
         clear: both
     }
 }
+
 //超出隐藏
 .elli() {
     white-space: nowrap;
@@ -41,44 +48,55 @@ ul,li{
 
 
 // 字体
-.SimSun(){
+.SimSun() {
     font-family: "SimSun"; // 宋体
 }
-.SimHei(){
+
+.SimHei() {
     font-family: "SimHei"; // 黑体
 }
-.Yahei(){
+
+.Yahei() {
     font-family: "Microsoft Yahei"; // 微软雅黑
 }
-.JhengHei(){
+
+.JhengHei() {
     font-family: "Microsoft JhengHei"; // 微软正黑体
 }
-.KaiTi(){
+
+.KaiTi() {
     font-family: "KaiTi"; // 楷体
 }
-.NSimSun(){
+
+.NSimSun() {
     font-family: "NSimSun"; // 新宋体
 }
-.FangSong(){
+
+.FangSong() {
     font-family: "FangSong"; // 仿宋
 }
 
 
-.placeholder(){
-    ::-webkit-input-placeholder{
-        padding:2px 00;
-        color:#ccc;
+.placeholder(@color: #ccc) {
+    ::-webkit-input-placeholder {
+        padding: 2px 00;
+        color: @color;
     }
-    ::-moz-placeholder{
-        padding:2px 00;
-        color:#ccc;
-    } /* firefox 19+ */
-    :-ms-input-placeholder{
-        padding:2px 00;
-        color:#ccc;
-    } /* ie */
-    input:-moz-placeholder{
-        padding:2px 00;
-        color:#ccc;
+
+    ::-moz-placeholder {
+        padding: 2px 00;
+        color: @color;
+    }
+
+    /* firefox 19+ */
+    :-ms-input-placeholder {
+        padding: 2px 00;
+        color: @color;
+    }
+
+    /* ie */
+    input:-moz-placeholder {
+        padding: 2px 00;
+        color: @color;
     }
 }

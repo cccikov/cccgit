@@ -20,7 +20,8 @@
     $(function() {
         $(".show").on("click", function() {
             $(".out").show().addClass("show");
-            setTimeout(function() { // 由于是连续两个操作，并且后一个操作依赖前一个的状态，所以在下一轮“事件循环”的开始时执行
+
+            setTimeout(function() { // 由于是连续两个操作，并且后一个操作依赖前一个的状态，所以在下一轮“事件循环”的开始时执行 requestAnimationFrame 也可以
                 $(".out").addClass("active");
             }); //1ms谁看得出来不是同步
             //如果处理内容多的话，可能不行，就设个一帧的时间16.7
