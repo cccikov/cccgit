@@ -10,16 +10,31 @@
             console.clear();
             console.log(this); //注册了click事件侦听器的元素
             console.log(e.currentTarget); //注册了click事件侦听器的元素
-            console.log(e.currentTarget === this);
+            console.log(e.currentTarget === this); // true
             console.log(e.target); //点击中的元素
             alert("注册了click事件侦听器的元素" + this.tagName.toLowerCase() + "#" + this.id + " , " + "点中的元素是" + e.target.tagName.toLowerCase() + (e.target.id == "" ? "" : "#") + e.target.id);
+
+
+            ///////////////////////////////
+            // e.currentTarget 只能在事件循环获得 //
+            ///////////////////////////////
+            // 就是说只能在监听器中的同步操作中获得，一旦当前事件循环结束，e.currentTarget 就会变为 null ， 这就是为什么控制台打印的e.currentTarget 都为 null
+
+            window.requestAnimationFrame(function() {
+                console.log(e.currentTarget); // null
+            });
+
+            setTimeout(function() {
+                console.log(e.currentTarget); // null
+            }, 1);
+
         }, false);
     }
     </script>
     <style type="text/css">
-        #wrap *{
-            background: #fafafa;
-        }
+    #wrap * {
+        background: #fafafa;
+    }
     </style>
 </head>
 
