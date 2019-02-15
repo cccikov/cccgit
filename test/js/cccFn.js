@@ -16,6 +16,22 @@ function fixNum(num) {
     return numArr.join(".");
 }
 
+// 最多保留两位小数(四舍五入)，有可能只有一位，或者没有
+function numDecimal (number){
+    return Number(number.toFixed(2));
+}
+
+// 最多保留两位小数(不四舍五入)，有可能只有一位，或者没有
+function numTwo(number){
+    var str = String(number);
+    var arr = str.split(".");
+    if(arr[1]){
+        arr[1] = arr[1].slice(0,2);
+    }
+    str = arr.join(".");
+    return Number(str);
+}
+
 // 可以自定义格式 日期
 function formatDate(d) {
     var now = new Date(d);
