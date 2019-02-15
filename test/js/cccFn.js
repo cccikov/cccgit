@@ -32,6 +32,11 @@ function numTwo(number){
     return Number(str);
 }
 
+// 最多保留两位小数(不四舍五入)，有可能只有一位，或者没有
+function numTwo(number) {
+    return Math.floor(number * 100) / 100;
+}
+
 // 可以自定义格式 日期
 function formatDate(d) {
     var now = new Date(d);
