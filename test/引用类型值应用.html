@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>引用类型应用</title>
+    <script type="text/javascript" src="./js/vue.min.js"></script>
+    <script type="text/javascript">
+    let list = [{
+            "bigIcon": null,
+            "children": [],
+            "code": "role",
+            "fid": "1445659315790S0044I7F000001R5084",
+            "name": "角色管理",
+            "operations": [],
+            "orderNo": 1,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.system.Role.d"
+        },
+        {
+            "bigIcon": null,
+            "children": [],
+            "code": "user",
+            "fid": "1396189646967S0002I7F000001R5961",
+            "name": "用户管理",
+            "operations": [],
+            "orderNo": 2,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.system.User.d"
+        },
+        {
+            "bigIcon": "",
+            "children": [],
+            "code": "department",
+            "fid": "1445659202372S0040I7F000001R7456",
+            "name": "部门管理",
+            "operations": [],
+            "orderNo": 3,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.system.Department.d"
+        },
+        {
+            "bigIcon": null,
+            "children": [],
+            "code": "workflow",
+            "fid": "1447833509841S0127I7F000001R6324",
+            "name": "流程设置",
+            "operations": [],
+            "orderNo": 4,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.workflow.Workflow.d"
+        },
+        {
+            "bigIcon": null,
+            "children": [],
+            "code": "workflowOrder",
+            "fid": "1447841249528S0124I7F000001R1692",
+            "name": "流程实例",
+            "operations": [],
+            "orderNo": 5,
+            "parent": null,
+            "smallIcon": null,
+            "url": "view.workflow.WorkflowOrder.d"
+        }
+    ];
+    </script>
+    <style type="text/css">
+        label{
+            display: block;
+        }
+        label span{
+            display: inline-block;
+            width: 100px;
+        }
+        button{
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <label>
+                <span>bigIcon</span><input type="text" v-model="editData.bigIcon">
+            </label>
+            <label>
+                <span>children</span><input type="text" v-model="editData.children">
+            </label>
+            <label>
+                <span>code</span><input type="text" v-model="editData.code">
+            </label>
+            <label>
+                <span>fid</span><input type="text" v-model="editData.fid">
+            </label>
+            <label>
+                <span>name</span><input type="text" v-model="editData.name">
+            </label>
+            <label>
+                <span>orderNo</span><input type="text" v-model="editData.orderNo">
+            </label>
+            <label>
+                <span>parent</span><input type="text" v-model="editData.parent">
+            </label>
+            <label>
+                <span>smallIcon</span><input type="text" v-model="editData.smallIcon">
+            </label>
+            <label>
+                <span>url</span><input type="text" v-model="editData.url">
+            </label>
+        </div>
+        <ul>
+            <li v-for="val in list" :class="{active:editData.fid === val.fid}" @click="choose(val)">{{val.name}}</li>
+        </ul>
+        <p>让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了</p>
+        <button @click="output">输出新对象</button>
+        <div v-html="str"></div>
+    </div>
+    <script type="text/javascript">
+    new Vue({
+        el: "#app",
+        data: {
+            list: list,
+            editData: {},
+            str:""
+        },
+        methods: {
+            choose(obj) {
+                this.editData = obj; // 让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了
+            },
+            output(){
+                this.str = JSON.stringify(this.list,null, 8).replace(/\n/g, "<br>").replace(/\s/g,"&nbsp;");
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
