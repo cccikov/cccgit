@@ -70,56 +70,94 @@
     ];
     </script>
     <style type="text/css">
-        label{
-            display: block;
-        }
-        label span{
-            display: inline-block;
-            width: 100px;
-        }
-        button{
-            vertical-align: top;
-        }
+    label {
+        display: block;
+    }
+
+    label span {
+        display: inline-block;
+        width: 100px;
+    }
+
+    button {
+        vertical-align: top;
+    }
+
+    #app {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+
+    #app .left {
+        flex: 1 1 50%;
+    }
+
+    #app .right {
+        flex: 1 1 50%;
+    }
+
+    #app .right p {
+        text-align: center;
+    }
+
+    #app .right .right-wrap {
+        display: inline-block;
+    }
+
+    ul>li {
+        cursor: pointer;
+    }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <div>
-            <label>
-                <span>bigIcon</span><input type="text" v-model="editData.bigIcon">
-            </label>
-            <label>
-                <span>children</span><input type="text" v-model="editData.children">
-            </label>
-            <label>
-                <span>code</span><input type="text" v-model="editData.code">
-            </label>
-            <label>
-                <span>fid</span><input type="text" v-model="editData.fid">
-            </label>
-            <label>
-                <span>name</span><input type="text" v-model="editData.name">
-            </label>
-            <label>
-                <span>orderNo</span><input type="text" v-model="editData.orderNo">
-            </label>
-            <label>
-                <span>parent</span><input type="text" v-model="editData.parent">
-            </label>
-            <label>
-                <span>smallIcon</span><input type="text" v-model="editData.smallIcon">
-            </label>
-            <label>
-                <span>url</span><input type="text" v-model="editData.url">
-            </label>
+        <div class="left">
+            <div>
+                <label>
+                    <span>bigIcon</span><input type="text" v-model="editData.bigIcon">
+                </label>
+                <label>
+                    <span>children</span><input type="text" v-model="editData.children">
+                </label>
+                <label>
+                    <span>code</span><input type="text" v-model="editData.code">
+                </label>
+                <label>
+                    <span>fid</span><input type="text" v-model="editData.fid">
+                </label>
+                <label>
+                    <span>name</span><input type="text" v-model="editData.name">
+                </label>
+                <label>
+                    <span>orderNo</span><input type="text" v-model="editData.orderNo">
+                </label>
+                <label>
+                    <span>parent</span><input type="text" v-model="editData.parent">
+                </label>
+                <label>
+                    <span>smallIcon</span><input type="text" v-model="editData.smallIcon">
+                </label>
+                <label>
+                    <span>url</span><input type="text" v-model="editData.url">
+                </label>
+            </div>
+            <ul>
+                <li v-for="val in list" :class="{active:editData.fid === val.fid}" @click="choose(val)">{{val.name}}</li>
+            </ul>
+            <p>让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了</p>
+            <button @click="output">输出新对象</button>
+            <div v-html="str"></div>
         </div>
-        <ul>
-            <li v-for="val in list" :class="{active:editData.fid === val.fid}" @click="choose(val)">{{val.name}}</li>
-        </ul>
-        <p>让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了</p>
-        <button @click="output">输出新对象</button>
-        <div v-html="str"></div>
+        <div class="right">
+            <div class="right-wrap">
+                <p>实时数据</p>
+                <div v-html="realTimeData"></div>
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
     new Vue({
@@ -127,14 +165,19 @@
         data: {
             list: list,
             editData: {},
-            str:""
+            str: ""
         },
         methods: {
             choose(obj) {
                 this.editData = obj; // 让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了
             },
-            output(){
-                this.str = JSON.stringify(this.list,null, 8).replace(/\n/g, "<br>").replace(/\s/g,"&nbsp;");
+            output() {
+                this.str = JSON.stringify(this.list, null, 8).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
+            }
+        },
+        computed: {
+            realTimeData() {
+                return JSON.stringify(this.list, null, 8).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
             }
         }
     })
