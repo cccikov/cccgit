@@ -17,16 +17,16 @@ function fixNum(num) {
 }
 
 // 最多保留两位小数(四舍五入)，有可能只有一位，或者没有
-function numDecimal (number){
+function numDecimal(number) {
     return Number(number.toFixed(2));
 }
 
 // 最多保留两位小数(不四舍五入)，有可能只有一位，或者没有
-function numTwo(number){
+function numTwo(number) {
     var str = String(number);
     var arr = str.split(".");
-    if(arr[1]){
-        arr[1] = arr[1].slice(0,2);
+    if (arr[1]) {
+        arr[1] = arr[1].slice(0, 2);
     }
     str = arr.join(".");
     return Number(str);
@@ -787,4 +787,19 @@ function isPassive() {
         }));
     } catch (e) {}
     return supportsPassiveOption;
+}
+
+/**
+ * 格式化 JSON
+ * @param  {Object} json        需要格式化的JSON
+ * @param  {String} outputType  "html"(可选)
+ * @return {String}             格式化后的字符串
+ */
+function formatJSON(json, outputType) {
+    var str = JSON.stringify(json, null, 4);
+    if (outputType === "html") {
+        return str.replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
+    } else {
+        return str;
+    }
 }
