@@ -148,6 +148,9 @@
             <ul>
                 <li v-for="val in list" :class="{active:editData.fid === val.fid}" @click="choose(val)">{{val.name}}</li>
             </ul>
+            <ul>
+                <li v-for="(val,index) in list" :class="{active:editData.fid === val.fid}" @click="choose2(index)">{{val.name}}</li>
+            </ul>
             <p>让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了</p>
             <button @click="output">输出新对象</button>
             <div v-html="str"></div>
@@ -169,7 +172,16 @@
         },
         methods: {
             choose(obj) {
+                /* 利用引用类型的特性，直接传对象 */
                 this.editData = obj; // 让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了
+
+                /* 对于引用类型来说，这样写更简单快捷 */
+            },
+            choose2(property) {
+                /* 通过属性去找出对应对象 */
+                this.editData = this.list[property]; // 让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了
+
+                /* 这种适用性广，引用类型和基本类型都可以用；但是如果引用类型十分复杂，多层嵌套，那需要传多个property list[0]["chickren"][0] 这样就需要传 0 "chickren" 0 */
             },
             output() {
                 this.str = JSON.stringify(this.list, null, 8).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
