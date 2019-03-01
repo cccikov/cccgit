@@ -803,3 +803,13 @@ function formatJSON(json, outputType) {
         return str;
     }
 }
+
+/**
+ * 是否含有非法字符；合法为中文，英文字母，下划线_
+ * @param  {String} str 需要检查的字符串
+ * @return {Boolean}     true表示含有非法字符串
+ */
+function isIllegal(str){
+    var reg = /[^a-zA-Z0-9_\u4e00-\u9fa5]/;
+    return reg.test(str);
+}
