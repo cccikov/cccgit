@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>测试</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        [id*=demo] {
+            margin: 0 0 25px;
+            padding: 10px;
+            box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .left {
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+        }
+
+        .right {
+            padding: 12px;
+            box-shadow: 0 0 5px rgba(0, 0, 255, 0.3);
+        }
+
+        .right p {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- demo1 float -->
+    <!-- demo1 float -->
+    <!-- demo1 float -->
+    <!-- demo1 float -->
+    <!-- demo1 float -->
+    <div id="demo1">
+        <div class="left">
+            <span>左边</span>
+        </div>
+        <div class="right">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium tempore in cumque, atque culpa qui
+                sunt?
+                Molestiae aperiam voluptatum quae rerum tempora, consequatur voluptatibus dolorem harum, necessitatibus
+                ad possimus
+                ipsum!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, qui. Laudantium, deleniti repellat a
+                quis,
+                aspernatur, quidem velit tempore aliquam odio modi ea molestias nihil harum commodi nobis minima nemo!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit voluptas magnam necessitatibus amet,
+                non
+                beatae odio animi tempore nihil minima enim veniam aperiam dignissimos, expedita officiis fugiat
+                asperiores impedit
+                totam.</p>
+        </div>
+    </div>
+    <style>
+        #demo1:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #demo1 .left {
+            float: left;
+        }
+
+        #demo1 .right {
+            overflow: hidden;
+        }
+
+        #demo1 .right p {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+        }
+    </style>
+
+
+
+
+
+
+    <!-- demo2 flex -->
+    <!-- demo2 flex -->
+    <!-- demo2 flex -->
+    <!-- demo2 flex -->
+    <!-- demo2 flex -->
+    <div id="demo2">
+        <div class="left">
+            <span>左边</span>
+        </div>
+        <div class="right">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium tempore in cumque, atque culpa qui
+                sunt?
+                Molestiae aperiam voluptatum quae rerum tempora, consequatur voluptatibus dolorem harum, necessitatibus
+                ad possimus
+                ipsum!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, qui. Laudantium, deleniti repellat a
+                quis,
+                aspernatur, quidem velit tempore aliquam odio modi ea molestias nihil harum commodi nobis minima nemo!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit voluptas magnam necessitatibus amet,
+                non
+                beatae odio animi tempore nihil minima enim veniam aperiam dignissimos, expedita officiis fugiat
+                asperiores impedit
+                totam.</p>
+        </div>
+    </div>
+    <style>
+        #demo2 {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #demo2 .left {
+            flex: 0 0 auto;
+        }
+
+        #demo2 .right {
+            flex: 1 1 auto;
+            min-width: 1px;
+        }
+
+        #demo2 .right p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- demo3 flex -->
+    <!-- demo3 flex -->
+    <!-- demo3 flex -->
+    <!-- demo3 flex -->
+    <!-- demo3 flex -->
+    <div id="demo3">
+        <div class="left">
+            <span>左边</span>
+        </div>
+        <div class="right">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium tempore in cumque, atque culpa qui
+                sunt?
+                Molestiae aperiam voluptatum quae rerum tempora, consequatur voluptatibus dolorem harum, necessitatibus
+                ad possimus
+                ipsum!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, qui. Laudantium, deleniti repellat a
+                quis,
+                aspernatur, quidem velit tempore aliquam odio modi ea molestias nihil harum commodi nobis minima nemo!</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit voluptas magnam necessitatibus amet,
+                non
+                beatae odio animi tempore nihil minima enim veniam aperiam dignissimos, expedita officiis fugiat
+                asperiores impedit
+                totam.</p>
+        </div>
+    </div>
+    <style>
+        #demo3 {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #demo3 .left {
+            flex: 0 0 auto;
+        }
+
+        #demo3 .right {
+            flex: 1 1 auto;
+            overflow: hidden;
+        }
+
+        #demo3 .right p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</body>
+
+</html>
