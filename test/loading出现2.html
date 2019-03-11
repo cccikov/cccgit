@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>测试</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <link rel="stylesheet" type="text/css" href="./icons/iconfont.css">
+</head>
+
+<body>
+    <style type="text/css">
+    .loading {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.3);
+        font-size: 100px;
+        opacity: 0;
+        transition: transform ease-out 0.3s, opacity 0.3s;
+        color: #00bcd4;
+    }
+
+    .loading.show {
+        display: block;
+    }
+
+    .loading.active {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+
+    .loading i {
+        display: inline-block;
+        font-size: inherit;
+    }
+    </style>
+    <div id="demo1">
+        <!-- <div class="loading">
+            <i class="iconfont icon-loading"></i>
+        </div> -->
+        <button onclick="load1.toShow()">loading 出现</button>
+        <button onclick="load1.toHide()">loading 消失</button>
+    </div>
+    <script type="text/javascript">
+    class Loading {
+        constructor() {
+            var _this = this;
+            let loading_dom = document.createElement("div");
+            loading_dom.innerHTML = `<i class="iconfont icon-loading5"></i>`;
+            loading_dom.classList.add("loading");
+            document.body.appendChild(loading_dom);
+
+            _this.dom = loading_dom;
+            _this.show = false;
+            _this.timer = null;
+            _this.timer2 = null;
+            /**
+             * transitionend 事件
+             */
+            loading_dom.addEventListener("transitionend", transitionend, false);
+
+            function transitionend(e) {
+                console.log("transitionend", e.propertyName, e);
+                if (e.propertyName === "opacity" && !_this.show) {
+                    _this.dom.classList.remove("show");
+                }
+            }
+
+        }
+
+        _reset() {
+            clearTimeout(this.timer);
+            clearTimeout(this.timer2);
+        }
+
+        _run() {
+            var _this = this;
+            var dom = _this.dom.querySelectorAll("i")[0];
+            var n = 0;
+            var timeArr = [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 45, 45, 45, 45, 45, 45, 45, 45, 45, 90, 90, 120, 180, 300, 300, 450, 120, 90, 45, 50, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30];
+            var index = 0;
+            /*setInterval(function() {
+                dom.style.transform = "rotate3d(0,0,1," + n * 360 / 8 + "deg)"
+                n++;
+                if (n >= 8) {
+                    n = 0;
+                }
+            }, 50);*/
+
+            function ani() {
+                var time = timeArr[index];
+                index++;
+                if (index >= timeArr.length) {
+                    index = 0;
+                }
+                _this.timer2 = setTimeout(function() {
+                    dom.style.transform = "rotate3d(0,0,1," + n * 360 / 8 + "deg)"
+                    n++;
+                    if (n >= 8) {
+                        n = 0;
+                    }
+                    ani();
+                }, time);
+            }
+
+            ani();
+        }
+
+        toShow() {
+            var _this = this;
+            _this.show = true;
+            _this._reset();
+            _this._run();
+            _this.dom.classList.add("show");
+            _this.timer = setTimeout(function() {
+                _this.dom.classList.add("active");
+            }, 17);
+        }
+
+        toHide() {
+            var _this = this;
+            _this.show = false;
+            _this._reset();
+            _this.dom.classList.remove("active");
+        }
+    }
+    var load1 = new Loading();
+    </script>
+</body>
+
+</html>
