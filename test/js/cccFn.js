@@ -809,7 +809,22 @@ function formatJSON(json, outputType) {
  * @param  {String} str 需要检查的字符串
  * @return {Boolean}     true表示含有非法字符串
  */
-function isIllegal(str){
+function isIllegal(str) {
     var reg = /[^a-zA-Z0-9_\u4e00-\u9fa5]/;
     return reg.test(str);
+}
+
+/**
+ * 图片加载完毕
+ * @param  {String}   src 图片的url
+ * @param  {Function} cb  回调函数
+ * @return {undefined}      无返回值
+ */
+function imgOnload(src, cb) {
+    var url = src;
+    var newImg = new Image();
+    newImg.onload = function() {
+        cb();
+    }
+    newImg.src = url;
 }
