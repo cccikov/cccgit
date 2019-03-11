@@ -18,10 +18,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0.3);
-        font-size: 100px;
         opacity: 0;
         transition: transform ease-out 0.3s, opacity 0.3s;
-        color: #00bcd4;
     }
 
     .loading.show {
@@ -36,7 +34,9 @@
 
     .loading i {
         display: inline-block;
-        font-size: inherit;
+        width: 70px;
+        height: 70px;
+        background: url("./img/loading.png") center/contain no-repeat;
     }
     </style>
     <div id="demo1">
@@ -51,7 +51,7 @@
         constructor() {
             var _this = this;
             let loading_dom = document.createElement("div");
-            loading_dom.innerHTML = `<i class="iconfont icon-loading5"></i>`;
+            loading_dom.innerHTML = `<i></i>`;
             loading_dom.classList.add("loading");
             document.body.appendChild(loading_dom);
 
@@ -82,7 +82,7 @@
             var _this = this;
             var dom = _this.dom.querySelectorAll("i")[0];
             var n = 0;
-            var timeArr = [45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 50, 66, 78, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45];
+            var timeArr = [60];
             var index = 0;
             /*setInterval(function() {
                 dom.style.transform = "rotate3d(0,0,1," + n * 360 / 8 + "deg)"
@@ -99,9 +99,9 @@
                     index = 0;
                 }
                 _this.timer2 = setTimeout(function() {
-                    dom.style.transform = "rotate3d(0,0,1," + n * 360 / 8 + "deg)"
+                    dom.style.transform = "rotate3d(0,0,1," + n * 360 / 12 + "deg)"
                     n++;
-                    if (n >= 8) {
+                    if (n >= 12) {
                         n = 0;
                     }
                     ani();
