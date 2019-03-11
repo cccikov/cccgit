@@ -35,8 +35,10 @@
 			var drag = document.getElementById("drag");
 			drag.onmousedown = function(e) {
 				var event = e || window.event;
-				var mouseX = event.clientX - drag.offsetLeft;
-				var mouseY = event.clientY - drag.offsetTop;
+				var mouseX = event.clientX - drag.offsetLeft; // 相当于 event.offsetX，但是offsetX还未成为标准，所以可能会有兼容问题
+				var mouseY = event.clientY - drag.offsetTop; // 相当于 event.offsetY，但是offsetY还未成为标准，所以可能会有兼容问题
+				console.log(e.offsetX,mouseX);
+				console.log(e.offsetY,mouseY);
 				document.onmousemove = function(e) {
 					var event = e || window.event;
 					var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
