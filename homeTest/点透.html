@@ -10,7 +10,7 @@
 				padding: 0;
 				margin: 0;
 			}
-			
+
 			a {
 				display: block;
 				line-height: 50px;
@@ -18,7 +18,7 @@
 				text-align: center;
 				background: #ccc;
 			}
-			
+
 			#mask {
 				position: fixed;
 				top: 0;
@@ -29,7 +29,7 @@
 				font-size: 50px;
 				text-align: center;
 			}
-			
+
 			#mask2 {
 				position: fixed;
 				top: 50%;
@@ -107,6 +107,10 @@
 					<br /> 2 在touchend事件回调中加入preventDefault, 并在下一层中加上pointer-events:none。
 					<br /><a href="http://segmentfault.com/q/1010000000691822">解决方法网址</a>
 				</p>
+				<p>
+					解决方法3
+					touchstart事件 preventDefault
+				</p>
 			</div>
 			<div id="mask">
 				我是蒙层，我用的是click，我没有点透
@@ -120,7 +124,8 @@
 			$("#mask").on("click", function() {
 				$(this).hide();
 			});
-			$("#mask2").on("touchstart", function() {
+			$("#mask2").on("touchstart", function(e) {
+				e.preventDefault();
 				$(this).hide();
 			});
 		</script>
