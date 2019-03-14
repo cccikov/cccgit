@@ -145,9 +145,19 @@
                     <span>url</span><input type="text" v-model="editData.url">
                 </label>
             </div>
+
+            <h4>choose</h4>
             <ul>
-                <li v-for="val in list" :class="{active:editData.fid === val.fid}" @click="choose(val)">{{val.name}}</li>
+                <li v-for="val in list" :class="{active:editData.fid === val.fid}" @click="choose(val)">
+                    {{val.name}}
+                    <button @click.stop="same(val)">赋值（等于号=）复制</button>
+                    <button @click.stop="deep(val)">深拷贝复制</button>
+                </li>
             </ul>
+            <p>赋值复制时，改变复制后的内容，也会改变源数据的内容。由于是引用类型值，所以值只是一个指针，直接赋值的时候，就是两个变量都指向同一个指针，所以其中一个改变，另外一个也会改变。</p>
+            <p>深拷贝复制，改变复制后的数据而不影响源数据。</p>
+
+            <h4>choose2</h4>
             <ul>
                 <li v-for="(val,index) in list" :class="{active:editData.fid === val.fid}" @click="choose2(index)">{{val.name}}</li>
             </ul>
@@ -182,6 +192,16 @@
                 this.editData = this.list[property]; // 让 editData 指向 obj 的内存地址；所以我们改 editData 的时候（不赋予新值），就是改list对应的值了
 
                 /* 这种适用性广，引用类型和基本类型都可以用；但是如果引用类型十分复杂，多层嵌套，那需要传多个property list[0]["chickren"][0] 这样就需要传 0 "chickren" 0 */
+            },
+            same(obj){
+                /* 直接等于号复制 */
+                var newObj = obj;
+                this.list.push(newObj);
+            },
+            deep(obj){
+                /* 直接等于号复制 */
+                var newObj = JSON.parse(JSON.stringify(obj));
+                this.list.push(newObj);
             },
             output() {
                 this.str = JSON.stringify(this.list, null, 8).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");

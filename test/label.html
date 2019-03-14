@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>label</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    label {
+        display: block;
+    }
+
+    p label{
+        display: inline-block;
+    }
+
+    h3 {
+        margin: 50px 0 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <p>
+        <span>点击文字，不会聚焦，或者选择表单元素</span>
+        <input type="text">
+    </p>
+    <p>
+        <span>点击文字，不会聚焦，或者选择表单元素</span>
+        <input type="checkbox">
+    </p>
+
+
+
+    <h3>用法1: label 包裹表单元素</h3>
+    <label>
+        <span>点击文字，会聚焦，或者选择表单元素</span>
+        <input type="text">
+    </label>
+    <label>
+        <span>点击文字，会聚焦，或者选择表单元素</span>
+        <input type="checkbox">
+    </label>
+
+
+
+    <h3>用法2: label for属性为表单元素的id，vue的时候，可以for和表单的id都用key的那个值来确保唯一性</h3>
+    <p>
+        <label for="123124123">点击文字，会聚焦，或者选择表单元素</label>
+        <input id="123124123" type="text">
+    </p>
+    <p>
+        <label for="293479234">点击文字，会聚焦，或者选择表单元素</label>
+        <input id="293479234" type="checkbox">
+    </p>
+</body>
+
+</html>

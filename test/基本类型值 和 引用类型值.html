@@ -88,7 +88,10 @@
         obj3.name = "haha"; // 其中一个改变 , obj3改变
         console.log(obj3 === obj2, obj3, obj2); // true {name: "haha"} {name: "haha"} 另一方obj2也随之改变
 
-
+        obj3 = {
+            "name": "meme"
+        } // obj3 等于 一个新值，就已经不是指向原来的obj2了，是指向一个新的值了；上面obj3.name = "haha" 只是 这个指针的name指向一个新值，obj3还是指向原来的值。
+        console.log(obj3 === obj2, obj3, obj2);
 
         /* 比较相等 */
         var obj4 = {
