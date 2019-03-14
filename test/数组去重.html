@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>数组去重</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <script type="text/javascript">
+    function ranInt(min, max) {
+        return parseInt(Math.random() * (max + 1 - min) + min)
+    }
+
+    let arr = new Array(10).fill('').map((item, index) => {
+        return {
+            num: ranInt(0, 10)
+        }
+    });
+
+    let arr_single = new Array(10).fill('').map((item, index) => ranInt(0, 10));
+    console.log(arr,arr_single);
+    console.log(removeDuplicate(arr));
+    console.log(removeDuplicate_single(arr_single));
+
+    function removeDuplicate(arr) {
+        arr = arr.slice(0);
+        var has = [];
+        var newList = [];
+        arr.forEach(val => {
+            if (!has.includes(val)) { // 有重复
+                has.push(val.num);
+                newList.push(val);
+            }
+        });
+        return newList;
+    }
+
+    function removeDuplicate_single(arr) {
+        arr = arr.slice(0);
+        var newList = [];
+        arr.forEach(val => {
+            if (!newList.includes(val)) { // 有重复
+                newList.push(val);
+            }
+        });
+        return newList;
+    }
+    </script>
+</body>
+
+</html>

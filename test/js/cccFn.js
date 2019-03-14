@@ -587,7 +587,7 @@ function ranInt(max, min) {
         max = min;
         min = mid;
     }
-    return parseInt(Math.random() * (max - min + 1) + min)
+    return parseInt(Math.random() * (max + 1 - min) + min)
 }
 
 
