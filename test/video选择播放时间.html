@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>video选择播放时间</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html,
+    body {
+        position: relative;
+        text-align: center;
+    }
+
+    video {
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <video loop src="./video/BigBuckBunny_640x360.mp4#t=10,15" controls=""></video>
+    <video loop id="video" src="./video/BigBuckBunny_640x360.mp4" controls=""></video>
+    <button onclick="fn()">按钮</button>
+    <button onclick="fn2()">按钮10秒</button>
+    <p>
+        对于uc和qq浏览器来说，好像只有有实际的点击操作才可以当前播放的时间。
+    </p>
+    <script type="text/javascript">
+        var video = document.getElementById("video");
+        video.addEventListener("play", function() {
+            video.currentTime = 10;
+            if (video.currentTime != 10) {
+                setTimeout(function() {
+                    video.currentTime = 10;
+                }, 1000 / 10);
+            }
+        }, false);
+
+        function fn() {
+            console.log("click");
+            video.play();
+            setTimeout(function() {
+                video.currentTime = 10;
+            }, 1000 / 10);
+        }
+
+        function fn2() {
+            video.currentTime = 10;
+        }
+    </script>
+    <script type="text/javascript">
+        document.write(navigator.userAgent)
+    </script>
+</body>
+
+</html>
