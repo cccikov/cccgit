@@ -36,5 +36,6 @@
         btn.addEventListener("click",listener,false);
 
     </script>
+    <p>对于一般元素来说，我们好少需要移出监听器，一般删除了元素，相关的监听器也就没了。但是对于window，document，html，body，或者一些不能随便删除的dom（如#wrap，body的子元素，一般包裹着全部HTML内容），这类的dom一般添加的监听都用具名函数，便于清除监听器</p>
 </body>
 </html>
