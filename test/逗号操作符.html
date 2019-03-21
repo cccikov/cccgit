@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>逗号操作符</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript">
+    function fn(str) {
+        console.log(str)
+    }
+
+    // 当你想要在期望一个表达式的位置包含多个表达式时，可以使用逗号操作符。这个操作符最常用的一种情况是：for 循环中提供多个参数。
+    fn("123"), fn("345");
+    var a = 123,b = 345; // 赋值是一个表达式
+    // var a = 123,var b = 345 // 报错 因为var赋值语句就是一个完整的js语句，所以报错
+    // (var a = 123) // 报错 因为var赋值语句就是一个完整的js语句，所以报错；
+    (a = 123) // 报错 因为var赋值语句就是一个完整的js语句，所以报错；
+
+    /*123
+    (a = 123) // 报错，由于没有任何分割操作符，所以以为是函数执行*/
+
+    var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    for (let i, len = arr.length; i < len; i++) { // 这样做的好处，就不需要每次循环都计算arr.length，在循环前就算好了
+        console.log(i);
+    }
+
+    for (let i = 0, len = arr.length; i < len; i++) { // 这样做的好处，就不需要每次循环都计算arr.length，在循环前就算好了
+        console.log(i);
+    }
+
+
+    // 如果想在逻辑运行时执行多个操作，除了改用为if
+    // fn("123") fn("345") || fn("678") fn("890") // 报错因为函数运行是一个表达式，这里有多个表达式 ，逻辑运算符只能左右两个表达式
+    fn("123"), fn("345") || (fn("678"), fn("890")); // 逗号用于分割 javascript 表达式。 分号用于分隔 javascript 语句。
+    // (fn("123"); fn("345")) || (fn("678"), fn("890")); // 报错，在一个表达式内部括号，加了分号，结束了语句，就分割成两个语句。前半个语句有一个不成对的( ; 后半个语句也有个不成对的)。
+
+
+    true ? (fn("123"), fn("345")) : fn("678"), fn("890"); // 相当于 (true ? (fn("123"), fn("345")) : fn("678")), fn("890");
+
+    // true ? fn("123"), fn("345") : fn("678"), fn("890"); // 报错 由于 运算符优先级问题。 相当于 (true ? fn("123")), (fn("345") : fn("678")), fn("890"); 就是不完整的三目运算符，所以报错
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
