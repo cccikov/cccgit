@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车数据处理</title>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        axios({
+            methods: "get",
+            url: "./data/getUserShoppingCartPage.json"
+        }).then(res => {
+            var listData = res.data.data // 列表数据
+            var sortList = {} // 按照空间整理的购物车列表
+            var normalSortList = [] // 购物车id列表
+
+            listData.forEach((item) => {
+                var cateId = item.cateId // 空间分类id
+
+                /**
+                 * 取价格，尺寸
+                 */
+                var size = {}
+                var price = 0
+                for (var i in item.archiveJson.Size) {
+                    let obj = item.archiveJson.Size[i]
+                    price = obj.price
+                    size = {
+                        width: obj.width,
+                        length: obj.length,
+                        height: obj.height,
+                        id: obj.id
+                    }
+                }
+
+                /**
+                 * 取材质
+                 */
+                var material = {}
+                for (var j in item.archiveJson.Mat) {
+                    // j 为 partCode
+                    let obj = item.archiveJson.Mat[j]
+                    material[j] = {
+                        matId: obj.matId,
+                        name: obj.name
+                    }
+                }
+
+                /**
+                 * 插对象
+                 */
+                var goodsSinge = {
+                    cartNum: item.num,
+                    id: item.id,
+                    fntId: item.fntId,
+                    name: item.modelName,
+                    picPath: item.picPath,
+                    price: price,
+                    size: size,
+                    material: material
+                }
+
+                if (!sortList[cateId]) { // 对象里面没有这个空间
+                    sortList[cateId] = {}
+                    sortList[cateId].name = item.cateName // 对象的名字为空间名字
+                    sortList[cateId].goodsList = [] // 购物车中属于这个空间的物品
+                }
+                sortList[cateId].goodsList.push(goodsSinge);
+                normalSortList.push(item.id);
+            });
+
+            // 将对象形式转化为数组形式
+            sortList = Object.keys(sortList).map(key => {
+                return sortList[key];
+            })
+
+            console.log(sortList);
+            console.log(normalSortList)
+        }).catch(err=>{
+            console.error(err);
+        });
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

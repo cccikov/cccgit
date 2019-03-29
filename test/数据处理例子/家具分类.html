@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>家具分类</title>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        axios({
+            methods: "get",
+            url: "./data/getModelCate.json"
+        }).then(res => {
+            let origin = res.data.obj;
+            console.log(origin)
+            let obj = {}; // parentCateId => cateId
+
+            // 以对象形式分好类
+            origin.forEach(val => {
+                let firstId = val.parentCateId
+                if (!(firstId in obj)) {
+                    obj[firstId] = {
+                        id: firstId,
+                        name: val.parentCateName,
+                        child: {}
+                    };
+                }
+
+                let secondId = val.cateId;
+                if (!(secondId in obj[firstId].child)) {
+                    obj[firstId].child[secondId] = {
+                        id: secondId,
+                        name: val.cateName,
+                        child: {}
+                    }
+                }
+
+                let thirdId = val.modelId;
+                obj[firstId].child[secondId].child[thirdId] = {
+                    id: thirdId,
+                    name: val.modelNo + " " + val.modelName,
+                }
+
+            });
+
+            // 以数组形式分好类
+            let list = [];
+
+            // list = Object.values(obj);
+            // list.forEach(val=>{
+            //     val.child = Object.values(val.child);
+            //     val.child.forEach(val=>{
+            //         val.child = Object.values(val.child);
+            //     });
+            // });
+
+            list = Object.values(obj).map(val => {
+                val.child = Object.values(val.child).map(val => {
+                    val.child = Object.values(val.child);
+                    return val
+                });
+                return val;
+            });
+
+            console.log(list);
+        }).catch(err => {
+            console.error(err);
+        });
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
