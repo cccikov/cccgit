@@ -12,6 +12,16 @@
             methods: "get",
             url: "./data/getModelCate.json"
         }).then(res => {
+            method1(res);
+        }).catch(err => {
+            console.error(err);
+        });
+
+
+        /**
+         * 处理方式1
+         */
+        function method1(res) {
             let origin = res.data.obj;
             console.log(origin)
             let obj = {}; // parentCateId => cateId
@@ -47,26 +57,24 @@
             // 以数组形式分好类
             let list = [];
 
-            // list = Object.values(obj);
-            // list.forEach(val=>{
-            //     val.child = Object.values(val.child);
-            //     val.child.forEach(val=>{
-            //         val.child = Object.values(val.child);
-            //     });
-            // });
-
-            list = Object.values(obj).map(val => {
-                val.child = Object.values(val.child).map(val => {
-                    val.child = Object.values(val.child);
-                    return val
+            function objToArr(obj) {
+                var keys = Object.keys(obj);
+                var arr = [];
+                keys.forEach(key => {
+                    arr.push(obj[key]);
                 });
-                return val;
-            });
+                arr.forEach(val => {
+                    if (val.child) {
+                        val.child = objToArr(val.child);
+                    }
+                });
+                return arr
+            }
+
+            list = objToArr(obj);
 
             console.log(list);
-        }).catch(err => {
-            console.error(err);
-        });
+        }
     </script>
 </head>
 
