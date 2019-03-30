@@ -61,9 +61,9 @@
             let list = [];
 
             list = Object.values(obj);
-            list.forEach(val=>{
+            list.forEach(val => {
                 val.child = Object.values(val.child);
-                val.child.forEach(val=>{
+                val.child.forEach(val => {
                     val.child = Object.values(val.child);
                 });
             });
@@ -120,8 +120,8 @@
 
             function objToArr(obj) {
                 let arr = Object.values(obj);
-                arr.forEach(val=>{
-                    if(val.child){
+                arr.forEach(val => {
+                    if (val.child) {
                         val.child = objToArr(val.child);
                     }
                 });
@@ -141,6 +141,77 @@
             let list = objToArr(obj);
             console.log(list);
             return list;
+        }
+
+        /**
+         * 处理方式1
+         */
+        function method1(res) {
+            let origin = res.data.obj;
+            console.log(origin)
+            let obj = {}; // parentCateId => cateId
+
+            // 以对象形式分好类
+            origin.forEach(val => {
+                let firstId = val.parentCateId
+                if (!(firstId in obj)) {
+                    obj[firstId] = {
+                        id: firstId,
+                        name: val.parentCateName,
+                        child: {}
+                    };
+                }
+
+                let secondId = val.cateId;
+                if (!(secondId in obj[firstId].child)) {
+                    obj[firstId].child[secondId] = {
+                        id: secondId,
+                        name: val.cateName,
+                        child: {}
+                    }
+                }
+
+                /*
+                 * 分类是必有的，但是具体商品是未必有
+                 */
+                if (val.modelId) {
+                    let thirdId = val.modelId;
+                    obj[firstId].child[secondId].child[thirdId] = {
+                        id: thirdId,
+                        name: val.modelNo + " " + val.modelName,
+                    }
+                }
+
+                /*
+                 * 如果某个二级分类没有任何商品，那么就删除这个二级分类
+                 */
+                if (Object.keys(obj[firstId].child[secondId].child) == 0) {
+                    delete obj[firstId].child[secondId]
+                }
+            });
+
+            console.log(JSON.parse(JSON.stringify(obj)));
+
+            // 以数组形式分好类
+            let list = [];
+
+            function objToArr(obj) {
+                var keys = Object.keys(obj);
+                var arr = [];
+                keys.forEach(key => {
+                    arr.push(obj[key]);
+                });
+                arr.forEach(val => {
+                    if (val.child) {
+                        val.child = objToArr(val.child);
+                    }
+                });
+                return arr
+            }
+
+            list = objToArr(obj);
+
+            console.log(list);
         }
     </script>
 </head>
