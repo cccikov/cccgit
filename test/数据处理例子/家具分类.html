@@ -46,13 +46,26 @@
                     }
                 }
 
-                let thirdId = val.modelId;
-                obj[firstId].child[secondId].child[thirdId] = {
-                    id: thirdId,
-                    name: val.modelNo + " " + val.modelName,
+                /*
+                 * 分类是必有的，但是具体商品是未必有
+                 */
+                if (val.modelId) {
+                    let thirdId = val.modelId;
+                    obj[firstId].child[secondId].child[thirdId] = {
+                        id: thirdId,
+                        name: val.modelNo + " " + val.modelName,
+                    }
                 }
 
+                /*
+                 * 如果某个二级分类没有任何商品，那么就删除这个二级分类
+                 */
+                if (Object.keys(obj[firstId].child[secondId].child) == 0) {
+                    delete obj[firstId].child[secondId]
+                }
             });
+
+            console.log(JSON.parse(JSON.stringify(obj)));
 
             // 以数组形式分好类
             let list = [];
