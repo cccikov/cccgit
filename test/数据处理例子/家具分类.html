@@ -12,6 +12,19 @@
             methods: "get",
             url: "./data/getModelCate.json"
         }).then(res => {
+            let list_simple = handler_simple(res);
+            console.log("%c----", "font-size:100px;color:red");
+            let list_iteration = handler_iteration(res);
+            console.log(JSON.stringify(list_simple) == JSON.stringify(list_iteration))
+        }).catch(err => {
+            console.error(err);
+        });
+
+
+        /**
+         * 简单处理
+         */
+        function handler_simple(res) {
             let origin = res.data.obj;
             console.log(origin)
             let obj = {}; // parentCateId => cateId
@@ -41,32 +54,94 @@
                     id: thirdId,
                     name: val.modelNo + " " + val.modelName,
                 }
-
             });
+            console.log(JSON.parse(JSON.stringify(obj)));
 
             // 以数组形式分好类
             let list = [];
 
-            // list = Object.values(obj);
-            // list.forEach(val=>{
-            //     val.child = Object.values(val.child);
-            //     val.child.forEach(val=>{
-            //         val.child = Object.values(val.child);
-            //     });
-            // });
+            list = Object.values(obj);
+            list.forEach(val=>{
+                val.child = Object.values(val.child);
+                val.child.forEach(val=>{
+                    val.child = Object.values(val.child);
+                });
+            });
 
-            list = Object.values(obj).map(val => {
+            /* list = Object.values(obj).map(val => {
+                // 始终返回的都是val，其实这里不应该用map遍历的，因为并没有对val作任何改变
                 val.child = Object.values(val.child).map(val => {
                     val.child = Object.values(val.child);
                     return val
                 });
                 return val;
-            });
-
+            }); */
             console.log(list);
-        }).catch(err => {
-            console.error(err);
-        });
+            return list;
+        }
+
+
+
+        /**
+         * 利用迭代
+         */
+        function handler_iteration(res) {
+            let origin = res.data.obj;
+            console.log(origin)
+            let obj = {}; // parentCateId => cateId
+
+            // 以对象形式分好类
+            origin.forEach(val => {
+                let firstId = val.parentCateId
+                if (!(firstId in obj)) {
+                    obj[firstId] = {
+                        id: firstId,
+                        name: val.parentCateName,
+                        child: {}
+                    };
+                }
+
+                let secondId = val.cateId;
+                if (!(secondId in obj[firstId].child)) {
+                    obj[firstId].child[secondId] = {
+                        id: secondId,
+                        name: val.cateName,
+                        child: {}
+                    }
+                }
+
+                let thirdId = val.modelId;
+                obj[firstId].child[secondId].child[thirdId] = {
+                    id: thirdId,
+                    name: val.modelNo + " " + val.modelName,
+                }
+            });
+            console.log(JSON.parse(JSON.stringify(obj)));
+
+            function objToArr(obj) {
+                let arr = Object.values(obj);
+                arr.forEach(val=>{
+                    if(val.child){
+                        val.child = objToArr(val.child);
+                    }
+                });
+                return arr;
+            }
+
+            // function objToArr(obj) {
+            //     return Object.values(obj).map(val => {
+            //         if (val.child) {
+            //             val.child = objToArr(val.child)
+            //         }
+            //         return val;
+            //     });
+            // }
+
+            // 以数组形式分好类
+            let list = objToArr(obj);
+            console.log(list);
+            return list;
+        }
     </script>
 </head>
 
