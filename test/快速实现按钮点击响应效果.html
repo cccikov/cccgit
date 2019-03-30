@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>快速实现按钮点击响应效果</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        .btn {
+            display: inline-block;
+            width: 50px;
+            line-height: 22px;
+            padding: 2px 0 0;
+            background: #03A9F4;
+            border-radius: 100px;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            font-size: 13px;
+        }
+
+        /* 禁用浏览器默认按钮点击样式 */
+        .btn:focus {
+            outline: none;
+        }
+
+        .btn {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        /* 点击瞬间变透明度 */
+        .demo1:active {
+            opacity: 0.1;
+        }
+
+        /* 点击变透明度，加上过度效果 */
+        .demo2 {
+            transition: opacity 1s;
+        }
+
+        .demo2:active {
+            opacity: 0.1;
+        }
+
+        /* 点击变透明度，加上过度效果;点下去快速变化，移开才慢慢恢复 */
+        .demo3 {
+            transition: opacity 1s;
+        }
+
+        .demo3:active {
+            /* 点中时的样式，transition时间较短 */
+            transition: opacity 100ms;
+            opacity: 0.1;
+        }
+
+        /* 正常 */
+        .demo4 {
+            transition: opacity 150ms ease-out;
+        }
+
+        .demo4:active {
+            /* 点中时的样式，transition时间较短 */
+            transition: opacity 10ms;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <p>很多时候，我们需要在点击按钮的时候，按钮有些反应</p> -->
+    <p>
+        <span>点击瞬间变透明度</span>
+        <a class="btn demo1" href="javascript:void(0)">按钮</a>
+    </p>
+    <p>
+        <span>点击变透明度，加上过度效果</span>
+        <a class="btn demo2" href="javascript:void(0)">按钮</a>
+        <span>但是效果怪怪的，点下去的时候，颜色变化得好慢，如果整个点击过程好快，基本等于没特效</span>
+    </p>
+    <p>
+        <span>点击变透明度，加上过度效果;点下去快速变化，移开才慢慢恢复</span>
+        <a class="btn demo3" href="javascript:void(0)">按钮</a>
+    </p>
+    <p>
+        <span>之前例子为了从原理理解，所以透明度和时间都比较夸张</span>
+        <a class="btn demo4" href="javascript:void(0)">按钮</a>
+    </p>
+</body>
+
+</html>
