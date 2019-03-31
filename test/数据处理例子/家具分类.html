@@ -19,6 +19,8 @@
             console.log(JSON.stringify(list_simple) == JSON.stringify(list_recursion))
 
             let list_no_useless = handler_no_useless(res);
+
+            handler(res);
         }).catch(err => {
             console.error(err);
         });
@@ -184,6 +186,61 @@
             console.log(list);
         }
 
+        /**
+         * 处理方式4
+         * 便于理解原理
+         */
+        function handler(res) {
+
+            let origin = res.data.obj;
+            console.log(origin)
+            let obj = {}; // 整理对象 parentCateId => cateId
+
+            origin.forEach(val => {
+
+                // 第三级
+                let thirdId = val.modelId;
+                let thirdObj = {
+                    id: thirdId,
+                    name: val.modelNo + " " + val.modelName,
+                }
+
+                // 第二级
+                let secondId = val.cateId;
+                let secondObj = {
+                    id: secondId,
+                    name: val.cateName,
+                }
+
+                // 第一级
+                let firstId = val.parentCateId
+                let firstObj = {
+                    id: firstId,
+                    name: val.parentCateName,
+                }
+
+                if (!(firstId in obj)){
+                    firstObj.child={};
+                    obj[firstId] = firstObj;
+                }
+                if(!(secondId in obj[firstId].child)){
+                    secondObj.child = {};
+                    obj[firstId].child[secondId] = secondObj;
+                }
+                if(!(thirdId in obj[firstId].child[secondId])){
+                    obj[firstId].child[secondId].child[thirdId] = thirdObj;
+                }
+
+            });
+
+            console.log(obj);
+
+            let list = recursion_keys(obj);
+
+            console.log(list);
+
+        }
+
 
 
 
@@ -193,7 +250,7 @@
          */
 
         // 递归方式一 遍历使用forEach
-        function recursion_forEach(obj){
+        function recursion_forEach(obj) {
             let arr = Object.values(obj);
             arr.forEach(val => {
                 if (val.child) {
@@ -227,7 +284,6 @@
             });
             return arr
         }
-
     </script>
 </head>
 
