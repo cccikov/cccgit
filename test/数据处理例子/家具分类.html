@@ -12,17 +12,20 @@
             methods: "get",
             url: "./data/getModelCate.json"
         }).then(res => {
+
             let list_simple = handler_simple(res);
-            console.log("%c----", "font-size:100px;color:red");
-            let list_iteration = handler_iteration(res);
-            console.log(JSON.stringify(list_simple) == JSON.stringify(list_iteration))
+
+            let list_recursion = handler_recursion(res);
+            console.log(JSON.stringify(list_simple) == JSON.stringify(list_recursion))
+
+            let list_no_useless = handler_no_useless(res);
         }).catch(err => {
             console.error(err);
         });
 
 
         /**
-         * 简单处理
+         * 处理方式1 简单处理
          */
         function handler_simple(res) {
             let origin = res.data.obj;
@@ -83,9 +86,9 @@
 
 
         /**
-         * 利用迭代
+         * 处理方式2 利用递归去讲对象转化为数组
          */
-        function handler_iteration(res) {
+        function handler_recursion(res) {
             let origin = res.data.obj;
             console.log(origin)
             let obj = {}; // parentCateId => cateId
@@ -118,35 +121,18 @@
             });
             console.log(JSON.parse(JSON.stringify(obj)));
 
-            function objToArr(obj) {
-                let arr = Object.values(obj);
-                arr.forEach(val => {
-                    if (val.child) {
-                        val.child = objToArr(val.child);
-                    }
-                });
-                return arr;
-            }
-
-            // function objToArr(obj) {
-            //     return Object.values(obj).map(val => {
-            //         if (val.child) {
-            //             val.child = objToArr(val.child)
-            //         }
-            //         return val;
-            //     });
-            // }
-
             // 以数组形式分好类
-            let list = objToArr(obj);
+            // let list = recursion_forEach(obj);
+            // let list = recursion_map(obj);
+            let list = recursion_keys(obj);
             console.log(list);
             return list;
         }
 
         /**
-         * 处理方式1
+         * 处理方式3 将无用的属性去掉
          */
-        function method1(res) {
+        function handler_no_useless(res) {
             let origin = res.data.obj;
             console.log(origin)
             let obj = {}; // parentCateId => cateId
@@ -193,26 +179,55 @@
             console.log(JSON.parse(JSON.stringify(obj)));
 
             // 以数组形式分好类
-            let list = [];
-
-            function objToArr(obj) {
-                var keys = Object.keys(obj);
-                var arr = [];
-                keys.forEach(key => {
-                    arr.push(obj[key]);
-                });
-                arr.forEach(val => {
-                    if (val.child) {
-                        val.child = objToArr(val.child);
-                    }
-                });
-                return arr
-            }
-
-            list = objToArr(obj);
+            let list = recursion_keys(obj);
 
             console.log(list);
         }
+
+
+
+
+
+        /**
+         * 递归的方法
+         */
+
+        // 递归方式一 遍历使用forEach
+        function recursion_forEach(obj){
+            let arr = Object.values(obj);
+            arr.forEach(val => {
+                if (val.child) {
+                    val.child = recursion_forEach(val.child);
+                }
+            });
+            return arr;
+        }
+
+        // 递归方式二 遍历使用map
+        function recursion_map(obj) {
+            return Object.values(obj).map(val => {
+                if (val.child) {
+                    val.child = recursion_map(val.child)
+                }
+                return val;
+            });
+        }
+
+        // 递归方式三 对象遍历使用Object.keys() 遍历使用forEach
+        function recursion_keys(obj) {
+            var keys = Object.keys(obj);
+            var arr = [];
+            keys.forEach(key => {
+                arr.push(obj[key]);
+            });
+            arr.forEach(val => {
+                if (val.child) {
+                    val.child = recursion_keys(val.child);
+                }
+            });
+            return arr
+        }
+
     </script>
 </head>
 
