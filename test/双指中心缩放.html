@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>双指中心缩放</title>
     <link rel="shortcut icon" href="img/ccc.ico" />
     <link rel="icon" href="img/ccc.ico" />
@@ -80,14 +79,15 @@
             _imgOnload(src, cb) {
                 var url = src;
                 var newImg = new Image();
-                newImg.onload = function () {
+                newImg.onload = function() {
                     cb();
                 }
                 newImg.src = url;
             }
             _addListener() {
                 var _this = this;
-                this.touchstartListener = function (e) {
+                this.touchstartListener = function(e) { // 可以算做闭包吧，在_addListener定义函数作为监听器，然后监听器里面就可以读取到_addListener里面的变量，这里是为了读取_this
+                    console.log("listener", this, _this);
                     _this._touchstart(e);
                 }
                 _this.el.addEventListener("touchstart", _this.touchstartListener, false);
@@ -96,8 +96,9 @@
                 var _this = this;
                 _this.el.removeEventListener("touchstart", _this.touchstartListener, false);
             }
-            _touchstart(e) {
-                console.log(e.touches[0].clientX);
+            _touchstart(e) { // 这个作为实际的handler，但是里面的this又是指向实例
+                console.log("handler", e.touches[0].clientX);
+                console.log("handler", this);
             }
         }
 

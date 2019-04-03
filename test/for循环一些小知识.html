@@ -20,7 +20,7 @@
 
         function showI(i) {
             setTimeout(function() {
-                console.log(i);
+                console.log(i); // 利用闭包，存储了i，读取的是函数里面的i
             }, 1000);
         }
     });

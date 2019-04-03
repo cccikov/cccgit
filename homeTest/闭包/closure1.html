@@ -18,7 +18,7 @@
             }　　
         };　　
         alert(object.getNameFunc()()); //the window*/
-        // 因为是返回了一个function 那个function执行的时候并没有被任何对象调用 ， 所以就this就指向window
+    // 因为是返回了一个function 那个function执行的时候并没有被任何对象调用 ， 所以就this就指向window
 
 
     /*var name = "The Window";　　
@@ -67,9 +67,9 @@
     f2();*/
 
     function Foo() {
-    	console.log("执行Foo了");
+        console.log("执行Foo了");
         var i = 0;
-        return function() {//我们先叫做内函数
+        return function() { //我们先叫做内函数
             console.log(i++);
             // console.log("再输出"+i);
         }
@@ -80,12 +80,24 @@
     var f2 = Foo();
     f2(); //0
 
-    Foo()();//执行Foo , 0
-    Foo()();//执行Foo , 0
-    Foo()();//执行Foo , 0
-
+    Foo()(); //执行Foo , 0
+    Foo()(); //执行Foo , 0
+    Foo()(); //执行Foo , 0
     </script>
     <p>闭包是指有权访问另一个函数作用域中的变量的函数。创建闭包的常见方式，就是在一个函数内部创建另一个函数。。。。在另一个函数内部定义的函数会将包含函数（即外部函数）的活动对象添加到它的作用域链中。（个人经过长时间研究，觉得要return里面的function出来，然后还会调用那个return出来的function，这才形成闭包；或者在函数中为dom添加了事件监听器，监听器有使用到函数中定义的变量）</p>
+    <script type="text/javascript">
+    function Person() {
+        var _this = this;
+        this.name = "haha";
+        this.age = 18;
+        this.ele = document.body;
+        this.ele.addEventListener("click", function() {
+            console.log(this.name, this.age); // 由于this是指向添加监听器的dom
+            console.log(_this.name, _this.age); // 所以往往在外面定义_this等于构造函数里面的this，从而可以在监听器内部获取到实例的属性，其实这也是闭包，读取了外部函数的_this
+        });
+    }
+    new Person();
+    </script>
 </body>
 
 </html>
