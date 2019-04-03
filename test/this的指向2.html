@@ -54,9 +54,46 @@
         }();
 
         x = 3;
-        foo();//3
+        foo(); //3
         // foo函数每次执行 , foo所在的执行环境都是同一个, 但是执行环境里面的内容不同了
 
+    }();
+
+    ! function() {
+        function fn() {
+            console.log(this);
+        }
+
+        var obj_a = {
+            name: "对象A",
+            method: fn
+        }
+
+        var obj_b = {
+            name: "对象B",
+            method: fn
+        }
+
+        function Person() {
+            this.name = "某个人"
+            this.method = fn;
+        }
+        var person = new Person();
+
+
+        console.log(fn === obj_a.method, fn === obj_b.method, fn === person.method); // 都是全等的，表明是同一个函数
+
+        fn(); // window
+        obj_a.method(); // {name: "对象A", method: ƒ}
+        obj_b.method(); // {name: "对象B", method: ƒ}
+        person.method(); // Person {name: "某个人", method: ƒ}
+
+        /**
+         * fn 定义方式是普通的函数声明
+         * 但同时也被赋值到对象的方法中
+         * 再次证明
+         * es5 中 this的指向是由函数的调用方式决定的，而不是由函数的定义的位置决定
+         */
     }();
     </script>
 </head>
