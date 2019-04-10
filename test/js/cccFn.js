@@ -285,7 +285,7 @@ if (!Array.prototype.remove) {
 // 数组交换值
 if (!Array.prototype.exchage) {
     Array.prototype.exchage = function(posi1, posi2) { //两个位置交换
-        if (this.length - 1 < posi1 || this.length - 1 < posi2 || posi1 == posi2) {
+        if (this.length - 1 < posi1 || this.length - 1 < posi2 || posi1 == posi2 || posi1 < 0 || posi2 < 0) {
             return this;
         }
         var mid = this[posi1];
