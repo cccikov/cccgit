@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>line-height 偏移</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    p {
+        font-size: 14px;
+        color: #ff8532;
+        background: #ffe7d9;
+        text-indent: 1em;
+    }
+
+    div {
+        margin: 16px 0;
+    }
+
+    .demo1 {
+        line-height: 24px;
+    }
+
+    .demo2 {
+        line-height: 25px;
+    }
+
+    .demo3 {
+        line-height: 24px;
+        padding: 1px 0 0;
+    }
+
+    .demo4 {
+        line-height: 24px;
+        padding: 2px 0 0;
+    }
+
+    .demo5 {
+        line-height: 25px;
+        padding: 1px 0 0;
+    }
+
+    .demo6 {
+        line-height: 25px;
+        padding: 2px 0 0;
+    }
+
+    .demo7 {
+        line-height: 23px;
+        padding: 1px 0 0;
+    }
+
+    .demo8 {
+        line-height: 22px;
+        padding: 2px 0 0;
+    }
+
+    .demo9 {
+        line-height: 24px;
+        padding: 1px 0 0;
+    }
+
+    .demo10 {
+        line-height: 23px;
+        padding: 2px 0 0;
+    }
+
+    .demo11 {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .demo11 p {
+        flex: 1 1 50%;
+    }
+
+    .demo11 p:nth-of-type(1) {
+        line-height: 24px;
+        text-align: right;
+        text-indent: 0;
+    }
+
+    .demo11 p:nth-of-type(2) {
+        line-height: 25px;
+        text-align: left;
+        text-indent: 0;
+    }
+
+    .demo999 {
+        line-height: 40px;
+    }
+
+    .demo12 {
+        height: 24px;
+        line-height: 25px;
+    }
+    .demo13 {
+        height: 24px;
+        line-height: 26px;
+    }
+    .demo14 {
+        height: 25px;
+        line-height: 26px;
+    }
+    .demo15 {
+        height: 25px;
+        line-height: 27px;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <strong>android 移动端</strong>通过line-height来实现文字上下居中，视觉上不是居中(line-height比较小且为单数像素值特别明显)；可以通过补上 1-2px 的 padding-top。
+    </div>
+    <p class="demo1">上下居中 line-height: 24px;</p>
+    <p class="demo2">上下居中 line-height: 25px;</p>
+    <p class="demo3">上下居中 line-height: 24px; padding: 1px 0 0;</p>
+    <p class="demo4">上下居中 line-height: 24px; padding: 2px 0 0;</p>
+    <p class="demo5">上下居中 line-height: 25px; padding: 1px 0 0;</p>
+    <p class="demo6">上下居中 line-height: 25px; padding: 2px 0 0;</p>
+    <div>
+        如果line-height为双数像素值，补1px较好；如果line-height为单数像素值，2px较好。
+    </div>
+    <div>
+        要注意，如果没固定高度的情况下，单行文字line-height的值，就是content的高度，所以最终元素的高度还要算上padding，border；所以如果要按照设置图做指定高度时，设置padding-top后，要减少一下line-height。
+    </div>
+    <p class="demo7">要求24px line-height: 23px; padding: 1px 0 0;</p>
+    <p class="demo8">要求24px line-height: 22px; padding: 2px 0 0;</p>
+    <p class="demo9">要求25px line-height: 24px; padding: 1px 0 0;</p>
+    <p class="demo10">要求25px line-height: 23px; padding: 2px 0 0;</p>
+    <div class="demo11">
+        <p>----line-height:24px----</p>
+        <p>----line-height:25px----</p>
+    </div>
+    <div>
+        感觉line-height的值为单数像素值的时候，元素就是直接在双数值的下面加了1px。内容并没有下移，这也是为什么line-height为单数像素值视觉不居中特别明显。不过也正常，css的像素一般是整数才有效的，小数会自动四舍五入。
+    </div>
+    <div>
+        除了补padding-top以外，还可以固定高度，line-height设得比高度大1、2px
+    </div>
+    <p class="demo12">高度24px</p>
+    <p class="demo13">高度24px</p>
+    <p class="demo14">高度25px</p>
+    <p class="demo15">高度25px</p>
+    <p class="demo999">上下居中 line-height: 40px;</p>
+    <div>基本上，line-height到了40以上，基本看起来就是居中了，不需要补padding-top了</div>
+</body>
+
+</html>
