@@ -96,15 +96,32 @@
 
 			console.log("%c---", "color:red")
 
+			/**
+			 * 世界协调时间UTC 协调世界时区会使用“Z”来表示
+			 *
+			 * 格林威治标准时间GMT
+			 *
+			 * 然而由于地球的不规则自转，导致GMT时间有误差，因此目前已不被当作标准时间使用。
+			 * 日常使用中，GMT与UTC的功能与精确度是没有差别的。
+			 */
+
+			console.log(new Date("2018-09-01T23:59:58Z")); // ISO8601 的标准格式
+			// “Z”表示UTC标准时区
+			// 零时区为2018-09-01T23:59:58的时候。东八区的时间就为Sun Sep 02 2018 07:59:58 GMT+0800 (中国标准时间)
+			// 东八区（UTC/GMT+08:00）是比世界协调时间（UTC）/格林尼治时间（GMT）快8小时的时区
+			console.log(new Date("2018-09-01T23:59:58+01:00")); // ISO8601 的标准格式 东一区
+			console.log(new Date("2018-09-01T23:59:58+08:00")); // ISO8601 的标准格式 东八区（中国本地时区）
 			console.log(new Date("2018-09-01T23:59:58")); // ISO8601 的标准格式
-			console.log(new Date("2018-09-01 23:59:58")); // T 可换为空格
+			console.log(new Date("2018-09-01 23:59:58")); // 日期和时分秒不带T，ios系统会出错（垃圾苹果）
 			console.log(new Date("2018-09-01"));
 			console.log(new Date("2018-09"));
 			console.log(new Date("2018"));
 
 			console.log("%c---", "color:red")
 
-			console.log(new Date("2018/09/11 13:45:34"));
+			console.log(new Date("2018/09/11 13:45:34")); // RFC2822 标准
+			console.log(new Date("2018/09/11 13:45:34+0800")); // RFC2822 标准
+			console.log(new Date("2018/09/11 13:45:34+0000")); // RFC2822 标准
 			console.log(new Date("2018/09/11")); // 年/月/日
 			console.log(new Date("09/11/2018")); // 月/日/年
 			console.log(new Date("11/09/2018")); // 月/日/年
@@ -136,6 +153,7 @@
 			let lastMonth = new Date(year,month-1);
 			console.log(lastMonth);
 
+			console.log("%c---", "color:red")
 
 			console.log(new Date().toString());
 			console.log(new Date().toUTCString());
