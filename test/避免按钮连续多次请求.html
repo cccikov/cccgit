@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>避免按钮连续多次请求</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <script>
+        var isClick = false;
+        function fn() {
+            console.log(isClick);
+            if (isClick) {
+                return;
+            }
+
+            if (true) {
+                if (true) {
+                    if (true) {
+                        isClick = true;
+                        setTimeout(() => {
+                            console.log("点击");
+                            isClick = false;
+                        }, 5000);
+                    }
+                }
+            }
+        }
+    </script>
+    <button onclick="fn()">按钮</button>
+</body>
+
+</html>
