@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>video play() 返回值</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <video src="./video/video.mp4" id="video"></video>
+    <button onclick="videoPlay()">播放</button>
+    <script>
+        videoPlay();
+        function videoPlay() {
+            video.play().catch(err => {
+                // video 的 play 方法返回的是Promise 对象，可以用来获取错误信息
+                console.error(err.message);
+                console.dir(err);
+            });
+        }
+    </script>
+</body>
+
+</html>
