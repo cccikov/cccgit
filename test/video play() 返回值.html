@@ -16,8 +16,10 @@
     <script>
         videoPlay();
         function videoPlay() {
-            video.play().catch(err => {
+            video.play() // 如果不加catch，出错时，浏览器报Uncaught (in promise) DOMException，表示没有 捕获Promise错误（DOMException 异常）的意思
+            .catch(err => {
                 // video 的 play 方法返回的是Promise 对象，可以用来获取错误信息
+                console.error(err);
                 console.error(err.message);
                 console.dir(err);
             });
