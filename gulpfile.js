@@ -245,3 +245,44 @@ gulp.task('web', function () {
     });
 
 });
+
+
+
+
+gulp.task('https', function () {
+
+    browserSync.init({
+        server: {
+            baseDir: "./test",
+            index: "test.html"
+        },
+        port: 3008,
+        https: true,
+        ui: { // ui的默认端口
+            port: 3009,
+            weinre: { // 不知道什么鬼 "weinre"好像也是用于远程调试的nodejs工具
+                port: 3010
+            }
+        }
+    });
+
+    // 转换less
+    gulp.watch("test/css/**/*.less").on('change', function (event) {
+        gulp.src("test/css/**/*.less", { // 这个是全部css变化且刷新
+            base: "test/css"
+        })
+            .pipe(less())
+            .pipe(gulp.dest("test/css"))
+            .pipe(browserSync.reload({
+                stream: true
+            }));
+    });
+
+    // 监视文件变化同步浏览器
+    gulp.watch(["test/**/*.html", "test/js/*.js"]).on("change", function (event) {
+        gulp.src(event.path).pipe(browserSync.reload({
+            stream: true
+        }));
+    });
+
+});
