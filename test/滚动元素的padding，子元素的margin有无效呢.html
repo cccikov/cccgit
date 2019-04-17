@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>滚动元素的padding，子元素的margin有无效呢</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        .scroll {
+            height: 400px;
+            width: 400px;
+            padding: 20px;
+            margin: 50px;
+            overflow: auto;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            white-space: nowrap;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .scroll .autosize[class] {
+            width: auto;
+            height: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>demo1</h2>
+    <div class="scroll demo1">
+        <div class="inner">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <div class="scroll demo1">
+        <div class="inner autosize">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <style>
+        .demo1 .inner {
+            width: 800px;
+            height: 800px;
+            padding: 50px;
+            background-color: #fee;
+            background-clip: content-box;
+            background-origin: padding-box;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+
+    <h2>demo2</h2>
+    <div class="scroll demo2">
+        <div class="inner">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <div class="scroll demo2">
+        <div class="inner autosize">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <p>火狐浏览器，如果内容由自己撑开的，那个出现滚动条的水平padding无效</p>
+
+    <style>
+        .demo2 .inner {
+            display: inline-block;
+            width: 800px;
+            height: 800px;
+            padding: 50px;
+            background-color: #fee;
+            background-clip: content-box;
+            background-origin: padding-box;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2>demo3</h2>
+    <div class="scroll demo3">
+        <div class="inner">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <div class="scroll demo3">
+        <div class="inner autosize">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <style>
+        .demo3 .inner {
+            width: 800px;
+            height: 800px;
+            padding: 50px;
+            margin: 50px;
+            background-color: #fee;
+            background-clip: content-box;
+            background-origin: padding-box;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+
+
+    <h2>demo4</h2>
+    <div class="scroll demo4">
+        <div class="inner">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <div class="scroll demo4">
+        <div class="inner autosize">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+            adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime tempore
+            porro numquam enim dolor.
+        </div>
+    </div>
+    <style>
+        .demo4 .inner {
+            display: inline-block;
+            width: 800px;
+            height: 800px;
+            padding: 50px;
+            margin: 50px;
+            background-color: #fee;
+            background-clip: content-box;
+            background-origin: padding-box;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+
+    <p>对于设置滚动条的元素来说，子元素是块元素还是行内(块)元素；滚动元素的padding，子元素的margin有无效的处理方式是不一样的。不同浏览器的处理方式也是不一样的。</p>
+    <p>
+        所以，设置滚动条的元素，不要设置padding；子元素不要设置margin。
+        <br>如果想实现一些间距，那么就嵌套多一层div，设置display:inline-block;来让子元素撑大
+    </p>
+
+    <h2>final</h2>
+    <div class="scroll final">
+        <div class="mid">
+            <div class="inner">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+                adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime
+                tempore
+                porro numquam enim dolor.
+            </div>
+        </div>
+    </div>
+    <div class="scroll final">
+            <div class="mid">
+                <div class="inner autosize">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit voluptates minima, accusamus
+                    adipisci eveniet voluptatibus, labore quia ab, quae quibusdam magni. Quas cupiditate tenetur maxime
+                    tempore
+                    porro numquam enim dolor.
+                </div>
+            </div>
+        </div>
+    <style>
+        .final {
+            padding: 0;
+        }
+
+        .final .mid {
+            display: inline-block;
+            padding: 20px;
+        }
+
+        .final .inner {
+            width: 800px;
+            height: 800px;
+            padding: 50px;
+            margin: 50px;
+            background-color: #fee;
+            background-clip: content-box;
+            background-origin: padding-box;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+</body>
+
+</html>
