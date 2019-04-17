@@ -169,11 +169,11 @@
     <!--  -->
     <!--  -->
     <div id="demo4">
-        <div class="flex">
+        <div class="flex first-flex">
             <div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, asperiores.</p>
                 <p>下面flex限制的宽度受兄弟元素宽度的影响，所以一般是用在有兄弟元素宽度占满父元素的情况下</p>
-                <div class="flex last-flex">
+                <div class="flex">
                     <div class="inner">
                         <p class="elli">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -195,14 +195,13 @@
         display: flex;
     }
 
-    .last-flex {
-        width: 100%;
-    }
+
 
     #demo4 .inner {
         flex: 1 1 auto;
         width: 1px;
         /*由于last-flex上面兄弟元素撑大他们的父元素（是flex元素来的），导致该父元素充满空间（虽然是弹性元素，但在自适应时，除了子元素撑开，都不会超出父元素的内容区域）。导致last-flex的宽度也是充满，而inner设定的宽度是好小，已经实实在在地限制空间，所以溢出有效，但是由于flex属性的flex-grow属性，让inner自动填满剩余空间，就可以做出在可视区域实现溢出变省略号*/
+        /* 由于固定死了宽度为1px，已经是可以限制空间；配合flex-grow来扩充自己 */
         /*关键，flex布局的尺寸是先根据元素本身的width，height布局，然后再通过flex属性去分配剩余空间*/
         /*先其他属性，再flex属性*/
 
@@ -214,7 +213,16 @@
         /* 直接使用flex-base也不行，因为除非您明确指定“最小宽度”或“宽度”或“最大宽度”，否则flex元素将拒绝缩小到最小内在宽度以下。 */
         /* 所以 使用flex-base代替width的时候，请加上overflow;但是flex-base百分没意义，固定数值影响自适应，所以只能用width*/
     }
+
+
+
+
+
+    #demo4 .first-flex>div{
+        flex:1 1 auto;
+    }
     </style>
+    一般不用固定数值来达到限制，特别是宽度，因为总觉得有点别扭；但是固定数值的限制可以减少层层限制带来的麻烦
 </body>
 
 </html>
