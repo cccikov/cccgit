@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>chrome flex img 问题</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <p>在chrome（73.0.3683.86（正式版本） （64 位））中，如果img作为弹性元素，flex-shrink无效，好像永远都不能缩放，就像设置值为0一样</p>
+    <div class="demo1">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+    </div>
+    <div class="demo1">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+    </div>
+    <style>
+        .demo1 {
+            display: flex;
+            outline: 1px solid red;
+        }
+
+        .demo1 img {
+            flex-shrink: 1;
+        }
+    </style>
+    <p>所以可以用个div将img包住</p>
+    <div class="demo2">
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+        <div><img src="./img/chrome.png"></div>
+    </div>
+    <div class="demo2">
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+        <div><img src="./img/cursor1.png"></div>
+    </div>
+    <style>
+        .demo2 {
+            display: flex;
+            outline: 1px solid red;
+        }
+
+        .demo2>div {
+            flex-shrink: 1;
+        }
+        .demo2>div img{
+            display: block;
+            max-width: 100%;
+        }
+    </style>
+</body>
+
+</html>
