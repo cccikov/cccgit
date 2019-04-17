@@ -5,49 +5,52 @@
     <meta charset="UTF-8">
     <title>元素排一行</title>
     <style type="text/css">
-    * {
-        padding: 0;
-        margin: 0;
-    }
-    body{
-        padding: 50px;
-    }
-    ul,
-    li {
-        list-style: none;
-    }
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-    h5{
-        padding: 20px 0 10px;
-    }
+        body {
+            padding: 50px;
+        }
 
-    .wrap{
-        box-sizing: border-box;
-        padding: 0 50px;
-        outline: 2px solid #ff0;
-        background: rgba(0,0,0,0.1);
-    }
-    .scroll{
-        box-sizing: border-box;
-        padding: 0 30px;
-        margin: 0 30px;
-        outline: 2px solid #f00;
-        background: rgba(255,0,0,0.3);
-    }
+        ul,
+        li {
+            list-style: none;
+        }
 
-    img {
-        width: 100px;
-        margin: 5px;
-        padding: 5px;
-        background: rgba(255,255,0,0.3);
-    }
+        h5 {
+            padding: 20px 0 10px;
+        }
+
+        .wrap {
+            box-sizing: border-box;
+            padding: 0 50px;
+            outline: 2px solid #ff0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .scroller {
+            box-sizing: border-box;
+            padding: 0 30px;
+            margin: 0 30px;
+            outline: 2px solid #f00;
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        img {
+            width: 100px;
+            margin: 5px;
+            padding: 5px;
+            background: rgba(255, 255, 0, 0.3);
+        }
     </style>
 </head>
 
 <body>
     <h5>flex</h5>
     <div id="demo1" class="wrap">
-        <div class="scroll">
+        <div class="scroller">
             <img src="./img/chrome_2014_512.png">
             <img src="./img/chrome_2014_512.png">
             <img src="./img/chrome_2014_512.png">
@@ -72,18 +75,18 @@
         </div>
     </div>
     <style type="text/css">
-    #demo1.wrap {
-        overflow: auto;
-    }
+        #demo1.wrap {
+            overflow: auto;
+        }
 
-    #demo1 .scroll {
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flex;
-        display: -o-flex;
-        display: flex;
-        align-items: center;
-    }
+        #demo1 .scroller {
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            align-items: center;
+        }
     </style>
 
 
@@ -92,7 +95,7 @@
     <h5> display:inline-block white-space </h5>
     <!-- white-space -->
     <div id="demo2" class="wrap">
-        <div class="scroll">
+        <div class="scroller">
             <img src="./img/chrome_2014_512.png">
             <img src="./img/chrome_2014_512.png">
             <img src="./img/chrome_2014_512.png">
@@ -117,22 +120,22 @@
         </div>
     </div>
     <style type="text/css">
-    #demo2.wrap {
-        overflow: auto;
-    }
+        #demo2.wrap {
+            overflow: auto;
+        }
 
-    #demo2 .scroll {
-        /*inline-block 元素，宽度由内容决定*/
-        display: inline-block;
-        white-space: nowrap;
-        font-size: 0;
-        /* 消除图片间的间隙 */
-    }
+        #demo2 .scroller {
+            /*inline-block 元素，宽度由内容决定*/
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 0;
+            /* 消除图片间的间隙 */
+        }
     </style>
 
 
     <h5> display:inline-block white-space </h5>
-    <div id="demo3" class="scroll">
+    <div id="demo3" class="scroller">
         <img src="./img/chrome_2014_512.png">
         <img src="./img/chrome_2014_512.png">
         <img src="./img/chrome_2014_512.png">
@@ -156,19 +159,19 @@
         <img src="./img/chrome_2014_512.png">
     </div>
     <style type="text/css">
-    #demo3 {
-        display: inline-block;
-        width: 100%;
-        overflow: auto;
-        white-space: nowrap;
-    }
+        #demo3 {
+            display: inline-block;
+            width: 100%;
+            overflow: auto;
+            white-space: nowrap;
+        }
     </style>
 
 
 
 
     <h5>flex</h5>
-    <div id="demo4" class="scroll">
+    <div id="demo4" class="scroller">
         <img src="./img/chrome_2014_512.png">
         <img src="./img/chrome_2014_512.png">
         <img src="./img/chrome_2014_512.png">
@@ -192,20 +195,21 @@
         <img src="./img/chrome_2014_512.png">
     </div>
     <style type="text/css">
-    #demo4 {
-        display: flex;
-        align-items: center;
-        overflow: auto;
+        #demo4 {
+            display: flex;
+            align-items: center;
+            overflow: auto;
 
-    }
+        }
     </style>
 
-    <p>会发现，其实使用flex不是真正的撑大元素，而是溢出了，浏览器为了不让这些有效内容看不到，而出现的滚动条；就类似position定位的元素超出父元素一样，滚动条父元素的padding和元素本身margin起作用。主要原因是flex弹性项目的宽度默认是占满父元素，然后由于BFC的存在，只能也要根据脱离文档流的元素计算内容宽高</p>
+    <p>会发现，其实使用flex不是真正的撑大元素，而是溢出了，浏览器为了不让这些有效内容看不到，而出现的滚动条；就类似position定位的元素超出父元素一样，滚动条父元素的padding和元素本身margin起作用。主要原因是flex弹性项目的宽度默认是占满父元素，然后由于BFC的存在，只能也要根据脱离文档流的元素计算内容宽高
+    </p>
 
 
     <h5>解决方式inline-flex，宽度由内容决定</h5>
     <div id="demo5" class="wrap">
-        <div class="scroll">
+        <div class="scroller">
             <img src="./img/chrome_2014_512.png">
             <img src="./img/chrome_2014_512.png">
             <img src="./img/chrome_2014_512.png">
@@ -230,21 +234,20 @@
         </div>
     </div>
     <style type="text/css">
-    #demo5.wrap {
-        overflow: auto;
-    }
+        #demo5.wrap {
+            overflow: auto;
+        }
 
-    #demo5 .scroll {
-        display: inline-flex;
-        align-items: center;
-    }
-
+        #demo5 .scroller {
+            display: inline-flex;
+            align-items: center;
+        }
     </style>
 
 
     <h5>position 溢出</h5>
     <div id="demo6" class="wrap">
-        <div class="scroll">
+        <div class="scroller">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -255,24 +258,81 @@
         </div>
     </div>
     <style type="text/css">
-        #demo6.wrap{
+        #demo6.wrap {
             overflow: auto;
         }
-        #demo6 .scroll{
+
+        #demo6 .scroller {
             position: relative;
             /* overflow: auto; */
         }
-        #demo6 .box{
+
+        #demo6 .box {
             position: absolute;
             left: 1000px;
             top: 0;
             width: 100px;
             height: 100px;
-            background: rgba(255,0,255,0.2);
+            background: rgba(255, 0, 255, 0.2);
             margin: 10px;
         }
     </style>
 
+
+
+
+
+
+
+
+
+
+
+
+    <h2>最优解</h2>
+    <h5> display:inline-block white-space ；最大宽度的接受层不设置滚动条，最大宽度的接受层外层才设置滚动条</h5>
+    <div id="final">
+        <div class="wrap">
+            <div class="scroller">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+                <img src="./img/chrome_2014_512.png">
+            </div>
+        </div>
+    </div>
+
+    <style type="text/css">
+        #final {
+            overflow: auto;
+        }
+
+        #final .wrap{
+            display: inline-block;
+        }
+
+        #final .scroller {
+            display: inline-block;
+            white-space: nowrap;
+        }
+    </style>
 </body>
 
 </html>
