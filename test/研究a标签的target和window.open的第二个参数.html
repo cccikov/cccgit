@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>研究a标签的target和window.open的第二个参数</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        #ifr {
+            display: block;
+            width: 800px;
+            height: 600px;
+        }
+        a{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <p>研究a标签的target和window.open的第二个参数</p>
+    <iframe src="about:blank" id="ifr" name="ifr" frameborder="0"></iframe>
+    <a href="./input file.html" target="ifr">ifr跳转</a>
+    <a href="./input file.html" target="_self">_self跳转，一定要加下划线_</a>
+    <a href="./input file.html" target="_blank">_blank跳转，一定要加下划线_</a>
+    <p>
+        先打开名为self和blank的页面
+        <!-- 由于是全局，所以open 即 window.open -->
+        <button onclick="window.open('about:blank','self');">打开name为self</button>
+        <button onclick="window.open('about:blank','blank');">打开name为blank</button>
+        ，然后再按a标签跳转
+    </p>
+    <a href="./input file.html" target="self">self跳转，实际是name为self页面调整</a>
+    <a href="./input file.html" target="blank">blank跳转，实际是name为blank页面调整</a>
+
+
+</body>
+
+</html>
