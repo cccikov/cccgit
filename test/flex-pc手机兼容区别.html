@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>flex-pc手机兼容区别</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <style type="text/css">
+    #wrap {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        width: 100%;
+        height: 100px;
+        background: #0003;
+    }
+
+    #wrap .left {
+        flex: 0 0 auto;
+        width: 100px;
+        background: #f001;
+    }
+
+    #wrap .middle {
+        flex: 1 1 auto;
+        background: #0f01;
+    }
+
+    #wrap .middle p {
+        white-space: nowrap;
+    }
+
+    #wrap .right {
+        flex: 0 0 auto;
+        width: 100px;
+        background: #00f1;
+    }
+    </style>
+    <div id="wrap">
+        <div class="left"></div>
+        <div class="middle">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="right"></div>
+    </div>
+
+    <hr>
+
+    <style type="text/css">
+    #wrap2 {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 300px;
+        background: #0003;
+    }
+
+    #wrap2 .top {
+        flex: 0 0 auto;
+        height: 100px;
+        background: #f001;
+    }
+
+    #wrap2 .middle {
+        flex: 1 1 auto;
+        background: #0f01;
+        display: flex;
+        /* 在手机端上，弹性元素设置了 display: flex; 也会起到 缩小得比内容 的作用。 看起来就好像设置了height: 1px;一样 */
+        /* 手机chrome版本 65.0.3325 android8.0 mi6 */
+        /* 版本 73.0.3683.103（正式版本） （64 位） */
+    }
+
+    #wrap2 .middle p {
+    }
+
+    #wrap2 .bottom {
+        flex: 0 0 auto;
+        height: 100px;
+        background: #00f1;
+    }
+    </style>
+    <div id="wrap2">
+        <div class="top"></div>
+        <div class="middle">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam optio nemo modi dolores quasi explicabo autem sed ratione adipisci alias. Assumenda eaque laboriosam placeat perferendis explicabo maxime culpa vero excepturi. ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+        <div class="bottom"></div>
+    </div>
+
+
+    <!-- 例子图片 -->
+    <div class="img-wrap">
+        <img src="./img/flex/flex_pc.png">
+        <img src="./img/flex/flex_phone.jpg">
+    </div>
+    <style type="text/css">
+        .img-wrap{
+            margin: 500px 0 0;
+            box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
+        }
+        .img-wrap img{
+            max-width: 100%;
+        }
+    </style>
+</body>
+
+</html>
