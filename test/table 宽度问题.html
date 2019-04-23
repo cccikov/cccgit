@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>table 宽度问题</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    table {
+        border-collapse: collapse;
+    }
+
+    .large {
+        width: 1000px;
+    }
+
+    .middle {
+        width: 200px;
+    }
+
+    .small {
+        width: 1px;
+    }
+
+    .inline-block{
+        display: inline-block;
+    }
+
+    .demo1 td {
+        border: 1px solid #eee;
+    }
+
+    .demo2 {
+        width: 300px;
+    }
+
+    .demo2 td {
+        border: 1px solid #eee;
+    }
+    </style>
+</head>
+
+<body>
+    <p>表格的单元格宽度的设定宽度，不一定是最终宽度</p>
+    <div>
+        <table class="demo1">
+            <tr>
+                <td class="large">10000</td>
+                <td class="middle">200</td>
+                <td class="small">1</td>
+            </tr>
+        </table>
+        <table class="demo2">
+            <tr>
+                <td class="large">10000</td>
+                <td class="middle">200</td>
+                <td class="small">1</td>
+            </tr>
+        </table>
+    </div>
+    <p>单元格宽度的宽度由设定的宽度，内容决定，以及表格的宽度决定（就是总宽度）。会被内容撑大，然后再根据设定的宽度分配宽度。</p>
+    <p>表格的最大宽度，默认不会超过父元素的宽度；除非内容不换行，且好多内容。如果想要让表格的宽度不被限制，那就要做到父元素的宽度由内容决定</p>
+    <div class="inline-block">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <table class="demo1">
+            <tr>
+                <td class="large">10000</td>
+                <td class="middle">200</td>
+                <td class="small">1</td>
+            </tr>
+        </table>
+        <table class="demo2">
+            <tr>
+                <td class="large">10000</td>
+                <td class="middle">200</td>
+                <td class="small">1</td>
+            </tr>
+        </table>
+    </div>
+
+    任何内容，不设定宽度的情况下，除非设定不换行，或者是图片；否则默认是不超过父元素宽度的。
+</body>
+
+</html>
