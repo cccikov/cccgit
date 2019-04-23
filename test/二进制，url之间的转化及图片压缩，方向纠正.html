@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>二进制，url之间的转化及图片压缩，方向纠正</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    img,
+    canvas {
+        max-width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="file" accept="image/*">
+    </div>
+    <script type="text/javascript" src="./js/exif.min.js"></script>
+    <script>
+    function createImgDom(url, cb) {
+        var img_dom = document.createElement("img");
+        img_dom.src = url;
+        cb && (img_dom.onload = cb);
+        document.body.appendChild(img_dom);
+    }
+    var input = document.querySelectorAll("input")[0];
+    input.addEventListener("change", function(e) {
+
+
+        getFileData(e, function(data) {
+            var base64 = compress(data); // 压缩图片
+            var blob = dataURLToBlob(base64);
+
+            // base64 url
+            BlobToDataUrl(blob, function(url_base64) {
+                createImgDom(url_base64);
+            });
+
+            // objectURL
+            var url_object = window.URL.createObjectURL(blob);
+            createImgDom(url_object, function() {
+                window.URL.revokeObjectURL(url_object);
+            });
+            download(url_object);
+        });
+
+    }, false);
+
+
+    /**
+     * 获取文件信息
+     * @param  {Object}   e  上传文件input的事件对象
+     * @param  {Function} cb 回调函数
+     */
+    function getFileData(e, cb) {
+        // 获取文件对象
+        var file = e.target.files[0];
+
+        if (!file.type.includes("image")) {
+            console.error("上传的是非图片文件");
+            return false;
+        }
+
+        var Orientation;
+        EXIF.getData(file, function() {
+            EXIF.getAllTags(this);
+            Orientation = EXIF.getTag(this, 'Orientation');
+            console.log('Orientation:', Orientation)
+            if (Orientation == "" || Orientation == undefined || Orientation == null) {
+                Orientation = 1;
+                /**
+                 * 1 0°
+                 * 6 顺时针90°
+                 * 8 逆时针90°
+                 * 3 180°
+                 */
+            }
+        });
+
+        /**
+         * fileReader 读取文件
+         * 主要是获取资源路径 base64
+         */
+        var fileReader = new FileReader();
+        fileReader.addEventListener("load", function(event) {
+            var base64_ori = event.target.result;
+
+            /**
+             * img 加载
+             * 获取宽高
+             */
+            var img = new Image()
+            img.addEventListener("load", function(e) {
+                console.dir(this);
+                var data = {
+                    width: this.naturalWidth,
+                    height: this.naturalHeight,
+                    type: file.type,
+                    size: file.size,
+                    name: file.name,
+                    url: base64_ori,
+                    rotate: Orientation
+                };
+
+                cb && cb(data);
+
+            }, false);
+            img.src = base64_ori;
+
+
+        }, false);
+        fileReader.readAsDataURL(file); // file 或者 blob 对象
+    }
+
+
+
+
+    /**
+     * 下载文件
+     * @param  {string} url 文件路径(可以是base64，但是base64位的url不能太长，否则会下载失败)
+     * 如果blob转化为url的，推荐使用 createObjectURL 创建的url，无论文件多大都不会造成url过长，导致下载失败
+     */
+    function download(url) {
+        var anchor = document.createElement("a");
+        anchor.download = "file";
+        anchor.href = url;
+        anchor.click();
+    }
+
+
+
+    /**
+     * base64路径转Blob
+     * @param  {[type]} dataurl base64编码(URL格式的字符串)
+     * @return {[type]}         Blob 二进制文件
+     */
+    function dataURLToBlob(dataurl) {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], { type: mime });
+    }
+
+    /**
+     * 返回一个指向二进制资源的url
+     * 当不再需要这些 URL 对象时，每个对象必须通过调用 URL.revokeObjectURL() 方法来释放。浏览器会在文档退出的时候自动释放它们，但是为了获得最佳性能和内存使用状况，你应该在安全的时机主动释放掉它们。
+     * @param  {Blob}    blob   二进制文件Blob 或者 File
+     * @return {DOMString}      objectURL-指向二进制资源的url
+     */
+    function createUrl(blob) {
+        return window.URL.createObjectURL(blob);
+    }
+
+    /**
+     * 释放URL
+     * @param  {DOMString} objectURL [description]
+     */
+    function deleteUrl(objectURL) {
+        URL.revokeObjectURL(objectURL);
+    }
+
+
+    /**
+     * Blob 对象转化为 base64编码(URL格式的字符串)
+     * @param {Blob}     blob Blob 或者 File 对象
+     * @param {Function} cb   回调函数
+     */
+    function BlobToDataUrl(blob, cb) {
+        var fileReader = new FileReader();
+        fileReader.addEventListener("load", function(event) {
+            var base64 = event.target.result;
+            cb && cb(base64)
+        }, false);
+        fileReader.readAsDataURL(blob); // file 或者 blob 对象
+    }
+
+
+    /**
+     * 压缩图片
+     * @param  {Object} obj 一个包含图片尺寸，url的对象，图片方向
+     * @return {string}     返回一个压缩后的图片的base64字符串路径
+     */
+    function compress(obj) {
+        var img = document.createElement("img");
+        img.src = obj.url;
+
+        var canvas = document.createElement('canvas'); //
+        ctx = canvas.getContext('2d');
+
+        if (obj.rotate == 1 || obj.rotate == 3) {
+            canvas.width = obj.width;
+            canvas.height = obj.height;
+        } else if (obj.rotate == 8 || obj.rotate == 6) {
+            canvas.width = obj.height;
+            canvas.height = obj.width;
+        }
+
+
+        // 铺底色
+        ctx.fillStyle = '#f0f';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 平移
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+
+        // 旋转
+        if (obj.rotate == 6) {
+            ctx.rotate(Math.PI / 2);
+            // 顺时针90°
+        } else if (obj.rotate == 8) {
+            ctx.rotate(-Math.PI / 2);
+            // 逆时针90°
+        } else if (obj.rotate == 3) {
+            ctx.rotate(Math.PI);
+            // 180°
+        }
+
+        // 核心JS就这个
+        ctx.drawImage(img, -obj.width / 2, -obj.height / 2, obj.width, obj.height);
+
+        return canvas.toDataURL('image/jpeg', 0.5); // 只可以改变格式为 image/jpeg 或 image/webp 的质量
+        // canvas.toBlob(callback, mimeType, qualityArgument)
+    }
+    </script>
+</body>
+
+</html>
