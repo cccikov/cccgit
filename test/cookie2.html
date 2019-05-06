@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>cookie</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript">
+    /**
+     * document.cookie
+     *
+     * *******************************
+     * 读取的话，是读取全部cookie。每条cookie以"分号和空格(; )"分隔(即, key=value 键值对)
+     * 设置的话，是设置一个cookie（如果这个cookie本身就存在的话，那么就会更新之前的cookie，或者说是替换掉）以下可选的cookie属性值可以跟在键值对后，用来具体化对cookie的设定/更新，使用分号以作分隔
+     * ******************************
+
+     * https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie
+     */
+
+    // 获取全部 cookie
+    var allCookies = document.cookie;
+    console.log(allCookies)
+
+    // 设置 cookie
+    document.cookie = "cookie=this is cookie";
+
+    // 设置 cookie ，以及 expires 过期时间，具体时间；expires是GMT格式 toGMTString() 或者 toUTCString() 都是返回GMT格式；由于toGMTString会转化为GMT时间，如果不转换，时间会由于时区问题变得多了或者少了。
+    var expires = new Date(new Date().getTime() + 60 * 60 * 1000).toUTCString(); // 一个小时后过期
+    document.cookie = "cookie_expires=this is cookie;expires=" + expires;
+
+    // 设置 cookie ，以及 max-age 过期时间，多少秒后过期
+    var maxage = 60
+    document.cookie = "cookie_max-age=this is cookie;max-age=" + maxage;
+
+    //  设置 cookie 过期时间，max-age和expires设置，取max-age
+    document.cookie = "cookie_max-age_expires1=this is cookie;max-age=" + 24 * 60 * 60 + ";expires=" + new Date(new Date().getTime() + 60 * 60 * 1000).toUTCString();
+    document.cookie = "cookie_max-age_expires2=this is cookie;max-age=" + 24 * 60 * 60 + ";expires=" + new Date(new Date().getTime() + 48 * 60 * 60 * 1000).toUTCString();
+    document.cookie = "cookie_max-age_expires3=this is cookie;expires=" + new Date(new Date().getTime() + 48 * 60 * 60 * 1000).toUTCString() + ";max-age=" + 24 * 60 * 60;
+
+    // 设置 cookie，以及 path 路径
+    var path = "/"
+    document.cookie = "cookie_path1=this is cookie;path=" + path; // 根目录以下的路径都可以访问，那么就是全部路径都可以访问
+    document.cookie = "cookie_path2=this is cookie;path=/test"; // 就是路径为/test以及下面目录才可以访问这个cookie
+
+    // 设置 cookie，以及 domain 域名
+    var domain = "localhost"
+    document.cookie = "cookie_domain=this is cookie;domain" + domain; // 域名为localhost才可以访问
+
+    // 设置 cookie ,以及 secure 协议
+    document.cookie = "cookie_secure=this is cookie;secure"; // 不设置，http和https都可以访问，设置了之后只有https可以访问，secure是不需要等于任何值得
+
+
+    // 设置 cookie 以及 cookie的每一个属性值
+    document.cookie = "cookie_all=this is cookie with all property;expires=Tue, 01 Jan 2030 00:00:00 GMT;path=/;domain=localhost;secure"; // 不设置，http和https都可以访问，设置了之后只有https可以访问，secure是不需要等于任何值得
+
+
+    /**
+     * 设置cookie
+     * @param {String}  name    cookie的名字
+     * @param {String}  value   cookie的值
+     * @param {Date}    expires cookie过期时间
+     * @param {String}  path    可以访问cookie的路径
+     * @param {String}  domain  可以访问cookie的域名
+     * @param {Boolean} secure  是否只能在https环境访问cookie
+     */
+    function setCookie(name, value, expires, path, domain, secure) {
+        if (secure) {
+            document.cookie = name + "=" + value + ";expires=" + expires + ";path=" + path + ";domain=" + domain + ";secure";
+        } else {
+            document.cookie = name + "=" + value + ";expires=" + expires + ";path=" + path + ";domain=" + domain;
+        }
+    }
+
+    var obj = {
+        name: "ccc",
+        age: 18,
+        value: "这是一个localhost可以访问的cookie"
+    }
+    var str = JSON.stringify(obj)
+    setCookie("cookie_localhost", str, new Date() + 60 * 60 * 1000, "/", "localhost", false); // 本地访问cookie
+    setCookie("cookie_github", "github上才可以访问的cookie", new Date() + 60 * 60 * 1000, "/cccgit/test", "cccikov.github.io", true); // https://cccikov.github.io/cccgit/test/ 可以访问这个cookie； 而https://cccikov.github.io/cccgit 是不行的。
+
+
+    /**
+     * 删除 cookie
+     * @param  {String} name 需要删除cookie的名字
+     *
+     * 删除 cookie 的本质，就是更新 cookie 的过期时间，将过期时间设置为现在或者以前
+     */
+    function delCookie(name) {
+        // document.cookie = name + "= ;max-age=" + 0;
+        // document.cookie = name + "= ;expires=" + new Date(0).toUTCString();
+        document.cookie = name + "= ;expires=" + new Date().toUTCString();
+    }
+
+
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

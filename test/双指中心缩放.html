@@ -73,7 +73,7 @@
                     img.style.width = this.width + "px"; // 设置图片宽度
                     img.style.height = this.height + "px"; // 设置图片高度
                     console.log(this.el.getBoundingClientRect());
-                    this._addListener();
+                    // this._addListener();
                 });
             }
             _imgOnload(src, cb) {
@@ -88,9 +88,9 @@
                 var _this = this;
                 this.touchstartListener = function(e) { // 可以算做闭包吧，在_addListener定义函数作为监听器，然后监听器里面就可以读取到_addListener里面的变量，这里是为了读取_this
                     console.log("listener", this, _this);
-                    _this._touchstart(e);
+                    _this._touchstart(e); // 由于 _touchstart 的调用方式是作为对象_this的方法调用，所以_touchstart里面的this指向_this
                 }
-                _this.el.addEventListener("touchstart", _this.touchstartListener, false);
+                _this.el.addEventListener("touchstart", _this.touchstartListener, false); // 由于 touchstartListener 函数的调用方式是被作为事件监听器器调用，所以 touchstartListener 里面的this指向_this.el
             }
             _removeListener() {
                 var _this = this;

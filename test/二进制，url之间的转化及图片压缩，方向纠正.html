@@ -194,7 +194,7 @@
         img.src = obj.url;
 
         var canvas = document.createElement('canvas'); //
-        ctx = canvas.getContext('2d');
+        var ctx = canvas.getContext('2d');
 
         if (obj.rotate == 1 || obj.rotate == 3) {
             canvas.width = obj.width;
