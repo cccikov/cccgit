@@ -27,17 +27,18 @@
     document.cookie = "cookie=this is cookie";
 
     // 设置 cookie ，以及 expires 过期时间，具体时间；expires是GMT格式 toGMTString() 或者 toUTCString() 都是返回GMT格式；由于toGMTString会转化为GMT时间，如果不转换，时间会由于时区问题变得多了或者少了。
-    var expires = new Date(new Date().getTime() + 60 * 60 * 1000).toUTCString(); // 一个小时后过期
-    document.cookie = "cookie_expires=this is cookie;expires=" + expires;
+    var expires = new Date(new Date().getTime() + 10 * 1000); // 10秒后过期
+    document.cookie = "cookie_expires1=this is cookie;expires=" + expires.toUTCString();
+    document.cookie = "cookie_expires2=this is cookie;expires=" + expires; // 不是10秒过期，因为时区问题
 
     // 设置 cookie ，以及 max-age 过期时间，多少秒后过期
     var maxage = 60
     document.cookie = "cookie_max-age=this is cookie;max-age=" + maxage;
 
     //  设置 cookie 过期时间，max-age和expires设置，取max-age
-    document.cookie = "cookie_max-age_expires1=this is cookie;max-age=" + 24 * 60 * 60 + ";expires=" + new Date(new Date().getTime() + 60 * 60 * 1000).toUTCString();
-    document.cookie = "cookie_max-age_expires2=this is cookie;max-age=" + 24 * 60 * 60 + ";expires=" + new Date(new Date().getTime() + 48 * 60 * 60 * 1000).toUTCString();
-    document.cookie = "cookie_max-age_expires3=this is cookie;expires=" + new Date(new Date().getTime() + 48 * 60 * 60 * 1000).toUTCString() + ";max-age=" + 24 * 60 * 60;
+    document.cookie = "cookie_max-age_expires1=this is cookie;max-age=" + 10 + ";expires=" + new Date(new Date().getTime() + 20 * 1000).toUTCString();
+    document.cookie = "cookie_max-age_expires2=this is cookie;max-age=" + 20 + ";expires=" + new Date(new Date().getTime() + 10 * 1000).toUTCString();
+    document.cookie = "cookie_max-age_expires3=this is cookie;expires=" + new Date(new Date().getTime() + 10 * 1000).toUTCString() + ";max-age=" + 20;
 
     // 设置 cookie，以及 path 路径
     var path = "/"
@@ -94,8 +95,6 @@
         // document.cookie = name + "= ;expires=" + new Date(0).toUTCString();
         document.cookie = name + "= ;expires=" + new Date().toUTCString();
     }
-
-
 
     </script>
 </head>
