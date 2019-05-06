@@ -20,9 +20,25 @@
 \*/
 
 var docCookies = {
+    /**
+     * 读取一个cookie。如果cookie不存在返回null。
+     * docCookies.getItem(name)
+     * @param  {String} sKey 读取的cookie名
+     * @return {String}      返回cookie
+     */
     getItem: function(sKey) {
         return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
     },
+    /**
+     * 创建或覆盖一个cookie
+     * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+     * @param {String} sKey    要创建或覆盖的cookie的名字
+     * @param {String} sValue  cookie的值
+     * @param {number,string, Date object or null} vEnd    最大年龄的秒数 (一年为31536e3， 永不过期的cookie为Infinity) ，或者过期时间的GMTString格式或Date对象; 如果没有定义则会在会话结束时过期 (number – 有限的或 Infinity – string, Date object or null)。
+     * @param {string} sPath   设置可以读取cookie的路径
+     * @param {string} sDomain 设置可以读取cookie的域名
+     * @param {Boolean} bSecure 是否只能被https传输
+     */
     setItem: function(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
         if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
         var sExpires = "";
@@ -42,11 +58,22 @@ var docCookies = {
         document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
         return true;
     },
+    /**
+     * 删除一个cookie。
+     * docCookies.removeItem(name[, path],domain)
+     * @param  {string} sKey    要移除的cookie名(string).
+     * @param  {string} sPath   可以读取这个cookie的路径
+     * @param  {string} sDomain 可以读取这个cookie的域名
+     */
     removeItem: function(sKey, sPath, sDomain) {
         if (!sKey || !this.hasItem(sKey)) { return false; }
         document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
         return true;
     },
+    /**
+     * 检查一个cookie是否存在
+     * docCookies.hasItem(name)
+     */
     hasItem: function(sKey) {
         return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[-.+*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
     },
