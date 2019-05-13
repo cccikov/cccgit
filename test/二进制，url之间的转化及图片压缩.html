@@ -188,6 +188,19 @@
         return canvas.toDataURL('image/jpeg', 0.5); // 只可以改变格式为 image/jpeg 或 image/webp 的质量
         // canvas.toBlob(callback, mimeType, qualityArgument)
     }
+
+
+    /**
+     * blob to file
+     */
+
+    function blobToFile(){
+        // 方法1
+        // formData.append(name, value, filename);
+
+        // 方法2
+        // new File(bits, name[, options]); // 可以是blob
+    }
     </script>
 </body>
 
