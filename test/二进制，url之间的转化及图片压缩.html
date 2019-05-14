@@ -32,6 +32,9 @@
             var base64 = compress(data); // 压缩图片
             var blob = dataURLToBlob(base64);
 
+            var file = new File([blob],"xxx.jpg");
+            console.log(file);
+
             // base64 url
             BlobToDataUrl(blob, function(url_base64) {
                 createImgDom(url_base64);
@@ -199,7 +202,10 @@
         // formData.append(name, value, filename);
 
         // 方法2
-        // new File(bits, name[, options]); // 可以是blob
+        // new File(bits, name[, options]);
+
+        // bits
+        // --- An Array of ArrayBuffer, ArrayBufferView, Blob, or DOMString objects — or a mix of any such objects. This is the file content encoded as UTF-8.
     }
     </script>
 </body>
