@@ -139,7 +139,7 @@
     var id = "1557849337284564146";
     axios({
         method: "get",
-        url: "./js/array.json"
+        url: "./js/array.json" // 数据是通过 createData 方法生成
     }).then(res => {
         var data = res.data;
         var indexs = searchData(data, id).split(" ").map(val => {
