@@ -147,14 +147,14 @@
         });
         var theObj = getData(data, indexs);
 
-        console.log(data);
-        console.log(indexs);
-        console.log(searchData_arr(data, id))
-        console.log(theObj); // id所在的目标对象
-        console.log(getData(data, indexs.slice(0, -1))); // id 所在的目标对象的上级
-        console.log(getData(data, indexs.slice(0, -2))); // id 所在的目标对象的上上级
-        console.log(getData(data, indexs.slice(0, -3))); // id 所在的目标对象的上上上级
-        console.log(getDatas(data, indexs)); // id 所在的目标根对象，二级对象，...，最终对象
+        console.log("原始数据：", data);
+        console.log("索引链：", indexs);
+        console.log("索引链：", searchData_arr(data, id))
+        console.log("id所在的目标对象:", theObj); // id所在的目标对象
+        console.log("id 所在的目标对象的上级", getData(data, indexs.slice(0, -1))); // id 所在的目标对象的上级
+        console.log("id 所在的目标对象的上上级", getData(data, indexs.slice(0, -2))); // id 所在的目标对象的上上级
+        console.log("id 所在的目标对象的上上上级", getData(data, indexs.slice(0, -3))); // id 所在的目标对象的上上上级
+        console.log("id 所在的目标根对象，二级对象，...，最终对象", getDatas(data, indexs)); // id 所在的目标根对象，二级对象，...，最终对象
     });
     </script>
 </head>
