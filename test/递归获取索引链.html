@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>递归获取索引链</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script src="js/axios.min.js"></script>
+    <script type="text/javascript">
+    function ranInt(max, min) {
+        if (min > max) {
+            var mid = max;
+            max = min;
+            min = mid;
+        }
+        return parseInt(Math.random() * (max + 1 - min) + min)
+    }
+
+    /**
+     * 生成随机n位数的数字，会前面补0
+     */
+    function ranStr(len) {
+        var min = 0;
+        var max = Math.pow(10, len) - 1;
+        var number = String(ranInt(min, max));
+        var str = new Array(len - number.length).fill("0").join("");
+        return str + number;
+    }
+
+    /**
+     * 递归生成多层嵌套数据
+     * @param  {Number} deep 起始层数，最多4层
+     */
+    function createData(deep) {
+        deep += 1;
+        return new Array(ranInt(3, 10)).fill("").map(val => {
+            var arr = (Math.random() > 0.5 && deep < 5) ? createData(deep) : [];
+            return {
+                id: new Date().getTime() + ranStr(6),
+                name: ranStr(6),
+                children: arr
+            }
+        })
+    }
+
+    /**
+     * 递归获取索引链
+     * @param  {[type]} arr 原始数据
+     * @param  {[type]} id  需要查找的id
+     */
+    function searchData(arr, id) {
+        var index = -1;
+        arr.forEach((val, key) => {
+            if (val.children && val.children.length > 0) {
+                var result = searchData(val.children, id);
+                if (result != -1) {
+                    index = key + " " + result;
+                }
+            } else {
+                if (val.id == id) {
+                    index = key;
+                }
+            }
+        });
+        return index;
+    }
+
+    /**
+     * 具体功能同上
+     * 只是直接返回数组
+     */
+    function searchData_arr(arr, id) {
+        var index = -1;
+        arr.forEach((val, key) => {
+            if (val.children && val.children.length > 0) {
+                var result = searchData_arr(val.children, id);
+                if (result != -1) {
+                    result.unshift(key);
+                    index = result
+                }
+            } else {
+                if (val.id == id) {
+                    index = [key];
+                }
+            }
+        });
+        return index;
+    }
+
+    /**
+     * 递归 通过索引链获取数据
+     * @param  {[type]} data   原始数据
+     * @param  {[type]} indexs 索引链
+     */
+    function getData(data, indexs) {
+        var key = indexs[0];
+        indexs = indexs.slice(); // 由于涉及shift()操作，所以先复制一次
+        if (indexs.length == 1) {
+            return data[key]
+        } else {
+            indexs.shift();
+            return getData(data[key].children, indexs)
+        }
+    }
+
+    /**
+     * 具体功能同上
+     * 只是返回时 数据链
+     */
+    function getDatas(data, indexs) {
+        var result_arr = [];
+        var key = indexs[0];
+        indexs = indexs.slice(); // 由于涉及shift()操作，所以先复制一次
+        if (indexs.length == 1) {
+            result_arr.unshift(data[key]);
+        } else {
+            indexs.shift();
+            result_arr = getDatas(data[key].children, indexs);
+            result_arr.unshift(data[key])
+        }
+        return result_arr;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var id = "1557849337284564146";
+    axios({
+        method: "get",
+        url: "./js/array.json"
+    }).then(res => {
+        var data = res.data;
+        var indexs = searchData(data, id).split(" ").map(val => {
+            return Number(val);
+        });
+        var theObj = getData(data, indexs);
+
+        console.log(data);
+        console.log(indexs);
+        console.log(searchData_arr(data, id))
+        console.log(theObj); // id所在的目标对象
+        console.log(getData(data, indexs.slice(0, -1))); // id 所在的目标对象的上级
+        console.log(getData(data, indexs.slice(0, -2))); // id 所在的目标对象的上上级
+        console.log(getData(data, indexs.slice(0, -3))); // id 所在的目标对象的上上上级
+        console.log(getDatas(data, indexs)); // id 所在的目标根对象，二级对象，...，最终对象
+    });
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
