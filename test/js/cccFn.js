@@ -591,7 +591,7 @@ function ranInt(max, min) {
 }
 
 /**
- * 生成随机n位数的数字，会前面补0
+ * 生成随机n位数的数字，会不足位数会自动在前面补0
  */
 function ranStr(len) {
     var min = 0;
