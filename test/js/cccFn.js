@@ -590,6 +590,16 @@ function ranInt(max, min) {
     return parseInt(Math.random() * (max + 1 - min) + min)
 }
 
+/**
+ * 生成随机n位数的数字，会前面补0
+ */
+function ranStr(len) {
+    var min = 0;
+    var max = Math.pow(10, len) - 1;
+    var number = String(ranInt(min, max));
+    var str = new Array(len - number.length).fill("0").join("");
+    return str + number;
+}
 
 
 /**
