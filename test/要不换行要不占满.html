@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>要不换行要不占满</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    .box {
+        width: 350px;
+        height: 300px;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+        margin: 15px;
+        /* 以下为核心代码 */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        align-content: flex-start;
+    }
+
+
+
+    .box input {
+        min-width: 150px;
+        flex: 1 0 auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="box">
+            <span>Lorem.</span>
+            <span>Lorem ipsum.</span>
+            <input type="" name="">
+        </div>
+        <div class="box">
+            <span>Lorem.</span>
+            <span>Lorem.</span>
+            <input type="" name="">
+        </div>
+        <div class="box">
+            <span>Lorem.</span>
+            <span>Lorem.</span>
+            <span>Lorem.</span>
+            <span>Lorem.</span>
+            <input type="" name="">
+        </div>
+        <hr>
+        <hr>
+        <hr>
+        <style type="text/css">
+        .box2 {
+            width: 350px;
+            height: 300px;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+            margin: 15px;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            min-width: 150px;
+            overflow: hidden;
+        }
+
+        .right input {
+            box-sizing: border-box;
+            width: 100%;
+        }
+        </style>
+        <div class="box2">
+            <div class="left">
+                <span>Lorem.</span>
+                <span>Lorem.</span>
+                <span>Lorem.</span>
+            </div>
+            <div class="right">
+                <input type="" name="">
+            </div>
+        </div>
+        <div class="box2">
+            <div class="left">
+                <span>Lorem.</span>
+                <span>Lorem.</span>
+            </div>
+            <div class="right">
+                <input type="" name="">
+            </div>
+        </div>
+        <div class="box2">
+            <div class="left">
+                <span>Lorem.</span>
+                <span>Lorem.</span>
+                <span>Lorem.</span>
+                <span>Lorem.</span>
+            </div>
+            <div class="right">
+                <input type="" name="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
