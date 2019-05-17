@@ -1,4 +1,20 @@
-/*收集一些平时工作的封装的方法*/
+/* 收集一些平时工作的封装的方法 */
+/* 收集一些平时工作的封装的方法 */
+/* 收集一些平时工作的封装的方法 */
+
+/**
+ * 函数注释标准
+ * @param {String} str 字符串
+ * @param {string|number} num 字符串或者数字
+ * @param {boolean} bool 布尔值
+ * @param {{name:string,age:string|num}} obj name-名字，age-年龄
+ * @param {Array<string|number|boolean>} arr 字符串或者数字或者布尔值组成的数组
+ * @return {*}  任何值
+ */
+function funDoc(str,num,bool,obj,arr){
+    return "函数注释标准";
+}
+
 // 请在服务器环境打开
 function onlyServer() {
     if (window.location.protocol.substr(0, 4) === "file") {
