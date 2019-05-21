@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>screen 对象</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript">
+    /**
+     * window.screen 即 screen 对象
+     * 返回当前window的screen对象。screen对象实现了Screen接口，它是个特殊的对象，返回当前渲染窗口中和屏幕有关的属性。
+     */
+
+    console.log(screen); // screen 对象
+
+    console.log(screen.height, "以像素为单位返回屏幕的高度");
+    console.log(screen.width, "以像素为单位返回屏幕的宽度");
+    console.log(screen.availHeight, "指定屏幕高度（以像素为单位）减去操作系统显示的永久或半永久性用户界面功能，例如Windows上的任务栏。");
+    console.log(screen.availWidth, "返回窗口中水平方向可用空间的像素值。");
+    console.log(screen.availTop, "指定未分配给永久或半永久用户界面功能的第一个像素的y坐标。");
+    console.log(screen.availLeft, "返回屏幕左边边界的第一个像素点");
+    console.log(screen.colorDepth, "返回屏幕的色彩深度");
+    console.log(screen.pixelDepth, "获取屏幕的像素点");
+    console.log(screen.orientation, "返回当前屏幕的转向(实验性功能)");
+    console.log(screen.orientation.angle, "返回当前屏幕的转向(实验性功能)");
+
+
+    /////////////////////////////////
+    // 然后我们可以通过 screen 对象去判断手机屏幕类型 //
+    /////////////////////////////////
+    var isIphoneX = screen.height === 812 && screen.width === 375; // iphoneX & iphoneXs
+    var isIphoneXMax = screen.height === 896 && screen.width === 414; // iphoneXs max & iphoneXR
+    if (isIphoneX || isIphoneXMax) { // 当然还要先判断useragent是iphone的情况下
+        document.write("你的手机是刘海屏");
+    }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
