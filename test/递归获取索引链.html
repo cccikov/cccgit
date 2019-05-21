@@ -92,12 +92,10 @@
      */
     function getData(data, indexs) {
         var key = indexs[0];
-        indexs = indexs.slice(); // 由于涉及shift()操作，所以先复制一次
         if (indexs.length == 1) {
             return data[key]
         } else {
-            indexs.shift();
-            return getData(data[key].children, indexs)
+            return getData(data[key].children, indexs.slice(1))
         }
     }
 
