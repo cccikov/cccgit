@@ -854,3 +854,25 @@ function imgOnload(src, cb) {
     }
     newImg.src = url;
 }
+
+/**
+ * 递归 判断arr1版本号是否大于arr2版本号
+ * @param  {array} arr1 版本号解析成的数组 "1.1.1" [1,1,1]
+ * @param  {array} arr2 版本号解析成的数组 "1.1.1" [1,1,1]
+ * @return {boolean}      是否大于
+ */
+function compare(arr1, arr2) {
+    if (Array.isArray(arr1) && Array.isArray(arr2) && arr1.length > 0 && arr2.length > 0) {
+        let val1 = Number(arr1[0]);
+        let val2 = Number(arr2[0]);
+        if (val1 > val2) {
+            return true;
+        } else if (val1 == val2) {
+            return compare(arr1.slice(1), arr2.slice(1));
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
