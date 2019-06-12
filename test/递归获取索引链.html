@@ -56,8 +56,8 @@
             if (val.id == id) {
                 index = String(key);
             }else if (val.children && val.children.length > 0) {
-                var result = searchData(val.children, id);
-                if (result != -1) {
+                var result = searchData(val.children, id); // 搜索子数组
+                if (result != -1) { // 如果子数组有结果
                     index = key + " " + result;
                 }
             }
