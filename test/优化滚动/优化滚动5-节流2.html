@@ -23,22 +23,45 @@
             };
         };
 
-        var index = 0
 
 
+        /* 利用定时器写法 */
+        function throttle2(func, mustRun) {
+            var run = true; // 是否会执行func
+
+            return function() {
+                var _this = this;
+                var args = arguments; //获取参数
+
+                if (run) {
+                    func.apply(_this, args);
+                    run = false;
+                    setTimeout(function() {
+                        run = true;
+                    }, mustRun);
+                }
+            }
+        }
+
+
+
+        ////////
+        // 应用 //
+        ////////
+
+        var index = 0;
 
         // $(window).on("scroll", throttle(function() {
         //     console.log(index++);
         // }, 1000));
 
-
-        let fn = throttle(function() {
+        let fn = throttle2(function() {
             console.log(index++);
         }, 1000)
 
-        $(document).on("scroll", function(e) {
+        document.onscroll = function(e) {
             fn.call(this, e);
-        });
+        }
 
     });
     </script>
