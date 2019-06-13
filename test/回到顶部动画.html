@@ -7,38 +7,31 @@
     <title>回到顶部动画</title>
     <link rel="shortcut icon" href="img/ccc.ico" />
     <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript" src="js/tween.js"></script>
     <style type="text/css">
-        p{
-            line-height: 100px;
-            font-size: 100px;
-            word-break: break-all;
-        }
+    p {
+        font-size: 14px;
+        line-height: 1000px;
+        word-break: break-all;
+    }
     </style>
 </head>
 
 <body>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+    <p> Lorem ipsum dolor. </p>
     <button id="scrollButton">回到顶部再下来</button>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+    <p> Lorem ipsum dolor.</p>
+    <button id="toTop">回到顶部再下来</button>
     <script>
     document.getElementById("scrollButton").onclick = function() {
-        var nowScroll = document.body.scrollTop || document.documentElement.scrollTop,
-            flag = "up";
-        var funScroll = function() {
+        var nowScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var flag = "up";
+
+        if (nowScroll) {
+            funScroll()
+        };
+
+        function funScroll() {
             var top = document.body.scrollTop || document.documentElement.scrollTop;
             if (flag == "up") {
                 top -= 20;
@@ -58,10 +51,37 @@
             window.scrollTo(0, top);
             requestAnimationFrame(funScroll);
         };
-        if (nowScroll) {
-            funScroll()
-        };
+
+
     };
+
+    document.getElementById("toTop").addEventListener("click", function() {
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        var t = 0;
+        var duration = 20; // 可以理解为多少帧完成这个动画
+        var change = 0 - scrollTop;
+        var begin = scrollTop;
+        var timer = null;
+
+        if (scrollTop > 0) {
+            handler();
+        }
+
+        function handler() {
+            // scrollTop变化
+            t += 1;
+            var scrollTop = Tween.Cubic.easeIn(t, begin, change, duration);
+
+            // 设定新scrollTop
+            window.scrollTo(0, scrollTop);
+
+            // 执行下一次变化
+            timer = window.requestAnimationFrame(handler)
+            if (t >= duration) {
+                window.cancelAnimationFrame(timer);
+            }
+        }
+    }, false);
     </script>
 </body>
 
