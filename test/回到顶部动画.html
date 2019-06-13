@@ -18,10 +18,11 @@
 </head>
 
 <body>
+    <button id="toBottom">去到底部</button>
     <p> Lorem ipsum dolor. </p>
     <button id="scrollButton">回到顶部再下来</button>
     <p> Lorem ipsum dolor.</p>
-    <button id="toTop">回到顶部再下来</button>
+    <button id="toTop">回到顶部</button>
     <script>
     document.getElementById("scrollButton").onclick = function() {
         var nowScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -64,6 +65,36 @@
         var timer = null;
 
         if (scrollTop > 0) {
+            handler();
+        }
+
+        function handler() {
+            // scrollTop变化
+            t += 1;
+            var scrollTop = Tween.Cubic.easeIn(t, begin, change, duration);
+
+            // 设定新scrollTop
+            window.scrollTo(0, scrollTop);
+
+            // 执行下一次变化
+            timer = window.requestAnimationFrame(handler)
+            if (t >= duration) {
+                window.cancelAnimationFrame(timer);
+            }
+        }
+    }, false);
+
+
+
+    document.getElementById("toBottom").addEventListener("click", function() {
+        var scrollHeight = document.documentElement.scrollHeight;
+        var t = 0;
+        var duration = 20; // 可以理解为多少帧完成这个动画
+        var begin = document.body.scrollTop || document.documentElement.scrollTop;
+        var change = scrollHeight - begin;
+        var timer = null;
+
+        if (scrollHeight > 0) {
             handler();
         }
 
