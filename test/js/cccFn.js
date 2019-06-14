@@ -882,10 +882,11 @@ function compare(arr1, arr2) {
 ///////////////////////
 
 /**
- * 防抖
- * @param  {Function} func        真正需要操作的动作，真正操作函数
- * @param  {Number}   wait        等候时长，毫秒
- * @param  {Boolean}  immediate   true-前缘触发，false-延迟触发（默认值）
+ * 防抖 debounce(func, wait, [immediate])
+ * @param  {Function} func        必填，真正需要操作的动作，真正操作函数
+ * @param  {Number}   wait        必填，等候时长，每轮等候周期时长
+ * @param  {Boolean}  immediate   选填，true-前缘触发，false-延迟触发（默认值）
+ * @return {function}             传递函数/事件监听器，每次事件触发都会调用
  */
 function debounce(func, wait, immediate) {
 
@@ -894,10 +895,10 @@ function debounce(func, wait, immediate) {
     var timeout, args, context, timestamp, result;
 
     var later = function() {
-        var last = Date.now() - timestamp; // timestamp-触发“伪操作函数”时刻；所以last表示上次触发“伪操作函数”到触发later的时长，即"停止触发时长"。
+        var last = Date.now() - timestamp; // timestamp-触发传递函数时刻；所以last表示上次触发传递函数到触发later的时长，即"停止触发时长"。
 
         if (last < wait && last >= 0) { // 停止触发时长 少于 等候时长。
-            timeout = setTimeout(later, wait - last); // wait = (wait - last) + last; 所以如果我们想 触发“伪操作函数”后wait毫秒后再次触发later，就要减去"停止触发时长"
+            timeout = setTimeout(later, wait - last); // wait = (wait - last) + last; 所以如果我们想 触发传递函数后wait毫秒后再次触发later，就要减去"停止触发时长"
         } else {
             timeout = null; // 清空定时器标示
 
@@ -909,7 +910,7 @@ function debounce(func, wait, immediate) {
         }
     };
 
-    return function() { // 命名为 “伪操作函数”
+    return function() { // 命名为 传递函数
         context = this;
         args = arguments;
         timestamp = Date.now();
@@ -930,37 +931,36 @@ function debounce(func, wait, immediate) {
 };
 
 /**
- * 节流
+ * 节流 throttle(function, wait, [options]) 当重复调用时，每隔wait毫秒最多只调用一次原始函数
+ * @param  {function}                           func    真正想要触发的操作，原始函数
+ * @param  {string|number}                      wait    等候时长，每轮等候周期时长
+ * @param  {{leading:boolean,trailing:boolean}} options 对象，默认{leading：true,trailing：true}。{leading：false} - 禁用前缘触发，即传递函数第一次触发时不会调用func，需要等候；{trailing：false} - 禁用后端触发，即传递函数最后一次触发后，不会再调用func
+ * @return {function}                           传递函数/事件监听器，每次事件触发都会调用
  */
 function throttle(func, wait, options) {
-    /*
-     *  options的默认值
-     *
-     *  表示首次调用返回值方法时，会马上调用func；否则仅会记录当前时刻，当第二次调用的时间间隔超过wait时，才调用func。
-     *  options.leading = true;
-     *
-     *  表示当调用方法时，未到达wait指定的时间间隔，则启动计时器延迟调用func函数，若后续在既未达到wait指定的时间间隔和func函数又未被调用的情况下调用返回值方法，则被调用请求将被丢弃。
-     *  options.trailing = true;
-     */
     var context, args, result;
     var timeout = null;
     var previous = 0;
-    if (!options) options = {};
+    if (!options) {
+        options = {};
+    };
     var later = function() {
         previous = options.leading === false ? 0 : Date.now();
         timeout = null;
         result = func.apply(context, args);
-        if (!timeout) context = args = null;
+        if (!timeout) {
+            context = args = null;
+        }
     };
     return function() {
         var now = Date.now();
-        if (!previous && options.leading === false) previous = now;
-        // 计算剩余时间
-        var remaining = wait - (now - previous);
+        if (!previous && options.leading === false) {
+            previous = now;
+        }
+        var remaining = wait - (now - previous); // 每轮等候周期剩余时长。没有剩余时长就执行原始函数
         context = this;
         args = arguments;
-        // 当到达wait指定的时间间隔，则调用func函数
-        // 精彩之处：按理来说remaining <= 0已经足够证明已经到达wait的时间间隔，但这里还考虑到假如客户端修改了系统时间则马上执行func函数。
+        // 精彩之处：按理来说remaining <= 0已经足够证明已经到达wait的时间间隔，但这里还考虑到假如客户端修改了系统时间，修改到过去的时间则马上执行func函数。
         if (remaining <= 0 || remaining > wait) {
             // 由于setTimeout存在最小时间精度问题，因此会存在到达wait的时间间隔，但之前设置的setTimeout操作还没被执行，因此为保险起见，这里先清理setTimeout操作
             if (timeout) {
@@ -969,14 +969,12 @@ function throttle(func, wait, options) {
             }
             previous = now;
             result = func.apply(context, args);
-            if (!timeout) context = args = null;
-        } else if (!timeout && options.trailing !== false) {
-            // options.trailing=true时，延时执行func函数
-            timeout = setTimeout(later, remaining);
+            if (!timeout) {
+                context = args = null;
+            }
+        } else if (!timeout && options.trailing !== false) { // 还有剩余时长，还在等候周期里面 且 后端触发
+            timeout = setTimeout(later, remaining); // 定时剩余时长后触发
         }
         return result;
     };
-    ////////////////////////////////////////////////////////////////////////////////
-    // 精彩之处：按理来说remaining <= 0已经足够证明已经到达wait的时间间隔，但这里还考虑到假如客户端修改了系统时间则马上执行func函数。 //
-    ////////////////////////////////////////////////////////////////////////////////
 };

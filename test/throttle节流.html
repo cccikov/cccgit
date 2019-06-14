@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>throttle节流</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript">
+
+        document.addEventListener("scroll", throttle(function () {
+            console.log("立即执行，停止滚动后，还会再执行一次")
+        }, 10000), false);
+
+        document.addEventListener("scroll", throttle(function () {
+            console.log("不立即执行，停止滚动后，还会再执行一次")
+        }, 1000, { leading: false }), false);
+
+        document.addEventListener("scroll", throttle(function () {
+            console.log("立即执行，停止滚动后，不会再执行一次")
+        }, 1000, { trailing: false }), false);
+
+        /**
+         * 节流 throttle(function, wait, [options]) 当重复调用时，每隔wait毫秒最多只调用一次原始函数
+         * @param  {function}                           func    真正想要触发的操作，原始函数
+         * @param  {string|number}                      wait    等候时长，每轮等候周期时长
+         * @param  {{leading:boolean,trailing:boolean}} options 对象，默认{leading：true,trailing：true}。{leading：false} - 禁用前缘触发，即传递函数第一次触发时不会调用func，需要等候；{trailing：false} - 禁用后端触发，即传递函数最后一次触发后，不会再调用func
+         * @return {function}                           传递函数/事件监听器，每次事件触发都会调用
+         */
+        function throttle(func, wait, options) {
+            var context, args, result;
+            var timeout = null;
+            var previous = 0;
+            if (!options) {
+                options = {};
+            };
+            var later = function () {
+                previous = options.leading === false ? 0 : Date.now();
+                timeout = null;
+                result = func.apply(context, args);
+                if (!timeout) {
+                    context = args = null;
+                }
+            };
+            return function () {
+                var now = Date.now();
+                if (!previous && options.leading === false) {
+                    previous = now;
+                }
+                var remaining = wait - (now - previous); // 每轮等候周期剩余时长。没有剩余时长就执行原始函数
+                context = this;
+                args = arguments;
+                // 精彩之处：按理来说remaining <= 0已经足够证明已经到达wait的时间间隔，但这里还考虑到假如客户端修改了系统时间，修改到过去的时间则马上执行func函数。
+                if (remaining <= 0 || remaining > wait) {
+                    // 由于setTimeout存在最小时间精度问题，因此会存在到达wait的时间间隔，但之前设置的setTimeout操作还没被执行，因此为保险起见，这里先清理setTimeout操作
+                    if (timeout) {
+                        clearTimeout(timeout);
+                        timeout = null;
+                    }
+                    previous = now;
+                    result = func.apply(context, args);
+                    if (!timeout) {
+                        context = args = null;
+                    }
+                } else if (!timeout && options.trailing !== false) { // 还有剩余时长，还在等候周期里面 且 后端触发
+                    timeout = setTimeout(later, remaining); // 定时剩余时长后触发
+                }
+                return result;
+            };
+        };
+    </script>
+
+</head>
+
+<body>
+    <div style="height:2000px;background:#eee"></div>
+</body>
+
+</html>

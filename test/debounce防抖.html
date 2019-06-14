@@ -67,10 +67,11 @@
 
 
         /**
-         * 防抖
-         * @param  {Function} func        真正需要操作的动作，真正操作函数
-         * @param  {Number}   wait        等候时长，毫秒
-         * @param  {Boolean}  immediate   true-前缘触发，false-延迟触发（默认值）
+         * 防抖 debounce(func, wait, [immediate])
+         * @param  {Function} func        必填，真正需要操作的动作，真正操作函数
+         * @param  {Number}   wait        必填，等候时长，每轮等候周期时长
+         * @param  {Boolean}  immediate   选填，true-前缘触发，false-延迟触发（默认值）
+         * @return {function}             传递函数/事件监听器，每次事件触发都会调用
          */
         function debounce(func, wait, immediate) {
 
@@ -79,12 +80,12 @@
             var timeout, args, context, timestamp, result;
 
             var later = function () {
-                var last = Date.now() - timestamp; // timestamp-触发“伪操作函数”时刻；所以last表示上次触发“伪操作函数”到触发later的时长，即"停止触发时长"。
+                var last = Date.now() - timestamp; // timestamp-触发传递函数时刻；所以last表示上次触发传递函数到触发later的时长，即"停止触发时长"。
 
                 if (last < wait && last >= 0) { // 停止触发时长 少于 等候时长。
-                    timeout = setTimeout(later, wait - last);  // wait = (wait - last) + last; 所以如果我们想 触发“伪操作函数”后wait毫秒后再次触发later，就要减去"停止触发时长"
+                    timeout = setTimeout(later, wait - last); // wait = (wait - last) + last; 所以如果我们想 触发传递函数后wait毫秒后再次触发later，就要减去"停止触发时长"
                 } else {
-                    timeout = null;// 清空定时器标示
+                    timeout = null; // 清空定时器标示
 
                     /* 延迟触发代码 */
                     if (!immediate) {
@@ -94,7 +95,7 @@
                 }
             };
 
-            return function () { // 命名为 “伪操作函数”
+            return function () { // 命名为 传递函数
                 context = this;
                 args = arguments;
                 timestamp = Date.now();
