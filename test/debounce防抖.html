@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>debounce防抖</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript">
+
+        document.addEventListener("scroll", debounce(function () {
+            console.log("debounce", "延迟触发，停止滚动1000ms后触发");
+        }, 1000, false), false);
+
+        document.addEventListener("scroll", debounce(function () {
+            console.log("debounce", "前缘触发，触发后要停止滚动1000ms，再次滚动触发");
+        }, 1000, true), false);
+
+
+
+        document.addEventListener("scroll", debounce_later(function () {
+            console.log("debounce_later", "延迟触发，停止滚动1000ms后触发");
+        }, 1000), false);
+
+        document.addEventListener("scroll", debounce_immediate(function () {
+            console.log("debounce", "前缘触发，触发后要停止滚动1000ms，再次滚动触发");
+        }, 1000), false);
+
+
+
+        /* 延迟防抖简单实现 */
+        function debounce_later(func, wait) {
+            var timer = null;
+            return function () {
+                var args = arguments;
+                var _this = this;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    func.apply(_this, args);
+                }, wait);
+            };
+        };
+
+        /* 前缘触发防抖简单实现 */
+        function debounce_immediate(func, wait) {
+            var timer = null;
+            var immediate = true;
+            return function () {
+                var args = arguments;
+                var _this = this;
+
+                // 立即执行，并将immediate设为false
+                if (immediate) {
+                    func.apply(_this, args);
+                    immediate = false;
+                }
+
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    // 停止触发一段时间后，才将immediate设为true
+                    immediate = true;
+                }, wait);
+            };
+        }
+
+
+        /**
+         * 防抖
+         * @param  {Function} func        真正需要操作的动作，真正操作函数
+         * @param  {Number}   wait        等候时长，毫秒
+         * @param  {Boolean}  immediate   true-前缘触发，false-延迟触发（默认值）
+         */
+        function debounce(func, wait, immediate) {
+
+            // immediate默认为false
+
+            var timeout, args, context, timestamp, result;
+
+            var later = function () {
+                var last = Date.now() - timestamp; // timestamp-触发“伪操作函数”时刻；所以last表示上次触发“伪操作函数”到触发later的时长，即"停止触发时长"。
+
+                if (last < wait && last >= 0) { // 停止触发时长 少于 等候时长。
+                    timeout = setTimeout(later, wait - last);  // wait = (wait - last) + last; 所以如果我们想 触发“伪操作函数”后wait毫秒后再次触发later，就要减去"停止触发时长"
+                } else {
+                    timeout = null;// 清空定时器标示
+
+                    /* 延迟触发代码 */
+                    if (!immediate) {
+                        result = func.apply(context, args);
+                        context = args = null;
+                    }
+                }
+            };
+
+            return function () { // 命名为 “伪操作函数”
+                context = this;
+                args = arguments;
+                timestamp = Date.now();
+
+                /* 前缘触发代码 */
+                var callNow = immediate && !timeout; // 标记
+                if (callNow) {
+                    result = func.apply(context, args);
+                    context = args = null;
+                }
+
+                if (!timeout) {
+                    timeout = setTimeout(later, wait);
+                }
+
+                return result;
+            };
+        };
+
+    </script>
+
+</head>
+
+<body>
+    <div style="height:2000px;background:#eee"></div>
+</body>
+
+</html>

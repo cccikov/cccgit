@@ -878,42 +878,51 @@ function compare(arr1, arr2) {
 }
 
 ///////////////////////
-// underscore v1.7.0  实现源码//
+// underscore v1.7.0  实现源码(经过部分修改)//
 ///////////////////////
 
 /**
  * 防抖
+ * @param  {Function} func        真正需要操作的动作，真正操作函数
+ * @param  {Number}   wait        等候时长，毫秒
+ * @param  {Boolean}  immediate   true-前缘触发，false-延迟触发（默认值）
  */
 function debounce(func, wait, immediate) {
+
     // immediate默认为false
+
     var timeout, args, context, timestamp, result;
 
     var later = function() {
-        // 当wait指定的时间间隔期间多次调用_.debounce返回的函数，则会不断更新timestamp的值，导致last < wait && last >= 0一直为true，从而不断启动新的计时器延时执行func
-        var last = Date.now() - timestamp;
+        var last = Date.now() - timestamp; // timestamp-触发“伪操作函数”时刻；所以last表示上次触发“伪操作函数”到触发later的时长，即"停止触发时长"。
 
-        if (last < wait && last >= 0) {
-            timeout = setTimeout(later, wait - last);
+        if (last < wait && last >= 0) { // 停止触发时长 少于 等候时长。
+            timeout = setTimeout(later, wait - last); // wait = (wait - last) + last; 所以如果我们想 触发“伪操作函数”后wait毫秒后再次触发later，就要减去"停止触发时长"
         } else {
-            timeout = null;
+            timeout = null; // 清空定时器标示
+
+            /* 延迟触发代码 */
             if (!immediate) {
                 result = func.apply(context, args);
-                if (!timeout) context = args = null;
+                context = args = null;
             }
         }
     };
 
-    return function() {
+    return function() { // 命名为 “伪操作函数”
         context = this;
         args = arguments;
         timestamp = Date.now();
-        // 第一次调用该方法时，且immediate为true，则调用func函数
-        var callNow = immediate && !timeout;
-        // 在wait指定的时间间隔内首次调用该方法，则启动计时器定时调用func函数
-        if (!timeout) timeout = setTimeout(later, wait);
+
+        /* 前缘触发代码 */
+        var callNow = immediate && !timeout; // 标记
         if (callNow) {
             result = func.apply(context, args);
             context = args = null;
+        }
+
+        if (!timeout) {
+            timeout = setTimeout(later, wait);
         }
 
         return result;
@@ -971,4 +980,3 @@ function throttle(func, wait, options) {
     // 精彩之处：按理来说remaining <= 0已经足够证明已经到达wait的时间间隔，但这里还考虑到假如客户端修改了系统时间则马上执行func函数。 //
     ////////////////////////////////////////////////////////////////////////////////
 };
-
