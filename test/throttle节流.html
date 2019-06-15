@@ -12,7 +12,7 @@
 
         document.addEventListener("scroll", throttle(function () {
             console.log("立即执行，停止滚动后，还会再执行一次")
-        }, 10000), false);
+        }, 1000), false);
 
         document.addEventListener("scroll", throttle(function () {
             console.log("不立即执行，停止滚动后，还会再执行一次")
@@ -21,6 +21,47 @@
         document.addEventListener("scroll", throttle(function () {
             console.log("立即执行，停止滚动后，不会再执行一次")
         }, 1000, { trailing: false }), false);
+
+
+        /**
+         * 节流 简单实现，利用时间戳
+         * 无前缘触发，无后端触发
+         */
+        function throttle_stamp(func, mustRun) {
+            var startTime = Date.now();
+
+            return function () {
+                var _this = this;
+                var args = arguments; //获取参数
+                var curTime = Date.now();
+
+                if (curTime - startTime >= mustRun) { // 如果达到了规定的触发时间间隔，触发 handler
+                    func.apply(_this, args);
+                    startTime = curTime;
+                }
+            };
+        };
+
+        /*
+         * 节流 简单实现，利用定时器写法
+         * 前缘触发，无后端触发
+         */
+        function throttle_setTimeout(func, mustRun) {
+            var run = true; // 是否会执行func
+
+            return function () {
+                var _this = this;
+                var args = arguments; //获取参数
+
+                if (run) {
+                    func.apply(_this, args);
+                    run = false;
+                    setTimeout(function () {
+                        run = true;
+                    }, mustRun);
+                }
+            }
+        }
 
         /**
          * 节流 throttle(function, wait, [options]) 当重复调用时，每隔wait毫秒最多只调用一次原始函数
@@ -32,12 +73,12 @@
         function throttle(func, wait, options) {
             var context, args, result;
             var timeout = null;
-            var previous = 0;
+            var previous = 0; // 上一次触发传递函数时间戳
             if (!options) {
                 options = {};
             };
             var later = function () {
-                previous = options.leading === false ? 0 : Date.now();
+                previous = options.leading === false ? 0 : Date.now(); // 如果是前缘触发，要记录触发时间，避免触发后，立即触发传递函数就会再触发原始函数
                 timeout = null;
                 result = func.apply(context, args);
                 if (!timeout) {
