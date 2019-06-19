@@ -716,6 +716,7 @@ function getPath(str) {
     }
 }
 
+/* 解析url */
 function urlParse(str) {
     var url = document.createElement('a'); // a标签的dom对象（HTMLAnchorElement）实现了类似location实例的接口
     url.href = str;
@@ -749,7 +750,7 @@ function urlParse(str) {
     return obj;
 }
 
-// search 解析
+// search 查询字符串 解析
 function searchParse(search) {
     var search = search || window.location.search;
     search = search.substr(1);
