@@ -222,6 +222,10 @@ ccc.isIos = function(){
     return (/(iPhone|iPad|iPod|iOS)/i).test(navigator.userAgent.toLowerCase());
 }
 
+ccc.isMobile = function(){
+    return (/android|(iPhone|iPad|iPod|iOS)|mobile/gi).test(navigator.userAgent.toLowerCase());
+}
+
 ccc.isXBrowser = function(name) { //msie(或者trident) chrome firefox
     var reg = new RegExp(name, "gi");
     return reg.test(navigator.userAgent.toLowerCase());
