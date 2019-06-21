@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>js加密</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript" src="./js/crypto-js.js"></script>
+    <script type="text/javascript">
+    /**
+     * 加密（需要先加载lib/aes/aes.min.js文件）
+     * @param word
+     * @returns {*}
+     */
+    function encrypt(word) {
+        var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
+        var srcs = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(srcs, key, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+        return encrypted.toString();
+    }
+
+    /**
+     * 解密
+     * @param word
+     * @returns {*}
+     */
+    function decrypt(word) {
+        var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
+        var decrypt = CryptoJS.AES.decrypt(word, key, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+        return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+    }
+
+    var en = encrypt("123");
+    var de = decrypt(en);
+    console.log(en, de)
+
+
+        ! function() {
+            var data = "123";
+            var key = CryptoJS.enc.Latin1.parse('q70wqj2FqBPvaZnN');
+            var iv = CryptoJS.enc.Latin1.parse('jfX9GHegdRkZJDFA');
+
+            //加密
+            var encrypted = CryptoJS.AES.encrypt(data, key, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.ZeroPadding
+            });
+
+            console.log(encrypted.toString())
+
+            //解密
+            var decrypted = CryptoJS.AES.decrypt(encrypted, key, { iv: iv, padding: CryptoJS.pad.ZeroPadding });
+            console.log(decrypted.toString(CryptoJS.enc.Utf8));
+        }()
+    </script>
+</head>
+
+<body>
+    test
+</body>
+
+</html>
