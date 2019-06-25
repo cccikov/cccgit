@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>ua 判断 设备</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        textarea {
+            display: block;
+            width: 100%;
+            font-size: 16px;
+            height: 8em;
+            box-sizing: border-box;
+        }
+
+        p {
+            max-width: 100%;
+            line-height: 2;
+        }
+    </style>
+    <script type="text/javascript">
+    var ua = navigator.userAgent.toLowerCase();
+
+    document.write(`<textarea>${ua}</textarea>`);
+
+    var wxUa = `mozilla/5.0 (linux; android 9; 16s build/pkq1.190202.001; wv) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/70.0.3538.111 mobile safari/537.36 mmwebid/9908 micromessenger/7.0.4.1420(0x2700043c) process/tools nettype/wifi language/zh_cn`
+    var chromeUa = `mozilla/5.0 (linux; android 9; 16s) applewebkit/537.36 (khtml, like gecko) chrome/75.0.3770.67 mobile safari/537.36`
+    var chromePcUa = "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.108 safari/537.36"
+    var firefoxUa = `mozilla/5.0 (android 9; mobile; rv:67.0) gecko/67.0 firefox/67.0`
+    var qqUa = `mozilla/5.0 (linux; u; android 9; zh-cn; 16s build/pkq1.190202.001) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/66.0.3359.126 mqqbrowser/9.4 mobile safari/537.36`
+    var ucUa = `mozilla/5.0 (linux; u; android 9; zh-cn; 16s build/pkq1.190202.001) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/57.0.2987.108 ucbrowser/12.5.0.1030 mobile safari/537.36`
+    var mzUa = `mozilla/5.0 (linux; u; android 9; zh-cn; mz-16s build/mra58k) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/57.0.2987.108 mzbrowser/7.12.0 uws/2.15.0.4 mobile safari/537.36`
+
+    var isAndroid = (/android/gi).test(ua);
+    var isIos = (/(iPhone|iPad|iPod|iOS)/i).test(ua);
+    var isMobile = (/android|(iPhone|iPad|iPod|iOS)|mobile/gi).test(ua);
+    var isWx = (/micromessenger/).test(ua);
+    var isUc = (/ucbrowser/).test(ua);
+    var isQQ = (/mqqbrowser/).test(ua);
+    var isFirefox = (/firefox/).test(ua);
+    var isChrome = (/mozilla\/\d+\.\d+\s*?\(.*?\)\s*?applewebkit\/\d+\.\d+\s*?\(khtml.+?like.+?gecko\)\s*?chrome\/(\d+)\.(\d|\.)+/).test(ua);
+    var chromeVersion = ua.match(/mozilla\/\d+\.\d+\s*?\(.*?\)\s*?applewebkit\/\d+\.\d+\s*?\(khtml.+?like.+?gecko\)\s*?chrome\/(\d+)\.(\d|\.)+/);
+    chromeVersion = Array.isArray(chromeVersion) ? chromeVersion[1] : "";
+
+    document.write(`<p>${JSON.stringify({
+        isMobile,
+        isAndroid,
+        isIos,
+        isWx,
+        isUc,
+        isQQ,
+        isFirefox,
+        isChrome,
+        chromeVersion
+    }, null, 4).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;")}</p>`)
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
