@@ -41,8 +41,8 @@
     var isUc = (/ucbrowser/).test(ua);
     var isQQ = (/mqqbrowser/).test(ua);
     var isFirefox = (/firefox/).test(ua);
-    var isChrome = (/^mozilla\/\d+\.\d+\s*?\(.*?\)\s*?applewebkit\/\d+\.\d+\s*?\(khtml.+?like.+?gecko\)\s*?chrome\/(\d+)\.(\d|\.)+\s*?(mobile\s*?)safari\/(\d|\.)+$/).test(ua);
-    var chromeVersion = ua.match(/^mozilla\/\d+\.\d+\s*?\(.*?\)\s*?applewebkit\/\d+\.\d+\s*?\(khtml.+?like.+?gecko\)\s*?chrome\/(\d+)\.(\d|\.)+\s*?(mobile\s*?)safari\/(\d|\.)+$/);
+    var isChrome = (/^mozilla\/\d+\.\d+\s*?\(.*?\)\s*?applewebkit\/\d+\.\d+\s*?\(khtml.+?like.+?gecko\)\s*?chrome\/(\d+)\.(\d|\.)+\s*?(mobile\s*?)?safari\/(\d|\.)+$/).test(ua);
+    var chromeVersion = ua.match(/^mozilla\/\d+\.\d+\s*?\(.*?\)\s*?applewebkit\/\d+\.\d+\s*?\(khtml.+?like.+?gecko\)\s*?chrome\/(\d+)\.(\d|\.)+\s*?(mobile\s*?)?safari\/(\d|\.)+$/);
     chromeVersion = Array.isArray(chromeVersion) ? chromeVersion[1] : "";
 
     document.write(`<p>${JSON.stringify({
