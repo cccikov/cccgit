@@ -136,6 +136,9 @@
 			today = new Date(today);
 			// 获取本周
 			let week = today.getDay();
+			if (week == 0) {
+                week = 7;
+            }
 			let weekStart = new Date(today-week*oneDay); // 以周日作为起点
 			let weekStartByMon = new Date(today-(week-1)*oneDay); // 以周一作为起点
 			console.log(today,weekStart,weekStartByMon);
@@ -152,6 +155,8 @@
 			// 上个月
 			let lastMonth = new Date(year,month-1);
 			console.log(lastMonth);
+			// 上个月最后一天
+			console.log(new Date(new Date().setDate(0)))
 
 			console.log("%c---", "color:red")
 
