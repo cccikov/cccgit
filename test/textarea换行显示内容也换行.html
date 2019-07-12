@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>textarea换行显示内容也换行</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script>
+        function fn(){
+            var value = text.value;
+            var arr = enterFix(value);
+            console.log(arr)
+            render(arr);
+        }
+
+        function enterFix(str){
+            var reg = /\n|\r|\r\n/;
+            console.log(str.replace(reg,'<br>'))
+            return str.split(reg);
+        }
+
+        function render(arr){
+            arr.forEach(txt=>{
+                let p = document.createElement("p");
+                p.innerHTML = txt;
+                document.body.appendChild(p)
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <textarea id="text" cols="30" rows="10"></textarea>
+    <button onclick="fn()">提交</button>
+</body>
+
+</html>
