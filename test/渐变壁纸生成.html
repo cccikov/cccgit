@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>渐变壁纸生成</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+
+</head>
+
+<body>
+    <style>
+        html {
+            height: 100%;
+            background: linear-gradient(to bottom,#3131df, #e8aff7);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        var arr = [
+            ["#3131df", "#e8aff7"],
+            ["#184377", "#47aaaf"],
+            ["#0f4c97", "#33c7cf"],
+            ["#fff", "#fff"],
+            ["#000", "#000"],
+            ["#f00", "#f00"],
+            ["#0f0", "#0f0"],
+            ["#00f", "#00f"],
+        ]
+        document.addEventListener("click", function () {
+            console.log("click");
+            document.documentElement.requestFullscreen().catch(err => console.log(err));
+        }, false);
+
+        alert("点击下载canvas生成的图片")
+        var canvas = document.createElement("canvas");
+        var w = 1080;
+        var h = 2232;
+        canvas.width = w;
+        canvas.height = h;
+
+        document.body.appendChild(canvas);
+        var ctx = canvas.getContext("2d");
+
+
+        var linearGradient = ctx.createLinearGradient(0, 0, 0, h);	//只是定义渐变方向
+
+        linearGradient.addColorStop(1, arr[2][0]);
+        linearGradient.addColorStop(0, arr[2][1]);
+
+        ctx.fillStyle = linearGradient;
+        ctx.fillRect(0, 0, w, h);
+
+        canvas.addEventListener("click", click, false);
+
+        function click(e) {
+            e.stopPropagation()
+            canvas.toBlob(function (blob) {
+                var url_object = window.URL.createObjectURL(blob);
+                download(url_object);
+                window.URL.revokeObjectURL(url_object);
+            }, 'image/png', 1);
+        }
+
+
+        /**
+        * 下载文件
+        * @param  {string} url 文件路径(可以是base64，但是base64位的url不能太长，否则会下载失败)
+        * 如果blob转化为url的，推荐使用 createObjectURL 创建的url，无论文件多大都不会造成url过长，导致下载失败
+        */
+        function download(url) {
+            var anchor = document.createElement("a");
+            anchor.download = "file";
+            anchor.href = url;
+            anchor.click();
+        }
+    </script>
+</body>
+
+</html>
