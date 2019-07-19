@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>双指中心缩放(点击版)</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+
+        }
+
+        #wrap {
+            position: fixed;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        .img-wrap {
+            width: 100px;
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
+            transform-origin: 0 0;
+        }
+
+        .img-wrap img {
+            display: block;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <!-- img-wrap 形变对象，不能事先设置transform，否则会被js覆盖 -->
+        <div class="img-wrap">
+            <img src="./img/firefox_512.png">
+        </div>
+    </div>
+    <script>
+        class FingerCenter {
+            constructor(imgWrapDom) {
+                this.init(imgWrapDom);
+            }
+            init(imgWrapDom) {
+                if (!imgWrapDom) {
+                    return;
+                }
+                if (typeof imgWrapDom === "object" && imgWrapDom.nodeType === 1) {
+                    this.el = imgWrapDom; // 元素dom对象
+                } else if (typeof imgWrapDom === "string") {
+                    var wrap = document.querySelectorAll(imgWrapDom)[0];
+                    this.el = wrap; // 元素dom对象
+                } else {
+                    return
+                }
+                this._transformInit();
+                this._addListener();
+            }
+            /**
+             * 初始化变形（所以元素本身不能有 transform，否则会被覆盖）
+             */
+            _transformInit() {
+                this.scale = 1; // 放大倍数
+                this.oldScale = this.scale; // 上一次的放大倍数
+                this.x = 0; // 移动的位置
+                this.y = 0; // 移动的位置
+                this.oriX = 10; // 变形原点位置
+                this.oriY = 10; // 变形原点位置
+                this.pointX = 0; // 点击的地方相对于原点的位置
+                this.pointY = 0; // 点击的地方相对于原点的位置
+                this.el.style.transformOrigin = `${this.oriX}px ${this.oriY}px`;
+                this.el.style.transform = `translate(${this.x}px,${this.y}px) scale(${this.scale})`;
+            }
+            /**
+             * ori 为原点位置
+             * point 为放大中心位置
+             */
+            _toScale() {
+                // 原始距离等于 origin - point
+                var disX = this.oriX * this.oldScale - this.pointX;
+                var disY = this.oriY * this.oldScale - this.pointY;
+
+                // 缩放后新的距离
+                var newDisX = disX * this.scale / this.oldScale;
+                var newDisY = disY * this.scale / this.oldScale;
+
+                // 由于point的需要位置不变，距离变化了，所以只有cen变化才能满足；cen需要移动的距离
+                var moveX = newDisX - disX;
+                var moveY = newDisY - disY;
+
+                this.x = this.x + moveX;
+                this.y = this.y + moveY;
+
+                this.el.style.transform = `translate(${this.x}px,${this.y}px) scale(${this.scale})`;
+            }
+
+            _addListener() {
+                var _this = this;
+                this.touchstartListener = function (e) { // 可以算做闭包吧，在_addListener定义函数作为监听器，然后监听器里面就可以读取到_addListener里面的变量，这里是为了读取_this（实例），如果不这么写，直接像原型的方法那样的写得话，里面将读取不到实例对象
+                    console.log("listener", this, _this);
+                    _this._touchstart(e, this); // 由于 _touchstart 的调用方式是作为对象_this的方法调用，所以_touchstart里面的this指向_this
+                }
+                _this.el.addEventListener("touchstart", _this.touchstartListener, false); // 由于 touchstartListener 函数的调用方式是被作为事件监听器器调用，所以 touchstartListener 里面的this指向_this.el
+            }
+            _removeListener() {
+                var _this = this;
+                _this.el.removeEventListener("touchstart", _this.touchstartListener, false);
+            }
+            _touchstart(e, tar) { // 这个作为实际的handler，但是里面的this又是指向实例
+                console.log("handler", e.touches[0].clientX);
+                console.log("handler", this, tar);
+                console.log("handler", tar === e.currentTarget);
+
+                /* 确定点中位置 */
+                var posi = this.el.getBoundingClientRect();
+                this.pointX = (e.touches[0].clientX - posi.left); // 点击的地方在对象中的什么位置。
+                this.pointY = (e.touches[0].clientY - posi.top); // 点击的地方在对象中的什么位置。
+
+                /* 缩放 */
+                this.oldScale = this.scale;
+                this.scale = Math.random() * (10 - 0.2) + 0.2;
+                this._toScale();
+            }
+        }
+
+        var wrap = document.querySelectorAll(".img-wrap")[0];
+        var instance = new FingerCenter(".img-wrap");
+        console.log(instance);
+    </script>
+</body>
+
+</html>
