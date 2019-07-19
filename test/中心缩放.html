@@ -14,12 +14,10 @@
             top: 25px;
             left: 20px;
             user-select: none;
-            transform-origin: center;
             transition: transform 300ms;
         }
 
-        .img-wrap:before {
-            content: "";
+        .img-wrap .ori {
             position: absolute;
             top: 150px;
             left: 150px;
@@ -30,8 +28,7 @@
             transform: translate(-50%, -50%);
         }
 
-        .img-wrap:after {
-            content: "";
+        .img-wrap .point {
             position: absolute;
             top: 50px;
             left: 250px;
@@ -52,43 +49,64 @@
     <p>以蓝点为中心放大缩小</p>
     <div class="img-wrap">
         <img src="./img/scale.png" alt="scale">
+        <span class="ori"></span>
+        <span class="point"></span>
     </div>
     <script>
         var tar = document.querySelectorAll(".img-wrap")[0];
-        var l = window.innerWidth/2-189;
-        var t = window.innerHeight/2-234;
+        var l = window.innerWidth / 2 - 189;
+        var t = window.innerHeight / 2 - 234;
         var s = 1;
+        var oriX = 10;
+        var oriY = 10;
+
+        // 元素变形的原点（不一定是元素的中心）; 当然也可以设为中心
+        tar.style.transformOrigin = `${oriX}px ${oriY}px`;
         tar.style.transform = `translate(${l}px,${t}px) scale(${s})`;
 
+        /* 红点（原点）位置 */
+        var ori = document.querySelectorAll(".img-wrap .ori")[0];
+        Object.assign(ori.style, {
+            left: oriX + "px",
+            top: oriY + "px"
+        });
+
+
+
         /**
-         * cen 为红点位置
+         * ori 为红点位置
          * point 为蓝点位置
          */
         function toScale(scale) {
-            var cenX = 150;
-            var cenY = 150;
-            var pointX = 250;
-            var pointY = 50;
 
-            // 距离等于 cen - point
-            var disX = cenX - pointX;
-            var disY = cenY - pointY;
+            var pointX = 234;
+            var pointY = 56;
 
+            /* 蓝点位置 */
+            var point = document.querySelectorAll(".img-wrap .point")[0];
+            Object.assign(point.style, {
+                left: pointX + "px",
+                top: pointY + "px"
+            });
 
-            // 新的距离
-            var newDisX = disX*scale
-            var newDisY = disY*scale
+            // 原始距离等于 origin - point
+            var disX = oriX - pointX;
+            var disY = oriY - pointY;
 
-            // 需要移动的距离
-            var moveX = newDisX-disX;
-            var moveY = newDisY-disY;
+            // 放大后新的距离
+            var newDisX = disX * scale
+            var newDisY = disY * scale
 
-            tar.style.transform = `translate(${l+moveX}px,${t+moveY}px) scale(${scale})`;
+            // 由于point的需要位置不变，距离变化了，所以只有cen变化才能满足；cen需要移动的距离
+            var moveX = newDisX - disX;
+            var moveY = newDisY - disY;
+
+            tar.style.transform = `translate(${l + moveX}px,${t + moveY}px) scale(${scale})`;
 
         }
 
-        document.addEventListener("click",function(){
-            toScale(Math.random()*5);
+        document.addEventListener("click", function () {
+            toScale(Math.random() * 5);
         });
     </script>
 </body>
