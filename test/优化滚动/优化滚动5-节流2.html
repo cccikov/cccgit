@@ -51,17 +51,28 @@
 
         var index = 0;
 
-        // $(window).on("scroll", throttle(function() {
-        //     console.log(index++);
-        // }, 1000));
+        // 调用方式1
+        /* $(window).on("scroll", throttle(function() {
+            console.log(this);
+            console.log(index++);
+        }, 1000)); */
 
-        let fn = throttle2(function() {
+
+        // 调用方式2
+        /* let fn = throttle2(function() {
+            console.log(this);
             console.log(index++);
         }, 1000)
-
         document.onscroll = function(e) {
             fn.call(this, e);
-        }
+        } */
+
+        // 调用方式3
+        let fn = throttle2(function() {
+            console.log(this);
+            console.log(index++);
+        }, 1000)
+        document.onscroll = fn;
 
     });
     </script>
