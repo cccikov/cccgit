@@ -35,7 +35,10 @@
 </head>
 
 <body>
-    <div id="tips"></div>
+    <div id="tips1"></div>
+    <div id="tips2"></div>
+    <div id="tips3"></div>
+    <div id="tips4"></div>
     <div id="wrap">
         <!-- img-wrap 形变对象，不能事先设置transform，否则会被js覆盖 -->
         <div class="img-wrap">
@@ -81,6 +84,10 @@
                     return
                 }
 
+                /* 渲染标记 */
+                this.requestId = null;
+                this.cancelAni = false;
+
                 this.fingersData = [{
                     x: 0,
                     y: 0,
@@ -94,13 +101,22 @@
                 this._addListener();
             }
             _render() {
+                tips1.innerHTML = `render ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`;
                 var x = parseInt(this.x * 100) / 100;
                 var y = parseInt(this.y * 100) / 100;
                 var scale = parseInt(this.scale * 100) / 100;
                 this.el.style.transform = `translate3d(${x}px,${y}px,0px) scale3d(${scale},${scale},1)`;
-                requestAnimationFrame(() => {
+
+                this.requestId = requestAnimationFrame(() => {
                     this._render();
                 });
+
+                if (this.cancelAni) {
+                    cancelAnimationFrame(this.requestId); // cancelAnimationFrame 一定要在 requestAnimationFrame 之后，否则又会执行
+                    this.cancelAni = false;;
+                    this.running = !this.running;
+                    tips3.innerHTML = `cancelAnimationFrame ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`
+                }
             }
             /**
              * 初始化变形（所以元素本身不能有 transform，否则会被覆盖）
@@ -115,9 +131,6 @@
                 this.pointX = 0; // 点击的地方相对于原点的位置
                 this.pointY = 0; // 点击的地方相对于原点的位置
                 this.el.style.transformOrigin = `${this.oriX}px ${this.oriY}px`;
-                requestAnimationFrame(() => {
-                    this._render();
-                });
             }
             /**
              * ori 为原点位置
@@ -154,10 +167,12 @@
                     console.log("listener", this, _this);
                     _this._touchstart(e, this); // 由于 _touchstart 的调用方式是作为对象_this的方法调用，所以_touchstart里面的this指向_this
                 }
-                _this.el.addEventListener("touchstart", _this.touchstartListener, false); // 由于 touchstartListener 函数的调用方式是被作为事件监听器器调用，所以 touchstartListener 里面的this指向_this.el
+                document.addEventListener("touchstart", _this.touchstartListener, {
+                    capture: false,
+                    passive: false
+                }); // 由于 touchstartListener 函数的调用方式是被作为事件监听器器调用，所以 touchstartListener 里面的this指向_this.el
 
                 /* touchmove 监听器*/
-
                 _this.touchmoveListener = function (e) {
                     e.preventDefault();
                     _this._touchmove(e, this);
@@ -171,7 +186,7 @@
             }
             _removeListener() {
                 var _this = this;
-                _this.el.removeEventListener("touchstart", _this.touchstartListener, false);
+                document.removeEventListener("touchstart", _this.touchstartListener, false);
             }
             _touchstart(e, tar) { // 这个作为实际的handler，但是里面的this又是指向实例
                 console.log("handler", e.touches[0].clientX);
@@ -195,11 +210,15 @@
                 });
             }
             _touchmove(e, tar) {
-                tips.innerHTML = e.touches[0].clientX;
+                tips2.innerHTML = `touchmove ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`
+                if(!this.running){
+                    this._render();
+                    this.running = !this.running;
+                }
+
 
                 var fingers = e.touches.length;
                 if (fingers === 2) {
-                    tips.innerHTML = `${e.touches[0].clientY} ${e.touches[1].clientY}`;
                     this.fingersData = [{
                         x: e.touches[0].clientX,
                         y: e.touches[0].clientY
@@ -232,6 +251,7 @@
 
             }
             _touchend(e, tar) {
+                this.cancelAni = true;
                 document.removeEventListener("touchmove", this.touchmoveListener, {
                     capture: false,
                     passive: false
