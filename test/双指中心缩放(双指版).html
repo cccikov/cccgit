@@ -114,7 +114,7 @@
                 if (this.cancelAni) {
                     cancelAnimationFrame(this.requestId); // cancelAnimationFrame 一定要在 requestAnimationFrame 之后，否则又会执行
                     this.cancelAni = false;;
-                    this.running = !this.running;
+                    this.running = false;
                     tips3.innerHTML = `cancelAnimationFrame ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`
                 }
             }
@@ -212,10 +212,9 @@
             _touchmove(e, tar) {
                 tips2.innerHTML = `touchmove ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`
                 if(!this.running){
+                    this.running = true; // 由于 _render 里面有个设置running为false的语句（而且还是同步的），所以这句一定要放在this._render()前面。如来到这步this.cancelAni为true的时候，导致最终执行完if后，this.running为ture，但是实际没有render在运行，而且再也进不去了执行render了。
                     this._render();
-                    this.running = !this.running;
                 }
-
 
                 var fingers = e.touches.length;
                 if (fingers === 2) {
