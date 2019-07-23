@@ -59,12 +59,12 @@
         {
             let str = "1234567890";
             let reg = /3(456)(789)/;
-            let result = str.replace(reg, function(match,p1,p1,index,str){
+            let result = str.replace(reg, function(match,p1,p2,index,str){
                 var arg = arguments;
                 console.log(arg);
-                return `- match:${match} p1:${p1} p1:${p1} index:${index} str:${str} -`
+                return `- match:${match} p1:${p1} p2:${p2} index:${index} str:${str} -`
             });
-            console.log(result);// 12- match:3456789 p1:789 p1:789 index:2 str:1234567890 -0
+            console.log(result);// 12- match:3456789 p1:456 p2:789 index:2 str:1234567890 -0
         }
     </script>
 </head>
