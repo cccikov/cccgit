@@ -28,7 +28,7 @@
         }
 
         .img-wrap.transitioning {
-            transition: transform 300ms;
+            transition: transform 16.7ms;
         }
 
 
@@ -214,9 +214,20 @@
                     }
                 }
 
-                /* 过渡 */
-                // this.transitioning = true;
-                // this.el.classList.add("transitioning");
+                /*
+                 * 过渡效果
+                 * 个人感觉要不就不要过渡效果，做的话就使用js实现过渡，每一帧通过改变x y来实现
+                 * 不然用css实现过渡，如果用户连续缩放，由于在过渡期间无效，会有一种卡顿感
+                 * 用js的话，每一帧都得状态都知道，都可以以每一帧作为基础再缩放移动，就不会有卡顿感
+                 */
+
+                this.transitioning = true;
+                this.el.classList.add("transitioning");
+                setTimeout(() => { // 不过可以 通过监听 transitionend 来移除，因为有可能位置没变化，就不触发transitionend，就移除不了过渡效果
+                    /* 移除过渡效果 */
+                    this.el.classList.remove("transitioning");
+                    this.transitioning = false;
+                }, 16.7);
 
                 this.el.style.transform = `translate3d(${this.x}px,${this.y}px,0px) scale3d(${this.scale},${this.scale},1)`;
             }
@@ -252,21 +263,12 @@
                 }
                 document.addEventListener("touchend", _this.touchendListener, false);
 
-                /* 过渡效果结束 */
-                // _this.el.addEventListener("transitionend", function (e) {
-                //     if (e.propertyName === "transform" && this.classList.contains("transitioning")) {
-                //         /* 移除过渡效果 */
-                //         this.classList.remove("transitioning");
-                //         _this.transitioning = false;
-                //     }
-                // }, false);
             }
 
             _removeListener() {
                 var _this = this;
                 document.removeEventListener("touchstart", _this.touchstartListener, false);
             }
-
 
             /*
              * 以下为触摸事件
