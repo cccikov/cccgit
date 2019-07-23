@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>正则表达式 match方法</title>
+    <style>
+        .par {
+            background: #f00;
+        }
+    </style>
 </head>
+
 <body>
     <script type="text/javascript">
+        /**
+         * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/match
+         * 如果使用g标志，则将返回与完整正则表达式匹配的所有结果（Array），但不会返回捕获组，或者未匹配 null。
+         * 如果未使用g标志，则仅返回第一个完整匹配及其相关的捕获组（Array）。 在这种情况下，返回的项目将具有如下所述的其他属性，或者未匹配 null。
+         */
+
         {
             let reg = /(^|&)tn=([^&]*)(&|$)/i;
             let str = "https://www.baidu.com/s?wd=mix&rsv_spt=1&rsv_iqid=0x89e20c4800344e7e&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=15&rsv_sug1=11&rsv_sug7=100"
@@ -16,24 +29,24 @@
                 数组第一个:匹配到的字符 &tn=baiduhome_pg&
                 其余的就存放子表达式匹配到的内容
                 第一个子表达式(^|&) 匹配到的是 "&"
-                第二个子表达式(^|&) 匹配到的是 "baiduhome_pg"
-                第三个子表达式(^|&) 匹配到的是 "&"
+                第二个子表达式([^&]*) 匹配到的是 "baiduhome_pg"
+                第三个子表达式(&|$) 匹配到的是 "&"
             */
         }
+
         {
             let reg = /123456/;
             let str = "123456";
             let result = str.match(reg);
             console.log(JSON.stringify(result));//["123456"]
         }
+
         {
             let reg = /(12)(345)6/;
             let str = "123456";
             let result = str.match(reg);
             console.log(JSON.stringify(result));//["123456","12","345"]
         }
-
-
 
         {
             let reg = /\d+/g;
@@ -45,6 +58,7 @@
                 数组里面是所有匹配的字符
             */
         }
+
         {
             let reg = /(\d+)/g;
             let str = "10px 0 20px 50px"
@@ -56,6 +70,40 @@
                 不管有没有()
             */
         }
+
+
+        {
+            let reg = /123(456)/;
+            let str = "1234567890"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));// ["123456","456"]
+        }
+        {
+            let reg = /123(?:456)/;
+            let str = "1234567890"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));// ["123456"]
+        }
+        {
+            let reg = /123(?=456)/;
+            let str = "1234567890"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));// ["123"]
+        }
+        {
+            let reg = /(?<=456)789/;
+            let str = "1234567890"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));// ["789"]
+        }
+        {
+            let reg = /123(?!123)/;
+            let str = "1231234567890"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result));// ["789"]
+            console.log(str.replace(reg, "aaa")); // 123aaa4567890
+        }
     </script>
 </body>
+
 </html>
