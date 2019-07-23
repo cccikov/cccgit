@@ -127,7 +127,7 @@
 
 
 
-
+    var obj={};
 
 
     var id = "1557849337284564146";
@@ -136,6 +136,10 @@
         url: "./js/array.json" // 数据是通过 createData 方法生成
     }).then(res => {
         var data = res.data;
+
+        obj = data;
+        left.innerHTML = JSON.stringify(obj, null, 4).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
+
         var indexs = searchData(data, id).split(" ").map(val => {
             return Number(val);
         });
@@ -150,10 +154,38 @@
         console.log("id 所在的目标对象的上上上级", getData(data, indexs.slice(0, -3))); // id 所在的目标对象的上上上级
         console.log("id 所在的目标根对象，二级对象，...，最终对象", getDatas(data, indexs)); // id 所在的目标根对象，二级对象，...，最终对象
     });
+
+
+
+
+
+    function searchHandler(){
+        var id = input.value;
+        var indexs = searchData_arr(obj,id);
+        result.innerHTML = JSON.stringify(getData(obj,indexs), null, 4).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
+    }
     </script>
 </head>
 
 <body>
+    <style>
+        #wrap{
+            display: flex;
+        }
+        #left{
+            flex: 0 0 50%;
+        }
+        #right{
+            flex:0 1 50%;
+        }
+    </style>
+    <div id="wrap">
+        <div id="left"></div>
+        <div id="right">
+            搜索的id：<input id="input" type="text"><button onclick="searchHandler()">search</button>
+            <div id="result"></div>
+        </div>
+    </div>
 </body>
 
 </html>
