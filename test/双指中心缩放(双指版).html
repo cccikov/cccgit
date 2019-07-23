@@ -27,6 +27,11 @@
             will-change: transform;
         }
 
+        .img-wrap.transitioning {
+            transition: transform 300ms;
+        }
+
+
         .img-wrap img {
             display: block;
             max-width: 100%;
@@ -68,9 +73,14 @@
         }
 
         class FingerCenter {
+
+            /*
+             * 构造函数
+             */
             constructor(imgWrapDom) {
                 this.init(imgWrapDom);
             }
+
             init(imgWrapDom) {
                 if (!imgWrapDom) {
                     return;
@@ -86,7 +96,11 @@
 
                 /* 渲染标记 */
                 this.requestId = null;
-                this.cancelAni = false;
+                this.cancelAni = false; // 是否应该cancelAnimationFrame
+                this.rendering = false; // 渲染中
+
+                /* 过渡效果 */
+                this.transitioning = false;
 
                 this.fingersData = [{
                     x: 0,
@@ -100,24 +114,7 @@
                 this._transformInit();
                 this._addListener();
             }
-            _render() {
-                tips1.innerHTML = `render ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`;
-                var x = parseInt(this.x * 100) / 100;
-                var y = parseInt(this.y * 100) / 100;
-                var scale = parseInt(this.scale * 100) / 100;
-                this.el.style.transform = `translate3d(${x}px,${y}px,0px) scale3d(${scale},${scale},1)`;
 
-                this.requestId = requestAnimationFrame(() => {
-                    this._render();
-                });
-
-                if (this.cancelAni) {
-                    cancelAnimationFrame(this.requestId); // cancelAnimationFrame 一定要在 requestAnimationFrame 之后，否则又会执行
-                    this.cancelAni = false;;
-                    this.running = false;
-                    tips3.innerHTML = `cancelAnimationFrame ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`
-                }
-            }
             /**
              * 初始化变形（所以元素本身不能有 transform，否则会被覆盖）
              */
@@ -132,6 +129,7 @@
                 this.pointY = 0; // 点击的地方相对于原点的位置
                 this.el.style.transformOrigin = `${this.oriX}px ${this.oriY}px`;
             }
+
             /**
              * ori 为原点位置
              * point 为放大中心位置
@@ -153,6 +151,77 @@
                 this.y = this.y + moveY;
             }
 
+            _render() {
+                tips1.innerHTML = `render ${Date.now()} rendering:${this.rendering} cancelAni:${this.cancelAni}`;
+                var x = parseInt(this.x * 100) / 100;
+                var y = parseInt(this.y * 100) / 100;
+                var scale = parseInt(this.scale * 100) / 100;
+                this.el.style.transform = `translate3d(${x}px,${y}px,0px) scale3d(${scale},${scale},1)`;
+
+                this.requestId = requestAnimationFrame(() => {
+                    this._render();
+                });
+
+                if (this.cancelAni) {
+                    cancelAnimationFrame(this.requestId); // cancelAnimationFrame 一定要在 requestAnimationFrame 之后，否则又会执行
+                    try {
+                        this._toCenter();
+                    } catch (err) {
+                        alert(err);
+                    }
+                    this.cancelAni = false;;
+                    this.rendering = false;
+                    tips3.innerHTML = `cancelAnimationFrame ${Date.now()} rendering:${this.rendering} cancelAni:${this.cancelAni}`
+                }
+            }
+
+            /* 结局后居中 */
+            _toCenter() {
+                var posi = this.el.getBoundingClientRect();
+                tips4.innerHTML = formatJSON(posi, "html");
+                var winH = window.innerHeight;
+                var winW = window.innerWidth;
+                if (winH > posi.height) { // 如果不超过屏幕，居中
+                    var toTop = (winH - posi.height) / 2; // 要到达的位置
+                    var moveTop = toTop - posi.top; // 要到达的位置与当前位置的差值
+                    this.y += moveTop; // 补上差值
+                } else { // 超过了，保证与屏幕边缘没有间距就可以了
+                    var top = posi.top;
+                    var bottom = winH - posi.bottom;
+                    if (top > 0) { // 由于比屏幕大，只要top>0，那就说明上边与屏幕有留白，下边溢出屏幕
+                        var toTop = 0;
+                        var moveTop = toTop - posi.top;
+                        this.y += moveTop;
+                    } else if (bottom > 0) { // 下边有留白
+                        this.y += bottom;
+                    }
+                    // 剩下的情况是上下都没留白
+                }
+
+                if (winW > posi.width) {
+                    var toLeft = (winW - posi.width) / 2;
+                    var moveLeft = toLeft - posi.left;
+                    this.x += moveLeft;
+                } else {
+                    var left = posi.left;
+                    var right = winW - posi.right;
+                    if (left > 0) {
+                        var toLeft = 0;
+                        var moveLeft = toLeft - posi.left;
+                        this.x += moveLeft;
+                    } else if (right > 0) {
+                        this.x += right;
+                    }
+                }
+
+                /* 过渡 */
+                // this.transitioning = true;
+                // this.el.classList.add("transitioning");
+
+                this.el.style.transform = `translate3d(${this.x}px,${this.y}px,0px) scale3d(${this.scale},${this.scale},1)`;
+            }
+
+            /* 定义事件监听器的地方 */
             _addListener() {
                 var _this = this;
 
@@ -160,7 +229,6 @@
                  * 除了时间监听器，其他的地方的this都是指向实例
                  * 下面将监听器和实际handler分开就是为了这个目的，让实际handler里面this也是指向实例
                  */
-
 
                 /* touchstart 监听器 */
                 _this.touchstartListener = function (e) { // 可以算做闭包吧，在_addListener定义函数作为监听器，然后监听器里面就可以读取到_addListener里面的变量，这里是为了读取_this（实例）；如果不这么写，直接像原型的方法那样的写得话，里面将读取不到实例对象；作为监听器方式调用的函数，this会指向添加监听器的对象
@@ -183,11 +251,27 @@
                     _this._touchend(e, this);
                 }
                 document.addEventListener("touchend", _this.touchendListener, false);
+
+                /* 过渡效果结束 */
+                // _this.el.addEventListener("transitionend", function (e) {
+                //     if (e.propertyName === "transform" && this.classList.contains("transitioning")) {
+                //         /* 移除过渡效果 */
+                //         this.classList.remove("transitioning");
+                //         _this.transitioning = false;
+                //     }
+                // }, false);
             }
+
             _removeListener() {
                 var _this = this;
                 document.removeEventListener("touchstart", _this.touchstartListener, false);
             }
+
+
+            /*
+             * 以下为触摸事件
+             */
+
             _touchstart(e, tar) { // 这个作为实际的handler，但是里面的this又是指向实例
                 console.log("handler", e.touches[0].clientX);
                 console.log("handler", this, tar);
@@ -209,10 +293,14 @@
                     passive: false
                 });
             }
+
             _touchmove(e, tar) {
-                tips2.innerHTML = `touchmove ${Date.now()} running:${this.running} cancelAni:${this.cancelAni}`
-                if(!this.running){
-                    this.running = true; // 由于 _render 里面有个设置running为false的语句（而且还是同步的），所以这句一定要放在this._render()前面。如来到这步this.cancelAni为true的时候，导致最终执行完if后，this.running为ture，但是实际没有render在运行，而且再也进不去了执行render了。
+                if (this.transitioning) {
+                    return false
+                }
+                tips2.innerHTML = `touchmove ${Date.now()} rendering:${this.rendering} cancelAni:${this.cancelAni}`
+                if (!this.rendering) {
+                    this.rendering = true; // 由于 _render 里面有个设置rendering为false的语句（而且还是同步的），所以这句一定要放在this._render()前面。如来到这步this.cancelAni为true的时候，导致最终执行完if后，this.rendering为ture，但是实际没有render在运行，而且再也进不去了执行render了。
                     this._render();
                 }
 
@@ -247,8 +335,8 @@
                     this.oldFingersData = this.fingersData
                 }
                 /* 确定点中位置 */
-
             }
+
             _touchend(e, tar) {
                 this.cancelAni = true;
                 document.removeEventListener("touchmove", this.touchmoveListener, {
@@ -256,11 +344,21 @@
                     passive: false
                 });
             }
+
         }
 
         var wrap = document.querySelectorAll(".img-wrap")[0];
         var instance = new FingerCenter(".img-wrap");
         console.log(instance);
+
+        function formatJSON(json, outputType) {
+            var str = JSON.stringify(json, null, 4);
+            if (outputType === "html") {
+                return str.replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
+            } else {
+                return str;
+            }
+        }
     </script>
 </body>
 
