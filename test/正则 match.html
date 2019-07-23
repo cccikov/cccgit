@@ -23,7 +23,7 @@
             let reg = /(^|&)tn=([^&]*)(&|$)/i;
             let str = "https://www.baidu.com/s?wd=mix&rsv_spt=1&rsv_iqid=0x89e20c4800344e7e&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=15&rsv_sug1=11&rsv_sug7=100"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));//["&tn=baiduhome_pg&","&","baiduhome_pg","&"]
+            console.log(JSON.stringify(result)); // ["&tn=baiduhome_pg&","&","baiduhome_pg","&"]
             /*
                 没有g修饰符
                 数组第一个:匹配到的字符 &tn=baiduhome_pg&
@@ -38,21 +38,21 @@
             let reg = /123456/;
             let str = "123456";
             let result = str.match(reg);
-            console.log(JSON.stringify(result));//["123456"]
+            console.log(JSON.stringify(result)); // ["123456"]
         }
 
         {
             let reg = /(12)(345)6/;
             let str = "123456";
             let result = str.match(reg);
-            console.log(JSON.stringify(result));//["123456","12","345"]
+            console.log(JSON.stringify(result)); // ["123456","12","345"]
         }
 
         {
             let reg = /\d+/g;
             let str = "10px 0 20px 50px"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));//["10","0","20","50"]
+            console.log(JSON.stringify(result)); // ["10","0","20","50"]
             /*
                 有g修饰符
                 数组里面是所有匹配的字符
@@ -63,7 +63,7 @@
             let reg = /(\d+)/g;
             let str = "10px 0 20px 50px"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));//["10","0","20","50"]
+            console.log(JSON.stringify(result)); // ["10","0","20","50"]
             /*
                 有g修饰符
                 数组里面是所有匹配的字符
@@ -76,32 +76,40 @@
             let reg = /123(456)/;
             let str = "1234567890"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));// ["123456","456"]
+            console.log(JSON.stringify(result)); // ["123456","456"]
         }
         {
             let reg = /123(?:456)/;
             let str = "1234567890"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));// ["123456"]
+            console.log(JSON.stringify(result)); // ["123456"]
         }
         {
-            let reg = /123(?=456)/;
+            let reg = /123(?=456|89)/;
             let str = "1234567890"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));// ["123"]
+            console.log(JSON.stringify(result)); // ["123"]
         }
         {
             let reg = /(?<=456)789/;
             let str = "1234567890"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));// ["789"]
+            console.log(JSON.stringify(result)); // ["789"]
         }
         {
             let reg = /123(?!123)/;
             let str = "1231234567890"
             let result = str.match(reg);
-            console.log(JSON.stringify(result));// ["789"]
+            console.log(JSON.stringify(result)); // ["789"]
             console.log(str.replace(reg, "aaa")); // 123aaa4567890
+        }
+
+        {
+            // n 是一个正整数。一个反向引用（back reference），指向正则表达式中第 n 个括号（从左开始数）中匹配的子字符串。
+            let reg = /(123)\1/;
+            let str = "1231234567890"
+            let result = str.match(reg);
+            console.log(JSON.stringify(result)); // ["123123","123"]
         }
     </script>
 </body>
