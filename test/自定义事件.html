@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>自定义事件</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script>
+        {
+            let obj = document.getElementById("el") || document;
+
+
+            // 监听器1
+            listen1 = function (e) {
+                console.log("=====")
+                console.log("listen1", e === cat_event);
+                console.log(e.data.age);
+            }
+            // 监听器2
+            listen2 = function (e) {
+                console.log("listen2", e);
+                console.log(e.preventDefault, cat_event.preventDefault);
+                console.log(e.stopPropagation, cat_event.stopPropagation);
+            }
+
+            // 给 事件名字为cat的事件 添加两个事件监听器
+            obj.addEventListener("cat", listen1, false);
+            obj.addEventListener("cat", listen2, false);
+
+
+            /**
+             * https://developer.mozilla.org/zh-CN/docs/Web/API/Event/Event
+             * event = new Event(typeArg, eventInit);
+             *  eventInit 可选
+             */
+            // 新建一个 事件名字为cat的事件对象
+            let cat_event = new Event("cat", {
+                "bubbles": true, // "bubbles"，可选，Boolean类型，默认值为 false，表示该事件是否冒泡
+                "cancelable": false, // "cancelable"，可选，Boolean类型，默认值为 false， 表示该事件能否被取消。
+                "composed": false // "composed"，可选，Boolean类型，默认值为 false，指示事件是否会在影子DOM根节点之外触发侦听器。
+            });
+            cat_event.data = {
+                name: "ccc",
+                age: 18
+            }
+
+
+            // 触发事件，注意传入参数是事件对象，不是事件名字
+            obj.dispatchEvent(cat_event);
+
+
+
+            cat_event.data = {
+                name: "ccc",
+                age: 28
+            }
+            obj.dispatchEvent(cat_event);
+        }
+    </script>
+
+    <script>
+        {
+            let obj = document.getElementById("el") || document;
+
+
+            // 监听器1
+            listen1 = function (e) {
+                console.log("listen1",e);
+            }
+
+            // 给 事件名字为cat的事件 添加两个事件监听器
+            obj.addEventListener("cat", listen1, false);
+
+
+            /**
+             * https://developer.mozilla.org/zh-CN/docs/Web/API/Event/Event
+             * event = new Event(typeArg, eventInit);
+             *  eventInit 可选
+             */
+            // 新建一个 事件名字为cat的事件对象
+            let cat_event = new CustomEvent("cat", {
+                "bubbles": true, // "bubbles"，可选，Boolean类型，默认值为 false，表示该事件是否冒泡
+                "cancelable": false, // "cancelable"，可选，Boolean类型，默认值为 false， 表示该事件能否被取消。
+                "detail":{
+                    txt:"CustomEvent 继承于 Event，比Event在初始化的时候多了个detail；好像除此之外我没发现有什么区别，但是mdn表示：CustomEvent 事件是由程序创建的，可以有任意自定义功能的事件。感觉自定义事件就应该用CustomEvent，应该是一种约定俗成吧"
+                } // 可选，默认值是 null 的任意类型数据，是一个与 event 相关的值
+            });
+            cat_event.data = {
+                name: "ccc",
+                age: 18
+            }
+
+
+            // 触发事件，注意传入参数是事件对象，不是事件名字
+            obj.dispatchEvent(cat_event);
+        }
+    </script>
+</head>
+
+<body>
+    hello world
+</body>
+
+</html>

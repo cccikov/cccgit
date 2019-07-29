@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <p>在chrome（73.0.3683.86（正式版本） （64 位））中，如果img作为弹性元素，flex-shrink无效，好像永远都不能缩放，就像设置值为0一样</p>
+    <p>在chrome（73.0.3683.86（正式版本） （64 位））中，如果img作为弹性元素，flex-shrink无效，好像永远都不能缩放，就像设置值为0一样。只有火狐是正常的</p>
     <div class="demo1">
         <img src="./img/chrome.png">
         <img src="./img/chrome.png">
@@ -45,6 +45,7 @@
         }
 
         .demo1 img {
+            flex-grow: 1;
             flex-shrink: 1;
         }
     </style>
@@ -84,11 +85,58 @@
         .demo2>div {
             flex-shrink: 1;
         }
-        .demo2>div img{
+
+        .demo2>div img {
             display: block;
             max-width: 100%;
         }
     </style>
+
+
+
+    <p> flex-direction: column 布局中。图片变形。 那是因为align-items: stretch;宽度为父元素的100%，但是又不是设置width:100%所以高度不会自动变化，所以变形了。align-items: center;和max-width:100%会好点</p>
+    <div class="demo3">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+        <img src="./img/chrome.png">
+    </div>
+    <div class="demo3">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+        <img src="./img/cursor1.png">
+    </div>
+    <style>
+        .demo3 {
+            display: flex;
+            flex-direction: column;
+            outline: 1px solid red;
+
+            align-items: center;
+        }
+
+        .demo3>img {
+            flex: 0 0 auto;
+            max-width: 100%;
+        }
+    </style>
+    <p>对于img canvas，这种会等比例缩放的元素来说；flex-grow，align-items影响的宽高和设置width，height还是有区别的；设置width，height才会自动等比例缩放，通过flex布局属性来影响宽高会导致变形</p>
+    <p>如果flex布局中，需要展示图片，最好使用div包裹着img</p>
 </body>
 
 </html>

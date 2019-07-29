@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>正则表达式 replace 方法</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script>
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "--");
+            console.log(result); // 12--0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "-abc-");
+            console.log(result); // 12-abc-0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "-$$-");
+            console.log(result);// 12-$-0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "-$&-");
+            console.log(result);// 12-3456789-0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "-$1-");
+            console.log(result);// 12-456-0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "-$1$2-");
+            console.log(result);// 12-456789-0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "-$`-");
+            console.log(result);// 12-12-0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, "-$'-");
+            console.log(result);// 12-0-0
+        }
+        {
+            let str = "1234567890";
+            let reg = /3(456)(789)/;
+            let result = str.replace(reg, function(match,p1,p2,index,str){
+                var arg = arguments;
+                console.log(arg);
+                return `- match:${match} p1:${p1} p2:${p2} index:${index} str:${str} -`
+            });
+            console.log(result);// 12- match:3456789 p1:456 p2:789 index:2 str:1234567890 -0
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
