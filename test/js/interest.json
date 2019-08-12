@@ -1,0 +1,1611 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "name": "新闻资讯",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "军事",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "政治",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "商业与经济",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "法律",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "公益",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "娱乐/名人/八卦",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "本地资讯",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "世界资讯",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "生活资讯",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "汽车资讯",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "汽车评测",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "汽车资讯",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "穿衣搭配",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "新闻资讯",
+          "childrens": []
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "餐饮美食",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "烹饪/菜谱",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "餐饮美食",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "美食",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "餐饮美食",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "快餐",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "美食",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "甜点",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "美食",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "饮料",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "餐饮美食",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "茗茶",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "饮料",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "酒水",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "餐饮美食",
+          "childrens": []
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "医疗健康",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "保健养生",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "医疗健康",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "心理健康",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "医疗健康",
+          "childrens": []
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "生活服务",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "宠物",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "生活服务",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "农资绿植",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "生活服务",
+          "childrens": []
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "体育运动",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "球类运动",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "篮球",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "球类运动",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "足球",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "球类运动",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "综合训练",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "水上运动",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "跑步骑行",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "跑步",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "跑步骑行",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "极限运动",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "户外运动",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "钓鱼",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "户外运动",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "瑜伽",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "格斗",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "健美操",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "体育运动",
+          "childrens": []
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "游戏",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "游戏（按载体）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "游戏",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "客户端网游",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "网页游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "手机游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "单机游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "电视游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "桌游",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按载体）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "游戏（按类型）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "游戏",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "角色扮演",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": [
+                {
+                  "id": 0,
+                  "name": "ARPG",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "角色扮演",
+                  "childrens": []
+                },
+                {
+                  "id": 0,
+                  "name": "MMORPG",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "角色扮演",
+                  "childrens": []
+                },
+                {
+                  "id": 0,
+                  "name": "回合",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "角色扮演",
+                  "childrens": []
+                }
+              ]
+            },
+            {
+              "id": 0,
+              "name": "MOBA",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "卡牌",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "策略",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": [
+                {
+                  "id": 0,
+                  "name": "战争策略",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "策略",
+                  "childrens": []
+                },
+                {
+                  "id": 0,
+                  "name": "塔防",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "策略",
+                  "childrens": []
+                }
+              ]
+            },
+            {
+              "id": 0,
+              "name": "体育",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "棋牌",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "音乐类游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "模拟经营",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "休闲益智",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": [
+                {
+                  "id": 0,
+                  "name": "跑酷躲避",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "休闲益智",
+                  "childrens": []
+                },
+                {
+                  "id": 0,
+                  "name": "消除",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "休闲益智",
+                  "childrens": []
+                },
+                {
+                  "id": 0,
+                  "name": "益智",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "休闲益智",
+                  "childrens": []
+                }
+              ]
+            },
+            {
+              "id": 0,
+              "name": "射击游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": [
+                {
+                  "id": 0,
+                  "name": "飞行射击",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "射击游戏",
+                  "childrens": []
+                },
+                {
+                  "id": 0,
+                  "name": "枪战射击",
+                  "parentId": 0,
+                  "cityLevel": null,
+                  "parentName": "射击游戏",
+                  "childrens": []
+                }
+              ]
+            },
+            {
+              "id": 0,
+              "name": "养成",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "格斗游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "冒险",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "竞速",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "综合游戏平台",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "儿童",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按类型）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "游戏（按题材）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "游戏",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "东方仙侠",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按题材）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "西方魔幻",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按题材）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "现代战争",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按题材）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "三国",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按题材）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "女性向",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按题材）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "音乐游戏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按题材）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "二次元",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "游戏（按题材）",
+              "childrens": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "旅游",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "国内游",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "旅游",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "华东",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "国内游",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "西南",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "国内游",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "境外游",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "旅游",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "东南亚",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "境外游",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "主题旅游",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "旅游",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "当季推荐",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "主题旅游",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "春季踏青",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "主题旅游",
+              "childrens": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "家居",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "家居装修",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "家居",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "室内设计与装潢",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "家居装修",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "家居装饰",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "家居装修",
+              "childrens": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "互联网/电子产品",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "摄影摄像",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "互联网/电子产品",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "手机及配件",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "互联网/电子产品",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "苹果手机",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "手机及配件",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "安卓手机",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "手机及配件",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "手机配件",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "手机及配件",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "智能设备",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "互联网/电子产品",
+          "childrens": []
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "美容/个护",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "减肥瘦身",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "美容/个护",
+          "childrens": []
+        },
+        {
+          "id": 0,
+          "name": "美容整形",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "美容/个护",
+          "childrens": []
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "娱乐休闲",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "文玩古董",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "爱好收藏",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "文玩古董",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "阅读（按载体）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "书籍",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "报纸",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "电子书",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按载体）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "听书",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按载体）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "阅读（按主题）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "言情小说",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "文艺著作",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "漫画",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "杂志",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "百科",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "科技互联网",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "人文历史",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "阅读（按主题）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "电视剧（按主题）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "偶像爱情",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "都市生活",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "罪案谍战",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "历险科幻",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "军旅抗战",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "喜剧电视剧",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "武侠江湖",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按主题）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "电视剧（按地域）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "大陆剧",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电视剧（按地域）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "动漫（按主题）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "宅基腐",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "动漫（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "少儿",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "动漫（按主题）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "电影（按主题）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "剧情电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "动作电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "爱情电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "犯罪电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "冒险电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "战争电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "惊悚电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "悬疑电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "恐怖电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "科幻电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "奇幻电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "家庭电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "动画电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "历史电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "传记电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "武侠电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "纪录电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按主题）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "电影（按地域）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "大陆电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按地域）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "美国电影",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "电影（按地域）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "音乐",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "民间音乐与传统音乐",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "音乐",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "流行音乐",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "音乐",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "综艺",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "真人秀",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "综艺",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "音乐类综艺",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "综艺",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "情感交友",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "综艺",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "脱口秀",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "综艺",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "喜剧",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "综艺",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "文化",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "综艺",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "演出赛事",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "演唱会",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "演出赛事",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "戏剧",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "演出赛事",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "体育赛事",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "演出赛事",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "文化艺术",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "声乐乐器",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "文化艺术",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "绘画",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "文化艺术",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "书法",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "文化艺术",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "宗教",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "文化艺术",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "舞蹈",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "文化艺术",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "宠物养育",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "狗",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "宠物养育",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "猫",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "宠物养育",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "网络直播",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "娱乐休闲",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "游戏直播",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "网络直播",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "体育直播",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "网络直播",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "泛娱乐直播",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "网络直播",
+              "childrens": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 0,
+      "name": "交通",
+      "parentId": 0,
+      "cityLevel": null,
+      "parentName": "",
+      "childrens": [
+        {
+          "id": 0,
+          "name": "汽车（按售价）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "交通",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "低档车",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "汽车（按售价）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "中档车",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "汽车（按售价）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "高档车",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "汽车（按售价）",
+              "childrens": []
+            },
+            {
+              "id": 0,
+              "name": "豪华车",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "汽车（按售价）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "汽车（按类型）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "交通",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "SUV",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "汽车（按类型）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "汽车（按动力）",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "交通",
+          "childrens": [
+            {
+              "id": 0,
+              "name": "汽油",
+              "parentId": 0,
+              "cityLevel": null,
+              "parentName": "汽车（按动力）",
+              "childrens": []
+            }
+          ]
+        },
+        {
+          "id": 0,
+          "name": "摩托车",
+          "parentId": 0,
+          "cityLevel": null,
+          "parentName": "交通",
+          "childrens": []
+        }
+      ]
+    }
+  ]
+}
