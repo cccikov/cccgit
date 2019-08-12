@@ -41,9 +41,7 @@
      * 初始化
      */
     function init() {
-        getData((function() {
-            console.log(fuzzyQuery(data, "与"))
-        })); // 获取数据
+        getData(); // 获取数据
 
         document.getElementById("btn1").addEventListener("click", function() {
             let search_result = accurateSearch();
