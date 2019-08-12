@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>递归查询</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    #wrap {
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+    }
+
+    #left {
+        flex: 1 0 auto;
+        width: 50%;
+        padding: 12px;
+        background: #f9f9f9;
+    }
+
+    #right {
+        flex: 1 0 auto;
+        width: 50%;
+    }
+
+    label {
+        display: block;
+    }
+    </style>
+    <script src="js/axios.min.js"></script>
+    <script type="text/javascript">
+    let data = []; // 原始数据
+    window.onload = init;
+
+    /**
+     * 初始化
+     */
+    function init() {
+        getData((function() {
+            console.log(fuzzyQuery(data, "与"))
+        })); // 获取数据
+
+        document.getElementById("btn1").addEventListener("click", function() {
+            let search_result = accurateSearch();
+            searchResult.innerHTML = "";
+            search_result.forEach(val => {
+                searchResult.innerHTML += JSON.stringify(val) + "<br>";
+            });
+        }, false);
+
+        document.getElementById("btn2").addEventListener("click", function() {
+            let str = document.getElementById("input").value
+            let search_result = fuzzyQuery(data, str);
+            console.log(search_result)
+            searchResult.innerHTML = "";
+            search_result.forEach(val => {
+                searchResult.innerHTML += JSON.stringify(val) + "<br>";
+            });
+        }, false);
+    }
+
+
+
+    /**
+     * 精准查询
+     */
+    function accurateSearch() {
+        let str = document.getElementById("input").value;
+
+        let parents = searchParent(data, str);
+        console.log(parents);
+        if (parents.tar) {
+            let sons = searchChildrens(parents.tar);
+            console.log(sons);
+            let result = sons.map(son => {
+                return parents.names.concat(son);
+            });
+            return result;
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * 获取数据
+     */
+    function getData(cb) {
+        axios({
+            method: "get",
+            url: "./js/interest.json"
+        }).then(res => {
+            data = res.data.data;
+            console.log(data);
+            left.innerHTML = json2html(sort(data));
+            cb && cb();
+        }).catch(err => {
+            console.error(err);
+        });
+    }
+
+    /**
+     * 整理数据(递归)
+     */
+    function sort(arr) {
+        arr = arr.slice();
+        return arr.map(val => {
+            if (val.childrens.length > 0) {
+                return {
+                    name: val.name,
+                    childrens: sort(val.childrens)
+                }
+            } else {
+                return { name: val.name }
+            }
+        });
+    }
+
+    /**
+     * 找到祖先的name，以及str所在的对象（递归）
+     */
+    function searchParent(data, str) {
+        if (Array.isArray(data)) {
+
+            var obj = {
+                tar: null, // str 所在的对象
+                indexes: [], // tar，从更目录开始的下标
+                names: [] // 记录祖先的name
+            }; // 返回结果
+
+            data.forEach((val, index) => {
+                index = String(index);
+                let childrens = val.childrens;
+                if (val.name === str) { // 找到
+                    obj = {
+                        tar: val,
+                        indexes: [index],
+                        names: [val.name]
+                    }
+                } else if (Array.isArray(childrens) && childrens.length > 0) { // 找不到，找子
+                    let result = searchParent(childrens, str);
+                    if (result.indexes.length > 0) { // 子孙里面找到了
+                        result.indexes.unshift(index)
+                        result.names.unshift(val.name)
+                        obj = result;
+                    }
+                }
+            });
+            return obj;
+        } else {
+            console.error(data, "不是数组");
+        }
+    }
+
+    /**
+     * 获取全部子节点（递归）
+     */
+    function searchChildrens(data) {
+        let sons = data.childrens; // 儿子们
+        let arr = []; // 返回结果
+        if (Array.isArray(sons) && sons.length > 0) {
+            sons.forEach(son => {
+                let result = searchChildrens(son);
+                if (result.length > 0) {
+                    result.forEach(result_val => {
+                        result_val.unshift(son.name);
+                        arr.push(result_val);
+                    });
+                } else {
+                    arr.push([son.name])
+                }
+            });
+        }
+        return arr;
+    }
+
+    /**
+     * 模糊查询（递归）
+     */
+    function fuzzyQuery(data, str) {
+        if (Array.isArray(data)) {
+            let arr = []; // 返回结果
+            if (data.length > 0) {
+                data.forEach(val => {
+                    let result = fuzzyQuery(val.childrens, str);
+                    if (result.length > 0) {
+                        result.forEach(result_val => {
+                            result_val.unshift(val.name);
+                            arr.push(result_val);
+                        });
+                    } else if (val.name.includes(str)) {
+                        arr.push([val.name])
+                    }
+                });
+            }
+            return arr;
+        } else {
+            console.error(data, "不是数组");
+        }
+    }
+
+    /**
+     * json 转化为 html
+     */
+    function json2html(json) {
+        return JSON.stringify(json, null, 4).replace(/\n/g, "<br>").replace(/\s/g, "&nbsp;");
+    }
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div id="left"></div>
+        <div id="right">
+            <label>
+                <span>需要查询的name：</span>
+                <input id="input" type="text">
+            </label>
+            <button id="btn1">精准查询</button>
+            <button id="btn2">模糊查询</button>
+            <div id="searchResult"></div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>eval</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript">
+    /**
+     * eval() 函数会将传入的字符串当做 JavaScript 代码进行执行。
+     * eval(string)
+     * https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/eval
+     *
+     * eval() 是一个危险的函数， 它使用与调用者相同的权限执行代码。如果你用 eval() 运行的字符串代码被恶意方（不怀好意的人）修改，您最终可能会在您的网页/扩展程序的权限下，在用户计算机上运行恶意代码。
+     * eval() 通常比其他替代方法更慢，因为它必须调用 JS 解释器
+     *
+     * 但是，（谢天谢地）存在一个非常好的eval替代方法：只需使用window.Function。
+     */
+
+
+    /* 使用 eval */
+    ! function() {
+        function looseJsonParse(obj) {
+            return eval("(" + obj + ")"); // 最好加上"("前缀和")"后缀，否则传入的字符串解析是对象和函数会出问题
+        }
+
+        var obj = looseJsonParse("{a:(4-1), b:function(){}, c:new Date()}");
+
+        console.log(obj)
+    }();
+
+    /* 不使用 eval */
+    ! function() {
+        function looseJsonParse(obj) {
+            return Function('"use strict";return (' + obj + ')')();
+        }
+
+        var obj = looseJsonParse("{a:(4-1), b:function(){}, c:new Date()}");
+
+        console.log(obj)
+    }();
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
