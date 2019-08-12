@@ -35,13 +35,16 @@
     <script src="js/axios.min.js"></script>
     <script type="text/javascript">
     let data = []; // 原始数据
+    let allData = [];
     window.onload = init;
 
     /**
      * 初始化
      */
     function init() {
-        getData(); // 获取数据
+        getData(function() {
+            allData = getAllData(data);
+        }); // 获取数据
 
         document.getElementById("btn1").addEventListener("click", function() {
             let search_result = accurateSearch();
@@ -53,7 +56,7 @@
 
         document.getElementById("btn2").addEventListener("click", function() {
             let str = document.getElementById("input").value
-            let search_result = fuzzyQuery(data, str);
+            let search_result = fuzzyQuery(allData, str);
             console.log(search_result)
             searchResult.innerHTML = "";
             search_result.forEach(val => {
@@ -119,7 +122,33 @@
     }
 
     /**
+     * 获取全部数据（递归）
+     */
+    function getAllData(data) {
+        if (Array.isArray(data)) {
+            let arr = []; // 返回结果
+            if (data.length > 0) {
+                data.forEach(val => {
+                    let result = getAllData(val.childrens);
+                    if (result.length > 0) {
+                        result.forEach(result_val => {
+                            result_val.unshift(val.name);
+                            arr.push(result_val);
+                        });
+                    } else {
+                        arr.push([val.name])
+                    }
+                });
+            }
+            return arr;
+        } else {
+            console.error(data, "不是数组");
+        }
+    }
+
+    /**
      * 找到祖先的name，以及str所在的对象（递归）
+     * 其实遍历数组不应该用forEach，应该用循环，因为现在就是找到符合要求的，由于forEach遍历的原因，还是会遍历下去，如果数据量大的时候，会造成性能消耗
      */
     function searchParent(data, str) {
         if (Array.isArray(data)) {
@@ -180,25 +209,9 @@
      * 模糊查询（递归）
      */
     function fuzzyQuery(data, str) {
-        if (Array.isArray(data)) {
-            let arr = []; // 返回结果
-            if (data.length > 0) {
-                data.forEach(val => {
-                    let result = fuzzyQuery(val.childrens, str);
-                    if (result.length > 0) {
-                        result.forEach(result_val => {
-                            result_val.unshift(val.name);
-                            arr.push(result_val);
-                        });
-                    } else if (val.name.includes(str)) {
-                        arr.push([val.name])
-                    }
-                });
-            }
-            return arr;
-        } else {
-            console.error(data, "不是数组");
-        }
+        return data.filter(val=>{
+            return val.join("-").includes(str);
+        })
     }
 
     /**
