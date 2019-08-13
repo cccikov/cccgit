@@ -220,11 +220,21 @@
         return arr;
     }
 
+
+    //////////
+    // 模糊查询 //
+    //////////
+
     /**
-     * 模糊查询
+     * 模糊查询1 ，需要一个 allData ，那么就是说第一次查询的时候，需要对原始数据完全遍历两次，一次出allData，一次出查询结果；但是由于allData记录下来，所以后续查询，只需要在遍历查询结果一次
+     *
+     * 模糊查询2，不需要一个 allData，里面的all属性也是完全遍历一次；但是还有filter遍历，但是由于不是每次都满足，所以不算完全遍历；所以 1次 < 完全遍历次数 < 2次
+     *
+     * 对于原始数据不变的情况下，模糊查询1总完全遍历次数少，逻辑容易理解，推荐使用。
+     * 对于原始数据会改变的情况下，模糊查询2总完全遍历次数少，推荐使用
      */
-    function fuzzyQuery(data, str) {
-        return data.filter(val => {
+    function fuzzyQuery(allData, str) {
+        return allData.filter(val => {
             return val.join("-").includes(str);
         })
     }
