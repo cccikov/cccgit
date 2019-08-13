@@ -48,6 +48,7 @@
 
         document.getElementById("btn1").addEventListener("click", function() {
             let search_result = accurateSearch();
+            console.log(search_result)
             searchResult.innerHTML = "";
             search_result.forEach(val => {
                 searchResult.innerHTML += JSON.stringify(val) + "<br>";
@@ -77,11 +78,15 @@
         console.log(parents);
         if (parents.tar) {
             let sons = searchChildrens(parents.tar);
-            console.log(sons);
-            let result = sons.map(son => {
-                return parents.names.concat(son);
-            });
-            return result;
+            if (sons.length > 0) {
+                let result = sons.map(son => {
+                    return parents.names.concat(son);
+                });
+                return result;
+            } else {
+                return [parents.names];
+            }
+
         } else {
             return [];
         }
@@ -209,7 +214,7 @@
      * 模糊查询（递归）
      */
     function fuzzyQuery(data, str) {
-        return data.filter(val=>{
+        return data.filter(val => {
             return val.join("-").includes(str);
         })
     }
