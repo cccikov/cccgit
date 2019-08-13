@@ -64,6 +64,16 @@
                 searchResult.innerHTML += JSON.stringify(val) + "<br>";
             });
         }, false);
+
+        document.getElementById("btn3").addEventListener("click", function() {
+            let str = document.getElementById("input").value
+            let search_result = fuzzyQuery2(data, str);
+            console.log(search_result)
+            searchResult.innerHTML = "";
+            search_result.filter.forEach(val => {
+                searchResult.innerHTML += JSON.stringify(val) + "<br>";
+            });
+        }, false);
     }
 
 
@@ -211,13 +221,75 @@
     }
 
     /**
-     * 模糊查询（递归）
+     * 模糊查询
      */
     function fuzzyQuery(data, str) {
         return data.filter(val => {
             return val.join("-").includes(str);
         })
     }
+
+    /**
+     * 模糊查询方式二（（递归））
+     */
+    function fuzzyQuery2(data, str) {
+        if (Array.isArray(data)) {
+            let obj = {
+                all: [], // 这是全部遍历出来的子节点
+                filter: [] // 这是符合筛选条件的子节点
+            }
+            let arr = []; // 返回结果
+            if (data.length > 0) {
+                data.forEach(val => {
+                    let result = fuzzyQuery2(val.childrens, str);
+
+                    /* 全部子节点 保存在obj.all */
+                    if (result.all.length > 0) { // 有子节点
+                        result.all.forEach(result_val => {
+                            result_val = result_val.slice();
+                            result_val.unshift(val.name);
+                            obj.all.push(result_val);
+                        });
+                    } else { // 无子节点，那么当前节点就是最末端节点
+                        obj.all.push([val.name])
+                    }
+
+                    /**
+                     * 如果当前节点符合筛选条件，那么当前节点的全部子节点符合筛选条件，并且加上当前节点的名字，所以是数据来源是 result.all
+                     *
+                     * 如果当前节点不符合筛选条件，那就继续保留子节点的数量就可以了，在子节点前面加上当前节点的名字，所以数据来源是 result.filter
+                     *
+                     * 归根到底，符合条件的就记录，不符合的就不需要记录
+                     */
+                    if (val.name.includes(str)) { // 当前节点符合筛选条件，全部子节点也符合了
+                        if (result.all.length > 0) { // 有子节点
+                            result.all.forEach(result_val => {
+                                result_val = result_val.slice();
+                                result_val.unshift(val.name);
+                                obj.filter.push(result_val);
+                            });
+                        } else { // 无子节点，那么当前节点就是最末端节点
+                            obj.filter.push([val.name])
+                        }
+                    } else {
+                        if (result.filter.length > 0) { // 有子节点
+                            // 虽然当前不符合，但是result.filter长度大于0，表明子孙节点有符合要求的，所以也需要在数据中补上，当前节点的名字
+                            result.filter.forEach(result_val => {
+                                result_val = result_val.slice();
+                                result_val.unshift(val.name);
+                                obj.filter.push(result_val);
+                            });
+                        }
+                        // 无子节点，不用管，因为当前的节点也不符合筛选条件，也不需要记录，因为上面有个obj.all，已经帮我们记录全部子节点了，所以也不怕子节点丢失
+                    }
+                });
+            }
+            return obj;
+        } else {
+            console.error(data, "不是数组");
+        }
+    }
+
 
     /**
      * json 转化为 html
@@ -238,6 +310,7 @@
             </label>
             <button id="btn1">精准查询</button>
             <button id="btn2">模糊查询</button>
+            <button id="btn3">模糊查询方式二</button>
             <div id="searchResult"></div>
         </div>
     </div>
