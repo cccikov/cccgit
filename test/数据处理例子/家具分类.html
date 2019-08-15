@@ -34,7 +34,7 @@
             console.log(origin)
             let obj = {}; // parentCateId => cateId
 
-            // 以对象形式分好类
+            // 以对象形式分好类，数组先转化为对象，因为对象中知道key（firstId，secondId，thirdId）比较容易访问到对应属性，比较好整理
             origin.forEach(val => {
                 let firstId = val.parentCateId
                 if (!(firstId in obj)) {
