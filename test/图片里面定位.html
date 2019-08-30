@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>图片里面定位</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    img {
+        width: 100%;
+        margin: 0 0 -4px;
+    }
+
+    .action {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 1;
+    }
+
+    .action2 {
+        position: fixed;
+        bottom: 50px;
+        right: 10px;
+        z-index: 1;
+    }
+
+    .demo {
+        max-width: 1200px;
+        display: inline-block;
+        position: relative;
+    }
+
+    .demo span {
+        position: absolute;
+        color: #eee;
+        font-size: 20px;
+        font-weight: 800;
+        text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+        outline: 1px solid #0f0;
+        transition: transform 0.3s;
+    }
+
+    .demo .point {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        border-radius: 100%;
+        outline: 3px solid #f00;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <p>元素定位位置会随着缩放改变</p>
+        <p>红点表示定位的点</p>
+        <a class="action2" onclick="handler2()" href="javascript:void(0)">取消红点和边框</a>
+        <a class="action" onclick="handler()" href="javascript:void(0)">取消相对偏移</a>
+        <p>我们可以利用translate或者margin，来改变元素定位原点。垂直居中的定位方式也是利用这种方式。</p>
+        <p>本质是让元素相对于自己移动，那么看起来就好像定位原点改变。</p>
+        <p>因为我们定位的点是固定在父元素的某个点上的。百分比时，就是相对于父元素的某个点上， 缩放，这个点并不会相对父元素移动</p>
+        <!-- demo1 -->
+        <style type="text/css">
+        .demo1 span,
+        .demo1 .point {
+            top: 56.4%;
+            left: 35.1%;
+        }
+        </style>
+        <div class="demo demo1">
+            <img src="./img/04bg.png">
+            <span>星巴克,星巴克,星巴克</span>
+            <i class="point"></i>
+        </div>
+        <!-- demo2 -->
+        <style type="text/css">
+        .demo2 span,
+        .demo2 .point {
+            top: 58.2%;
+            left: 42.9%;
+        }
+
+        .demo2 span {
+            transform: translate(-50%, -50%);
+        }
+        </style>
+        <div class="demo demo2">
+            <img src="./img/04bg.png">
+            <span>星巴克,星巴克,星巴克</span>
+            <i class="point"></i>
+        </div>
+        <!-- demo3 -->
+        <style type="text/css">
+        .demo3 span,
+        .demo3 .point {
+            top: 57.9%;
+            right: 57.1%;
+        }
+
+        .demo3 span {
+            transform: translate(50%, -50%);
+        }
+        </style>
+        <div class="demo demo3">
+            <img src="./img/04bg.png">
+            <span>星巴克,星巴克,星巴克</span>
+            <i class="point"></i>
+        </div>
+        <!-- demo4 -->
+        <style type="text/css">
+        .demo4 span,
+        .demo4 .point {
+            bottom: 42.2%;
+            left: 42.9%;
+        }
+
+        .demo4 span {
+            transform: translate(-50%, 50%);
+        }
+        </style>
+        <div class="demo demo4">
+            <img src="./img/04bg.png">
+            <span>星巴克,星巴克,星巴克</span>
+            <i class="point"></i>
+        </div>
+        <!-- demo5 -->
+        <style type="text/css">
+        .demo5 span,
+        .demo5 .point {
+            bottom: 42.2%;
+            right: 57.1%;
+        }
+
+        .demo5 span {
+            transform: translate(50%, 50%);
+        }
+        </style>
+        <div class="demo demo5">
+            <img src="./img/04bg.png">
+            <span>星巴克,星巴克,星巴克</span>
+            <i class="point"></i>
+        </div>
+        <!-- demo6 -->
+        <style type="text/css">
+        .demo6>div,
+        .demo6 .point {
+            position: absolute;
+            top: 58.2%;
+            left: 42.9%;
+        }
+
+        /* 相对于父元素居中 */
+        .demo6 span {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+        }
+        </style>
+        <div class="demo demo6">
+            <img src="./img/04bg.png">
+            <div>
+                <span>星巴克,星巴克,星巴克</span>
+            </div>
+            <i class="point"></i>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var flag = true;
+    var flag2 = true;
+
+    function handler() {
+        var spans = document.querySelectorAll(".demo span");
+        spans.forEach(dom => {
+            if (flag) {
+                dom.style.transform =
+                    "translate(0,0)";
+            } else {
+                dom.setAttribute("style", "");
+            }
+        });
+        flag = !flag
+    }
+
+    function handler2() {
+        var spans = document.querySelectorAll(".demo span");
+        var points = document.querySelectorAll(
+            ".demo .point");
+        console.log(spans, points);
+        if (flag2) {
+            spans.forEach(dom => {
+                dom.style.outline = "none";
+            });
+            points.forEach(dom => {
+                dom.style.display = "none";
+            });
+        } else {
+            spans.forEach(dom => {
+                dom.setAttribute("style", "");
+            });
+            points.forEach(dom => {
+                dom.setAttribute("style", "");
+            });
+        }
+        flag2 = !flag2
+    }
+    </script>
+</body>
+
+</html>
