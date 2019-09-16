@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>回调函数，等待多个触发后触发</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript">
+    var btn1_flag = false;
+    var btn2_flag = false;
+
+    /* 回调函数，等待多个触发后触发 */
+    function handler(num, cb, ...arg) {
+        if (num == 1) {
+            console.log("1触发");
+            btn1_flag = true;
+        } else if (num == 2) {
+            console.log("2触发");
+            btn2_flag = true;
+        }
+        if (btn1_flag && btn2_flag) {
+            cb && cb(...arg);
+            btn1_flag = btn2_flag = false;
+        }
+    }
+
+    function fn(num) {
+        handler(num, function(arg) {
+            console.log("%c执行了", "font-size:20px;color:red;font-weight:700;");
+            console.log(arg, arguments);
+        }, "1", 2, 3, 4, 5, 6, "fuck");
+    }
+    </script>
+</head>
+
+<body>
+    <p>要两个都触发过，才会触发真正handler</p>
+    <button onclick="fn(1)"> 按钮1 </button>
+    <button onclick="fn(2)"> 按钮2 </button>
+</body>
+
+</html>
