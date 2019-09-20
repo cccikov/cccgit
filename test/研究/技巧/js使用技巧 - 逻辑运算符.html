@@ -16,10 +16,15 @@
             // }
             return arguments;
         }
-        console.log(fn(function(){
+        function callback(){
+            console.log("this is callback");
+        }
+
+        fn();
+        fn(function(){
             console.log("lorem");
-        }));
-        console.log(fn());
+        });
+        fn(callback); // 注意cb接受的是一个函数，所以callback后面不要加上()，除非callback的返回值是函数
 
 
 
