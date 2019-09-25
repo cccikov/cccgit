@@ -325,6 +325,62 @@ if (!Array.prototype.exchageDown) {
     }
 }
 
+Object.defineProperty(Array.prototype, "exchange", {
+    value: function(posi1, posi2) {
+        var max = this.length - 1;
+        if (isNaN(posi1) || isNaN(posi2)) {
+            console.error("请传数字")
+            return this;
+        } else if (posi1 == void 0 || posi2 == void 0) {
+            console.error("请传两个下标参数")
+            return this;
+        } else if (posi1 > max || posi2 > max) {
+            console.error("下标超出范围")
+            return this;
+        } else if (posi1 < 0 || posi2 < 0) {
+            console.error("下标为负值")
+            return this;
+        } else if (posi1 == posi2) {
+            console.warn("下标一样");
+            return this;
+        } else {
+            var val1 = this[posi1];
+            var val2 = this[posi2];
+
+            this.splice(posi1, 1, val2);
+            this.splice(posi2, 1, val1);
+
+            return this;
+        }
+    }
+});
+
+
+Object.defineProperty(Array.prototype, "up", {
+    value: function(posi) {
+        if (posi <= 0) {
+            return this;
+        } else if (posi > this.length - 1) {
+            return this;
+        } else {
+            this.exchange(posi, posi - 1);
+            return this;
+        }
+    }
+});
+
+Object.defineProperty(Array.prototype, "down", {
+    value: function(posi) {
+        if (posi < 0) {
+            return this;
+        } else if (posi >= this.length - 1) {
+            return this;
+        } else {
+            this.exchange(posi, posi + 1);
+            return this;
+        }
+    }
+});
 
 function hasClass(obj, cls) {
     return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
