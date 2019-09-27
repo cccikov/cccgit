@@ -8,12 +8,24 @@
     <title>file API</title>
     <script src="../js/jquery.min.js" charset="utf-8"></script>
     <script type="text/javascript">
-        $(function () {
-            var fileReader = new FileReader();//创建fileReader对象
-            $("#uploadfile").on("change", function () {
-                var that = this;//原生js
+        $(function() {
+            var fileReader = new FileReader(); //创建fileReader对象
+            $("#uploadfile").on("change", function() {
+                var that = this; //原生js
 
-                var files = Array.prototype.slice.call(this.files)
+                /**
+                 *  所有type属性(attribute)为file的 <input> 元素都有一个files属性(property),用来存储用户所选择的文件，即FileList 对象
+                 *
+                 * 每个 File 对象包含了下列信息:
+                 *
+                 * name: 文件名.
+                 * lastModified: UNIX timestamp 形式的最后修改时间.
+                 * lastModifiedDate:  Date 形式的最后修改时间.
+                 * size: 文件的字节大小.
+                 * type: DOMString 文件的 MIME 类型.
+                 */
+
+                var files = Array.prototype.slice.call(this.files) // 由于表单的files只是类数组对象，所以不能直接用数组方法
                 if (files.length === 0) {
                     alert('请选择图片')
                     return
@@ -26,6 +38,7 @@
                 // var file = that.files[0];
                 var file = files[0];
 
+                // 获取文件的信息
 
                 console.dir(file);
                 var name = file.name;
@@ -52,19 +65,19 @@
                 fileReader.readAsDataURL(file);
             });
 
-            fileReader.addEventListener("load",function(e){
+            fileReader.addEventListener("load", function(e) {
                 var url = e.target.result;
                 var img = new Image();
                 img.src = url;
-                img.addEventListener("load",function(){
-                    console.log("图片宽高",this.width,this.height,this.naturalWidth,this.naturalHeight)
-                    alert("上传的图片宽为"+this.width+"px，高为"+this.height+"px")
+                img.addEventListener("load", function() {
+                    console.log("图片宽高", this.width, this.height, this.naturalWidth, this.naturalHeight)
+                    alert("上传的图片宽为" + this.width + "px，高为" + this.height + "px")
                 });
             });
 
-            $("#uploadfile2").on("change", function () {
-                var that = this;//原生js
-                var files = that.files;
+            $("#uploadfile2").on("change", function() {
+                var that = this; //原生js
+                var files = that.files; // file 对象
                 for (var i = 0; i < files.length; i++) {
                     console.log(files[i].name);
                 }
@@ -76,7 +89,6 @@
 <body>
     <label for="uploadfile">选择一个文件</label>
     <input id="uploadfile" type="file">
-
     <label for="uploadfile">选择多个文件</label>
     <input id="uploadfile2" type="file" multiple>
 </body>

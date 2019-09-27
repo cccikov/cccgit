@@ -34,7 +34,7 @@
         var fileReader = new FileReader();//创建fileReader对象
         var src = null;
         input.on("change",function(){
-            var fileObj = $(this)[0].files[0];
+            var fileObj = $(this)[0].files[0]; // 表单的files字段就是存放上传的文件组成的 File对象 列表，是类数组对象
             fileReader.readAsDataURL(fileObj);
             fileReader.onload = function(e){ //读完文件
                 console.log(e.target);//traget就是fileReader 其实就是 this , 在事件里面this对象与e.target对象是相同的
