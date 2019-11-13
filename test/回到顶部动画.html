@@ -59,7 +59,7 @@
     document.getElementById("toTop").addEventListener("click", function() {
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         var t = 0;
-        var duration = 20; // 可以理解为多少帧完成这个动画
+        var duration = 20; // 可以理解为多少帧完成这个动画,但是这样的话，无论scrollTop多少，总耗时都是一样，如果想速度一样，可以根据scrollTop来改变帧数如:scrollTop/100
         var change = 0 - scrollTop;
         var begin = scrollTop;
         var timer = null;

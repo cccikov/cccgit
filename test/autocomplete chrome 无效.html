@@ -22,6 +22,16 @@
             box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
             margin: 10px;
         }
+
+        .autocomplete{
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            position: fixed;
+            z-index: -100000;
+        }
     </style>
 </head>
 
@@ -31,14 +41,13 @@
         <input type="text">
         <p>页面中的form表单的第一个type="password" 以及这个password的dom顺序上面最近一个type="text"会自动填充</p>
         <form action="./index.html">
-            可以设置display:none
             <input autocomplete="off" type="text">
             <input autocomplete="off" type="password">
             <button>提交</button>
         </form>
         <p>页面中的form表单外的第一个type="password" 以及这个password的dom顺序上面最近一个type="text"会自动填充</p>
         <div>
-            可以设置display:none
+            class="autocomplete"
             <input type="text">
             <input type="password">
         </div>
