@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>test</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style type="text/css">
+    canvas {
+        display: block;
+        max-width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <button onclick="save()">save</button>
+
+    <script type="text/javascript">
+    initCanvas(new Array(5).fill("").map(v => {
+        return Math.random().toString().slice(2, 10);
+    }));
+
+    function initCanvas(arr) {
+        var canvas = document.getElementById('canvas');
+        canvas.width = 981;
+        canvas.height = 1003;
+        var ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        /*对象为image的时候,且图片缩放了*/
+        var img = new Image();
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0);
+
+            ctx.font = "29px Arial";
+            ctx.fillStyle = "#1c8aa8";
+            ctx.fillText('券码:' + arr[0], 277, 182);
+            ctx.fillText('券码:' + arr[1], 519, 182);
+            ctx.fillText('券码:' + arr[2], 151, 370);
+            ctx.fillText('券码:' + arr[3], 396, 370);
+            ctx.fillText('券码:' + arr[4], 639, 370);
+        }
+        img.src = "./img/test.png";
+    }
+
+    function save() {
+        var url = canvas.toDataURL('image/png', 1);
+        download(url);
+    }
+
+    function download(url) {
+        let imgData = url;
+        this.downloadFile('优惠券.png', imgData);
+    }
+    //下载
+    function downloadFile(fileName, content) {
+        let aLink = document.createElement('a');
+        let blob = this.base64ToBlob(content); //new Blob([content]);
+
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+        aLink.download = fileName;
+        aLink.href = URL.createObjectURL(blob);
+        aLink.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window })); //兼容火狐
+    }
+    //base64转blob
+    function base64ToBlob(code) {
+        let parts = code.split(';base64,');
+        let contentType = parts[0].split(':')[1];
+        let raw = window.atob(parts[1]);
+        let rawLength = raw.length;
+
+        let uInt8Array = new Uint8Array(rawLength);
+
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+        return new Blob([uInt8Array], { type: contentType });
+    }
+    </script>
+</body>
+
+</html>
