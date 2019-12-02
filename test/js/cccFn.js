@@ -1035,3 +1035,17 @@ function throttle(func, wait, options) {
         return result;
     };
 };
+
+
+/**
+ * 是否非（无效）时间对象
+ * @param  {object}  date 需要判断的对象
+ * @return {Boolean}      判断结果
+ */
+function isInvalidDate(date) {
+    if (date instanceof Date) {
+        return isNaN(date.getTime());
+    } else {
+        return true
+    }
+}
