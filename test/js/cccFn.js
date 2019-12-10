@@ -72,10 +72,67 @@ function formatDate(d) {
 
 /**
  * 格式化日期
+ * @param  {Date|num|str} dateObj 日期对象
+ * @param  {str} str     格式字符串
+ * @return {str}         格式后的字符串 YY MM DD hh mm ss
+ */
+function dateFormatter(dateObj, str) {
+    if (typeof dateObj == "number") {
+        dateObj = new Date(dateObj);
+    } else if (typeof dateObj == "string") {
+        dateObj = new Date(dateObj);
+    } else if (typeof dateObj == "undefined") {
+        dateObj = new Date();
+    } else if (typeof dateObj == "object" && dateObj.toDateString() == "Invalid Date") {
+        return ""
+    }
+    var year = dateObj.getFullYear();
+    var month = dateObj.getMonth() + 1;
+    month < 10 ? month = "0" + month : month = month;
+    var day = dateObj.getDate();
+    day < 10 ? day = "0" + day : day = day;
+    var hour = dateObj.getHours();
+    hour < 10 ? hour = "0" + hour : hour = hour;
+    var minute = dateObj.getMinutes();
+    minute < 10 ? minute = "0" + minute : minute = minute;
+    var second = dateObj.getSeconds();
+    second < 10 ? second = "0" + second : second = second;
+    if (str) {
+        return str.replace(/YY/g, year).replace(/MM/g, month).replace(/DD/g, day).replace(/hh/g, hour).replace(/mm/g, minute).replace(/ss/g, second)
+    } else {
+        return year + "-" + month + "-" + day + " " + hour + ":" + minute;
+    }
+}
+
+if (!Date.prototype.format) {
+    Object.defineProperty(Date.prototype, "format", {
+        value: function(str) {
+            var year = this.getFullYear();
+            var month = this.getMonth() + 1;
+            month < 10 ? month = "0" + month : month = month;
+            var day = this.getDate();
+            day < 10 ? day = "0" + day : day = day;
+            var hour = this.getHours();
+            hour < 10 ? hour = "0" + hour : hour = hour;
+            var minute = this.getMinutes();
+            minute < 10 ? minute = "0" + minute : minute = minute;
+            var second = this.getSeconds();
+            second < 10 ? second = "0" + second : second = second;
+            if (str) {
+                return str.replace(/YY/g, year).replace(/MM/g, month).replace(/DD/g, day).replace(/hh/g, hour).replace(/mm/g, minute).replace(/ss/g, second)
+            } else {
+                return year + "-" + month + "-" + day + " " + hour + ":" + minute;
+            }
+        }
+    });
+}
+
+/**
+ * 格式化日期
  * @param  {[date]} dateObj [时间对象]
  * @return {[string]}         [格式化后的字符串]
  */
-function dataFormatter(dateObj) {
+function dateFormat(dateObj) {
     return dateObj.toLocaleString('zh', {
             hour12: false,
             year: 'numeric',
@@ -88,7 +145,9 @@ function dataFormatter(dateObj) {
         .replace(/日/g, '')
         .replace(/\/|年|月/g, '-');
 }
-// console.log(dataFormatter(new Date()))
+// console.log(dateFormat(new Date()))
+
+
 
 // 格式化银行卡
 function formatBankCard(card, spacing) {
