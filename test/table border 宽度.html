@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>table border 宽度</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        .table-wrap {
+            /* width: 250px; */
+            overflow: auto;
+            margin: 30px;
+        }
+
+        th {
+            background: #f8f8f8;
+        }
+
+        th div {
+            width: 150px;
+            line-height: 50px;
+        }
+
+        td div {
+            width: 150px;
+            line-height: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <p>表格 table 里面的 td的宽度无法直接设置（table没有设死宽度的时候），是靠内容撑开。通过设置内容的宽度</p>
+    <p>表格 table 设置边框几种情况</p>
+
+
+    <div class="table-wrap">
+        <p>table border</p>
+        <p> border-color: #f00; border-collapse: collapse;</p>
+        <p>table没有border-width，最外框会重叠导致颜色加深</p>
+        <table border class="demo1">
+            <tr>
+                <th>
+                    <div>表头1</div>
+                </th>
+                <th>
+                    <div>表头2</div>
+                </th>
+                <th>
+                    <div>表头3</div>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <div>内容1</div>
+                </td>
+                <td>
+                    <div>内容2</div>
+                </td>
+                <td>
+                    <div>内容3</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <style>
+        table.demo1 {
+            border-color: #f00;
+            border-collapse: collapse;
+        }
+    </style>
+
+
+    <div class="table-wrap">
+        <p>table 没有 border 属性</p>
+        <p> border: 1px solid #f00; border-collapse: collapse;</p>
+        <table class="demo2">
+            <tr>
+                <th>
+                    <div>表头1</div>
+                </th>
+                <th>
+                    <div>表头2</div>
+                </th>
+                <th>
+                    <div>表头3</div>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <div>内容1</div>
+                </td>
+                <td>
+                    <div>内容2</div>
+                </td>
+                <td>
+                    <div>内容3</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <style>
+        table.demo2 {
+            border: 1px solid #f00;
+            border-collapse: collapse;
+        }
+    </style>
+
+
+
+    <div class="table-wrap">
+        <p>table border</p>
+        <p>border: 1px solid #f00; border-collapse: collapse;</p>
+        <p>table有border-width</p>
+        <table border class="demo3">
+            <tr>
+                <th>
+                    <div>表头1</div>
+                </th>
+                <th>
+                    <div>表头2</div>
+                </th>
+                <th>
+                    <div>表头3</div>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <div>内容1</div>
+                </td>
+                <td>
+                    <div>内容2</div>
+                </td>
+                <td>
+                    <div>内容3</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <style>
+        table.demo3 {
+            border: 1px solid #f00;
+            border-collapse: collapse;
+        }
+    </style>
+
+
+
+    <div class="table-wrap">
+        <p>table 没有 border 属性</p>
+        <p>border-collapse: collapse;</p>
+        <p>单元格 border: 1px solid #f00;</p>
+        <p>设置单元格的border</p>
+        <table class="demo4">
+            <tr>
+                <th>
+                    <div>表头1</div>
+                </th>
+                <th>
+                    <div>表头2</div>
+                </th>
+                <th>
+                    <div>表头3</div>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <div>内容1</div>
+                </td>
+                <td>
+                    <div>内容2</div>
+                </td>
+                <td>
+                    <div>内容3</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <style>
+        table.demo4 {
+            border-collapse: collapse;
+        }
+
+        table.demo4 td,
+        table.demo4 th {
+            border: 1px solid #f00;
+        }
+    </style>
+</body>
+
+</html>
