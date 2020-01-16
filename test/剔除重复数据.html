@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>剔除重复数据</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+</head>
+
+<body>
+    <script type="text/javascript">
+    let ori = [1, 2, 3, 4];
+
+    function addArr(val, ori) {
+        ori = ori.slice();
+        var remain = val.filter(v => {
+            let flag = true;
+            ori.forEach(o => {
+                if (o == v) {
+                    flag = false;
+                }
+            });
+            return flag;
+        });
+        if (val.length > 0) {
+            if (ori.length > 0 && val.length != remain.length) {
+                alert("已自动为你剔除重复数据");
+            }
+            if (remain.length > 0) {
+                ori.push(...remain);
+            }
+        }
+        return ori;
+    }
+
+
+    function add(val, ori) {
+        ori = ori.slice();
+        val.forEach(v => {
+            let already = ori.filter(o => {
+                return o == v;
+            });
+            if (already.length == 0) {
+                ori.push(v);
+            }
+        });
+        return ori;
+    }
+
+    console.log(addArr([3,4,5,8],ori))
+    console.log(add([3,4,5,8],ori))
+    </script>
+</body>
+
+</html>
