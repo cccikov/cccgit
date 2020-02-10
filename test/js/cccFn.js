@@ -1108,3 +1108,22 @@ function isInvalidDate(date) {
         return true
     }
 }
+
+/**
+ * 返回目标元素位于父元素的位置（索引值），类似Jquery里面的index()
+ * @param {Element} dom 目标元素
+ * @return {Number} 索引值
+ */
+function domIndex(dom) {
+    // 获取所有的兄弟节点
+    var arr = Array.from(dom.parentNode.children);
+
+    //遍历
+    let index;
+    arr.forEach(function (v,i) {
+        if(dom == v){
+            index = i;
+        }
+    });
+    return index
+}
