@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>拖拽排序</title>
+    <link rel="shortcut icon" href="img/ccc.ico" />
+    <link rel="icon" href="img/ccc.ico" />
+    <style>
+        ul {
+            list-style: none;
+            margin: 200px;
+            font-size: 0;
+        }
+
+        .ele {
+            font-size: 16px;
+            width: 100px;
+            height: 40px;
+            border: 1px solid #999;
+            background: #EA6E59;
+            margin: 2px 0;
+            border-radius: 10px;
+            padding-left: 10px;
+            color: white;
+            cursor: move;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="container">
+        <li class="ele" draggable="true">1</li>
+        <li class="ele" draggable="true">2</li>
+        <li class="ele" draggable="true">3</li>
+        <li class="ele" draggable="true">4</li>
+        <li class="ele" draggable="true">5</li>
+        <li class="ele" draggable="true">6</li>
+        <li class="ele" draggable="true">7</li>
+        <li class="ele" draggable="true">8</li>
+    </ul>
+
+    <script>
+        var node = document.querySelector("#container");
+        var draging = null;
+        // 使用事件委托，将li的事件委托给ul
+        node.ondragstart = function (event) {
+            // firefox设置了setData后元素才能拖动！！！！
+            event.dataTransfer.setData("te", event.target.innerText); //不能使用text，firefox会打开新tab
+            draging = event.target;
+        }
+        node.ondragover = function (event) {
+            event.preventDefault();
+            var target = event.target;
+            console.log(target);
+
+            /* 下面为交换逻辑 */
+            // 因为dragover会发生在ul上，所以要判断是不是li
+            if (target.nodeName === "LI" && target !== draging) {
+                // domIndex是实现的获取index
+                if (domIndex(draging) < domIndex(target)) {
+                    target.parentNode.insertBefore(draging, target.nextSibling);
+                } else {
+                    target.parentNode.insertBefore(draging, target);
+                }
+            }
+        }
+
+        function domIndex(el) {
+            var index = 0;
+            if (!el || !el.parentNode) {
+                return -1;
+            }
+            while (el && (el = el.previousElementSibling)) {
+                index++;
+            }
+            return index;
+        }
+    </script>
+</body>
+
+</html>
