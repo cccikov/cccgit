@@ -1120,10 +1120,27 @@ function domIndex(dom) {
 
     //遍历
     let index;
-    arr.forEach(function (v,i) {
-        if(dom == v){
+    arr.forEach(function(v, i) {
+        if (dom == v) {
             index = i;
         }
     });
     return index
+}
+
+/**
+ * 删除对象属性
+ * @param  {Object} obj      目标对象 {name:"ccc",age:18}
+ * @param  {Array<string>}  property 需要删除的属性 ["name","age"]
+ * @return {Object}          新对象
+ */
+function delProperty(obj = {}, property = []) {
+    // 返回新对象 在模块里面、严格模式下都可以使用
+    let newObj = {};
+    Object.keys(obj).forEach(key => {
+        if (!property.includes(key)) {
+            newObj[key] = obj[key];
+        }
+    });
+    return newObj;
 }
