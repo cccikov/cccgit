@@ -7,10 +7,192 @@
     <title>test</title>
     <link rel="shortcut icon" href="img/ccc.ico" />
     <link rel="icon" href="img/ccc.ico" />
+    <script type="text/javascript" src="./js/test.js"></script>
+    <script type="text/javascript">
+    function sortData(data) {
+        const return_obj = {
+            modelName: data.modelName
+        } // 返回结果
+        const curtain_part = {}; // 窗帘部位
+
+        return_obj.price = data.price; // 零售价
+        return_obj.buyingPrice = data.buyingPrice; // 进货价
+
+        /* 处理 jsonMap 属性里面的数据 */
+        if (data.jsonMap) {
+            let jsonMap = data.jsonMap;
+            return_obj.wide = jsonMap.wideSize; // 成品宽度
+            return_obj.height = jsonMap.heightSize; // 成品高度
+
+            let parts = []; // 部位
+
+            if (jsonMap.curtainBody) {
+                let curtainBody = jsonMap.curtainBody;
+                return_obj.curtainBody = {};
+                parts.push(...curtainBody.parts);
+            }
+
+            if (jsonMap.curtainHead) {
+                let curtainHead = jsonMap.curtainHead;
+                return_obj.curtainHead = {};
+                parts.push(...curtainHead.parts);
+            }
+
+            parts.forEach(part => {
+                let partCode = part.partType; // LS-ZB-01
+                curtain_part[partCode] = {
+                    partCode: partCode,
+                    id: part.id,
+                    foldMultiple: part.extAttrs ? part.extAttrs.foldMultiple : void 0, // 倍数
+                    isDoubleOpen: part.extAttrs ? part.extAttrs.isDoubleOpen : void 0 // 双开
+                }
+            });
+
+        } else {
+            console.error("缺少 jsonMap 属性")
+            return false
+        }
+
+        // singleMap Fnt
+        // singleMap.Size.listPartMats.LT-ZB-01.matModelNo 材质
+
+        if (data.singleMap) {
+            let singleMap = data.singleMap;
+
+            if (singleMap.Fnt) {
+                let Fnt = singleMap.Fnt;
+                return_obj.modelNo = Fnt.modelNo;
+                return_obj.cateName = Fnt.cateName;
+            } else {
+                console.error("缺少 singleMap.Fnt 属性")
+                return false
+            }
+
+            if (singleMap.Size && singleMap.Size.listPartMats) {
+                let listPartMats = singleMap.Size.listPartMats;
+
+                Object.values(listPartMats).forEach(part => {
+                    let partCode = part.partCode; // LS-ZB-01
+                    Object.assign(curtain_part[partCode], {
+                        partName: part.partName,
+                        matModelNo: part.matModelNo
+                    })
+                })
+
+            } else {
+                console.error("缺少 singleMap.Size.listPartMats 属性")
+                return false
+            }
+
+        } else {
+            console.error("缺少 singleMap 属性")
+            return false
+        }
+
+
+
+        //
+        // priceMap 价格
+        // obj[0].list[0].priceMap.curtainBody.price 进货价
+        // obj[0].list[0].priceMap.curtainBody.retailPrice 零售价
+        if (data.priceMap) {
+            let priceMap = data.priceMap
+            let parts = []; // 部位
+            if (priceMap.curtainBody) {
+                let curtainBody = priceMap.curtainBody;
+                Object.assign(return_obj.curtainBody, {
+                    buyingPrice: curtainBody.price,
+                    price: curtainBody.retailPrice
+                })
+                parts.push(...curtainBody.parts);
+
+            }
+
+            if (priceMap.curtainHead) {
+                let curtainHead = priceMap.curtainHead;
+                Object.assign(return_obj.curtainHead, {
+                    buyingPrice: curtainHead.price,
+                    price: curtainHead.retailPrice
+                })
+                parts.push(...curtainHead.parts);
+            }
+
+            parts.forEach(part => {
+                let partCode = part.partType; // LS-ZB-01
+                Object.assign(curtain_part[partCode], {
+                    buyingPrice: part.price,
+                    price: part.retailPrice
+                })
+            });
+
+        } else {
+            console.error("缺少 priceMap 属性")
+            return false
+        }
+
+
+        /**
+         * 排序
+         */
+
+
+
+
+
+        console.log(curtain_part);
+        console.log(sortCurtainPart(curtain_part));
+
+
+        return return_obj
+    }
+
+    function sortCurtainPart(curtain_part) {
+
+        let arr = Object.values(curtain_part);
+        arr.sort((a, b) => {
+            let a_num = getWeight(a.partCode);
+            let b_num = getWeight(b.partCode);
+            return b_num - a_num
+        })
+        return arr
+    }
+
+    /* 字符串权重，用于排序 */
+    function getWeight(str) {
+        let strWeight = {
+            "LT": 9 * 100 * 100,
+            "LS": 8 * 100 * 100,
+            "ZB": 9 * 100,
+            "PB": 8 * 100, // 配布
+            "PU": 8 * 100, // 配布（可能是错误的）
+            "HB": 7 * 100,
+            "S": 6 * 100,
+            "LC": 5 * 100
+        }
+        let reg = /([A-Z]{1,2})-([A-Z]{1,2})-(\d+)/;
+        let matchResult = str.match(reg);
+        let head_body = matchResult[1];
+        let part = matchResult[2];
+        let num = matchResult[3];
+        if (head_body && part && num) {
+            return strWeight[head_body] + strWeight[part] + Number(num);
+        } else {
+            console.error(str + "出错")
+        }
+    }
+
+
+
+
+
+
+
+
+    console.log(JSON.stringify(sortData(curtainData), null, 4));
+    </script>
 </head>
 
 <body>
-
 </body>
 
 </html>
