@@ -11,7 +11,7 @@ function server() {
     return browserSync.init({
         server: {
             baseDir: "./test",
-            index: "test.html",
+            index: "test.html", // http://localhost:3008 和 http://localhost:3008/test.html 都指向 test.html
             middleware: [] // 中间件
         },
         port: 3008,

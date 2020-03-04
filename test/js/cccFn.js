@@ -1144,3 +1144,12 @@ function delProperty(obj = {}, property = []) {
     });
     return newObj;
 }
+
+/**
+ * 只要有值且值不为false就为true，包含"" 0 都为true。 可用于vue里面是否有传某个prop 如 <component disabled></component> 里面的 disabled
+ * @param  {any}  val 需要判断的值
+ * @return {Boolean}
+ */
+function isTrue(val) {
+    return !['false', false, void 0, null].includes(val)
+}
