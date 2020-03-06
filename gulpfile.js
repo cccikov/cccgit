@@ -28,7 +28,7 @@ function server() {
  * 监测 html 变化的时候 reload
  */
 function reload() {
-    return gulp.watch(["test/*.html"]).on("change", function(event) {
+    return gulp.watch(["test/**/*.html"]).on("change", function(event) {
         console.log(event + " change")
         try {
             gulp.src(event).pipe(browserSync.reload({
