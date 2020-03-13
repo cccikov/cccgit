@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>蒙层后面 body不滚动4</title>
+</head>
+
+<body>
+    <div class="wrap">
+        鼠标放在灰色块上面是不能滚动的。
+        如果滚动条不是浏览器的滚动条，而是元素的滚动条，鼠标放在fixed元素上，滚动是不会影响滚动条的。
+        所以只需fixed元素占满整个屏幕就可以了（但是对于移动端来说，浏览器的滚动条会更加流畅顺滑）
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div class="fix"></div>
+    </div>
+    <style type="text/css">
+    html,
+    body {
+
+        height: 100%;
+    }
+
+    body {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 50px;
+    }
+
+    .wrap {
+        height: 100%;
+        overflow: auto;
+        font-size: 50px;
+        letter-spacing: 10px;
+        line-height: 2;
+        outline: 1px solid red;
+    }
+
+    .fix {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 30%;
+        height: 30%;
+        transform: translate(-50%, -50%);
+        background: #ccc;
+        /* 可以正常滚动了 */
+        /* pointer-events: none; */
+    }
+    </style>
+</body>
+
+</html>
