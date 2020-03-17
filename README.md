@@ -81,6 +81,13 @@ webpack-demo
 webpack {entry file} {destination for bundled file}
 ```
 
+``` shell
+# {extry file}出填写入口文件的路径，本文中就是上述main.js的路径，
+# {destination for bundled file}处填写打包文件的存放路径
+# 填写路径的时候不用添加{}
+webpack {entry file} {destination for bundled file}
+```
+
 ``` html
 <p>hi</p>
 ```
@@ -160,7 +167,7 @@ div{
     var a = “啊啊啊啊”
 
 我是相当于p标签
-通常来说，通过相隔一行(有时需要两行，有时如果语法明显也可以不换行，但是未markdown文件看起来舒服，建议还是换语法就隔一行)来表示新的语法
+通常来说，通过相隔一行(有时需要两行，有时如果语法明显也可以不换行，但是为了markdown文件看起来舒服，建议还是换语法就隔一行)来表示新的语法
 
 我是另外一个p
 
