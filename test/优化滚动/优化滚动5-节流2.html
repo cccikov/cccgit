@@ -44,6 +44,24 @@
         }
 
 
+        function throttle3(func) {
+            var run = true; // 是否会执行func
+
+            return function() {
+                var _this = this;
+                var args = arguments; //获取参数
+
+                if (run) {
+                    func.apply(_this, args);
+                    run = false;
+                    window.requestAnimationFrame(function() {
+                        run = true;
+                    });
+                }
+            }
+        }
+
+
 
         ////////
         // 应用 //
