@@ -1153,3 +1153,34 @@ function delProperty(obj = {}, property = []) {
 function isTrue(val) {
     return !['false', false, void 0, null].includes(val)
 }
+
+/**
+ * 请求打开全屏
+ */
+function requestFullscreen() {
+    var ele = document.documentElement;
+    if (ele.requestFullscreen) {
+        return ele.requestFullscreen()
+    } else if (ele.msRequestFullscreen) {
+        return ele.msRequestFullscreen();
+    } else if (ele.mozRequestFullScreen) {
+        return ele.mozRequestFullScreen();
+    } else if (ele.webkitRequestFullscreen) {
+        return ele.webkitRequestFullscreen();
+    }
+}
+
+/**
+ * 退出全屏
+ */
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        return document.exitFullscreen()
+    } else if (document.msExitFullscreen) {
+        return document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        return document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        return document.webkitExitFullscreen();
+    }
+}
