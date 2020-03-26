@@ -60,6 +60,7 @@
     }();
 
     ! function() {
+        /* 同一个函数对象，不同的调用方式，this指向不一样 */
         function fn() {
             console.log(this);
         }
@@ -95,6 +96,32 @@
          * es5 中 this的指向是由函数的调用方式决定的，而不是由函数的定义的位置决定
          */
     }();
+
+    ! function() {
+        /* 同一个函数对象，不同的调用方式，this指向不一样 */
+        var obj = {
+            name: "ccc",
+            method: function() {
+                console.log(this)
+            }
+        }
+
+        var fn = obj.method;
+
+        console.log(obj.method === fn); // true
+
+        obj.method(); // {name: "ccc", method: ƒ}
+        fn(); // Window
+
+
+        let getEle = document.querySelectorAll
+        /* 其实有些时候不注意this，会引起报错的 */
+        console.log(getEle === document.querySelectorAll); // true
+        console.log(document.querySelectorAll("*")); // 正常
+        console.log(getEle.call(document, "*")); // 不报错
+        console.log(getEle("*")); // 报错了，因为this指向了window了
+    }();
+
     </script>
 </head>
 
