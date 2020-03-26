@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /**
+         * 请求打开全屏
+         */
+        function requestFullscreen() {
+            var ele = document.documentElement;
+            if (ele.requestFullscreen) {
+                return ele.requestFullscreen()
+            } else if (ele.msRequestFullscreen) {
+                return ele.msRequestFullscreen();
+            } else if (ele.mozRequestFullScreen) {
+                return ele.mozRequestFullScreen();
+            } else if (ele.webkitRequestFullscreen) {
+                return ele.webkitRequestFullscreen();
+            }
+        }
+
+        /**
+         * 退出全屏
+         */
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                return document.exitFullscreen()
+            } else if (document.msExitFullscreen) {
+                return document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                return document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                return document.webkitExitFullscreen();
+            }
+        }
+
+
+        function trigger_handler() {
+            var loading = false;
+            var full = false;
+            return function () {
+                if (loading === false) {
+                    loading = true;
+                    if (full === false) {
+                        requestFullscreen().then(res => {
+                            setTimeout(() => {
+                                loading = false
+                                full = true;
+                            }, 1000/30);
+                        }).catch(err => {
+                            console.error(err.message)
+                        })
+                    } else {
+                        exitFullscreen().then(res => {
+                            setTimeout(() => {
+                                loading = false
+                                full = false;
+                            }, 1000/30);
+                        }).catch(err => {
+                            console.error(err.message)
+                        })
+                    }
+                }
+            }
+        }
+
+        var trigger = trigger_handler();
+
+        window.addEventListener("click", trigger)
+        window.addEventListener("mouseup", trigger)
+        window.addEventListener("mousedonw", trigger)
+        window.addEventListener("keyup", trigger)
+        window.addEventListener("keydown", trigger)
+        window.addEventListener("keyperss", trigger)
+
+    </script>
+    <button onclick="trigger()">切换</button>
+</body>
+
+</html>
