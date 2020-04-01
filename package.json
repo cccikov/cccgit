@@ -9,7 +9,7 @@
     "start": "browser-sync start --server --files \"test/**/*.html,test/**/*.css,test/**/*.js\" --startPath \"test\" --index \"test.html\"",
     "simple": "browser-sync start --server --files test/**/*.html,test/**/*.css,test/**/*.js --startPath test --index test.html",
     "web": "browser-sync start --server test --files test/**/*.html,test/**/*.css,test/**/*.js  --index test.html",
-    "gulp":"npx gulp"
+    "gulp": "npx gulp"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,8 @@
     "gulp": "^4.0.2",
     "gulp-clean-css": "^3.10.0",
     "gulp-less": "^3.5.0",
-    "gulp-rename": "^1.4.0"
+    "gulp-rename": "^1.4.0",
+    "video.js": "^7.7.5"
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",

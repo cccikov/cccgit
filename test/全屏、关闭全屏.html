@@ -53,7 +53,7 @@
                             setTimeout(() => {
                                 loading = false
                                 full = true;
-                            }, 1000/30);
+                            }, 1000 / 30);
                         }).catch(err => {
                             console.error(err.message)
                         })
@@ -62,7 +62,7 @@
                             setTimeout(() => {
                                 loading = false
                                 full = false;
-                            }, 1000/30);
+                            }, 1000 / 30);
                         }).catch(err => {
                             console.error(err.message)
                         })
@@ -75,7 +75,7 @@
 
         window.addEventListener("click", trigger)
         window.addEventListener("mouseup", trigger)
-        window.addEventListener("mousedonw", trigger)
+        window.addEventListener("mousedown", trigger)
         window.addEventListener("keyup", trigger)
         window.addEventListener("keydown", trigger)
         window.addEventListener("keyperss", trigger)

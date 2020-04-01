@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 10000px
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+
+        function throttle(func) {
+            var run = true; // 是否会执行func
+
+            return function () {
+                var _this = this;
+                var args = arguments; //获取参数
+
+                if (run) {
+                    func.apply(_this, args);
+                    run = false;
+                    window.requestAnimationFrame(function () {
+                        run = true;
+                    });
+                }
+            }
+        }
+
+        let throttle_handler = throttle(function () {
+            console.log("requestAnimationFrame " + i)
+            i++;
+        })
+
+        let i = 0;
+        let timer;
+        function go() {
+            timer = window.requestAnimationFrame(function () {
+                console.log("requestAnimationFrame " + i)
+                i++;
+                go();
+            });
+        }
+
+        let j = 0
+        function go_timeout() {
+            window.setTimeout(function () {
+                console.log("setTimeout " + j)
+                j++;
+                if (j == 2000) {
+                    window.cancelAnimationFrame(timer);
+                }
+                // throttle_handler();
+                go_timeout();
+            });
+        }
+
+        function run() {
+            go();
+            go_timeout();
+        }
+
+        window.onscroll = function () {
+            console.log("scroll")
+        }
+    </script>
+</body>
+
+</html>
