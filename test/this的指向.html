@@ -5,10 +5,10 @@
     <title>关于this的指向</title>
 
     <script type="text/javascript">
-        function smartCut(){
+        function smart____separate(){
             console.log('%c..小分割..', 'color: #fff; background: #4f0; font-size: 12px;');
         }
-        function longCut(){
+        function long____________________separate(){
             console.log('%c\n........................这是一条美丽动人的分割线...............................\n', 'color: #fff; background: #f40; font-size: 24px;');
         }
 
@@ -38,7 +38,7 @@
         // 所以函数直接调用 , this都是window全局对象;
 
         /******************************大分割*************************************/
-        longCut();
+        long____________________separate();
 
 
         /*
@@ -58,14 +58,16 @@
                 fn1();
             }
         };
-        ccc.cutHair()// ccc window
+        ccc.cutHair() // ccc window
         // cutHair是作为ccc的方法调用的,this就指向ccc ; 而里面的fn1是作为一个函数那样普通执行 , 所以指向window
 
         /****小分割***/
-        smartCut();
+        smart____separate();
 
-        // 构造函数
-        function person(name,age,length){
+        /**
+         * 情况3 作为构造函数调用，使用new调用，指向构造函数创建的实例对象
+         */
+        function Person(name,age,length){
             console.log(this);
             this.name = name;
             this.age = age;
@@ -75,22 +77,23 @@
             }
         }
 
-        var cong = new person("ccc",25,12);//cong对象
-        cong.personfn();//cong对象
+        var cong = new Person("ccc",25,12); // cong对象，作为构造函数调用
+        cong.personfn(); // cong对象，作为cong对象的函数调用
 
         /****小分割***/
-        smartCut();
+        smart____separate();
 
         // 若构造函数作为普通调用
-        person()//window
-        personfn()//window
+        Person() // window 构造函数一般采用首字母大写，是约定俗成的写法
+        personfn() // window 由于上述直接执行了，所以构造函数指向window，所以personfn方法是写在window上。
+        console.log(window.personfn === personfn) // true
 
          /******************************大分割*************************************/
-        longCut();
+        long____________________separate();
 
 
         /*
-         *  情况3  call/apply 强行掰弯 , 强行把this指向对象
+         *  情况4  call/apply 强行掰弯 , 强行把this指向对象
          */
         var tomato = {
             "name":"臭茄"
@@ -100,7 +103,7 @@
         // 你看,被强行掰弯了
 
         /****小分割***/
-        smartCut();
+        smart____separate();
 
         // 所以call,apply可以使对象可以用其他对象有而自己没有的方法
         // e.g.
