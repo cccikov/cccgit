@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布-订阅模式</title>
+</head>
+
+<body>
+    <p>增加了 off 取消订阅功能</p>
+    <p>增加了 once 取消订阅功能</p>
+    <script>
+        /* 参考来源 https://segmentfault.com/a/1190000019260857 */
+
+        let eventEmitter = {};
+
+        // 缓存列表，存放 event 及 eventListener
+        /**
+         * 格式
+         * {
+         *     event:listener_list,
+         *     event:[eventListener1,eventListener2,eventListener3...]
+         * }
+         */
+        eventEmitter.list = {};
+
+        // 订阅
+        eventEmitter.on = function (event, eventListener) {
+            let _this = this;
+            // 如果对象中没有对应的 event 值，也就是说明没有订阅过，就给 event 创建个缓存列表
+            // 如有对象中有相应的 event 值，把 eventListener 添加到对应 event 的缓存列表里
+            // (_this.list[event] || (_this.list[event] = [])).push(eventListener); // (_this.list[event] || (_this.list[event] = [])) 返回那个数组，但是这里没有判断eventListener是否在这个事件的监听器list里面
+
+            if (_this.list[event] && !_this.list[event].includes(eventListener)) {
+                _this.list[event].push(eventListener)
+            } else {
+                _this.list[event] = [];
+                _this.list[event].push(eventListener)
+            }
+
+            return _this;
+        };
+
+        // 发布
+        eventEmitter.emit = function () {
+            let _this = this;
+
+            // 第一个参数是对应的 event 值，直接用数组的 shift 方法取出
+            let event = [].shift.call(arguments), // 取出第一个参数，并在arguments除去第一个参数
+                listener_list = _this.list[event],
+                len = listener_list.length
+
+            // 如果缓存列表里没有 eventListener 就返回 false
+            if (!listener_list || listener_list.length === 0) {
+                return false;
+            }
+
+            // 遍历 event 值对应的缓存列表，依次执行 eventListener
+            // 由于涉及 once 边执行边删除，所以从后遍历
+            let i = len;
+            let list = listener_list.slice().reverse(); // 从后遍历，但是又要订阅顺序执行，所以，要讲数组翻转
+            while (i > 0) {
+                i--;
+                let eventListener = list[i];
+                eventListener.apply(_this, arguments);
+            }
+
+            return _this;
+        };
+
+        // 取消订阅
+        eventEmitter.off = function (event, eventListener) {
+            let _this = this,
+                listener_list = _this.list[event],
+                len = listener_list.length
+
+            // 如果缓存列表中没有相应的 eventListener，返回false
+            if (!listener_list) {
+                return false;
+            }
+
+            if (!eventListener) {
+                // 如果没有传 eventListener 的话，就会将 event 值对应缓存列表中的 eventListener 都清空
+                listener_list && (listener_list.splice(0, len));
+            } else {
+                // 若有 eventListener，遍历缓存列表，看看传入的 eventListener 与哪个函数相同，如果相同就直接从缓存列表中删掉即可
+                // 删除，从后面开始删除，这样就不会导致未被遍历到的元素因为前面元素被删除，导致没被遍历到
+                let i = len;
+                while (i > 0) {
+                    i--;
+                    let tar = listener_list[i];
+                    if (tar === eventListener || tar.listener === eventListener) { // on 订阅的，或者 once 订阅的
+                        listener_list.splice(i, 1);
+                        // break // 由于现在除了 on 还有 once，所以取消订阅就要将全部取消
+                    }
+                }
+            }
+            return _this;
+        }
+
+        // 监听一次，once 同一个 eventListener 可以监听（订阅）无限次，与 on 不同；on 同一个 eventListener 只能监听（订阅）一次
+        eventEmitter.once = function (event, eventListener) {
+            // 先绑定，调用后删除
+            let _this = this;
+            _this.on(event, handler); // 订阅的是 handler
+            return _this;
+
+            function handler() {
+                eventListener.apply(_this, arguments); // arguments 为传入 handler 的参数
+                _this.off(event, handler); // handler 触发后，立即取消订阅 handler
+            }
+            handler.listener = eventListener; // 记录实际的 eventListener，用于直接 off eventListener 有迹可循
+        }
+
+        function listener1(content) {
+            console.log('监听器1-订阅:', content);
+        };
+
+        function listener2(content) {
+            console.log('监听器2-订阅:', content);
+        };
+
+        // 订阅
+        eventEmitter.on('event1', listener1);
+        eventEmitter.on('event1', listener1);
+        eventEmitter.on('event1', listener2);
+
+        eventEmitter.on('event2', listener1);
+        eventEmitter.on('event2', listener1);
+        eventEmitter.on('event2', listener2);
+
+        eventEmitter.on('event3', listener1);
+        eventEmitter.on('event3', listener2);
+        eventEmitter.once('event3', listener1);
+        eventEmitter.once('event3', listener1);
+        eventEmitter.once('event3', listener1);
+        eventEmitter.once('event3', listener1);
+
+        eventEmitter.off('event1');
+        eventEmitter.off('event2', listener2);
+
+        // 发布
+        eventEmitter.emit('event1', '事件1触发');
+        eventEmitter.emit('event2', '事件2触发');
+        eventEmitter.emit('event3', '事件3触发');
+        console.log("----")
+        eventEmitter.emit('event3', '事件3触发');
+
+    </script>
+</body>
+
+</html>
