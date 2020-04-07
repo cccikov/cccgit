@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布-订阅模式</title>
+</head>
+
+<body>
+    <script>
+        /* 参考来源 https://segmentfault.com/a/1190000019260857 */
+
+        let eventEmitter = {};
+
+        // 缓存列表，存放 event 及 eventListener
+        /**
+         * 格式
+         * {
+         *     event:listener_list,
+         *     event:[eventListener1,eventListener2,eventListener3...]
+         * }
+         */
+        eventEmitter.list = {};
+
+        // 订阅
+        eventEmitter.on = function (event, eventListener) {
+            let _this = this;
+            // 如果对象中没有对应的 event 值，也就是说明没有订阅过，就给 event 创建个缓存列表
+            // 如有对象中有相应的 event 值，把 eventListener 添加到对应 event 的缓存列表里
+            // (_this.list[event] || (_this.list[event] = [])).push(eventListener); // (_this.list[event] || (_this.list[event] = [])) 返回那个数组，但是这里没有判断eventListener是否在这个事件的监听器list里面
+
+            if(_this.list[event] && !_this.list[event].includes(eventListener)){
+                _this.list[event].push(eventListener)
+            }else{
+                _this.list[event] = [];
+                _this.list[event].push(eventListener)
+            }
+
+            return _this;
+        };
+
+        // 发布
+        eventEmitter.emit = function () {
+            let _this = this;
+
+            // 第一个参数是对应的 event 值，直接用数组的 shift 方法取出
+            let event = [].shift.call(arguments), // 取出第一个参数，并在arguments除去第一个参数
+                listener_list = _this.list[event];
+
+            // 如果缓存列表里没有 eventListener 就返回 false
+            if (!listener_list || listener_list.length === 0) {
+                return false;
+            }
+
+            // 遍历 event 值对应的缓存列表，依次执行 eventListener
+            listener_list.forEach(eventListener => {
+                eventListener.apply(_this, arguments);
+            });
+
+            return _this;
+        };
+
+        function listener1(content) {
+            console.log('监听器1-订阅:', content);
+        };
+
+        function listener2(content) {
+            console.log('监听器2-订阅:', content);
+        };
+
+        // 订阅
+        eventEmitter.on('article', listener1);
+        eventEmitter.on('article', listener1);
+        eventEmitter.on('article', listener2);
+
+        // 发布
+        eventEmitter.emit('article', 'Javascript 发布-订阅模式');
+
+        /*
+            用户1订阅了: Javascript 发布-订阅模式
+            用户2订阅了: Javascript 发布-订阅模式
+        */
+
+    </script>
+</body>
+
+</html>
