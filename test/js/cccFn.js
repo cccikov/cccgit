@@ -804,11 +804,17 @@ function firstEntry() {
     }
 }
 
-// 响应式 rem布局
+/**
+ * 响应式 rem 布局
+ * @return {Number} rem 大小
+ *
+ * window.addEventListener("load", baseFontSize)
+ * window.addEventListener("resize", baseFontSize)
+ */
 function baseFontSize() {
-    var rootfontsize = $(window).width() / 20;
+    var rootfontsize = window.innerWidth / 20;
     rootfontsize = rootfontsize > 20 ? 20 : rootfontsize;
-    $("html").css("fontSize", rootfontsize + "px");
+    document.documentElement.style.fontSize = rootfontsize + "px"
     return rootfontsize;
 }
 
