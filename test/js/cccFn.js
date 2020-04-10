@@ -812,7 +812,16 @@ function firstEntry() {
  * window.addEventListener("resize", baseFontSize)
  */
 function baseFontSize() {
-    var rootfontsize = window.innerWidth / 20;
+    var width;
+    if (window.innerWidth == window.outerWidth) {
+        width = window.innerWidth;
+    } else if (window.innerWidth > window.outerWidth) { // 缩放了
+        width = window.outerWidth;
+    } else if (window.innerWidth < window.outerWidth) { // pc端，起了控制台
+        width = window.innerWidth
+    }
+
+    var rootfontsize = width / 20;
     rootfontsize = rootfontsize > 20 ? 20 : rootfontsize;
     document.documentElement.style.fontSize = rootfontsize + "px"
     return rootfontsize;
