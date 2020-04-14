@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>超窄border</title>
+    <style type="text/css">
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        color: #2c3e50;
+        text-align: center;
+    }
+
+    .section {
+        display: flex;
+        justify-content: space-around;
+        padding: 30px 10vw;
+    }
+
+    .btn {
+        width: 100px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 100px;
+    }
+
+    .btn2 {
+        width: 100px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .btn2.half-border::after {
+        border-radius: 20px;
+    }
+
+    .box {
+        width: 100px;
+        line-height: 100px;
+        text-align: center;
+        background: #fdfdfd;
+    }
+
+    .border {
+        border: 1px solid #ccc;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .border-top {
+        border-top: 1px solid #ccc;
+    }
+
+    .border-left {
+        border-left: 1px solid #ccc;
+    }
+
+    .border-right {
+        border-right: 1px solid #ccc;
+    }
+
+    .half-border {
+        position: relative;
+        border-width: 0px;
+    }
+
+    .half-border::after {
+        /* border 3要素： width（有默认的，所以一定要先设为0px） style color */
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        pointer-events: none;
+        top: -50%;
+        right: -50%;
+        bottom: -50%;
+        left: -50%;
+        /* border: 0px solid #fff; */
+        /* border-bottom-width: 1px; */
+        /* border-width: 0px; */
+        border-style: inherit;
+        border-color: inherit;
+        border-width: 1px;
+        transform: scale(0.5);
+    }
+
+    .half-border.round::after {
+        border-radius: 100vh;
+    }
+
+    .half-border-bottom {
+        position: relative;
+        border-width: 0px;
+    }
+
+    .half-border-bottom::after {
+        /* border 3要素： width（有默认的，所以一定要先设为0px） style color */
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        pointer-events: none;
+        top: -50%;
+        right: -50%;
+        bottom: -50%;
+        left: -50%;
+        border-width: 0px;
+        border-style: inherit;
+        border-color: inherit;
+        border-bottom-width: 1px;
+        transform: scale(0.5);
+    }
+
+    .half-border-top {
+        position: relative;
+        border-width: 0px;
+    }
+
+    .half-border-top::after {
+        /* border 3要素： width（有默认的，所以一定要先设为0px） style color */
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        pointer-events: none;
+        top: -50%;
+        right: -50%;
+        bottom: -50%;
+        left: -50%;
+        border-width: 0px;
+        border-style: inherit;
+        border-color: inherit;
+        border-top-width: 1px;
+        transform: scale(0.5);
+    }
+
+    .half-border-left {
+        position: relative;
+        border-width: 0px;
+    }
+
+    .half-border-left::after {
+        /* border 3要素： width（有默认的，所以一定要先设为0px） style color */
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        pointer-events: none;
+        top: -50%;
+        right: -50%;
+        bottom: -50%;
+        left: -50%;
+        border-width: 0px;
+        border-style: inherit;
+        border-color: inherit;
+        border-left-width: 1px;
+        transform: scale(0.5);
+    }
+
+    .half-border-right {
+        position: relative;
+        border-width: 0px;
+    }
+
+    .half-border-right::after {
+        /* border 3要素： width（有默认的，所以一定要先设为0px） style color */
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        pointer-events: none;
+        top: -50%;
+        right: -50%;
+        bottom: -50%;
+        left: -50%;
+        border-width: 0px;
+        border-style: inherit;
+        border-color: inherit;
+        border-right-width: 1px;
+        transform: scale(0.5);
+    }
+
+    </style>
+</head>
+
+<body>
+    <h1>超窄边框 超窄border</h1>
+    <div class="wrap">
+        <div class="section">
+            <div class="btn border half-border round">按钮</div>
+            <div class="btn border">按钮</div>
+        </div>
+        <div class="section">
+            <div class="btn2 border half-border">按钮</div>
+            <div class="btn2 border">按钮</div>
+        </div>
+        <div class="section">
+            <div class="box border half-border">盒子</div>
+            <div class="box border">盒子</div>
+        </div>
+        <div class="section">
+            <div class="box border-top half-border-top">盒子</div>
+            <div class="box border-top">盒子</div>
+        </div>
+        <div class="section">
+            <div class="box border-right half-border-right">盒子</div>
+            <div class="box border-right">盒子</div>
+        </div>
+        <div class="section">
+            <div class="box border-bottom half-border-bottom">盒子</div>
+            <div class="box border-bottom">盒子</div>
+        </div>
+        <div class="section">
+            <div class="box border-left half-border-left">盒子</div>
+            <div class="box border-left">盒子</div>
+        </div>
+    </div>
+</body>
+
+</html>

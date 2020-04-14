@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vh</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="text"></div>
+        <button onclick="log()">log()</button>
+    </div>
+    <script>
+        let wrap = document.querySelectorAll(".wrap")[0];
+        let text = document.getElementById("text");
+
+
+        function log() {
+            // alert("wrap.clientHeight:" + wrap.clientHeight + "\n" + "window.innerHeight:" + window.innerHeight)
+            text.innerHTML = "100vh:" + wrap.clientHeight + "<br>" + "window.innerHeight:" + window.innerHeight;
+        }
+        log();
+        window.onresize = log;
+    </script>
+</body>
+
+</html>
