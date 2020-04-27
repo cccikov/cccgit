@@ -808,6 +808,10 @@ function firstEntry() {
  * 响应式 rem 布局
  * @return {Number} rem 大小
  *
+ * 注意 有些浏览器不支持这么小于12px的字体，html的fontSize小于12px会按照12px计算rem（pc为主，开发时），
+ * 所以就会造成计算的混乱，比如1rem = 10px的时候，你想设置一个100px的宽度，设置了10rem，但是实际就会变成120px（因为浏览器不支持10px字体，按照12px计算）
+ * 因为最窄的设备是iphone4,4s，320px宽度，所以只要在320px宽度下，html的font-size大于12px就行了。
+ *
  * window.addEventListener("load", baseFontSize)
  * window.addEventListener("resize", baseFontSize)
  */

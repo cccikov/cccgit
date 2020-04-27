@@ -167,6 +167,21 @@
 			console.log(new Date().toTimeString());
 			console.log(new Date().toDateString());
 
+
+
+			document.write(`<p>new Date("2018-09-01T23:59:58+01:00"):<br> --- ${new Date("2018-09-01T23:59:58+01:00")}</p>`);
+    		document.write(`<p>new Date("2018-09-01T23:59:58+08:00"):<br> --- ${new Date("2018-09-01T23:59:58+08:00")}</p>`);
+    		document.write(`<p>new Date("2018-09-01T23:59:58"):<br> --- ${new Date("2018-09-01T23:59:58")}</p>`);
+    		document.write(`<p>new Date("2018-09-01 23:59:58"):<br> --- ${new Date("2018-09-01 23:59:58")}</p>`); // 留意ios这个
+    		document.write(`<p>new Date("2018-09-01"):<br> --- ${new Date("2018-09-01")}</p>`);
+    		document.write(`<p>new Date("2018-09"):<br> --- ${new Date("2018-09")}</p>`);
+    		document.write(`<p>new Date("2018"):<br> --- ${new Date("2018")}</p>`);
+    		document.write(`<p>new Date("2018/09/11 13:45:34"):<br> --- ${new Date("2018/09/11 13:45:34")}</p>`);
+    		document.write(`<p>new Date("2018/09/11 13:45:34+0800"):<br> --- ${new Date("2018/09/11 13:45:34+0800")}</p>`);
+    		document.write(`<p>new Date("2018/09/11 13:45:34+0000"):<br> --- ${new Date("2018/09/11 13:45:34+0000")}</p>`);
+    		document.write(`<p>new Date("2018/09/11"):<br> --- ${new Date("2018/09/11")}</p>`);
+    		document.write(`<p>new Date("09/11/2018"):<br> --- ${new Date("09/11/2018")}</p>`);
+    		document.write(`<p>new Date("11/09/2018"):<br> --- ${new Date("11/09/2018")}</p>`);
 		</script>
 	</body>
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>数组错开</title>
+</head>
+
+<body>
+    <h4>数组错开 列表错开 数组混合 列表混合</h4>
+    <script type="text/javascript">
+    /* eslint-disable */
+    let arr1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+    let arr2 = ["a", "b", "c", "d"]
+
+    arrCross1(arr1, arr2)
+    console.log("%c-----------", "font-size:20px;color:red")
+    arrCross2(arr1, arr2)
+
+    /**
+     * [arrCross1 description]
+     * @param  {[type]} arr1 [description]
+     * @param  {[type]} arr2 [description]
+     * @return {[type]}      [description]
+     */
+    function arrCross1(arr1, arr2) {
+        let len1 = arr1.length;
+        let len2 = arr2.length;
+
+        let i1 = 0;
+        let i2 = 0;
+
+        let plus1 = 4; // 增加量
+        let plus2 = 1; // 增加量
+
+        let whole = []
+
+        let safe = 0;
+        while (i1 < len1 || i2 < len2) {
+
+            let piece1 = arr1.slice(i1, i1 + plus1); // 本次
+            let piece2 = arr2.slice(i2, i2 + plus2); // 本次
+            let piece1_future = arr1.slice(i1 + plus1) // 下一次
+            let piece2_future = arr2.slice(i2 + plus2) // 下一次
+
+            console.log(piece1)
+            console.log(piece2)
+
+            whole.push({
+                big: piece1,
+                small: piece2,
+            })
+
+            console.log("------------")
+            if (piece1_future.length > plus1 && piece2_future.length > 0) { // 由于piece1_future是排在前面，所以要求必须要大于增加量，不然其实就可以结束了；piece2_future是后面的，所以只要有值（piece1_future也要大于增加量），就可以继续
+                i1 += plus1
+                i2 += plus2
+            } else {
+                let big = [],
+                    small = []
+                if (piece1_future.length > 0) {
+                    console.log(piece1_future);
+                    big = piece1_future
+                }
+                if (piece2_future.length > 0) {
+                    console.log(piece2_future);
+                    small = piece2_future;
+                }
+                whole.push({
+                    big,
+                    small
+                })
+
+                break
+            }
+
+
+            safe++;
+            if (safe >= 1000) {
+                console.warn("死循环了")
+                break
+            }
+        }
+
+        console.log(whole)
+        return whole
+    }
+
+    /**
+     * [arrCross2 description]
+     * @param  {[type]} arr1 [description]
+     * @param  {[type]} arr2 [description]
+     * @return {[type]}      [description]
+     */
+    function arrCross2(arr1, arr2) {
+        let len1 = arr1.length;
+        let len2 = arr2.length;
+
+        let i1 = 0;
+        let i2 = 0;
+
+        let plus1 = 4; // 增加量
+        let plus2 = 1; // 增加量
+
+        let whole = []
+
+        let safe = 0;
+        while (i1 < len1 || i2 < len2) {
+
+            let obj = {};
+
+            let piece1 = arr1.slice(i1, i1 + plus1); // 本次
+            let piece2 = arr2.slice(i2, i2 + plus2); // 本次
+
+            if (piece1.length < plus1 || piece2.length === 0) { // 由于piece1是排在前面，所以要求必须要等于于增加量，不然其实就可以结束了；piece2是后面的，所以只要有值（piece1也要大于增加量），就可以继续
+                piece1 = arr1.slice(i1)
+                piece2 = arr2.slice(i2)
+                i1 = len1;
+                i2 = len2
+            }
+            console.log(piece1)
+            console.log(piece2)
+            console.log("---------")
+
+            if (piece1.length > 0) {
+                obj.big = piece1
+            }
+            if (piece2.length > 0) {
+                obj.small = piece1
+            }
+            whole.push(obj)
+
+            i1 += plus1
+            i2 += plus2
+
+            safe++;
+            if (safe >= 1000) {
+                console.warn("死循环了")
+                break
+            }
+        }
+
+        console.log(whole)
+        return whole
+    }
+
+    </script>
+</body>
+
+</html>
