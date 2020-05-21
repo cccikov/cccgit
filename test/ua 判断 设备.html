@@ -27,12 +27,16 @@
     document.write(`<textarea>${ua}</textarea>`);
 
     var wxUa = `mozilla/5.0 (linux; android 9; 16s build/pkq1.190202.001; wv) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/70.0.3538.111 mobile safari/537.36 mmwebid/9908 micromessenger/7.0.4.1420(0x2700043c) process/tools nettype/wifi language/zh_cn`
+
+    var wxUaPc = `mozilla/5.0 (windows nt 10.0; wow64) applewebkit/537.36 (khtml, like gecko) chrome/53.0.2785.116 safari/537.36 qbcore/4.0.1301.400 qqbrowser/9.0.2524.400 mozilla/5.0 (windows nt 6.1; wow64) applewebkit/537.36 (khtml, like gecko) chrome/53.0.2875.116 safari/537.36 nettype/wifi micromessenger/7.0.5 windowswechat`
     var chromeUa = `mozilla/5.0 (linux; android 9; 16s) applewebkit/537.36 (khtml, like gecko) chrome/75.0.3770.67 mobile safari/537.36`
     var chromePcUa = "mozilla/5.0 (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/74.0.3729.108 safari/537.36"
     var firefoxUa = `mozilla/5.0 (android 9; mobile; rv:67.0) gecko/67.0 firefox/67.0`
     var qqUa = `mozilla/5.0 (linux; u; android 9; zh-cn; 16s build/pkq1.190202.001) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/66.0.3359.126 mqqbrowser/9.4 mobile safari/537.36`
     var ucUa = `mozilla/5.0 (linux; u; android 9; zh-cn; 16s build/pkq1.190202.001) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/57.0.2987.108 ucbrowser/12.5.0.1030 mobile safari/537.36`
     var mzUa = `mozilla/5.0 (linux; u; android 9; zh-cn; mz-16s build/mra58k) applewebkit/537.36 (khtml, like gecko) version/4.0 chrome/57.0.2987.108 mzbrowser/7.12.0 uws/2.15.0.4 mobile safari/537.36`
+
+
 
     var isAndroid = (/android/gi).test(ua);
     var isIos = (/(iPhone|iPad|iPod|iOS)/i).test(ua);
