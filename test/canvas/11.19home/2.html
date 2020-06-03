@@ -7,18 +7,24 @@
 	</head>
 
 	<body>
+		<button onclick="video.play()">play</button>
 		<p>记得要用服务器打开</p>
-		<video autoplay="autoplay" id="video" loop="loop" controls="controls" style="display: none;">
+		<video autoplay="autoplay" muted id="video" loop="loop" controls="controls" style="display: none;">
 			<source src="html5-canvas-video/BigBuckBunny_640x360.mp4" type="video/mp4"></source>
 			<source src="html5-canvas-video/BigBuckBunny_640x360.ogv" type="video/ogg"></source>
 		</video>
 		<canvas id="canvas" width="640" height="360"></canvas>
 		<canvas id="canvas1" width="640" height="360"></canvas>
+
 		<script type="text/javascript">
 			window.onload = function() {
 				var canvas = document.getElementById("canvas");
 				var ctx = canvas.getContext("2d");
 				var video = document.getElementById("video");
+
+				video.play().catch(err=>{
+					alert(err)
+				});
 
 				function play() {
 					//灰度

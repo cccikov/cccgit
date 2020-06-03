@@ -9,6 +9,7 @@
     "start": "browser-sync start --server --files \"test/**/*.html,test/**/*.css,test/**/*.js\" --startPath \"test\" --index \"test.html\"",
     "simple": "browser-sync start --server --files test/**/*.html,test/**/*.css,test/**/*.js --startPath test --index test.html",
     "web": "browser-sync start --server test --files test/**/*.html,test/**/*.css,test/**/*.js  --index test.html",
+    "dev": "npx gulp",
     "gulp": "npx gulp"
   },
   "repository": {
