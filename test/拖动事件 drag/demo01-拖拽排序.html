@@ -44,26 +44,28 @@
 
     <script>
         var node = document.querySelector("#container");
-        var draging = null;
+        var draging = null; // 拖动的元素
         // 使用事件委托，将li的事件委托给ul
         node.ondragstart = function (event) {
             // firefox设置了setData后元素才能拖动！！！！
             event.dataTransfer.setData("te", event.target.innerText); //不能使用text，firefox会打开新tab
-            draging = event.target;
+            draging = event.target; // 拖动的元素
         }
         node.ondragover = function (event) {
             event.preventDefault();
             var target = event.target;
-            console.log(target);
 
             /* 下面为交换逻辑 */
             // 因为dragover会发生在ul上，所以要判断是不是li
             if (target.nodeName === "LI" && target !== draging) {
+                    console.log(target);
                 // domIndex是实现的获取index
                 if (domIndex(draging) < domIndex(target)) {
-                    target.parentNode.insertBefore(draging, target.nextSibling);
+                    // 如果目标本来在拖动元素后面
+                    target.parentNode.insertBefore(draging, target.nextSibling); // 在目标后面插入
                 } else {
-                    target.parentNode.insertBefore(draging, target);
+                     // 如果目标本来在拖动元素前面
+                    target.parentNode.insertBefore(draging, target); // 在目标前面插入
                 }
             }
         }
@@ -73,7 +75,7 @@
             if (!el || !el.parentNode) {
                 return -1;
             }
-            while (el && (el = el.previousElementSibling)) {
+            while (el && (el = el.previousElementSibling)) { // 如果元素前面还有元素就++，再以前面的元素再执行一次。。。。
                 index++;
             }
             return index;
