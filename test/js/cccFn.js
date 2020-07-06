@@ -816,17 +816,20 @@ function firstEntry() {
  * window.addEventListener("resize", baseFontSize)
  */
 function baseFontSize() {
-    var width;
-    if (window.innerWidth == window.outerWidth) {
-        width = window.innerWidth;
-    } else if (window.innerWidth > window.outerWidth) { // 缩放了
-        width = window.outerWidth;
-    } else if (window.innerWidth < window.outerWidth) { // pc端，起了控制台
-        width = window.innerWidth
+    var width,
+        innerWidth = window.innerWidth,
+        outerWidth = window.outerWidth || window.innerWidth; // ios10 window.outerWidth会为0
+    if (innerWidth == outerWidth) {
+        width = innerWidth;
+    } else if (innerWidth > outerWidth) { // 缩放了
+        width = outerWidth;
+    } else if (innerWidth < outerWidth) { // pc端，起了控制台
+        width = innerWidth
     }
 
     var rootfontsize = width / 20;
     rootfontsize = rootfontsize > 20 ? 20 : rootfontsize;
+    rootfontsize = rootfontsize < 10 ? 10 : rootfontsize;
     document.documentElement.style.fontSize = rootfontsize + "px"
     return rootfontsize;
 }

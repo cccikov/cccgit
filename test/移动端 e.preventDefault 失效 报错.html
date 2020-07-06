@@ -69,6 +69,17 @@
          * 据规范，passive 选项的默认值始终为false。但是，这引入了处理某些触摸事件（以及其他）的事件监听器在尝试处理滚动时阻止浏览器的主线程的可能性，从而导致滚动处理期间性能可能大大降低。
          * 为防止出现此问题，某些浏览器（特别是Chrome和Firefox）已将touchstart和touchmove事件的passive选项的默认值更改为true文档级节点 Window，Document，document.documentElement和Document.body。这可以防止调用事件监听器，因此在用户滚动时无法阻止页面呈现
          */
+
+         /**
+          * 浏览器报下面的错误，就表示 preventDefault() 无效
+          * Unable to preventDefault inside passive event listener invocation.
+          *
+          * 由于浏览器必须要在执行事件处理函数之后，才能知道有没有掉用过 preventDefault() ，这就导致了浏览器不能及时响应滚动，略有延迟。
+          * 所以为了让页面滚动的效果如丝般顺滑，从 chrome56 开始，在 window、document 和 body 上注册的 touchstart 和 touchmove 事件处理函数，会默认为是 passive: true。浏览器忽略 preventDefault() 就可以第一时间滚动了。
+          */
+
+
+
     </script>
 </body>
 

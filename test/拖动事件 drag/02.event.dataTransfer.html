@@ -56,6 +56,7 @@
             event.target.style.opacity = .5;
         }, false);
 
+        /* 放下目标节点时触发事件 */
         document.addEventListener("dragend", function (event) {
             console.log("dragend", event.dataTransfer.getData("text"));
 
@@ -63,7 +64,6 @@
             event.target.style.opacity = "";
         }, false);
 
-        /* 放下目标节点时触发事件 */
         document.addEventListener("dragover", function (event) {
             console.log("dragover", event.dataTransfer.getData("text"));
 
