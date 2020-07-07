@@ -87,6 +87,15 @@
         controlBar.removeChild("FullscreenToggle")
         controlBar.removeChild("RemainingTimeDisplay")
 
+        /* 增加组件，也会将对应的dom插入父组件中，所以可以通过插入组件顺序去控制dom的顺序 */
+        controlBar.removeChild("CurrentTimeDisplay")
+        controlBar.removeChild("TimeDivider")
+        controlBar.removeChild("DurationDisplay")
+        controlBar.addChild("CurrentTimeDisplay")
+        controlBar.addChild("TimeDivider")
+        let DurationDisplay = videojs.getComponent("DurationDisplay"); // 可以通过  getComponent 去获得组件的构造函数
+        controlBar.addChild(new DurationDisplay(player))
+
         console.log(children)
         console.log(controlBar)
         console.log(controlBar_children)
@@ -98,6 +107,75 @@
         // player.dispose();
         // player.src(src);
         // player.options(obj);
+
+
+
+        /**
+         * Component 类
+         *
+         * line:3257
+         *
+         * if (options.el) {
+         *     this.el_ = options.el;
+         * } else if (options.createEl !== false) {
+         *     this.el_ = this.createEl();
+         * }
+         *
+         * 表明 Component 实例化的时候，会调用直接读取option选项的el或者调用createEl()
+         */
+        // createEl // this.el_ = this.createEl(); line:3284
+
+        let createEl = videojs.dom.createEl;
+        let Component = videojs.getComponent('Component');
+
+        let dom = createEl("div", {
+            /* dom属性 */
+            id: "123123",
+            className: "123123 123"
+        }, {
+            /* 标签属性 */
+            "data-value": "123123123",
+            "style": "padding:10px"
+        }, " myComponent ");
+        let myComponent = new Component(player, {
+            el: dom
+        }); // Component 实例
+        console.log(myComponent.createEl(), myComponent.contentEl(), myComponent.el())
+        // createEl 是用于实例化时创建的
+        // contentEl 是输出组件dom
+        // el 是输出组件dom 是和 contentEl 一模一样的
+        controlBar.addChild(myComponent);
+
+
+        /* 扩展类 */
+        let Com_Class = videojs.extend(Component, {
+            createEl: function () {
+                return createEl("div", {
+                    /* dom属性 */
+                    id: "123123",
+                    className: "123123 123",
+                }, {
+                    /* 标签属性 */
+                    "data-value": "123123123",
+                    "style": "padding:10px"
+                }, " default ");
+            }
+        }); // Component 子类
+        controlBar.addChild(new Com_Class(player));
+
+        let myCom = new Com_Class(player, {
+            el: createEl("div", {
+                /* dom属性 */
+                id: "123123",
+                className: "123123 123",
+            }, {
+                /* 标签属性 */
+                "data-value": "123123123",
+                "style": "padding:10px"
+            }, " myCom ")
+        }); // Com_Class 实例
+        controlBar.addChild(myCom);
+
     </script>
 </body>
 
