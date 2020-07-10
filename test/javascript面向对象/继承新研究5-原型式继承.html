@@ -7,44 +7,51 @@
 </head>
 
 <body>
+    <script type="text/javascript" src="./util.js"></script>
     <script type="text/javascript">
-    function show(o) {
-        console.log("\n", "\n", "\n", o, "\n", "\n", "\n", "\n", "\n")
-    }
-
     /*
      * 原型式继承（继承于一个对象）
      * es5 中的 Object.create();
      */
 
-    // 原型式继承函数
-    function object(o) {
-        function F() {};
-        F.prototype = o; // 继承于o，F就是o的子类，每次调用都会新建一个F
-        return new F(); // 新对象就是F的实例，新对象的prototype直接指向o，新对象就是o的子类实例
-        // 每次返回的对象都是由新的构造函数产生的实例，所以就算传进来o一样，返回值都不是不同的对象，因为构造函数不同，但是返回值的原型是相同的，都是o。
-    };
+    ($ => {
+        $$$()
 
-    // 原对象，就是父对象；
-    var super_instance = {
-        "super_name": "ccc",
-        "super_age": 18
-    };
+        // 原型式继承函数
+        function object(o) {
+            function F() {};
+            F.prototype = o; // 继承于o，F就是o的子类，每次调用都会新建一个F
+            return new F(); // 新对象就是F的实例，新对象的prototype直接指向o，新对象就是o的子类实例
+            // 每次返回的对象都是由新的构造函数产生的实例，所以就算传进来o一样，返回值都不是不同的对象，因为构造函数不同，但是返回值的原型是相同的，都是o。
+        };
 
-    // 子对象
-    var sub_instance1 = object(super_instance);
-    var sub_instance2 = Object.create(super_instance);
-    // 对比起上面几个继承方法来说，个人觉得这个更偏向于是创建对象的方法，因为没有涉及引用类型，只是这个对象是继承于另外一个对象
-    show(super_instance)
-    show(sub_instance1);
-    show(sub_instance2);
+        // 原对象，就是父对象；
+        var super_instance = {
+            "super_name": "ccc",
+            "super_age": 18
+        };
 
-    // 优点：不需要专门定义构造函数去创建对象
-    // 缺点：继承于同一个父对象的子对象是共享对应的属性，就好像直接使用原型模式那样
+        // 子对象
+        var sub_instance1 = object(super_instance);
+        var sub_instance2 = Object.create(super_instance);
+        // 对比起上面几个继承方法来说，个人觉得这个更偏向于是创建对象的方法，因为没有涉及引用类型，只是这个对象是继承于另外一个对象
+        show(super_instance)
+        show(sub_instance1);
+        show(sub_instance2);
+
+        // 优点：不需要专门定义构造函数去创建对象
+        // 缺点：继承于同一个父对象的子对象是共享对应的属性，就好像直接使用原型模式那样
+
+        ___()
+    })();
+
+
 
 
     /*只有构造函数可以直接指定原型是哪个对象。非构造函数（原型对象和实例对象）只能通过调用构造函数成为这个构造函数的实例才能选择原型是指向哪个对象；或者通过Object.create()来继承于某个对象作为自身的原型对象*/
-    (function() {
+    ($ => {
+        $$$()
+
         // 一个对象
         var obj = {
             name: "ccc"
@@ -58,7 +65,7 @@
         /* 实例选择自己的原型 */
         // 只能让一个构造函数的原型是我们想要的对象，然后成为这个构造函数的实例，才能让自身的原型是我们想要的对象（原型式继承封装的就是这一步）
         // 或者调用
-        function F(){};
+        function F() {};
         F.prototype = obj;
         var instance1 = new F(); // 这个实例的原型(__proto__)是obj了
         console.log(instance1);
@@ -69,14 +76,82 @@
 
 
         /* 让某个构造函数原型的原型指向obj呢 */
-        A.prototype = new F(); // 这个实例的原型(__proto__)是obj了
+        A.prototype = new F(); // 这个实例的原型(__proto__)的原型(__proto__)是obj了
         console.log(new A()); // 实例原型的原型已经指向obj了
 
-        A.prototype = Object.create(obj); // 这个实例的原型(__proto__)是obj了
+        A.prototype = Object.create(obj); // 这个实例的原型(__proto__)的原型(__proto__)是obj了
         console.log(new A());
 
-
+        ___()
     })();
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 新研究 20200720
+     * 根据 three.js 采用 Object.create() 继承
+     * 以及 es6 extends 继承
+     * 研究新领悟
+     */
+
+    ///////////////////////////
+    // Object.create() 原型式继承 //
+    ///////////////////////////
+
+    ($ => {
+        $$$("Object.create() 原型式继承");
+
+        /* 父类 */
+        function Parent() {
+            this.parent_property = "父类实例属性"
+        }
+        Parent.prototype.parent_method = function() {
+            console.log("父类原型方法")
+        }
+        let p = new Parent();
+        console.log("父类实例", p);
+
+
+        /* 子类 */
+        function Child() {
+            this.child_property = "子类实例属性"
+        }
+        Child.prototype.child_method = function() {
+            console.log("子类原型方法")
+        }
+        let c = new Child();
+        console.log("继承前子类实例", c);
+
+
+        /* 继承 */
+        Child.prototype = Object.create(Parent.prototype);
+        Object.defineProperty(Child.prototype, 'constructor', {
+            value: Child
+        });
+        Child.prototype.child_method2 = function() {
+            // 因为子类的原型重新指向一个新的对象，所以原来原型里面的属性都没有了，要重新来，其实可以作一下合并的，但是这里只是为了简单介绍原型式继承
+            console.log("子类原型方法")
+        }
+        let c2 = new Child();
+        console.log("继承后子类实例", c2);
+
+        /* 原型链上已经继承了父类的原型 */
+        /* 并且子类的原型上也不会存在父类的实例方法（对比原型链继承的优势） */
+        /* 缺点：父类的实例属性丢失了（其实和原型链继承一样，再调用构造函数就可以，这种方式就成为了“寄生组合式继承”） */
+
+
+        ___("Object.create() 原型式继承");
+    })()
+
     </script>
 </body>
 

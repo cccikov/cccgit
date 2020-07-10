@@ -50,7 +50,7 @@
 				this.age = age;
 				this.job = job;
 				if(!this.sayName) {
-					Person.prototype.sayName = function() { //这里不能使用字面量重写，不然第一个实例会没有sayName这个方法
+					Person.prototype.sayName = function() { // 这里不能使用重写原型，不然第一个实例会没有sayName这个方法
 						alert(this.name);
 					}
 				}
