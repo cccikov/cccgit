@@ -9,12 +9,16 @@
 	<body>
 		<script type="text/javascript">
 			function Person() {}
+
+			/* 添加属性方式 */
 			Person.prototype.name = "Nocholas";
 			Person.prototype.age = 25;
 			Person.prototype.job = "Software Engineer";
 			Person.prototype.sayName = function() {
 				alert(this.name);
 			}
+
+			/* 字面量方式 */
 			/*Person.prototype = {
 				constructor: Person,
 				name: "Nocholas",
@@ -112,7 +116,7 @@
 			//var friend = new Person(); 只有在重写后新建的实例才是，指向新原型
 			// friend.sayFu();//报错
 			// 动态原型模型如果里面也是重写原型，也会出现这样的问题；所以动态原型模型不能采用重写原型的写法
-			// 在构造函数里面都不能通过字面量的方式让原型指向一个新对象，否则每个实例的的原型都不一样了
+			// 在构造函数里面也不能通过字面量的方式让原型指向一个新对象，否则每个实例的的原型都不一样了
 
 
 

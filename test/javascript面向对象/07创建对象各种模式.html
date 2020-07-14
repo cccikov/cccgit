@@ -1,129 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>创建对象模式</title>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>创建对象模式</title>
+</head>
 
-	<body>
-		<script type="text/javascript">
-			/*
-			 *   组合使用构造函数模式和原型模式,最常用
-			 */
-			function Person(name, age, job) {
-				this.name = name;
-				this.age = age;
-				this.job = job;
-				this.friend = ["Shelbey", "Court"];
-				this.sayHi = function() {
-					alert(hi);
-				}
-			}
-			Person.prototype = {
-				constructor: Person,
-				teacher: ["Mr Wang"],
-				sayName: function() {
-					alert(this.name);
-				}
-			}
-			var person1 = new Person("Nicholas", 29, "Software Engineer");
-			var person2 = new Person("Greg", 27, "Doctor");
-			console.log(person1.friend === person2.friend); //false
-			console.log(person1.teacher === person2.teacher); //true
+<body>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript">
+    ($ => {
+        /////////////////////////
+        // 组合使用构造函数模式和原型模式,最常用 //
+        /////////////////////////
+        $$$("1.组合使用构造函数模式和原型模式");
 
-			person1.friend.push("van");
-			person1.teacher.push("Mr Li");
+        function Person(name, age, job) {
+            this.name = name;
+            this.age = age;
+            this.job = job;
+            this.friend = ["Shelbey", "Court"];
+            this.sayHi = function() {
+                console.log(hi);
+            }
+        }
+        Person.prototype = {
+            constructor: Person,
+            teacher: ["Mr Wang"],
+            sayName: function() {
+                console.log(this.name);
+            }
+        }
+        var person1 = new Person("Nicholas", 29, "Software Engineer");
+        var person2 = new Person("Greg", 27, "Doctor");
+        console.log("person1.friend === person2.friend", person1.friend === person2.friend); //false
+        console.log("person1.teacher === person2.teacher", person1.teacher === person2.teacher); //true
 
-			console.log(person1.friend, person2.friend); // ["Shelbey", "Court", "van"] ["Shelbey", "Court"]
-			console.log(person1.teacher, person2.teacher); // ["Mr Wang", "Mr Li"] ["Mr Wang", "Mr Li"]
+        person1.friend.push("van");
+        person1.teacher.push("Mr Li");
 
-			// 可以看出，在构造函数中设置的属性，即使同名值相同也不是同一属性；在原型中定义的属性才是大家共用的属性。
-			// 如果一个属性是全部实例共用的（一般是方法），就写在原型中；如果这个属性是每个实例独特（即使值的相同的，但不是指向同一个内存位置），就写在构造函数中
-			// 也是最符合面向对象语言的编程习惯
+        console.log(person1.friend, person2.friend); // ["Shelbey", "Court", "van"] ["Shelbey", "Court"]
+        console.log(person1.teacher, person2.teacher); // ["Mr Wang", "Mr Li"] ["Mr Wang", "Mr Li"]
 
-			/*
-			 *  动态原型模型
-			 */
-			/*function Person(name, age, job) {
-				this.name = name;
-				this.age = age;
-				this.job = job;
-				if(!this.sayName) {
-					Person.prototype.sayName = function() { // 这里不能使用重写原型，不然第一个实例会没有sayName这个方法
-						alert(this.name);
-					}
-				}
-			}
-			var person1 = new Person("Nicholas", 29, "Software Engineer");
-			var person2 = new Person("Greg", 27, "Doctor");
-			person1.sayName();*/
+        // 可以看出，在构造函数中设置的属性，即使同名值相同也不是同一属性；在原型中定义的属性才是大家共用的属性。
+        // 如果一个属性是全部实例共用的（一般是方法），就写在原型中；如果这个属性是每个实例独特（即使值的相同的，但不是指向同一个内存位置），就写在构造函数中
+        // 也是最符合面向对象语言的编程习惯
 
-			/*
-			 *  寄生构造函数模式，感觉就是工厂模式强行变成构造函数模式
-			 */
-			/*function Person(name,age,job){
-				var o = new Object();
-				o.name = name;
-				o.age = age;
-				o.job = job;
-				o.sayName = function(){
-					alert(this.name);
-				}
-				// ………………有其他一些代码去增强这个对象，或者改变这个对象
-				return o;
-			}
-			var friend = new Person("Nicholas",29,"Software Engineer");
-			friend.sayName();
+        ___("组合使用构造函数模式和原型模式");
 
-			function SpecialArray() {
-				//创建数组
-				var values = new Array();//var o = new Object();
+    })();
 
-				//添加值
-				values.push.apply(values, arguments);//一些处理
-				//相当于
-				//var arr = [];
-				//arr.push.apply(values,arguments);//只是想调用数组的push方法
 
-				//添加方法
-				values.toPipedString = function() { //o.xxx = funciton(){}
-					return this.join("|");
-				};
 
-				//返回数组
-				return values;
-			}
-			var colors = new SpecialArray("red", "blue", "green"); //有没有new都一样
-			console.log(colors); //"red,blue,green"
-			console.log(colors.toPipedString()); //"red|blue|green"
-			// 构造函数可能比较难对将要被创建的对象做一些处理（或者我们要创建的对象不是单纯的Object，而是其他引用类型），这些处理可能用工厂模式会比较容易;寄生模式可能是寄生其他其他引用类型，或者寄生于工厂模式的意思吧。
-			// 通常我们都过new一个来创建的对象都是Object类型,但是如果我们想new一个创建出来的对象是一个Array类型呢
-			// !!!注意,寄生模式构造函数返回值只能是Array,或者是Object,或者其他复杂类型;不可以是5种基本数据类型,因为这几种类型不可以设置属性*/
-			// 与工厂模式不同的是,构造函数内部this的不同;如果是工厂模式,this是指向window;而寄生模式构造函数模式,this指向新创建该构造函数的实例对象(虽然该实例并没有返回出来)，由于调用方式的不同，用new调用一个函数，就会将函数里面的this对象指向构造函数的新实例对象
 
-			/*
-			 *  稳妥构造函数模式  适合在一些要求安全环境使用
-			 */
-			/*function Person(name, age, job) {
-				// 创建要返回的对象
-				var o = new Object();
 
-				//可以在这里定义私有变量和函数
+    ($ => {
+        ////////////
+        // 动态原型模型 //
+        ////////////
+        $$$("2.动态原型模型");
 
-				//添加方法
-				o.sayName = function() {
-					alert(name);
-				}
+        function Person(name, age, job) {
+            this.name = name;
+            this.age = age;
+            this.job = job;
+            if (!this.sayName) {
+                Person.prototype.sayName = function() { // 这里不能使用重写原型，不然第一个实例会没有sayName这个方法
+                    console.log("调用sayName", this.name);
+                }
+            }
+        }
+        var person1 = new Person("Nicholas", 29, "Software Engineer");
+        var person2 = new Person("Greg", 27, "Doctor");
+        person1.sayName();
 
-				//返回对象
-				return o;
-			}
-			var person1 = Person("ccc", 25, "doctor");
-			person1.name = "hehe";
-			person1.sayName(); //ccc ， 除了调用sayName()方法外，没有其他方法访问数据，也没有办法修改
-			console.log(person1.name); //hehe*/
-		</script>
-	</body>
+        ___("动态原型模型");
+
+    })();
+
+
+
+
+    ($ => {
+        //////////////
+        // 寄生构造函数模式 //
+        //////////////
+        $$$("3.寄生构造函数模式");
+
+        function Person(name, age, job) {
+            var o = new Object();
+            o.name = name;
+            o.age = age;
+            o.job = job;
+            o.sayName = function() {
+                console.log("调用sayName", this.name);
+            }
+            // ………………有其他一些代码去增强这个对象，或者改变这个对象
+            return o;
+        }
+        var friend = new Person("Nicholas", 29, "Software Engineer"); // 感觉就是工厂模式强行变成构造函数模式
+        friend.sayName();
+
+
+        /* 实际例子 */
+        function SpecialArray() {
+            //创建数组
+            var values = new Array(); //var o = new Object();
+
+            //添加值
+            values.push.apply(values, arguments); //一些处理
+            //相当于
+            //var arr = [];
+            //arr.push.apply(values,arguments);//只是想调用数组的push方法
+
+            //添加方法
+            values.toPipedString = function() { //o.xxx = funciton(){}
+                return this.join("|");
+            };
+
+            //返回数组
+            return values;
+        }
+        var colors = new SpecialArray("red", "blue", "green"); //有没有new都一样
+        console.log(colors); //"red,blue,green"
+        console.log(colors.toPipedString()); //"red|blue|green"
+
+        // 构造函数可能比较难对将要被创建的对象做一些处理（或者我们要创建的对象不是单纯的Object，而是其他引用类型），这些处理可能用工厂模式会比较容易;寄生模式可能是寄生其他类。
+        // 通常我们都过new一个来创建的对象都是Object类型,但是如果我们想new一个创建出来的对象是一个Array类型呢
+        // !!!注意,寄生模式构造函数返回值只能是Array,或者是Object,或者其他复杂类型;不可以是5种基本数据类型,因为这几种类型不可以设置属性
+        // 与工厂模式不同的是,构造函数内部this的不同;如果是工厂模式,this是指向window;而寄生模式构造函数模式,this指向新创建该构造函数的实例对象(虽然该实例并没有返回出来)，由于调用方式的不同，用new调用一个函数，就会将函数里面的this对象指向构造函数的新实例对象
+        /* 寄生式可以用来增强（改变）原对象、原类、原类原型。 但是又不会影响原对象、原类、原类原型。通过SpecialArray的实例比Array实例多了一些方法，但是并没有改变Array类*/
+
+        ___("寄生构造函数模式");
+
+    })();
+
+
+
+
+
+
+    ($ => {
+        //////////////
+        // 稳妥构造函数模式 //
+        //////////////
+
+        // 适合在一些要求安全环境使用
+        $$$("4.稳妥构造函数模式");
+
+        function Person(name, age, job) {
+            // 创建要返回的对象
+            var o = new Object();
+
+            //可以在这里定义私有变量和函数
+
+            //添加方法
+            o.sayName = function() {
+                console.log("调用sayName", name);
+            }
+
+            //返回对象
+            return o;
+        }
+        var person1 = Person("ccc", 25, "doctor");
+        person1.name = "hehe";
+        person1.sayName(); // ccc ， 除了调用sayName()方法外，没有其他方法访问数据，也没有办法修改
+        console.log(person1.name); // hehe
+
+        ___("稳妥构造函数模式");
+
+    })();
+
+    </script>
+</body>
 
 </html>
