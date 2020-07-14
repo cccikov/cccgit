@@ -10,64 +10,77 @@
     <script type="text/javascript" src="./util.js"></script>
     <script type="text/javascript">
     /*
-     * 寄生组合式继承
+     * 寄生组合式继承（寄生式继承+构造函数继承）
      *
-     * 虽然组合继承是js最常见的继承模式，但是其最大的缺点在于无论什么情况啊，都会调用两次超类型构造函数(子类构造函数一次，创建子类原型一次)；
+     * 虽然原型+组合构造函数继承是js最常见的继承模式，但是其最大的缺点在于无论什么情况啊，都会调用两次超类型构造函数(子类构造函数一次，创建子类原型一次)；
      * 而且子类型的原型中会有父类型的实例属性，并且这部分属性也会在因为子类在构造函数中也继承了而被覆盖
+     *
+     * 而寄生式继承就是解决 原型+组合构造函数继承中连词调用父类构造函数问题
+     *
+     * 能通过寄生组合式继承实现 es6 extends 继承
      */
 
-    function object(o) {
-        function F() {};
-        F.prototype = o; // 继承于o，F就是o的子类，每次调用都会新建一个F
-        return new F(); // 新对象就是F的实例，新对象的prototype直接指向o，新对象就是o的子类实例
-    };
+    /////////////////////////////////////////
+    // 优点：父类构造函数只执行一次，子类的原型里面就不会有父类冗余的实例属性 //
+    /////////////////////////////////////////
 
 
-    function inheritPrototype(subType, superType) {
-        // subType.prototype = Object.create(superType.prototype); // 将 subType.prototype的原型 指向 superType的原型；虽然 subType.prototype的原型 不完全是 superType 的实例（没有superType的实例属性，但是用instanceof检测还是属于superType的实例），但是由于原型指向这个 superType的原型 这个对象，只要 superType的原型 有所变化，subType的实例上都会反映出来
-        subType.prototype = object(superType.prototype)
-        subType.prototype.constructor = subType;
-    }
+    ($ => {
+        $$$("寄生组合式继承");
 
-    //超类引用类型
-    function SuperType(param) {
-        this.super_property = "父类";
-        this.super_parameter = param;
-        this.super_obj = {
-            "name": "ccc"
+        /////////////
+        // 寄生组合式继承 //
+        /////////////
+
+        /**
+         * 原型式继承
+         * 相当于Object.create()
+         */
+        function object(o) {
+            function F() {};
+            F.prototype = o; // 继承于o，F就是o的子类，每次调用都会新建一个F
+            return new F(); // 新对象就是F的实例，新对象的prototype直接指向o，新对象就是o的子类实例
+        };
+
+        /**
+         * 寄生式继承
+         */
+        function inheritPrototype(subType, superType) {
+            subType.prototype = object(superType.prototype); // 创建对象， 原型式继承 subType.prototype的原型指向superType.prototype
+            // subType.prototype = Object.create(superType.prototype);
+            subType.prototype.constructor = subType; // 增强对象
         }
-    };
-    SuperType.prototype.super_method = function() {
-        console.log("我是父类")
-    }
 
+        // 超类构造函数
+        function SuperType() {
+            this.super_property = "父类实例属性";
+        };
+        SuperType.prototype.super_method = function() {
+            console.log("我是父类")
+        }
 
-    //子类引用类型
-    function SubType(param1, param2) {
+        // 子类构造函数（采用了【构造函数函数继承】）
+        function SubType(param1, param2) {
+            // 继承
+            SuperType.call(this, param2); // 构造函数函数继承 只是继承超类构造函数中的属性方法，不会继承超类原型中的属性方法
+            this.sub_property = "子类实例属性";
+        };
         // 继承
-        param2 = "经过子类处理 " + param2;
-        SuperType.call(this, param2);  // 只是继承超类构造函数中的属性方法，不会继承超类原型中的属性方法
+        inheritPrototype(SubType, SuperType); // 只是继承超类原型中的属性方法，不会继承超类构造函数中的属性方法
+        // 继续在子类原型里面添加方法
+        SubType.prototype.sub_method = function() {
+            console.log("我是子类")
+        }
 
-        this.sub_property = "子类";
-        this.sub_parameter = param1;
-    };
+        // 实例
+        var instance = new SubType();
+        show(instance);
 
-    // 继承
-    inheritPrototype(SubType, SuperType); // 只是继承超类原型中的属性方法，不会继承超类构造函数中的属性方法
+        console.log("父类的实例属性也存在于子类的实例里面；子类的原型里面也不会存在父类的实例属性，显得十分清晰干净")
 
-    // 继续在子类原型里面添加方法
-    SubType.prototype.sub_method = function() {
-        console.log("我是子类")
-    }
+        ___("寄生组合式继承");
+    })();
 
-    // 实例
-    var instance = new SubType("子类参数", "父类参数");
-
-    show(instance);
-
-
-
-    /* 疑问：为什么不能让子类的原型直接指向父类的原型呢？因为都是指向同一个对象的话我们修改子类原型，来给子类全部实例添加共用属性方法的时候，就会将父类的原型也修改了，父类的实例也会出现了变化 */
     </script>
 </body>
 

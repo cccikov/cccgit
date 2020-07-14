@@ -65,7 +65,7 @@
          * @return {null}           无
          */
         function inheritPrototype(subType, superType) {
-            var prototype = Object.create(superType.prototype); // 寄生创建对象，原型式继承
+            var prototype = Object.create(superType.prototype); // 创建对象，原型式继承
             prototype.constructor = subType; // 增强对象
             subType.prototype = prototype;
         }

@@ -14,7 +14,12 @@ function ranInt(max, min) {
 
 let color_g = ""
 
-function $$$(str = "<---", color) {
+function $$$(str, color) {
+    if (str) {
+        document.write(`<p>${str}</p>`);
+    } else {
+        str = "<---"
+    }
     if (!color) {
         let num = ranInt(1, 12) * 30
         color = "hsl(" + num + ",50%,50%)"
