@@ -134,9 +134,7 @@
 
         /* 继承 */
         Child.prototype = Object.create(Parent.prototype);
-        Object.defineProperty(Child.prototype, 'constructor', {
-            value: Child
-        });
+        Child.prototype.constructor = Child; // Object.defineProperty(Child.prototype, 'constructor', {value: Child });
         Child.prototype.child_method2 = function() {
             // 因为子类的原型重新指向一个新的对象，所以原来原型里面的属性都没有了，要重新来，其实可以作一下合并的，但是这里只是为了简单介绍原型式继承
             console.log("子类原型方法")
