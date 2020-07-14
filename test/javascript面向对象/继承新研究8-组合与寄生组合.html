@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>继承新研究7-寄生组合式继承</title>
+</head>
+
+<body>
+    <p>继承就是要解决 【实例属性继承】 和 【原型属性继承】 </p>
+    <p>所以真正符合继承的方式只有两种：</p>
+    <ul>
+        <li>组合继承（原型链继承+借用构造函数继承）</li>
+        <li>寄生组合继承（寄生式继承(主要用到原型式继承)+借用构造函数继承）</li>
+    </ul>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript">
+    ($ => {
+        $$$("1. 组合继承");
+
+        /* 父类 */
+        function Parent() {
+            this.parent = "父类实例属性"
+        }
+        Parent.prototype.prop_p = "父类原型属性"
+
+        /* 子类 */
+        function Child() {
+            Parent.call(this); // 借助构造函数继承
+            this.child = "子类实例属性"
+        }
+
+        /* 原型链继承 */
+        Child.prototype = new Parent();
+        Child.prototype.constructor = Child;
+        Child.prototype.prop_c = "子类原型属性"
+
+        /* 实例 */
+        show(new Child())
+
+        ___("组合继承");
+    })();
+
+
+
+
+
+    ($ => {
+        $$$("2. 寄生组合继承--直接使用原型式继承");
+
+        /* 父类 */
+        function Parent() {
+            this.parent = "父类实例属性"
+        }
+        Parent.prototype.prop_p = "父类原型属性"
+
+        /* 子类 */
+        function Child() {
+            Parent.call(this); // 借助构造函数继承
+            this.child = "子类实例属性"
+        }
+
+        /* 原型式继承 */
+        Child.prototype = Object.create(Parent.prototype); // 寄生式继承，就是将这两行封装为一个函数
+        Child.prototype.constructor = Child; // 寄生式继承，就是将这两行封装为一个函数
+        Child.prototype.prop_c = "子类原型属性"
+
+        /* 实例 */
+        show(new Child())
+
+        ___("寄生组合继承");
+    })();
+
+
+
+
+
+    ($ => {
+        $$$("3. 寄生组合继承--封装为寄生式继承");
+
+        /**
+         * 寄生组合式继承
+         */
+        function extend(subType, superType) {
+            subType.prototype = Object.create(superType.prototype);
+            subType.prototype.constructor = subType;
+        }
+
+        /* 父类 */
+        function Parent() {
+            this.parent = "父类实例属性"
+        }
+        Parent.prototype.prop_p = "父类原型属性"
+
+        /* 子类 */
+        function Child() {
+            Parent.call(this); // 借助构造函数继承
+            this.child = "子类实例属性"
+        }
+
+        /* 寄生式继承 */
+        extend(Child, Parent);
+        Child.prototype.prop_c = "子类原型属性"
+
+        /* 实例 */
+        show(new Child())
+
+        ___("寄生组合继承");
+    })();
+
+    /////////////////////
+    // 其实主要区别还是在原型继承上面 //
+    /////////////////////
+
+    </script>
+</body>
+
+</html>
