@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型继承写法研究</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="./util.js"></script>
+    <script>
+    ($ => {
+        function extend(subType, superType) {
+            subType.prototype = Object.create(superType.prototype);
+            subType.prototype.constructor = subType;
+        }
+
+        function Parent() {
+            this.parent = "父类实例属性"
+        }
+        Parent.prototype.prop_p = "父类原型属性"
+
+        function Child() {
+            Parent.call(this);
+            this.child = "子类实例属性"
+        }
+        extend(Child, Parent);
+        Child.prototype.prop_c = "子类原型属性"
+        show(new Child())
+    })();
+
+
+
+
+
+
+    /**
+     * 继承
+     */
+    function extend(subType, superType) {
+        subType.prototype = Object.create(superType.prototype); // 同理 subType.prototype = new superType(); 也可以
+        subType.prototype.constructor = subType;
+    }
+
+    // 另外的写法
+    function extend_b(subType, superType) {
+        subType.prototype = Object.assign(Object.create(superType.prototype), {
+            constructor: subType
+        })
+    }
+    // 存在的问题
+    // 1. 子类的 constructor 变得可被遍历
+    // 2. 子类的原型指向新的原型，原来的原型属性丢失
+
+    ////////////////////////////
+    // 为了 constructor 不能被枚举出来 //
+    ////////////////////////////
+
+    /* 为了不让子类的 constructor 可被遍历，采用 Object.defineProperty */
+    function extend2(subType, superType) {
+        subType.prototype = Object.create(superType.prototype);
+        Object.defineProperty(subType.prototype, "constructor", {
+            configurable: true,
+            enumerable: false,
+            value: subType,
+            writable: true
+        })
+    }
+
+    /* 为了比较清晰，先用一个 prototype 的存储起来，最后在支付赋值 */
+    function extend3(subType, superType) {
+        let prototype = Object.create(superType.prototype);
+        Object.defineProperty(prototype, "constructor", {
+            value: subType
+        });
+        subType.prototype = prototype;
+    }
+
+    /* 改用 Object.defineProperties ，因为可以设置多个描述符 */
+    function extend4(subType, superType) {
+        let prototype = Object.create(superType.prototype);
+        Object.defineProperties(prototype, {
+            "constructor": {
+                value: subType
+            }
+        });
+        subType.prototype = prototype;
+    }
+    // 另外的写法
+    function extend_4_b(subType, superType) {
+        let prototype = Object.create(superType.prototype);
+        let constructor = Object.defineProperties({}, {
+            constructor: {
+                value: subType
+            }
+        })
+        subType.prototype = Object.assign(prototype, constructor)
+    }
+
+    /* Object.create 第二个参数也实现 Object.defineProperties 的功能，直接写在一起 */
+    function extend5(subType, superType) {
+        let prototype = Object.create(superType.prototype, {
+            "constructor": {
+                value: subType
+            }
+        });
+
+        subType.prototype = prototype;
+    }
+
+
+    ///////////////
+    // 为了不覆盖原来对象 //
+    ///////////////
+
+
+    /* Object.assign 只能合并不可枚举属性，所以不能通过将新原型合并到旧原型的方式 */
+    /* 所以原型继承一定要作为被合并的对象，即系Object.assign的第一个参数 */
+    function extend_wrong(subType, superType) {
+        let prototype = Object.create(superType.prototype);
+        Object.assign(subType.prototype, prototype)
+    }
+
+    function extend$2(subType, superType) {
+        let prototype = Object.create(superType.prototype);
+        subType.prototype = Object.assign(prototype, subType.prototype)
+    }
+
+
+    //////////////
+    // 同时解决两个问题 //
+    //////////////
+
+    /* best */
+    function extend_best(subType, superType) {
+        let prototype = Object.create(superType.prototype, {
+            "constructor": {
+                configurable: true,
+                enumerable: false,
+                value: subType,
+                writable: true
+            }
+        });
+        subType.prototype = Object.assign(prototype, subType.prototype)
+    }
+
+
+
+
+
+
+
+
+
+    /* 父类 */
+    function Parent() {
+        this.parent = "父类实例属性"
+    }
+    Parent.prototype.prop_p = "父类原型属性"
+
+    /* 子类 */
+    function Child() {
+        Parent.call(this); // 借助构造函数继承
+        this.child = "子类实例属性"
+    }
+    Child.prototype.prop_c = "子类原型属性"
+
+    /* 继承 */
+    extend_best(Child, Parent);
+
+    let instance = new Child()
+
+    </script>
+</body>
+
+</html>
