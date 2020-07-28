@@ -142,10 +142,22 @@
                 writable: true
             }
         });
-        subType.prototype = Object.assign(prototype, subType.prototype)
+        subType.prototype = Object.assign(prototype, subType.prototype) // 将原先子类原型可遍历的属性复制到新原型上面
     }
 
 
+    function extend_best2(subType, superType) {
+        let prototype = new superType();
+        Object.defineProperties(prototype, {
+            "constructor": {
+                configurable: true,
+                enumerable: false,
+                value: subType,
+                writable: true
+            }
+        });
+        subType.prototype = Object.assign(prototype, subType.prototype) // 将原先子类原型可遍历的属性复制到新原型上面
+    }
 
 
 
@@ -170,6 +182,11 @@
     extend_best(Child, Parent);
 
     let instance = new Child()
+
+    console.log(instance);
+
+    console.log(instance instanceof Child);
+    console.log(instance instanceof Parent);
 
     </script>
 </body>

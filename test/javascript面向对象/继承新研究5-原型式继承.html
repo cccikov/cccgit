@@ -34,13 +34,14 @@
         // 子对象
         var sub_instance1 = object(super_instance); // sub_instance1的原型指向super_instance
         var sub_instance2 = Object.create(super_instance);
-        // 对比起上面几个继承方法来说，个人觉得这个更偏向于是创建对象的方法，因为没有涉及引用类型，只是这个对象是继承于另外一个对象
+
+        // 对比起上面几个继承方法来说，个人觉得这个更偏向于是创建对象的方法
         show(super_instance)
         show(sub_instance1);
         show(sub_instance2);
 
         // 优点：不需要专门定义构造函数去创建对象
-        // 缺点：继承于同一个父对象的子对象是共享对应的属性，就好像直接使用原型模式那样
+        // 缺点：继承于同一个父对象的子对象是共享对应的属性，就好像直接使用原型链继承那样
 
         ___()
     })();
@@ -133,7 +134,7 @@
 
 
         /* 继承 */
-        Child.prototype = Object.create(Parent.prototype);
+        Child.prototype = Object.create(Parent.prototype); // 原型式继承
         Child.prototype.constructor = Child; // Object.defineProperty(Child.prototype, 'constructor', {value: Child });
         Child.prototype.child_method2 = function() {
             // 因为子类的原型重新指向一个新的对象，所以原来原型里面的属性都没有了，要重新来，其实可以作一下合并的，但是这里只是为了简单介绍原型式继承
