@@ -100,7 +100,7 @@
             let reg = /123(?!123)/;
             let str = "1231234567890"
             let result = str.match(reg);
-            console.log(JSON.stringify(result)); // ["789"]
+            console.log(JSON.stringify(result)); // ["123"]
             console.log(str.replace(reg, "aaa")); // 123aaa4567890
         }
 

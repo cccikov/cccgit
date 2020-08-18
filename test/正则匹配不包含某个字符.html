@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则匹配不包含某个字符</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    // 匹配 不包含class的a标签
+    let reg_a = /^<a(.(?!class))*>$/;
+    // 匹配 不包含@click的a标签
+    let reg_b = /^<a(.(?!@click))*>$/;
+
+    let str_a = '<a href="img/big-icon.png" download="img/big-icon.png" id="download" class="btn btn-dl">下载</a>'
+    let str_b = '<a href="img/big-icon.png" download="img/big-icon.png" id="download">下载</a>'
+
+
+    console.log(str_a, reg_a, reg_a.test(str_a));
+    console.log(str_b, reg_a, reg_a.test(str_b));
+
+    console.log(str_a, reg_b, reg_b.test(str_a));
+    console.log(str_b, reg_b, reg_b.test(str_b));
+
+    // /<a(?!href)/ 匹配 【后面不是href 的 <a】
+    // /<a.*/ 匹配 【<a后面是任意字符】 的字符串
+    // /<a(.)*/ 匹配 【<a后面是任意字符】 的字符串
+    // /<a(.(?!class))*/ 匹配 【<a后面是任意字符（但是这个字符后面不能是class）】 的字符串，所以整合起来就是不包含class的字符串
+    </script>
+</body>
+
+</html>
