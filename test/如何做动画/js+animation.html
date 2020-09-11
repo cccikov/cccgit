@@ -55,12 +55,12 @@
 			js+animation
 		</div>
 		<button id="btn">开始动画</button>
-		<button id="pause">暂定动画</button>
+		<button id="pause">暂停动画</button>
 		<button id="stop">停止动画</button>
 		<p>
 			用animation+js写动画，控制方法有两个:<br />
 			1、用js控制添加、删除含有 animation-name 属性的className,虽然说要元素有看得到的动画必须至少有两个属性animation-name，animation-duration，但是元素其实只要有了animation-name就已经是有了动画，因为已经与@keyframes互相绑定了，只是没有animation-duration(持续时间)，没有动起来而已。（其实说白了就是js控制animation-name）
-			2、控制animation-play-state，但是这种方法没有停止，要停止始终要改变animation-name。
+			2、控制animation-play-state，但是这种方法没有停止(stop)，要停止(stop)始终要改变animation-name。
 		</p>
 	</body>
 </html>
