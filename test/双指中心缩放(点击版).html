@@ -82,11 +82,11 @@
              */
             _toScale() {
                 // 原始距离等于 origin - point
-                var disX = this.oriX * this.oldScale - this.pointX;
+                var disX = this.oriX * this.oldScale - this.pointX; // 由于 pointX 是放大后的坐标点，所以 ori 的点也要是放大后的点
                 var disY = this.oriY * this.oldScale - this.pointY;
 
                 // 缩放后新的距离
-                var newDisX = disX * this.scale / this.oldScale;
+                var newDisX = disX * this.scale / this.oldScale; // 其实真正的放大倍数是新的倍数除以旧的倍数
                 var newDisY = disY * this.scale / this.oldScale;
 
                 // 由于point的需要位置不变，距离变化了，所以只有ori变化才能满足；ori需要移动的距离
@@ -98,6 +98,7 @@
 
                 this.el.style.transform = `translate(${this.x}px,${this.y}px) scale(${this.scale})`;
             }
+            // 为什么【中心缩放.html】不需要记住上次缩放的倍数，甚至距离也不需要考虑放大倍数，因为【中心缩放.html】的 ori 和 point 都是初始化的时候定义的，而且一直没有变化，所以在【中心缩放.html】里面，每次缩放都是相当于基于初次的缩放。
 
             _addListener() {
                 var _this = this;
@@ -118,8 +119,8 @@
 
                 /* 确定点中位置 */
                 var posi = this.el.getBoundingClientRect();
-                this.pointX = (e.touches[0].clientX - posi.left); // 点击的地方在对象中的什么位置。
-                this.pointY = (e.touches[0].clientY - posi.top); // 点击的地方在对象中的什么位置。
+                this.pointX = (e.touches[0].clientX - posi.left); // 点击的地方在对象中的什么位置。在图片上的距离左边边缘的位置
+                this.pointY = (e.touches[0].clientY - posi.top); // 点击的地方在对象中的什么位置。在图片上的距离上边边缘的位置
 
                 /* 缩放 */
                 this.oldScale = this.scale;

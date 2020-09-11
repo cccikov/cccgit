@@ -47,6 +47,8 @@
 
 <body>
     <p>以蓝点为中心放大缩小</p>
+    <p>假如蓝点红点距离水平距离5cm，放大为原来3倍后，变成15cm了，只需要将红点向左移动10cm，蓝点就还是在原来的位置了。</p>
+    <!-- 图片本身会有margin，因为不洗碗解决方案里面会受margin影响 -->
     <div class="img-wrap">
         <img src="./img/scale.png" alt="scale">
         <span class="ori"></span>
@@ -54,8 +56,8 @@
     </div>
     <script>
         var tar = document.querySelectorAll(".img-wrap")[0];
-        var l = window.innerWidth / 2 - 189;
-        var t = window.innerHeight / 2 - 234;
+        var l = window.innerWidth / 2 - 189; // 初始偏移量
+        var t = window.innerHeight / 2 - 234; // 初始偏移量
         var s = 1;
         var oriX = 10;
         var oriY = 10;
@@ -90,19 +92,22 @@
             });
 
             // 原始距离等于 origin - point
-            var disX = oriX - pointX;
+            var disX = oriX - pointX; // 假如蓝点红点距离水平距离5cm
             var disY = oriY - pointY;
 
             // 放大后新的距离
-            var newDisX = disX * scale
+            var newDisX = disX * scale // 放大为原来3倍后，变成15cm了，
             var newDisY = disY * scale
 
-            // 由于point的需要位置不变，距离变化了，所以只有cen变化才能满足；cen需要移动的距离
-            var moveX = newDisX - disX;
+            // 由于point的需要位置不变，距离变化了，所以只有ori变化才能满足；ori需要移动的距离
+            var moveX = newDisX - disX; // 将红点向左移动10cm
             var moveY = newDisY - disY;
 
-            tar.style.transform = `translate(${l + moveX}px,${t + moveY}px) scale(${scale})`;
+            tar.style.transform = `translate(${l + moveX}px,${t + moveY}px) scale(${scale})`; // 可以理解为先放大，再平移
 
+            // // 理解用的分解步骤
+            // tar.style.transform = `translate(${l}px,${t}px) scale(${scale})`; // 先放大
+            // tar.style.transform = `translate(${l + moveX}px,${t + moveY}px) scale(${scale})`; // 再平移
         }
 
         document.addEventListener("click", function () {
