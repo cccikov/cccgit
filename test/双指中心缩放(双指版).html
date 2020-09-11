@@ -40,6 +40,7 @@
 </head>
 
 <body>
+    <p>结束后跳一下是因为有个居中显示_toCenter，可以取消的</p>
     <div id="tips1"></div>
     <div id="tips2"></div>
     <div id="tips3"></div>
@@ -95,9 +96,8 @@
                 }
 
                 /* 渲染标记 */
-                this.requestId = null;
-                this.cancelAni = false; // 是否应该cancelAnimationFrame
-                this.rendering = false; // 渲染中
+                this.requestId = null; // null 就标识没有在渲染，有值就标识在渲染
+                this.cancelAni = false; // 是否应该 取消动画 cancelAnimationFrame
 
                 /* 过渡效果 */
                 this.transitioning = false;
@@ -152,7 +152,7 @@
             }
 
             _render() {
-                tips1.innerHTML = `render ${Date.now()} rendering:${this.rendering} cancelAni:${this.cancelAni}`;
+                tips1.innerHTML = `render ${Date.now()} cancelAni:${this.cancelAni}`;
                 var x = parseInt(this.x * 100) / 100;
                 var y = parseInt(this.y * 100) / 100;
                 var scale = parseInt(this.scale * 100) / 100;
@@ -164,14 +164,10 @@
 
                 if (this.cancelAni) {
                     cancelAnimationFrame(this.requestId); // cancelAnimationFrame 一定要在 requestAnimationFrame 之后，否则又会执行
-                    try {
-                        this._toCenter();
-                    } catch (err) {
-                        alert(err);
-                    }
+                    this.requestId = null; // requestId 为 null 时就标识有没有requestAnimationFrame在执行了
                     this.cancelAni = false;;
-                    this.rendering = false;
-                    tips3.innerHTML = `cancelAnimationFrame ${Date.now()} rendering:${this.rendering} cancelAni:${this.cancelAni}`
+                    this._toCenter();
+                    tips3.innerHTML = `cancelAnimationFrame ${Date.now()} cancelAni:${this.cancelAni}`
                 }
             }
 
@@ -244,6 +240,7 @@
                 /* touchstart 监听器 */
                 _this.touchstartListener = function (e) { // 可以算做闭包吧，在_addListener定义函数作为监听器，然后监听器里面就可以读取到_addListener里面的变量，这里是为了读取_this（实例）；如果不这么写，直接像原型的方法那样的写得话，里面将读取不到实例对象；作为监听器方式调用的函数，this会指向添加监听器的对象
                     console.log("listener", this, _this);
+                    e.preventDefault();
                     _this._touchstart(e, this); // 由于 _touchstart 的调用方式是作为对象_this的方法调用，所以_touchstart里面的this指向_this
                 }
                 document.addEventListener("touchstart", _this.touchstartListener, {
@@ -300,9 +297,8 @@
                 if (this.transitioning) {
                     return false
                 }
-                tips2.innerHTML = `touchmove ${Date.now()} rendering:${this.rendering} cancelAni:${this.cancelAni}`
-                if (!this.rendering) {
-                    this.rendering = true; // 由于 _render 里面有个设置rendering为false的语句（而且还是同步的），所以这句一定要放在this._render()前面。如来到这步this.cancelAni为true的时候，导致最终执行完if后，this.rendering为ture，但是实际没有render在运行，而且再也进不去了执行render了。
+                tips2.innerHTML = `touchmove ${Date.now()} cancelAni:${this.cancelAni}`
+                if (!this.requestId) {
                     this._render();
                 }
 
