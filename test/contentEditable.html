@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contentEditable</title>
+</head>
+
+<body>
+    <p id="p" contenteditable="false">可编辑 contenteditable</p>
+    <p>不可编辑</p>
+    <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur et commodi dolor perspiciatis adipisci
+        aspernatur natus repudiandae soluta, perferendis voluptate ad numquam veniam quod maiores ratione quis vero
+        asperiores earum.
+    </p>
+    <button onclick="fn()">全局</button>
+
+    <script>
+        console.log(p.contentEditable)
+        function fn() {
+            let bool = document.body.contentEditable = true
+            console.log(bool)
+        }
+
+    </script>
+</body>
+
+</html>
