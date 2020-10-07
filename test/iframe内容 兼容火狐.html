@@ -12,7 +12,7 @@
 			function codePreview(value) {
 				$('<iframe id="preview" height="340" width="100%" frameborder="0"></iframe>').appendTo($("body"));
 				var timer = setTimeout(function() {
-					var doc = document.getElementById("preview").contentDocument || document.frames["preview"].document;
+					var doc = document.getElementById("preview").contentDocument || document.frames["preview"].document; // document.frames 是ie的，现代浏览器请改用window.frames
 					doc.body.innerHTML = value;
 				}, 1)
 			}

@@ -23,7 +23,7 @@
 		<p>注意：要在服务器环境</p>
 		<p>我是a.html</p>
 		<h5>第一层iframe</h5>
-		<iframe src="b.html" id="ifr" name="ifr" width="80%" height="600"></iframe>
+		<iframe src="b.html" id="ifr" name="ifr_name" width="80%" height="600"></iframe>
 		<button id="btn1">操作iframe b</button>
 		<button id="btn2">操作iframe c</button>
 		<p id="action"></p>
@@ -34,10 +34,17 @@
 			var frameObj = document.getElementById("ifr");
 			frameObj.onload = function(){
 				console.log(frameObj.contentDocument);//获取了iframe 的 document
-				console.log(window.frames['ifr'].document);//获取iframe的document 等价于 window.frames.ifr.document ; window.frames包含页面全部iframe,通过属性名(iframe的name属性)获得对应的iframe对象
-				console.log(frameObj.contentDocument == window.frames['ifr'].document); // true 以上两种方法获得内容是相等的
-				console.log(window.ifr.document)//或者window可以不写,获取iframe的document,由于没有全局属性ifr,所以ifr就是那个iframe
-				console.log(window.frames === window);//true window对象竟然和window.frames是一样的 看来还是用 frameObj.contentDocument
+				console.log(window.frames['ifr_name'].document);//获取iframe的document 等价于 window.frames.ifr_name.document ; window.frames包含页面全部iframe,通过属性名(iframe的name属性)获得对应的iframe对象
+				console.log(window.ifr_name.document,window['ifr_name'].document)// 由于 window.frames === window
+				console.log(window.frames === window); // true
+				console.log("window.frames[0] === window.frames['ifr']",window.frames[0] === window.frames['ifr'])
+				console.log(frameObj.contentWindow == window.frames['ifr_name']); // contentWindow 获取的是 子窗口的window对象
+				console.log(frameObj.contentDocument == window.frames['ifr_name'].document); // contentDocument 获取的是 子窗口的document对象
+				console.log(frameObj.contentWindow.document == frameObj.contentDocument)
+
+				// window.frames是一个frame对象的集合，它类似一个数组，有length属性且可以使用索引（[i]）来访问。
+				// window.frames === window 计算结果为true。
+				// 在window.frames类数组中的每一项都代表了窗口对应给定对象的<frame>或<iframe>的内容，而不是(i)frame DOM元素（即window.frames[ 0 ]与document.getElementsByTagName( "iframe" )[ 0 ].contentWindow是相同的）。
 
 				// 子iframe的document
 				var sonDoc = frameObj.contentDocument;
@@ -55,8 +62,8 @@
 					grandsonAction.innerHTML = "是在a.html那里改变的";
 				}
 
-				console.log(window.frames['ifr'].testFrameVariable);
-				console.log(window.frames['ifr']); // 就是ifr 的顶层环境
+				console.log(window.frames['ifr_name'].testFrameVariable);
+				console.log(window.frames['ifr_name']); // 就是ifr 的顶层环境
 				// console.log(testFrameVariable); // 是读不到iframe_b中的定义的变量
 				// console.log(testFrameVariable2); // 是读不到iframe_b中的定义的变量
 			}

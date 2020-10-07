@@ -10,7 +10,7 @@
 		<iframe id="preview" height="340" width="100%" frameborder="0"></iframe>
 		<script type="text/javascript">
 			function codePreview(value) {
-				var doc = document.getElementById("preview").contentDocument || document.frames["preview"].document;
+				var doc = document.getElementById("preview").contentDocument || document.frames["preview"].document; // document.frames 是ie的，现代浏览器请改用window.frames
 				doc.body.innerHTML = value;
 			}
 			codePreview("lajsdfljalsdjf; lajsdl; fjal; sdjf; lasjdfl; ajsdlfja; ldsjfl; asjdfl; jasdl; fj; lasdjf");

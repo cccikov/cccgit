@@ -14,7 +14,7 @@
             width: 800px;
             height: 600px;
         }
-        a{
+        a,button{
             display: block;
         }
     </style>
@@ -22,19 +22,35 @@
 
 <body>
     <p>研究a标签的target和window.open的第二个参数</p>
-    <iframe src="about:blank" id="ifr" name="ifr" frameborder="0"></iframe>
-    <a href="./input file.html" target="ifr">ifr跳转</a>
-    <a href="./input file.html" target="_self">_self跳转，一定要加下划线_</a>
-    <a href="./input file.html" target="_blank">_blank跳转，一定要加下划线_</a>
+
+    <!-- iframe 的 name 是作为子窗口的名字，用于获取子窗口window对象以及链接跳转目标使用 -->
+    <iframe src="about:blank" id="ifr" name="ifr_name" frameborder="1"></iframe>
+
+    <p>a标签的target可以指定在name窗口打开链接，没有这个name的窗口，则新建一个；window.open(url,name)第二个参数同理</p>
+    <p>a标签的target有4个特殊值</p>
+    <p>_blank: 新窗口打开，即到一个新的未命名的HTML4窗口或HTML5浏览器上下文</p>
+    <p>_self: 当前页面加载，即当前的响应到同一HTML 4 frame（或HTML5浏览上下文）。此值是默认的，如果没有指定属性的话。 可以和window.self关联理解</p>
+    <p>_parent: 加载响应到当前框架的HTML4父框架或当前的HTML5浏览上下文的父浏览上下文。如果没有parent框架或者浏览上下文，此选项的行为方式相同_self。可以和window.parent关联理解</p>
+    <p>_top: IHTML4中：加载的响应成完整的，原来的窗口，取消所有其它frame。 HTML5中：加载响应进入顶层浏览上下文（即，浏览上下文，它是当前的一个的祖先，并且没有parent）。如果没有parent框架或者浏览上下文，此选项的行为方式相同_self。可以和window.top关联理解</p>
+    <p>窗口的名称可以通过window.name获取</p>
+
+
+    <a href="./input file.html" target="ifr_name">ifr_name跳转</a>
+    <a href="./input file.html" target="_self">_self，特殊值，当前窗口跳转</a>
+    <a href="./input file.html" target="_blank">_blank，特殊值，新窗口跳转</a>
+    <a href="./input file.html" target="self">self跳转，实际是name为self页面跳转，如果没有，则打开一个叫self的窗口</a>
+    <a href="./input file.html" target="blank">blank跳转，实际是name为blank页面跳转，如果没有，则打开一个叫blank的窗口</a>
+
     <p>
         先打开名为self和blank的页面
-        <!-- 由于是全局，所以open 即 window.open -->
-        <button onclick="window.open('about:blank','self');">打开name为self</button>
-        <button onclick="window.open('about:blank','blank');">打开name为blank</button>
+        由于是全局，所以open 即 window.open
+        <button onclick="window.open('about:blank','ifr_name');">name为ifr_name的窗口跳转</button>
+        <button onclick="window.open('about:blank','_self');">_self，特殊值，当前窗口跳转</button>
+        <button onclick="window.open('about:blank','_blank');">_blank，特殊值，新窗口跳转</button>
+        <button onclick="window.open('about:blank','self');">name为self的窗口跳转</button>
+        <button onclick="window.open('about:blank','blank');">name为blank的窗口跳转</button>
         ，然后再按a标签跳转
     </p>
-    <a href="./input file.html" target="self">self跳转，实际是name为self页面调整</a>
-    <a href="./input file.html" target="blank">blank跳转，实际是name为blank页面调整</a>
 
 
 </body>
