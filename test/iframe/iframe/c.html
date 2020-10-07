@@ -34,6 +34,10 @@
 		<script type="text/javascript">
 			console.log(top.variableA);
 
+			console.log("self 当前窗口的window对象", self, window.self.document)
+			console.log("parent 父窗口的window对象", parent, window.parent.document)
+			console.log("top 最顶层窗口的window对象", top, window.top.document)
+
 			window.onload = function(){
 				// 获取顶层窗口document
 				var topDoc = window.top.document;
