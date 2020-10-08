@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array.prototype.reduce()</title>
+</head>
+
+<body>
+    <a target="_blank" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">Array.prototype.reduce()</a>
+    <script type="text/javascript">
+    var arr = [111, 222, 333, 444]
+
+    /* acc 为 是上一次调用回调时返回的累积值，或者是初始值(没有的话，是数组的第一个元素) */
+    /* reduce 返回值 为函数累计处理的结果，即系最后的acc */
+    var reduce = arr.reduce(function(acc, val, idx, ori) {
+        console.log(acc, val, idx, ori)
+        return idx % 2 === 0 ? 'a' : 'b'
+    })
+    console.log("结果", reduce)
+
+    console.log("---");
+
+    var reduce2 = arr.reduce(function(acc, val, idx, ori) {
+        console.log(acc, val, idx, ori)
+        return 1
+    })
+    console.log("结果", reduce2)
+
+    console.log("---");
+
+    /* 没有初始值，执行次数为数组长度-1 */
+    arr.reduce(function(acc, val, idx, ori) {
+        console.log(acc, val, idx, ori)
+        return acc + val
+    })
+
+    console.log("---");
+
+    /* 设定初始值，执行次数为数组长度；作为第一次调用 callback函数时的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。 */
+    arr.reduce(function(acc, val, idx, ori) {
+        console.log(acc, val, idx, ori)
+        return acc + val
+    }, 0)
+
+    console.log("---");
+
+    /* 设定初始值可以是任何值 */
+    arr.reduce(function(acc, val, idx, ori) {
+        console.log(acc, val, idx, ori)
+        return acc
+    }, {})
+
+    console.log("---");
+
+    /* 和别的遍历方法对比，别的遍历方法都有固定的返回值类型，限制较多，要通过外部的中间变量去实现某些功能（数组转对象，二维数组转化为一维等）；reduce就能通过初始值（初始值当做中间变量），去自定义返回值类型，限制较小 */
+
+    ///////////
+    // 求和 //
+    ///////////
+
+    {
+        let arr = [1, 2, 3, 4];
+        let result = arr.reduce(function(sum, val, index) {
+            return sum + val;
+        }, 0)
+        console.log("求和", result)
+    }
+
+    console.log("---");
+
+    ////////////////////
+    // 计算数组中每个元素出现的次数 //
+    ////////////////////
+
+    {
+        let arr = new Array(20).fill("").map(v => Math.random().toString().slice(2, 3));
+        let result = arr.reduce(function(obj, val, index) {
+            if (!(val in obj)) {
+                obj[val] = 0
+            }
+            obj[val]++;
+            return obj
+        }, {})
+        console.log("计算数组中每个元素出现的次数", arr, result)
+    }
+
+    console.log("---");
+
+    ////////////////
+    // 将二维数组转化为一维（数组处理） //
+    ////////////////
+
+    {
+        let arr = [
+            [0, 1],
+            [2, 3],
+            [4, 5]
+        ];
+        let result = arr.reduce(function(newArr, val, index) {
+            return newArr.concat(val);
+        }, [])
+        console.log("将二维数组转化为一维", result)
+    }
+
+    console.log("---");
+
+    //////////
+    // 数组去重（数组处理） //
+    /////////////
+
+    {
+        let arr = new Array(10).fill("").map(v => Math.random().toString().slice(2, 3));
+        let result = arr.reduce(function(newArr, val, index) {
+            if (newArr.indexOf(val) === -1) {
+                newArr.push(val)
+            }
+            return newArr
+        }, [])
+        console.log("数组去重", arr, result)
+        console.log(Array.from(new Set(arr))) // 虽然使用es6的方式更简单
+    }
+
+    console.log("---");
+
+    ////////////////
+    // 累加对象数组里面的值（对象数组处理） //
+    ////////////////
+
+    {
+        let arr = [{ x: 1 }, { x: 2 }, { x: 3 }]; // 这是一个由对象组成的数组，简称对象数组
+        let result = arr.reduce(function(sum, val, index) {
+            return sum + val.x;
+        }, 0)
+        console.log("累加对象数组里面的值", result)
+    }
+
+    console.log("---");
+
+    /////////////
+    // 数组转化为对象（对象数组处理） //
+    /////////////
+
+    {
+        // 通常使用场景，知道某个id，想知道属于list里面的那个数据
+        let list = [
+            { name: 'Alice', id: "0001" },
+            { name: 'Max', id: "0003" },
+            { name: 'Jane', id: "0002" },
+            { name: 'Bob', id: "0202" },
+            { name: 'Tiff', id: "1002" },
+            { name: 'Bruce', id: "5002" },
+        ];
+        let result = list.reduce(function(newObj, val) {
+            newObj[val.id] = val
+            return newObj;
+        }, {})
+        console.log("数组转化为对象", result)
+        console.log("id 为0001数据的name", result["0001"].name)
+    }
+
+    console.log("---");
+
+    ////////////////////
+    // 按属性对object分类（ 和数组转化为对象差不多）（对象数组处理），常见数据处理，归类 //
+    ////////////////////
+    {
+        // 通常用于归类，后台只给一个列表，根据所需归类；如省市区，如按标签统计数据
+        let list = [
+            { name: 'Alice', id: "0001", tag: "rich" },
+            { name: 'Max', id: "0003", tag: "poor" },
+            { name: 'Jane', id: "0002", tag: "poor" },
+            { name: 'Bob', id: "0202", tag: "rich" },
+            { name: 'Tiff', id: "1002", tag: "rich" },
+            { name: 'Bruce', id: "5002", tag: "poor" },
+        ];
+        let result = list.reduce(function(newObj, val) {
+            let tag = val.tag;
+            if (!newObj[tag]) {
+                newObj[tag] = []
+            }
+            newObj[tag].push(val)
+            return newObj;
+        }, {})
+
+        console.log("按属性对object分类", arr, result)
+    }
+
+    console.log("---");
+
+    ///////////////////////////////////////
+    // 使用扩展运算符和initialValue绑定包含在对象数组中的数组（对象数组处理） //
+    ///////////////////////////////////////
+
+    {
+        let friends = [{
+            name: 'Anna',
+            books: ['Bible', 'Harry Potter'],
+            age: 21
+        }, {
+            name: 'Bob',
+            books: ['War and peace', 'Romeo and Juliet'],
+            age: 26
+        }, {
+            name: 'Alice',
+            books: ['The Lord of the Rings', 'The Shining'],
+            age: 18
+        }];
+
+        let allbooks = friends.reduce(function(prev, curr) {
+            return [...prev, ...curr.books];
+        }, ['Alphabet']);
+
+        console.log("使用扩展运算符和initialValue绑定包含在对象数组中的数组", allbooks)
+    }
+
+    console.log("---");
+
+    /////////////
+    // 功能型函数管道 //
+    /////////////
+
+    {
+        function pipe(...fns) {
+            return function(input) {
+                return fns.reduce(function(acc, method) {
+                    return method(acc)
+                }, input);
+            }
+        }
+
+        const double = x => x + x;
+        const triple = x => 3 * x;
+        const quadruple = x => 4 * x;
+
+        const multiply24 = pipe(double, triple, quadruple); // 返回一个函数
+
+        console.log("功能型函数管道", multiply24(2))
+
+    }
+
+    console.log("---");
+
+    ////////////////////
+    // 使用 reduce实现map //
+    ////////////////////
+
+    {
+        if (!Array.prototype.mapUsingReduce) {
+            Array.prototype.mapUsingReduce = function(callback, thisArg) {
+                return this.reduce(function(mappedArray, currentValue, index, array) {
+                    mappedArray[index] = callback.call(thisArg, currentValue, index, array)
+                    return mappedArray
+                }, [])
+            }
+        }
+
+        let newArr = [1, 2, , 3].mapUsingReduce(
+            (currentValue, index, array) => currentValue + index + array.length
+        )
+        console.log(newArr) // [5, 7, , 10]
+    }
+
+    console.log("---");
+
+    //////////////////
+    // 按顺序运行Promise //
+    //////////////////
+
+    {
+        // 假如有几个promise方法，要求按顺序；原始写法，可以通过then一个接一个；但是假如随着业务，越来越多方法；或者顺序要换，改动就大了
+
+        function runPromiseInSequence(arr) {
+            return arr.reduce(function(promiseChain, currentFunction) {
+                return promiseChain.then(currentFunction)
+                // onFulfilled 参数是一个返回promise的函数，所以会等该promise状态变化
+                // 这里直接将 p1 p2 p3 p4 等返回promise的函数当做 onFulfilled 处理函数
+            }, Promise.resolve())
+        }
+
+        let p1 = function() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log("方法1执行完毕")
+                    resolve("p1")
+                }, 1000)
+            })
+        }
+        let p2 = function() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log("方法2执行完毕")
+                    resolve("p2")
+                }, 500)
+            })
+        }
+        let p3 = function() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log("方法3执行完毕")
+                    resolve("p3")
+                }, 2000)
+            })
+        }
+        let p4 = function() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log("方法4执行完毕")
+                    resolve("p4")
+                }, 100)
+            })
+        }
+
+        p1().then(() => {
+            return p2();
+        }).then(() => {
+            return p3();
+        }).then(() => {
+            return p4();
+        }).then(async () => {
+            await p1();
+            await p2();
+            await p3();
+            await p4();
+            // 等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变
+        }).then(() => {
+            return runPromiseInSequence([p1, p2, p3, p4])
+        }).then((val) => {
+            console.log("完成", val)
+        })
+    }
+
+    </script>
+</body>
+
+</html>
