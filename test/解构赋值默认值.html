@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值默认值</title>
+</head>
+
+<body>
+    <script>
+        const isok = 2;
+        const para = { ...{ chname: '小郑', age: 12 }, ...[2].includes(isok) && { ename: 'xz', } }
+        console.log(para)
+
+        {
+            let obj = {}
+            let { a: { b: { c: { d: e = 12 } = {} } = {} } = {} } = obj
+            console.log(e)
+        }
+
+        {
+            let obj = {}
+            let { a: b = 1 } = obj
+            console.log(b)
+        }
+        {
+            let obj = {}
+            let { a = 1 } = obj
+            console.log(a)
+        }
+        {
+            let obj = {}
+            let {
+                a: { b: c = 2 } = {}
+            } = obj
+            console.log(c)
+        }
+        {
+            let obj = {}
+            let {
+                a: { b = 2 } = {}
+            } = obj
+            console.log(b)
+        }
+        {
+            let obj = {}
+            let {
+                a: { b: c = 2 } = { b: "上层默认值" }
+            } = obj
+            console.log(c)
+        }
+        {
+            let obj = {}
+            let {
+                a: { b = 2 } = { b: "上层默认值" }
+            } = obj
+            console.log(b)
+        }
+        {
+            let obj = { a: { b: "真实值" } }
+            let {
+                a: { b: c = 2 } = {}
+            } = obj
+            console.log(c)
+        }
+        {
+            let obj = { a: { b: "真实值" } }
+            let {
+                a: { b = 2 } = {}
+            } = obj
+            console.log(b)
+        }
+        {
+            let obj = { a: { b: "真实值" } }
+            let {
+                a: { b = 2 } = { b: "上层默认值" }
+            } = obj
+            console.log(b)
+        }
+    </script>
+</body>
+
+</html>

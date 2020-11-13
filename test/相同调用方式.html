@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相同调用方式</title>
+</head>
+
+<body>
+    <button id="btn">按钮，绑定了事件</button>
+
+    <script>
+
+        /* 采用相同调用方式,分别从传参，上下文(this)下手 */
+        function makeSame(fn) {
+            return function (...arg) {
+                fn.call(this, ...arg)
+            }
+        }
+
+        /* 错误的 */
+        function makeSame_wrong(fn) {
+            return function () {
+                fn();
+            }
+        }
+
+
+
+        function bar(...arg) {
+            console.log("参数有", ...arg);
+            console.log("上下文", this);
+        }
+        let bar_same_right = makeSame(bar);
+        let bar_same_wrong = makeSame_wrong(bar);
+
+
+
+
+
+        // window 调用
+        bar(1, 2, 3);
+        bar_same_right(1, 2, 3);
+        bar_same_wrong(1, 2, 3);
+
+        console.log("---------------")
+
+        // 作为对象方法调用
+        let obj = {
+            name: "ccc",
+            age: 18,
+            bar,
+            bar_same_right,
+            bar_same_wrong
+        }
+
+        obj.bar(1, 2, 3, 4)
+        obj.bar_same_right(1, 2, 3, 4)
+        obj.bar_same_wrong(1, 2, 3, 4)
+
+        console.log("---------------")
+
+        // call 改变 this
+        bar.call(obj, 4, 5, 6)
+        bar_same_right.call(obj, 4, 5, 6)
+        bar_same_wrong.call(obj, 4, 5, 6)
+
+        console.log("---------------")
+
+        // 作为事件监听器调用
+        let btn = document.getElementById("btn")
+        btn.addEventListener("click", bar, false)
+        btn.addEventListener("click", bar_same_right, false)
+        btn.addEventListener("click", bar_same_wrong, false)
+
+    </script>
+
+</body>
+
+</html>
