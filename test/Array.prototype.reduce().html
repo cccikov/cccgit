@@ -331,6 +331,28 @@
         })
     }
 
+
+    {
+        // 真实例子 一段秒杀时间段
+        let seckillTime = ["18:00", "22:00", "10:00", "08:00", "20:00", "12:00", "15:00"]
+        seckillTime.sort(function(a, b) {
+            return parseInt(a) - parseInt(b)
+        }); // 先将时间由小到大排序
+        let index = seckillTime.reduce(function(_index, val, index) {
+            let time = parseInt(val)
+            let now = new Date().getHours()
+            if (time <= now) {
+                // 已经到了这个时间了
+                return index // 返回新的
+            } else {
+                // 还没到这个时间
+                return _index // 返回以前
+            }
+        }, 0)
+        console.log(seckillTime, index)
+        console.log("当前时间处在这个秒杀时间段", seckillTime[index])
+    }
+
     </script>
 </body>
 
