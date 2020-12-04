@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>版本号对比</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    // 判断需要显示版本号
+    let version = this.version.split(".");
+    let originVersion = this.originVersion.split(".");
+    /**
+     * 判断 arr1 的版本号是否大于 arr2
+     */
+    function compare(arr1, arr2) {
+        if (Array.isArray(arr1) && Array.isArray(arr2) && arr1.length > 0 && arr2.length > 0) {
+            let val1 = Number(arr1[0]);
+            let val2 = Number(arr2[0]);
+            if (val1 > val2) {
+                return true;
+            } else if (val1 == val2) {
+                return compare(arr1.slice(1), arr2.slice(1));
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    return compare(originVersion, version);
+
+    </script>
+</body>
+
+</html>
