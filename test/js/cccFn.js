@@ -4,6 +4,7 @@
 
 /**
  * 函数注释标准
+ * https://google.github.io/styleguide/jsguide.html
  * @param {String} str 字符串
  * @param {string|number} num 字符串或者数字
  * @param {boolean} bool 布尔值
