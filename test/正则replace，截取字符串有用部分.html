@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则replace，截取字符串有用部分</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+
+    let modulesFiles = ["./api.js", "./app.js", "./permission.js", "./settings.js", "./tagsView.js", "./user.js"]
+    const modules = modulesFiles.reduce((modules, modulePath) => {
+
+        console.log(modules, modulePath)
+        const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+        console.log(modulePath,moduleName)
+        modules[moduleName] = {}
+
+        return modules
+    }, {})
+
+    console.log(modules)
+    </script>
+</body>
+
+</html>
