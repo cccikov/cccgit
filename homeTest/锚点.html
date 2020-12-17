@@ -10,25 +10,25 @@
 				padding: 0;
 				margin: 0;
 			}
-			
+
 			html {
 				background: #ccc;
 			}
-			
+
 			.wrap {
 				background: #fff;
 			}
-			
+
 			h4 {
 				text-indent: 5px;
 				background: #eee;
 			}
-			
+
 			p {
 				padding: 5px;
 				height: 100px;
 			}
-			
+
 			ul {
 				position: fixed;
 				top: 0;
@@ -41,7 +41,7 @@
 				text-align: center;
 				list-style: none;
 			}
-			
+
 			li {
 				line-height: 20px;
 			}
@@ -134,14 +134,14 @@
 			 * 方法三：点击时，获取当时父元素的scrollTop,当时锚点的jq位置（offset().top ,position().top ,因为这两个会随着滚动条变化而变化），设置scrollTop(当时scrollTop()-(-当时锚点的jq位置))---这种方法只适用于除body，html之外标签出现滚动条的情况。
 			 */
 			$("#rightBar li").on("touchstart", function() {
-				var parentTop = $("body").scrollTop();
+				var parentTop = $("html").scrollTop();
 				console.log(parentTop);
 				var value = $(this).html();
 				$("h4").each(function(index, key) {
 					if ($(key).html() == value) {
 						var selfTop = $(key).offset().top;
 						console.log(selfTop);
-						$("body").scrollTop(selfTop);
+						$("html").scrollTop(selfTop);
 					}
 				});
 			});
