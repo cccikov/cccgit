@@ -15,13 +15,22 @@
 
         console.log(modules, modulePath)
         const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
-        console.log(modulePath,moduleName)
+        console.log(modulePath, moduleName)
         modules[moduleName] = {}
 
         return modules
     }, {})
 
     console.log(modules)
+
+    console.log("--------------------------")
+
+    let str = "aaaaaaa.1234567890.aaaaaa阿拉斯加大理石氪金大佬是点击";
+    let reg = /\D*(\d+\.?\d+).*/ // 小数点后面必须要有数字 123. 得到的是 123
+    let reg = /\D*(\d+\.?\d*).*/ // 小数点后面可以无数字 123. 得到的是 123.
+    console.log(str)
+    console.log(str.replace(reg, "$1"))
+    console.log(str.match(reg))
     </script>
 </body>
 
