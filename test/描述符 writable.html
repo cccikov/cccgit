@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>描述符 writable </title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    //////////////
+    // writable //
+    //////////////
+
+    /* 当且仅当该属性的 writable 键值为 true 时，属性的值，也就是上面的 value，才能被赋值运算符改变。 默认为 false。 */
+
+    Object.defineProperty(Object.prototype, 'copy', {
+        writable: false,
+        value: function() {
+            if (this !== null && typeof this === "object") {
+                return JSON.parse(JSON.stringify(this));
+            } else {
+                return this
+            }
+        }
+    })
+
+
+    let obj1 = {};
+    obj1.copy = "hello";
+    console.log(obj1.copy) // function 为什么设置不成功，是不是不符合原型链规则呢；即使这样设置的是实例属性，而copy是原型属性也不行，原因是writable为false
+
+    let obj2 = {
+        copy: "hello"
+    };
+    console.log(obj2.copy); // hello
+    obj2.copy = "world"
+    console.log(obj2.copy) // hello 由于obj在定义的时候就设置了copy属性，没有直接用赋值运算符，所以obj里面的copy为true，而不是直接先读取原型链上的copy属性；所以其实符合原型链规则，只是在原型上定义writable为false，实例上没有相同属性名的时候，也会影响到实例
+
+    </script>
+</body>
+
+</html>
