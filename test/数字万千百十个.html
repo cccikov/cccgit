@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function numTranslate(num, str) {
+            let num_str = num.toFixed(2)
+            let num_str_arr = num_str.split("")
+
+            let all = "5,4,3,2,1,0,-1".split(",")
+            let str_arr = str.split(",")
+            let reverse = all.filter(v => {
+                return !str_arr.includes(v)
+            })
+
+
+            let hash = {
+                "-1": "-1",
+                "0": "-2",
+                "1": "-4",
+                "2": "-5",
+                "3": "-6",
+                "4": "-7",
+                "5": "-8",
+            }
+            reverse.forEach(v => {
+                let index = hash[v];
+                num_str_arr.splice(index, 1, "*")
+            })
+            return num_str_arr.join("")
+        }
+        // console.log(numTranslate(9999999999.9909, "5,4,2,1"))
+        // console.log(numTranslate(99999.99, "5,4,2,1"))
+        console.log(numTranslate(99999.99, ""))
+    </script>
+</body>
+
+</html>

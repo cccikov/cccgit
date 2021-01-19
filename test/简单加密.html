@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单加密</title>
+</head>
+
+<body>
+    <script>
+    /* 加密 */
+    /**
+     * 加密
+     * @param  {String} str 需要加密的字符串
+     * @param  {String} key 秘钥 - 需要加密的字符串可能含有的字符串的集合（默认是大小写字母）
+     * @return {String}     加密后的字符串
+     */
+    function incode(str, key) {
+        let alphabet = key || "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let alphabet_arr = alphabet.split("");
+        let str_arr = str.split("");
+        return str_arr.map((v, i) => {
+            let index = alphabet_arr.indexOf(v)
+            if (index > -1 && Math.random() > 0.3) {
+                if (index < 10) {
+                    return "0" + index
+                } else {
+                    return index.toString()
+                }
+            } else {
+                return v
+            }
+        }).join("")
+    }
+
+    /* 解密 key秘钥 */
+    /**
+     * 解密
+     * @param  {String} str 需要解密的字符串
+     * @param  {String} key 秘钥 - 加密时使用的秘钥（默认是大小写字母）
+     * @return {String}     解密后的字符串
+     */
+    function decode(str, key) {
+        let alphabet = key || "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        let len = str.length;
+        let i = 0;
+
+        let word = ""
+
+        while (i < len) {
+            let letter = str[i];
+            let next_letter = str[i + 1];
+            let complete = letter + next_letter;
+            if (isNumber(letter) && isNumber(next_letter) && isInRang(complete)) {
+                word += alphabet[Number(complete)]
+                i += 2
+            } else {
+                word += letter
+                i++
+            }
+        }
+        return word
+
+        function isNumber(num) {
+            return !isNaN(num)
+        }
+
+        function isInRang(num) {
+            return !isNaN(num) && Number(num) >= 0 && Number(num) < 26 * 2
+        }
+    }
+
+    // 乱序
+    function randomSort(arr) {
+        var arr = arr.slice(); // 复制原数组
+        var newArr = [];
+
+        while (arr.length > 0) {
+            var index = parseInt(Math.random() * ((arr.length - 1) - 0 + 1) + 0); // 返回0至(数组长度-1)的整数；作为抽出索引
+            var val = arr.splice(index, 1)[0]; // 取出对应索引的值。然后原数组长度就会减短。
+            newArr.push(val); // 将值添加到新数组
+        }
+
+        return newArr;
+    }
+
+    // 乱序 字符串
+    function ranStr(str) {
+        return randomSort(str.split("")).join("");
+    }
+
+    let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    let key = ranStr(alphabet) // 秘钥，随机一串秘钥
+    console.log(key)
+
+    let str = "https://cccikov.gitee.io/cccgit/test/js/jquery.min.js"
+
+    let decoded_str = incode(str, key);
+    let ori = decode(decoded_str, key)
+    console.log(decoded_str);
+    console.log(ori, str === ori)
+
+    console.log("----")
+    console.log("document", incode("document", key))
+    console.log("createElement", incode("createElement", key))
+    console.log("script", incode("script", key))
+    console.log("src", incode("src", key))
+    console.log("body", incode("body", key))
+    console.log("appendChild", incode("appendChild", key))
+    console.log("https://elememt-ui.gitee.io/lang/zh-cn.js", incode("https://elememt-ui.gitee.io/lang/zh-cn.js", key))
+
+    </script>
+</body>
+
+</html>
