@@ -222,6 +222,18 @@ ccc.isIos = function(){
     return (/(iPhone|iPad|iPod|iOS)/i).test(navigator.userAgent.toLowerCase());
 }
 
+function getIosVersion() {
+    const u = navigator.userAgent;
+    const reg = /(iPhone\sOS)\s([\d_]+)/;
+    const result = u.match(reg);
+    if (Array.isArray(result) && result[2]) {
+        let str = result[2].replace(/_/g, ".");
+        return parseFloat(str);
+    }else{
+        return 0
+    }
+}
+
 ccc.isMobile = function(){
     return (/android|(iPhone|iPad|iPod|iOS)|mobile/gi).test(navigator.userAgent.toLowerCase());
 }

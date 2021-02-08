@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.prototype影响实例</title>
+</head>
+
+<body>
+    <script>
+
+        let first = void 0;
+        let second = void 0;
+
+        Object.defineProperties(Object.prototype, {
+            'Authorization': {
+                configurable: false,
+                enumerable: false,
+                set: function (val) {
+                    first = val
+                    if (this !== Object.prototype) {
+                        /**
+                         * 给某个属性 赋值有三种方式
+                         * 1. 字面量的时候已经有
+                         * 2. 赋值操作符
+                         * 3. Object.defineProperties 或者 Object.defineProperty
+                         */
+                        Object.defineProperties(this, {
+                            'Authorization': {
+                                configurable: true,
+                                enumerable: true,
+                                set: function (selfval) {
+                                    second = first;
+                                    first = selfval
+                                },
+                                get: function () {
+                                    return second
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        });
+
+        var obj = {}
+
+        obj.Authorization = 1
+        console.log(JSON.stringify(obj))
+
+        obj.Authorization = 2
+        console.log(JSON.stringify(obj))
+
+        obj.Authorization = 3
+        console.log(JSON.stringify(obj))
+
+    </script>
+</body>
+
+</html>

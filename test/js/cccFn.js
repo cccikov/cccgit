@@ -856,6 +856,11 @@ function getPath(str) {
 }
 
 /* 解析url */
+/*
+ * 也可以使用WHATWG 的 URL 接口
+ * const myURL = new URL('https://example.org/foo#bar');
+ * console.log(myURL.hash);
+ */
 function urlParse(str) {
     var url = document.createElement('a'); // a标签的dom对象（HTMLAnchorElement）实现了类似location实例的接口
     url.href = str;
