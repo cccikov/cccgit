@@ -641,3 +641,20 @@ ccc.off = function(el, name, fn) {
     }
     return eventDom[attrName];
 }
+
+function isIos() {
+    const u = navigator.userAgent;
+    return !!u.match(/\(i[^;]+;(\sU;)?\sCPU.+Mac\sOS\sX/);
+}
+
+function getIosVersion() {
+    const u = navigator.userAgent;
+    const reg = /(iPhone\sOS)\s([\d_]+)/;
+    const result = u.match(reg);
+    if (Array.isArray(result) && result[2]) {
+        let str = result[2].replace(/_/g, ".");
+        return parseFloat(str);
+    } else {
+        return 0;
+    }
+}

@@ -4,11 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
+    <title>Object.prototype影响实例</title>
 </head>
 
 <body>
+    <script>
+    Object.defineProperties(Object.prototype, {
+        'Authorization': {
+            configurable: false,
+            enumerable: false,
+            set: function(val) {
+                console.log(this.constructor.name)
+                if (this !== Object.prototype) {
+                    /**
+                     * 给某个属性 赋值有三种方式
+                     * 1. 字面量的时候已经有
+                     * 2. 赋值操作符
+                     * 3. Object.defineProperties 或者 Object.defineProperty
+                     */
+                    Object.defineProperties(this, {
+                        'Authorization': {
+                            configurable: true,
+                            enumerable: true,
+                            value: val + 1,
+                            writable: false
+                        }
+                    })
+                }
+            }
+        }
+    });
 
+    function isWechat() {
+        var ua = navigator.userAgent.toLowerCase();
+        var platform = navigator.platform.toLowerCase()
+        var uri = location.host.toLowerCase()
+        if (/micromessenger/.test(ua) && /live7/.test(uri)) {
+            if (/wechatdevtools/.test(ua)) {
+                /* 开发者工具 */
+                return false
+            } else if (/windowswechat/.test(ua)) {
+                /* 电脑版pc */
+                return false
+            } else if (/miniprogram/.test(ua)) {
+                /* 小程序 */
+                return false
+            } else {
+                /* android iphone 平台 才触发 */
+                if (/linux/.test(platform) || /iphone/.test(platform)) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        } else {
+            return false
+        }
+    }
+
+    console.log(isWechat())
+
+
+    function percent(num) {
+        num = num / 100;
+        let ran = Math.random();
+        return ran < num;
+    }
+
+    for(var i =0;i<1000;i++){
+        console.log(percent(5))
+    }
+
+    </script>
 </body>
 
 </html>
